@@ -7,7 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelinge
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4924015A-0FD1-485E-8D4E-D2B0BFCC3EF4}"
 	ProjectSection(SolutionItems) = preProject
-		functions.md = functions.md
 		readme.md = readme.md
 	EndProjectSection
 EndProject
@@ -18,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{35C0B2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Core.Tests", "Vs.VoorzieningenEnRegelingen.Core.Tests\Vs.VoorzieningenEnRegelingen.Core.Tests.csproj", "{F808BE58-C22E-47D7-A494-CA1C788832E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.VoorzieningenEnRegelingen.Site", "Vs.VoorzieningenEnRegelingen.Site\Vs.VoorzieningenEnRegelingen.Site.csproj", "{B580B0CD-3027-4FC3-A3EB-06094FC85130}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Site", "Vs.VoorzieningenEnRegelingen.Site\Vs.VoorzieningenEnRegelingen.Site.csproj", "{B580B0CD-3027-4FC3-A3EB-06094FC85130}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

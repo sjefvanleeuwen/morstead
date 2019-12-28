@@ -4,6 +4,7 @@ using System;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using System.Globalization;
 using YamlDotNet.Serialization;
+using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 {
@@ -146,6 +147,24 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                .Build();
 
             var json = serializer.Serialize(variables);
+        }
+
+        [Fact]
+        void Formula_Table_Select_Test()
+        {
+            // -naam: woonlandfactoren
+            //  woonland, factor:
+            //  - [Finland, 0.7161]
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag.Body);
+            ExpressionContext context = new ExpressionContext(controller);
+            //  Tsjechië,            0.2412 
+            context.Variables.Add("woonland", "Tsjechië");
+            var formula = controller.GetFormula("woonlandfactor");
+            //  select(string tableName, string lookupValue, string lookupColumn, string resultColumn)
+            IDynamicExpression e = context.CompileDynamic(formula.Expression);
+            double result1 = (double)e.Evaluate();
+            Assert.True(result1 == 0.2412);
         }
     }
 }

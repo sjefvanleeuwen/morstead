@@ -1,8 +1,14 @@
 ﻿![logo](./images/logo.svg) <span style="font-family: 'Exo 2'; font-size: 3.5em;">Virtual Society</span> 
 
-## Formules
+## Functies
 
-### Beschikbare functies
+### lookup('tabelnaam', opzoekwaarde, 'zoekinkolom', 'resultaatuitkolom'))
+Retourneert de eerste gevonden resultaatwaarde vanuit de aangegeven resultaat kolomop basis van de opzoekwaarde uit de opgegeven zoekkolomn vanuit opgegeven tabel.
+**Voorbeeld**
+lookup('woonlandfactoren',woonland,'woonland','factor')
+
+
+## Wiskundig
 
 #### Abs (n)
 Retourneert de absolute waarde van een decimaal getal.

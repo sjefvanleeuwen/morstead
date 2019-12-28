@@ -11,6 +11,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             Type = type;
         }
 
+        public int Index { get; internal set; }
         public DebugInfo DebugInfo { get; }
         public string Name { get; }
         public ColumnTypeEnum Type { get; }

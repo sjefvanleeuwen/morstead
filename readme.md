@@ -400,7 +400,16 @@ YAML-streams kunnen worden gelezen en geschreven.<br /> Momenteel ondersteunt Ya
 
 ### Formules
 
-#### Beschikbare functies
+#### Gegevensfuncties
+
+##### lookup('tabelnaam', opzoekwaarde, 'zoekinkolom', 'resultaatuitkolom'))
+Retourneert de eerste gevonden resultaatwaarde vanuit de aangegeven resultaat kolomop basis van de opzoekwaarde uit de opgegeven zoekkolomn vanuit opgegeven tabel.
+
+**Voorbeeld** : lookup('woonlandfactoren',woonland,'woonland','factor')
+
+Zoekt in de tabel 'woonlandfactoren' naar de waarde die opgegeven is in de variabele woonland binnen kolom woonlaand en retourneert hierbij de waarde uit de kolom 'factor' als resultaat.
+
+#### Wiskundige functies
 
 ##### abs (n)
 Retourneert de absolute waarde van een decimaal getal.
@@ -488,3 +497,4 @@ Berekent het integrale deel van een opgegeven drijvende-kommagetal met dubbele p
 
 ## Taxonomie
 
+t.b.a.

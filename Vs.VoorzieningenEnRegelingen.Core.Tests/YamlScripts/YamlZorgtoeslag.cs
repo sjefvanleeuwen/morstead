@@ -54,13 +54,17 @@ formules:
      formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0),1189)
    - situatie: aanvrager met toeslagpartner
      formule: min(percentage(4.315) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 2314)
+ - buitenland:
+     formule: not(woonland,'Nederland')
+ - woonlandfactor:
+     formule: lookup('woonlandfactoren',woonland,'woonland','factor')
 tabellen:
   - naam: maximaalvermogen
     situatie, waarde:
       - [ alleenstaande,                11476 ] 
       - [ aanvrager met toeslagpartner, 14536 ]
-  - naam: woonlandfactor
-    woonland, woonlandfactor:
+  - naam: woonlandfactoren
+    woonland, factor:
       - [ Finland,             0.7161 ]
       - [ Frankrijk,           0.8316 ]
       - [ België,              0.7392 ]

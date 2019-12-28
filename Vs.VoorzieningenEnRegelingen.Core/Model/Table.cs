@@ -11,6 +11,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             Name = name ?? throw new ArgumentNullException(nameof(name));
             ColumnTypes = columnTypes ?? throw new ArgumentNullException(nameof(columnTypes));
             Rows = rows ?? throw new ArgumentNullException(nameof(rows));
+
+            for (int i = 0; i < ColumnTypes.Count; i++)
+            {
+                ColumnTypes[i].Index = i;
+            }
         }
 
         public DebugInfo DebugInfo { get; }

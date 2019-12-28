@@ -164,14 +164,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                         {
                             var f = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == FormulaAttribute).Value;
                             var s = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == SituationAttribute).Value;
-                            var function = new Function(mapDebugInfo(f.Start,f.End), s.ToString(), f.ToString());
+                            var function = new Function(mapDebugInfo(f.Start,f.End), s.ToString(), f.ToString().Replace("'","\""));
                             functions.Add(function);
                         }
                     }
                     else
                     {
                         var f = ((YamlMappingNode)row.Value).Children.FirstOrDefault(p => p.Key.ToString() == FormulaAttribute).Value;
-                        var function = new Function(mapDebugInfo(f.Start, f.End), f.ToString());
+                        var function = new Function(mapDebugInfo(f.Start, f.End), f.ToString().Replace("'", "\""));
                         functions.Add(function);
                     }
                     funcs.Add(new Formula(mapDebugInfo(variableName.Start, variableName.End), variableName.ToString(), functions));

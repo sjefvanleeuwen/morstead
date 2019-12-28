@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 
@@ -11,6 +12,21 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public YamlScriptController()
         {
+        }
+
+
+        public double Lookup(string tableName, string lookupValue, string lookupColumn, string resultColumn)
+        {
+            var table = GetTable(tableName);
+            var columnIndex = (from p in table.ColumnTypes where p.Name == lookupColumn select p.Index).First();
+            var resultColumnIndex = (from p in table.ColumnTypes where p.Name == resultColumn select p.Index).First();
+            var value = (from p in table.Rows where p.Columns[columnIndex].Value.ToString() == lookupValue select p.Columns[resultColumnIndex]).FirstOrDefault();
+            return double.Parse(value.Value.ToString());
+        }
+
+        public Function GetFormula(string name)
+        {
+            return _model.Formulas.First(p => p.Name == name).Functions.First();
         }
 
         public Function GetSituation(string formula, string situation)
