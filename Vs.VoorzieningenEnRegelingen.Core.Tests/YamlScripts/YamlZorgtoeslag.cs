@@ -55,7 +55,9 @@ formules:
    - situatie: aanvrager_met_toeslagpartner
      formule: min(percentage(4.315) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 2314)
  - buitenland:
-     formule: not(woonland,'Nederland')
+     formule: niet(woonland,'Nederland')
+ - binnenland:
+     formule: wel(woonland,'Nederland')
  - woonlandfactor:
      formule: lookup('woonlandfactoren',woonland,'woonland','factor')
 tabellen:

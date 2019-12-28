@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
+﻿using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 using Xunit;
 
@@ -22,7 +21,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
-            controller.Execute(new List<Parameter>() {
+            controller.Execute(new Parameters() {
                 new Parameter("alleenstaande","ja"),
                 new Parameter("toetsingsinkomen_aanvrager","19000")
             });

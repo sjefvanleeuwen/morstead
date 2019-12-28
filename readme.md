@@ -1,11 +1,20 @@
 ﻿![logo](./images/logo.svg) <span style="font-family: 'Exo 2'; font-size: 3.5em;">Virtual Society</span> 
-## Voorzieningen en Regelingen
+## Ur-Nammu Rule Engine
 
-***Maakt regelgeving leesbaar en digitaal uitvoerbaar***
-
-Binnen Virtual Society worden, desgewenst, voorzieningen en regelingen meegenomen in de simulatie. Wanneer automatiseringsystemen 
+Binnen Virtual Society worden, desgewenst, wetten en regelingen meegenomen in de simulatie. Wanneer automatiseringsystemen 
 ontbreken tijdens de simulatie terwijl andere systemen voorzien moeten worden in de ketentests van gegevens uit de regelingen, 
 kan Virtual Society de gewenste berekeningen alsnog maken.
+
+De Code van Ur-Nammu is de oudste bekende wetcode die vandaag overleeft. Het komt uit Mesopotamië en is geschreven op tablets,
+in de Sumerische taal circa 2100–2050 BC.
+
+Zijn belangrijkste prestatie was het opbouwen van de staat, en Ur-Nammu wordt vandaag vooral herinnerd vanwege zijn wettelijke code, de 
+Code van Ur-Nammu, het oudste bekende overgebleven exemplaar ter wereld.
+https://en.wikipedia.org/wiki/Code_of_Ur-Nammu
+
+<sub>VIDEO: Enkele gedachten en context voor "The Code of Ur-Nammu"</sub>
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/NZcTZonjHKw/0.jpg)](https://www.youtube.com/watch?v=NZcTZonjHKw "Video Title")
 
 ### Voordelen t.o.v. van andere rule engines
 

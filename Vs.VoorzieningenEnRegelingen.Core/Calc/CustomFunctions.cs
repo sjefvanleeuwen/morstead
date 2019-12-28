@@ -18,5 +18,15 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Calc
         {
             return percentage / 100;
         }
+
+        public static bool Niet(string value, string value2)
+        {
+            return !(value == value2);
+        }
+
+        public static bool Wel(string value, string value2) 
+        {
+            return (value == value2);
+        }
     }
 }
