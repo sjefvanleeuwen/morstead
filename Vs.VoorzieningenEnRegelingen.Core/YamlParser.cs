@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -20,8 +21,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private const string FormulaAttribute = "formule";
         private const string SituationAttribute = "situatie";
         private const string TablesAttribute = "tabellen";
+        private const string FlowAttribute = "berekening";
 
-        private static Dictionary<string, YamlMappingNode> Maps = new Dictionary<string, YamlMappingNode>();
+        private static ConcurrentDictionary<string, YamlMappingNode> Maps = new ConcurrentDictionary<string, YamlMappingNode>();
         private static Dictionary<string, Dictionary<string, DataTable>> Tables = new Dictionary<string, Dictionary<string, DataTable>>();
         private readonly Dictionary<string, Parameter> _parameters;
         private readonly string _yaml;
@@ -40,6 +42,38 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 start: new LineInfo(line: start.Line, col: start.Column, index: start.Index),
                 end: new LineInfo(line: end.Line, col: end.Column, index: end.Index)
             );
+        }
+
+        public List<Step> Flow()
+        {
+            var steps = new List<Step>();
+            foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)])
+            {
+                var debugInfoStep = mapDebugInfo(step.Start, step.End);
+                string stepid ="", description="", formula = "", situation="";
+                foreach (var stepInfo in ((YamlMappingNode)step).Children)
+                {
+                    switch (stepInfo.Key.ToString())
+                    {
+                        case "stap":
+                            stepid = stepInfo.Value.ToString();
+                            break;
+                        case "omschrijving":
+                            description = stepInfo.Value.ToString();
+                            break;
+                        case "situatie":
+                            situation = stepInfo.Value.ToString();
+                            break;
+                        case "formule":
+                            formula = stepInfo.Value.ToString();
+                            break;
+                        default:
+                            throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
+                    }
+                }
+                steps.Add(new Step(stepid, description, formula, situation));
+            }
+            return steps;
         }
 
         public List<Table> Tabellen()
@@ -79,14 +113,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         private YamlMappingNode Map(string body)
         {
-            if (Maps.ContainsKey(body))
-                return Maps[body];
-            var input = new StringReader(body);
-            // Load the stream
-            var yaml = new YamlStream();
-            yaml.Load(input);
-            // Examine the stream
-            Maps.Add(body, (YamlMappingNode)yaml.Documents[0].RootNode);
+                if (Maps.ContainsKey(body))
+                    return Maps[body];
+                var input = new StringReader(body);
+                // Load the stream
+                var yaml = new YamlStream();
+                yaml.Load(input);
+                // Examine the stream
+                Maps.TryAdd(body, (YamlMappingNode)yaml.Documents[0].RootNode);
             return (YamlMappingNode)yaml.Documents[0].RootNode;
         }
 

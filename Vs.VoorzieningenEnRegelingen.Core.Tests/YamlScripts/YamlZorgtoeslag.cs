@@ -18,17 +18,17 @@ stuurinformatie:
 berekening:
  - stap: 1
    omschrijving: bepaal de standaard premie
-   formule: gezamenlijk toestinginkomen
+   formule: toetsingsinkomen
  - stap: 2
    omschrijving: bereken het gezamenlijke toestingsinkomen
  - stap: 3 
    omschrijving: bereken de normpremie
  - stap: 4 
    situatie: binnenland
-   omschrijving: bereken de zorgtoeslag binnen nederland woont
+   omschrijving: bereken de zorgtoeslag wanneer men binnen nederland woont
  - stap: 5
    situatie: buitenland
-   omschrijving: bereken de zorgtoeslag buitenland.
+   omschrijving: bereken de zorgtoeslag wanner men in het buitenland woont
 formules:
  - standaardpremie:
    - situatie: alleenstaande
@@ -48,11 +48,11 @@ formules:
  - drempelinkomen:
      formule: 20941
  - toetsingsinkomen: 
-     formule: toetsingsinkomen aanvrager + toetsingsinkomen toeslagpartner
+     formule: toetsingsinkomen_aanvrager + toetsingsinkomen_toeslagpartner
  - normpremie:
    - situatie: alleenstaande
      formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0),1189)
-   - situatie: aanvrager met toeslagpartner
+   - situatie: aanvrager_met_toeslagpartner
      formule: min(percentage(4.315) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 2314)
  - buitenland:
      formule: not(woonland,'Nederland')
