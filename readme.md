@@ -1,20 +1,20 @@
 ﻿![logo](./images/logo.svg) <span style="font-family: 'Exo 2'; font-size: 3.5em;">Virtual Society</span> 
-## Ur-Nammu Rule Engine
+## Urukagina Rule Engine
 
 Binnen Virtual Society worden, desgewenst, wetten en regelingen meegenomen in de simulatie. Wanneer automatiseringsystemen 
 ontbreken tijdens de simulatie terwijl andere systemen voorzien moeten worden in de ketentests van gegevens uit de regelingen, 
 kan Virtual Society de gewenste berekeningen alsnog maken.
 
-De Code van Ur-Nammu is de oudste bekende wetcode die vandaag overleeft. Het komt uit Mesopotamië en is geschreven op tablets,
-in de Sumerische taal circa 2100–2050 BC.
+Uru-ka-gina, Uru-inim-gina of Iri-ka-gina (Sumerisch: 𒌷𒅗𒄀𒈾 URU-KA-gi.na; ca. 24e eeuw voor Christus, korte chronologie)
+was een heerser (ensi) van de stadstaat Lagash in Mesopotamië. Hij nam de titel van koning aan en beweerde goddelijk te zijn 
+benoemd bij de val van zijn corrupte voorganger Lugalanda.
 
-Zijn belangrijkste prestatie was het opbouwen van de staat, en Ur-Nammu wordt vandaag vooral herinnerd vanwege zijn wettelijke code, de 
-Code van Ur-Nammu, het oudste bekende overgebleven exemplaar ter wereld.
-https://en.wikipedia.org/wiki/Code_of_Ur-Nammu
-
-<sub>VIDEO: Enkele gedachten en context voor "The Code of Ur-Nammu"</sub>
-
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/NZcTZonjHKw/0.jpg)](https://www.youtube.com/watch?v=NZcTZonjHKw "Video Title")
+Hij is vooral bekend om zijn hervormingen om corruptie te bestrijden, die soms worden genoemd als **het eerste voorbeeld van 
+een wettelijke code** in de geschiedenis. Hoewel de eigenlijke tekst niet is ontdekt, kan veel van de inhoud ervan vermoed 
+worden uit andere gevonden verwijzingen ernaar. Daarin stelde hij weduwen en wezen vrij van belastingen; dwong de stad om
+begrafeniskosten te betalen (inclusief de rituele voedsel- en drankoffers voor de reis van de doden naar de lagere wereld); 
+en besloten dat de rijken zilver moeten gebruiken bij de aankoop van de armen, en als de armen niet willen verkopen, 
+kan de machtige man (de rijke man of de priester) hem niet dwingen dit te doen. [1]
 
 ### Voordelen t.o.v. van andere rule engines
 
