@@ -1,0 +1,21 @@
+﻿syntax = "{{proto_syntax}}";
+package mypackage;
+import "google/api/annotations.proto";
+
+service {{proto_service_name}} {
+    rpc MyFunc ({{message}}) returns ({{response}}) {
+        option (google.api.http) = {
+            post: "/message"
+            body: "*"
+        };
+    }
+}
+
+message MyMessage {
+    string MyString = 1;
+    int64 MyInt = 2;
+}
+
+message MyResponse {
+    string MyString = 1;
+}

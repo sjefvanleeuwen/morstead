@@ -1,0 +1,36 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+
+<EditForm Model="@yaml" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <textarea rows="24" cols="120"
+              @bind-value="yaml"
+              @bind-value:event="oninput" />
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+<h2>Parse Result</h2>
+
+<p>Message: @result.Message</p>
+<p>ExpressionTree (debug): </p>
+<pre>   
+    @result.ExpressionTree
+</pre>
+@code {
+    private string yaml = YamlZorgtoeslag.Body;
+
+    private ParseResult result = new ParseResult();
+
+    private void HandleValidSubmit()
+    {
+        YamlScriptController c = new YamlScriptController();
+        result = c.Parse(yaml);
+        Console.WriteLine("OnValidSubmit");
+    }
+}
