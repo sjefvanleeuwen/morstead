@@ -1,25 +1,25 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<h1>Urukagina Rule Engine</h1>
 
-Welcome to your new app.
-
+Parsing voor nu, zie project op: <a href="https://github.com/sjefvanleeuwen/virtual-society-urukagina">Github</a>
 
 <EditForm Model="@yaml" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <textarea rows="24" cols="120"
+    <textarea rows="20" cols="80"
               @bind-value="yaml"
               @bind-value:event="oninput" />
 
-    <button type="submit">Submit</button>
+    <br/>
+    <button type="submit">Parse YAML</button>
 </EditForm>
 
 <h2>Parse Result</h2>
 
 <p>Message: @result.Message</p>
 <p>ExpressionTree (debug): </p>
-<pre>   
+<pre style="font-size:8px">   
     @result.ExpressionTree
 </pre>
 @code {

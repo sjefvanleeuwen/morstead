@@ -7,6 +7,7 @@
 [![Coverage Status](https://img.shields.io/azure-devops/coverage/leeuwens/Urukagina/1)](https://leeuwens.visualstudio.com/Urukagina/_build/latest?definitionId=1&branchName=master)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/sjefvanleeuwen/virtual-society-urukagina/graphs/commit-activity)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0298c3.svg)](https://github.com/sjefvanleeuwen/virtual-society-urukagina/blob/master/LICENSE)
+[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://regelingen.azurewebsites.net/)
 
 Binnen Virtual Society worden, desgewenst, wetten en regelingen meegenomen in de simulatie. Wanneer automatiseringsystemen 
 ontbreken tijdens de simulatie terwijl andere systemen voorzien moeten worden in de ketentests van gegevens uit de regelingen, 
