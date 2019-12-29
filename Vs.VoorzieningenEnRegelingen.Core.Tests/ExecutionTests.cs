@@ -21,10 +21,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
-            controller.ExecuteWorkflow(new Parameters() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("toetsingsinkomen_aanvrager","19000")
-            });
+            //controller.ExecuteWorkflow(new Parameters() {
+            //    new Parameter("alleenstaande","ja"),
+            //    new Parameter("toetsingsinkomen_aanvrager","19000")
+            //});
 
         }
     }

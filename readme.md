@@ -2,7 +2,6 @@
 
 ## Urukagina Rule Engine
 [![Maintainability](https://api.codeclimate.com/v1/badges/12cb1c194f0c722e7485/maintainability)](https://codeclimate.com/github/sjefvanleeuwen/virtual-society-urukagina/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/12cb1c194f0c722e7485/test_coverage)](https://codeclimate.com/github/sjefvanleeuwen/virtual-society-urukagina/test_coverage)
 [![Build Status](https://leeuwens.visualstudio.com/Urukagina/_apis/build/status/sjefvanleeuwen.virtual-society-urukagina?branchName=master)](https://leeuwens.visualstudio.com/Urukagina/_build/latest?definitionId=1&branchName=master)
 
 Binnen Virtual Society worden, desgewenst, wetten en regelingen meegenomen in de simulatie. Wanneer automatiseringsystemen 
