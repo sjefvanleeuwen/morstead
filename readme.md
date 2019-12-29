@@ -1,5 +1,8 @@
 ﻿![logo](./images/logo.svg) <span style="font-family: 'Exo 2'; font-size: 3.5em;">Virtual Society</span> 
+
 ## Urukagina Rule Engine
+[![Maintainability](https://api.codeclimate.com/v1/badges/12cb1c194f0c722e7485/maintainability)](https://codeclimate.com/github/sjefvanleeuwen/virtual-society-urukagina/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/12cb1c194f0c722e7485/test_coverage)](https://codeclimate.com/github/sjefvanleeuwen/virtual-society-urukagina/test_coverage)
 
 Binnen Virtual Society worden, desgewenst, wetten en regelingen meegenomen in de simulatie. Wanneer automatiseringsystemen 
 ontbreken tijdens de simulatie terwijl andere systemen voorzien moeten worden in de ketentests van gegevens uit de regelingen, 
