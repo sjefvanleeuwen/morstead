@@ -12,10 +12,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private ExpressionContext _context;
         private Model.Model _model;
         private Formula _formula;
-        private readonly string _variableName;
-        private Parameters _parameters;
+        private ParametersCollection _parameters;
 
-        public FormulaExpressionContext(ref Model.Model model, ref Parameters parameters, Formula formula)
+        public FormulaExpressionContext(ref Model.Model model, ref ParametersCollection parameters, Formula formula)
         {
             _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
             _formula = formula ?? throw new ArgumentNullException(nameof(formula));

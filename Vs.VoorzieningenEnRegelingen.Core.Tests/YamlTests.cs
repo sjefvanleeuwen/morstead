@@ -18,13 +18,15 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
             if (Maps.ContainsKey(body))
                 return Maps[body];
-            var input = new StringReader(body);
-            // Load the stream
-            var yaml = new YamlStream();
-            yaml.Load(input);
-            // Examine the stream
-            Maps.Add(body, (YamlMappingNode)yaml.Documents[0].RootNode);
-            return (YamlMappingNode)yaml.Documents[0].RootNode;
+            using (var input = new StringReader(body))
+            {
+                // Load the stream
+                var yaml = new YamlStream();
+                yaml.Load(input);
+                // Examine the stream
+                Maps.Add(body, (YamlMappingNode)yaml.Documents[0].RootNode);
+                return (YamlMappingNode)yaml.Documents[0].RootNode;
+            }
         }
 
         private string Order(string s)

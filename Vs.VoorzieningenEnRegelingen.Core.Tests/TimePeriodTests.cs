@@ -1,5 +1,6 @@
 ﻿using Itenso.TimePeriod;
 using System;
+using System.Globalization;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
@@ -17,7 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 
             var dateTimeStrings = s.Split('|')[0].Split('-');
 
-            var l = new TimeRange(DateTime.Parse(dateTimeStrings[0]), DateTime.Parse(dateTimeStrings[1]));
+            var l = new TimeRange(DateTime.Parse(dateTimeStrings[0],new CultureInfo("nl-NL")), DateTime.Parse(dateTimeStrings[1],new CultureInfo("nl-NL")));
         }
     }
 }

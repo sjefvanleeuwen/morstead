@@ -1,5 +1,4 @@
-﻿using Flee.PublicTypes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -11,24 +10,20 @@ namespace Vs.VoorzieningenEnRegelingen.Core
     {
         public static bool In(this string source, params string[] list)
         {
-            if (null == source) throw new ArgumentNullException("source");
+            if (null == source) throw new ArgumentNullException(nameof(source));
             return list.Contains(source, StringComparer.OrdinalIgnoreCase);
         }
     }
 
     public class YamlScriptController
     {
+        private const string Ok = "OK";
         private Model.Model _model;
         /// <summary>
         /// Some global culture info's for number conversions (do not make this configurable, 
         /// otherwise it will possibly interfere with script syntax)
         /// </summary>
         private static readonly CultureInfo _numberCulture = CultureInfo.InvariantCulture;
-        /// <summary>
-        /// Some global culture info's for date conversions
-        /// TODO: make conjfigurable.
-        /// </summary>
-        private static readonly CultureInfo _dateCulture = new CultureInfo("nl-NL");
 
         public YamlScriptController()
         {
@@ -73,33 +68,24 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             return new ParseResult()
             {
-                Message = "OK",
+                Message = Ok,
                 ExpressionTree = new YamlDotNet.Serialization.Serializer().Serialize(_model),
                 Model = _model
             };
         }
-
-        /*
-
-        private double Execute(ref ExpressionContext context, ref Function function, ref Parameters parameters, ref ExecutionResult excecutionResult)
-        {
-            foreach (var parameter in parameters)
-            {
-                context.Variables.Add(parameter.Name, parameter.Value);
-            }
-
-            return 0;
-        }
-
-        */
 
         /// <summary>
         /// Execute Workflow
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public ExecutionResult ExecuteWorkflow(Parameters parameters)
+        public ExecutionResult ExecuteWorkflow(ParametersCollection parameters)
         {
+            if (parameters is null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             ExecutionResult executionResult = new ExecutionResult();
             try
             {
@@ -153,7 +139,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         }
     }
 
-    public class Parameters : List<Parameter>
+    public class ParametersCollection : List<Parameter>
     {
         public Parameter GetParameter(string name)
         {
@@ -187,9 +173,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
     public class ParseResult
     {
-        public bool IsError = false;
-        public string Message;
-        public string ExpressionTree;
-        public Model.Model Model;
+        public bool IsError { get; set; }
+        public string Message { get; set; }
+        public string ExpressionTree { get; set; }
+        public Model.Model Model { get; set; }
     }
 }

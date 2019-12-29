@@ -38,6 +38,16 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public static DebugInfo mapDebugInfo(Mark start, Mark end)
         {
+            if (start is null)
+            {
+                throw new ArgumentNullException(nameof(start));
+            }
+
+            if (end is null)
+            {
+                throw new ArgumentNullException(nameof(end));
+            }
+
             return new DebugInfo(
                 start: new LineInfo(line: start.Line, col: start.Column, index: start.Index),
                 end: new LineInfo(line: end.Line, col: end.Column, index: end.Index)
@@ -104,7 +114,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 var columnTypes = new List<ColumnType>();
                 for (int i = 0; i < columns1.Length; i++)
                 {
-                    columnTypes.Add(new ColumnType(columnsDebugInfo, columns1[i], ColumnType.ColumnTypeEnum.@string));
+                    columnTypes.Add(new ColumnType(columnsDebugInfo, columns1[i], ColumnType.ColumnTypeEnum.text));
                 }
                 tables.Add(new Table(debugInfoTable, tableName, columnTypes, rows));
             }
@@ -113,15 +123,17 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         private YamlMappingNode Map(string body)
         {
-                if (Maps.ContainsKey(body))
-                    return Maps[body];
-                var input = new StringReader(body);
+            if (Maps.ContainsKey(body))
+                return Maps[body];
+            using (var input = new StringReader(body))
+            {
                 // Load the stream
                 var yaml = new YamlStream();
                 yaml.Load(input);
                 // Examine the stream
                 Maps.TryAdd(body, (YamlMappingNode)yaml.Documents[0].RootNode);
-            return (YamlMappingNode)yaml.Documents[0].RootNode;
+                return (YamlMappingNode)yaml.Documents[0].RootNode;
+            }
         }
 
         public Dictionary<string, DataTable> Table(string key)

@@ -3,15 +3,13 @@ using System.Globalization;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
-    public static class TypeInference
+    public static partial class TypeInference
     {
         public static InferenceResult Infer(string inference)
         {
-            int intResult;
-            Decimal floatResult=50;
+            Decimal floatResult =50;
             TimeSpan timeSpanResult;
             DateTime dateTimeResult;
-            int stringResult;
 
             // value = "1,097.63";
             var style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign | NumberStyles.AllowLeadingWhite;
@@ -30,26 +28,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 return new InferenceResult(InferenceResult.TypeEnum.DateTime, dateTimeResult);
             }
             return new InferenceResult(InferenceResult.TypeEnum.String, dateTimeResult);
-        }
-
-        public class InferenceResult
-        {
-            public TypeEnum Type { get; }
-            public object Value { get; }
-
-            public InferenceResult(TypeEnum type, object value)
-            {
-                Type = type;
-                Value = value;
-            }
-
-            public enum TypeEnum
-            {
-                Decimal,
-                TimeSpan,
-                DateTime,
-                String
-            }
         }
     }
 }

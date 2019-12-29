@@ -18,9 +18,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
 
         public enum ColumnTypeEnum
         {
-            @double,
+            number,
             formula,
-            @string
+            text
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
     [Serializable]
-    internal class StepException : Exception
+    public class StepException : Exception
     {
         public StepException(string message, Step step) : base(message)
         {
@@ -13,5 +12,22 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         }
 
         public Step Step { get; }
+
+        public StepException()
+        {
+        }
+
+        public StepException(string message) : base(message)
+        {
+        }
+
+        public StepException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected StepException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
