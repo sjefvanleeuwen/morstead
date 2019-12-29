@@ -33,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var result = controller.Parse(YamlZorgtoeslag.Body);
             var parameters = new Parameters();
             parameters.Add(new Parameter("woonland", "Nederland"));
-            var executionResult = controller.Execute(parameters);
+            var executionResult = controller.ExecuteWorkflow(parameters);
             // Tsjechië,            0.2412 
             // context.Variables.Add("woonland", "Tsjechië");
             // var formula = controller.GetFormula("woonlandfactor");

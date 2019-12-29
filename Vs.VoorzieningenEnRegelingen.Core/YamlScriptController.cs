@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
@@ -44,9 +43,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return double.Parse(value.Value.ToString(),_numberCulture);
         }
 
-        public Function GetFormula(string name)
+        public Formula GetFormula(string name)
         {
-            return _model.Formulas.First(p => p.Name == name).Functions.FirstOrDefault();
+            return _model.Formulas.First(p => p.Name == name);
         }
 
         public Function GetSituation(string formula, string situation)
@@ -80,17 +79,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             };
         }
 
-        private static ExpressionContext GetExpressionContext()
-        {
-            // Define the context of our expression
-            ExpressionContext context = new ExpressionContext();
-            context.Options.ParseCulture = CultureInfo.InvariantCulture;
-            // Allow the expression to use all static public methods of System.Math
-            context.Imports.AddType(typeof(Math));
-            // Allow the expression to use all static overload public methods our CustomFunctions class
-            context.Imports.AddType(typeof(CustomFunctions));
-            return context;
-        }
+        /*
 
         private double Execute(ref ExpressionContext context, ref Function function, ref Parameters parameters, ref ExecutionResult excecutionResult)
         {
@@ -102,12 +91,16 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return 0;
         }
 
-        public ExecutionResult Execute(Parameters parameters)
+        */
+
+        /// <summary>
+        /// Execute Workflow
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public ExecutionResult ExecuteWorkflow(Parameters parameters)
         {
             ExecutionResult executionResult = new ExecutionResult();
-            // needs some performance optimalization @ per instance.
-            var expressionContext = GetExpressionContext();
-
             try
             {
                 foreach (var step in _model.Steps)
@@ -125,8 +118,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             var formula = GetFormula(step.Situation);
                             if (formula == null)
                                 throw new StepException($"can't resolve parameter '${parameter.Name}' to formula", step);
-                            // execute the formula adn add the outcome to parameters.
-                            var result = Execute(ref expressionContext, ref formula, ref parameters, ref executionResult);
+                            // execute the formula which adds the outcome to parameters.
+                            var context = new FormulaExpressionContext(ref _model, ref parameters, formula);
+                            var result = context.Evaluate();
+                            //var result = Execute(ref context, ref formula, ref parameters, ref executionResult);
 
                         }
                         else

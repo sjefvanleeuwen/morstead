@@ -162,7 +162,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             context.Variables.Add("woonland", "Tsjechië");
             var formula = controller.GetFormula("woonlandfactor");
             //  select(string tableName, string lookupValue, string lookupColumn, string resultColumn)
-            IDynamicExpression e = context.CompileDynamic(formula.Expression);
+            IDynamicExpression e = context.CompileDynamic(formula.Functions[0].Expression);
             double result1 = (double)e.Evaluate();
             Assert.True(result1 == 0.2412);
         }
