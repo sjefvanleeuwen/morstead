@@ -4,6 +4,7 @@ using System.Globalization;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
@@ -13,6 +14,29 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private Model.Model _model;
         private Formula _formula;
         private ParametersCollection _parameters;
+
+        public static void Map(ref ParametersCollection parameters, VariableCollection variables)
+        {
+            if (parameters is null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            if (variables is null)
+            {
+                throw new ArgumentNullException(nameof(variables));
+            }
+
+            foreach (var parameter in parameters)
+            {
+                if (variables.ContainsKey(parameter.Name))
+                {
+
+                    variables.Remove(parameter.Name);
+                }
+                variables.Add(parameter.Name, parameter.Value.Infer());
+            }
+        }
 
         public FormulaExpressionContext(ref Model.Model model, ref ParametersCollection parameters, Formula formula)
         {
@@ -30,6 +54,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             _context.Variables.ResolveVariableType += ResolveVariableType;
             // this will visit ResolveVariableValue
             _context.Variables.ResolveVariableValue += ResolveVariableValue;
+            Map(ref _parameters, _context.Variables);
         }
 
         public Parameter Evaluate()
@@ -38,13 +63,37 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             if (!_formula.IsSituational)
             {
                 e = _context.CompileDynamic(_formula.Functions[0].Expression);
+                var result = e.Evaluate().Infer();
+                Parameter parameter;
+                parameter = new Parameter(_formula.Name, result.Infer());
+                _parameters.Add(parameter);
+                if (_context.Variables.ContainsKey(parameter.Name)){
+                    _context.Variables.Remove(parameter.Name);
+                }
+                _context.Variables.Add(parameter.Name, parameter.Value);
+                return parameter;
             }
             else
             {
-                throw new NotImplementedException();
-
+                foreach (var function in _formula.Functions) {
+                    foreach (var item in _parameters)
+                    {
+                        if (item.Name == function.Situation)
+                        {
+                            e = _context.CompileDynamic(function.Expression);
+                            var parameter = new Parameter(_formula.Name, e.Evaluate().Infer());
+                            _parameters.Add(parameter);
+                            if (_context.Variables.ContainsKey(parameter.Name))
+                            {
+                                _context.Variables.Remove(parameter.Name);
+                            }
+                            _context.Variables.Add(parameter.Name, parameter.Value);
+                            return parameter;
+                        }
+                    }
+                }
+                throw new ArgumentException($"Can't evaluate formula ${_formula.Name} for situation.");
             }
-            return new Parameter(_formula.Name, (double)e.Evaluate());
         }
 
         private void ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
@@ -55,7 +104,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 // this variable is a formula. Recurvsively execute this formula.
                 var context = new FormulaExpressionContext(ref _model, ref _parameters, recursiveFormula);
-                e.VariableValue = context.Evaluate();
+                e.VariableValue = context.Evaluate().Value.Infer();
             }
             else
             {

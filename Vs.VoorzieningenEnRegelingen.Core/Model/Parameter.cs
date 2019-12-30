@@ -17,7 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             }
 
             Name = name;
-            Value = value;
+            Value = value.Infer();
         }
 
         public string Name { get; }

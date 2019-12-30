@@ -96,7 +96,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             // stap 3
             // Let op!Leidt het tweede deel van de formule tot een negatief bedrag? Reken dan met € 0.
             // using c# math expression min(n,0)
-            IGenericExpression <Double> eDynamic = context.CompileGeneric<Double>("round(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0),2)");
+            IGenericExpression <Double> eDynamic = context.CompileGeneric<Double>("min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)");
             variables["normpremie"] = eDynamic.Evaluate();
             // stap 4
             IGenericExpression<Double> eDynamic2 = context.CompileGeneric<Double>("standaardpremie - normpremie");

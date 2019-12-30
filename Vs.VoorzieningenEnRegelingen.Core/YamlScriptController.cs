@@ -8,11 +8,48 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 {
     public static class StringHelpers
     {
-        public static bool In(this string source, params string[] list)
+        private static bool In(this string source, params string[] list)
         {
             if (null == source) throw new ArgumentNullException(nameof(source));
             return list.Contains(source, StringComparer.OrdinalIgnoreCase);
         }
+
+        public static object Infer(this object value)
+        {
+            if (value is null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+            if (value.GetType() != typeof(object))
+            {
+                if (value.GetType() == typeof(int))
+                    value = double.Parse(value.ToString(), new CultureInfo("en-US"));
+                return value;
+            }
+            if (value.ToString().In("ja", "yes", "true", "nee", "no", "false"))
+            {
+                if (value.ToString().In("ja", "yes", "true"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                try
+                {
+                    return double.Parse(value.ToString(), new CultureInfo("en-US"));
+                }
+                catch (FormatException)
+                {
+                    return value.ToString();
+                }
+            }
+        }
+
     }
 
     public class YamlScriptController
@@ -79,7 +116,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public ExecutionResult ExecuteWorkflow(ParametersCollection parameters)
+        public ExecutionResult ExecuteWorkflow(ref ParametersCollection parameters)
         {
             if (parameters is null)
             {
@@ -108,11 +145,15 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             var context = new FormulaExpressionContext(ref _model, ref parameters, formula);
                             var result = context.Evaluate();
                             //var result = Execute(ref context, ref formula, ref parameters, ref executionResult);
-
+                            if (result.Value.GetType() != typeof(bool))
+                            {
+                                throw new StepException($"Expected situation to evalute to boolean value in worflow step {step.Name} {step.Description} but got value: {result.Value} of type {result.Value.GetType().Name} instead.", step);
+                            }
+                            match = (bool)result.Value;
                         }
                         else
                         {
-                            if (parameter.Value.ToString().In("ja", "yes", "true"))
+                            if ((bool)parameter.Value.Infer())
                             {
                                 // execute this step.
                                 match = true;
@@ -128,6 +169,15 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     if (match)
                     {
                         executionResult.Stacktrace.Add(new FlowExecutionItem(step, null));
+                        // resolve parameter value from named formula.
+                        if (string.IsNullOrEmpty(step.Formula))
+                        {
+                            throw new StepException($"Expected reference to a formula to evaluate in worflow step {step.Name} {step.Description} to execute.", step);
+                        }
+                        // calculate formula and add it to the parameter list.
+                        var formula = GetFormula(step.Formula);
+                        var context = new FormulaExpressionContext(ref _model, ref parameters, formula);
+                        var result = context.Evaluate();
                     }
                 }
             }

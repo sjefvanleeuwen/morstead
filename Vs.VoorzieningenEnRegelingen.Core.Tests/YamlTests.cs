@@ -92,7 +92,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
             var yamlParser = new YamlParser(YamlScripts.YamlZorgtoeslag.Body, null);
             var functions = yamlParser.Formulas();
-            Assert.True(functions.Count == 9);
+            Assert.True(functions.Count == 10);
             Assert.True(functions[1].Name == "maximaalvermogen");
             Assert.True(functions[1].IsSituational == true);
         }
