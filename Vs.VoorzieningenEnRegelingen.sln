@@ -19,6 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelinge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Site", "Vs.VoorzieningenEnRegelingen.Site\Vs.VoorzieningenEnRegelingen.Site.csproj", "{B580B0CD-3027-4FC3-A3EB-06094FC85130}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{903A60DA-7659-421E-9BA8-14FBCC994642}"
+	ProjectSection(SolutionItems) = preProject
+		doc\Requirements-Wetsanalist.md = doc\Requirements-Wetsanalist.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

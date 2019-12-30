@@ -13,5 +13,12 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.True(controller.GetSituation("standaardpremie", "alleenstaande").Expression == "1609");
             Assert.True(controller.GetSituation("maximaalvermogen", "aanvrager_met_toeslagpartner").Expression == "145136");
         }
+
+        [Fact]
+        public void StuurInformatieTest()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag.Body);
+        }
     }
 }
