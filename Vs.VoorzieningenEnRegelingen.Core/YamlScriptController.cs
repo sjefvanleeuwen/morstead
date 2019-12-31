@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
@@ -16,27 +15,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public static object Infer(this object value)
         {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            if (value is null) throw new ArgumentNullException(nameof(value));
             if (value.GetType() != typeof(object))
             {
                 if (value.GetType() == typeof(int))
-                    value = double.Parse(value.ToString(), new CultureInfo("en-US"));
-                return value;
+                    return double.Parse(value.ToString(), new CultureInfo("en-US"));
             }
             if (value.ToString().In("ja", "yes", "true", "nee", "no", "false"))
-            {
-                if (value.ToString().In("ja", "yes", "true"))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+                return value.ToString().In("ja", "yes", "true");
             else
             {
                 try
@@ -49,7 +35,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 }
             }
         }
-
     }
 
     public class YamlScriptController
@@ -111,6 +96,67 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             };
         }
 
+        private bool EvaluateSituation(ref ParametersCollection parameters, Step step)
+        {
+            if (parameters is null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            var match = false;
+            // evaluate if the situation (condition) is appropiate, otherwise skip it.
+            // not in input parameters. Evaluate the
+            var parameter = parameters.GetParameter(step.Situation);
+            if (parameter == null)
+            {
+                // resolve parameter value from named formula.
+                var formula = GetFormula(step.Situation);
+                if (formula == null)
+                    throw new StepException($"can't resolve parameter '${parameter.Name}' to formula", step);
+                // execute the formula which adds the outcome to parameters.
+                var context = new FormulaExpressionContext(ref _model, ref parameters, formula);
+                var result = context.Evaluate();
+                //var result = Execute(ref context, ref formula, ref parameters, ref executionResult);
+                if (result.Value.GetType() != typeof(bool))
+                {
+                    throw new StepException($"Expected situation to evalute to boolean value in worflow step {step.Name} {step.Description} but got value: {result.Value} of type {result.Value.GetType().Name} instead.", step);
+                }
+                match = (bool)result.Value;
+            }
+            else
+            {
+                if ((bool)parameter.Value.Infer())
+                {
+                    // execute this step.
+                    match = true;
+                }
+            }
+            return match;
+        }
+
+        private void ExecuteStep(ref ExecutionResult executionResult, ref ParametersCollection parameters, Step step)
+        {
+            if (executionResult is null)
+            {
+                throw new ArgumentNullException(nameof(executionResult));
+            }
+
+            if (parameters is null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+            executionResult.Stacktrace.Add(new FlowExecutionItem(step, null));
+            // resolve parameter value from named formula.
+            if (string.IsNullOrEmpty(step.Formula))
+            {
+                throw new StepException($"Expected reference to a formula to evaluate in worflow step {step.Name} {step.Description} to execute.", step);
+            }
+            // calculate formula and add it to the parameter list.
+            var formula = GetFormula(step.Formula);
+            var context = new FormulaExpressionContext(ref _model, ref parameters, formula);
+            context.Evaluate();
+        }
+
         /// <summary>
         /// Execute Workflow
         /// </summary>
@@ -132,33 +178,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     bool match = false;
                     if (!string.IsNullOrEmpty(step.Situation))
                     {
-                        // evaluate if the situation (condition) is appropiate, otherwise skip it.
-                        // not in input parameters. Evaluate the
-                        var parameter = parameters.GetParameter(step.Situation);
-                        if (parameter == null)
-                        {
-                            // resolve parameter value from named formula.
-                            var formula = GetFormula(step.Situation);
-                            if (formula == null)
-                                throw new StepException($"can't resolve parameter '${parameter.Name}' to formula", step);
-                            // execute the formula which adds the outcome to parameters.
-                            var context = new FormulaExpressionContext(ref _model, ref parameters, formula);
-                            var result = context.Evaluate();
-                            //var result = Execute(ref context, ref formula, ref parameters, ref executionResult);
-                            if (result.Value.GetType() != typeof(bool))
-                            {
-                                throw new StepException($"Expected situation to evalute to boolean value in worflow step {step.Name} {step.Description} but got value: {result.Value} of type {result.Value.GetType().Name} instead.", step);
-                            }
-                            match = (bool)result.Value;
-                        }
-                        else
-                        {
-                            if ((bool)parameter.Value.Infer())
-                            {
-                                // execute this step.
-                                match = true;
-                            }
-                        }
+                        match = EvaluateSituation(ref parameters, step);
                     }
                     // unconditional step
                     else
@@ -168,16 +188,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     // execute step.
                     if (match)
                     {
-                        executionResult.Stacktrace.Add(new FlowExecutionItem(step, null));
-                        // resolve parameter value from named formula.
-                        if (string.IsNullOrEmpty(step.Formula))
-                        {
-                            throw new StepException($"Expected reference to a formula to evaluate in worflow step {step.Name} {step.Description} to execute.", step);
-                        }
-                        // calculate formula and add it to the parameter list.
-                        var formula = GetFormula(step.Formula);
-                        var context = new FormulaExpressionContext(ref _model, ref parameters, formula);
-                        var result = context.Evaluate();
+                        ExecuteStep(ref executionResult, ref parameters, step);
                     }
                 }
             }
@@ -187,45 +198,5 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             return executionResult;
         }
-    }
-
-    public class ParametersCollection : List<Parameter>
-    {
-        public Parameter GetParameter(string name)
-        {
-            return (from p in this where p.Name == name select p).SingleOrDefault();
-        }
-    }
-
-    public class ExecutionResult
-    {
-        public bool IsError { get; internal set; }
-        public string Message { get; internal set; }
-        public List<FlowExecutionItem> Stacktrace { get; }
-
-        public ExecutionResult()
-        {
-            Stacktrace = new List<FlowExecutionItem>();
-        }
-    }
-
-    public class FlowExecutionItem
-    {
-        public FlowExecutionItem(Step step, Exception exception = null)
-        {
-            Step = step ?? throw new ArgumentNullException(nameof(step));
-            Exception = exception;
-        }
-
-        public Step Step { get; }
-        public Exception Exception { get; }
-    }
-
-    public class ParseResult
-    {
-        public bool IsError { get; set; }
-        public string Message { get; set; }
-        public string ExpressionTree { get; set; }
-        public Model.Model Model { get; set; }
     }
 }

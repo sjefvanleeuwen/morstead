@@ -12,26 +12,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
     /// <summary></summary>
     public class YamlTests
     {
-        private Dictionary<string, YamlMappingNode> Maps = new Dictionary<string, YamlMappingNode>();
-
-        private YamlMappingNode Map(string body)
-        {
-            if (Maps.ContainsKey(body))
-                return Maps[body];
-            using (var input = new StringReader(body))
-            {
-                // Load the stream
-                var yaml = new YamlStream();
-                yaml.Load(input);
-                // Examine the stream
-                Maps.Add(body, (YamlMappingNode)yaml.Documents[0].RootNode);
-                return (YamlMappingNode)yaml.Documents[0].RootNode;
-            }
-        }
-
         private string Order(string s)
         {
-            return String.Join(",", s.Trim(',').Split(',').OrderBy(i => i));
+            return string.Join(",", s.Trim(',').Split(',').OrderBy(i => i));
         }
 
         /// <summary>
@@ -40,7 +23,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Yaml_Can_Deserialize_Root_Nodes()
         {
-            var map = Map(YamlScripts.YamlZorgtoeslag.Body);
+            var map = YamlParser.Map(YamlScripts.YamlZorgtoeslag.Body);
             // Load the stream
             var s = "";
             foreach (var entry in map.Children)
@@ -53,7 +36,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Yaml_Passes_AttributeNaming_Stuurinformatie()
         {
-            var map = Map(YamlScripts.YamlZorgtoeslag.Body);
+            var map = YamlParser.Map(YamlScripts.YamlZorgtoeslag.Body);
             var s = "";
             foreach (var entry in (YamlMappingNode)map.Children[new YamlScalarNode("stuurinformatie")])
             {
@@ -64,7 +47,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Yaml_Passes_AttributeValues_Stuurinformatie()
         {
-            var map = Map(YamlScripts.YamlZorgtoeslag.Body);
+            var map = YamlParser.Map(YamlScripts.YamlZorgtoeslag.Body);
             var s = "";
             var entries = (YamlMappingNode)map.Children[new YamlScalarNode("stuurinformatie")];
             foreach (var entry in entries)

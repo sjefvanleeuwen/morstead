@@ -121,7 +121,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return tables;
         }
 
-        private YamlMappingNode Map(string body)
+        public static YamlMappingNode Map(string body)
         {
             if (Maps.ContainsKey(body))
                 return Maps[body];
@@ -134,65 +134,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 Maps.TryAdd(body, (YamlMappingNode)yaml.Documents[0].RootNode);
                 return (YamlMappingNode)yaml.Documents[0].RootNode;
             }
-        }
-
-        public Dictionary<string, DataTable> Table(string key)
-        {
-            if (Tables.ContainsKey(key))
-                return Tables[key];
-            var tables = new Dictionary<string, DataTable>();
-            var entries = map.Children;
-            foreach (var norm in (YamlSequenceNode)entries[key])
-            {
-                DataTable dt = new DataTable();
-                dt.TableName = key + "_" + ((YamlMappingNode)norm).Children.First().Key.ToString();
-                if (((YamlMappingNode)norm).Children.First().Value.GetType() == typeof(YamlMappingNode))
-                {
-                    //var n = (YamlMappingNode)norm).Children.First().Value;
-                    foreach (var situatieColumn in (YamlMappingNode)((YamlMappingNode)norm).Children.First().Value)
-                    {
-                        DataRow row = dt.NewRow();
-                        if (!dt.Columns.Contains(situatieColumn.Key.ToString()))
-                            dt.Columns.Add(situatieColumn.Key.ToString());
-                        row[situatieColumn.Key.ToString()] = situatieColumn.Value;
-                        //row.SetModified();
-                        dt.Rows.Add(row);
-                        dt.AcceptChanges();
-                    }
-                }
-                else
-                {
-                    if (((YamlMappingNode)norm).Children.First().Value.GetType() == typeof(YamlScalarNode))
-                    {
-                        var node = ((YamlMappingNode)norm).Children.First();
-                        DataRow row = dt.NewRow();
-                        dt.Columns.Add(node.Key.ToString());
-                        row[node.Key.ToString()] = node.Value;
-                        dt.Rows.Add(row);
-                        dt.AcceptChanges();
-                    }
-                    else
-                    {
-                        foreach (var situatieRow in (YamlSequenceNode)((YamlMappingNode)norm).Children.First().Value)
-                        {
-                            DataRow row = dt.NewRow();
-                            foreach (var situatieColumn in (YamlMappingNode)situatieRow)
-                            {
-                                if (!dt.Columns.Contains(situatieColumn.Key.ToString()))
-                                    dt.Columns.Add(situatieColumn.Key.ToString());
-                                row[situatieColumn.Key.ToString()] = situatieColumn.Value;
-                            }
-                            //row.SetModified();
-                            dt.Rows.Add(row);
-                            dt.AcceptChanges();
-                        }
-
-                    }
-                }
-                tables.Add(dt.TableName, dt);
-            }
-            Tables.Add(key, tables);
-            return Tables[key];
         }
 
         public List<Formula> Formulas()
