@@ -269,17 +269,21 @@ stuurinformatie:
 berekening:
  - stap: 1
    omschrijving: bepaal de standaard premie
-   formule: gezamenlijk toestinginkomen
+   formule: standaardpremie
  - stap: 2
    omschrijving: bereken het gezamenlijke toestingsinkomen
+   formule: toetsingsinkomen
  - stap: 3 
    omschrijving: bereken de normpremie
+   formule: normpremie
  - stap: 4 
    situatie: binnenland
-   omschrijving: bereken de zorgtoeslag binnen nederland woont
+   omschrijving: bereken de zorgtoeslag wanneer men binnen nederland woont
+   formule: zorgtoeslag
  - stap: 5
    situatie: buitenland
-   omschrijving: bereken de zorgtoeslag buitenland.
+   omschrijving: bereken de zorgtoeslag wanner men in het buitenland woont
+   formule: zorgtoeslag
 formules:
  - standaardpremie:
    - situatie: alleenstaande
@@ -299,19 +303,30 @@ formules:
  - drempelinkomen:
      formule: 20941
  - toetsingsinkomen: 
-     formule: toetsingsinkomen aanvrager + toetsingsinkomen toeslagpartner
+     formule: toetsingsinkomen_aanvrager + toetsingsinkomen_toeslagpartner
  - normpremie:
    - situatie: alleenstaande
-     formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0),1189)
-   - situatie: aanvrager met toeslagpartner
+     formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)
+   - situatie: aanvrager_met_toeslagpartner
      formule: min(percentage(4.315) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 2314)
+ - buitenland:
+     formule: niet(woonland,'Nederland')
+ - binnenland:
+     formule: wel(woonland,'Nederland')
+ - zorgtoeslag:
+     - situatie: binnenland
+       formule: round((standaardpremie - normpremie) / 12,2)
+     - situatie: buitenland
+       formule: round((standaardpremie - normpremie) * woonlandfactor / 12,2)
+ - woonlandfactor:
+     formule: lookup('woonlandfactoren',woonland,'woonland','factor')
 tabellen:
   - naam: maximaalvermogen
     situatie, waarde:
       - [ alleenstaande,                11476 ] 
       - [ aanvrager met toeslagpartner, 14536 ]
-  - naam: woonlandfactor
-    woonland, woonlandfactor:
+  - naam: woonlandfactoren
+    woonland, factor:
       - [ Finland,             0.7161 ]
       - [ Frankrijk,           0.8316 ]
       - [ België,              0.7392 ]
