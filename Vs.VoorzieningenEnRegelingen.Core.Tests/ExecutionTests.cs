@@ -28,6 +28,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 new Parameter("toetsingsinkomen_toeslagpartner",(double)0)
             };
             var executionResult = controller.ExecuteWorkflow(ref parameters);
+            Assert.True((double)parameters.GetParameter("zorgtoeslag").Value == 99.09);
         }
     }
 }

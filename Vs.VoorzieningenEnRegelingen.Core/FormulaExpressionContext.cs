@@ -59,6 +59,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public Parameter Evaluate()
         {
+            if (_formula.Name == "normpremie")
+            {
+
+            }
             IDynamicExpression e = null;
             if (!_formula.IsSituational)
             {
@@ -70,7 +74,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 if (_context.Variables.ContainsKey(parameter.Name)){
                     _context.Variables.Remove(parameter.Name);
                 }
-                _context.Variables.Add(parameter.Name, parameter.Value);
+                _context.Variables.Add(parameter.Name, parameter.Value.Infer());
                 return parameter;
             }
             else
@@ -87,7 +91,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             {
                                 _context.Variables.Remove(parameter.Name);
                             }
-                            _context.Variables.Add(parameter.Name, parameter.Value);
+                            _context.Variables.Add(parameter.Name, parameter.Value.Infer());
                             return parameter;
                         }
                     }
