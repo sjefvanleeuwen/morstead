@@ -4,7 +4,6 @@ using System.Globalization;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
-using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {

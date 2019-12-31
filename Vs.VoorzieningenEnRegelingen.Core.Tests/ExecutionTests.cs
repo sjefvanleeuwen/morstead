@@ -30,5 +30,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var executionResult = controller.ExecuteWorkflow(ref parameters);
             Assert.True((double)parameters.GetParameter("zorgtoeslag").Value == 99.09);
         }
+
+        [Fact]
+        public void Execution_ZorgToeslag_2019_GetInputParameters()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var parameters = controller.GetInputParameters();
+        }
+
     }
 }

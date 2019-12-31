@@ -20,6 +20,24 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         {
         }
 
+        public ParametersCollection GetInputParameters()
+        {
+            var parameters = new ParametersCollection();
+            // Get all parameters that are not resolved by formulas.
+            foreach (var s in _model.Steps)
+            {
+                if (!s.IsSituational)
+                    continue;
+
+                if (_model.Formulas.Any(p => p.Name == s.Situation))
+                    continue;
+
+                parameters.Add(new Parameter(s.Situation,string.Empty));
+            }
+
+            return parameters;
+        }
+
         public double Lookup(string tableName, string lookupValue, string lookupColumn, string resultColumn)
         {
             var table = GetTable(tableName);

@@ -24,5 +24,6 @@
         public string Description { get; }
         public string Formula { get; }
         public string Situation { get; }
+        public bool IsSituational => !string.IsNullOrEmpty(Situation);
     }
 }
