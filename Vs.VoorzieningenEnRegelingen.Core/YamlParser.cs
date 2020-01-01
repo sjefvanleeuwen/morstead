@@ -22,6 +22,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private const string SituationAttribute = "situatie";
         private const string TablesAttribute = "tabellen";
         private const string FlowAttribute = "berekening";
+        private const string HeaderAttribute = "stuurinformatie";
 
         private static ConcurrentDictionary<string, YamlMappingNode> Maps = new ConcurrentDictionary<string, YamlMappingNode>();
         private static Dictionary<string, Dictionary<string, DataTable>> Tables = new Dictionary<string, Dictionary<string, DataTable>>();
@@ -52,6 +53,44 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 start: new LineInfo(line: start.Line, col: start.Column, index: start.Index),
                 end: new LineInfo(line: end.Line, col: end.Column, index: end.Index)
             );
+        }
+
+        public StuurInformatie Header()
+        {
+            var stuurinformatie = new StuurInformatie();
+            foreach (var item in ((YamlMappingNode)map.Children[new YamlScalarNode(HeaderAttribute)]).Children)
+            {
+                switch (item.Key.ToString())
+                {
+                    case "onderwerp":
+                        stuurinformatie.Onderwerp = item.Value.ToString();
+                        break;
+                    case "organisatie":
+                        stuurinformatie.Organisatie = item.Value.ToString();
+                        break;
+                    case "type":
+                        stuurinformatie.Type = item.Value.ToString();
+                        break;
+                    case "domein":
+                        stuurinformatie.Domein = item.Value.ToString();
+                        break;
+                    case "versie":
+                        stuurinformatie.Versie = item.Value.ToString();
+                        break;
+                    case "status":
+                        stuurinformatie.Status = item.Value.ToString();
+                        break;
+                    case "jaar":
+                        stuurinformatie.Jaar = item.Value.ToString();
+                        break;
+                    case "bron":
+                        stuurinformatie.Bron = item.Value.ToString();
+                        break;
+                    default:
+                        throw new Exception($"unknown header identifider {item.Key.ToString()}");
+                }
+            }
+            return stuurinformatie;
         }
 
         public List<Step> Flow()

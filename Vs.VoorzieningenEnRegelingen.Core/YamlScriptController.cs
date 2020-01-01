@@ -47,6 +47,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return double.Parse(value.Value.ToString(),_numberCulture);
         }
 
+        public StuurInformatie GetHeader()
+        {
+            return _model.Header;
+        }
+
         public Formula GetFormula(string name)
         {
             return _model.Formulas.First(p => p.Name == name);
@@ -67,11 +72,12 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             try
             {
                 YamlParser parser = new YamlParser(yaml, null);
-                _model = new Model.Model(parser.Formulas(), parser.Tabellen(), parser.Flow());
+                _model = new Model.Model(parser.Header(),parser.Formulas(), parser.Tabellen(), parser.Flow());
             }
             catch (Exception ex)
             {
                 var result = new ParseResult();
+                result.IsError = true;
                 result.Message = ex.Message;
                 return result;
             }
