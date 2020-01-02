@@ -25,7 +25,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private const string HeaderAttribute = "stuurinformatie";
 
         private static ConcurrentDictionary<string, YamlMappingNode> Maps = new ConcurrentDictionary<string, YamlMappingNode>();
-        private static Dictionary<string, Dictionary<string, DataTable>> Tables = new Dictionary<string, Dictionary<string, DataTable>>();
         private readonly Dictionary<string, Parameter> _parameters;
         private readonly string _yaml;
         private readonly YamlMappingNode map;

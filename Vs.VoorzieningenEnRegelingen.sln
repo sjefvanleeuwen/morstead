@@ -24,6 +24,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{903A60DA-765
 		doc\Requirements-Wetsanalist.md = doc\Requirements-Wetsanalist.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.VoorzieningenEnRegelingen.Service", "Vs.VoorzieningenEnRegelingen.Service\Vs.VoorzieningenEnRegelingen.Service.csproj", "{60E9282A-7AF1-45DB-8C60-711A465F66A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.VoorzieningenEnRegelingen.Service.Tests", "Vs.VoorzieningenEnRegelingen.Service.Tests\Vs.VoorzieningenEnRegelingen.Service.Tests.csproj", "{8FEA3733-D193-41F2-AF73-B9D05C900874}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +46,14 @@ Global
 		{B580B0CD-3027-4FC3-A3EB-06094FC85130}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B580B0CD-3027-4FC3-A3EB-06094FC85130}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B580B0CD-3027-4FC3-A3EB-06094FC85130}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FEA3733-D193-41F2-AF73-B9D05C900874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FEA3733-D193-41F2-AF73-B9D05C900874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FEA3733-D193-41F2-AF73-B9D05C900874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FEA3733-D193-41F2-AF73-B9D05C900874}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
