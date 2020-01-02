@@ -8,6 +8,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
     {
         public UnresolvedException()
         {
+            throw new NotImplementedException();
         }
 
         public UnresolvedException(string message) : base(message)
@@ -16,10 +17,12 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public UnresolvedException(string message, Exception innerException) : base(message, innerException)
         {
+            throw new NotImplementedException();
         }
 
         protected UnresolvedException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
+            throw new NotImplementedException();
         }
     }
 }

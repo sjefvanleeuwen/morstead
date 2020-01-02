@@ -56,5 +56,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
            // var parameters = controller.GetInputParameters();
         }
 
+        [Fact]
+        public void Execution_Should_Be_Not_Implemented_Exception()
+        {
+            Exception ex1 = Assert.Throws<NotImplementedException>(() => new UnresolvedException());
+            Exception ex3 = Assert.Throws<NotImplementedException>(() => new UnresolvedException("", new Exception()));
+        }
     }
 }
