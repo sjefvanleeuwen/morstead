@@ -9,10 +9,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-0298c3.svg)](https://github.com/sjefvanleeuwen/virtual-society-urukagina/blob/master/LICENSE)
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://regelingen.azurewebsites.net/)
 
-Binnen Virtual Society worden, desgewenst, wetten en regelingen meegenomen in de simulatie. Wanneer automatiseringsystemen 
-ontbreken tijdens de simulatie terwijl andere systemen voorzien moeten worden in de ketentests van gegevens uit de regelingen, 
-kan Virtual Society de gewenste berekeningen alsnog maken.
-
 Uru-ka-gina, Uru-inim-gina of Iri-ka-gina (Sumerisch: 𒌷𒅗𒄀𒈾 URU-KA-gi.na; ca. 24e eeuw voor Christus, korte chronologie)
 was een heerser (ensi) van de stadstaat Lagash in Mesopotamië. Hij nam de titel van koning aan en beweerde goddelijk te zijn 
 benoemd bij de val van zijn corrupte voorganger Lugalanda.
@@ -24,23 +20,16 @@ begrafeniskosten te betalen (inclusief de rituele voedsel- en drankoffers voor d
 en besloten dat de rijken zilver moeten gebruiken bij de aankoop van de armen, en als de armen niet willen verkopen, 
 kan de machtige man (de rijke man of de priester) hem niet dwingen dit te doen. [1]
 
-### Voordelen t.o.v. van andere rule engines
+### Features
 
-* Volledig ontkoppeld van (legacy) databases.
-* Stuurdata is niet meer binnen specifieke complexe database strukturen en technologie aanwezig en dus portabel.
+* Portabel, volledig ontkoppeld van databases.
 * Semantisch geoptimaliseerd om regelingen in korte en leesbare notaties weer te geven en uit te voeren (No Code).
-  *  Geen onduidelijke codering zoals binnen database referentie sleutels, waarbij regelgeving zoals die opgenomen is binnen het automatiseringsysteem 
-     niet meer duidelijk gelezen kan worden.
-  *  Semantische Differenties tussen regels over verschillende versies worden inzichtelijk.
-* Transpilable binnen client applicaties zodat regels uitgevoerd kunnen worden zonder dat back-end systemen geraadpleegd hoeven te worden.
-* Zeer snel.
-* Open Source.
+* Koppelbare formulieren middels Question Answer aangestuurd vanuit de rule engine.
 
 ## YAML
 
 Virtual Society heeft voor haar **low code** strategie een configuratie taal ontwikkelt in YAML om regelingen eenvoudig in te brengen binnen
-her simulkatie systeem. Het voordeel van deze taal is dat zij tevens inzicht geeft in welke gegevens er eventueel nog meer gesynthetiseerd
-moeten worden wanneer classificaties in de YAML ontbreken.
+haar systeem. Het voordeel van deze taal is dat er met sterk verkorte anotaties regels uitgevoerd kunnen worden.
 
 ## Low Code v.s. No Code
 
@@ -69,9 +58,21 @@ stuurinformatie:
 ```
 
 #### Onderwerp
+
+Geef hier een beknopte omschrijving van de regel
+
 #### Organisatie
+
+Geef hier de naam van de organisatie weer. 
+
 #### Type
+
+Geeft hier type van de uitvoering/regelgeving op.
+
 #### Domein
+
+Geef hier het werkdomein op.
+
 #### Versie
 
 Virtual Society adviseert om binnen versiebeheer in combinatie met status de volgende werkwijze aan te houden:
@@ -89,31 +90,16 @@ Ophogen na bevindingen uit de testers binnen een Agile Team die werken aan hetze
 Ophogen bij een volgende (mogelijke) oplevering uit de ontwikkel omgeving binnen de OTAP straat. Herhaal hierbij de eerder genoemde werkwijze.
 
 #### Status
+
+Geeft een indicatie van status yaml document. Ontwikkel, Test, Accpetatie, Productie
+
 #### Periode
+
+De periode van gegevens waarover het Yaml document berekeningen mag uitvoeren.
+
 #### Bron
 
-
-### Normeringen
-
-Een norm is een classificering volgens een (situationele) vastgelegde waarde als referentiepunt.
-
-#### Norm
-
-```yaml
-norm:
- <<classificatie>>: <<vastgelegde waarde>>
-```
-
-#### Situationele Norm
-
-```yaml
-norm:
- <<classificatie>>:
-   - situatie: <<classificatie>>
-     <<classificatie>>: <<vastgelegde waarde>>
-   - situatie: <<classificatie>>
-     <<classificatie>>: <<vastgelegde waarde>>
-```
+Een verwijzing naar regelgeving document waar de regels uitgelegd worden.
 
 ### Formules
 
@@ -139,7 +125,7 @@ formule:
    - situatie: <<classificering>>
      formule: <<literale formule>>
    - situatie: <<classificering>>
-     formule: <<litterale formule>>
+     formule: <<literale formule>>
 ```
 
 
@@ -153,7 +139,7 @@ stuurinformatie:
   type: toeslagen
   domein: zorg
   versie: 1.0
-  status: productie
+  status: ontwikkel
   jaar: 2019
   bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
 ```
@@ -181,13 +167,11 @@ Buitenlands vermogen telt ook mee.
 
 <sup>YAML deelrepresentatie</sup>
 ```yaml
-norm:
- drempelinkomen: 20941
- maximaalvermogen:
-   - situatie: alleenstaande
-     maximaalvermogen: 114776
-   - situatie: aanvrager met toeslagpartner
-     maximaalvermogen: 145136
+tabellen:
+  - naam: maximaalvermogen
+    situatie, waarde:
+      - [ alleenstaande,                11476 ] 
+      - [ aanvrager met toeslagpartner, 14536 ]
 ```
 
 #### Berekening
@@ -199,15 +183,21 @@ zorgtoeslag van uw klant in 5 stappen.
 berekening:
  - stap: 1
    omschrijving: bepaal de standaard premie
-   formule: gezamenlijk toestinginkomen
+   formule: standaardpremie
  - stap: 2
    omschrijving: bereken het gezamenlijke toestingsinkomen
+   formule: toetsingsinkomen
  - stap: 3 
    omschrijving: bereken de normpremie
+   formule: normpremie
  - stap: 4 
-   omschrijving: bereken de zorgtoeslag wanneer de persoon binnen nederland woont
+   situatie: binnenland
+   omschrijving: bereken de zorgtoeslag wanneer men binnen nederland woont
+   formule: zorgtoeslag
  - stap: 5
-   omschrijving: bereken de zorgtoeslag wanneer de persoon in het buitenland woont
+   situatie: buitenland
+   omschrijving: bereken de zorgtoeslag wanner men in het buitenland woont
+   formule: zorgtoeslag
 ```
 
 ##### Stap 1: bepaal de standaardpremie
@@ -217,12 +207,12 @@ tweemaal de standaardpremie genomen (€ 3.218).
 
 <sup>YAML representatie</sup>
 ```yaml
-normen:
+formules:
  - standaardpremie:
    - situatie: alleenstaande
-     waarde: 1609
-   - situatie: aanvrager met toeslagpartner
-     waarde: 3218
+     formule: 1609
+   - situatie: aanvrager_met_toeslagpartner
+     formule: 3218
 ```
 
 ##### Stap 2: bereken het gezamenlijke toetsingsinkomen
@@ -236,8 +226,8 @@ normen:
 
 <sup>YAML representatie</sup>
 ```yaml
-formule:
- toetsinginkomen: toetsingsinkomen aanvrager + toetsingsinkomen toeslagpartner
+ - toetsingsinkomen: 
+     formule: toetsingsinkomen_aanvrager + toetsingsinkomen_toeslagpartner
 ```
 
 Uw klant heeft geen recht op zorgtoeslag als het toetsingsinkomen hoger is dan:
@@ -246,15 +236,17 @@ Uw klant heeft geen recht op zorgtoeslag als het toetsingsinkomen hoger is dan:
 
 <sup>YAML deelrepresentatie</sup>
 ```yaml
- recht op zorgtoeslag: 
+ - recht_op_zorgtoeslag: 
    - situatie: alleenstaande
      formule: toetsinginkomen <= 29562
-   - situatie: aanvrager met toeslagpartner
+   - situatie: aanvrager_met_toeslagpartner
      formule: toetsinginkomen <= 37885
 ```
 
 Let op!
 Woont uw klant buiten Nederland? Dan is het wereldinkomen het toetsingsinkomen.
+
+#### Het volledige script:
 
 ```yaml
 stuurinformatie:
@@ -263,7 +255,7 @@ stuurinformatie:
   type: toeslagen
   domein: zorg
   versie: 1.0
-  status: productie
+  status: ontwikkel
   jaar: 2019
   bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
 berekening:

@@ -46,7 +46,7 @@ formules:
      formule: 145136
  - recht_op_zorgtoeslag: 
    - situatie: alleenstaande
-     formule: toetsinginkomen > 29562
+     formule: toetsinginkomen <= 29562
    - situatie: aanvrager_met_toeslagpartner
      formule: toetsinginkomen <= 37885
  - drempelinkomen:
