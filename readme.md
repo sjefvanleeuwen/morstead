@@ -381,22 +381,9 @@ weer te geven.
 Meer informatie over ECMA-334 kan hier gevonden worden.
 https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-334.pdf
 
-##### Ontwerppatroon
-
-Ontwerppatronen zijn oplossingen voor problemen met softwareontwerp die u steeds opnieuw tegenkomt in real-world applicatie-ontwikkeling. Patronen
-gaan over herbruikbare ontwerpen en interacties van objecten. De 23 Gang of Four (GoF) -patronen worden over het algemeen beschouwd als de basis 
-voor alle andere patronen. Ze zijn onderverdeeld in drie groepen: Creatief, Structureel en Gedrag. Binnen dit project gebruiken wij met name het
-VISITORS patroon. Voor een volledige lijst zie: https://en.wikipedia.org/wiki/Design_Patterns
-
-###### Definitie
-
-###### UML Class Diagram
-
-###### Participants
-
 ### YAML Transpiler
 
-Het volledige YAML script kan getranspiled worden naar een compileerbare taal. Momenteel is er een YAML naar C# regelingen transpiler. 
+Under construction. Het volledige YAML script kan getranspiled worden naar een compileerbare taal. Momenteel is er een YAML naar C# regelingen transpiler. 
 Het voordeel van een dergelijke transpiler is dat de resulterende source code uitgevoerd kan worden op een computer systeem en kan helpen bij:
 
 * Het versnelt uitvoeren van regelgeving logica t.b.v. algoritmisch onderzoek, waaronder inputs en outputs classificering voor machine learning.
