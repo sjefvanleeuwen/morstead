@@ -1,4 +1,5 @@
-﻿using Vs.VoorzieningenEnRegelingen.Core.Model;
+﻿using System;
+using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 using Xunit;
 
@@ -32,11 +33,27 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         }
 
         [Fact]
+        public void Execution_ZorgToeslag_2019_Scenario1_WithQA()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag.Body);
+            Assert.False(result.IsError);
+            var parameters = new ParametersCollection() {
+                new Parameter("alleenstaande","ja"),
+                new Parameter("woonland","Nederland"),
+                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
+                new Parameter("toetsingsinkomen_toeslagpartner",(double)0)
+            };
+            var executionResult = controller.ExecuteWorkflow(ref parameters);
+            Assert.True((double)parameters.GetParameter("zorgtoeslag").Value == 99.09);
+        }
+
+        [Fact]
         public void Execution_ZorgToeslag_2019_GetInputParameters()
         {
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlZorgtoeslag.Body);
-            var parameters = controller.GetInputParameters();
+           // var parameters = controller.GetInputParameters();
         }
 
     }

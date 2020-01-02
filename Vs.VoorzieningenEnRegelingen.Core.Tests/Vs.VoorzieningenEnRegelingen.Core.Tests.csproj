@@ -7,16 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ExecutionTests.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="ExecutionTests.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="altcover" Version="4.0.644" />
     <PackageReference Include="coverlet.msbuild" Version="2.3.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -33,6 +23,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core\Vs.VoorzieningenEnRegelingen.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ExecutionTests.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
 </Project>

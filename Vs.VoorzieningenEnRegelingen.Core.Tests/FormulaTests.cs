@@ -6,6 +6,7 @@ using System.Globalization;
 using YamlDotNet.Serialization;
 using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using static Vs.VoorzieningenEnRegelingen.Core.YamlScriptController;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 {
@@ -168,6 +169,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.True(result1 == 0.2412);
         }
 
+
+        public event QuestionDelegate OnQuestion;
+
         [Fact]
         void Formula_Can_Execute_FormulaExpressionContext()
         {
@@ -181,12 +185,44 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 new Parameter("toetsingsinkomen_toeslagpartner",(double)0)
             };
             var model = result.Model;
-
-            var context = new FormulaExpressionContext(ref model, ref parameters, controller.GetFormula("normpremie"));
+            var context = new FormulaExpressionContext(ref model, ref parameters, controller.GetFormula("normpremie"), null);
             var parameter = context.Evaluate();
             Assert.True(parameter.Name == "normpremie");
             Assert.True((double)parameter.Value == 419.86704999999995);
             Assert.True(parameters.Count == 8);
+        }
+
+        [Fact]
+        void Formula_Can_Execute_FormulaExpressionContext_UsingQuestionAnswer()
+        {
+
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var parameters = new ParametersCollection() {
+                new Parameter("alleenstaande","ja"),
+                new Parameter("woonland","Nederland"),
+                /*new Parameter("toetsingsinkomen_aanvrager",(double)19000),*/  // expect this question in FormulaTests_OnQuestion
+                new Parameter("toetsingsinkomen_toeslagpartner",(double)0)
+            };
+            var model = result.Model;
+            bool called = false;
+            OnQuestion = (FormulaExpressionContext sender, QuestionArgs args) => {
+                Assert.True(args.Parameters[0].Name == "toetsingsinkomen_aanvrager");
+                called = true;
+
+            };
+            var context = new FormulaExpressionContext(ref model, ref parameters, controller.GetFormula("normpremie"), OnQuestion);
+            bool unresolvedException = false;
+            try
+            {
+                var parameter = context.Evaluate();
+            }
+            catch (UnresolvedException)
+            {
+                unresolvedException = true;
+            }
+            Assert.True(called);
+            Assert.True(unresolvedException);
         }
     }
 }

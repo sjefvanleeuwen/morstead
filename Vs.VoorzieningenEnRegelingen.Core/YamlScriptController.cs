@@ -10,6 +10,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
     {
         private const string Ok = "OK";
         private Model.Model _model;
+        private ParametersCollection _unresolved;
+
+        public delegate void QuestionDelegate(FormulaExpressionContext sender, QuestionArgs args);
+
         /// <summary>
         /// Some global culture info's for number conversions (do not make this configurable, 
         /// otherwise it will possibly interfere with script syntax)
@@ -20,23 +24,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         {
         }
 
-        public ParametersCollection GetInputParameters()
-        {
-            var parameters = new ParametersCollection();
-            // Get all parameters that are not resolved by formulas.
-            foreach (var s in _model.Steps)
-            {
-                if (!s.IsSituational)
-                    continue;
-
-                if (_model.Formulas.Any(p => p.Name == s.Situation))
-                    continue;
-
-                parameters.Add(new Parameter(s.Situation,string.Empty));
-            }
-
-            return parameters;
-        }
+        public QuestionDelegate QuestionCallback { get; set; }
 
         public double Lookup(string tableName, string lookupValue, string lookupColumn, string resultColumn)
         {
@@ -107,7 +95,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 if (formula == null)
                     throw new StepException($"can't resolve parameter '${parameter.Name}' to formula", step);
                 // execute the formula which adds the outcome to parameters.
-                var context = new FormulaExpressionContext(ref _model, ref parameters, formula);
+                var context = new FormulaExpressionContext(ref _model, ref parameters, formula, null);
                 var result = context.Evaluate();
                 //var result = Execute(ref context, ref formula, ref parameters, ref executionResult);
                 if (result.Value.GetType() != typeof(bool))
@@ -146,7 +134,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             // calculate formula and add it to the parameter list.
             var formula = GetFormula(step.Formula);
-            var context = new FormulaExpressionContext(ref _model, ref parameters, formula);
+            var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback);
             context.Evaluate();
         }
 
