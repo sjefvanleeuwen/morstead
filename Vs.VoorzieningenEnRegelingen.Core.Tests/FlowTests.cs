@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 using Xunit;
@@ -37,6 +38,24 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             // Tsjechië,            0.2412 
             // context.Variables.Add("woonland", "Tsjechië");
             // var formula = controller.GetFormula("woonlandfactor");
+        }
+
+        [Fact]
+        public void Flow_Should_Be_StepException()
+        {
+            Exception ex1 = Assert.Throws<NotImplementedException>(() => new StepException());
+            Exception ex2 = Assert.Throws<NotImplementedException>(() => new StepException("test"));
+            Exception ex3 = Assert.Throws<NotImplementedException>(() => new StepException("",new Exception()));
+        }
+
+        [Fact]
+        public void Flow_Shouldnt_Be_StepException()
+        {
+            StepException ex = new StepException("exception", new Step("name", "description", "formula", "situation"));
+            Assert.True(ex.Step.Name == "name");
+            Assert.True(ex.Step.Description == "description");
+            Assert.True(ex.Step.Formula == "formula");
+            Assert.True(ex.Step.Situation == "situation");
         }
     }
 }
