@@ -12,14 +12,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             Functions = functions ?? throw new ArgumentNullException(nameof(functions));
         }
 
-        public Formula(DebugInfo debugInfo, string name, Function function)
-        {
-            DebugInfo = debugInfo ?? throw new ArgumentNullException(nameof(debugInfo));
-            Name = name ?? throw new ArgumentNullException(nameof(name));
-            if (function == null) throw new ArgumentNullException(nameof(function));
-            Functions = new List<Function>() { function };
-        }
-
         public DebugInfo DebugInfo { get; }
         public string Name { get; }
         public List<Function> Functions { get; }
