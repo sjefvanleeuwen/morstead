@@ -15,9 +15,6 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
             ServiceController controller = new ServiceController(null);
             var s = new ParseRequest() { Config = YamlZorgtoeslag.Body };
             var o = Newtonsoft.Json.JsonConvert.SerializeObject(s);
-
-
-
             var result = controller.Parse(s);
             Assert.False(result.IsError);
         }
