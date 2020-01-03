@@ -26,7 +26,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.True(header.Type == "toeslagen");
             Assert.True(header.Domein == "zorg");
             Assert.True(header.Versie == "1.0");
-            Assert.True(header.Status == "productie");
+            Assert.True(header.Status == "ontwikkel");
             Assert.True(header.Jaar == "2019");
             Assert.True(header.Bron == "https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf");
         }

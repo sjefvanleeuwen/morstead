@@ -54,7 +54,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             {
                 s += entry.Value + ",";
             }
-            Assert.True("1.0,2019,belastingdienst,https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf,productie,toeslagen,zorg,zorgtoeslag" == Order(s));
+            Assert.True("1.0,2019,belastingdienst,https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf,ontwikkel,toeslagen,zorg,zorgtoeslag" == Order(s));
         }
 
         [Fact]
