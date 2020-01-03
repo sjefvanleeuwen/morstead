@@ -11,7 +11,12 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         public void Service_Parse_Yaml_Successfull()
         {
             ServiceController controller = new ServiceController(null);
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var s = new ParseRequest() { Config = YamlZorgtoeslag.Body };
+            var o = Newtonsoft.Json.JsonConvert.SerializeObject(s);
+
+
+
+            var result = controller.Parse(s);
             Assert.False(result.IsError);
         }
 
@@ -19,7 +24,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         public void Service_Parse_Yaml_Unsuccessfull()
         {
             ServiceController controller = new ServiceController(null);
-            var result = controller.Parse("-- garbage in ---");
+            var result = controller.Parse(new ParseRequest() { Config = "--- Garbage In ---" });
             Assert.True(result.IsError);
         }
     }

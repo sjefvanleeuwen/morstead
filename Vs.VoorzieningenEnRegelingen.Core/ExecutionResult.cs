@@ -12,5 +12,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         {
             Stacktrace = new List<FlowExecutionItem>();
         }
+
+        public static readonly ExecutionResult NotExecutedBecauseOfParseError = new ExecutionResult() { IsError = true, Message = "Not Executed Because Of Parse Error" };
     }
 }
