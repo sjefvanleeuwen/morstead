@@ -4,6 +4,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
     public class Parameter
     {
+        public string Name { get; }
+
+        private readonly object _value;
+
         public Parameter(string name, object value)
         {
             if (string.IsNullOrEmpty(name))
@@ -17,10 +21,23 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             }
 
             Name = name;
-            Value = value.Infer();
+            _value = value.Infer();
+            Type = value.Infer().GetType().Name;
+
         }
 
-        public string Name { get; }
-        public object Value { get; }
+
+
+        public object Value {
+            get
+            {
+                // for serialization, prefer to serialize as enumeration name.
+                if (_value.GetType() == typeof(UnresolvedType))
+                    return _value.ToString();
+                return _value;
+            }
+        }
+
+        public string Type { get; }
     }
 }

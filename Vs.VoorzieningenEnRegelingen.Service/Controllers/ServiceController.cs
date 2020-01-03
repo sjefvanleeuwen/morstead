@@ -42,7 +42,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
         }
 
         [HttpPost("execute")]
-        public Tuple<ParseResult,ExecutionResult> Execute([FromBody] ExecuteRequest executeRequest)
+        public ExecutionResult Execute([FromBody] ExecuteRequest executeRequest)
         {
             if (executeRequest is null)
             {
@@ -52,16 +52,27 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             {
                 executeRequest.Parameters = new ParametersCollection();
             }
-
+            ExecutionResult executionResult = new ExecutionResult();
+            var parameters = executeRequest.Parameters;
             executeRequest.Config = parseHelper(executeRequest.Config);
             var controller = new YamlScriptController();
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                executionResult.Questions = args;
+            };
+
             var result = controller.Parse(executeRequest.Config);
-            controller.QuestionCallback = Execute_QuestionCallback;
             if (result.IsError)
-                return new Tuple<ParseResult, ExecutionResult>(result, ExecutionResult.NotExecutedBecauseOfParseError);
-            var parameters = executeRequest.Parameters;
-            var executionResult = controller.ExecuteWorkflow(ref parameters);
-            return new Tuple<ParseResult, ExecutionResult>(result, executionResult);
+                return executionResult;
+            try
+            {
+                
+                executionResult = controller.ExecuteWorkflow(ref parameters);
+            }
+            catch (UnresolvedException)
+            {
+            }
+            return executionResult;
         }
 
         private void Execute_QuestionCallback(FormulaExpressionContext sender, QuestionArgs args)

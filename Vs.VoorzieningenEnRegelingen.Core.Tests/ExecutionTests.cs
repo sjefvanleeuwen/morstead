@@ -38,14 +38,62 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
+            QuestionArgs argsret = null;
+            var isException = false;
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                Assert.True(args.Parameters[0].Name == "toetsingsinkomen_aanvrager");
+                argsret = args;
+            };
             var parameters = new ParametersCollection() {
                 new Parameter("alleenstaande","ja"),
                 new Parameter("woonland","Nederland"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
+                /*new Parameter("toetsingsinkomen_aanvrager",(double)19000),*/
                 new Parameter("toetsingsinkomen_toeslagpartner",(double)0)
             };
-            var executionResult = controller.ExecuteWorkflow(ref parameters);
-            Assert.True((double)parameters.GetParameter("zorgtoeslag").Value == 99.09);
+            try
+            {
+                var executionResult = controller.ExecuteWorkflow(ref parameters);
+            }
+            catch (UnresolvedException)
+            {
+                isException = true;
+            }
+            Assert.True(isException);
+            Assert.NotNull(argsret);
+            Assert.True(argsret.Parameters[0].Name == "toetsingsinkomen_aanvrager");
+        }
+
+        [Fact]
+        public void Execution_ZorgToeslag_2019_Without_Initial_Parameters()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag.Body);
+            Assert.False(result.IsError);
+            QuestionArgs argsret = null;
+            var isException = false;
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                Assert.True(args.Parameters[0].Name == "alleenstaande");
+                Assert.True(args.Parameters[0].Type == "UnresolvedType");
+                Assert.True(args.Parameters[0].Value.ToString() == "Situation");
+                Assert.True(args.Parameters[1].Name == "aanvrager_met_toeslagpartner");
+                Assert.True(args.Parameters[1].Type == "UnresolvedType");
+                Assert.True(args.Parameters[1].Value.ToString() == "Situation");
+                argsret = args;
+            };
+            var parameters = new ParametersCollection();
+            try
+            {
+                var executionResult = controller.ExecuteWorkflow(ref parameters);
+            }
+            catch (UnresolvedException)
+            {
+                isException = true;
+            }
+            Assert.True(isException);
+            Assert.NotNull(argsret);
+            Assert.True(argsret.Parameters[0].Name == "alleenstaande");
         }
 
         [Fact]

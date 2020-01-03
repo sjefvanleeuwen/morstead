@@ -5,6 +5,7 @@ using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using static Vs.VoorzieningenEnRegelingen.Core.YamlScriptController;
+using System.Text;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
@@ -119,7 +120,18 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                         }
                     }
                 }
-                throw new ArgumentException($"Can't evaluate formula ${_formula.Name} for situation.");
+                StringBuilder situations = new StringBuilder();
+                var parameters = new ParametersCollection();
+                foreach (var function in _formula.Functions)
+                {
+                    situations.Append(function.Situation +",");
+                    parameters.Add(new Parameter(function.Situation, UnresolvedType.Situation));
+                }
+                if (OnQuestion == null)
+                    throw new Exception($"In order to evaluate variable one of the following situations:  {situations.ToString().Trim(',')}, you need to provide a delegate callback to the client for providing an answer");
+                OnQuestion(this, new QuestionArgs("", parameters));
+                // situation has to be formulated as an input parameter by the client.
+                throw new UnresolvedException($"Can't evaluate formula {_formula.Name} for situation. Please specify one of the following situations: {situations.ToString().Trim(',')}.");
             }
         }
 
