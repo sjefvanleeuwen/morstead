@@ -1,4 +1,6 @@
 using System;
+using Vs.VoorzieningenEnRegelingen.Core;
+using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
@@ -26,6 +28,21 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
             ServiceController controller = new ServiceController(null);
             var result = controller.Parse(new ParseRequest() { Config = "--- Garbage In ---" });
             Assert.True(result.IsError);
+        }
+
+        [Fact]
+        public void Service_Execute_Zorgtoeslag_From_Url()
+        {
+            ServiceController controller = new ServiceController(null);
+            var result = controller.Execute(new ExecuteRequest()
+            {
+                Config = YamlZorgtoeslag.Body,
+                Parameters = new ParametersCollection() {
+                    new Parameter("alleenstaande","ja")
+                }
+            });
+            Assert.True(result.Questions.Parameters.Count == 1);
+            Assert.True(result.Questions.Parameters[0].Name == "toetsingsinkomen_aanvrager");
         }
     }
 }
