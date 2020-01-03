@@ -17,15 +17,16 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             _logger = logger;
         }
 
-        private static void parseHelper(ref ParseRequest parseRequest)
+        private static string parseHelper(string config)
         {
-            if (parseRequest.Config.StartsWith("http"))
+            if (config.StartsWith("http"))
             {
                 using (var client = new WebClient())
                 {
-                    parseRequest.Config = client.DownloadString(parseRequest.Config);
+                    return client.DownloadString(config);
                 }
             }
+            return config;
         }
 
         [HttpPost("parse")]
@@ -35,20 +36,30 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             {
                 throw new ArgumentNullException(nameof(parseRequest));
             }
-            parseHelper(ref parseRequest);
+            parseRequest.Config = parseHelper(parseRequest.Config);
             var controller = new YamlScriptController();
             return controller.Parse(parseRequest.Config);
         }
 
         [HttpPost("execute")]
-        public Tuple<ParseResult,ExecutionResult> Execute([FromBody] ParseRequest parseRequest, [FromBody] ParametersCollection parameters)
+        public Tuple<ParseResult,ExecutionResult> Execute([FromBody] ExecuteRequest executeRequest)
         {
-            parseHelper(ref parseRequest);
+            if (executeRequest is null)
+            {
+                throw new ArgumentNullException(nameof(executeRequest));
+            }
+            if (executeRequest.Parameters == null)
+            {
+                executeRequest.Parameters = new ParametersCollection();
+            }
+
+            executeRequest.Config = parseHelper(executeRequest.Config);
             var controller = new YamlScriptController();
-            var result = controller.Parse(parseRequest.Config);
+            var result = controller.Parse(executeRequest.Config);
             controller.QuestionCallback = Execute_QuestionCallback;
             if (result.IsError)
                 return new Tuple<ParseResult, ExecutionResult>(result, ExecutionResult.NotExecutedBecauseOfParseError);
+            var parameters = executeRequest.Parameters;
             var executionResult = controller.ExecuteWorkflow(ref parameters);
             return new Tuple<ParseResult, ExecutionResult>(result, executionResult);
         }
