@@ -194,7 +194,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var parameter = context.Evaluate();
             Assert.True(parameter.Name == "normpremie");
             Assert.True((double)parameter.Value == 419.86704999999995);
-            Assert.True(parameters.Count == 8);
+            Assert.True(parameters.Count == 7);
         }
 
         [Fact]
