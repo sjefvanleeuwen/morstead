@@ -10,12 +10,12 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         public ParametersCollection Parameters { get; }
         public QuestionArgs Questions { get; set; }
 
-        public ExecutionResult()
+        public ExecutionResult(ref ParametersCollection parameters)
         {
-            Parameters = new ParametersCollection();
+            Parameters = parameters;
             Stacktrace = new List<FlowExecutionItem>();
         }
 
-        public static readonly ExecutionResult NotExecutedBecauseOfParseError = new ExecutionResult() { IsError = true, Message = "Not Executed Because Of Parse Error" };
+        public static ExecutionResult NotExecutedBecauseOfParseError(ref ParametersCollection parameters) => new ExecutionResult(ref parameters) { IsError = true, Message = "Not Executed Because Of Parse Error" };
     }
 }

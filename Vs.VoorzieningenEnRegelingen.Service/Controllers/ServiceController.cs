@@ -59,8 +59,8 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             {
                 executeRequest.Parameters = new ParametersCollection();
             }
-            ExecutionResult executionResult = new ExecutionResult();
             var parameters = executeRequest.Parameters;
+            ExecutionResult executionResult = new ExecutionResult(ref parameters);
             executeRequest.Config = parseHelper(executeRequest.Config);
             var controller = new YamlScriptController();
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -79,7 +79,6 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             catch (UnresolvedException)
             {
             }
-
             return executionResult;
         }
 
