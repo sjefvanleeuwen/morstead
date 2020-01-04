@@ -46,7 +46,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         {
             _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
             _formula = formula ?? throw new ArgumentNullException(nameof(formula));
-            OnQuestion = onQuestion;
+            OnQuestion = onQuestion ?? throw new ArgumentNullException(nameof(onQuestion));
             _model = model ?? throw new ArgumentNullException(nameof(model));
             // Define the context of our expression
             _context = new ExpressionContext();
@@ -64,10 +64,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public Parameter Evaluate()
         {
-            if (_context.Variables.ContainsKey("toetsingsinkomen_aanvrager"))
-            {
-
-            }
             IDynamicExpression e = null;
             if (!_formula.IsSituational)
             {

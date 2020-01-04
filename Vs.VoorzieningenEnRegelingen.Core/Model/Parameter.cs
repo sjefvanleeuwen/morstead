@@ -4,9 +4,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
     public class Parameter
     {
-        public string Name { get; }
+        public string Name { get; set; }
 
-        private readonly object _value;
+        private  object _value;
+
+        public Parameter() { }
 
         public Parameter(string name, object value)
         {
@@ -36,8 +38,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
                     return _value.ToString();
                 return _value;
             }
+            set
+            {
+                _value = value.Infer();
+                Type = value.Infer().GetType().Name;
+            }
         }
 
-        public string Type { get; }
+        public string Type { get; set; }
     }
 }

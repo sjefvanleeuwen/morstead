@@ -95,7 +95,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 if (formula == null)
                     throw new StepException($"can't resolve parameter '${parameter.Name}' to formula", step);
                 // execute the formula which adds the outcome to parameters.
-                var context = new FormulaExpressionContext(ref _model, ref parameters, formula, null);
+                var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback);
                 var result = context.Evaluate();
                 //var result = Execute(ref context, ref formula, ref parameters, ref executionResult);
                 if (result.Value.GetType() != typeof(bool))

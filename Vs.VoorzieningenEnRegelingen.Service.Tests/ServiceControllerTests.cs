@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
@@ -31,13 +32,16 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         public void Service_Execute_Zorgtoeslag_From_Url()
         {
             ServiceController controller = new ServiceController(null);
-            var result = controller.Execute(new ExecuteRequest()
+            var executeRequest = new ExecuteRequest()
             {
                 Config = YamlZorgtoeslag.Body,
                 Parameters = new ParametersCollection() {
                     new Parameter("alleenstaande","ja")
                 }
-            });
+            };
+
+            var payload = JsonConvert.SerializeObject(executeRequest);
+            var result = controller.Execute(executeRequest);
             Assert.True(result.Questions.Parameters.Count == 1);
             Assert.True(result.Questions.Parameters[0].Name == "toetsingsinkomen_aanvrager");
         }

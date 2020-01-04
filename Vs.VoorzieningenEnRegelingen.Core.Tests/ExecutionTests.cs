@@ -20,6 +20,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void Execution_ZorgToeslag_2019_Scenario1()
         {
             var controller = new YamlScriptController();
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                // should not be called.
+                throw new Exception("Questioncallback should not be called.");
+            };
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
@@ -33,7 +38,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         }
 
         [Fact]
-        public void Execution_ZorgToeslag_2019_Scenario1_WithQA()
+        public void Execution_ZorgToeslag_2019_Scenario1_WithQA_toetsingsinkomen_aanvrager()
         {
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlZorgtoeslag.Body);
@@ -62,6 +67,38 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.True(isException);
             Assert.NotNull(argsret);
             Assert.True(argsret.Parameters[0].Name == "toetsingsinkomen_aanvrager");
+        }
+        
+        [Fact]
+        public void Execution_ZorgToeslag_2019_Scenario1_WithQA_Woonland()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag.Body);
+            Assert.False(result.IsError);
+            QuestionArgs argsret = null;
+            var isException = false;
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                Assert.True(args.Parameters[0].Name == "woonland");
+                argsret = args;
+            };
+            var parameters = new ParametersCollection() {
+                new Parameter("alleenstaande","ja"),
+                /*new Parameter("woonland","Nederland"),*/
+                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
+                new Parameter("toetsingsinkomen_toeslagpartner",(double)0)
+            };
+            try
+            {
+                var executionResult = controller.ExecuteWorkflow(ref parameters);
+            }
+            catch (UnresolvedException)
+            {
+                isException = true;
+            }
+            Assert.True(isException);
+            Assert.NotNull(argsret);
+            Assert.True(argsret.Parameters[0].Name == "woonland");
         }
 
         [Fact]
