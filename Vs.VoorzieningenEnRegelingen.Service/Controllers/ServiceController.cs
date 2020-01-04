@@ -74,11 +74,12 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             try
             {
                 
-                executionResult = controller.ExecuteWorkflow(ref parameters);
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
             {
             }
+
             return executionResult;
         }
 

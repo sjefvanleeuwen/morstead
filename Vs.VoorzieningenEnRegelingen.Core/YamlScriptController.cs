@@ -143,14 +143,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public ExecutionResult ExecuteWorkflow(ref ParametersCollection parameters)
+        public ExecutionResult ExecuteWorkflow(ref ParametersCollection parameters, ref ExecutionResult executionResult)
         {
             if (parameters is null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            ExecutionResult executionResult = new ExecutionResult();
             try
             {
                 foreach (var step in _model.Steps)

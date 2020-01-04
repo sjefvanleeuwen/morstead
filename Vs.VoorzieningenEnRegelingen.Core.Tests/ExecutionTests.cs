@@ -33,7 +33,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 new Parameter("toetsingsinkomen_aanvrager",(double)19000),
                 new Parameter("toetsingsinkomen_toeslagpartner",(double)0)
             };
-            var executionResult = controller.ExecuteWorkflow(ref parameters);
+            var executionResult = new ExecutionResult();
+            controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True((double)parameters.GetParameter("zorgtoeslag").Value == 99.09);
         }
 
@@ -58,7 +59,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             };
             try
             {
-                var executionResult = controller.ExecuteWorkflow(ref parameters);
+                var executionResult = new ExecutionResult();
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
             {
@@ -90,7 +92,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             };
             try
             {
-                var executionResult = controller.ExecuteWorkflow(ref parameters);
+                var executionResult = new ExecutionResult();
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
             {
@@ -122,7 +125,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var parameters = new ParametersCollection();
             try
             {
-                var executionResult = controller.ExecuteWorkflow(ref parameters);
+                var executionResult = new ExecutionResult();
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
             {
