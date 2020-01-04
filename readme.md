@@ -363,6 +363,297 @@ tabellen:
       - [ Zweden,              0.8213 ]
       - [ Zwitserland,         0.8000 ]
 ```
+#### Service RESTful API Conversatie
+
+Bovenstaande berekening bestaat uit een aantal stappen. Bij iedere stap vraagt Urukagina om variabelen die niet gevonden konden worden in
+het script of welke niet eerder doorgestuurd werden aan de API. De converstatie gebeurd in JSON format. De stappen uit de converstatie 
+kunnen afgespeeld worden met bijgeleverde [POSTMAN](https://www.postman.com) bestanden. Om een idee te geven van een conversatie hebben we de JSON's uit die conversatie
+geconverteerd naar YAML zodat ze leesbaar/compacter zijn voor deze readme. Er zijn twee typen conversaties:
+
+1. **Geautomatiseerd**<br />
+Bij geautomatiseerde processen is het mogelijk om alles beschikbare variabelen die nodig zijn voor de berekening van te voren aan te de API
+door te geven. Dit reduceert round-trip time en biedt daarmee een hogere performance voor batch berekeningen. 
+
+2. **User Centric**<br />
+Bij user centricity is het mogelijk een conversatie/assistant te bouwen en deze aan te laten sturen middels een zgn. Question Answer principe
+Bij iedere stap geeft de API aan welke input er verwacht wordt.
+
+In dit voorbeeld gebruiken we de User Centric approach.
+
+##### Zorgtoeslag 2019 berekening stap 1
+
+In stap 1 wordt uitsluitend als startpunt het uit te voeren YAML script meegegeven. In dit geval wordt verwezen naar een URL waar het YAML
+script met de berekening van de zorgtoeslag staat.
+
+```yaml
+Config: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml
+```
+
+De API Server geeft als antwoord:
+
+```yaml
+isError: false
+message: 
+stacktrace:
+- step:
+    name: '1'
+    description: bepaal de standaard premie
+    formula: standaardpremie
+    situation: ''
+    isSituational: false
+  exception: 
+parameters: []
+questions:
+  sessionId: ''
+  parameters:
+  - name: alleenstaande
+    value: Situation
+    type: UnresolvedType
+  - name: aanvrager_met_toeslagpartner
+    value: Situation
+    type: UnresolvedType
+```
+
+De reactie bevat geen fout **isError=false**. Dit betekent dat het YAML script goed is uitgevoerd, onder **step** kan men zien dat het
+script is gestopt bij de eerste stap in de berekening, namelijk bij het uitvoeren van de formule **standaardpremie**. De API service vewacht
+nu een invoer van de client applicatie.
+
+##### Zorgtoeslag 2019 berekening stap 2
+
+Één van de twee situaties dienen nu aangegeven te worden om de standaardpremie verder te kunnen berekenen. Er wordt gekozen voor **alleenstaande**.
+
+[x] Alleenstaande
+[ ] Aanvrager met toeslagpartner
+
+Het volgende bericht wrodt gestuurd naar de API service
+
+```yaml
+---
+Config: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml
+Parameters:
+- Name: alleenstaande
+  Value: ja
+```
+
+De API Server geeft als antwoord (sommige data is weggelaten voor leesbaarheid):
+
+```yaml
+---
+isError: false
+message: 
+stacktrace:
+- step:
+    name: '1' ......
+- step:
+    name: '2'
+    description: bereken het gezamenlijke toestingsinkomen
+    formula: toetsingsinkomen
+    situation: ''
+    isSituational: false
+  exception: 
+parameters:
+- name: alleenstaande
+  value: true
+  type: Boolean
+- name: standaardpremie
+  value: 1609
+  type: Double
+questions:
+  sessionId: ''
+  parameters:
+  - name: toetsingsinkomen_aanvrager
+    value: unresolved
+    type: String
+```
+
+##### Zorgtoeslag 2019 berekening stap 3
+
+
+```yaml
+Config: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml
+Parameters:
+- Name: alleenstaande
+  Value: ja
+- Name: toetsingsinkomen_aanvrager
+  Value: '19000'
+```
+
+```yaml
+isError: false
+message: 
+stacktrace:
+- step:
+    name: '1' ..........
+  exception: 
+- step:
+    name: '2'
+    description: bereken het gezamenlijke toestingsinkomen
+    formula: toetsingsinkomen
+    situation: ''
+    isSituational: false
+  exception: 
+parameters:
+- name: alleenstaande
+  value: true
+  type: Boolean
+- name: toetsingsinkomen_aanvrager
+  value: 19000
+  type: Double
+- name: standaardpremie
+  value: 1609
+  type: Double
+questions:
+  sessionId: ''
+  parameters:
+  - name: toetsingsinkomen_toeslagpartner
+    value: unresolved
+    type: String
+```
+
+
+##### Zorgtoeslag 2019 berekening stap 4
+
+```yaml
+Config: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml
+Parameters:
+- Name: alleenstaande
+  Value: ja
+- Name: toetsingsinkomen_aanvrager
+  Value: '19000'
+- Name: toetsingsinkomen_toeslagpartner
+  Value: '0'
+```
+
+```yaml
+isError: false
+message: 
+stacktrace:
+- step:
+    name: '1' ..........
+- step:
+    name: '2' ..........
+- step:
+    name: '3'
+    description: bereken de normpremie
+    formula: normpremie
+    situation: ''
+    isSituational: false
+  exception: 
+parameters:
+- name: alleenstaande
+  value: true
+  type: Boolean
+- name: toetsingsinkomen_aanvrager
+  value: 19000
+  type: Double
+- name: toetsingsinkomen_toeslagpartner
+  value: 0
+  type: Double
+- name: standaardpremie
+  value: 1609
+  type: Double
+- name: toetsingsinkomen
+  value: 19000
+  type: Double
+- name: drempelinkomen
+  value: 20941
+  type: Double
+- name: normpremie
+  value: 419.86704999999995
+  type: Double
+questions:
+  sessionId: ''
+  parameters:
+  - name: woonland
+    value: unresolved
+    type: String
+```
+
+##### Zorgtoeslag 2019 berekening stap 5
+
+```yaml
+Config: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml
+Parameters:
+- Name: alleenstaande
+  Value: ja
+- Name: toetsingsinkomen_aanvrager
+  Value: '19000'
+- Name: toetsingsinkomen_toeslagpartner
+  Value: '0'
+- Name: woonland
+  Value: Nederland
+```
+
+Eindantwoord, volledig:
+
+```yaml
+isError: false
+message: 
+stacktrace:
+- step:
+    name: '1'
+    description: bepaal de standaard premie
+    formula: standaardpremie
+    situation: ''
+    isSituational: false
+  exception: 
+- step:
+    name: '2'
+    description: bereken het gezamenlijke toestingsinkomen
+    formula: toetsingsinkomen
+    situation: ''
+    isSituational: false
+  exception: 
+- step:
+    name: '3'
+    description: bereken de normpremie
+    formula: normpremie
+    situation: ''
+    isSituational: false
+  exception: 
+- step:
+    name: '4'
+    description: bereken de zorgtoeslag wanneer men binnen nederland woont
+    formula: zorgtoeslag
+    situation: binnenland
+    isSituational: true
+  exception: 
+parameters:
+- name: alleenstaande
+  value: true
+  type: Boolean
+- name: toetsingsinkomen_aanvrager
+  value: 19000
+  type: Double
+- name: toetsingsinkomen_toeslagpartner
+  value: 0
+  type: Double
+- name: woonland
+  value: Nederland
+  type: String
+- name: standaardpremie
+  value: 1609
+  type: Double
+- name: toetsingsinkomen
+  value: 19000
+  type: Double
+- name: drempelinkomen
+  value: 20941
+  type: Double
+- name: normpremie
+  value: 419.86704999999995
+  type: Double
+- name: binnenland
+  value: true
+  type: Boolean
+- name: zorgtoeslag
+  value: 99.09
+  type: Double
+- name: buitenland
+  value: false
+  type: Boolean
+questions: 
+```
 
 ## Techniek
 
@@ -392,10 +683,6 @@ Het voordeel van een dergelijke transpiler is dat de resulterende source code ui
 * Het genereren van RESTfull Services
 * Het vereenvoudigen van business processes, waaronder workflow engines zoals BPMN.
 * Het uitvoeren van Smart Contracts
-
-#### RESTfull Service Integratie
-
-Under construction.
 
 #### BPMN Integratie
 
