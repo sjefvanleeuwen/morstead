@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "2bd617b7-9313-4da1-afef-1420d90ead6e",
+		"name": "VirtualSociety Urukagina",
+		"description": "Tests for the Virtual Society Rule Engine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Zorgtoeslag 2019 parse by yaml body",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Config\":\"# Minimal Script for Unit Tests\\r\\nstuurinformatie:\\r\\n  onderwerp: zorgtoeslag\\r\\n  organisatie: belastingdienst\\r\\n  type: toeslagen\\r\\n  domein: zorg\\r\\n  versie: 1.0\\r\\n  status: ontwikkel\\r\\n  jaar: 2019\\r\\n  bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf\\r\\nberekening:\\r\\n - stap: 1\\r\\n   omschrijving: bepaal de standaard premie\\r\\n   formule: standaardpremie\\r\\n - stap: 2\\r\\n   omschrijving: bereken het gezamenlijke toestingsinkomen\\r\\n   formule: toetsingsinkomen\\r\\n - stap: 3 \\r\\n   omschrijving: bereken de normpremie\\r\\n   formule: normpremie\\r\\n - stap: 4 \\r\\n   situatie: binnenland\\r\\n   omschrijving: bereken de zorgtoeslag wanneer men binnen nederland woont\\r\\n   formule: zorgtoeslag\\r\\n - stap: 5\\r\\n   situatie: buitenland\\r\\n   omschrijving: bereken de zorgtoeslag wanner men in het buitenland woont\\r\\n   formule: zorgtoeslag\\r\\nformules:\\r\\n - standaardpremie:\\r\\n   - situatie: alleenstaande\\r\\n     formule: 1609\\r\\n   - situatie: aanvrager_met_toeslagpartner\\r\\n     formule: 3218\\r\\n - maximaalvermogen:\\r\\n   - situatie: alleenstaande\\r\\n     formule: 114776\\r\\n   - situatie: aanvrager_met_toeslagpartner\\r\\n     formule: 145136\\r\\n - recht_op_zorgtoeslag: \\r\\n   - situatie: alleenstaande\\r\\n     formule: toetsinginkomen <= 29562\\r\\n   - situatie: aanvrager_met_toeslagpartner\\r\\n     formule: toetsinginkomen <= 37885\\r\\n - drempelinkomen:\\r\\n     formule: 20941\\r\\n - toetsingsinkomen: \\r\\n     formule: toetsingsinkomen_aanvrager + toetsingsinkomen_toeslagpartner\\r\\n - normpremie:\\r\\n   - situatie: alleenstaande\\r\\n     formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)\\r\\n   - situatie: aanvrager_met_toeslagpartner\\r\\n     formule: min(percentage(4.315) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 2314)\\r\\n - buitenland:\\r\\n     formule: niet(woonland,'Nederland')\\r\\n - binnenland:\\r\\n     formule: wel(woonland,'Nederland')\\r\\n - zorgtoeslag:\\r\\n     - situatie: binnenland\\r\\n       formule: round((standaardpremie - normpremie) / 12,2)\\r\\n     - situatie: buitenland\\r\\n       formule: round((standaardpremie - normpremie) * woonlandfactor / 12,2)\\r\\n - woonlandfactor:\\r\\n     formule: lookup('woonlandfactoren',woonland,'woonland','factor')\\r\\ntabellen:\\r\\n  - naam: maximaalvermogen\\r\\n    situatie, waarde:\\r\\n      - [ alleenstaande,                11476 ] \\r\\n      - [ aanvrager met toeslagpartner, 14536 ]\\r\\n  - naam: woonlandfactoren\\r\\n    woonland, factor:\\r\\n      - [ Finland,             0.7161 ]\\r\\n      - [ Frankrijk,           0.8316 ]\\r\\n      - [ België,              0.7392 ]\\r\\n      - [ Bosnië-Herzegovina,  0.0672 ]\\r\\n      - [ Bulgarije,           0.0735 ]\\r\\n      - [ Cyprus,              0.1363 ]\\r\\n      - [ Denemarken,          0.9951 ]\\r\\n      - [ Duitsland,           0.8701 ]\\r\\n      - [ Estland,             0.2262 ]\\r\\n      - [ Finland,             0.7161 ]\\r\\n      - [ Frankrijk,           0.8316 ]\\r\\n      - [ Griekenland,         0.2490 ]\\r\\n      - [ Hongarije,           0.1381 ]\\r\\n      - [ Ierland,             0.8667 ]\\r\\n      - [ IJsland,             0.9802 ]\\r\\n      - [ Italië,              0.5470 ]\\r\\n      - [ Kaapverdië,          0.0177 ]\\r\\n      - [ Kroatië,             0.1674 ]\\r\\n      - [ Letland,             0.0672 ]\\r\\n      - [ Liechtenstein,       0.9720 ]\\r\\n      - [ Litouwen,            0.2399 ]\\r\\n      - [ Luxemburg,           0.7358 ]\\r\\n      - [ Macedonië,           0.0565 ]\\r\\n      - [ Malta,               0.3574 ]\\r\\n      - [ Marokko,             0.0193 ]\\r\\n      - [ Montenegro,          0.0821 ]\\r\\n      - [ Noorwegen,           1.3729 ]\\r\\n      - [ Oostenrijk,          0.6632 ]\\r\\n      - [ Polen,               0.1691 ]\\r\\n      - [ Portugal,            0.2616 ]\\r\\n      - [ Roemenië,            0.0814 ]\\r\\n      - [ Servië,              0.0714 ]\\r\\n      - [ Slovenië,            0.3377 ]\\r\\n      - [ Slowakije,           0.2405 ]\\r\\n      - [ Spanje,              0.4001 ]\\r\\n      - [ Tsjechië,            0.2412 ]\\r\\n      - [ Tunesië,             0.0292 ]\\r\\n      - [ Turkije,             0.0874 ]\\r\\n      - [ Verenigd Koninkrijk, 0.7741 ]\\r\\n      - [ Zweden,              0.8213 ]\\r\\n      - [ Zwitserland,         0.8000 ]\\r\\n\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/service/parse",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"service",
+						"parse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zorgtoeslag 2019 berekening step 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/service/execute",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"service",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zorgtoeslag 2019 berekening step 2 (alleenstaande)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/service/execute",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"service",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zorgtoeslag 2019 berekening step 3 (toetsingsinkomen_aanvrager)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"},{\"Name\":\"toetsingsinkomen_aanvrager\",\"Value\":\"19000\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44372/service/execute",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44372",
+					"path": [
+						"service",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zorgtoeslag 2019 berekening step 4 (toetsingsinkomen_toeslagpartner)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"},{\"Name\":\"toetsingsinkomen_aanvrager\",\"Value\":\"19000\"},{\"Name\":\"toetsingsinkomen_toeslagpartner\",\"Value\":\"0\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44372/service/execute",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44372",
+					"path": [
+						"service",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zorgtoeslag 2019 berekening step 5 (woonland)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"},{\"Name\":\"toetsingsinkomen_aanvrager\",\"Value\":\"19000\"},{\"Name\":\"toetsingsinkomen_toeslagpartner\",\"Value\":\"0\"},{\"Name\":\"woonland\",\"Value\":\"Nederland\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44372/service/execute",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44372",
+					"path": [
+						"service",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Zorgtoeslag 2019 parse by yaml url",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/service/parse",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"service",
+						"parse"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
