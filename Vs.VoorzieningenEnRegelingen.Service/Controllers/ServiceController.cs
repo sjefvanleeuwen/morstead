@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Concurrent;
 using System.Net;
 using Vs.VoorzieningenEnRegelingen.Core;
 
@@ -17,10 +18,16 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             _logger = logger;
         }
 
+        static ConcurrentDictionary<string, string> UrlContentCache = new ConcurrentDictionary<string, string>();
+
         private static string parseHelper(string config)
         {
             if (config.StartsWith("http"))
             {
+                if (UrlContentCache.ContainsKey(config))
+                {
+                    return UrlContentCache[config];
+                }
                 using (var client = new WebClient())
                 {
                     return client.DownloadString(config);
