@@ -1,4 +1,4 @@
-﻿#![logo](./images/logo.svg) Virtual Society
+﻿# ![logo](./images/logo.svg) Virtual Society
 
 ## Urukagina Rule Engine
 [![Maintainability](https://api.codeclimate.com/v1/badges/12cb1c194f0c722e7485/maintainability)](https://codeclimate.com/github/sjefvanleeuwen/virtual-society-urukagina/maintainability)
