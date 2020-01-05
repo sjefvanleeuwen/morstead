@@ -223,7 +223,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 // this variable is an input variable. Provide a question to the client for an answer.
                 if (OnQuestion == null)
                     throw new Exception($"In order to evaluate variable '${e.VariableName}', you need to provide a delegate callback to the client for providing an answer");
-                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName, "unresolved" )}));
+                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName, UnresolvedType.Situation) }));
             }
         }
 
@@ -242,7 +242,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 // this variable is an input variable. Provide a question to the client for an answer.
                 if (OnQuestion == null)
                     throw new Exception($"In order to evaluate variable '${e.VariableName}', you need to provide a delegate callback to the client for providing an answer");
-                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName, "unresolved") }));
+                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName, UnresolvedType.Situation) }));
             }
         }
     }
