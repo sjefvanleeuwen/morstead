@@ -130,7 +130,6 @@ formule:
      formule: <<literale formule>>
 ```
 
-
 ### YAML Voorbeeld Zorgtoeslag (2019)
 
 <sup>YAML deelrepresentatie</sup>
@@ -385,6 +384,8 @@ In dit voorbeeld gebruiken we de User Centric approach.
 In stap 1 wordt uitsluitend als startpunt het uit te voeren YAML script meegegeven. In dit geval wordt verwezen naar een URL waar het YAML
 script met de berekening van de zorgtoeslag staat.
 
+Het volgende bericht wordt naar de API service gestuurd:
+
 ```yaml
 Config: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml
 ```
@@ -425,7 +426,7 @@ nu een invoer van de client applicatie.
 [x] Alleenstaande
 [ ] Aanvrager met toeslagpartner
 
-Het volgende bericht wrodt gestuurd naar de API service
+Het volgende bericht wordt naar de API service gestuurd:
 
 ```yaml
 ---
@@ -437,6 +438,7 @@ Parameters:
 
 De API Server geeft als antwoord (sommige data is weggelaten voor leesbaarheid):
 
+<sup>YAML deelrepresentatie</sup>
 ```yaml
 ---
 isError: false
@@ -468,6 +470,7 @@ questions:
 
 ##### Zorgtoeslag 2019 berekening stap 3
 
+Het volgende bericht wordt naar de API service gestuurd:
 
 ```yaml
 Config: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml
@@ -478,6 +481,9 @@ Parameters:
   Value: '19000'
 ```
 
+De API Server geeft als antwoord (sommige data is weggelaten voor leesbaarheid):
+
+<sup>YAML deelrepresentatie</sup>
 ```yaml
 isError: false
 message: 
@@ -511,6 +517,7 @@ questions:
 ```
 
 
+
 ##### Zorgtoeslag 2019 berekening stap 4
 
 ```yaml
@@ -524,6 +531,9 @@ Parameters:
   Value: '0'
 ```
 
+De API Server geeft als antwoord (sommige data is weggelaten voor leesbaarheid):
+
+<sup>YAML deelrepresentatie</sup>
 ```yaml
 isError: false
 message: 
