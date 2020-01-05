@@ -9,7 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-0298c3.svg)](https://github.com/sjefvanleeuwen/virtual-society-urukagina/blob/master/LICENSE)
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://regelingen.azurewebsites.net/)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/sjefvanleeuwen)
-
+[![OpenAPI](https://img.shields.io/badge/openapi-oas%203.0-green)](https://regelingenservice.azurewebsites.net/swagger)
 
 Uru-ka-gina, Uru-inim-gina of Iri-ka-gina (Sumerisch: 𒌷𒅗𒄀𒈾 URU-KA-gi.na; ca. 24e eeuw voor Christus, korte chronologie)
 was een heerser (ensi) van de stadstaat Lagash in Mesopotamië. Hij nam de titel van koning aan en beweerde goddelijk te zijn 
