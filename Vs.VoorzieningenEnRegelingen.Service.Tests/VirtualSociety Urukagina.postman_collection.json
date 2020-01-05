@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Zorgtoeslag 2019 parse by yaml body",
+			"name": "Zorgtoeslag 2019 parse yaml",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -41,7 +41,7 @@
 			"response": []
 		},
 		{
-			"name": "Zorgtoeslag 2019 berekening step 1",
+			"name": "Zorgtoeslag 2019 berekening stap 1",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -130,12 +130,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:44372/service/execute",
-					"protocol": "https",
+					"raw": "{{host}}/service/execute",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "44372",
 					"path": [
 						"service",
 						"execute"
@@ -166,12 +164,10 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:44372/service/execute",
-					"protocol": "https",
+					"raw": "{{host}}/service/execute",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "44372",
 					"path": [
 						"service",
 						"execute"
@@ -202,49 +198,13 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:44372/service/execute",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44372",
-					"path": [
-						"service",
-						"execute"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Zorgtoeslag 2019 parse by yaml url",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\"}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{host}}/service/parse",
+					"raw": "{{host}}/service/execute",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"service",
-						"parse"
+						"execute"
 					]
 				}
 			},
