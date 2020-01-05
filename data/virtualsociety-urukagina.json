@@ -1,0 +1,24 @@
+{
+    "description": "Urukagina is een service based rule engine ontworpen voor beslisregels binnen voorzieningen en regelingen",
+    "organization_name": "Virtual Society",
+    "service_name": "Urukagina",
+    "api_url": "https://api.example.com/service/",
+    "api_type": "REST/JSON",
+    "specification_url": "https://regelingenservice.azurewebsites.net/swagger/v1/swagger.json",
+    "documentation_url": "https://regelingenservice.azurewebsites.net/swagger",
+    "tags": ["regelingen", "belisregels"],["rule-engine", "rules"]
+    "badges": ["Gouden API"],
+    "contact": {
+        "email": "innovatie@wigo4it.nl",
+        "phone": "0682994079",
+        "chat": "https://discipl.slack.com",
+        "url": "https://github.com/sjefvanleeuwen/virtual-society-urukagina"
+    },
+    "is_reference_implementation": false,
+    "terms_of_use": {
+      "government_only": true,
+      "pay_per_use": false,
+      "uptime_guarantee": 99.8,
+      "support_response_time": "2 dagen"
+  }
+}
