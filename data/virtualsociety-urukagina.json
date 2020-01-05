@@ -6,7 +6,7 @@
     "api_type": "REST/JSON",
     "specification_url": "https://regelingenservice.azurewebsites.net/swagger/v1/swagger.json",
     "documentation_url": "https://regelingenservice.azurewebsites.net/swagger",
-    "tags": ["regelingen", "belisregels"],["rule-engine", "rules"]
+    "tags": ["regelingen", "belisregels","rule-engine", "rules"],
     "badges": ["Gouden API"],
     "contact": {
         "email": "innovatie@wigo4it.nl",
