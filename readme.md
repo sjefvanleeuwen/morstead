@@ -1,4 +1,4 @@
-﻿![logo](./images/logo.svg) <span style="font-family: 'Exo 2'; font-size: 3.5em;">Virtual Society</span> 
+﻿#![logo](./images/logo.svg) Virtual Society
 
 ## Urukagina Rule Engine
 [![Maintainability](https://api.codeclimate.com/v1/badges/12cb1c194f0c722e7485/maintainability)](https://codeclimate.com/github/sjefvanleeuwen/virtual-society-urukagina/maintainability)
@@ -20,7 +20,7 @@ een wettelijke code** in de geschiedenis. Hoewel de eigenlijke tekst niet is ont
 worden uit andere gevonden verwijzingen ernaar. Daarin stelde hij weduwen en wezen vrij van belastingen; dwong de stad om
 begrafeniskosten te betalen (inclusief de rituele voedsel- en drankoffers voor de reis van de doden naar de lagere wereld); 
 en besloten dat de rijken zilver moeten gebruiken bij de aankoop van de armen, en als de armen niet willen verkopen, 
-kan de machtige man (de rijke man of de priester) hem niet dwingen dit te doen. [1]
+kan de machtige man (de rijke man of de priester) hem niet dwingen dit te doen.
 
 ### Features
 
@@ -366,7 +366,12 @@ tabellen:
 
 Bovenstaande berekening bestaat uit een aantal stappen. Bij iedere stap vraagt Urukagina om variabelen die niet gevonden konden worden in
 het script of welke niet eerder doorgestuurd werden aan de API. De converstatie gebeurd in JSON format. De stappen uit de converstatie 
-kunnen afgespeeld worden met bijgeleverde [POSTMAN](https://www.postman.com) bestanden. Om een idee te geven van een conversatie hebben we de JSON's uit die conversatie
+kunnen afgespeeld worden met bijgeleverde [POSTMAN](https://www.postman.com) bestanden.
+
+Hier is een screenshot van postman met de bijgeleverde bestanden:
+![logo](./images/postman.png)
+
+Om een idee te geven van een conversatie hebben we de JSON's uit die conversatie
 geconverteerd naar YAML zodat ze leesbaar/compacter zijn voor deze readme. Er zijn twee typen conversaties:
 
 1. **Geautomatiseerd**<br />
