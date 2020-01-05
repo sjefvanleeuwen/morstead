@@ -13,6 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{35C0B2C8-9B11-417A-8C9A-523F452DA31C}"
 	ProjectSection(SolutionItems) = preProject
 		images\logo.svg = images\logo.svg
+		images\postman.png = images\postman.png
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Core.Tests", "Vs.VoorzieningenEnRegelingen.Core.Tests\Vs.VoorzieningenEnRegelingen.Core.Tests.csproj", "{F808BE58-C22E-47D7-A494-CA1C788832E2}"
