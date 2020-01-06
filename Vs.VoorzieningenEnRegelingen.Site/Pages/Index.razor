@@ -3,34 +3,3 @@
 <h1>Urukagina Rule Engine</h1>
 
 Parsing voor nu, zie project op: <a href="https://github.com/sjefvanleeuwen/virtual-society-urukagina">Github</a>
-
-<EditForm Model="@yaml" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <textarea rows="20" cols="80"
-              @bind-value="yaml"
-              @bind-value:event="oninput" />
-
-    <br/>
-    <button type="submit">Parse YAML</button>
-</EditForm>
-
-<h2>Parse Result</h2>
-
-<p>Message: @result.Message</p>
-<p>ExpressionTree (debug): </p>
-<pre style="font-size:8px">   
-    @result.ExpressionTree
-</pre>
-@code {
-    private string yaml = YamlZorgtoeslag.Body;
-
-    private ParseResult result = new ParseResult();
-
-    private void HandleValidSubmit()
-    {
-        YamlScriptController c = new YamlScriptController();
-        result = c.Parse(yaml);
-        Console.WriteLine("OnValidSubmit");
-    }
-}

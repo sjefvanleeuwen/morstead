@@ -1,39 +1,31 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">YAML Rules</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#"><img src="/images/logo.svg" asp-append-version="true" width="32" /> URUKAGINA</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-</div>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-bug" aria-hidden="true"></span>YAML Parser
-            </NavLink>
-        </li>
-        <!--
-            <li class="nav-item px-3">
-                <NavLink class="nav-link" href="counter">
-                    <span class="oi oi-plus" aria-hidden="true"></span> Counter
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <NavLink class="nav-link" href="">
+                    <span class="oi oi-bug" aria-hidden="true"></span>Home
                 </NavLink>
             </li>
-            <li class="nav-item px-3">
-                <NavLink class="nav-link" href="fetchdata">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            <li class="nav-item">
+                <NavLink class="nav-link" href="parse">
+                    <span class="oi oi-bug" aria-hidden="true"></span>Parse
                 </NavLink>
             </li>
-        -->
-    </ul>
-</div>
-
-@code {
-    private bool collapseNavMenu = true;
-
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}
+            <li class="nav-item">
+                <NavLink class="nav-link" href="execute">
+                    <span class="oi oi-bug" aria-hidden="true"></span>Execute
+                </NavLink>
+            </li>
+            <li class="nav-item">
+                <NavLink class="nav-link" href="conversation">
+                    <span class="oi oi-bug" aria-hidden="true"></span>Conversation
+                </NavLink>
+            </li>
+        </ul>
+    </div>
+</nav>
