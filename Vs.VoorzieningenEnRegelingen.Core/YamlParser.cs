@@ -126,6 +126,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         public List<Table> Tabellen()
         {
             var tables = new List<Table>();
+            if (!map.Children.ContainsKey(new YamlScalarNode(TablesAttribute)))
+                return tables;
+            if (((YamlNode)map.Children[new YamlScalarNode(TablesAttribute)]).ToString() == string.Empty)
+                return tables;
             foreach (var tabel in (YamlSequenceNode)map.Children[new YamlScalarNode(TablesAttribute)])
             {
                 var debugInfoTable = mapDebugInfo(tabel.Start, tabel.End);
