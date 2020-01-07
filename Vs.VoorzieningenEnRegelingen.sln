@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test-payloads", "test-paylo
 		doc\test-payloads\zorgtoeslag-2019.yml = doc\test-payloads\zorgtoeslag-2019.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.VoorzieningenEnRegelingen.Benchmarks", "Vs.VoorzieningenEnRegelingen.Benchmarks\Vs.VoorzieningenEnRegelingen.Benchmarks.csproj", "{947FB17C-36B5-498C-83E0-911D66A1C826}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Benchmarks", "Vs.VoorzieningenEnRegelingen.Benchmarks\Vs.VoorzieningenEnRegelingen.Benchmarks.csproj", "{947FB17C-36B5-498C-83E0-911D66A1C826}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{C27292C1-213D-442D-A011-7A6EE26C1AFE}"
 	ProjectSection(SolutionItems) = preProject

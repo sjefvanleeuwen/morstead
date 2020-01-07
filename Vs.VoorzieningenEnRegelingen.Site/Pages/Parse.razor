@@ -1,5 +1,5 @@
 ﻿@page "/Parse"
-
+@inject IJSRuntime JSRuntime;
 <h1>Parse</h1>
 
 <EditForm Model="@yaml" OnValidSubmit="@HandleValidSubmit">
@@ -9,7 +9,7 @@
               @bind-value="yaml"
               @bind-value:event="oninput" />
 
-    <br/>
+    <br />
     <button type="submit">Parse YAML</button>
 </EditForm>
 

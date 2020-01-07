@@ -20,7 +20,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site
         public static void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddServerSideBlazor();
+            services.AddServerSideBlazor()
+                .AddCircuitOptions(options => { options.DetailedErrors = true; }); // For detailed JS Interop debugging in browser.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

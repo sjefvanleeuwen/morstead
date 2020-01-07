@@ -1,4 +1,29 @@
 ﻿
+
+html, body {
+    font-family: 'Exo 2', sans-serif;
+    height: 100%;
+}
+
+.splash {
+    /* The image used */
+    background-image: url("/images/about-artwork.jpg");
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#editor {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;

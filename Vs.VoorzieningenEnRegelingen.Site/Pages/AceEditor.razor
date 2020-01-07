@@ -1,0 +1,23 @@
+﻿@page "/AceEditor"
+@inject IJSRuntime JSRuntime;
+<div id="editor">
+@yaml
+</div>
+@code {
+    private string yaml = YamlZorgtoeslag.Body;
+
+    private ParseResult result = new ParseResult();
+
+    private void HandleValidSubmit()
+    {
+        YamlScriptController c = new YamlScriptController();
+        result = c.Parse(yaml);
+        Console.WriteLine("OnValidSubmit");
+    }
+
+    protected async override void OnAfterRender(bool firstRender)
+    {
+       // in js/ace.interop.js
+       await JSRuntime.InvokeAsync<object>("createEditor", new object[] {  });
+    }
+}
