@@ -362,6 +362,11 @@ tabellen:
       - [ Zweden,              0.8213 ]
       - [ Zwitserland,         0.8000 ]
 ```
+#### In de regeling configurator (online web interface)
+![regelingen configurator](./images/regeling-configurator.png)
+
+
+
 #### Service RESTful API Conversatie
 
 Bovenstaande berekening bestaat uit een aantal stappen. Bij iedere stap vraagt Urukagina om variabelen die niet gevonden konden worden in
@@ -369,7 +374,7 @@ het script of welke niet eerder doorgestuurd werden aan de API. De converstatie 
 kunnen afgespeeld worden met bijgeleverde [POSTMAN](https://www.postman.com) bestanden.
 
 Hier is een screenshot van postman met de bijgeleverde bestanden:
-![logo](./images/postman.png)
+![postman](./images/postman.png)
 
 Om een idee te geven van een conversatie hebben we de JSON's uit die conversatie
 geconverteerd naar YAML zodat ze leesbaar/compacter zijn voor deze readme. Er zijn twee typen conversaties:
