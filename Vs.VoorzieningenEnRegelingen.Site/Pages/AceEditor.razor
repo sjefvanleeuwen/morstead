@@ -17,7 +17,14 @@
 
     protected async override void OnAfterRender(bool firstRender)
     {
-       // in js/ace.interop.js
-       await JSRuntime.InvokeAsync<object>("createEditor", new object[] {  });
+        // in js/ace.interop.js
+        await JSRuntime.InvokeAsync<object>("createEditor", new object[] { DotNetObjectReference.Create(this) });
+    }
+
+    [JSInvokable]
+    public Task OnChange(dynamic delta)
+    {
+        var message = delta;
+        return Task.FromResult(message);
     }
 }
