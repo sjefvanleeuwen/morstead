@@ -43,6 +43,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{C27292C1-2
 		data\virtualsociety-urukagina.json = data\virtualsociety-urukagina.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ux", "ux", "{2D723034-EED5-4817-BEAD-395569BB5AE6}"
+	ProjectSection(SolutionItems) = preProject
+		doc\ux\step.png = doc\ux\step.png
+		doc\ux\wireframing.pptx = doc\ux\wireframing.pptx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +85,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{59BAD9B8-4094-4778-B851-E0654C59C646} = {903A60DA-7659-421E-9BA8-14FBCC994642}
+		{2D723034-EED5-4817-BEAD-395569BB5AE6} = {903A60DA-7659-421E-9BA8-14FBCC994642}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
