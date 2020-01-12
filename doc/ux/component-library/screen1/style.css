@@ -1,0 +1,91 @@
+.cursor-pointer{
+  cursor: pointer;
+}
+
+body {
+  margin-top:180px;
+  margin-bottom:150px;
+}
+
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+ul.timeline:before {
+    content: ' ';
+    background: #d4d9df;
+    display: inline-block;
+    position: absolute;
+    left: 29px;
+    width: 2px;
+    height: 100%;
+    z-index: 400;
+}
+ul.timeline > li {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+ul.timeline > li:before {
+    content: attr(data-step);
+    background: white;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid #22c0e8;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    z-index: 400;
+  width: 24px;
+  height: 24px;
+  line-height: 22px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  font-style: normal;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+div.demo {
+    display: table;
+    width: 100%;
+    table-layout: fixed;    /* For cells of equal size */
+}
+div.demo span {
+    display: table-cell;
+    text-align: center;
+}
+
+.step-number {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 22px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  font-style: normal;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.fa-stack[data-count]:after{
+  position:absolute;
+  right:-5%;
+  top:-25%;
+  content: attr(data-count);
+  font-size:60%;
+  padding:.6em;
+  border-radius:666px;
+  line-height:.75em;
+  color: white;
+  background:rgba(255,0,0,.75);
+  text-align:center;
+  min-width:2em;
+  font-weight:bold;
+}
