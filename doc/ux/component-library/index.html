@@ -16,7 +16,10 @@
   <iframe id="iFrameKey-3fad7950-97c4-afab-e7ca-e565528966e7" src="screen1/index.html" name="CodePen" allowfullscreen="true" sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" allowtransparency="true" allowpaymentrequest="true" class="result-iframe"></iframe>
 </div>
 </div>
-
+<script>
+  var el = document.getElementById('iFrameKey-3fad7950-97c4-afab-e7ca-e565528966e7');
+  el.src = "berekening-wizard/index.html"; // assign url to src property
+  </script>
 <!--Controls etc.-->
 <div id="controls">
     <!--Idea by /u/aerosole-->
@@ -24,8 +27,14 @@
     <label for="iframePerspective">Add perspective:</label>
     <input type="checkbox" id="iframePerspective" checked="true">
   </div>
-
+  <div>
+    <h4><label>Selcteer Scherm:</label></h4>
+    <br />       <br />   
+    <label style="cursor:pointer" onclick="el.src='login/dist/index.html'">* Login</label>
+    <label style="cursor:pointer" onclick="el.src='berekening-wizard/index.html'">* Berekening Wizard</label>
+  </div>
 </div>
+
 
 <div id="phone-controls">
 
