@@ -365,8 +365,6 @@ tabellen:
 #### In de regeling configurator (online web interface)
 ![regelingen configurator](./images/regeling-configurator.png)
 
-
-
 #### Service RESTful API Conversatie
 
 Bovenstaande berekening bestaat uit een aantal stappen. Bij iedere stap vraagt Urukagina om variabelen die niet gevonden konden worden in
@@ -815,6 +813,10 @@ Retourneert de hyperbolische tangens van de opgegeven hoek.
 ##### truncate (n)
 Berekent het integrale deel van een opgegeven drijvende-kommagetal met dubbele precisie. 
 
-## Taxonomie
+## UX
 
-t.b.a.
+UX bestanden zijn te vinden in /doc/ux in de repository. Hierin staan:
+
+* Powerpoint wireframing mockup
+* Component library met Mobile first preview<br/>
+* Preview gehost: https://sjefvanleeuwen.github.io/virtual-society-urukagina/doc/ux/component-library/index.html
