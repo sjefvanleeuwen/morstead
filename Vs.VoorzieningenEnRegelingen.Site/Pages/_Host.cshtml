@@ -10,9 +10,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Fixed Sidebar</title>
+    <title>Virtual Society | Urukagina</title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- WebVOWL -->
+    <link rel="stylesheet" type="text/css" href="plugins/webvowl/css/webvowl.css" />
+    <link rel="stylesheet" type="text/css" href="plugins/webvowl/css/webvowl.app.css" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -20,12 +24,10 @@
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="css/blazor.css" />
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Site wrapper -->
@@ -45,10 +47,14 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+<script src="plugins/webvowl/js/d3.min.js"></script>
+<script src="plugins/webvowl/js/webvowl.js"></script>
+<script src="plugins/webvowl/js/webvowl.app.js"></script>
 
     <script src="_framework/blazor.server.js"></script>
     <script src="~/js/ace/ace.js"></script>
     <script src="~/js/ace.interop.js"></script>
+    <script src="~/js/dataTable.interop.js"></script>
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -62,6 +68,6 @@
     <script src="dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-    <script src="~/js/dataTable.interop.js"></script>
+    <!-- WebVOWL -->
 </body>
 </html>
