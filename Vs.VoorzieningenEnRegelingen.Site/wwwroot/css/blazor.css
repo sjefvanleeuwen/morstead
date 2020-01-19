@@ -3,6 +3,7 @@
 html, body {
     font-family: 'Exo 2', sans-serif;
     height: 100%;
+    margin-top: 10px;
 }
 
 .splash {

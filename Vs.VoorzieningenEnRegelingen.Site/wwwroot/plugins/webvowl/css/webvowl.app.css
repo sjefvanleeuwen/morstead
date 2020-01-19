@@ -51,7 +51,7 @@ html {
     padding: 10px;
     font-size: 1.5em;
     white-space: nowrap;
-    overflow: hidden;
+    /*overflow: hidden; */
     text-overflow: ellipsis;
 }
 
@@ -634,7 +634,13 @@ a:hover {
 /*----------------------------------------------
         LAYOUT
 ----------------------------------------------*/
-body {
+
+
+
+/*
+
+body { 
+    
     background: rgb(24, 32, 42);
     height: 100%;
     font-size: 14px;
@@ -646,6 +652,8 @@ body {
     position: fixed;
     width: 100%;
 }
+    
+
 
 main {
     height: 100%;
@@ -654,6 +662,7 @@ main {
     position: relative;
     width: 100%;
 }
+        */
 
 #canvasArea {
     position: relative;
