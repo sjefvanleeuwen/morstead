@@ -1,4 +1,5 @@
 exclude_patterns:
 - "**/*.js"
+- "**/*.ts"
 - "**/*.razor"
 - "**/Model/WebVowl/**
