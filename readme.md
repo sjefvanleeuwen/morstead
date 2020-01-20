@@ -1,6 +1,7 @@
 ﻿# ![logo](./images/logo.svg) Virtual Society
 
 ## Urukagina Rule Engine
+![Last commit](https://img.shields.io/github/last-commit/sjefvanleeuwen/virtual-society-urukagina)
 [![Maintainability](https://api.codeclimate.com/v1/badges/12cb1c194f0c722e7485/maintainability)](https://codeclimate.com/github/sjefvanleeuwen/virtual-society-urukagina/maintainability)
 [![Build Status](https://leeuwens.visualstudio.com/Urukagina/_apis/build/status/sjefvanleeuwen.virtual-society-urukagina?branchName=master)](https://leeuwens.visualstudio.com/Urukagina/_build/latest?definitionId=1&branchName=master)
 [![Test Status](https://img.shields.io/azure-devops/tests/leeuwens/Urukagina/1?failed_label=bad&passed_label=good&skipped_label=n%2Fa)](https://leeuwens.visualstudio.com/Urukagina/_build/latest?definitionId=1&branchName=master)
@@ -10,7 +11,6 @@
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://regelingen.azurewebsites.net/)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/sjefvanleeuwen)
 [![OpenAPI](https://img.shields.io/badge/openapi-oas%203.0-green)](https://regelingenservice.azurewebsites.net/swagger)
-
 Uru-ka-gina, Uru-inim-gina of Iri-ka-gina (Sumerisch: 𒌷𒅗𒄀𒈾 URU-KA-gi.na; ca. 24e eeuw voor Christus, korte chronologie)
 was een heerser (ensi) van de stadstaat Lagash in Mesopotamië. Hij nam de titel van koning aan en beweerde goddelijk te zijn 
 benoemd bij de val van zijn corrupte voorganger Lugalanda.
