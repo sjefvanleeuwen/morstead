@@ -1,0 +1,15 @@
+﻿@page "/Bpmn"
+@inject IJSRuntime JSRuntime
+
+<div id="canvas_bpmn"></div>
+
+@code {
+
+    protected async override void OnAfterRender(bool firstRender)
+    {
+        // in js/bpmn.interop.js
+        await JSRuntime.InvokeAsync<object>("createModeler", new object[] { /* DotNetObjectReference.Create(this) */ });
+    }
+
+
+}
