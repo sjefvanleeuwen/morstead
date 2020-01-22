@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="wwwroot\data\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

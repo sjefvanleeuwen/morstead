@@ -8,7 +8,7 @@ html, body {
 #swipeBarContainer {
     background-color: #444444;
 }
-#canvas_bpmn {
+#canvas {
     height: 85vh;
 }
 

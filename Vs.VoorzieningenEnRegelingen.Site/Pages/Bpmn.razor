@@ -1,15 +1,31 @@
 ﻿@page "/Bpmn"
+@using System.Net
+@using System.Text
 @inject IJSRuntime JSRuntime
 
-<div id="canvas_bpmn"></div>
+
+
+<div id="canvas"></div>
 
 @code {
 
-    protected async override void OnAfterRender(bool firstRender)
+protected async override void OnAfterRender(bool firstRender)
+{
+    // in js/bpmn.interop.js
+    await JSRuntime.InvokeAsync<object>("createModeler", new object[] { /* DotNetObjectReference.Create(this) */ });
+
+
+
+    string xmlResult = string.Empty;
+    using(WebClient client = new WebClient())
     {
-        // in js/bpmn.interop.js
-        await JSRuntime.InvokeAsync<object>("createModeler", new object[] { /* DotNetObjectReference.Create(this) */ });
+        client.Encoding = UTF8Encoding.UTF8;
+        client.Headers[HttpRequestHeader.ContentType] = "text/xml";
+            xmlResult = client.DownloadString("https://raw.githubusercontent.com/bpmn-io/bpmn-js/72745c7c97e52ac8f4c65b381ca9724690f27aa5/test/fixtures/bpmn/features/replace/01_replace.bpmn");
     }
 
 
+    await JSRuntime.InvokeAsync<object>("openDiagram", new object[] { xmlResult });
+
+}
 }

@@ -5,7 +5,7 @@ var bpmnModeler;
 
 function createModeler() {
     bpmnModeler = new BpmnJS({
-        container: '#canvas_bpmn',
+        container: '#canvas',
         keyboard: {
             bindTo: window
         }
