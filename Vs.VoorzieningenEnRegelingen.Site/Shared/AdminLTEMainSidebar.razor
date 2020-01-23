@@ -10,64 +10,11 @@
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="../../dist/img/svl.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block">Sjef van Leeuwen</a>
-            </div>
-        </div>
-
+        <User />
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="/Parse" class="nav-link">
-                        <i class="nav-icon fa fa-check"></i>
-                        <p>
-                            Parser
-                            <!-- <span class="badge badge-info right">2</span> -->
-                        </p>
-                    </a>
-                </li>
-            <li class="nav-item">
-                <a href="/AceEditor" class="nav-link">
-                    <i class="nav-icon far fa-edit"></i>
-                    <p>
-                        Ace Editor
-                        <!-- <span class="badge badge-info right">2</span> -->
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/Files" class="nav-link">
-                    <i class="nav-icon far fa-folder"></i>
-                    <p>
-                        Bestanden
-                        <!-- <span class="badge badge-info right">2</span> -->
-                    </p>
-                </a>
-            </li>
-                <li class="nav-item">
-                    <a href="/Ontology" class="nav-link">
-                        <i class="nav-icon fab fa-connectdevelop"></i>
-                        <p>
-                            Ontologie
-                            <!-- <span class="badge badge-info right">2</span> -->
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/Bpmn" class="nav-link">
-                        <i class="nav-icon  fas fa-project-diagram"></i>
-                        <p>
-                            BPMN
-                            <!-- <span class="badge badge-info right">2</span> -->
-                        </p>
-                    </a>
-                </li>
+                <AccessControl />
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
