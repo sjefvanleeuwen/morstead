@@ -817,8 +817,4 @@ Berekent het integrale deel van een opgegeven drijvende-kommagetal met dubbele p
 
 ## UX
 
-UX bestanden zijn te vinden in /doc/ux in de repository. Hierin staan:
-
-* Powerpoint wireframing mockup
-* Component library met Mobile first preview<br/>
-* Preview gehost: https://sjefvanleeuwen.github.io/virtual-society-urukagina/doc/ux/component-library/index.html
+Documentatie omtrent UX kun je hier terugvinden: [UX Documentatie](./doc/ux/readme.md)
