@@ -1,6 +1,4 @@
 using System;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using RestSharp;
 
 namespace Vs.VoorzieningenEnRegelingen.Site
 {
@@ -72,20 +69,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site
 
        options.Events = new OpenIdConnectEvents
                 {
-                    OnTokenValidated = (context) =>
-                    {
-                        var client = new RestClient($"https://{Configuration["Auth0:Domain"]}/api/v2/users/{context.SecurityToken.Claims.FirstOrDefault(p => p.Type == "sub").Value}");
-                        var request = new RestRequest(Method.GET);
-                        request.AddHeader("authorization", $"Bearer {Configuration["Auth0:ClientSecret"]}");
-                        IRestResponse response = client.Execute(request);
-                        return Task.CompletedTask;
-                    },
-                    OnUserInformationReceived = (context) =>
-                    {
-                        
-                        
-                        return Task.CompletedTask;
-                    },
                     // handle the logout redirection
           OnRedirectToIdentityProviderForSignOut = (context) =>
                     {
