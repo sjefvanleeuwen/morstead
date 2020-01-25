@@ -1,15 +1,34 @@
-﻿<AuthorizeView>
+﻿@using System.Security.Claims
+@using YamlDotNet.Core.Tokens
+@using Microsoft.AspNetCore.Components.Authorization
+@using Newtonsoft.Json;
+@using  System.Linq;
+@inject AuthenticationStateProvider AuthenticationStateProvider
+<AuthorizeView>
     <Authorized>
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="../../dist/img/svl.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="@Picture().Result" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Sjef van Leeuwen</a>
+                <a href="#" class="d-block">@Name().Result</a>
             </div>
         </div>
     </Authorized>
     <NotAuthorized>
     </NotAuthorized>
 </AuthorizeView>
+@code {
+    private async Task<string> Name()
+    {
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        return state.User.Claims.FirstOrDefault(p=>p.Type=="name").Value;
+    }
+    private async Task<string> Picture()
+    {
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        return state.User.Claims.FirstOrDefault(p=>p.Type=="picture").Value;
+    }
+
+}
