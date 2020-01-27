@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Vs.VoorzieningenEnRegelingen.Site
 {
@@ -45,33 +46,43 @@ namespace Vs.VoorzieningenEnRegelingen.Site
             .AddCookie()
             .AddOpenIdConnect("Auth0", options =>
             {
-      // Set the authority to your Auth0 domain
-      options.Authority = $"https://{Configuration["Auth0:Domain"].ToString()}";
+                // Set the authority to your Auth0 domain
+                options.Authority = $"https://{Configuration["Auth0:Domain"].ToString()}";
+                
+                // Configure the Auth0 Client ID and Client Secret
+                options.ClientId = Configuration["Auth0:ClientId"];
+                options.ClientSecret = Configuration["Auth0:ClientSecret"];
+                options.GetClaimsFromUserInfoEndpoint = true;
+                
+                // Set response type to code
+                
+                // Configure the scope
+                options.Scope.Clear();
+                options.Scope.Add("openid");
+                options.Scope.Add("profile");
+                options.Scope.Add("email");
+                options.Scope.Add("roles");
+                options.Scope.Add("gemeente");
 
-      // Configure the Auth0 Client ID and Client Secret
-      options.ClientId = Configuration["Auth0:ClientId"];
-      options.ClientSecret = Configuration["Auth0:ClientSecret"];
-      options.GetClaimsFromUserInfoEndpoint = true;
-
-      // Set response type to code
-
-      // Configure the scope
-      options.Scope.Clear();
-      options.Scope.Add("openid");
-      options.Scope.Add("profile");
+                // Set the correct name claim type
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = "name",
+                    RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/roles"
+                };
 
                 // Set the callback path, so Auth0 will call back to http://localhost:3000/callback
                 // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard
                 options.CallbackPath = new PathString("/callback");
 
-      // Configure the Claims Issuer to be Auth0
-      options.ClaimsIssuer = "Auth0";
+                 // Configure the Claims Issuer to be Auth0
+                options.ClaimsIssuer = "Auth0";
 
-       options.Events = new OpenIdConnectEvents
+                options.Events = new OpenIdConnectEvents
                 {
                     // handle the logout redirection
-          OnRedirectToIdentityProviderForSignOut = (context) =>
-                    {
+                     OnRedirectToIdentityProviderForSignOut = (context) =>
+                     {
                         var logoutUri = $"https://{Configuration["Auth0:Domain"]}/v2/logout?client_id={Configuration["Auth0:ClientId"]}";
 
                         var postLogoutUri = context.Properties.RedirectUri;
@@ -79,8 +90,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site
                         {
                             if (postLogoutUri.StartsWith("/"))
                             {
-                      // transform to absolute
-                      var request = context.Request;
+                                // transform to absolute
+                                 var request = context.Request;
                                 postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
                             }
                             logoutUri += $"&returnTo={ Uri.EscapeDataString(postLogoutUri)}";

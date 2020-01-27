@@ -1,5 +1,5 @@
 ﻿@page "/dashboard"
-@attribute [Authorize]
+@attribute [Authorize(Roles = "Administrator")]
 @inject IJSRuntime JSRuntime
 
     <!-- Content Header (Page header) -->

@@ -8,61 +8,77 @@
                 </p>
             </a>
         </li>
-        <li class="nav-item">
-            <a href="/Parse" class="nav-link">
-                <i class="nav-icon fa fa-check"></i>
-                <p>
-                    Parser
-                    <!-- <span class="badge badge-info right">2</span> -->
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/AceEditor" class="nav-link">
-                <i class="nav-icon far fa-edit"></i>
-                <p>
-                    Ace Editor
-                    <!-- <span class="badge badge-info right">2</span> -->
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/Files" class="nav-link">
-                <i class="nav-icon far fa-folder"></i>
-                <p>
-                    Bestanden
-                    <!-- <span class="badge badge-info right">2</span> -->
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/Ontology" class="nav-link">
-                <i class="nav-icon fab fa-connectdevelop"></i>
-                <p>
-                    Ontologie
-                    <!-- <span class="badge badge-info right">2</span> -->
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/Bpmn" class="nav-link">
-                <i class="nav-icon  fas fa-project-diagram"></i>
-                <p>
-                    BPMN
-                    <!-- <span class="badge badge-info right">2</span> -->
-                </p>
-            </a>
-        </li>
-
-    </Authorized>
-    <NotAuthorized>
-        <li class="nav-item">
-            <a href="/Login?redirectUri=/" class="nav-link">
-                <i class="nav-icon fas fa-fingerprint"></i>
-                <p>
-                    Login
-                </p>
-            </a>
-        </li>
-    </NotAuthorized>
+     </Authorized>
 </AuthorizeView>
+ <AuthorizeView Roles="Administrator">
+     <Authorized>
+            <li class="nav-item">
+                <a href="/Dashboard" class="nav-link">
+                    <i class="nav-icon fas fa-chart-line"></i>
+                    <p>
+                        Dashboard
+                    </p>
+                </a>
+            </li>
+        </Authorized>
+ </AuthorizeView>>
+ <AuthorizeView>
+     <Authorized>
+         <li class="nav-item">
+             <a href="/Parse" class="nav-link">
+                 <i class="nav-icon fa fa-check"></i>
+                 <p>
+                     Parser
+                     <!-- <span class="badge badge-info right">2</span> -->
+                 </p>
+             </a>
+         </li>
+         <li class="nav-item">
+             <a href="/AceEditor" class="nav-link">
+                 <i class="nav-icon far fa-edit"></i>
+                 <p>
+                     Ace Editor
+                     <!-- <span class="badge badge-info right">2</span> -->
+                 </p>
+             </a>
+         </li>
+         <li class="nav-item">
+             <a href="/Files" class="nav-link">
+                 <i class="nav-icon far fa-folder"></i>
+                 <p>
+                     Bestanden
+                     <!-- <span class="badge badge-info right">2</span> -->
+                 </p>
+             </a>
+         </li>
+         <li class="nav-item">
+             <a href="/Ontology" class="nav-link">
+                 <i class="nav-icon fab fa-connectdevelop"></i>
+                 <p>
+                     Ontologie
+                     <!-- <span class="badge badge-info right">2</span> -->
+                 </p>
+             </a>
+         </li>
+         <li class="nav-item">
+             <a href="/Bpmn" class="nav-link">
+                 <i class="nav-icon  fas fa-project-diagram"></i>
+                 <p>
+                     BPMN
+                     <!-- <span class="badge badge-info right">2</span> -->
+                 </p>
+             </a>
+         </li>
+
+     </Authorized>
+     <NotAuthorized>
+         <li class="nav-item">
+             <a href="/Login?redirectUri=/" class="nav-link">
+                 <i class="nav-icon fas fa-fingerprint"></i>
+                 <p>
+                     Login
+                 </p>
+             </a>
+         </li>
+     </NotAuthorized>
+ </AuthorizeView>

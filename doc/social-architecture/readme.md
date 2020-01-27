@@ -35,6 +35,24 @@ Hieronder kun je een score geven op elk onderdeel.
 | Gezonde financiering        | hoe de groep economisch overleeft                                  |       |
 
 
+### Missie
+
+Het startpunt voor de Virtual Society gemeenschap is een verklaarde missie. De missie definieert de doelen waarover we allemaal vooraf overeenstemming kunnen bereiken, voordat we ons bij dit project aansluiten. Het is net als de titel van een website of de slogan voor een film.
+
+De titel voor Virtual Society is *"social open innovation"*, een ambitieuze missie waarbij vele stakeholders onderdeel uitmaken van het eco-systeem met daarin
+de burger centraal. In het eco-systeem ontwikkelen we systemen die voor een digitale transformatie zorgen door alle stakeholders te betrekken binnen de society.
+Iedere stakeholder is gebruiker van het systeem en voegt haar kennis toe om de burger te kunnen helpen in zijn digitale zijn m.b.t. zaken doen met de overheid
+in het sociale domein.
+
+### 
+
+
+
+
+
+
+
+
 Bronnen: 
 
 P. Hintjes - *A Primer on on-line community building* - Sep 2016
