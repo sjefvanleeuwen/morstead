@@ -1,6 +1,7 @@
 ﻿using Flee.PublicTypes;
 using Xunit;
 using System;
+using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using System.Globalization;
 using YamlDotNet.Serialization;
@@ -228,6 +229,25 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             }
             Assert.True(called);
             Assert.True(unresolvedException);
+        }
+
+        [Fact]
+        void Formula_Can_Discover_Parameters()
+        {
+            var localContext = new ExpressionContext();
+            var variables = new System.Collections.Generic.Dictionary<string,Type>();
+            localContext.Variables.ResolveVariableType += (object sender, ResolveVariableTypeEventArgs e) =>
+            {
+                variables.Add(e.VariableName,typeof(double));
+                e.VariableType = typeof(double);
+            };
+
+            IGenericExpression<object> eDynamic = localContext.CompileGeneric<object>("a + b");
+
+            Assert.True(variables.Count==2);
+            Assert.True(variables.ContainsKey("a"));
+            Assert.True(variables.ContainsKey("b"));
+
         }
     }
 }
