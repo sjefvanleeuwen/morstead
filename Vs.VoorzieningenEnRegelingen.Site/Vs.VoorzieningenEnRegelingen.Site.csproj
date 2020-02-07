@@ -35,6 +35,7 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="wwwroot\data\NewFolder\" />
+    <Folder Include="wwwroot\plugins\split\" />
   </ItemGroup>
 
   <ItemGroup>
