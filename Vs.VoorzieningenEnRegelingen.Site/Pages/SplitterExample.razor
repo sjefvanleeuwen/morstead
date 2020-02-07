@@ -1,0 +1,30 @@
+﻿@page "/SplitterExample"
+@attribute [Authorize]
+@inject IJSRuntime JSRuntime
+    <!-- Main content -->
+    <div id="splitcontainer" class="clear-fix row no-gutters" style="background-color: black;">
+        <div id="left-half" class="left-half">
+            <article>
+                <h1>Left Half</h1>
+                <p>Weekends don't count unless you spend them doing something completely pointless.</p>
+            </article>
+        </div>
+        <div id="right-half" class="right-half">
+            <article>
+                <h1>Right Half</h1>
+                <p>If your knees aren't green by the end of the day, you ought to seriously re-examine your life.</p>
+            </article>
+        </div>
+    </div>
+    <!-- /.content -->
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeAsync<object>("split", new object[] {});
+        }
+    }
+
+}

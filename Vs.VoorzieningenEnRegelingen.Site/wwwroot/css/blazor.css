@@ -3,7 +3,7 @@
 html, body {
     font-family: 'Exo 2', sans-serif;
     height: 100%;
-    margin-top: 15px;
+    padding-top: 24px;
 }
 #swipeBarContainer {
     background-color: #444444;

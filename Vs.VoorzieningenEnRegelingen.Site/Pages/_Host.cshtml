@@ -32,13 +32,15 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="css/blazor.css" />
+    <!-- Splitter style -->
+    <link href="~/css/split.css" rel="stylesheet" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed text-sm">
     <!-- Site wrapper -->
     <div class="wrapper">
-        <app>
-            <component type="typeof(App)" render-mode="ServerPrerendered" />
-        </app>
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
     </div>
     <!-- ./wrapper -->
     <div id="blazor-error-ui">
@@ -82,5 +84,7 @@
     <script src="https://unpkg.com/bpmn-js@6.2.0/dist/bpmn-modeler.development.js"></script>
     <!-- div element splitter my mouse dragging -->
     <script src="~/plugins/split/split.min.js"></script>
+    <!-- Blazor interop for splitter -->
+    <script src="~/js/splitter.interop.js"></script>
 </body>
 </html>
