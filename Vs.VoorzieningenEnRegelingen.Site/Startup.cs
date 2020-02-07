@@ -9,16 +9,22 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
+using Redbus;
+using Redbus.Events;
+using Redbus.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Site
 {
     public class Startup
     {
+        public static IEventBus Bus { get; private set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile("auth0.json")
                 .Build();
+            Bus = new EventBus();
         }
 
         private static IConfiguration Configuration { get; set; }
