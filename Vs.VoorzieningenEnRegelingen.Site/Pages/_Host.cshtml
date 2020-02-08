@@ -32,15 +32,17 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="css/blazor.css" />
+    <!-- Toastr notifications -->
+    <link href="~/plugins/toastr/toastr.css" rel="stylesheet" />
     <!-- Splitter style -->
     <link href="~/css/split.css" rel="stylesheet" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed text-sm">
     <!-- Site wrapper -->
     <div class="wrapper">
-    <app>
-        <component type="typeof(App)" render-mode="ServerPrerendered" />
-    </app>
+        <app>
+            <component type="typeof(App)" render-mode="ServerPrerendered" />
+        </app>
     </div>
     <!-- ./wrapper -->
     <div id="blazor-error-ui">
@@ -86,5 +88,9 @@
     <script src="~/plugins/split/split.min.js"></script>
     <!-- Blazor interop for splitter -->
     <script src="~/js/splitter.interop.js"></script>
+    <!-- Toastr -->
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    <!-- Toastr interop -->
+    <script src="~/js/toastr.interop.js"></script>
 </body>
 </html>

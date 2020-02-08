@@ -1,8 +1,10 @@
-﻿@using Redbus
+﻿@using Microsoft.Extensions.DependencyInjection
+@using Redbus
 @using Redbus.Events
 @inherits LayoutComponentBase
 @implements IDisposable
 @inject IJSRuntime JSRuntime
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <AdminLTENavbar></AdminLTENavbar>
 
@@ -21,12 +23,15 @@
 
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        var authState = AuthenticationStateProvider.GetAuthenticationStateAsync().Result;
+        var user = authState.User;
+        if (token == null && user.Identity.IsAuthenticated)
         {
             JSRuntime.InvokeAsync<object>("console.log", new object[] { $"Oninitalized" });
             token = Startup.Bus.Subscribe<PayloadEvent<string>>(s =>
             {
                 JSRuntime.InvokeAsync<object>("console.log", new object[] { $"Timer event #{s.Payload}" });
+                JSRuntime.InvokeAsync<object>("notify", new object[] { $"Timer event #{s.Payload}" });
             });
             SetTimer();
 
@@ -34,26 +39,27 @@
         return base.OnAfterRenderAsync(firstRender);
     }
 
-
-    private System.Timers.Timer aTimer;
-    private long count;
+    private static System.Timers.Timer aTimer;
+    private static long count;
 
     private void SetTimer()
     {
-        // Create a timer with a two second interval.
-        aTimer = new System.Timers.Timer(10000);
-        // Hook up the Elapsed event for the timer.
-        aTimer.Elapsed += OnTimedEvent;
-        // aTimer.AutoReset = true;
-        aTimer.Enabled = true;
+
+            if (aTimer != null)
+                return;
+            // Create a timer with a two second interval.
+            aTimer = new System.Timers.Timer(10000);
+            // Hook up the Elapsed event for the timer.
+            aTimer.Elapsed += OnTimedEvent;
+            // aTimer.AutoReset = true;
+            aTimer.Enabled = true;
     }
 
+    // TODO: Other way to manage the lifecycle than on componentlevel?
     public void Dispose()
     {
         if (token == null)
             return;
-        aTimer.Stop();
-        aTimer.Dispose();
         Startup.Bus.Unsubscribe(token);
     }
 
