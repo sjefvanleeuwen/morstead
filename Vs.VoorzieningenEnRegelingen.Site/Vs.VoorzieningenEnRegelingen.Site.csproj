@@ -40,6 +40,33 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\base\worker\workerMain.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.nls.de.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.nls.es.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.nls.fr.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.nls.it.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.nls.ja.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.nls.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.nls.ko.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.nls.ru.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-cn.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-tw.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min-maps\vs\loader.js.map" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\base\worker\workerMain.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.nls.de.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.nls.es.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.nls.fr.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.nls.it.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.nls.ja.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.nls.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.nls.ko.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.nls.ru.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.nls.zh-cn.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\editor\editor.main.nls.zh-tw.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\javascript\javascript.js" />
+    <None Include="wwwroot\plugins\monaco-editor\min\vs\loader.js" />
     <None Include="wwwroot\plugins\webvowl\js\d3.min.js" />
     <None Include="wwwroot\plugins\webvowl\js\webvowl.app.js" />
     <None Include="wwwroot\plugins\webvowl\js\webvowl.js" />
