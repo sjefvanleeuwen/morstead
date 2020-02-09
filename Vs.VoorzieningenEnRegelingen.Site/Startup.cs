@@ -17,14 +17,11 @@ namespace Vs.VoorzieningenEnRegelingen.Site
 {
     public class Startup
     {
-        public static IEventBus Bus { get; private set; }
-
         public Startup(IConfiguration configuration)
         {
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile("auth0.json")
                 .Build();
-            Bus = new EventBus();
         }
 
         private static IConfiguration Configuration { get; set; }
@@ -110,7 +107,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site
                     }
                 };
             });
-
+            //TODO: REdbus is temporary for MVP. Replace with in-memory provider for Rebus for future versions
+            //https://github.com/rebus-org/Rebus.ServiceProvider
+            services.AddSingleton(typeof(Redbus.Interfaces.IEventBus), typeof(Redbus.EventBus));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

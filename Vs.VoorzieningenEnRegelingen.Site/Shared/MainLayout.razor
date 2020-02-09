@@ -1,11 +1,9 @@
-﻿@using Microsoft.Extensions.DependencyInjection
-@using Redbus
-@using Redbus.Events
+﻿@using Redbus.Interfaces
 @inherits LayoutComponentBase
 @implements IDisposable
 @inject IJSRuntime JSRuntime
 @inject AuthenticationStateProvider AuthenticationStateProvider
-
+@inject IEventBus Bus
 <AdminLTENavbar></AdminLTENavbar>
 
 <AdminLTEMainSidebar></AdminLTEMainSidebar>
@@ -28,7 +26,7 @@
         if (token == null && user.Identity.IsAuthenticated)
         {
             JSRuntime.InvokeAsync<object>("console.log", new object[] { $"Oninitalized" });
-            token = Startup.Bus.Subscribe<PayloadEvent<string>>(s =>
+            token = Bus.Subscribe<PayloadEvent<string>>(s =>
             {
                 JSRuntime.InvokeAsync<object>("console.log", new object[] { $"Timer event #{s.Payload}" });
                 JSRuntime.InvokeAsync<object>("notify", new object[] { $"Timer event #{s.Payload}" });
@@ -45,14 +43,14 @@
     private void SetTimer()
     {
 
-            if (aTimer != null)
-                return;
-            // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(10000);
-            // Hook up the Elapsed event for the timer.
-            aTimer.Elapsed += OnTimedEvent;
-            // aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+        if (aTimer != null)
+            return;
+        // Create a timer with a two second interval.
+        aTimer = new System.Timers.Timer(10000);
+        // Hook up the Elapsed event for the timer.
+        aTimer.Elapsed += OnTimedEvent;
+        // aTimer.AutoReset = true;
+        aTimer.Enabled = true;
     }
 
     // TODO: Other way to manage the lifecycle than on componentlevel?
@@ -60,12 +58,12 @@
     {
         if (token == null)
             return;
-        Startup.Bus.Unsubscribe(token);
+        Bus.Unsubscribe(token);
     }
 
     private void OnTimedEvent(Object source, ElapsedEventArgs e)
     {
         count++;
-        Startup.Bus.Publish(new PayloadEvent<string>($"Timed Event {count}"));
+        Bus.Publish(new PayloadEvent<string>($"Timed Event {count}"));
     }
 }
