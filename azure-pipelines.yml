@@ -34,7 +34,7 @@ steps:
     command: 'test'
     projects: |
               **/*.csproj
-              !**/*Vs.Cms.GitHubFileStorage.Tests.dll
+              !**/Vs.Cms.GitHubFileStorage.Tests.csproj
     arguments: '--configuration $(BuildConfiguration)  /p:CollectCoverage=true  /p:CoverletOutputFormat=cobertura   /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\Coverage\'
     testRunTitle: 'Urukagina Core Test'
     nobuild: true
