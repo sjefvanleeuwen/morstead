@@ -1,0 +1,16 @@
+﻿@page "/FlowExample"
+@using WorkflowCore.Interface
+@inject IWorkflowHost Host;
+<h1>Workflow Simpel Voorbeeld</h1>
+<button onclick="@Review();">Start workflow</button>
+@code {
+
+    protected string isDisabled { get; set; }
+
+    Task Review()
+    {
+        var r = Host.StartWorkflow("ReviewWorkflow", "test");
+        return r;
+    }
+
+}

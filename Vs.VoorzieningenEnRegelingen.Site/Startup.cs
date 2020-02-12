@@ -12,11 +12,15 @@ using Microsoft.IdentityModel.Tokens;
 using Redbus;
 using Redbus.Events;
 using Redbus.Interfaces;
+using Vs.VoorzieningenEnRegelingen.Site.Workflow;
+using WorkflowCore.Interface;
 
 namespace Vs.VoorzieningenEnRegelingen.Site
 {
     public class Startup
     {
+        public static IServiceProvider ServiceProvider { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = new ConfigurationBuilder()
@@ -110,6 +114,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site
             //TODO: REdbus is temporary for MVP. Replace with in-memory provider for Rebus for future versions
             //https://github.com/rebus-org/Rebus.ServiceProvider
             services.AddSingleton(typeof(Redbus.Interfaces.IEventBus), typeof(Redbus.EventBus));
+            services.AddWorkflow();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -138,6 +143,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+            var host = app.ApplicationServices.GetService<IWorkflowHost>();
+
+            host.RegisterWorkflow<ReviewWorkflow, ReviewDataClass>();
+            host.Start();
         }
     }
 }
