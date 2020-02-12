@@ -1,0 +1,1204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with WebVOWL (version 1.1.7), http://vowl.visualdataweb.org -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   class="vowlGraph"
+   width="676.64087"
+   height="620.40961"
+   version="1.1"
+   id="svg392"
+   sodipodi:docname="ouder-kind-relatie.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata398">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs396" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview394"
+     showgrid="false"
+     inkscape:zoom="0.25513514"
+     inkscape:cx="233.21312"
+     inkscape:cy="260.2363"
+     inkscape:window-x="410"
+     inkscape:window-y="148"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg392" />
+  <g
+     style="opacity:1"
+     transform="matrix(0.77098564,0,0,0.77098564,-52.113997,-16.433437)"
+     id="g390">
+    <g
+       class="linkContainer"
+       id="g90">
+      <defs
+         id="defs2" />
+      <defs
+         id="defs40">
+        <marker
+           id="markerobjectProperty1"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path4"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerobjectProperty2"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path7"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerobjectProperty3"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path10"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerobjectProperty4"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path13"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerobjectProperty5"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path16"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerobjectProperty6"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path19"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerdatatypeProperty8"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path22"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerdatatypeProperty9"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path25"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerdatatypeProperty10"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path28"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerdatatypeProperty11"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path31"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerdatatypeProperty12"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path34"
+             inkscape:connector-curvature="0" />
+        </marker>
+        <marker
+           id="markerdatatypeProperty13"
+           viewBox="-14 -10 28 20"
+           markerWidth="10"
+           markerHeight="10"
+           orient="auto">
+          <path
+             d="M 0,0 -12,8 V -8 L 0,0"
+             class="filled"
+             style="fill:#000000;stroke:#000000;stroke-width:2px;stroke-dasharray:100"
+             id="path37"
+             inkscape:connector-curvature="0" />
+        </marker>
+      </defs>
+      <g
+         class="link"
+         id="g44"
+         style="marker-end:url(#markerobjectProperty1)">
+        <path
+           class="link-path nodeClass2 nodeClass1 normal"
+           d="m 624.10227,568.98358 q -91.7429,27.97244 -114.97623,29.64955 -23.23332,1.6771 -117.357,-12.8785"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path42"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g48"
+         style="marker-end:url(#markerobjectProperty2)">
+        <path
+           class="link-path nodeClass3 nodeClass1 normal"
+           d="m 459.15682,292.46955 q -48.38992,92.09211 -58.52673,116.046 -10.13681,23.95389 -42.84138,123.49289"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path46"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g52"
+         style="marker-end:url(#markerobjectProperty3)">
+        <path
+           class="link-path nodeClass2 nodeClass3 normal"
+           d="M 648.41994,511.83393 Q 597.6282,419.69827 583.85457,397.43344 570.08094,375.16861 510.68361,289.18561"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path50"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g56"
+         style="marker-end:url(#markerobjectProperty4)">
+        <path
+           class="link-path nodeClass3 nodeClass2 normal"
+           d="m 523.7599,276.38381 q 104.98882,61.34646 119.17431,84.29405 14.18549,22.94759 22.68061,145.18187"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path54"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g60"
+         style="marker-end:url(#markerobjectProperty5)">
+        <path
+           class="link-path nodeClass1 nodeClass3 normal"
+           d="m 340.43539,529.19539 q -12.29613,-122.5147 -1.84213,-147.24654 10.454,-24.73185 106.3821,-100.07187"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path58"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g64"
+         style="marker-end:url(#markerobjectProperty6)">
+        <path
+           class="link-path nodeClass1 nodeClass2 normal"
+           d="m 387.00429,602.35784 q 102.28259,62.91271 126.69632,61.14412 24.41372,-1.76859 117.44092,-78.83002"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path62"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g68"
+         style="marker-end:url(#markerdatatypeProperty8)">
+        <path
+           class="link-path nodeClass2 nodeNodeId5 normal"
+           d="m 724.11671,550.1168 q 62.8462,-7.61125 78.55774,-9.51407 15.71155,-1.90281 78.55774,-9.51406"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path66"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g72"
+         style="marker-end:url(#markerdatatypeProperty9)">
+        <path
+           class="link-path nodeClass3 nodeNodeId6 normal"
+           d="m 510.28003,204.41058 q 42.7134,-64.50479 53.39175,-80.63098 10.67835,-16.1262 53.39176,-80.630983"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path70"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g76"
+         style="marker-end:url(#markerdatatypeProperty10)">
+        <path
+           class="link-path nodeClass3 nodeNodeId7 normal"
+           d="M 451.87941,205.86799 Q 406.1499,143.77531 394.71752,128.25214 383.28514,112.72897 337.55563,50.636291"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path74"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g80"
+         style="marker-end:url(#markerdatatypeProperty11)">
+        <path
+           class="link-path nodeClass1 nodeNodeId8 normal"
+           d="m 319.82512,626.55422 q -32.54843,71.01931 -40.68553,88.77414 -8.13711,17.75482 -40.68553,88.77413"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path78"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g84"
+         style="marker-end:url(#markerdatatypeProperty12)">
+        <path
+           class="link-path nodeClass1 nodeNodeId9 normal"
+           d="m 290.07359,580.04447 q -63.39184,-0.18264 -79.2398,-0.2283 -15.84797,-0.0457 -79.23981,-0.22829"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path82"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         class="link"
+         id="g88"
+         style="marker-end:url(#markerdatatypeProperty13)">
+        <path
+           class="link-path nodeClass2 nodeNodeId10 normal"
+           d="m 700.20699,599.68845 q 41.0737,66.77456 51.34213,83.4682 10.26842,16.69364 51.34213,83.4682"
+           style="fill:none;stroke:#000000;stroke-width:2px"
+           id="path86"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       class="cardinalityContainer"
+       id="g92" />
+    <g
+       class="labelContainer"
+       id="g226">
+      <g
+         class="labelGroup"
+         transform="translate(509.12604,598.63313)"
+         id="g103">
+        <g
+           class="label"
+           id="objectProperty1">
+          <rect
+             class="objectproperty property"
+             x="-21.5"
+             y="-14"
+             width="43"
+             height="28"
+             style="fill:#aaccff"
+             id="rect96">
+            <title
+               id="title94">kind</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text100">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan98">kind</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(400.63009,408.51555)"
+         id="g114">
+        <g
+           class="label"
+           id="objectProperty2">
+          <rect
+             class="objectproperty property"
+             x="-21.5"
+             y="-14"
+             width="43"
+             height="28"
+             style="fill:#aaccff"
+             id="rect107">
+            <title
+               id="title105">kind</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text111">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan109">kind</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(583.85457,397.43344)"
+         id="g125">
+        <g
+           class="label"
+           id="objectProperty3">
+          <rect
+             class="objectproperty property"
+             x="-29.5"
+             y="-14"
+             width="59"
+             height="28"
+             style="fill:#aaccff"
+             id="rect118">
+            <title
+               id="title116">partner</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text122">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan120">partner</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(642.93421,360.67786)"
+         id="g136">
+        <g
+           class="label"
+           id="objectProperty4">
+          <rect
+             class="objectproperty property"
+             x="-29.5"
+             y="-14"
+             width="59"
+             height="28"
+             style="fill:#aaccff"
+             id="rect129">
+            <title
+               id="title127">partner</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text133">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan131">partner</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(338.59326,381.94885)"
+         id="g147">
+        <g
+           class="label"
+           id="objectProperty5">
+          <rect
+             class="objectproperty property"
+             x="-26"
+             y="-14"
+             width="52"
+             height="28"
+             style="fill:#aaccff"
+             id="rect140">
+            <title
+               id="title138">ouder</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text144">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan142">ouder</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(513.70061,663.50196)"
+         id="g158">
+        <g
+           class="label"
+           id="objectProperty6">
+          <rect
+             class="objectproperty property"
+             x="-26"
+             y="-14"
+             width="52"
+             height="28"
+             style="fill:#aaccff"
+             id="rect151">
+            <title
+               id="title149">ouder</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text155">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan153">ouder</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(802.67445,540.60273)"
+         id="g169">
+        <g
+           class="label"
+           id="datatypeProperty8">
+          <rect
+             class="datatypeproperty property"
+             x="-31"
+             y="-14"
+             width="62"
+             height="28"
+             style="fill:#99cc66"
+             id="rect162">
+            <title
+               id="title160">periode</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text166">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan164">periode</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(563.67178,123.7796)"
+         id="g180">
+        <g
+           class="label"
+           id="datatypeProperty9">
+          <rect
+             class="datatypeproperty property"
+             x="-31"
+             y="-14"
+             width="62"
+             height="28"
+             style="fill:#99cc66"
+             id="rect173">
+            <title
+               id="title171">periode</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text177">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan175">periode</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(394.71752,128.25214)"
+         id="g191">
+        <g
+           class="label"
+           id="datatypeProperty10">
+          <rect
+             class="datatypeproperty property"
+             x="-22.5"
+             y="-14"
+             width="45"
+             height="28"
+             style="fill:#99cc66"
+             id="rect184">
+            <title
+               id="title182">BSN</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text188">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan186">BSN</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(279.13959,715.32836)"
+         id="g202">
+        <g
+           class="label"
+           id="datatypeProperty11">
+          <rect
+             class="datatypeproperty property"
+             x="-22.5"
+             y="-14"
+             width="45"
+             height="28"
+             style="fill:#99cc66"
+             id="rect195">
+            <title
+               id="title193">BSN</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text199">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan197">BSN</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(210.83379,579.81617)"
+         id="g213">
+        <g
+           class="label"
+           id="datatypeProperty12">
+          <rect
+             class="datatypeproperty property"
+             x="-31"
+             y="-14"
+             width="62"
+             height="28"
+             style="fill:#99cc66"
+             id="rect206">
+            <title
+               id="title204">periode</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text210">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan208">periode</tspan>
+          </text>
+        </g>
+      </g>
+      <g
+         class="labelGroup"
+         transform="translate(751.54912,683.15665)"
+         id="g224">
+        <g
+           class="label"
+           id="datatypeProperty13">
+          <rect
+             class="datatypeproperty property"
+             x="-22.5"
+             y="-14"
+             width="45"
+             height="28"
+             style="fill:#99cc66"
+             id="rect217">
+            <title
+               id="title215">BSN</title>
+          </rect>
+          <text
+             class="text"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+             y="-6.4852047"
+             id="text221">
+            <tspan
+               class="text"
+               x="0"
+               dy="12"
+               style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+               id="tspan219">BSN</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+    <g
+       class="nodeContainer"
+       id="g309">
+      <g
+         class="node"
+         id="Class1"
+         transform="translate(341.07338,580.1914)">
+        <circle
+           class="class"
+           r="50"
+           style="fill:#aaccff;stroke:#000000;stroke-width:2px"
+           id="circle230"
+           cx="0"
+           cy="0">
+          <title
+             id="title228">Persoon</title>
+        </circle>
+        <text
+           class="text"
+           style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+           y="-6.4852047"
+           id="text234">
+          <tspan
+             class="text"
+             x="0"
+             dy="12"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+             id="tspan232">Persoon</tspan>
+        </text>
+      </g>
+      <g
+         class="node"
+         id="Class2"
+         transform="translate(673.48667,556.24856)">
+        <circle
+           class="class"
+           r="50"
+           style="fill:#aaccff;stroke:#000000;stroke-width:2px"
+           id="circle239"
+           cx="0"
+           cy="0">
+          <title
+             id="title237">persoon</title>
+        </circle>
+        <text
+           class="text"
+           style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+           y="-6.4852047"
+           id="text243">
+          <tspan
+             class="text"
+             x="0"
+             dy="12"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+             id="tspan241">persoon</tspan>
+        </text>
+      </g>
+      <g
+         class="node"
+         id="Class3"
+         transform="translate(482.1227,246.9331)">
+        <circle
+           class="class"
+           r="50"
+           style="fill:#aaccff;stroke:#000000;stroke-width:2px"
+           id="circle248"
+           cx="0"
+           cy="0">
+          <title
+             id="title246">persoon</title>
+        </circle>
+        <text
+           class="text"
+           style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+           y="-6.4852047"
+           id="text252">
+          <tspan
+             class="text"
+             x="0"
+             dy="12"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+             id="tspan250">persoon</tspan>
+        </text>
+      </g>
+      <g
+         class="node"
+         id="NodeId10"
+         transform="translate(809.56628,777.47661)">
+        <rect
+           class="class datatype"
+           x="-30.5"
+           y="-10"
+           width="61"
+           height="20"
+           style="fill:#ffcc33;stroke:#000000;stroke-width:2px"
+           id="rect257">
+          <title
+             id="title255">elfproef</title>
+        </rect>
+        <text
+           class="text"
+           style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+           y="-6.4852047"
+           id="text261">
+          <tspan
+             class="text"
+             x="0"
+             dy="12"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+             id="tspan259">elfproef</tspan>
+        </text>
+      </g>
+      <g
+         class="node"
+         id="NodeId5"
+         transform="translate(913.22494,527.21406)">
+        <rect
+           class="class datatype"
+           x="-31"
+           y="-10"
+           width="62"
+           height="20"
+           style="fill:#ffcc33;stroke:#000000;stroke-width:2px"
+           id="rect266">
+          <title
+             id="title264">periode</title>
+        </rect>
+        <text
+           class="text"
+           style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+           y="-6.4852047"
+           id="text270">
+          <tspan
+             class="text"
+             x="0"
+             dy="12"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+             id="tspan268">periode</tspan>
+        </text>
+      </g>
+      <g
+         class="node"
+         id="NodeId7"
+         transform="translate(329.59791,39.831093)">
+        <rect
+           class="class datatype"
+           x="-30.5"
+           y="-10"
+           width="61"
+           height="20"
+           style="fill:#ffcc33;stroke:#000000;stroke-width:2px"
+           id="rect275">
+          <title
+             id="title273">elfproef</title>
+        </rect>
+        <text
+           class="text"
+           style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+           y="-6.4852047"
+           id="text279">
+          <tspan
+             class="text"
+             x="0"
+             dy="12"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+             id="tspan277">elfproef</tspan>
+        </text>
+      </g>
+      <g
+         class="node"
+         id="NodeId6"
+         transform="translate(624.23739,32.314842)">
+        <rect
+           class="class datatype"
+           x="-31"
+           y="-10"
+           width="62"
+           height="20"
+           style="fill:#ffcc33;stroke:#000000;stroke-width:2px"
+           id="rect284">
+          <title
+             id="title282">periode</title>
+        </rect>
+        <text
+           class="text"
+           style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+           y="-6.4852047"
+           id="text288">
+          <tspan
+             class="text"
+             x="0"
+             dy="12"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+             id="tspan286">periode</tspan>
+        </text>
+      </g>
+      <g
+         class="node"
+         id="NodeId9"
+         transform="translate(99.593986,579.49568)">
+        <rect
+           class="class datatype"
+           x="-31"
+           y="-10"
+           width="62"
+           height="20"
+           style="fill:#ffcc33;stroke:#000000;stroke-width:2px"
+           id="rect293">
+          <title
+             id="title291">periode</title>
+        </rect>
+        <text
+           class="text"
+           style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+           y="-6.4852047"
+           id="text297">
+          <tspan
+             class="text"
+             x="0"
+             dy="12"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+             id="tspan295">periode</tspan>
+        </text>
+      </g>
+      <g
+         class="node"
+         id="NodeId8"
+         transform="translate(233.45439,815.01157)">
+        <rect
+           class="class datatype"
+           x="-30.5"
+           y="-10"
+           width="61"
+           height="20"
+           style="fill:#ffcc33;stroke:#000000;stroke-width:2px"
+           id="rect302">
+          <title
+             id="title300">elfproef</title>
+        </rect>
+        <text
+           class="text"
+           style="font-size:12px;font-family:Helvetica, Arial, sans-serif;text-anchor:middle;fill:#000000"
+           y="-6.4852047"
+           id="text306">
+          <tspan
+             class="text"
+             x="0"
+             dy="12"
+             style="font-size:12px;font-family:Helvetica, Arial, sans-serif"
+             id="tspan304">elfproef</tspan>
+        </text>
+      </g>
+    </g>
+    <g
+       class="linkContainer hidden-in-export"
+       style="display:none"
+       id="g327">
+      <g
+         id="g313">
+        <line
+           class="classNodeDragPath hidden"
+           x1="0"
+           y1="0"
+           x2="0"
+           y2="0"
+           style="stroke:#000000;stroke-width:2px"
+           id="line311" />
+      </g>
+      <g
+         id="g317">
+        <line
+           class="classNodeDragPath hidden"
+           x1="0"
+           y1="0"
+           x2="0"
+           y2="0"
+           style="stroke:#000000;stroke-width:2px"
+           id="line315" />
+      </g>
+      <g
+         id="g321">
+        <line
+           class="classNodeDragPath hidden"
+           x1="0"
+           y1="0"
+           x2="0"
+           y2="0"
+           style="stroke:#000000;stroke-width:2px"
+           id="line319" />
+      </g>
+      <g
+         id="g325">
+        <line
+           x1="0"
+           y1="0"
+           x2="0"
+           y2="0"
+           class="hidden"
+           style="stroke:#000000;stroke-width:2px"
+           id="line323" />
+      </g>
+    </g>
+    <g
+       class="editContainer hidden-in-export"
+       style="display:none"
+       id="g354">
+      <g
+         class="node hidden-in-export"
+         id="10001"
+         style="display:none">
+        <g
+           id="g333">
+          <path
+             d="M 20,40 C 0,15 0,-15 20,-40 L -40,0 Z"
+             class="classDraggerNode hidden"
+             style="fill:none;stroke:#000000;stroke-width:2px"
+             id="path329"
+             inkscape:connector-curvature="0" />
+          <circle
+             r="40"
+             cx="0"
+             cy="0"
+             class="superHiddenElement superOpacityElement hidden"
+             id="circle331" />
+        </g>
+      </g>
+      <g
+         class="node hidden-in-export"
+         id="10002"
+         style="display:none">
+        <g
+           id="g340">
+          <path
+             d="M 61,40 C 41,15 41,-15 61,-40 L 1,0 Z"
+             class="classDraggerNode hidden"
+             style="fill:none;stroke:#000000;stroke-width:2px"
+             id="path336"
+             inkscape:connector-curvature="0" />
+          <circle
+             r="40"
+             cx="0"
+             cy="0"
+             class="superHiddenElement superOpacityElement hidden"
+             id="circle338" />
+        </g>
+      </g>
+      <g
+         class="node hidden-in-export"
+         id="g349"
+         style="display:none">
+        <g
+           id="g347">
+          <path
+             d="M 10,40 C -10,15 -10,-15 10,-40 -8.8233455,-13.641384 -36.711107,-5.1228436 -50,0 -36.696429,4.9079017 -8.6403157,13.745728 10,40 Z"
+             class="classDraggerNode hidden"
+             style="fill:none;stroke:#000000;stroke-width:2px"
+             id="path343"
+             inkscape:connector-curvature="0" />
+          <circle
+             r="40"
+             cx="0"
+             cy="0"
+             class="superHiddenElement superOpacityElement hidden"
+             id="circle345" />
+        </g>
+      </g>
+      <g
+         class="node hidden-in-export"
+         id="10003"
+         style="display:none">
+        <g
+           class="hidden"
+           id="g351" />
+      </g>
+    </g>
+    <g
+       class="editContainer hidden-in-export"
+       style="display:none"
+       id="g388">
+      <g
+         class="hidden-in-export hidden addDataPropertyElement"
+         style="display:none"
+         id="g370">
+        <circle
+           r="12"
+           cx="0"
+           cy="0"
+           id="circle358">
+          <title
+             id="title356">Add Datatype Property</title>
+        </circle>
+        <line
+           x1="-8"
+           y1="0"
+           x2="8"
+           y2="0"
+           style="stroke:#000000;stroke-width:2px"
+           id="line362">
+          <title
+             id="title360">Add Datatype Property</title>
+        </line>
+        <line
+           x1="0"
+           y1="-8"
+           x2="0"
+           y2="8"
+           style="stroke:#000000;stroke-width:2px"
+           id="line366">
+          <title
+             id="title364">Add Datatype Property</title>
+        </line>
+        <circle
+           r="15"
+           cx="-7"
+           cy="7"
+           class="superHiddenElement superOpacityElement"
+           id="circle368" />
+      </g>
+      <g
+         class="hidden-in-export hidden deleteParentElement"
+         style="display:none"
+         id="g386">
+        <circle
+           r="12"
+           cx="0"
+           cy="0"
+           id="circle374">
+          <title
+             id="title372">Delete This Node</title>
+        </circle>
+        <line
+           x1="-5"
+           y1="-5"
+           x2="5"
+           y2="5"
+           style="stroke:#000000;stroke-width:2px"
+           id="line378">
+          <title
+             id="title376">Delete This Node</title>
+        </line>
+        <line
+           x1="5"
+           y1="-5"
+           x2="-5"
+           y2="5"
+           style="stroke:#000000;stroke-width:2px"
+           id="line382">
+          <title
+             id="title380">Delete This Node</title>
+        </line>
+        <circle
+           r="15"
+           cx="7"
+           cy="-7"
+           class="superHiddenElement superOpacityElement"
+           id="circle384" />
+      </g>
+    </g>
+  </g>
+</svg>

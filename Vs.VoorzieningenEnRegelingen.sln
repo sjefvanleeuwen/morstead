@@ -54,11 +54,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cms", "cms", "{E3EFC9E8-AF9
 		cms\readme.md = cms\readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Cms.Core", "cms\Vs.Cms.Core\Vs.Cms.Core.csproj", "{CF02EDE3-E037-4F87-B6D3-2B016FB45D4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Cms.Core", "cms\Vs.Cms.Core\Vs.Cms.Core.csproj", "{CF02EDE3-E037-4F87-B6D3-2B016FB45D4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Cms.GitHubFileStorage", "cms\Vs.Cms.GitHubStorage\Vs.Cms.GitHubFileStorage.csproj", "{979CBBEE-C1F5-45D6-A7A3-C16B63FBFC93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Cms.GitHubFileStorage", "cms\Vs.Cms.GitHubStorage\Vs.Cms.GitHubFileStorage.csproj", "{979CBBEE-C1F5-45D6-A7A3-C16B63FBFC93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Cms.GitHubFileStorage.Tests", "cms\Vs.Cmd.GitHubFileStorage\Vs.Cms.GitHubFileStorage.Tests.csproj", "{7A14DA8A-67AD-485B-992B-0DC53191E85D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Cms.GitHubFileStorage.Tests", "cms\Vs.Cmd.GitHubFileStorage\Vs.Cms.GitHubFileStorage.Tests.csproj", "{7A14DA8A-67AD-485B-992B-0DC53191E85D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "graph", "graph", "{4EEA526B-513B-4274-83E9-82847EDCB061}"
+	ProjectSection(SolutionItems) = preProject
+		graph\README.md = graph\README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Graph.Core", "graph\Vs.Graph.Core\Vs.Graph.Core.csproj", "{103262AA-2B0C-4D00-B38C-640E6717B8B4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Graph.Core.Tests", "graph\Vs.Graph.Core.Tests\Vs.Graph.Core.Tests.csproj", "{728F73EE-B084-4A5F-89F3-60CB548426A3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.DataProvider.MsSqlGraph", "graph\Vs.DataProvider.MsSqlGraph\Vs.DataProvider.MsSqlGraph.csproj", "{68E67FA0-1F7C-4366-9B42-4889D5C3494C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.DataProvider.MsSqlGraph.Tests", "graph\Vs.DataProvider.MsSqlGraph.Tests\Vs.DataProvider.MsSqlGraph.Tests.csproj", "{6ABD6EF5-6FF1-4BBF-B47F-981C4E2DB881}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,6 +115,22 @@ Global
 		{7A14DA8A-67AD-485B-992B-0DC53191E85D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A14DA8A-67AD-485B-992B-0DC53191E85D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A14DA8A-67AD-485B-992B-0DC53191E85D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{103262AA-2B0C-4D00-B38C-640E6717B8B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{103262AA-2B0C-4D00-B38C-640E6717B8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{103262AA-2B0C-4D00-B38C-640E6717B8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{103262AA-2B0C-4D00-B38C-640E6717B8B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{728F73EE-B084-4A5F-89F3-60CB548426A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{728F73EE-B084-4A5F-89F3-60CB548426A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{728F73EE-B084-4A5F-89F3-60CB548426A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{728F73EE-B084-4A5F-89F3-60CB548426A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68E67FA0-1F7C-4366-9B42-4889D5C3494C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68E67FA0-1F7C-4366-9B42-4889D5C3494C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68E67FA0-1F7C-4366-9B42-4889D5C3494C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68E67FA0-1F7C-4366-9B42-4889D5C3494C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ABD6EF5-6FF1-4BBF-B47F-981C4E2DB881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ABD6EF5-6FF1-4BBF-B47F-981C4E2DB881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ABD6EF5-6FF1-4BBF-B47F-981C4E2DB881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ABD6EF5-6FF1-4BBF-B47F-981C4E2DB881}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +141,10 @@ Global
 		{CF02EDE3-E037-4F87-B6D3-2B016FB45D4C} = {E3EFC9E8-AF92-4CA2-B6F8-43FEF9555A3E}
 		{979CBBEE-C1F5-45D6-A7A3-C16B63FBFC93} = {E3EFC9E8-AF92-4CA2-B6F8-43FEF9555A3E}
 		{7A14DA8A-67AD-485B-992B-0DC53191E85D} = {E3EFC9E8-AF92-4CA2-B6F8-43FEF9555A3E}
+		{103262AA-2B0C-4D00-B38C-640E6717B8B4} = {4EEA526B-513B-4274-83E9-82847EDCB061}
+		{728F73EE-B084-4A5F-89F3-60CB548426A3} = {4EEA526B-513B-4274-83E9-82847EDCB061}
+		{68E67FA0-1F7C-4366-9B42-4889D5C3494C} = {4EEA526B-513B-4274-83E9-82847EDCB061}
+		{6ABD6EF5-6FF1-4BBF-B47F-981C4E2DB881} = {4EEA526B-513B-4274-83E9-82847EDCB061}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
