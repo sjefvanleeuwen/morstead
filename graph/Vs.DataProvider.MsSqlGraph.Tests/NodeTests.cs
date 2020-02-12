@@ -8,7 +8,7 @@ namespace Vs.DataProvider.MsSqlGraph.Tests
 {
     public class NodeTests
     {
-        [Fact]
+      //  [Fact]
         public void Node_Create_Person()
         {
             NodeSchema n = new NodeSchema(name:"person");
@@ -36,7 +36,7 @@ namespace Vs.DataProvider.MsSqlGraph.Tests
             var sql = script.CreateScript(n);
         }
 
-        [Fact]
+        //[Fact]
         public void Node_Can_Deserialize_And_Create_SqlSchema()
         {
             var yaml = @"Version: 15.0.0.0
