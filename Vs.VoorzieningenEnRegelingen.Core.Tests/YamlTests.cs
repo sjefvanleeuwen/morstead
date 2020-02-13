@@ -75,7 +75,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
             var yamlParser = new YamlParser(YamlScripts.YamlZorgtoeslag.Body, null);
             var functions = yamlParser.Formulas();
-            Assert.True(functions.Count == 10);
+            Assert.True(functions.Count == 11);
             Assert.True(functions[1].Name == "maximaalvermogen");
             Assert.True(functions[1].IsSituational == true);
         }
@@ -85,11 +85,12 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
             var yamlParser = new YamlParser(YamlScripts.YamlZorgtoeslag.Body, null);
             var tabellen = yamlParser.Tabellen();
-            Assert.True(tabellen.Count == 2);
-            Assert.True(tabellen[1].Name == "woonlandfactoren");
-            Assert.True(tabellen[1].ColumnTypes.Count == 2);
-            Assert.True(tabellen[1].ColumnTypes[0].Name == "woonland");
-            Assert.True(tabellen[1].ColumnTypes[1].Name == "factor");
+            Assert.True(tabellen.Count == 1);
+            var tabel = tabellen.Single();
+            Assert.True(tabel.Name == "woonlandfactoren");
+            Assert.True(tabel.ColumnTypes.Count == 2);
+            Assert.True(tabel.ColumnTypes[0].Name == "woonland");
+            Assert.True(tabel.ColumnTypes[1].Name == "factor");
         }
     }
 }

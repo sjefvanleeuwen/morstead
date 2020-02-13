@@ -40,9 +40,9 @@ formules:
      formule: 145136
  - recht: 
    - situatie: alleenstaande
-     formule: vermogen <= 114776 AND toetsingsinkomen <= 29562
+     formule: vermogen <= 114776 AND toetsingsinkomen <= 29562 AND (wel(woonland,'Nederland') OR woonlandfactor > 0)
    - situatie: aanvrager_met_toeslagpartner
-     formule: vermogen <= 145136 AND toetsingsinkomen <= 37885
+     formule: vermogen <= 145136 AND toetsingsinkomen <= 37885 AND (wel(woonland,'Nederland') OR woonlandfactor > 0)
  - drempelinkomen:
      formule: 20941
  - vermogen: 
@@ -70,7 +70,7 @@ formules:
      - situatie: buitenland
        formule: round((standaardpremie - normpremie) * woonlandfactor / 12,2)
  - woonlandfactor:
-     formule: lookup('woonlandfactoren',woonland,'woonland','factor')
+     formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
 tabellen:
   - naam: woonlandfactoren
     woonland, factor:

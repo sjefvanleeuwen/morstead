@@ -26,13 +26,15 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public QuestionDelegate QuestionCallback { get; set; }
 
-        public double Lookup(string tableName, string lookupValue, string lookupColumn, string resultColumn)
+        public double Lookup(string tableName, string lookupValue, string lookupColumn, string resultColumn, double defaultValue)
         {
             var table = GetTable(tableName);
             var columnIndex = (from p in table.ColumnTypes where p.Name == lookupColumn select p.Index).First();
             var resultColumnIndex = (from p in table.ColumnTypes where p.Name == resultColumn select p.Index).First();
             var value = (from p in table.Rows where p.Columns[columnIndex].Value.ToString() == lookupValue select p.Columns[resultColumnIndex]).FirstOrDefault();
-            return double.Parse(value.Value.ToString(), _numberCulture);
+            double result = defaultValue;
+            double.TryParse(value?.Value.ToString(), NumberStyles.Float, _numberCulture, out result);
+            return result;
         }
 
         public StuurInformatie GetHeader()
@@ -95,7 +97,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 if (formula == null)
                     throw new StepException($"can't resolve parameter '${parameter.Name}' to formula", step);
                 // execute the formula which adds the outcome to parameters.
-                var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback);
+                var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback, this);
                 var result = context.Evaluate();
                 //var result = Execute(ref context, ref formula, ref parameters, ref executionResult);
                 if (result.Value.GetType() != typeof(bool))
@@ -134,7 +136,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             // calculate formula and add it to the parameter list.
             var formula = GetFormula(step.Formula);
-            var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback);
+            var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback, this);
             context.Evaluate();
             CheckForStopExecution(parameters, executionResult);
         }

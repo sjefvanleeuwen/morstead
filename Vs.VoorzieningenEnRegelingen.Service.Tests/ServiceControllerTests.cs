@@ -42,7 +42,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
             var payload = JsonConvert.SerializeObject(executeRequest);
             var result = controller.Execute(executeRequest);
             Assert.True(result.Questions.Parameters.Count == 1);
-            Assert.True(result.Questions.Parameters[0].Name == "toetsingsinkomen_aanvrager");
+            Assert.True(result.Questions.Parameters[0].Name == "woonland");
         }
     }
 }

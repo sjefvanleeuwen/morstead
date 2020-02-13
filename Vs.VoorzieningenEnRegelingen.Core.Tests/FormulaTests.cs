@@ -191,7 +191,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 new Parameter("toetsingsinkomen_toeslagpartner",(double)0)
             };
             var model = result.Model;
-            var context = new FormulaExpressionContext(ref model, ref parameters, controller.GetFormula("normpremie"), controller.QuestionCallback);
+            var context = new FormulaExpressionContext(ref model, ref parameters, controller.GetFormula("normpremie"), controller.QuestionCallback, controller);
             var parameter = context.Evaluate();
             Assert.True(parameter.Name == "normpremie");
             Assert.True((double)parameter.Value == 419.86704999999995);
@@ -217,7 +217,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 called = true;
 
             };
-            var context = new FormulaExpressionContext(ref model, ref parameters, controller.GetFormula("normpremie"), OnQuestion);
+            var context = new FormulaExpressionContext(ref model, ref parameters, controller.GetFormula("normpremie"), OnQuestion, controller);
             bool unresolvedException = false;
             try
             {

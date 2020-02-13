@@ -42,14 +42,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
         }
 
-        public FormulaExpressionContext(ref Model.Model model, ref ParametersCollection parameters, Formula formula, QuestionDelegate onQuestion)
+        public FormulaExpressionContext(ref Model.Model model, ref ParametersCollection parameters, Formula formula, QuestionDelegate onQuestion, YamlScriptController controller)
         {
             _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
             _formula = formula ?? throw new ArgumentNullException(nameof(formula));
             OnQuestion = onQuestion ?? throw new ArgumentNullException(nameof(onQuestion));
             _model = model ?? throw new ArgumentNullException(nameof(model));
             // Define the context of our expression
-            _context = new ExpressionContext();
+            _context = new ExpressionContext(controller);
             _context.Options.ParseCulture = CultureInfo.InvariantCulture;
             // Allow the expression to use all static public methods of System.Math
             _context.Imports.AddType(typeof(Math));
@@ -140,71 +140,82 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public Parameter Evaluate()
         {
-            IDynamicExpression e = null;
+            IDynamicExpression e;
             if (!_formula.IsSituational)
             {
-                try
-                {
-                    e = _context.CompileDynamic(_formula.Functions[0].Expression);
-                    var result = e.Evaluate().Infer();
-                    Parameter parameter;
-                    parameter = new Parameter(_formula.Name, result.Infer());
-                    _parameters.Add(parameter);
-                    if (_context.Variables.ContainsKey(parameter.Name))
-                    {
-                        _context.Variables.Remove(parameter.Name);
-                    }
-                    _context.Variables.Add(parameter.Name, parameter.Value.Infer());
-                    return parameter;
-
-                }
-                catch (ExpressionCompileException)
-                {
-                    // Function can not evaluate further, before a Question/Answer sequence is fullfilled by the client.
-                    throw new UnresolvedException($"Function {_formula.Functions[0].Expression} can not evaluate further, before a Question/Answer sequence is fullfilled by the client.");
-                }
+                return NonSituationalEvaluate(out e);
             }
             else
             {
-                foreach (var function in _formula.Functions) {
-                    foreach (var item in _parameters)
-                    {
-                        if (item.Name == function.Situation)
-                        {
-                            try
-                            {
-                                e = _context.CompileDynamic(function.Expression);
-                                var parameter = new Parameter(_formula.Name, e.Evaluate().Infer());
-                                _parameters.Add(parameter);
-                                if (_context.Variables.ContainsKey(parameter.Name))
-                                {
-                                    _context.Variables.Remove(parameter.Name);
-                                }
-                                _context.Variables.Add(parameter.Name, parameter.Value.Infer());
-                                return parameter;
+                return SituationalEvaluate(out e);
+            }
+        }
 
-                            }
-                            catch (ExpressionCompileException)
+        private Parameter NonSituationalEvaluate(out IDynamicExpression e)
+        {
+            try
+            {
+                e = _context.CompileDynamic(_formula.Functions[0].Expression);
+                var result = e.Evaluate().Infer();
+                Parameter parameter;
+                parameter = new Parameter(_formula.Name, result.Infer());
+                _parameters.Add(parameter);
+                if (_context.Variables.ContainsKey(parameter.Name))
+                {
+                    _context.Variables.Remove(parameter.Name);
+                }
+                _context.Variables.Add(parameter.Name, parameter.Value.Infer());
+                return parameter;
+
+            }
+            catch (ExpressionCompileException)
+            {
+                // Function can not evaluate further, before a Question/Answer sequence is fullfilled by the client.
+                throw new UnresolvedException($"Function {_formula.Functions[0].Expression} can not evaluate further, before a Question/Answer sequence is fullfilled by the client.");
+            }
+        }
+
+        private Parameter SituationalEvaluate(out IDynamicExpression e)
+        {
+            foreach (var function in _formula.Functions)
+            {
+                foreach (var item in _parameters)
+                {
+                    if (item.Name == function.Situation && bool.TryParse(item.Value.ToString(), out bool value) && value)
+                    {
+                        try
+                        {
+                            e = _context.CompileDynamic(function.Expression);
+                            var parameter = new Parameter(_formula.Name, e.Evaluate().Infer());
+                            _parameters.Add(parameter);
+                            if (_context.Variables.ContainsKey(parameter.Name))
                             {
-                                // Function can not evaluate further, before a Question/Answer sequence is fullfilled by the client.
-                                throw new UnresolvedException($"Function {function.Expression} can not evaluate further, before a Question/Answer sequence is fullfilled by the client.");
+                                _context.Variables.Remove(parameter.Name);
                             }
+                            _context.Variables.Add(parameter.Name, parameter.Value.Infer());
+                            return parameter;
+
+                        }
+                        catch (ExpressionCompileException)
+                        {
+                            // Function can not evaluate further, before a Question/Answer sequence is fullfilled by the client.
+                            throw new UnresolvedException($"Function {function.Expression} can not evaluate further, before a Question/Answer sequence is fullfilled by the client.");
                         }
                     }
                 }
-                StringBuilder situations = new StringBuilder();
-                var parameters = new ParametersCollection();
-                foreach (var function in _formula.Functions)
-                {
-                    situations.Append(function.Situation +",");
-                    parameters.Add(new Parameter(function.Situation, UnresolvedType.Situation));
-                }
-                if (OnQuestion == null)
-                    throw new Exception($"In order to evaluate variable one of the following situations:  {situations.ToString().Trim(',')}, you need to provide a delegate callback to the client for providing an answer");
-                OnQuestion(this, new QuestionArgs("", parameters));
-                // situation has to be formulated as an input parameter by the client.
-                throw new UnresolvedException($"Can't evaluate formula {_formula.Name} for situation. Please specify one of the following situations: {situations.ToString().Trim(',')}.");
             }
+            StringBuilder situations = new StringBuilder();
+            var parameters = new ParametersCollection();
+            foreach (var function in _formula.Functions)
+            {
+                situations.Append(function.Situation + ",");
+                parameters.Add(new Parameter(function.Situation, UnresolvedType.Situation));
+            }
+            if (OnQuestion == null)
+                throw new Exception($"In order to evaluate variable one of the following situations:  {situations.ToString().Trim(',')}, you need to provide a delegate callback to the client for providing an answer");
+            OnQuestion(this, new QuestionArgs("", parameters));
+            // situation has to be formulated as an input parameter by the client.
+            throw new UnresolvedException($"Can't evaluate formula {_formula.Name} for situation. Please specify one of the following situations: {situations.ToString().Trim(',')}.");
         }
 
         private void ResolveVariableValue(object sender, ResolveVariableValueEventArgs e)
