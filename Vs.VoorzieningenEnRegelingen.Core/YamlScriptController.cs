@@ -32,7 +32,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             var columnIndex = (from p in table.ColumnTypes where p.Name == lookupColumn select p.Index).First();
             var resultColumnIndex = (from p in table.ColumnTypes where p.Name == resultColumn select p.Index).First();
             var value = (from p in table.Rows where p.Columns[columnIndex].Value.ToString() == lookupValue select p.Columns[resultColumnIndex]).FirstOrDefault();
-            return double.Parse(value.Value.ToString(),_numberCulture);
+            return double.Parse(value.Value.ToString(), _numberCulture);
         }
 
         public StuurInformatie GetHeader()
@@ -47,7 +47,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public Function GetSituation(string formula, string situation)
         {
-            return _model.Formulas.First(p=>p.Name== formula).Functions.First(p => p.Situation == situation);
+            return _model.Formulas.First(p => p.Name == formula).Functions.First(p => p.Situation == situation);
         }
 
         public Table GetTable(string name)
@@ -60,7 +60,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             try
             {
                 YamlParser parser = new YamlParser(yaml, null);
-                _model = new Model.Model(parser.Header(),parser.Formulas(), parser.Tabellen(), parser.Flow());
+                _model = new Model.Model(parser.Header(), parser.Formulas(), parser.Tabellen(), parser.Flow());
             }
             catch (Exception ex)
             {
@@ -136,6 +136,15 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             var formula = GetFormula(step.Formula);
             var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback);
             context.Evaluate();
+            CheckForStopExecution(parameters, executionResult);
+        }
+
+        private void CheckForStopExecution(ParametersCollection parameters, ExecutionResult executionResult)
+        {
+            if (parameters.Any(p => p.Name == "recht" && bool.TryParse(p.Value.ToString(), out bool value) && value == false))
+            {
+                executionResult.Stacktrace.Last().StopExecution();
+            }
         }
 
         /// <summary>
@@ -169,6 +178,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     if (match)
                     {
                         ExecuteStep(ref executionResult, ref parameters, step);
+                        if (executionResult != null && executionResult.Stacktrace.Last().IsStopExecution)
+                        {
+                            break;
+                        };
                     }
                 }
             }

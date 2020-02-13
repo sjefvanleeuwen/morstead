@@ -12,6 +12,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         }
 
         public Step Step { get; }
+        public bool IsStopExecution { get; private set; }
         public Exception Exception { get; }
+
+        public void StopExecution() => IsStopExecution = true;
     }
 }
