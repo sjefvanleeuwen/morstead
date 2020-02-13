@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>
+        
+        Modal |
+        
+        NL Design System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="../../uno/components/favicon/ro-favicon-wit-0xffffff.png">
+
+    <link rel="stylesheet" href="../../uno/core/base.css">
+    <link rel="stylesheet" href="../../uno/core/grid.css">
+    <link rel="stylesheet" href="../../uno/components/lists/lists.css">
+    <link rel="stylesheet" href="../../uno/components/header/header.css">
+    <link rel="stylesheet" href="../../uno/components/footer/footer.css">
+    <link rel="stylesheet" href="../../uno/components/collapse/collapse.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/navigation.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/breadcrumbs.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/backlink.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/sidenav.css">
+    <link rel="stylesheet" href="../../uno/components/form/form.css">
+    <link rel="stylesheet" href="../../uno/components/form/input.css">
+    <link rel="stylesheet" href="../../uno/components/button/button.css">
+    <link rel="stylesheet" href="../../uno/components/skiplink/skiplink.css">
+    <link rel="stylesheet" href="../../uno/components/tabs/tabs.css">
+    <link rel="stylesheet" href="../../css/main.css">
+
+    
+    <link rel="stylesheet" href="../../uno/components/modal/modal.css">
+<link rel="stylesheet" href="../../uno/components/button/button.css">
+    
+
+    
+
+    <script src="../../uno/vendor/js/Promise.min.js"></script>
+    <script src="../../uno/vendor/js/system.js"></script>
+
+    <script>
+        System.config({
+            packages: {
+                '/': {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+    </script>
+</head>
+</html>
+<body class="theme--large-padding">
+<div class="wrapper">
+<a class="skiplink" href="#main-content">
+    <span class="skiplink__text">Ga direct naar inhoud</span>
+</a>
+<header class="header "
+        role="banner">
+    <!-- <div class="header-logo">
+        <a href="/" title="Logo Dienst Uitvoering Onderwijs"><span class="screenreader-only">dienst uitvoering onderwijs, naar de homepage</span></a>
+    </div> -->
+</header>
+
+
+<nav class="top-nav" id="docs-nav">
+    <div class="container">
+        <div class="top-nav__block top-nav-autoresize">
+            <ul class="nav">
+                <li class="nav__item">
+                    <a href="/" title="Home" class="nav__link  ">
+                        <i class="icon icon-home" role="presentation"></i>
+                        <span>NL Design System</span>
+                    </a>
+                </li>
+                
+                <li class="nav__item"><a class="nav__link " href="/aan-de-slag/index.html">Aan de slag</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/core/index.html">Basis</a></li>
+                
+                <li class="nav__item"><a class="nav__link nav__link--active" href="/componenten/index.html">Componenten</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/templates/index.html">Voorbeelden</a></li>
+                
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+
+<main class="smain" id="content">
+    <div class="container">
+        <section class="row">
+            <div class="col-xl-9 col-xl-offset-4 col-lg-8 col-lg-offset-5 col-md-9 col-md-offset-4 col-xs-12">
+                <header class="content__header">
+                    
+                        <h1 class="content__header-title">Modal</h1>
+                    
+                </header>
+            </div>
+        </section>
+        <article>
+            <div class="row">
+                <aside class="col-xl-3 col-lg-4 col-md-3 col-sm-modal">
+                    <nav class="sidenav">
+                        
+                            
+                        
+                            
+                        
+                            
+                                <ul>
+                                    <li class="sidenav__item ">
+                                        <a href="/componenten">
+                                            Introductie
+                                        </a>
+                                    </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/backlink">Backlink</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/bottom-bar">Bottom bar</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/button">Button</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/card">Card</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/donutchart">Chart</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/checkbox">Checkbox</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/collapse">Collapse</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/combobox">Combobox</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/definition-list">Definition list</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/footer">Footer</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/file">File</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/filter">Filter</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/form">Form</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/header">Header</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/hint">Hint</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/images">Images</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/label">Labels &amp; badges</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/lists">Lists</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item sidenav__item--active">
+                                            <a href="../../componenten/modal">Modal</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/meta">Meta</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/navigation">Navigation</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/notification">Notification</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/pagination">Pagination</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/quote">Quote</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/radio">Radiobutton</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/sections">Section</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/skiplink">Skiplink</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/spinner">Spinner</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/switch">Switch</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/table">Table</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/tabs">Tabs</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/timeline">Timeline</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/tooltip">Tooltip</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/videos">Video</a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        
+                            
+                        
+                    </nav>
+                </aside>
+                <div class="col-xl-9 col-lg-8 col-md-9">
+                    <div class="content-background">
+
+                        <div class="skiplink-target content" id="main-content">
+                            
+<h2>Standaard <span lang="en-US">modal</span></h2>
+<p>Een <span lang="en-US">modal</span> bestaat uit een <span lang="en-US">header</span>, <span lang="en-US">body</span> en <span lang="en-US">footer</span>. 
+De <span lang="en-US">footer</span> en de <span lang="en-US">body</span> zijn optioneel.</p>
+<h3>Toegankelijkheid</h3>
+<p>Een <span lang="en-US">modal</span> heeft standaard een aantal potentiële toegankelijkheidsissues. Hier een aantal aanwijzigingen</p>
+<ul>
+<li>
+Een <span lang="en-US">modal</span> is voor blinde mensen niet altijd even duidelijk. Neem daarom een extra toelichting
+op. Geef die een <code>class="screenreader-only"</code> zodat die alleen door <span lang="en-US">screenreaders</span> gezien wordt.
+</li>
+<li> Geef  de toelichting een id die terugkomt in de <code>aria-describedby</code> van de <span lang="en-US">modal</span>.
+Dan wordt de toelichting meteen voorgelezen als de <span lang="en-US">modal</span> geopend wordt.
+</li>
+<li>
+Geef de <code>modal__body</code> een <code>tabindex="0"</code>.
+<br>De tabindex zorgt er voor dat de tekst met toetsenbord bereikbaar is, wat noodzakelijk is om lange teksten met scrollbars met toetsenbord zichtbaar te kunnen maken.
+</li>
+<li>
+Geef de <span lang="en-US">section</span> een <code>role="document" </code>.
+<br>De <span lang="en-US">role</span> zorgt er voor dat de tekst van de <span lang="en-US">modal</span> voorgelezen wordt en er makkelijk in genavigeerd kan worden.
+</li>
+</ul>
+<p>NB: De <span lang="en-US">escape</span> knop annuleert en sluit het venster.</p>
+<p>Het titel element kan ook weggelaten worden, maar het is toch raadzaam die te behouden omdat de titel
+    kernachtig het doel aan de gebruiker duidelijk kan maken.</p>
+
+
+<div class="example example--transparent example--modal">
+    <div class="example--modal" id="example-modal">
+        <div class="modal modal--open" role="dialog" aria-describedby="modal-description">
+            <section class="modal__content" role="document">
+                <div id="modal-description" class="screenreader-only">
+                    <p>Dit is de beschrijving van de <span lang="en-US">modal</span>. Het wordt door de <span lang="en-US">screenreader</span> voorgelezen als de modal geopend wordt.
+                    Het is gekoppeld aan de <span lang="en-US">modal</span> div via de <code>aria-describedby</code>.
+                        Zet hierin de toelichting die blinden duidelijk maakt wat er getoond wordt en hoe het werkt.
+                        Vermeldt in ieder geval dat met de <span lang="en-US">escape</span> knop geannuleerd kan worden en het venster sluit.
+                    </p>
+                </div>
+                <header class="modal__title">
+                    <h1>Titel van <span lang="en-US">modal</span></h1>
+                    <button class="modal__close-button">
+                        <i class="icon icon-cross"></i>
+                        Sluit
+                    </button>
+                </header>
+
+                <div class="modal__body" role="document" tabindex="0">
+                    <p>Ut quis congue sapien. Proin maximus augue molestie mauris ultrices, non consequat lectus mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus hendrerit massa est, nec sodales ex sollicitudin eget.</p>
+                    <p><a href="http://www.duo.nl" target="_blank" rel="noopener">ga naar de DUO site</a></p>
+                </div>
+
+                <footer class="modal__footer">
+                    <button class="btn btn--primary">Bevestig</button>
+                </footer>
+            </section>
+        </div>
+    </div>
+</div>
+
+<h2><span lang="en-US">modal</span> met <span lang="en-US">backdrop</span></h2>
+<p>De <span lang="en-US">backdrop</span> zorgt ervoor dat de focus op de <span lang="en-US">modal</span> komt te liggen. De gebruiker
+wordt niet afgeleid door informatie achter de <span lang="en-US">modal</span>.</p>
+
+
+<div class="example example--transparent example--modal" id="example-modal--backdrop">
+    <div class="modal modal--open modal--backdrop" role="dialog" aria-describedby="modal-description2">
+        <section class="modal__content" role="document">
+            <div id="modal-description2" class="screenreader-only">
+                Dit is de beschrijving van de <span lang="en-US">modal</span>. De <span lang="en-US">escape</span> knop annuleert en sluit het venster.
+            </div>
+            <header class="modal__title">
+                <h1>Subsidie zij-instroom verantwoorden</h1>
+                <button class="modal__close-button">
+                    <i class="icon icon-cross"></i>
+                    Sluit
+                </button>
+            </header>
+
+            <div class="modal__body" role="document" tabindex="0">
+                <p>Ut quis congue sapien. Proin maximus augue molestie mauris ultrices, non consequat lectus mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus hendrerit massa est, nec sodales ex sollicitudin eget.</p>
+            </div>
+
+            <footer class="modal__footer">
+                <button class="btn btn--primary">Bevestig</button>
+            </footer>
+        </section>
+    </div>
+</div>
+
+<h2>Javascript</h2>
+<p>Open een <span lang="en-US">modal</span> door op de knop te klikken</p>
+<p><strong>Toegankelijkheids tip:</strong> De tekst van de <span lang="en-US">modal body</span> is zo lang, dat er <span lang="en-US">scrollbars</span> komen.
+    De <span lang="en-US">scrollbar</span> zijn niet automatisch met het toetsenbord te bereiken.
+    Zorg er in dat geval voor dat de div een <code> tabindex = "0"</code> krijgt,
+    zodat het focus kan krijgen en de tekst met de cursortoetsen te verplaatsen is.</p>
+
+
+<div class="example example--transparent">
+    <button class="btn btn--primary" data-toggle="modal" data-target="#myModal" onclick="openModal()">Open modal</button>
+
+    <div class="modal modal--backdrop" role="dialog" id="myModal" tabindex="-1" aria-describedby="modal-description3">
+        <section class="modal__content" role="document">
+            <div id="modal-description3" class="screenreader-only">
+                Dit is de beschrijving van de <span lang="en-US">modal</span>. De Escape knop annuleert en sluit het venster.
+            </div>
+            <header class="modal__title">
+                <h1>Titel van <span lang="en-US">modal</span></h1>
+                <button class="modal__close-button">
+                    <i class="icon icon-cross"></i>
+                    Sluit
+                </button>
+            </header>
+
+            <div class="modal__body" tabindex="0" lang="en-US">
+                <p>Leverage agile frameworks to provide a robust synopsis for
+                    high level overviews. Iterative approaches to corporate strategy
+                    foster collaborative thinking to further the overall value
+                    proposition. Organically grow the holistic world view of
+                    disruptive innovation via workplace diversity and empowerment.</p>
+                <p>Bring to the table win-win survival strategies to ensure
+                    proactive domination. At the end of the day, going forward,
+                    a new normal that has evolved from generation X is on the
+                    runway heading towards a streamlined cloud solution. User
+                    generated content in real-time will have multiple touchpoints
+                    for offshoring.</p>
+                <p>Capitalise on low hanging fruit to identify a ballpark value
+                    added activity to beta test.  Override the digital divide
+                    with additional clickthroughs from DevOps. Nanotechnology
+                    immersion along the information highway will close the loop
+                    on focusing solely on the bottom line.</p>
+                <p>Podcasting operational change management inside of workflows
+                    to establish a framework. Taking seamless key performance
+                    indicators offline to maximise the long tail. Keeping your
+                    eye on the ball while performing a deep dive on the start-up
+                    mentality to derive convergence on cross-platform integration.</p>
+                <p>Collaboratively administrate empowered markets via plug-and-play
+                    networks. Dynamically procrastinate B2C users after installed
+                    base benefits. Dramatically visualize customer directed
+                    convergence without revolutionary ROI.</p>
+                <p>Efficiently unleash cross-media information without
+                    cross-media value. Quickly maximize timely deliverables for
+                    real-time schemas. Dramatically maintain clicks-and-mortar
+                    solutions without functional solutions.</p>
+                <p>Completely synergize resource taxing relationships via premier
+                    niche markets. Professionally cultivate one-to-one customer
+                    service with robust ideas. Dynamically innovate
+                    resource-leveling customer service for state of the art
+                    customer service.</p>
+                <p>Objectively innovate empowered manufactured products whereas
+                    parallel platforms. Holisticly predominate extensible testing
+                    procedures for reliable supply chains. Dramatically engage
+                    top-line web services vis-a-vis cutting-edge deliverables.</p>
+                <p>Proactively envisioned multimedia based expertise and cross-media
+                    growth strategies. Seamlessly visualize quality intellectual
+                    capital without superior collaboration and idea-sharing.
+                    Holistically pontificate installed base portals after
+                    maintainable products.</p>
+                <p>Phosfluorescently engage worldwide methodologies with
+                    web-enabled technology. Interactively coordinate proactive
+                    e-commerce via process-centric "outside the box" thinking.
+                    Completely pursue scalable customer service through
+                    sustainable potentialities.</p>
+                <p>Podcasting operational change management inside of workflows
+                    to establish a framework. Taking seamless key performance
+                    indicators offline to maximise the long tail. Keeping your
+                    eye on the ball while performing a deep dive on the start-up
+                    mentality to derive convergence on cross-platform integration.</p>
+                <p>Collaboratively administrate empowered markets via plug-and-play
+                    networks. Dynamically procrastinate B2C users after installed
+                    base benefits. Dramatically visualize customer directed
+                    convergence without revolutionary ROI.</p>
+            </div>
+
+            <footer class="modal__footer" lang="en-US">
+                <p>Efficiently unleash cross-media information without
+                    cross-media value. Quickly maximize timely deliverables for
+                    real-time schemas. Dramatically maintain clicks-and-mortar
+                    solutions without functional solutions.</p>
+                <button class="btn btn--primary">Bevestig</button>
+            </footer>
+        </section>
+    </div>
+    <div class="js-example">
+        <pre><code>&lt;script&gt;
+            var myModal;
+            // Load modal component
+            System.import('/uno/components/modal/modal.js').then(function (module) {
+                myModal = new module.Modal(document.getElementById('myModal'));
+            });
+        
+            // Called when the user clicks the button
+            function openModal() {
+                myModal.open();
+            }
+        &lt;/script&gt;</code></pre>
+    </div>
+</div>
+
+<h2>Hoogte en breedte</h2>
+<p>Om de afmetingen van een <span lang="en-US">modal</span> aan te passen kunnen er een aantal <span lang="en-US">modifiers</span> worden toegepast op de HTML klasse. </p>
+
+<div class="example example--transparent">
+
+    <button class="btn btn--primary" data-toggle="modal" data-target="#myBigModal" onclick="openBigModal()">Open XL
+        modal
+    </button>
+    <div class="modal modal--backdrop" role="dialog" id="myBigModal" tabindex="-1">
+        <section class="modal__content modal--height-xl modal--width-xl" role="document">
+            <header class="modal__title">
+                <h1>Extra grote <span lang="en-US">modal</span></h1>
+
+                <button class="modal__close-button">
+                    <i class="icon icon-cross"></i>
+                    Sluit
+                </button>
+            </header>
+            <div class="modal__body" tabindex="0" lang="en-US">
+                <p>Leverage agile frameworks to provide a robust synopsis for
+                    high level overviews. Iterative approaches to corporate strategy
+                    foster collaborative thinking to further the overall value
+                    proposition. Organically grow the holistic world view of
+                    disruptive innovation via workplace diversity and empowerment.</p>
+                <p>Bring to the table win-win survival strategies to ensure
+                    proactive domination. At the end of the day, going forward,
+                    a new normal that has evolved from generation X is on the
+                    runway heading towards a streamlined cloud solution. User
+                    generated content in real-time will have multiple touchpoints
+                    for offshoring.</p></div>
+            <footer class="modal__footer">
+                <button class="btn btn--primary">Bevestig</button>
+            </footer>
+        </section>
+    </div>
+
+    <button class="btn btn--primary" data-toggle="modal" data-target="#myLargeModal" onclick="openLargeModal()">Open
+        large
+        modal
+    </button>
+    <div class="modal modal--backdrop" role="dialog" id="myLargeModal" tabindex="-1">
+        <section class="modal__content modal--height-l modal--width-l" role="document">
+            <header class="modal__title">
+                <h1>Grote <span lang="en-US">modal</span></h1>
+
+                <button class="modal__close-button">
+                    <i class="icon icon-cross"></i>
+                    Sluit
+                </button>
+            </header>
+            <div class="modal__body" tabindex="0" lang="en-US">
+                <p>Leverage agile frameworks to provide a robust synopsis for
+                    high level overviews. Iterative approaches to corporate strategy
+                    foster collaborative thinking to further the overall value
+                    proposition. Organically grow the holistic world view of
+                    disruptive innovation via workplace diversity and empowerment.</p>
+                <p>Bring to the table win-win survival strategies to ensure
+                    proactive domination. At the end of the day, going forward,
+                    a new normal that has evolved from generation X is on the
+                    runway heading towards a streamlined cloud solution. User
+                    generated content in real-time will have multiple touchpoints
+                    for offshoring.</p></div>
+            <footer class="modal__footer">
+                <button class="btn btn--primary">Bevestig</button>
+            </footer>
+        </section>
+    </div>
+
+    <button class="btn btn--primary" data-toggle="modal" data-target="#mySmallModal" onclick="openSmallModal()">Open
+        small
+        modal
+    </button>
+    <div class="modal modal--backdrop" role="dialog" id="mySmallModal" tabindex="-1">
+        <section class="modal__content modal--height-s modal--width-s" role="document">
+            <header class="modal__title">
+                <h1>Kleine <span lang="en-US">modal</span></h1>
+                <button class="modal__close-button">
+                    <i class="icon icon-cross"></i>
+                    Sluit
+                </button>
+            </header>
+            <div class="modal__body" tabindex="0" lang="en-US">
+                <p>Leverage agile frameworks to provide a robust synopsis for
+                    high level overviews. Iterative approaches to corporate strategy
+                    foster collaborative thinking to further the overall value
+                    proposition. Organically grow the holistic world view of
+                    disruptive innovation via workplace diversity and empowerment.</p>
+                <p>Bring to the table win-win survival strategies to ensure
+                    proactive domination. At the end of the day, going forward,
+                    a new normal that has evolved from generation X is on the
+                    runway heading towards a streamlined cloud solution. User
+                    generated content in real-time will have multiple touchpoints
+                    for offshoring.</p></div>
+            <footer class="modal__footer">
+                <button class="btn btn--primary">Bevestig</button>
+            </footer>
+        </section>
+    </div>
+</div>
+
+<p><strong>Hoogte instellen: </strong>Door het toevoegen van de volgende klasses kan de hoogte van de <span lang="en-US">modal</span>
+    worden ingesteld.
+<pre><code>class="modal--height-xl" // Een modal die het hele scherm vult</code></pre>
+<pre><code>class="modal--height-l" // Een modal die 75% van het scherm vult</code></pre>
+<pre><code>class="modal--height-s" // Een modal die 40% van het scherm vult</code></pre>
+
+</p><p><strong>Breedte instellen: </strong>Door het toevoegen van de volgende klasses kan de breedte van de <span lang="en-US">modal</span>
+    worden ingesteld.
+<pre><code>class="modal--width-xl" // Een modal die het hele scherm vult</code></pre>
+<pre><code>class="modal--width-l" // Een modal die 75% van het scherm vult</code></pre>
+<pre><code>class="modal--width-s" // Een modal die 40% van het scherm vult</code></pre>
+
+
+<script>
+
+    var myModal;
+    // Load modal component
+    System.import('/uno/components/modal/modal.js').then(function (module) {
+        myModal = new module.Modal(document.getElementById('myModal'));
+        myBigModal = new module.Modal(document.getElementById('myBigModal'));
+        myLargeModal = new module.Modal(document.getElementById('myLargeModal'));
+        mySmallModal = new module.Modal(document.getElementById('mySmallModal'));
+
+    });
+
+    function openModal() {
+        myModal.open();
+    }
+
+    function openBigModal() {
+        myBigModal.open();
+    }
+
+    function openLargeModal() {
+        myLargeModal.open();
+    }
+
+    function openSmallModal() {
+        mySmallModal.open();
+    }
+</script>
+</p>
+                            
+                            <h2>Benodigde stylesheets</h2>
+                            <ul>
+                                
+                                <li><code>/uno/components/modal/modal.css</code></li>
+                                
+                                <li><code>/uno/components/button/button.css</code></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+<div class="debug-container" aria-hidden="true">
+    <div class="container">
+        <div class="row">
+            <div class="debug">
+                <input type="checkbox"/>
+
+                <div class="col-xs-1">
+                    <div>
+                        1
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-left">
+                        2
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-left col-lg-dash-list">
+                        3
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        4
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        5
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        6
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        7
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        8
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-right">
+                        9
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        10
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-right">
+                        11
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        12
+                    </div>
+                </div>
+
+                <div class="guide--center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer__content background--hemelblauw">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <span class="footer__header">NL Design System 0.0.1</span>
+
+                    <ul class="list list--links footer__nav">
+                        <li><a href="/changelog">Changelog</a></li>
+                        <li><a href="/upgrade">Upgraden</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Bijdragen</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a rel="external" href="">Backlog</a></li>
+                        <li><a rel="external" href="https://git.dfront.rijkscloud.nl/ux/nl-design-system/">GitLab</a></li>
+                    </ul>
+                </div>  
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Contact</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a href="">Stuur een e-mail</a></li>
+                    </ul>
+                </div>  
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../../js/highlight.pack.js"></script>
+<script src="../../js/examples.js"></script>
+<script src="../../js/debug.js"></script>
+
+<script>
+    // Load collapse component
+    System['import']('/uno/components/collapse/collapse.js').then(function (m) {
+
+        //gebruikt unieke id van de nav om te voorkomen dat example collapses ook automatisch geactiveerd worden.
+        new m.Collapse(document.querySelector('#search-trigger'));
+    });
+    // Load nav component
+    System.import('/uno/components/navigation/navigation.js').then(function (module) {
+        var navs = document.querySelectorAll('.top-nav-autoresize');
+        // Initialize all navs
+        for (var i = 0; i < navs.length; i++) {
+            new module.AutoResizeNavigation(navs.item(i));
+        }
+        var submenus = document.querySelectorAll('.nav--submenu');
+        // Initialize all submenus
+        for (var i = 0; i < submenus.length; i++) {
+            new module.SubMenuNavigation(submenus.item(i));
+        }
+    });
+
+    // Load example tabbing
+    System.import('/uno/components/tabs/tabs.js').then(function (module) {
+        // Select all .tab elements inside the examples on the page
+        var tabs = document.querySelectorAll('.example > .tab--example');
+
+        // Initialize all example tabs
+        for (var i = 0; i < tabs.length; i++) {
+            new module.Tabs(tabs.item(i));
+        }
+    });
+</script>
+
+</div>
+</body>
+</html>

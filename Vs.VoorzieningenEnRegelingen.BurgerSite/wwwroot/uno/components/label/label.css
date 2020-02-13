@@ -1,0 +1,121 @@
+.label {
+  -webkit-column-break-inside: avoid;
+     page-break-inside: avoid;
+          break-inside: avoid;
+  display: inline-block;
+  font-size: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 18px;
+  line-height: 1.8rem;
+  margin: 0 2.5px;
+  margin: 0 0.25rem;
+  padding: 0 4px;
+  padding: 0 0.4rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.label--wit {
+  background-color: white;
+  color: #2b2b2b;
+}
+
+.label--zwart {
+  background-color: #2b2b2b;
+  color: white;
+}
+
+.label--optional {
+  color: #696969;
+  letter-spacing: 0.5px;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+}
+
+.label--violet {
+  background-color: #a90061;
+  color: #ffffff;
+}
+
+.label--roze {
+  background-color: #f092cd;
+  color: #000000;
+}
+
+.label--rood {
+  background-color: #d52b1e;
+  color: #ffffff;
+}
+
+.label--robijnrood {
+  background-color: #ca005d;
+  color: #ffffff;
+}
+
+.label--paars {
+  background-color: #42145f;
+  color: #ffffff;
+}
+
+.label--oranje {
+  background-color: #e17000;
+  color: #000000;
+}
+
+.label--mosgroen {
+  background-color: #767b00;
+  color: #ffffff;
+}
+
+.label--mintgroen {
+  background-color: #76d2b6;
+  color: #000000;
+}
+
+.label--lichtblauw {
+  background-color: #8fcae7;
+  color: #000000;
+}
+
+.label--hemelblauw {
+  background-color: #007bc7;
+  color: #ffffff;
+}
+
+.label--groen {
+  background-color: #39870c;
+  color: #ffffff;
+}
+
+.label--geel {
+  background-color: #f9e11e;
+  color: #000000;
+}
+
+.label--donkergroen {
+  background-color: #275937;
+  color: #ffffff;
+}
+
+.label--donkergeel {
+  background-color: #ffb612;
+  color: #000000;
+}
+
+.label--donkerbruin {
+  background-color: #673327;
+  color: #ffffff;
+}
+
+.label--donkerblauw {
+  background-color: #01689b;
+  color: #ffffff;
+}
+
+.label--bruin {
+  background-color: #94710a;
+  color: #ffffff;
+}
+/*# sourceMappingURL=label.css.map */

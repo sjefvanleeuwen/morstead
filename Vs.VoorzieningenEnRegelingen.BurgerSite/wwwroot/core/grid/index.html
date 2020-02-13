@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>
+        
+        Grid |
+        
+        NL Design System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="../../uno/components/favicon/ro-favicon-wit-0xffffff.png">
+
+    <link rel="stylesheet" href="../../uno/core/base.css">
+    <link rel="stylesheet" href="../../uno/core/grid.css">
+    <link rel="stylesheet" href="../../uno/components/lists/lists.css">
+    <link rel="stylesheet" href="../../uno/components/header/header.css">
+    <link rel="stylesheet" href="../../uno/components/footer/footer.css">
+    <link rel="stylesheet" href="../../uno/components/collapse/collapse.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/navigation.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/breadcrumbs.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/backlink.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/sidenav.css">
+    <link rel="stylesheet" href="../../uno/components/form/form.css">
+    <link rel="stylesheet" href="../../uno/components/form/input.css">
+    <link rel="stylesheet" href="../../uno/components/button/button.css">
+    <link rel="stylesheet" href="../../uno/components/skiplink/skiplink.css">
+    <link rel="stylesheet" href="../../uno/components/tabs/tabs.css">
+    <link rel="stylesheet" href="../../css/main.css">
+
+    
+    <link rel="stylesheet" href="../../uno/components/modal/modal.css">
+<link rel="stylesheet" href="../../uno/components/table/table.css">
+    
+
+    
+
+    <script src="../../uno/vendor/js/Promise.min.js"></script>
+    <script src="../../uno/vendor/js/system.js"></script>
+
+    <script>
+        System.config({
+            packages: {
+                '/': {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+    </script>
+</head>
+</html>
+<body class="theme--large-padding">
+<div class="wrapper">
+<a class="skiplink" href="#content">
+    <span class="skiplink__text">Ga direct naar inhoud</span>
+</a>
+<header class="header "
+        role="banner">
+    <!-- <div class="header-logo">
+        <a href="/" title="Logo Dienst Uitvoering Onderwijs"><span class="screenreader-only">dienst uitvoering onderwijs, naar de homepage</span></a>
+    </div> -->
+</header>
+
+
+<nav class="top-nav" id="docs-nav">
+    <div class="container">
+        <div class="top-nav__block top-nav-autoresize">
+            <ul class="nav">
+                <li class="nav__item">
+                    <a href="/" title="Home" class="nav__link  ">
+                        <i class="icon icon-home" role="presentation"></i>
+                        <span>NL Design System</span>
+                    </a>
+                </li>
+                
+                <li class="nav__item"><a class="nav__link " href="/aan-de-slag/index.html">Aan de slag</a></li>
+                
+                <li class="nav__item"><a class="nav__link nav__link--active" href="/core/index.html">Basis</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/componenten/index.html">Componenten</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/templates/index.html">Voorbeelden</a></li>
+                
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+
+<main class="skiplink-target main" id="content" tabindex="-1">
+    <div class="container">
+        <section class="row">
+    <div class="col-xs-12 col-xl-8 col-xl-offset-2 col-lg-10 col-lg-offset-1">
+        <div class="content">
+            
+                <a href="/core" class="backlink">Naar Core</a>
+            
+
+            <header class="content__header">
+                
+                <h1 class="content__header-title">Grid</h1>
+                
+
+                
+
+                
+
+                
+                    <p class="content__header-paragraph">De componenten <span lang="en-US">library</span> maakt gebruik van een <span lang="en-US">responsive, mobile first grid</span> systeem die relatief kan schalen tot 12 kolommen als er een verandering in schermgrootte of type <span lang="en-US">device</span> plaatsvindt. De <span lang="en-US">UX Library</span> maakt gebruik van voorgedefinieerde <span lang="en-US">classes</span> om snel en eenvoudig een <span lang="en-US">grid</span> te kunnen samenstellen. Het <span lang="en-US">grid</span> is een uitgeklede variant van het <span lang="en-US">Bootstrap 4 grid.</span></p>
+                
+
+                
+            </header>
+        </div>
+    </div>
+</section>
+
+        <article>
+            <div class="row">
+                <div class="col-xl-8 col-xl-offset-2 col-lg-10 col-lg-offset-1">
+                    <div class="content-background">
+
+                        <div class="content">
+                            
+
+<div class="docs-section" id="grid">
+
+    <h2 id="grid-intro">Introductie</h2>
+    <p><span lang="en-US">Grid</span> systemen worden gebruikt om pagina <span lang="en-US">layouts</span> te bouwen door middel van <span lang="en-US">rows</span> (rijen) en <span lang="en-US">columns</span>
+        (kolommen) waar content in gepresenteerd wordt. Het <span lang="en-US">Bootstrap grid</span> systeem werkt op de volgende manier:</p>
+    <ul>
+        <li><span lang="en-US">Rows</span> moeten binnen een <code>.container</code> geplaatst worden voor de juiste uitlijning en vulling.</li>
+        <li>Gebruik <span lang="en-US">rows</span> om horizontale groepen met <span lang="en-US">columns</span> te creëren.</li>
+        <li><span lang="en-US">Content</span> moet binnen een <span lang="en-US">column</span> geplaatst worden en alleen <span lang="en-US">columns</span> mogen een directe <span lang="en-US">child</span> van <span lang="en-US">rows</span> zijn.</li>
+        <li>Voorgedefinieerde <span lang="en-US">grid classes</span> als <code>.row</code> en <code>.col-xs-4</code> zijn te gebruiken
+            om snel een <span lang="en-US">grid layout</span> samen te stellen. Sass <span lang="en-US">>mixins</span> kunnen gebruikt worden een meer semantisch
+            <span lang="en-US">grid</span> te bouwen.</li>
+        <li><span lang="en-US">columns</span> creëren <span lang="en-US">gutters</span> (verticale witruimte tussen content en componenten) door middel van
+            <code>padding</code>. De padding heeft een offset in rows voor de eerste en laatste column door
+            een negatieve <span lang="en-US">margin</span> op de <code>.row</code>s.</li>
+        <li>De negatieve <span lang="en-US">margin</span> is de oorzaak waarom de onderstaande voorbeelden buiten het <span lang="en-US">grid</span> lopen.</li>
+        <li><span lang="en-US">Grid columns</span> kunnen gecreërd worden door een aantal <span lang="en-US">columns</span> te definieren die samen optellen tot
+            maximaal 12 (de volledige paginabreedte). Bijvoorbeeld: Om 3 gelijke <span lang="en-US">columns</span> over de volledige
+            breedte te creëren gebruik je drie<code>.col-xs-4</code>.</li>
+        <li>Wanneer er meer dan 12 <span lang="en-US">columns</span> in een <span lang="en-US">row</span> geplaatst worden, vallen de laatste <span lang="en-US">columns</span>
+            automatisch op een nieuwe regel.</li>
+        <li><span lang="en-US">Grid classes</span> hebben uitwerking op <span lang="en-US">devices</span> met schermresoluties die gelijk en/of groter zijn dan
+            de <span lang="en-US">breakpoints</span>. Ze overschrijven <span lang="en-US">grid classes</span> die kleinere schermresoluties aanspreken. Wanneer
+            men bijvoorbeeld een <code>.col-md-*</code> <span lang="en-US">class</span> aan een element toevoegd, zal deze niet alleen
+            de <span lang="en-US">medium devices</span> aanspreken maar ook alle grotere wanneer er geen <code>.col-lg-*</code> <span lang="en-US">class</span>
+            aanwezig is.</li>
+        <li>Het <q>nesten</q> van <span lang="en-US">rows (row</span> in een <span lang="en-US">row</span>) is tot één niveau diep toegestaan. De geneste <span lang="en-US">row</span> dient altijd uit
+            gelijke kolommen opgebouwd te worden.</li>
+    </ul>
+    <p>Bekijk onderstaande voorbeelden voor een uitwerking van deze principes binnen de <span lang="en-US">library</span>.</p>
+
+    <h2 id="grid-media-queries" lang="en-US">Media queries</h2>
+    <p>We gebruiken de volgende <span lang="en-US">media queries</span> in onze Sass bestanden om de basis breekpunten in het <span lang="en-US">grid</span>
+        systeem te definieren.</p>
+    <pre><code class="language-scss" data-lang="scss">/* Extra kleine <span lang="en-US">devices</span> (telefoons, minder dan 768px) */
+/* Geen media query omdat er vanuit mobile first gewerkt wordt in de UX Library. */
+
+/* Kleine devices (tablets, 768px en hoger) */
+@media (min-width:
+@screen-sm-min) {
+... }
+
+/* Medium devices (desktops, 992px en hoger) */
+@media (min-width:
+@screen-md-min) {
+... }
+
+/* Grote devices (grote desktops, 1200px en hoger) */
+@media (min-width: @screen-lg-min) { ... }</code></pre>
+    <p>Het is mogelijk om de <span lang="en-US">media queries</span> uit te breiden met een <code>max-width</code> om een specifiekere <span lang="en-US">range</span> aan
+        <span lang="en-US">devices</span> te bedienen met bepaalde CSS regels.</p>
+    <pre><code class="language-scss" data-lang="scss">@media (max-width: @screen-xs-max) { ... }
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) { ... }
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) { ... }
+@media (min-width: @screen-lg-min) { ... }</code></pre>
+
+    <h2 id="grid-options"><span lang="en-US">Grid</span> opties</h2>
+    <p>In onderstaande tabel is goed te zien hoe het <span lang="en-US">grid</span> systeem zich gedraagt op verschillende <span lang="en-US">devices</span>.</p>
+    <p>De <code>.col-xxl-</code> <span lang="en-US">classes</span> zijn alleen voor <em>medewerkersschermen</em> en kunnen geactiveerd worden
+    door de <span lang="en-US">class</span> <code>.theme--xxl-breakpoint</code> op de <span lang="en-US">body</span> te zetten.</p>
+    <div class="table-responsive">
+        <table class="table table--small-font table--striped" summary="Werking van het grid op verschillende resoluties">
+            <thead>
+            <tr>
+                <td></td>
+                <th scope="col">
+                    Extra kleine <span lang="en-US">devices</span>
+                    <small>Telefoons (&lt;768px)</small>
+                </th>
+                <th scope="col">
+                    Kleine <span lang="en-US">devices</span>
+                    <small><span lang="en-US">Tablets</span> (&ge;768px)</small>
+                </th>
+                <th scope="col">
+                    <span lang="en-US">Medium devices</span>
+                    <small><span lang="en-US">Desktops</span> (&ge;992px)</small>
+                </th>
+                <th scope="col">
+                    Grote <span lang="en-US">devices</span>
+                    <small><span lang="en-US">Desktops</span> (&ge;1200px)</small>
+                </th>
+                <th scope="col">
+                    Extra grote <span lang="en-US">devices</span><br>
+                    <small><span lang="en-US">Desktops</span> (&ge;1800px)</small>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th class="text-nowrap" scope="row"><span lang="en-US">Grid</span> gedrag</th>
+                <td>Altijd horizontaal</td>
+                <td colspan="4">Uitgeklapt tot aan begin, horizontaal boven breekpunten</td>
+            </tr>
+            <tr>
+                <th class="text-nowrap" scope="row">Container breedte</th>
+                <td>Geen (auto)</td>
+                <td>750px</td>
+                <td>970px</td>
+                <td>1200px</td>
+                <td>1800px</td>
+            </tr>
+            <tr>
+                <th class="text-nowrap" scope="row" lang="en-US">Class prefix</th>
+                <td><code>.col-xs-</code></td>
+                <td><code>.col-sm-</code></td>
+                <td><code>.col-md-</code></td>
+                <td><code>.col-lg-</code></td>
+                <td><code>.col-xxl-</code></td>
+            </tr>
+            <tr>
+                <th class="text-nowrap" scope="row">Aantal kolommen</th>
+                <td colspan="5">12</td>
+            </tr>
+            <tr>
+                <th class="text-nowrap" scope="row">Kolom breedte</th>
+                <td class="text-muted">Auto</td>
+                <td>~62px</td>
+                <td>~81px</td>
+                <td>~97px</td>
+                <td>~147px</td>
+            </tr>
+            <tr>
+                <th class="text-nowrap" scope="row"><span lang="en-US">Gutter</span> breedte</th>
+                <td colspan="5">20px (10px aan beide zijden van een <span lang="en-US">column</span>)</td>
+            </tr>
+            <tr>
+                <th class="text-nowrap" scope="row" lang="en-US">Nestable</th>
+                <td colspan="5"><i class="icon icon-check" aria-label="ja"></i></td>
+            </tr>
+            <tr>
+                <th class="text-nowrap" scope="row" lang="-"en-US"">Offsets</th>
+                <td colspan="5"><i class="icon icon-check" aria-label="ja"></i></td>
+            </tr>
+            <tr>
+                <th class="text-nowrap" scope="row" lang="en-US">Column ordering</th>
+                <td colspan="5"><i class="icon icon-check" aria-label="ja"></i></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <h2 id="grid-example-basic">Voorbeeld: gestapeld-tot-horizontaal</h2>
+    <p>Met enkele <code>.col-md-*</code> <span lang="en-US">grid classes</span>, kan een basis <span lang="en-US">grid</span> systeem gecreëerd worden die
+        gestapeld begint op <span lang="en-US">mobile devices</span> en horizontaal eindigt op de desktop. De grid columns moeten
+        binnen een <code>.row</code>geplaatst worden.</p>
+    <div class="example">
+        <div class="row show-grid">
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+            <div class="col-md-1">.col-md-1</div>
+        </div>
+        <div class="row show-grid">
+            <div class="col-md-8">.col-md-8</div>
+            <div class="col-md-4">.col-md-4</div>
+        </div>
+        <div class="row show-grid">
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4">.col-md-4</div>
+        </div>
+        <div class="row show-grid">
+            <div class="col-md-6">.col-md-6</div>
+            <div class="col-md-6">.col-md-6</div>
+        </div>
+    </div>
+
+    <h2 id="grid-example-mixed">Voorbeeld: <span lang="en-US">Mobile</span> en desktop</h2>
+    <p>Wil je niet dat <span lang="en-US">columns</span> stapelen op kleinere <span lang="en-US">devices</span>? Gebruik de <span lang="en-US">extra small</span> en <span lang="en-US">medium device grid classes</span> door <code>.col-xs-*</code> <code>.col-md-*</code> toe te voegen aan je <span lang="en-US">columns</span>. Zie onderstaand voorbeeld voor een uitwerking van deze regels.</p>
+    <div class="example">
+        <!-- Stapel de columns op mobile devices door één column de volledige breedte in te laten nemen en de andere de helft -->
+        <div class="row show-grid">
+            <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
+            <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+        </div>
+        <!-- Columns beginnen op 50% breedte op mobile devices en worden 33.3% op de desktop -->
+        <div class="row show-grid">
+            <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+            <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+            <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+        </div>
+        <!-- Columns zijn altijd 50% breed, op mobile devices en de desktop -->
+        <div class="row show-grid">
+            <div class="col-xs-6">.col-xs-6</div>
+            <div class="col-xs-6">.col-xs-6</div>
+        </div>
+    </div>
+
+    <h2 id="grid-example-mixed-complete">Voorbeeld: <span lang="en-US">Mobile</span>, tablet, desktop</h2>
+    <p>Gebasseerd op het vorige voorbeeld kunnen meer dynamische en krachtige layouts gemaakt worden met de toevoeging van de <code>.col-sm-*</code> <span lang="en-US">classes</span> voor tablets.</p>
+    <div class="example">
+        <div class="row show-grid">
+            <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
+            <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+        </div>
+        <div class="row show-grid">
+            <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+            <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+            <!-- Optioneel: clear de XS-cols als de binnenliggende content niet overeen komt in hoogte -->
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+        </div>
+    </div>
+
+    <h2 id="grid-example-wrapping">Voorbeeld: <span lang="en-US">Column wrapping</span></h2>
+    <p>Wanneer er meer dan 12 <span lang="en-US">columns</span> binnen een enkele <span lang="en-US">row</span> geplaatst worden, zal elke extra groep <span lang="en-US">columns</span>, als één onderdeel op een nieuwe regel vallen.</p>
+    <div class="example">
+        <div class="row show-grid">
+            <div class="col-xs-9">.col-xs-9</div>
+            <div class="col-xs-4">.col-xs-4<br>Omdat 9 + 4 = 13 &gt; 12, valt deze 4-column-brede div op een nieuwe regel als een aaneensluitend element.</div>
+            <div class="col-xs-6">.col-xs-6<br>Opeenvolgende columns komen tegen het vorige element op de nieuwe regel.</div>
+        </div>
+    </div>
+
+
+    <h2 id="grid-offsetting" lang="en-US">Offsetting columns</h2>
+    <p>Verplaats <span lang="en-US">columns</span> naar rechts door middel van de <code>.col-md-offset-*</code> <span lang="en-US">classes</span>. Deze <span lang="en-US">classes</span> zorgen voor een toename in de linker <span lang="en-US">margin</span> van <code>*</code> <span lang="en-US">columns</span>. Bijvoorbeeld, <code>.col-md-offset-4</code> verplaatst <code>.col-md-4</code> vier <span lang="en-US">columns</span> naar rechts.</p>
+    <div class="example">
+        <div class="row show-grid">
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+        </div>
+        <div class="row show-grid">
+            <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+            <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+        </div>
+        <div class="row show-grid">
+            <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
+        </div>
+    </div>
+
+
+
+    <h2 id="grid-column-ordering" lang="en-US">Column sortering</h2>
+    <p>Door middel van de <code>.col-md-push-*</code> en
+        <code>.col-md-pull-*</code> <span lang="en-US">modifier classes</span> kan eenvoudig de volgorde
+        van bestaande <span lang="en-US">grid columns</span> worden aangepast. <br><code>col-md-push-xx</code>
+        duwt een element xx kolommen naar rechts. <br><code>col-md-pull-xx</code>
+        trekt een element xx kolommen naar links. <br>Let op: de elementen
+        <span lang="en-US">'floaten'</span> en kunnen elkaar dan overlappen.</p>
+    <div class="example">
+        <div class="row show-grid">
+            <div class="col-md-9 col-md-push-3">.col-md-9 .col-md-push-3</div>
+            <div class="col-md-3 col-md-pull-9">.col-md-3 .col-md-pull-9</div>
+        </div>
+    </div>
+
+    <h2 lang="en-US">Mobile: modal colums</h2>
+    <p>Met de <code>.col-sm-modal</code> <span lang="en-US">modifier</span> kan een kolom op kleine schermen
+    verborgen worden, en met een knop als <span lang="en-US">modal</span> getoond worden. (Maak het scherm
+    smaller om de werking te zien).</p>
+    <div class="example">
+        <div class="row show-grid">
+            <div class="col-sm-3 col-sm-modal" id="modal_target">
+                <button class="modal__close-button hidden-md-up" onclick="history.back()">
+                    <i class="icon icon-cross"></i>
+                    Sluit
+                </button>
+                .col-sm-3 .col-sm-modal</div>
+            <div class="col-sm-9">.col-sm-9 <a class="hidden-md-up" href="#modal_target">Toon .col-sm-modal</a> </div>
+        </div>
+    </div>
+
+    <h2>Geen <span lang="en-US">gutters</span></h2>
+    <p>Soms is het nodig dat kolommen direct op elkaar aansluiten, in dat geval
+        kunt je de <span lang="en-US">modifier</span> <code>.row--no-gutter</code> toepassen.</p>
+    <div class="example example--transparent">
+        <div class="row row--no-gutter">
+            <div class="col-sm-4">
+                <div class="content-background">
+                    <div class="content">
+                        Geen <span lang="en-US">gutter</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="content-background">
+                    <div class="content">
+                        .col-sm-4
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="content-background background--hemelblauw">
+                    <div class="content">
+                        .col-sm-4
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="content-background">
+                    <div class="content">
+                        Met <span lang="en-US">>gutter</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="content-background">
+                    <div class="content">
+                        .col-sm-4
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="content-background background--hemelblauw">
+                    <div class="content">
+                        .col-sm-4
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Stippellijnen</h2>
+    <p>Met de <span lang="en-US">modifier</span> <code>.col-{<em>screensize</em>}-up--dotted</code> kan er een stippellijn tussen kolommen worden toegevoegd.</p>
+    <p>In het onderstaande voorbeeld wordt er een stippellijn toegevoegd op alle schermen, behalve mobiel (xs).</p>
+    <div class="example">
+        <div class="row">
+            <div class="col-sm-4 col-sm-up--dotted">
+                Integer venenatis faucibus ultricies. Suspendisse sed varius purus. Ut sit amet ligula scelerisque, venenatis orci sit amet, cursus lectus. Aenean tempus, nulla et mollis semper, ex odio tempor ligula, non porttitor libero nibh et augue.
+            </div>
+            <div class="col-sm-4 col-sm-up--dotted">
+                In placerat eu est vel posuere. Nunc sed feugiat nisl. Maecenas ac maximus sem. Aliquam tincidunt orci in rhoncus commodo. Duis auctor pellentesque velit et egestas. Sed non faucibus mauris.
+            </div>
+            <div class="col-sm-4 col-sm-up--dotted">
+                Nulla mattis efficitur nisl ut tempus. Nullam urna nibh, hendrerit vel iaculis vitae, lobortis nec nulla.
+            </div>
+        </div>
+    </div>
+</div>
+
+                            
+                            <h2>Benodigde stylesheets</h2>
+                            <ul>
+                                
+                                <li><code>/uno/components/modal/modal.css</code></li>
+                                
+                                <li><code>/uno/components/table/table.css</code></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+<div class="debug-container" aria-hidden="true">
+    <div class="container">
+        <div class="row">
+            <div class="debug">
+                <input type="checkbox"/>
+
+                <div class="col-xs-1">
+                    <div>
+                        1
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-left">
+                        2
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-left col-lg-dash-list">
+                        3
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        4
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        5
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        6
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        7
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        8
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-right">
+                        9
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        10
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-right">
+                        11
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        12
+                    </div>
+                </div>
+
+                <div class="guide--center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer__content background--hemelblauw">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <span class="footer__header">NL Design System 0.0.1</span>
+
+                    <ul class="list list--links footer__nav">
+                        <li><a href="/changelog">Changelog</a></li>
+                        <li><a href="/upgrade">Upgraden</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Bijdragen</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a rel="external" href="">Backlog</a></li>
+                        <li><a rel="external" href="https://git.dfront.rijkscloud.nl/ux/nl-design-system/">GitLab</a></li>
+                    </ul>
+                </div>  
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Contact</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a href="">Stuur een e-mail</a></li>
+                    </ul>
+                </div>  
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../../js/highlight.pack.js"></script>
+<script src="../../js/examples.js"></script>
+<script src="../../js/debug.js"></script>
+
+<script>
+    // Load collapse component
+    System['import']('/uno/components/collapse/collapse.js').then(function (m) {
+
+        //gebruikt unieke id van de nav om te voorkomen dat example collapses ook automatisch geactiveerd worden.
+        new m.Collapse(document.querySelector('#search-trigger'));
+    });
+    // Load nav component
+    System.import('/uno/components/navigation/navigation.js').then(function (module) {
+        var navs = document.querySelectorAll('.top-nav-autoresize');
+        // Initialize all navs
+        for (var i = 0; i < navs.length; i++) {
+            new module.AutoResizeNavigation(navs.item(i));
+        }
+        var submenus = document.querySelectorAll('.nav--submenu');
+        // Initialize all submenus
+        for (var i = 0; i < submenus.length; i++) {
+            new module.SubMenuNavigation(submenus.item(i));
+        }
+    });
+
+    // Load example tabbing
+    System.import('/uno/components/tabs/tabs.js').then(function (module) {
+        // Select all .tab elements inside the examples on the page
+        var tabs = document.querySelectorAll('.example > .tab--example');
+
+        // Initialize all example tabs
+        for (var i = 0; i < tabs.length; i++) {
+            new module.Tabs(tabs.item(i));
+        }
+    });
+</script>
+
+</div>
+</body>
+</html>

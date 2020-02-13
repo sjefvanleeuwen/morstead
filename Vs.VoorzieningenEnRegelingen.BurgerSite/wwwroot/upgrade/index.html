@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>
+        
+        Upgraden |
+        
+        NL Design System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="../uno/components/favicon/ro-favicon-wit-0xffffff.png">
+
+    <link rel="stylesheet" href="../uno/core/base.css">
+    <link rel="stylesheet" href="../uno/core/grid.css">
+    <link rel="stylesheet" href="../uno/components/lists/lists.css">
+    <link rel="stylesheet" href="../uno/components/header/header.css">
+    <link rel="stylesheet" href="../uno/components/footer/footer.css">
+    <link rel="stylesheet" href="../uno/components/collapse/collapse.css">
+    <link rel="stylesheet" href="../uno/components/navigation/navigation.css">
+    <link rel="stylesheet" href="../uno/components/navigation/breadcrumbs.css">
+    <link rel="stylesheet" href="../uno/components/navigation/backlink.css">
+    <link rel="stylesheet" href="../uno/components/navigation/sidenav.css">
+    <link rel="stylesheet" href="../uno/components/form/form.css">
+    <link rel="stylesheet" href="../uno/components/form/input.css">
+    <link rel="stylesheet" href="../uno/components/button/button.css">
+    <link rel="stylesheet" href="../uno/components/skiplink/skiplink.css">
+    <link rel="stylesheet" href="../uno/components/tabs/tabs.css">
+    <link rel="stylesheet" href="../css/main.css">
+
+    
+
+    
+    <link rel="stylesheet" href="../uno/components/label/label.css">
+    
+
+    <script src="../uno/vendor/js/Promise.min.js"></script>
+    <script src="../uno/vendor/js/system.js"></script>
+
+    <script>
+        System.config({
+            packages: {
+                '/': {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+    </script>
+</head>
+</html>
+<body class="theme--large-padding">
+<div class="wrapper">
+<a class="skiplink" href="#content">
+    <span class="skiplink__text">Ga direct naar inhoud</span>
+</a>
+<header class="header "
+        role="banner">
+    <!-- <div class="header-logo">
+        <a href="/" title="Logo Dienst Uitvoering Onderwijs"><span class="screenreader-only">dienst uitvoering onderwijs, naar de homepage</span></a>
+    </div> -->
+</header>
+
+
+<nav class="top-nav" id="docs-nav">
+    <div class="container">
+        <div class="top-nav__block top-nav-autoresize">
+            <ul class="nav">
+                <li class="nav__item">
+                    <a href="/" title="Home" class="nav__link  ">
+                        <i class="icon icon-home" role="presentation"></i>
+                        <span>NL Design System</span>
+                    </a>
+                </li>
+                
+                <li class="nav__item"><a class="nav__link " href="/aan-de-slag/index.html">Aan de slag</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/core/index.html">Basis</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/componenten/index.html">Componenten</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/templates/index.html">Voorbeelden</a></li>
+                
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+
+<main class="skiplink-target main" id="content" tabindex="-1">
+    <div class="container">
+        <section class="row">
+    <div class="col-xs-12 col-xl-8 col-xl-offset-2 col-lg-10 col-lg-offset-1">
+        <div class="content">
+            
+
+            <header class="content__header">
+                
+                <h1 class="content__header-title">Upgraden</h1>
+                
+
+                
+
+                
+
+                
+                    <p class="content__header-paragraph">Een nieuwe <span lang="en-US">major release</span> gaat gepaard met enkele <span lang="en-US">breaking changes</span></p>
+                
+
+                
+            </header>
+        </div>
+    </div>
+</section>
+
+        <article>
+            <div class="row">
+                <div class="col-xl-8 col-xl-offset-2 col-lg-10 col-lg-offset-1">
+                    <div class="content-background">
+
+                        <div class="content">
+                            <h2>Uno 3.x &rarr; Uno 4</h2>
+<p>Per component worden de <span lang="en-US">breaking changes</span> beschreven</p>
+
+<section>
+    <h3>Javascript</h3>
+    <p>De configuratie voor SystemJS is gewijzigd. Update de config naar:</p>
+    <pre><code>System.config({
+    packages: {
+        '/': {defaultExtension: 'js'}
+    }
+});</code></pre>
+
+</section>
+
+<section>
+    <h3 lang="en-US">Fonts</h3>
+    <p>De serif varianten van het Rijksoverheid <span lang="en-US">font</span> worden niet meer meegeleverd met Uno.</p>
+</section>
+
+<section>
+    <h3 lang="en-US">Footer</h3>
+    <p>De opmaak & structuur van de <span lang="en-US">footer</span> is gewijzigd. Daarnaast is er een nieuwe <span lang="en-US">payoff</span> geïntroduceerd.</p>
+    <ul>
+        <li><em>Onderwijs mogelijk maken</em> &rarr; <em>Ontwikkeling mogelijk maken</em></li>
+        <li><span class="label label--rood">nieuw</span> Engelse vertaling voor de payoff: <em lang="en-US">Making development possible</em> </li>
+        <li>Het element <code>.payoff</code> verwijderen</li>
+        <li><code>.footer__content</code> moet een <code>.background--</code> <span lang="en-US">modifier</span> krijgen.</li>
+        <li>De <span lang="en-US">payoff</span> komt als eerste kolom in de <span lang="en-US">footer</span>:<pre><code>&lt;div class="col-xs-12 col-md-5 col-md-offset-1"&gt;
+    &lt;span class="footer__header footer__header--title"&gt;Ontwikkeling mogelijk maken&lt;/span&gt;
+&lt;/div&gt;</code></pre></li>
+        <li>De andere kolommen hebben een titel dmv <code>&lt;span&nbsp;class="footer__header"&gt;</code></li>
+        <li>Eventuele navigatie plaats je in een <code>.list--links</code> met als extra <span lang="en-US">class</span> <code>.footer__nav</code></li>
+    </ul>
+</section>
+
+<section>
+
+    <h3>Lijsten</h3>
+    <p>De <span lang="en-US">classnames</span> van alle lijsten zijn gewijzigd. De BEM methodiek wordt nu strikter gevolgd, dus een <span lang="en-US">base class</span>
+    <code>.list</code> met een <span lang="en-US">modifier</span></p>
+    <ul>
+        <li>Alle &lsquo;Uno&rsquo; lijsten krijgen de <span lang="en-US">classname <code>.list</code></span></li>
+        <li>Alle <code>&lt;li&gt;</code> binnen <code>.list</code> &rarr; class <code>.list__item</code> toevoegen</li>
+    </ul>
+    <h4 lang="en-US">Core</h4>
+    <ul>
+        <li><code>.decimal</code> &rarr; <code>.list--decimal</code></li>
+
+        <li><code>.link-list</code> &rarr; <code>.list--links</code></li>
+
+        <li><code>.link-list--chevrons</code> &rarr; <code>.list--chevrons</code></li>
+
+        <li><code>.decimal--circled</code> &rarr; <code>.list--decimal-circled</code>.<br>
+            <span class="label label--rood">Nieuw</span> Dit is een op zichzelf staande <span lang="en-US">modifier</span>. Dus niet combineren met <code>.list--decimal</code></li>
+    </ul>
+
+    <h4>Bestanden</h4>
+    <p>Bestanden kunnen nu ook zonder lijst gebruikt worden. In plaats van in een <code>ul</code> / <code>li</code>
+    kun je het bestand bijvoorbeeld in een <code>div</code> plaatsen.<br>
+        <span class="label label--rood">nieuw</span> <code>.file</code> is een losstaand component geworden.</p>
+    <ul>
+        <li><code>.list-files</code> &rarr; <code>.list.list--files</code></li>
+        <li><code>.list-files__file</code> &rarr; <code>.file</code></li>
+        <li><code>.list-files__data</code> &rarr; <code>.file__data</code></li>
+        <li><code>.list-files__filename</code> &rarr; <code>.file__filename</code></li>
+        <li><code>.list-files__title</code> &rarr; <code>.file__title</code></li>
+        <li><code>.list-files__icon</code> &rarr; <code>.file__icon</code></li>
+        <li><code>.list-files__button</code> &rarr; <code>.file__button</code></li>
+    </ul>
+
+    <h4 lang="en-US">Timeline</h4>
+    <ul>
+        <li><code>.list-timelime</code> &rarr; <code>.list.list--timeline</code></li>
+        <li><code>.list-timelime--compact</code> &rarr; <code>.list.list--compact</code></li>
+        <li><code>.list-timeline--large</code> &rarr; <code>.list.list--timeline.list--timeline-large</code></li>
+    </ul>
+
+    <h4 lang="en-US">Link list</h4>
+    <ul>
+        <li><code>.link-list</code> &rarr; <code>.list.list--links</code></li>
+        <li><code>.link-list--chevrons</code> &rarr; <code>.list.list--links.list--chevrons</code></li>
+    </ul>
+
+    <h4 lang="en-US">Notification list</h4>
+    <ul>
+        <li><code>.list-notification</code> &rarr; <code>.list.list--notification</code></li>
+        <li><code>.list-notification__item</code> &rarr; <code>.list__item</code></li>
+    </ul>
+
+    <h4 lang="en-US">Filter list</h4>
+    <p>De filter list is uit de core van uno verwijderd. Wanneer je Uno met de losse css files gebruikt, dien je
+    <code>/components/list/filter.css</code> extra in te laden<br>
+    <span class="label label--rood">nieuw</span> Voor een filter met sluit knop de modifier <code>.list--filter-closable</code> ook nog toevoegen.</p>
+    <ul>
+        <li><code>.filter-list</code> &rarr; <code>.list.list--filter</code></li>
+        <li><code>.filter-list--inline</code> &rarr; <code>.list.list--filter.list--filter-inline</code></li>
+    </ul>
+
+    <h4 lang="en-US">Subject list</h4>
+    <ul>
+        <li><code>.list-subject</code> &rarr; <code>.list.list--subjects</code></li>
+        <li><code>.list-subject__link</code> &rarr; <code>.list__link</code></li>
+        <li><code>.list-subject__description</code> &rarr; <code>.list__description</code></li>
+    </ul>
+</section>
+
+<section>
+    <h3><span lang="en-US">In-page</span> navigatie</h3>
+    <p>De html structuur van <span lang="en-US">in-page</span> navigatie is gewijzigd.</p>
+    <ul>
+        <li>De blauwe achtergrond is verwijderd.</li>
+        <li>De <code>.content</code> div krijgt een modifier <code>.content--inpage-nav-header</code></li>
+        <li>De <code>.content</code> div dient binnen een <code>&lt;div class="col-xs-12"&gt;</code> te staan</li>
+        <li>De lijst met pagina's heeft de <span lang="en-US">classes</span> <code>list list--decimal list--decimal-with-dot columns</code></li>
+        <li>De <span lang="en-US">footer</span> nav staat <em>in</em> het <code>.content</code> element</li>
+        <li>De <span lang="en-US">footer</span> nav heeft de volgende structuur:
+            <pre><code>&lt;div class="prev-next"&gt;
+    &lt;a href="#" class="prev-next__prev"&gt;
+        &lt;span class="prev-next__meta"&gt;VORIGE&lt;/span&gt;
+        &lt;span class="prev-next__text"&gt;1. Wat moet je doen&lt;/span&gt;
+    &lt;/a&gt;
+    &lt;a href="#" class="prev-next__next"&gt;
+        &lt;span class="prev-next__meta"&gt;VOLGENDE&lt;/span&gt;
+        &lt;span class="prev-next__text"&gt;3. Hoe het werkt&lt;/span&gt;
+    &lt;/a&gt;
+&lt;/div&gt;</code></pre></li>
+    </ul>
+</section>
+
+<section>
+    <h3>Tabellen</h3>
+    <p>Tabellen hebben nu standaard een witte achtergrond. <code>.table--striped</code> voegt afwisselende
+        <em>achtergronden</em> toe, in plaats van strepen tussen de rijen. Voor alleen strepen is de <span lang="en-US">class</span>
+        <code>.table</code> afdoende.</p>
+</section>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+<div class="debug-container" aria-hidden="true">
+    <div class="container">
+        <div class="row">
+            <div class="debug">
+                <input type="checkbox"/>
+
+                <div class="col-xs-1">
+                    <div>
+                        1
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-left">
+                        2
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-left col-lg-dash-list">
+                        3
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        4
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        5
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        6
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        7
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        8
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-right">
+                        9
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        10
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-right">
+                        11
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        12
+                    </div>
+                </div>
+
+                <div class="guide--center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer__content background--hemelblauw">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <span class="footer__header">NL Design System 0.0.1</span>
+
+                    <ul class="list list--links footer__nav">
+                        <li><a href="/changelog">Changelog</a></li>
+                        <li><a href="/upgrade">Upgraden</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Bijdragen</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a rel="external" href="">Backlog</a></li>
+                        <li><a rel="external" href="https://git.dfront.rijkscloud.nl/ux/nl-design-system/">GitLab</a></li>
+                    </ul>
+                </div>  
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Contact</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a href="">Stuur een e-mail</a></li>
+                    </ul>
+                </div>  
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../js/highlight.pack.js"></script>
+<script src="../js/examples.js"></script>
+<script src="../js/debug.js"></script>
+
+<script>
+    // Load collapse component
+    System['import']('/uno/components/collapse/collapse.js').then(function (m) {
+
+        //gebruikt unieke id van de nav om te voorkomen dat example collapses ook automatisch geactiveerd worden.
+        new m.Collapse(document.querySelector('#search-trigger'));
+    });
+    // Load nav component
+    System.import('/uno/components/navigation/navigation.js').then(function (module) {
+        var navs = document.querySelectorAll('.top-nav-autoresize');
+        // Initialize all navs
+        for (var i = 0; i < navs.length; i++) {
+            new module.AutoResizeNavigation(navs.item(i));
+        }
+        var submenus = document.querySelectorAll('.nav--submenu');
+        // Initialize all submenus
+        for (var i = 0; i < submenus.length; i++) {
+            new module.SubMenuNavigation(submenus.item(i));
+        }
+    });
+
+    // Load example tabbing
+    System.import('/uno/components/tabs/tabs.js').then(function (module) {
+        // Select all .tab elements inside the examples on the page
+        var tabs = document.querySelectorAll('.example > .tab--example');
+
+        // Initialize all example tabs
+        for (var i = 0; i < tabs.length; i++) {
+            new module.Tabs(tabs.item(i));
+        }
+    });
+</script>
+
+</div>
+</body>
+</html>

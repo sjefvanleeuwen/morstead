@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>
+        
+        Button |
+        
+        NL Design System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="../../uno/components/favicon/ro-favicon-wit-0xffffff.png">
+
+    <link rel="stylesheet" href="../../uno/core/base.css">
+    <link rel="stylesheet" href="../../uno/core/grid.css">
+    <link rel="stylesheet" href="../../uno/components/lists/lists.css">
+    <link rel="stylesheet" href="../../uno/components/header/header.css">
+    <link rel="stylesheet" href="../../uno/components/footer/footer.css">
+    <link rel="stylesheet" href="../../uno/components/collapse/collapse.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/navigation.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/breadcrumbs.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/backlink.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/sidenav.css">
+    <link rel="stylesheet" href="../../uno/components/form/form.css">
+    <link rel="stylesheet" href="../../uno/components/form/input.css">
+    <link rel="stylesheet" href="../../uno/components/button/button.css">
+    <link rel="stylesheet" href="../../uno/components/skiplink/skiplink.css">
+    <link rel="stylesheet" href="../../uno/components/tabs/tabs.css">
+    <link rel="stylesheet" href="../../css/main.css">
+
+    
+    <link rel="stylesheet" href="../../uno/components/button/button.css">
+    
+
+    
+    <link rel="stylesheet" href="../../uno/components/hint/hint.css">
+<link rel="stylesheet" href="../../uno/components/notification/notification.css">
+    
+
+    <script src="../../uno/vendor/js/Promise.min.js"></script>
+    <script src="../../uno/vendor/js/system.js"></script>
+
+    <script>
+        System.config({
+            packages: {
+                '/': {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+    </script>
+</head>
+</html>
+<body class="theme--large-padding">
+<div class="wrapper">
+<a class="skiplink" href="#main-content">
+    <span class="skiplink__text">Ga direct naar inhoud</span>
+</a>
+<header class="header "
+        role="banner">
+    <!-- <div class="header-logo">
+        <a href="/" title="Logo Dienst Uitvoering Onderwijs"><span class="screenreader-only">dienst uitvoering onderwijs, naar de homepage</span></a>
+    </div> -->
+</header>
+
+
+<nav class="top-nav" id="docs-nav">
+    <div class="container">
+        <div class="top-nav__block top-nav-autoresize">
+            <ul class="nav">
+                <li class="nav__item">
+                    <a href="/" title="Home" class="nav__link  ">
+                        <i class="icon icon-home" role="presentation"></i>
+                        <span>NL Design System</span>
+                    </a>
+                </li>
+                
+                <li class="nav__item"><a class="nav__link " href="/aan-de-slag/index.html">Aan de slag</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/core/index.html">Basis</a></li>
+                
+                <li class="nav__item"><a class="nav__link nav__link--active" href="/componenten/index.html">Componenten</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/templates/index.html">Voorbeelden</a></li>
+                
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+
+<main class="smain" id="content">
+    <div class="container">
+        <section class="row">
+            <div class="col-xl-9 col-xl-offset-4 col-lg-8 col-lg-offset-5 col-md-9 col-md-offset-4 col-xs-12">
+                <header class="content__header">
+                    
+                        <h1 class="content__header-title">Button</h1>
+                    
+                </header>
+            </div>
+        </section>
+        <article>
+            <div class="row">
+                <aside class="col-xl-3 col-lg-4 col-md-3 col-sm-modal">
+                    <nav class="sidenav">
+                        
+                            
+                        
+                            
+                        
+                            
+                                <ul>
+                                    <li class="sidenav__item ">
+                                        <a href="/componenten">
+                                            Introductie
+                                        </a>
+                                    </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/backlink">Backlink</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/bottom-bar">Bottom bar</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item sidenav__item--active">
+                                            <a href="../../componenten/button">Button</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/card">Card</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/donutchart">Chart</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/checkbox">Checkbox</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/collapse">Collapse</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/combobox">Combobox</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/definition-list">Definition list</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/footer">Footer</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/file">File</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/filter">Filter</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/form">Form</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/header">Header</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/hint">Hint</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/images">Images</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/label">Labels &amp; badges</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/lists">Lists</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/modal">Modal</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/meta">Meta</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/navigation">Navigation</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/notification">Notification</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/pagination">Pagination</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/quote">Quote</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/radio">Radiobutton</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/sections">Section</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/skiplink">Skiplink</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/spinner">Spinner</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/switch">Switch</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/table">Table</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/tabs">Tabs</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/timeline">Timeline</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/tooltip">Tooltip</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/videos">Video</a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        
+                            
+                        
+                    </nav>
+                </aside>
+                <div class="col-xl-9 col-lg-8 col-md-9">
+                    <div class="content-background">
+
+                        <div class="skiplink-target content" id="main-content">
+                            <style>
+    .example .btn {
+        display: inline-flex;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="notification notification--error">
+    <div class="notification__content">
+        <strong class="notification__title">Niet <a href="https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/" target="_blank" rel="noopener">BEM</a> classes zijn vanaf 5.0 deprecated</strong>
+        <span>Update dus je <code>btn</code> naar de onderstaande BEM standaarden.</span>
+    </div>
+</div>
+
+<p><span lang="en-US">Buttons</span> kunnen gebruikt worden voor interactie binnen een pagina</p>
+
+<p>Gebruik voor <span lang="en-US">buttons</span> <strong>altijd</strong> de
+    <code>&lt;button&gt;</code> tag. Zo zien screenreaders ook
+    dat het om een interactief element gaat. Wanneer een ander element als
+    <span lang="en-US">button gestyled</span> wordt, gebruik dan javascript om het gedrag van een <span lang="en-US">button</span> na
+te bootsen.</p>
+<p>Door de <span lang="en-US">class</span> <code>.btn</code> toe te voegen wordt een knop
+als <span lang="en-US">button gestyled</span>. Daarnaast kunnen er nog extra<span lang="en-US">classes</span> worden
+toegevoegd voor alternatieve weergaves van <span lang="en-US">buttons</span></p>
+<ul>
+    <li><code>.btn--primary</code>, <span lang="en-US">styled</span> de <span lang="en-US">button</span> als primaire actie</li>
+    <li><code>.btn--disabled</code>, <span lang="en-US">styled</span> de <span lang="en-US">button</span> als disabled. Wanneer de
+    <span lang="en-US">button</span> een <code>a</code> tag is, dient ook <code>tabindex="-1"</code> gezet te worden,
+    om te voorkomen dat de <span lang="en-US">button</span> focus krijgt.</li>
+    <li><code>.btn--link</code>, <span lang="en-US">styled</span> de <span lang="en-US">button</span> als een link. Kan niet <span lang="en-US">disabled</span> zijn.</li>
+    <li><code>.btn--icon</code>, voor <span lang="en-US">buttons</span> met <em>alleen</em> een icoon.
+        Verwijderd de <span lang="en-US">padding</span> rondom het icoon. Voeg een <code lang="en-US">title</code>
+        attribuut aan de <span lang="en-US">button</span> toe met een beschrijving van de knop.</li>
+    <li><code>.btn--digid</code>, een <span lang="en-US">button</span> met een DigiD logo. <br> <em>Let op dat visuele informatie ook voor blinden
+        beschikbaar is.</em> <br>In dit geval dat inloggen met DigiD gebeurt.
+        Dat kan bijvoorbeeld door in de knop achter de tekst 'inloggen'
+        een span toe te voegen met <span lang="en-US">class</span> <code>.screenreader-only</code> en de tekst '&nbsp;met Digi D'.<br>
+        Dan hoort een blinde dat als 'inloggen met Digi D'.</li>
+</ul>
+<aside class="hint">
+    <span class="hint__title"><span lang="en-US">Buttons</span> met een icoon</span>
+    <p>Wanneer je een een <code>&lt;button&gt;</code> met icoon <em>en</em> tekst
+    gebruikt, plaats dan de inhoud van de <span lang="en-US">button</span> in een
+        <code>&lt;span class="btn__content"&gt;</code> tag. Dit is een <span lang="en-US">workaround</span>
+    voor een <span lang="en-US">Firefox bug</span>.
+        Meer informatie op <a href="http://stackoverflow.com/questions/24289251/flexbox-not-working-in-buttons-in-firefox" rel="noopener" title="StackOverflow" target="_blank">StackOverflow</a>
+    en <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=984869" rel="noopener" title="Bugzilla issue" target="_blank">Bugzilla</a>. <br>
+    Dit is niet nodig wanneer je een <code>&lt;a&gt;</code> <span lang="en-US">tag</span> als <span lang="en-US">button</span> gebruikt.</p>
+</aside>
+
+<div class="example example--column" id="example_btn">
+    <button class="btn">Standaard knop</button>
+    <button class="btn" disabled="disabled">Standaard knop (uitgeschakeld)</button>
+    <button class="btn btn--primary">Primaire knop</button>
+    <button class="btn btn--primary"><span class="btn__content">Verder <i class="btn__icon icon icon-arr-forward" title role></i></span></button>
+    <button class="btn btn--primary" disabled="disabled">Primaire knop (uitgeschakeld)</button>
+</div>
+
+<h3>Link als knop</h3>
+
+<div class="example example--column" id="example_link">
+    <a href="https://www.google.com" rel="noopener" class="btn btn--primary" target="_blank">Link als knop <span class="btn__icon icon icon-arr-forward" title role></span></a>
+    <a href="#" class="btn btn--primary btn--disabled" tabindex="-1">Link als knop (uitgeschakeld)</a>
+</div>
+
+<h3>Knop als link</h3>
+<div class="example example--column" id="example_btn--link">
+    <button class="btn btn--link">Button als link</button>
+    <input type="submit" class="btn btn--link" value="Input Button als link">
+</div>
+
+<h3><span lang="en-US">Button</span> met enkel een icoon</h3>
+<div class="example" id="example_btn--icon">
+    <button class="btn btn--icon" title="Zoeken"><i class="icon icon-magnifier"></i></button>
+</div>
+
+<h3>Button met spinner</h3>
+<p>
+    Het is mogelijk om een spinner in een button te plaatsen. Voorwaarde hiervoor is dat de button disabled
+    is, zodat er niet nogmaals op geklikt kan worden. De spinner in een button dient met enige terughoudendheid
+    gebruikt te worden. Alleen indien er sprake is van een wachtmoment waarbij de spinner niet op zichzelf
+    kan worden ingezet, kun je de spinner in de button plaatsen.
+</p>
+
+<p>
+    Om de spinner te gebruiken, voeg je een <code>div</code> toe met de <code>btn__spinner</code> klasse.
+</p>
+
+<div class="example example--column" id="example_btn-spinner">
+    <button class="btn btn--primary" disabled="disabled">
+        Bewaar
+        <div class="btn__spinner">
+            <div aria-live="assertive" class="screenreader-only">Aan het opslaan</div>
+        </div>  
+    </button>
+
+    <button class="btn" disabled="disabled">
+        Bewaar
+        <div class="btn__spinner">
+            <div aria-live="assertive" class="screenreader-only">Aan het opslaan</div>
+        </div>  
+    </button>
+</div>
+
+<h3>DigiD <span lang="en-US">buttons</span></h3>
+<div class="example" id="example_btn--digid">
+    <p>Een DigiD <span lang="en-US">button</span>. (<code>a</code> tag)<br>
+        <a class="btn btn--primary btn--digid cta-link" href="#" role="button" tabindex="0">
+            Inloggen Mijn DUO
+            <span class="screenreader-only">&nbsp;met Digi D</span>
+        </a>
+    </p>
+    <p>Een DigiD <span lang="en-US">button</span>. (<code>button</code> tag)</p>
+    <button class="btn btn--primary btn--digid cta-link">
+        Inloggen Mijn DUO
+        <span class="screenreader-only">&nbsp;met Digi D</span>
+    </button>
+</div>
+
+<h2>Javascript</h2>
+
+<p>Wanneer een <code>a</code> <span lang="en-US">tag</span> als <span lang="en-US">button gestyled</span> wordt, is javascript nodig
+om de knop webrichtlijnen-proof te maken. Het script voegt de benodigde <span lang="en-US">aria-roles</span>
+toe, en zorgt voor een juiste afhandeling bij keyboardnavigatie.</p>
+
+<pre><code>&lt;script&gt;
+    // Load button component
+    System.import('/uno/components/button/button.js').then(function (module) {
+
+        // Select all a.btn elements on the page
+        var buttons = document.querySelectorAll('a.btn');
+
+        // Initialize all 'fake' buttons
+        for (var i = 0; i &lt; buttons.length; i++) {
+            new module.Button(buttons.item(i));
+        }
+    });
+&lt;/script&gt;</code></pre>
+
+<aside class="hint">
+    <span class="hint__title"><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_button_role" lang="en-US" target="_blank" rel="noopener">Mozilla Developer Network</a> over buttons</span>
+    <p class="hint__description" lang="en-US">Where possible, it is recommended to use native
+        HTML buttons (<code>&lt;button&gt;</code>,
+        <code>&lt;input type="button" /&gt;</code> and
+        <code>&lt;input type="image" /&gt;</code>) rather than the button role,
+        as native HTML buttons are more widely supported by older user agents
+        and assistive technology. Native HTML buttons also support keyboard and
+        focus requirements by default, without need for additional customization.
+    </p>
+    <p class="hint__description" lang="en-US">
+    <strong>Warning:</strong> Be careful when marking up links with the button role.
+    Buttons are expected to be triggered using the Space key, while links are
+    expected to be triggered using the Enter key. In other words, when links
+    are used to behave like buttons, adding <code>role="button"</code> alone is not
+    sufficient. It will also be necessary to add a key event handler that
+    listens for the Space key in order to be consistent with native buttons.</p>
+</aside>
+
+<script>
+    // Load button component
+    System.import('/uno/components/button/button.js').then(function (module) {
+
+        // Select all a.btn elements on the page
+        var buttons = document.querySelectorAll('a.btn');
+
+        // Initialize all 'fake' buttons
+        for (var i = 0; i < buttons.length; i++) {
+            new module.Button(buttons.item(i));
+        }
+    });
+</script>
+                            
+                            <h2>Benodigde stylesheets</h2>
+                            <ul>
+                                
+                                <li><code>/uno/components/button/button.css</code></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+<div class="debug-container" aria-hidden="true">
+    <div class="container">
+        <div class="row">
+            <div class="debug">
+                <input type="checkbox"/>
+
+                <div class="col-xs-1">
+                    <div>
+                        1
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-left">
+                        2
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-left col-lg-dash-list">
+                        3
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        4
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        5
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        6
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        7
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        8
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-right">
+                        9
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        10
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-right">
+                        11
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        12
+                    </div>
+                </div>
+
+                <div class="guide--center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer__content background--hemelblauw">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <span class="footer__header">NL Design System 0.0.1</span>
+
+                    <ul class="list list--links footer__nav">
+                        <li><a href="/changelog">Changelog</a></li>
+                        <li><a href="/upgrade">Upgraden</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Bijdragen</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a rel="external" href="">Backlog</a></li>
+                        <li><a rel="external" href="https://git.dfront.rijkscloud.nl/ux/nl-design-system/">GitLab</a></li>
+                    </ul>
+                </div>  
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Contact</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a href="">Stuur een e-mail</a></li>
+                    </ul>
+                </div>  
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../../js/highlight.pack.js"></script>
+<script src="../../js/examples.js"></script>
+<script src="../../js/debug.js"></script>
+
+<script>
+    // Load collapse component
+    System['import']('/uno/components/collapse/collapse.js').then(function (m) {
+
+        //gebruikt unieke id van de nav om te voorkomen dat example collapses ook automatisch geactiveerd worden.
+        new m.Collapse(document.querySelector('#search-trigger'));
+    });
+    // Load nav component
+    System.import('/uno/components/navigation/navigation.js').then(function (module) {
+        var navs = document.querySelectorAll('.top-nav-autoresize');
+        // Initialize all navs
+        for (var i = 0; i < navs.length; i++) {
+            new module.AutoResizeNavigation(navs.item(i));
+        }
+        var submenus = document.querySelectorAll('.nav--submenu');
+        // Initialize all submenus
+        for (var i = 0; i < submenus.length; i++) {
+            new module.SubMenuNavigation(submenus.item(i));
+        }
+    });
+
+    // Load example tabbing
+    System.import('/uno/components/tabs/tabs.js').then(function (module) {
+        // Select all .tab elements inside the examples on the page
+        var tabs = document.querySelectorAll('.example > .tab--example');
+
+        // Initialize all example tabs
+        for (var i = 0; i < tabs.length; i++) {
+            new module.Tabs(tabs.item(i));
+        }
+    });
+</script>
+
+</div>
+</body>
+</html>

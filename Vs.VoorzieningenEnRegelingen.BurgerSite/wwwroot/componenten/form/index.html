@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>
+        
+        Form |
+        
+        NL Design System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="../../uno/components/favicon/ro-favicon-wit-0xffffff.png">
+
+    <link rel="stylesheet" href="../../uno/core/base.css">
+    <link rel="stylesheet" href="../../uno/core/grid.css">
+    <link rel="stylesheet" href="../../uno/components/lists/lists.css">
+    <link rel="stylesheet" href="../../uno/components/header/header.css">
+    <link rel="stylesheet" href="../../uno/components/footer/footer.css">
+    <link rel="stylesheet" href="../../uno/components/collapse/collapse.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/navigation.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/breadcrumbs.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/backlink.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/sidenav.css">
+    <link rel="stylesheet" href="../../uno/components/form/form.css">
+    <link rel="stylesheet" href="../../uno/components/form/input.css">
+    <link rel="stylesheet" href="../../uno/components/button/button.css">
+    <link rel="stylesheet" href="../../uno/components/skiplink/skiplink.css">
+    <link rel="stylesheet" href="../../uno/components/tabs/tabs.css">
+    <link rel="stylesheet" href="../../css/main.css">
+
+    
+    <link rel="stylesheet" href="../../uno/components/button/button.css">
+<link rel="stylesheet" href="../../uno/components/form/form.css">
+<link rel="stylesheet" href="../../uno/components/form/input.css">
+<link rel="stylesheet" href="../../uno/components/form/file.css">
+<link rel="stylesheet" href="../../uno/components/form/checkbox.css">
+<link rel="stylesheet" href="../../uno/components/label/label.css">
+    
+
+    
+    <link rel="stylesheet" href="../../uno/components/hint/hint.css">
+<link rel="stylesheet" href="../../uno/components/list/list-files.css">
+<link rel="stylesheet" href="../../uno/components/meta/meta.css">
+    
+
+    <script src="../../uno/vendor/js/Promise.min.js"></script>
+    <script src="../../uno/vendor/js/system.js"></script>
+
+    <script>
+        System.config({
+            packages: {
+                '/': {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+    </script>
+</head>
+</html>
+<body class="theme--large-padding">
+<div class="wrapper">
+<a class="skiplink" href="#main-content">
+    <span class="skiplink__text">Ga direct naar inhoud</span>
+</a>
+<header class="header "
+        role="banner">
+    <!-- <div class="header-logo">
+        <a href="/" title="Logo Dienst Uitvoering Onderwijs"><span class="screenreader-only">dienst uitvoering onderwijs, naar de homepage</span></a>
+    </div> -->
+</header>
+
+
+<nav class="top-nav" id="docs-nav">
+    <div class="container">
+        <div class="top-nav__block top-nav-autoresize">
+            <ul class="nav">
+                <li class="nav__item">
+                    <a href="/" title="Home" class="nav__link  ">
+                        <i class="icon icon-home" role="presentation"></i>
+                        <span>NL Design System</span>
+                    </a>
+                </li>
+                
+                <li class="nav__item"><a class="nav__link " href="/aan-de-slag/index.html">Aan de slag</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/core/index.html">Basis</a></li>
+                
+                <li class="nav__item"><a class="nav__link nav__link--active" href="/componenten/index.html">Componenten</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/templates/index.html">Voorbeelden</a></li>
+                
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+
+<main class="smain" id="content">
+    <div class="container">
+        <section class="row">
+            <div class="col-xl-9 col-xl-offset-4 col-lg-8 col-lg-offset-5 col-md-9 col-md-offset-4 col-xs-12">
+                <header class="content__header">
+                    
+                        <h1 class="content__header-title">Form</h1>
+                    
+                </header>
+            </div>
+        </section>
+        <article>
+            <div class="row">
+                <aside class="col-xl-3 col-lg-4 col-md-3 col-sm-modal">
+                    <nav class="sidenav">
+                        
+                            
+                        
+                            
+                        
+                            
+                                <ul>
+                                    <li class="sidenav__item ">
+                                        <a href="/componenten">
+                                            Introductie
+                                        </a>
+                                    </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/backlink">Backlink</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/bottom-bar">Bottom bar</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/button">Button</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/card">Card</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/donutchart">Chart</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/checkbox">Checkbox</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/collapse">Collapse</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/combobox">Combobox</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/definition-list">Definition list</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/footer">Footer</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/file">File</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/filter">Filter</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item sidenav__item--active">
+                                            <a href="../../componenten/form">Form</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/header">Header</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/hint">Hint</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/images">Images</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/label">Labels &amp; badges</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/lists">Lists</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/modal">Modal</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/meta">Meta</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/navigation">Navigation</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/notification">Notification</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/pagination">Pagination</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/quote">Quote</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/radio">Radiobutton</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/sections">Section</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/skiplink">Skiplink</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/spinner">Spinner</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/switch">Switch</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/table">Table</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/tabs">Tabs</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/timeline">Timeline</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/tooltip">Tooltip</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/videos">Video</a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        
+                            
+                        
+                    </nav>
+                </aside>
+                <div class="col-xl-9 col-lg-8 col-md-9">
+                    <div class="content-background">
+
+                        <div class="skiplink-target content" id="main-content">
+                            
+<p>Elk veld in een formulier bestaat uit een <code>.input</code> met een
+<code>.input__label</code> en een <code>.input__control</code>. De <span lang="en-US">input</span> heeft een id
+nodig, het <code>label</code> element verwijst naar dat id met het <code>for</code>
+attribuut.</p>
+<p>Voeg de <span lang="en-US">class</span> <code>.input--invalid</code> toe aan invalide velden.<br>
+Eventuele <span lang="en-US">errors</span> worden in een <code>.input__error</code> blok getoond, tussen
+het label en de <span lang="en-US">input</span>.</p>
+<p>Extra aanwijzingen kunnen in een <code>.input__hint</code> geplaatst worden. Voorzie
+de hint ook van een ID, en verwijs in de <span lang="en-US">input</span> met het attribuut <code>aria-describedby</code>
+naar dat ID. Op die manier kan een <span lang="en-US">screenreader</span> ook de relatie tussen de <span lang="en-US">input</span> en
+de hint leggen.</p>
+
+
+<div class="hint">
+    <span class="hint__title">Verder knop</span>
+<p>Gebruik als verder knop een <code>button</code> tag ipv een <code>&lt;input type="submit"&gt;</code>.
+Internet Explorer rendert de pagina niet goed wanneer je een <code>input</code> <span lang="en-US">tag</span> gebruikt.</p>
+</div>
+
+<h3>HTML5 <span lang="en-US">input types</span></h3>
+
+<p>Gebruik waar mogelijk de HTML5 <span lang="en-US">input types (number, email)</span>, met uitzondering van het type <code>date</code>.
+Kijk voor de mogelijkheden op <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" rel="noopener" target="_blank">MDN</a>.</p>
+
+<div class="example" id="example-form">
+    <form method="post" action="#">
+        <div class="input input--invalid">
+            <label class="input__label" for="name">Naam beheerder <span class="label label--optional">optioneel</span> </label>
+            <span class="input__hint" id="hint_name">Bijvoorbeeld Frank Masmeijer</span>
+            <div class="input__error">U heeft het veld Naam beheerder nog niet ingevuld</div>
+            <input required type="text" id="name" aria-describedby="hint_name" class="input__control input__control--text input__control--large">
+        </div>
+
+        <div class="input">
+            <label class="input__label" for="brin">BRIN-nummer</label>
+            <input type="text" id="brin" class="input__control input__control--m input__control--text">
+            <button class="btn">Gegevens ophalen</button>
+        </div>
+
+        <div class="input">
+            <label class="input__label" for="color">Kleur</label>
+            <select id="color" class="input__control input__control--m input__control--select ">
+                <option>Hemelblauw</option>
+                <option>Mosgroen</option>
+                <option>Robijnrood</option>
+            </select>
+        </div>
+
+        <div class="input input--search">
+            <label class="input__label" for="search">Zoeken</label>
+            <div class="input__control-group">
+                <input type="search" id="search" class="input__control input__control--m input__control--search">
+                <button class="btn btn--icon" title="Zoeken"><i class="icon icon-magnifier" role="presentation"></i></button>
+            </div>
+        </div>
+
+        <div class="input">
+            <label class="input__label" for="email">E-mailadres</label>
+            <input required type="email" id="email" class="input__control input__control--text">
+        </div>
+
+        <div class="input">
+            <label class="input__label">Geboortedatum</label>
+
+            <div class="input__control-group">
+                <div>
+                    <label class="input__hint" for="date_of_birth-d">dag</label>
+                    <input aria-label="Geboortedag" title="Geboortedag" required type="number" min="1" max="31" id="date_of_birth-d" class="input__control input__control--two-characters input__control--linked input__control--text">
+                </div>
+                <div>
+                    <label class="input__hint" for="date_of_birth-m">maand</label>
+                    <input aria-label="Geboortemaand" title="Geboortemaand" required type="number" min="1" max="12" id="date_of_birth-m" class="input__control input__control--two-characters input__control--linked input__control--text">
+                </div>
+                <div>
+                    <span class="input__hint" for="date_of_birth-y">jaar</span>
+                    <input aria-label="Geboortejaar" title="Geboortejaar" required type="number" id="date_of_birth-y" class="input__control input__control--four-characters input__control--linked input__control--text">
+                </div>
+            </div>
+        </div>
+
+        <div class="input">
+                <label class="input__label">Adres</label>
+    
+                <div class="input__control-group">
+                    <div>
+                        <label class="input__hint" for="address_postal_code">postcode</label>
+                        <input aria-label="Postcode" title="Postcode" required type="text" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" id="address_postal_code" class="input__control input__control--six-characters input__control--text">
+                    </div>
+                    <div>
+                        <label class="input__hint" for="address_number">huisnummer</label>
+                        <input aria-label="Huisnummer" title="Huisnummer" required type="number" minlength="1" maxlength="5" id="address_number" class="input__control input__control--five-characters input__control--text">
+                    </div>
+                    <div>
+                        <span class="input__hint" for="address_number-addition">toevoeging</span>
+                        <input aria-label="Toevoeging" title="Toevoeging" required type="text" maxlength="5" id="address_number-addition" class="input__control input__control--five-characters input__control--text">
+                    </div>
+                </div>
+            </div>
+
+        <div class="input">
+            <label class="input__label" for="disabled">Uitgeschakeld veld</label>
+            <input disabled type="text" id="disabled" class="input__control input__control--m input__control--text" value="disabled text">
+        </div>
+
+        <div class="input">
+            <label class="input__label" for="textarea_voorbeeld">Tekstveld</label>
+            <textarea id="textarea_voorbeeld" class="input__control input__control--m input__control--text"></textarea>
+        </div>
+
+        <div class="input">
+            <button type="submit" class="btn btn--primary">Verder</button>&nbsp;&nbsp;of naar de <a href="#">vorige stap</a>
+        </div>
+
+    </form>
+</div>
+
+<h2>Bestanden upload</h2>
+<p>Voor het uploaden van bestanden biedt Uno alleen de <span lang="en-US">styling</span> van de componenten.
+    Het afhandelen van de upload is afhankelijk van de gekozen techniek.</p>
+<p>De gekozen bestanden worden getoond in een <code>.list-files</code>(meerdere bestanden) of <code>.list-file</code> bij enkele bestanden.<br>
+Vermeld in de <code lang="en-US">title</code> van de verwijder knop ook de bestandsnaam</p>
+
+<p>Door het attribuut <code lang="en-US">multiple</code> op de <span lang="en-US">input</span> te plaatsen, kunnen er
+meerdere bestanden tegelijk geupload worden. Het is aan te raden de gekozen bestanden
+in javascript bij te houden, aangezien deze lijst wordt overschreven zodra de
+gebruiker weer op 'Bestand uploaden' klikt en een ander bestand kiest.</p>
+
+<div class="example" id="example-upload">
+    <form method="post" action="#">
+        <ul class="list list--files">
+            <li class="file">
+                <i class="file__icon icon icon-document" role="presentation"></i>
+                <div class="file__data">
+                    <div class="file__filename">
+                        <strong class="file__title break-all">c50bed25.jpg</strong>
+                        <span class="meta">JPG, 396.05 kB</span>
+                    </div>
+                    <button class="btn btn--link file__button" title="Verwijder c50bed25.jpg">Verwijder</button>
+                </div>
+            </li>
+
+            <li class="file">
+                <i class="file__icon icon icon-document" role="presentation"></i>
+
+                <div class="file__data">
+                    <div class="file__filename">
+                        <strong class="file__title break-all">formulier.pdf</strong>
+                        <span class="meta">PDF, 1.05 mB</span>
+                    </div>
+                    <button class="btn btn--link file__button" title="Verwijder formulier.pdf">Verwijder</button>
+                </div>
+            </li>
+        </ul>
+
+        <div class="input input--invalid">
+            <span class="input__hint" id="input-upload-hint">Toegestane bestanden: PDF, Word, afbeeldingen. Maximale bestandsgrootte 5mB</span>
+            <div class="input__error">
+                Eventuele foutmeldingen worden <em>onder</em> de bestanden getoond.
+            </div>
+            <label>
+                <input type="file" class="input__control--file" multiple aria-describedby="input-upload-hint">
+                <span class="btn" role="button">Bestand uploaden</span>
+            </label>
+        </div>
+
+        <div class="hidden hidden--for-a11y">
+            <!-- Puur om de a11y test te doorstaan -->
+            <input type="submit" value="submit">
+        </div>
+    </form>
+</div>
+
+<div class="example" id="example-upload-file">
+	<form method="post" action="#">
+        <div class="file">
+            <i class="file__icon icon icon-document" role="presentation"></i>
+            <div class="file__data">
+                <div class="file__filename">
+                    <strong class="file__title break-all is-h4">c50bed25.jpg</strong>
+                    <span class="meta">JPG, 396.05 kB</span>
+                </div>
+                <button class="btn btn--link file__button" title="Verwijder c50bed25.jpg">Verwijder</button>
+            </div>
+        </div>
+
+		<div class="hidden hidden--for-a11y">
+			<!-- Puur om de a11y test te doorstaan -->
+			<input type="submit" value="submit">
+		</div>
+	</form>
+</div>
+
+<h2><span lang="en-US">input</span> groottes</h2>
+<p>Stem het formaat van een <span lang="en-US">input</span> af op de te verwachten inhoud. Een veld voor
+een postcode hoeft niet 100% van de beschikbare breedte in te nemen. Met de
+verschillende <span lang="en-US">modifiers</span> kan een input vergroot / verkleind worden.</p>
+
+<div class="example" id="example-form-sizes">
+    <form class="form">
+        <div class="input input--text">
+            <label class="input__label" for="input-xs">.input__control--xs</label>
+            <input id="input-xs" type="text" class="input__control input__control--xs input__control--search">
+        </div>
+
+        <div class="input input--text">
+            <label class="input__label" for="input-s">.input__control--s</label>
+            <input id="input-s" type="text" class="input__control input__control--s input__control--search">
+        </div>
+
+        <div class="input input--text">
+            <label class="input__label" for="input-m">.input__control--m</label>
+            <input id="input-m" type="text" class="input__control input__control--m input__control--search">
+        </div>
+
+        <div class="input input--text">
+            <label class="input__label" for="input-l">.input__control--l</label>
+            <input id="input-l" type="text" class="input__control input__control--l input__control--search">
+        </div>
+
+        <div class="input input--text">
+            <label class="input__label" for="input-xl">.input__control--xl</label>
+            <input id="input-xl" type="text" class="input__control input__control--xl input__control--search">
+        </div>
+
+        <div class="hidden hidden--for-a11y">
+            <!-- Puur om de a11y test te doorstaan -->
+            <input type="submit" value="submit">
+        </div>
+    </form>
+</div>
+
+<h2>Horizontale uitlijning labels</h2>
+<p>Voor medewerkersschermen bestaat er ook de mogelijkheid om de labels voor het inputveld te plaatsten.
+gebruik hiervoor de <span lang="en-US">class</span> <code>input--horizontal</code>.
+
+</p><p>Deze variant gebruiken we alleen voor medewerkersschermen. Voor
+klantschermen gebruik je altijd de variant met het label erboven. We willen
+klanten door schermen heen leiden en hanteren het principe van één vraag per
+pagina. Medewerkers willen vaak een overzicht van alle gegevens, daarom mag je
+daar van dit principe afwijken. Om te voorkomen dat <code>input--horizontal</code>
+per abuis op klantschermen terecht komt, werkt de modifier alleen als de
+<code>.theme--xxl-breakpoint</code> aan de body is meegegeven.</p>
+
+<div class="example example--theme-xxl" id="example-form-sizes">
+    <form class="form">
+        <div class="input input--horizontal">
+            <div>
+                <label class="input__label" for="name">Naam beheerder</label>
+            </div>
+            <input required type="text" id="name" aria-describedby="hint_name" class="input__control input__control--text input__control--l">
+        </div>
+
+        <div class="input input--horizontal">
+            <div>
+                <label class="input__label" for="name">Naam beheerder <span class="label label--optional">optioneel</span> </label>
+                <span class="input__hint" id="hint_name">Bijvoorbeeld Frank Masmeijer</span>
+            </div>
+            <input required type="text" id="name" aria-describedby="hint_name" class="input__control input__control--text input__control--l">
+        </div>
+
+        <div class="input input--invalid input--horizontal">
+            <div>
+                <label class="input__label" for="name">Naam beheerder <span class="label label--optional">optioneel</span> </label>
+                <span class="input__hint" id="hint_name">Bijvoorbeeld Frank Masmeijer</span>
+            </div>
+            <div class="input__error">U heeft het veld Naam beheerder nog niet ingevuld</div>
+            <input required type="text" id="name" aria-describedby="hint_name" class="input__control input__control--text input__control--l">
+        </div>
+    </form>
+</div>
+
+                            
+                            <h2>Benodigde stylesheets</h2>
+                            <ul>
+                                
+                                <li><code>/uno/components/button/button.css</code></li>
+                                
+                                <li><code>/uno/components/form/form.css</code></li>
+                                
+                                <li><code>/uno/components/form/input.css</code></li>
+                                
+                                <li><code>/uno/components/form/file.css</code></li>
+                                
+                                <li><code>/uno/components/form/checkbox.css</code></li>
+                                
+                                <li><code>/uno/components/label/label.css</code></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+<div class="debug-container" aria-hidden="true">
+    <div class="container">
+        <div class="row">
+            <div class="debug">
+                <input type="checkbox"/>
+
+                <div class="col-xs-1">
+                    <div>
+                        1
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-left">
+                        2
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-left col-lg-dash-list">
+                        3
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        4
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        5
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        6
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        7
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        8
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-right">
+                        9
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        10
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-right">
+                        11
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        12
+                    </div>
+                </div>
+
+                <div class="guide--center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer__content background--hemelblauw">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <span class="footer__header">NL Design System 0.0.1</span>
+
+                    <ul class="list list--links footer__nav">
+                        <li><a href="/changelog">Changelog</a></li>
+                        <li><a href="/upgrade">Upgraden</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Bijdragen</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a rel="external" href="">Backlog</a></li>
+                        <li><a rel="external" href="https://git.dfront.rijkscloud.nl/ux/nl-design-system/">GitLab</a></li>
+                    </ul>
+                </div>  
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Contact</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a href="">Stuur een e-mail</a></li>
+                    </ul>
+                </div>  
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../../js/highlight.pack.js"></script>
+<script src="../../js/examples.js"></script>
+<script src="../../js/debug.js"></script>
+
+<script>
+    // Load collapse component
+    System['import']('/uno/components/collapse/collapse.js').then(function (m) {
+
+        //gebruikt unieke id van de nav om te voorkomen dat example collapses ook automatisch geactiveerd worden.
+        new m.Collapse(document.querySelector('#search-trigger'));
+    });
+    // Load nav component
+    System.import('/uno/components/navigation/navigation.js').then(function (module) {
+        var navs = document.querySelectorAll('.top-nav-autoresize');
+        // Initialize all navs
+        for (var i = 0; i < navs.length; i++) {
+            new module.AutoResizeNavigation(navs.item(i));
+        }
+        var submenus = document.querySelectorAll('.nav--submenu');
+        // Initialize all submenus
+        for (var i = 0; i < submenus.length; i++) {
+            new module.SubMenuNavigation(submenus.item(i));
+        }
+    });
+
+    // Load example tabbing
+    System.import('/uno/components/tabs/tabs.js').then(function (module) {
+        // Select all .tab elements inside the examples on the page
+        var tabs = document.querySelectorAll('.example > .tab--example');
+
+        // Initialize all example tabs
+        for (var i = 0; i < tabs.length; i++) {
+            new module.Tabs(tabs.item(i));
+        }
+    });
+</script>
+
+</div>
+</body>
+</html>

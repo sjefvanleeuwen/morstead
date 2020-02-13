@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>
+        
+        Aan de slag |
+        
+        NL Design System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="../uno/components/favicon/ro-favicon-wit-0xffffff.png">
+
+    <link rel="stylesheet" href="../uno/core/base.css">
+    <link rel="stylesheet" href="../uno/core/grid.css">
+    <link rel="stylesheet" href="../uno/components/lists/lists.css">
+    <link rel="stylesheet" href="../uno/components/header/header.css">
+    <link rel="stylesheet" href="../uno/components/footer/footer.css">
+    <link rel="stylesheet" href="../uno/components/collapse/collapse.css">
+    <link rel="stylesheet" href="../uno/components/navigation/navigation.css">
+    <link rel="stylesheet" href="../uno/components/navigation/breadcrumbs.css">
+    <link rel="stylesheet" href="../uno/components/navigation/backlink.css">
+    <link rel="stylesheet" href="../uno/components/navigation/sidenav.css">
+    <link rel="stylesheet" href="../uno/components/form/form.css">
+    <link rel="stylesheet" href="../uno/components/form/input.css">
+    <link rel="stylesheet" href="../uno/components/button/button.css">
+    <link rel="stylesheet" href="../uno/components/skiplink/skiplink.css">
+    <link rel="stylesheet" href="../uno/components/tabs/tabs.css">
+    <link rel="stylesheet" href="../css/main.css">
+
+    
+
+    
+    <link rel="stylesheet" href="../uno/components/navigation/inpage.css">
+    
+
+    <script src="../uno/vendor/js/Promise.min.js"></script>
+    <script src="../uno/vendor/js/system.js"></script>
+
+    <script>
+        System.config({
+            packages: {
+                '/': {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+    </script>
+</head>
+</html>
+<body class="theme--large-padding">
+<div class="wrapper">
+<a class="skiplink" href="#content">
+    <span class="skiplink__text">Ga direct naar inhoud</span>
+</a>
+<header class="header "
+        role="banner">
+    <!-- <div class="header-logo">
+        <a href="/" title="Logo Dienst Uitvoering Onderwijs"><span class="screenreader-only">dienst uitvoering onderwijs, naar de homepage</span></a>
+    </div> -->
+</header>
+
+
+<nav class="top-nav" id="docs-nav">
+    <div class="container">
+        <div class="top-nav__block top-nav-autoresize">
+            <ul class="nav">
+                <li class="nav__item">
+                    <a href="/" title="Home" class="nav__link  ">
+                        <i class="icon icon-home" role="presentation"></i>
+                        <span>NL Design System</span>
+                    </a>
+                </li>
+                
+                <li class="nav__item"><a class="nav__link nav__link--active" href="/aan-de-slag/index.html">Aan de slag</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/core/index.html">Basis</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/componenten/index.html">Componenten</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/templates/index.html">Voorbeelden</a></li>
+                
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+
+<main class="skiplink-target main" id="content" tabindex="-1">
+    <div class="container">
+        <section class="row">
+    <div class="col-xs-12 col-xl-8 col-xl-offset-2 col-lg-10 col-lg-offset-1">
+        <div class="content">
+            
+
+            <header class="content__header">
+                
+                <h1 class="content__header-title">Aan de slag</h1>
+                
+
+                
+
+                
+
+                
+
+                
+                <ol class="content__header-inpage list list--decimal list--decimal-with-dot columns">
+                    
+                        
+                        <li><a href="/aan-de-slag/index.html">Installatie</a></li>
+                        
+                    
+                        
+                        <li><a href="/aan-de-slag/uno-gebruiken.html">Configuratie</a></li>
+                        
+                    
+                        
+                        <li><a href="/aan-de-slag/document-structuur.html">Documentstructuur</a></li>
+                        
+                    
+                        
+                        <li>Pagina opbouw</li>
+
+                        
+                    
+                </ol>
+                
+            </header>
+        </div>
+    </div>
+</section>
+
+        <article>
+            <div class="row">
+                <div class="col-xl-8 col-xl-offset-2 col-lg-10 col-lg-offset-1">
+                    <div class="content-background">
+
+                        <div class="content">
+                            
+
+<h1>Pagina opbouw</h1>
+<p>Hier komt een stukje tekst over de pagina opbouw.</p>
+
+<h2>Wrapper</h2>
+<p>Elke pagina begint met een <code>&lt;div class="wrapper"&gt;</code>. Alle inhoud van
+de pagina bevindt zich binnen deze <span lang="en-US">wrapper</span></p>
+
+<h2>Breedte</h2>
+<p>De breedte van de <span lang="en-US">content</span> wordt zo ingesteld, zodat de regellengte maximaal
+600&nbsp;pixels is. Dit wordt bereikt door verschillende <code>.col-{screensize}</code>
+toe te passen.<br>
+Door een <code>.col-<em>xx</em>-offset-<em>##</em></code> op de div te zetten
+wordt het <span lang="en-US">content</span> blok worden gecentreerd op de pagina.</p>
+<pre><code>&lt;div class="row"&gt;
+    &lt;div class="col-xs-12 col-xl-8 col-xl-offset-2 col-lg-10 col-lg-offset-1"&gt;
+        &lt;div class="content-background"&gt;
+            &lt;div class="content"&gt;
+                &lt;p&gt;Inhoud van de pagina&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+
+<h2>Main</h2>
+<p>Zet alle <span lang="en-US">content</span> van een pagina (alle zaken behalve het DUO logo, de navigatie en de <span lang="en-US">footer</span>) in een <code lang="en-US">main</code> element.
+    De <span lang="en-US">main</span> heeft een minimale hoogte van 70vh (70% van de <span lang="en-US">view height</span>). Als je teveel zaken buiten de <span lang="en-US">main</span> zet heb je kans dat er zaken buiten beeld gedrukt worden.</p>
+<p>Zorg er wel voor dat niet meer dan één <code lang="en-US">main</code> element per pagina is. <span lang="en-US">Screenreaders</span> verwachten ook maar één keer een <span lang="en-US">main</span> per pagina, namelijk het stuk waar de pagina over gaat.</p>
+<p>Meestal zal een <code lang="en-US">skiplinks</code> ook verwijzen naar de <span lang="en-US">main</span>.</p>
+<pre><code>
+&lt;main class=&quot;skiplink-target main&quot; id=&quot;content&quot; tabindex=&quot;-1&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        [content bijvoorbeeld intro]
+    &lt;/div&gt;
+&lt;/main&gt;
+</code>
+</pre>
+
+<h2>Achtergrondkleur</h2>
+
+<p>De inhoud van de pagina wordt weergegeven op een witte achtergrond, dit
+wordt bereikt door het <code>.content</code> blok in een
+<code>&lt;div class="content-background"&gt;</code> te plaatsen.</p>
+<pre><code>&lt;div class="row"&gt;
+    &lt;div class="col-xs-12 col-xl-8 col-xl-offset-2 col-lg-10 col-lg-offset-1"&gt;
+        &lt;!-- Geeft deze content een achtergrond --&gt;
+        &lt;div class="content-background"&gt;
+            &lt;div class="content"&gt;
+                &lt;p&gt;Inhoud van de pagina&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h3>Alternatieve achtergrond kleur</h3>
+
+<p>De achtergrond
+    kan gewijzigd door een extra <span lang="en-US">class</span> toe te voegen <code>.background-{<em><a href="/core/colors/">rijkshuisstijl kleur</a></em>}</code>.
+    Gebruik dit alleen voor bijvoorbeeld een <span lang="en-US">link list</span>, niet voor tekst blokken.</p>
+
+<h2>Content</h2>
+<p>Een pagina bestaat altijd uit <code>.content</code> blokken. Binnen de contentvlak kun je de pagina beginnen met een intro <code>.content__header</code></p>
+
+<h3>Content Header</h3>
+<p>De meeste pagina's beginnen met een intro. Deze bevat de titel van de pagina
+    met een korte introductie. De titel & de introductie paragraaf worden geplaatst
+    in een <code lang="en-US">header</code> element met de class <code>.content__header</code>.
+    Het intro blok bevat ook de eventuele <code>.backlink</code>.</p>
+    <pre><code>&lt;section class="row"&gt;
+        &lt;div class="col-xs-12 col-xl-8 col-xl-offset-2 col-lg-10 col-lg-offset-1"&gt;
+            &lt;div class="content"&gt;
+                &lt;a href="#" class="content__header-backlink backlink"&gt;Terug&lt;/a&gt;
+                &lt;header class="content__header"&gt;
+                    &lt;h1 class="content__header-title">Titel&lt;/h1&gt;
+                    &lt;p class="content__header-paragraph"&gt;Intro&lt;/p&gt;
+                &lt;/header&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+    </code></pre>
+    
+<h3>Titel met subtitel</h3>
+<p>De subtitel is <em>geen</em> <code>&lt;h2&gt;</code> maar een gewone paragraaf</p>
+<blockquote class="quote">
+    <span lang="en-US">
+        <code>h1–h6</code> elements must not be used to markup subheadings,
+        subtitles, alternative titles and taglines unless intended to be the
+        heading for a new section or subsection.
+    </span>
+
+    <span class="meta">– W3</span><br>
+    <a href="https://www.w3.org/TR/html5/common-idioms.html" title="Lees meer" target="_blank" rel="noopener">Lees meer over html5</a>
+</blockquote>
+
+
+<div class="example">
+    <header class="content__header">
+        <h1 class="content__header-title">Titel van de pagina</h1>
+        <p class="subheading">Subtitel van de pagina</p>
+        <p class="content__header-paragraph">Eventuele introductie text</p>
+    </header>
+</div>
+
+<h3>Titel met meta informatie</h3>
+
+<div class="example">
+    <header class="content__header">
+        <h1 class="content__header-title">Terugmeldingen 2e voorlopige foto
+            2015 mbo vavo beschikbaar</h1>
+        <ul class="meta">
+            <li class="meta__item">9 Maart 2016</li>
+            <li class="meta__item">Leerlingenadministratie</li>
+        </ul>
+    </header>
+</div>
+
+<h3>Titel met voortgangsindicatie</h3>
+
+<div class="example">
+    <header class="content__header">
+        <h1 class="content__header-title">Contactgegevens instelling</h1>
+        <p class="meta meta--progress">Stap 1 van 4 – Eerste opvang nieuwkomers VO</p>
+    </header>
+</div>
+
+<h3>Extra kolom witruimte</h3>
+<p>Op grotere schermen kan het wenselijk zijn een extra kolom witruimte aan de linker
+en rechter kant van het content vlak toe te voegen. Hiervoor moet op de <code lang="us-EN">body</code>
+<span lang="en-US">tag</span> een <span lang="en-US">class</span> worden toegevoegd <code>.theme--large-padding</code>.</p>
+
+<h3>Minder witruimte</h3>
+<p>Voor o.a. medewerkersschermen kan het juist wenselijk zijn om minder witruimte
+tussen de verschillende content blokken te hebben. Voeg hiervoor de <span lang="en-US">modifier</span>
+<code>.content--compact</code> toe aan het <code>.content</code> blok. De witruimte
+bovenaan het <span lang="en-US">content</span> vlak wordt hiermee verkleind. Deze <span lang="en-US">modifier</span> kan <em>niet</em> worden
+gebruikt in combinatie met <code>.theme--large-padding</code>.</p>
+
+<pre><code>&lt;div class="row"&gt;
+    &lt;div class="col-xs-12 col-lg-10 col-lg-offset-1"&gt;
+        &lt;div class="content-background"&gt;
+            &lt;div class="content content--compact"&gt;
+                &lt;h2&gt;Externe identifiers&lt;/h2&gt;
+                &lt;table class="table table--striped"&gt;
+                    &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th&gt;Type&lt;/th&gt;
+                            &lt;th&gt;Inhoud&lt;/th&gt;
+                            &lt;th&gt;Begindatum&lt;/th&gt;
+                            &lt;th&gt;Einddatum&lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;ONDERWIJSAANBIEDER_ID&lt;/td&gt;
+                            &lt;td&gt;100A001&lt;/td&gt;
+                            &lt;td&gt;02-02-2002&lt;/td&gt;
+                            &lt;td&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3><span lang="en-US">Content</span> uitvullen</h3>
+<p>De <span lang="en-US">padding</span> aan de linker en rechter zijde van <span lang="en-US">content</span> blokken kan worden verwijderd
+door de <span lang="en-US">modifier</span> <code>.content--wide</code> toe te passen. Tabellen en componenten
+worden dan strak tegen de rand van het <span lang="en-US">content</span> vlak geplaatst</p>
+
+<pre><code>&lt;div class="row"&gt;
+    &lt;div class="col-xs-12 col-lg-10 col-lg-offset-1"&gt;
+        &lt;div class="content-background"&gt;
+            &lt;div class="content content--wide"&gt;
+                &lt;h2&gt;Externe identifiers&lt;/h2&gt;
+                &lt;table class="table table--striped"&gt;
+                    &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th&gt;Type&lt;/th&gt;
+                            &lt;th&gt;Inhoud&lt;/th&gt;
+                            &lt;th&gt;Begindatum&lt;/th&gt;
+                            &lt;th&gt;Einddatum&lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;ONDERWIJSAANBIEDER_ID&lt;/td&gt;
+                            &lt;td&gt;100A001&lt;/td&gt;
+                            &lt;td&gt;02-02-2002&lt;/td&gt;
+                            &lt;td&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<div class="prev-next">
+    <a href="/aan-de-slag/document-structuur.html" class="prev-next__prev">
+        <span class="prev-next__meta">VORIGE</span>
+        <span class="prev-next__text">3. Documentstructuur</span>
+    </a>
+</div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+<div class="debug-container" aria-hidden="true">
+    <div class="container">
+        <div class="row">
+            <div class="debug">
+                <input type="checkbox"/>
+
+                <div class="col-xs-1">
+                    <div>
+                        1
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-left">
+                        2
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-left col-lg-dash-list">
+                        3
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        4
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        5
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        6
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        7
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        8
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-right">
+                        9
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        10
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-right">
+                        11
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        12
+                    </div>
+                </div>
+
+                <div class="guide--center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer__content background--hemelblauw">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <span class="footer__header">NL Design System 0.0.1</span>
+
+                    <ul class="list list--links footer__nav">
+                        <li><a href="/changelog">Changelog</a></li>
+                        <li><a href="/upgrade">Upgraden</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Bijdragen</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a rel="external" href="">Backlog</a></li>
+                        <li><a rel="external" href="https://git.dfront.rijkscloud.nl/ux/nl-design-system/">GitLab</a></li>
+                    </ul>
+                </div>  
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Contact</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a href="">Stuur een e-mail</a></li>
+                    </ul>
+                </div>  
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../js/highlight.pack.js"></script>
+<script src="../js/examples.js"></script>
+<script src="../js/debug.js"></script>
+
+<script>
+    // Load collapse component
+    System['import']('/uno/components/collapse/collapse.js').then(function (m) {
+
+        //gebruikt unieke id van de nav om te voorkomen dat example collapses ook automatisch geactiveerd worden.
+        new m.Collapse(document.querySelector('#search-trigger'));
+    });
+    // Load nav component
+    System.import('/uno/components/navigation/navigation.js').then(function (module) {
+        var navs = document.querySelectorAll('.top-nav-autoresize');
+        // Initialize all navs
+        for (var i = 0; i < navs.length; i++) {
+            new module.AutoResizeNavigation(navs.item(i));
+        }
+        var submenus = document.querySelectorAll('.nav--submenu');
+        // Initialize all submenus
+        for (var i = 0; i < submenus.length; i++) {
+            new module.SubMenuNavigation(submenus.item(i));
+        }
+    });
+
+    // Load example tabbing
+    System.import('/uno/components/tabs/tabs.js').then(function (module) {
+        // Select all .tab elements inside the examples on the page
+        var tabs = document.querySelectorAll('.example > .tab--example');
+
+        // Initialize all example tabs
+        for (var i = 0; i < tabs.length; i++) {
+            new module.Tabs(tabs.item(i));
+        }
+    });
+</script>
+
+</div>
+</body>
+</html>

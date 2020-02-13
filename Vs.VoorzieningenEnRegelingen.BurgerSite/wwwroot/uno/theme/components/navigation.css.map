@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "navigation.css",
+	"sources": [
+		"../../../../../../../src/theme/components/navigation.scss"
+	],
+	"names": [],
+	"mappings": ""
+}

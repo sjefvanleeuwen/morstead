@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>
+        
+        Tabs |
+        
+        NL Design System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="../../uno/components/favicon/ro-favicon-wit-0xffffff.png">
+
+    <link rel="stylesheet" href="../../uno/core/base.css">
+    <link rel="stylesheet" href="../../uno/core/grid.css">
+    <link rel="stylesheet" href="../../uno/components/lists/lists.css">
+    <link rel="stylesheet" href="../../uno/components/header/header.css">
+    <link rel="stylesheet" href="../../uno/components/footer/footer.css">
+    <link rel="stylesheet" href="../../uno/components/collapse/collapse.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/navigation.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/breadcrumbs.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/backlink.css">
+    <link rel="stylesheet" href="../../uno/components/navigation/sidenav.css">
+    <link rel="stylesheet" href="../../uno/components/form/form.css">
+    <link rel="stylesheet" href="../../uno/components/form/input.css">
+    <link rel="stylesheet" href="../../uno/components/button/button.css">
+    <link rel="stylesheet" href="../../uno/components/skiplink/skiplink.css">
+    <link rel="stylesheet" href="../../uno/components/tabs/tabs.css">
+    <link rel="stylesheet" href="../../css/main.css">
+
+    
+    <link rel="stylesheet" href="../../uno/components/tabs/tabs.css">
+    
+
+    
+    <link rel="stylesheet" href="../../uno/components/table/table.css">
+<link rel="stylesheet" href="../../uno/components/label/label.css">
+<link rel="stylesheet" href="../../uno/components/label/badge.css">
+    
+
+    <script src="../../uno/vendor/js/Promise.min.js"></script>
+    <script src="../../uno/vendor/js/system.js"></script>
+
+    <script>
+        System.config({
+            packages: {
+                '/': {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+    </script>
+</head>
+</html>
+<body class="theme--large-padding">
+<div class="wrapper">
+<a class="skiplink" href="#main-content">
+    <span class="skiplink__text">Ga direct naar inhoud</span>
+</a>
+<header class="header "
+        role="banner">
+    <!-- <div class="header-logo">
+        <a href="/" title="Logo Dienst Uitvoering Onderwijs"><span class="screenreader-only">dienst uitvoering onderwijs, naar de homepage</span></a>
+    </div> -->
+</header>
+
+
+<nav class="top-nav" id="docs-nav">
+    <div class="container">
+        <div class="top-nav__block top-nav-autoresize">
+            <ul class="nav">
+                <li class="nav__item">
+                    <a href="/" title="Home" class="nav__link  ">
+                        <i class="icon icon-home" role="presentation"></i>
+                        <span>NL Design System</span>
+                    </a>
+                </li>
+                
+                <li class="nav__item"><a class="nav__link " href="/aan-de-slag/index.html">Aan de slag</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/core/index.html">Basis</a></li>
+                
+                <li class="nav__item"><a class="nav__link nav__link--active" href="/componenten/index.html">Componenten</a></li>
+                
+                <li class="nav__item"><a class="nav__link " href="/templates/index.html">Voorbeelden</a></li>
+                
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+
+<main class="smain" id="content">
+    <div class="container">
+        <section class="row">
+            <div class="col-xl-9 col-xl-offset-4 col-lg-8 col-lg-offset-5 col-md-9 col-md-offset-4 col-xs-12">
+                <header class="content__header">
+                    
+                        <h1 class="content__header-title">Tabs</h1>
+                    
+                </header>
+            </div>
+        </section>
+        <article>
+            <div class="row">
+                <aside class="col-xl-3 col-lg-4 col-md-3 col-sm-modal">
+                    <nav class="sidenav">
+                        
+                            
+                        
+                            
+                        
+                            
+                                <ul>
+                                    <li class="sidenav__item ">
+                                        <a href="/componenten">
+                                            Introductie
+                                        </a>
+                                    </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/backlink">Backlink</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/bottom-bar">Bottom bar</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/button">Button</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/card">Card</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/donutchart">Chart</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/checkbox">Checkbox</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/collapse">Collapse</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/combobox">Combobox</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/definition-list">Definition list</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/footer">Footer</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/file">File</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/filter">Filter</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/form">Form</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/header">Header</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/hint">Hint</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/images">Images</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/label">Labels &amp; badges</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/lists">Lists</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/modal">Modal</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/meta">Meta</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/navigation">Navigation</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/notification">Notification</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/pagination">Pagination</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/quote">Quote</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/radio">Radiobutton</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/sections">Section</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/skiplink">Skiplink</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/spinner">Spinner</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/switch">Switch</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/table">Table</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item sidenav__item--active">
+                                            <a href="../../componenten/tabs">Tabs</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/timeline">Timeline</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/tooltip">Tooltip</a>
+                                        </li>
+                                    
+                                        <li class="sidenav__item ">
+                                            <a href="../../componenten/videos">Video</a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        
+                            
+                        
+                    </nav>
+                </aside>
+                <div class="col-xl-9 col-lg-8 col-md-9">
+                    <div class="content-background">
+
+                        <div class="skiplink-target content" id="main-content">
+                            
+<h2>Tabs als content sectie</h2>
+<p>Tabs kunnen als content sectie of <span lang="en-US">inline</span> worden geplaatst.
+Hieronder een voorbeeld als content sectie </p>
+
+<h3>Badges</h3>
+<p>Een tab mag een <span lang="en-US">badge</span> of label bevatten. Zorg ervoor dat er geen witruimte tussen de titel van de
+tab en de <span lang="en-US">badge</span> zit. Dit voorkomt dat de onderlijning van de titel te ver doorloopt.</p>
+
+<div class="example" id="example-tabs">
+    <ul class="tab" role="tablist">
+        <li id="tab1" role="tab" aria-controls="panel1" class="tab__tab"><a href="#panel1">Tab 1 met een lange titel</a></li>
+        <li id="tab2" role="tab" aria-controls="panel2" class="tab__tab"><a href="#panel2">Tab 2<span class="badge badge--geel">2</span></a></li>
+        <li id="tab3" role="tab" aria-controls="panel3" class="tab__tab"><a href="#panel3">Tab 3</a></li>
+        <li id="tab4" role="tab" aria-controls="panel4" class="tab__tab tab__tab--disabled"><a href="#panel4">Disabled</a></li>
+        <li id="tab5" role="tab" aria-controls="panel5" class="tab__tab"><a href="#panel5">Tab 5</a></li>
+        <li id="tab6" role="tab" aria-controls="panel5" class="tab__tab"><a href="#panel6">Another tab (6)</a></li>
+        <li id="tab7" role="tab" aria-controls="panel5" class="tab__tab"><a href="#panel7">Another tab (7)</a></li>
+        <li id="tab8" role="tab" aria-controls="panel5" class="tab__tab"><a href="#panel8">Another tab (8)</a></li>
+        <li id="tab9" role="tab" aria-controls="panel5" class="tab__tab"><a href="#panel9">Another tab (9)</a></li>
+        <li id="tab10" role="tab" aria-controls="panel5" class="tab__tab"><a href="#panel10">Another tab (10)</a></li>
+    </ul>
+
+    <div class="content-background tab__content">
+        <section class="content tab__pane" id="panel1" aria-labelledby="tab1" role="tabpanel">
+            <h3>Panel 1</h3>
+            <p>Panel 1</p>
+        </section>
+
+        <section class="content tab__pane" id="panel2" role="tabpanel" aria-labelledby="tab2">
+            <p>Panel 2</p>
+        </section>
+
+        <section class="content tab__pane" id="panel3" role="tabpanel" aria-labelledby="tab3">
+            <p>Panel 3</p>
+        </section>
+        <section class="content tab__pane" id="panel4" role="tabpanel" aria-labelledby="tab4">
+            <p>This tab is disabled :'(</p>
+        </section>
+
+        <section class="content tab__pane" id="panel5" role="tabpanel" aria-labelledby="tab5">
+            <p>Panel 5</p>
+        </section>
+
+        <section class="content tab__pane" id="panel6" role="tabpanel" aria-labelledby="tab6">
+            <p>Panel 6</p>
+        </section>
+
+        <section class="content tab__pane" id="panel7" role="tabpanel" aria-labelledby="tab7">
+            <p>Panel 7</p>
+        </section>
+
+        <section class="content tab__pane" id="panel8" role="tabpanel" aria-labelledby="tab8">
+            <p>Panel 8</p>
+        </section>
+
+        <section class="content tab__pane" id="panel9" role="tabpanel" aria-labelledby="tab9">
+            <p>Panel 9</p>
+        </section>
+
+        <section class="content tab__pane" id="panel10" role="tabpanel" aria-labelledby="tab10">
+            <p>Panel 10</p>
+        </section>
+    </div>
+</div>
+
+<h2><span lang="en-US">Inline</span> tabs</h2>
+
+<p><span lang="en-US">Inline</span> tabs kunnen tussen de lopende tekst worden geplaatst. Voeg
+hiervoor de <span lang="en-US">modifiers</span> <code>.tab--inline</code> en
+<code>.tab__content--inline</code> toe aan de code.</p>
+
+<div id="example-tabs--inline" class="example">
+    <ul class="tab tab--inline" role="tablist">
+        <li class="tab__tab tab__tab--active" role="tab" aria-controls="panel2-1" id="tab2-1"><a href="#panel2-1">Tab 1</a></li>
+        <li class="tab__tab" role="tab" aria-controls="panel2-2" id="tab2-2"><a href="#panel2-2">Tab 2</a></li>
+        <li class="tab__tab" role="tab" aria-controls="panel2-3" id="tab2-3"><a href="#panel2-3">Tab 3</a></li>
+        <li class="tab__tab" role="tab" aria-controls="panel2-4" id="tab2-4"><a href="#panel2-4">Tab 4 met een hele lange titel</a></li>
+    </ul>
+
+    <div class="tab__content tab__content--inline">
+
+        <section class="tab__pane tab__pane--active" id="panel2-1" role="tabpanel" aria-labelledby="tab2-1">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Praesent eget ipsum turpis. Vestibulum sit amet congue erat.
+                Mauris at enim maximus, bibendum eros non, porttitor ante.
+                Nunc a ante at nunc molestie pretium ut iaculis erat. Maecenas
+                non justo ligula. Sed placerat porta sem, id euismod purus.
+                Ut ac elementum nunc. Donec vitae velit rutrum magna fermentum
+                varius. Praesent vitae elit lorem. Nunc condimentum maximus
+                consectetur. Aliquam fringilla leo ut malesuada consectetur.
+                Praesent tristique congue auctor. Donec at sem eu quam
+                ultricies feugiat. Ut libero nisi, venenatis vitae tortor
+                vitae, sollicitudin pretium diam. Maecenas porttitor
+                consectetur elit sed viverra.</p>
+        </section>
+
+        <section class="tab__pane" id="panel2-2" role="tabpanel" aria-labelledby="tab2-2">
+            <p>Donec vitae velit rutrum magna fermentum
+                varius. Praesent vitae elit lorem. Nunc condimentum maximus
+                consectetur. Aliquam fringilla leo ut malesuada consectetur.
+                Praesent tristique congue auctor. Donec at sem eu quam
+                ultricies feugiat. Ut libero nisi, venenatis vitae tortor
+                vitae, sollicitudin pretium diam. Maecenas porttitor
+                consectetur elit sed viverra.</p>
+        </section>
+
+        <section class="tab__pane" id="panel2-3" role="tabpanel" aria-labelledby="tab2-3">
+            <p>Ut libero nisi, venenatis vitae tortor
+                vitae, sollicitudin pretium diam. Donec vitae velit rutrum
+                magna fermentum varius. Praesent vitae elit lorem. Nunc
+                condimentum maximus consectetur. Ut libero nisi, venenatis
+                vitae tortor vitae, sollicitudin pretium diam. Aliquam
+                fringilla leo ut malesuada consectetur. Praesent tristique
+                congue auctor. Donec at sem eu quam ultricies feugiat. Ut
+                libero nisi, venenatis vitae tortor vitae, sollicitudin
+                pretium diam. Maecenas porttitor consectetur elit sed viverra.</p>
+        </section>
+
+        <section class="tab__pane" id="panel2-4" role="tabpanel" aria-labelledby="tab2-4">
+            <p>Donec vitae velit rutrum magna fermentum
+                varius. Praesent vitae elit lorem. Nunc condimentum maximus
+                consectetur. Aliquam fringilla leo ut malesuada consectetur.
+                Praesent tristique congue auctor. Donec at sem eu quam
+                ultricies feugiat. Ut libero nisi, venenatis vitae tortor
+                vitae, sollicitudin pretium diam. Maecenas porttitor
+                consectetur elit sed viverra.</p>
+        </section>
+    </div>
+</div>
+
+<h2>Javascript</h2>
+
+<p>Voor de werking van tabs is javascript nodig</p>
+
+<pre><code>/* Load tab component */
+    System.import('/uno/components/tabs/tabs.js').then(function (module) {
+    /* Select all .tab elements on the page */
+    var tabs = document.querySelectorAll('.tab');
+    /* Initialize all tabs */
+    for (var i = 0; i &lt; tabs.length; i++) {
+    new module.Tabs(tabs.item(i));
+    }
+});</code></pre>
+
+<h3>Bediening met javascript</h3>
+
+<p>Via javascript kan o.a. de actieve tab gewijzigd worden, via de methode
+<code>openTab(<em>n</em>)</code>, waarbij <em>n</em> de index van de
+te activeren tab is.</p>
+
+<pre><code>/* Load tab component */
+    System.import('/uno/components/tabs/tabs.js').then(function (module) {
+    /* Create tab component */
+    var tab = new module.Tabs(document.querySelector('.tab'));
+});</code></pre>
+
+<h2>Javascript API</h2>
+<h3>Publieke methodes</h3>
+
+<table class="table table--striped">
+    <thead>
+    <tr>
+        <th>Methode</th>
+        <th>Omschrijving</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>openTab(idx:number):void</code></td>
+        <td>Opent de tab met index <code>idx</code></td>
+    </tr>
+    <tr>
+        <td><code>disableTab(idx:number):void</code></td>
+        <td>Deactiveer de tab met index <code>idx</code></td>
+    </tr>
+    <tr>
+        <td><code>enableTab(idx:number):void</code></td>
+        <td>Activeer de tab met index <code>idx</code></td>
+    </tr>
+    <tr>
+        <td><code>destroy():void</code></td>
+        <td>Verwijdert de tabs, verwijdert alle event-listeners.<br><em>Roep deze methode aan wanneer je de tabs wilt verwijderen!</em></td>
+    </tr>
+    </tbody>
+
+</table>
+
+<h3>Publieke eigenschappen</h3>
+
+<table class="table table--striped">
+    <thead>
+    <tr>
+        <th>Eigenschap</th>
+        <th>Type</th>
+        <th>Omschrijving</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>activeTabIndex</code> <span class="label label--zwart">read-only</span> </td>
+            <td>number</td>
+            <td>De index van de actieve tab</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<script>
+
+  var tabExample;
+  // Load tab component
+  System.import('/uno/components/tabs/tabs.js').then(function (module) {
+    // Select all .tab elements on the page
+    var tabs = document.querySelectorAll('.tab:not(.tab--example)');
+
+    // Initialize all tabs
+    for (var i = 0; i < tabs.length; i++) {
+      new module.Tabs(tabs.item(i));
+    }
+  });
+
+  function enableTab(item) {
+    tabExample.enableTab(item - 1);
+  }
+
+  function disableTab(item) {
+    tabExample.disableTab(item - 1);
+  }
+
+  function openTab(item) {
+    tabExample.openTab(item - 1);
+  }
+</script>
+
+                            
+                            <h2>Benodigde stylesheets</h2>
+                            <ul>
+                                
+                                <li><code>/uno/components/tabs/tabs.css</code></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</main>
+
+<div class="debug-container" aria-hidden="true">
+    <div class="container">
+        <div class="row">
+            <div class="debug">
+                <input type="checkbox"/>
+
+                <div class="col-xs-1">
+                    <div>
+                        1
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-left">
+                        2
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-left col-lg-dash-list">
+                        3
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        4
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        5
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        6
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        7
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        8
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-lg-dash-right">
+                        9
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        10
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div class="col-md-dash-right">
+                        11
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <div>
+                        12
+                    </div>
+                </div>
+
+                <div class="guide--center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer__content background--hemelblauw">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <span class="footer__header">NL Design System 0.0.1</span>
+
+                    <ul class="list list--links footer__nav">
+                        <li><a href="/changelog">Changelog</a></li>
+                        <li><a href="/upgrade">Upgraden</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Bijdragen</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a rel="external" href="">Backlog</a></li>
+                        <li><a rel="external" href="https://git.dfront.rijkscloud.nl/ux/nl-design-system/">GitLab</a></li>
+                    </ul>
+                </div>  
+
+                <div class="col-xs-4">
+                    <span class="footer__header">Contact</span>
+                    <ul class="list list--links footer__nav">
+                        <li><a href="">Stuur een e-mail</a></li>
+                    </ul>
+                </div>  
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../../js/highlight.pack.js"></script>
+<script src="../../js/examples.js"></script>
+<script src="../../js/debug.js"></script>
+
+<script>
+    // Load collapse component
+    System['import']('/uno/components/collapse/collapse.js').then(function (m) {
+
+        //gebruikt unieke id van de nav om te voorkomen dat example collapses ook automatisch geactiveerd worden.
+        new m.Collapse(document.querySelector('#search-trigger'));
+    });
+    // Load nav component
+    System.import('/uno/components/navigation/navigation.js').then(function (module) {
+        var navs = document.querySelectorAll('.top-nav-autoresize');
+        // Initialize all navs
+        for (var i = 0; i < navs.length; i++) {
+            new module.AutoResizeNavigation(navs.item(i));
+        }
+        var submenus = document.querySelectorAll('.nav--submenu');
+        // Initialize all submenus
+        for (var i = 0; i < submenus.length; i++) {
+            new module.SubMenuNavigation(submenus.item(i));
+        }
+    });
+
+    // Load example tabbing
+    System.import('/uno/components/tabs/tabs.js').then(function (module) {
+        // Select all .tab elements inside the examples on the page
+        var tabs = document.querySelectorAll('.example > .tab--example');
+
+        // Initialize all example tabs
+        for (var i = 0; i < tabs.length; i++) {
+            new module.Tabs(tabs.item(i));
+        }
+    });
+</script>
+
+</div>
+</body>
+</html>

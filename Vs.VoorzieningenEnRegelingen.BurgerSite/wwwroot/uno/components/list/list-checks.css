@@ -1,0 +1,32 @@
+@charset "UTF-8";
+.list--checks {
+  list-style: none outside;
+  margin-left: 24px;
+  margin-left: 2.4rem;
+}
+
+.list--checks li {
+  position: relative;
+}
+
+.list--checks li::before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  /* stylelint-disable */
+  font-family: 'duo-basic' !important;
+  /* stylelint-enable */
+  /* Better Font Rendering */
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-transform: none;
+  content: "";
+  font-size: 20px;
+  font-size: 2rem;
+  line-height: 10px;
+  text-align: right;
+}
+/*# sourceMappingURL=list-checks.css.map */
