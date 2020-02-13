@@ -17,19 +17,13 @@ stuurinformatie:
   bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
 berekening:
  - stap: 1
-   omschrijving: bepaal de standaard premie
-   formule: standaardpremie
- - stap: 2
-   omschrijving: bereken het gezamenlijke toestingsinkomen
-   formule: toetsingsinkomen
- - stap: 3 
-   omschrijving: bereken de normpremie
-   formule: normpremie
- - stap: 4 
+   omschrijving: bepaal of er recht is op de zorgtoeslag
+   formule: recht
+ - stap: 2 
    situatie: binnenland
    omschrijving: bereken de zorgtoeslag wanneer men binnen nederland woont
    formule: zorgtoeslag
- - stap: 5
+ - stap: 2
    situatie: buitenland
    omschrijving: bereken de zorgtoeslag wanner men in het buitenland woont
    formule: zorgtoeslag
@@ -44,14 +38,22 @@ formules:
      formule: 114776
    - situatie: aanvrager_met_toeslagpartner
      formule: 145136
- - recht_op_zorgtoeslag: 
+ - recht: 
    - situatie: alleenstaande
-     formule: toetsinginkomen <= 29562
+     formule: vermogen <= 114776 AND toetsingsinkomen <= 29562
    - situatie: aanvrager_met_toeslagpartner
-     formule: toetsinginkomen <= 37885
+     formule: vermogen <= 145136 AND toetsingsinkomen <= 37885
  - drempelinkomen:
      formule: 20941
- - toetsingsinkomen: 
+ - vermogen: 
+   - situatie: alleenstaande
+     formule: vermogen_aanvrager
+   - situatie: aanvrager_met_toeslagpartner
+     formule: vermogen_aanvrager + vermogen_toeslagpartner
+ - toetsingsinkomen:
+   - situatie: alleenstaande
+     formule: toetsingsinkomen_aanvrager
+   - situatie: aanvrager_met_toeslagpartner 
      formule: toetsingsinkomen_aanvrager + toetsingsinkomen_toeslagpartner
  - normpremie:
    - situatie: alleenstaande
@@ -70,10 +72,6 @@ formules:
  - woonlandfactor:
      formule: lookup('woonlandfactoren',woonland,'woonland','factor')
 tabellen:
-  - naam: maximaalvermogen
-    situatie, waarde:
-      - [ alleenstaande,                11476 ] 
-      - [ aanvrager met toeslagpartner, 14536 ]
   - naam: woonlandfactoren
     woonland, factor:
       - [ Finland,             0.7161 ]
