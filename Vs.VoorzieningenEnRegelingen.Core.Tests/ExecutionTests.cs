@@ -144,28 +144,28 @@ formules:
         /// Hij woont in Malta.
         /// bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
         /// </summary>
-        [Fact]
-        public void Execution_ZorgToeslag_2019_Scenario1c()
-        {
-            var controller = new YamlScriptController();
-            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
-            {
-                // should not be called.
-                throw new Exception("Questioncallback should not be called.");
-            };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
-            Assert.False(result.IsError);
-            var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("woonland","Malta")
-            };
-            var executionResult = new ExecutionResult(ref parameters);
-            controller.ExecuteWorkflow(ref parameters, ref executionResult);
-            Assert.True((bool)parameters.GetParameter("recht")?.Value);
-            Assert.True((double)parameters.GetParameter("zorgtoeslag").Value == Math.Round(99.09 * 0.3574, 2));
-        }
+        //[Fact]
+        //public void Execution_ZorgToeslag_2019_Scenario1c()
+        //{
+        //    var controller = new YamlScriptController();
+        //    controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+        //    {
+        //        // should not be called.
+        //        throw new Exception("Questioncallback should not be called.");
+        //    };
+        //    var result = controller.Parse(YamlZorgtoeslag.Body);
+        //    Assert.False(result.IsError);
+        //    var parameters = new ParametersCollection() {
+        //        new Parameter("alleenstaande","ja"),
+        //        new Parameter("toetsingsinkomen_aanvrager",(double)19000),
+        //        new Parameter("vermogen_aanvrager",(double)1000),
+        //        new Parameter("woonland","Malta")
+        //    };
+        //    var executionResult = new ExecutionResult(ref parameters);
+        //    controller.ExecuteWorkflow(ref parameters, ref executionResult);
+        //    Assert.True((bool)parameters.GetParameter("recht")?.Value);
+        //    Assert.True((double)parameters.GetParameter("zorgtoeslag").Value == Math.Round(99.09 * 0.3574, 2));
+        //}
 
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1_WithQA_vermogen_aanvrager()
