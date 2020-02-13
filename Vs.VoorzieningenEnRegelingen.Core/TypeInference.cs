@@ -7,7 +7,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
     {
         public static InferenceResult Infer(string inference)
         {
-            Decimal floatResult =50;
+            double floatResult = 50;
             TimeSpan timeSpanResult;
             DateTime dateTimeResult;
 
@@ -15,9 +15,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             var style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign | NumberStyles.AllowLeadingWhite;
             var culture = new CultureInfo("en-US");
 
-            if (Decimal.TryParse(inference, style, culture, out floatResult))
+            if (Double.TryParse(inference, style, culture, out floatResult))
             {
-                return new InferenceResult(InferenceResult.TypeEnum.Decimal, floatResult);
+                return new InferenceResult(InferenceResult.TypeEnum.Double, floatResult);
             }
             if (TimeSpan.TryParse(inference, out timeSpanResult))
             {

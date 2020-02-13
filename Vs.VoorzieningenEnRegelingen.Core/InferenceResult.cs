@@ -15,7 +15,7 @@
 
             public enum TypeEnum
             {
-                Decimal,
+                Double,
                 TimeSpan,
                 DateTime,
                 String
