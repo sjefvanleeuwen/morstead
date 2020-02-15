@@ -31,6 +31,9 @@ namespace Vs.DataProvider.MsSqlGraph
                 // Resolve AttributeType from types that inherit from IAttributeType
                 switch (((AttributeTypeAttribute)attribute.Type.GetType().GetCustomAttributes(typeof(AttributeTypeAttribute), true)[0]).Name)
                 {
+                    case "int":
+                        sb.Append($"{attribute.Name} INTEGER,");
+                        break;
                     case "datum":
                         sb.Append($"{attribute.Name} DATETIME,");
                         break;

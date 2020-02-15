@@ -51,7 +51,7 @@ Edges:
   - Name: person
   Attributes:
   - Name: rating
-    Type: Integer
+    Type: int
 - Name: married
   Constraints:
   - Name: person
