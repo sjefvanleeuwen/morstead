@@ -6,6 +6,22 @@ namespace Vs.Graph.Core.Tests
     public class DataTests
     {
         [Fact]
+        public void CanReadSchemaPackage()
+        {
+            var schemaPackage = @"SchemaSequence:
+Schemas:
+- Name: openId
+- Name: persoon
+- Name: bestand
+";
+            SchemaController controller = new SchemaController(new MsSqlGraphSchemaService());
+            var package = controller.SchemaSequence(schemaPackage);
+            Assert.NotNull(package.Schemas);
+            Assert.True(package.Schemas.Count==3);
+            Assert.True(package.Schemas[0].Name != string.Empty);
+        }
+
+        [Fact]
         public void CreateEntityFromYamlWithCustomType()
         {
             // create some entities through built-in data provider

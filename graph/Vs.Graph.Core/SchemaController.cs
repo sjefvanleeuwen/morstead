@@ -21,6 +21,12 @@ namespace Vs.Graph.Core
             return sw.ToString();
         }
 
+        public SchemaSequence SchemaSequence(string yaml)
+        {
+            var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
+            return deserializer.Deserialize<SchemaSequence>(yaml);
+        }
+
         public NodeSchema Deserialize(string yaml)
         {
             var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
