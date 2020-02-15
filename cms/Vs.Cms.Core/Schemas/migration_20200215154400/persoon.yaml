@@ -1,11 +1,11 @@
 ﻿Name: persoon
-Attributen:
+Attributes:
 - Name: voornamen
-  type: tekst
+  Type: text
 - Name: voorvoegsel
-  type: tekst
+  Type: text
 - Name: geslachtsnaam
-  type: tekst
+  Type: text
 Edges:
 - Name: digitaleIdentiteit
   Constraints:

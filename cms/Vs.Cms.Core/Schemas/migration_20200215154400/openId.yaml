@@ -1,4 +1,4 @@
 ﻿Name: openId
 Attributes:
   - Name: gebruikersId
-  - Type: text
+    Type: text
