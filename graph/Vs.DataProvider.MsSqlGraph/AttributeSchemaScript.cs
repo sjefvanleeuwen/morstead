@@ -51,7 +51,8 @@ namespace Vs.DataProvider.MsSqlGraph
                         throw new AttributeNotSupportedException();
                 }
             }
-            return sb.ToString().TrimEnd(',') + ' ';
+
+            return sb.ToString();
         }
     }
 }
