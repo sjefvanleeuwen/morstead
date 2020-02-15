@@ -31,6 +31,29 @@ namespace Vs.DataProvider.MsSqlGraph.Tests
             var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
             var r = deserializer.Deserialize<NodeSchema>(yaml);
             var sql = script.CreateScript(n);
+            Assert.True(sql== @"CREATE TABLE node.person (
+ID INTEGER PRIMARY KEY,
+FirstName  NTEXT,LastName  NTEXT,DateOfBirth DATETIME,
+) AS NODE;
+CREATE TABLE edge.likes (
+rating DECIMAL,CONSTRAINT EC_LIKES CONNECTION (
+node.person TO node.person
+)
+) AS EDGE;
+
+CREATE TABLE edge.married (
+CONSTRAINT EC_MARRIED CONNECTION (
+node.person TO node.person
+)
+) AS EDGE;
+
+CREATE TABLE edge.friend (
+CONSTRAINT EC_FRIEND CONNECTION (
+node.person TO node.person
+)
+) AS EDGE;
+
+");
         }
 
         [Fact]
@@ -64,7 +87,30 @@ Edges:
             var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
             var r = deserializer.Deserialize<NodeSchema>(yaml);
             NodeSchemaScript script = new NodeSchemaScript();
-            var s = script.CreateScript(r);
+            var sql = script.CreateScript(r);
+            Assert.True(sql== @"CREATE TABLE node.person (
+ID INTEGER PRIMARY KEY,
+FirstName  NTEXT,LastName  NTEXT,
+) AS NODE;
+CREATE TABLE edge.likes (
+rating INTEGER,CONSTRAINT EC_LIKES CONNECTION (
+node.person TO node.person
+)
+) AS EDGE;
+
+CREATE TABLE edge.married (
+CONSTRAINT EC_MARRIED CONNECTION (
+node.person TO node.person
+)
+) AS EDGE;
+
+CREATE TABLE edge.friend (
+CONSTRAINT EC_FRIEND CONNECTION (
+node.person TO node.person
+)
+) AS EDGE;
+
+");
         }
     }
 }
