@@ -12,10 +12,13 @@ namespace Vs.DataProvider.MsSqlGraph
             sb.AppendLine($"ID INTEGER PRIMARY KEY,");
             sb.AppendLine(new AttributeSchemaScript().CreateScript(node.Attributes));
             sb.AppendLine(") AS NODE;");
-            var s = new EdgeSchemaScript(node);
-            foreach (var edge in node.Edges)
+            if (node.Edges != null)
             {
-                sb.AppendLine(s.CreateScript(edge));
+                var s = new EdgeSchemaScript(node);
+                foreach (var edge in node.Edges)
+                {
+                    sb.AppendLine(s.CreateScript(edge));
+                }
             }
             return sb.ToString();
         }
