@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Vs.Core.Diagnostics;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {

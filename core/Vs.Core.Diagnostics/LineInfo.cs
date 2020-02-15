@@ -1,4 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.Model
+﻿namespace Vs.Core.Diagnostics
 {
     public class LineInfo
     {

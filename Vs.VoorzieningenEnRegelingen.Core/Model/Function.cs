@@ -1,4 +1,5 @@
 ﻿using System;
+using Vs.Core.Diagnostics;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {

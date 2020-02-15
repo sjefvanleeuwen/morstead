@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Vs.Core.Diagnostics;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using YamlDotNet.Core;
 using YamlDotNet.RepresentationModel;
@@ -35,25 +36,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             map = Map(_yaml);
         }
 
-        public static DebugInfo mapDebugInfo(Mark start, Mark end)
-        {
-            if (start is null)
-            {
-                throw new ArgumentNullException(nameof(start));
-            }
-
-            if (end is null)
-            {
-                throw new ArgumentNullException(nameof(end));
-            }
-
-            return new DebugInfo(
-                start: new LineInfo(line: start.Line, col: start.Column, index: start.Index),
-                end: new LineInfo(line: end.Line, col: end.Column, index: end.Index)
-            );
-        }
-
-        public StuurInformatie Header()
+       public StuurInformatie Header()
         {
             var stuurinformatie = new StuurInformatie();
             foreach (var item in ((YamlMappingNode)map.Children[new YamlScalarNode(HeaderAttribute)]).Children)
@@ -96,7 +79,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             var steps = new List<Step>();
             foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)])
             {
-                var debugInfoStep = mapDebugInfo(step.Start, step.End);
+                var debugInfoStep = DebugInfo.MapDebugInfo(step.Start, step.End);
                 string stepid ="", description="", formula = "", situation="";
                 foreach (var stepInfo in ((YamlMappingNode)step).Children)
                 {
@@ -132,7 +115,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 return tables;
             foreach (var tabel in (YamlSequenceNode)map.Children[new YamlScalarNode(TablesAttribute)])
             {
-                var debugInfoTable = mapDebugInfo(tabel.Start, tabel.End);
+                var debugInfoTable = DebugInfo.MapDebugInfo(tabel.Start, tabel.End);
                 var debugInfo = new DebugInfo(
                     start: new LineInfo(line: tabel.Start.Line, col: tabel.Start.Column, index: tabel.Start.Index),
                     end: new LineInfo(line: tabel.Start.Line, col: tabel.Start.Column, index: tabel.Start.Index)
@@ -140,14 +123,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 var tableName = ((YamlMappingNode)tabel).ElementAt(0).Value.ToString();
                 var columns1 = ((YamlMappingNode)tabel).ElementAt(1).Key.ToString().Split(',').Select(sValue => sValue.Trim()).ToArray();
                 var rows = new List<Row>();
-                var columnsDebugInfo = mapDebugInfo(((YamlMappingNode)tabel).ElementAt(1).Key.Start, ((YamlMappingNode)tabel).ElementAt(1).Key.End);
+                var columnsDebugInfo = DebugInfo.MapDebugInfo(((YamlMappingNode)tabel).ElementAt(1).Key.Start, ((YamlMappingNode)tabel).ElementAt(1).Key.End);
                 foreach (var row in (YamlSequenceNode)(((YamlMappingNode)tabel).ElementAt(1).Value))
                 {
-                    var rowdebugInfo = mapDebugInfo(row.Start, row.End);
+                    var rowdebugInfo = DebugInfo.MapDebugInfo(row.Start, row.End);
                     var columns = new List<Column>();
                     foreach (var column in (YamlSequenceNode)row)
                     {
-                        var info = mapDebugInfo(column.Start, column.End);
+                        var info = DebugInfo.MapDebugInfo(column.Start, column.End);
                         columns.Add(new Column(info, ((YamlScalarNode)column).Value));
                     }
                     rows.Add(new Row(rowdebugInfo, columns));
@@ -192,17 +175,17 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                         {
                             var f = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == FormulaAttribute).Value;
                             var s = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == SituationAttribute).Value;
-                            var function = new Function(mapDebugInfo(f.Start,f.End), s.ToString(), f.ToString().Replace("'","\""));
+                            var function = new Function(DebugInfo.MapDebugInfo(f.Start,f.End), s.ToString(), f.ToString().Replace("'","\""));
                             functions.Add(function);
                         }
                     }
                     else
                     {
                         var f = ((YamlMappingNode)row.Value).Children.FirstOrDefault(p => p.Key.ToString() == FormulaAttribute).Value;
-                        var function = new Function(mapDebugInfo(f.Start, f.End), f.ToString().Replace("'", "\""));
+                        var function = new Function(DebugInfo.MapDebugInfo(f.Start, f.End), f.ToString().Replace("'", "\""));
                         functions.Add(function);
                     }
-                    funcs.Add(new Formula(mapDebugInfo(variableName.Start, variableName.End), variableName.ToString(), functions));
+                    funcs.Add(new Formula(DebugInfo.MapDebugInfo(variableName.Start, variableName.End), variableName.ToString(), functions));
                 }
             }
             return funcs;
