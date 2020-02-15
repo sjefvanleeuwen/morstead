@@ -12,7 +12,10 @@ namespace Vs.Graph.Core.Data
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
-            AddRange((DeserializeTemplate) nestedObjectDeserializer(typeof(DeserializeTemplate)));
+            var o = (DeserializeTemplate) nestedObjectDeserializer(typeof(DeserializeTemplate));
+            if (o == null)
+                return;
+            AddRange(o);
             DebugInfo = DebugInfo.MapDebugInfo(parser.Current.Start, parser.Current.End);
         }
 
