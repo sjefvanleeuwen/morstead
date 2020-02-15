@@ -1,10 +1,11 @@
 ﻿using System;
+using Vs.Core.Diagnostics;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Data
 {
-    public class EdgeSchema : IEdgeSchema
+    public class EdgeSchema : IEdgeSchema, IDebugInfo
     {
         public string Name { get; set; }
         public Constraints Constraints { get; set; }
@@ -38,11 +39,14 @@ namespace Vs.Graph.Core.Data
             Name = o.Name;
             Constraints = o.Constraints;
             Attributes = o.Attributes;
+            DebugInfo = DebugInfo.MapDebugInfo(parser.Current.Start, parser.Current.End);
         }
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
             nestedObjectSerializer(new { Name, Constraints, Attributes });
         }
+
+        public DebugInfo DebugInfo { get; set; }
     }
 }

@@ -1,14 +1,16 @@
 ﻿using System;
+using Vs.Core.Diagnostics;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Data
 {
-    public class NodeSchema : INodeSchema
+    public class NodeSchema : INodeSchema, IDebugInfo
     {
         public string Name { get; set; }
         public Attributes Attributes { get; set; }
         public Edges Edges { get; set; }
+        public DebugInfo DebugInfo { get; set; }
 
         private INodeSchemaScript _scriptProvider;
 
@@ -34,6 +36,7 @@ namespace Vs.Graph.Core.Data
             Name = o.Name;
             Attributes = o.Attributes;
             Edges = o.Edges;
+            DebugInfo = DebugInfo.MapDebugInfo(parser.Current.Start, parser.Current.End);
         }
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)

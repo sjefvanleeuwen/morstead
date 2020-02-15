@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Vs.Core.Diagnostics;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Data
 {
-    public class Attribute : IAttribute, ISerialize
+    public class Attribute : IAttribute, ISerialize, IDebugInfo
     {
        public IAttributeType Type { get ;set; }
 
@@ -33,6 +34,7 @@ namespace Vs.Graph.Core.Data
         {
             var o = (DeserializeTemplate)nestedObjectDeserializer(typeof(DeserializeTemplate));
             Name = o.Name;
+            DebugInfo = DebugInfo.MapDebugInfo(parser.Current.Start, parser.Current.End);
             // Convert to correct IAttribute implementation from the serialization template
             var type = typeof(IAttributeType);
             foreach (var item in AppDomain.CurrentDomain.GetAssemblies()
@@ -54,5 +56,7 @@ namespace Vs.Graph.Core.Data
         {
             nestedObjectSerializer(new { Name, Type});
         }
+
+        public DebugInfo DebugInfo { get; set; }
     }
 }

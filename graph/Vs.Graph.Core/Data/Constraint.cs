@@ -1,10 +1,11 @@
 ﻿using System;
+using Vs.Core.Diagnostics;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Data
 {
-    public class Constraint : IConstraintSchema
+    public class Constraint : IConstraintSchema, IDebugInfo
     {
         public string Name { get; set; }
 
@@ -27,11 +28,14 @@ namespace Vs.Graph.Core.Data
         {
             var o = (DeserializeTemplate)nestedObjectDeserializer(typeof(DeserializeTemplate));
             Name = o.Name;
+            DebugInfo = DebugInfo.MapDebugInfo(parser.Current.Start, parser.Current.End);
         }
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
             nestedObjectSerializer(new { Name });
         }
+
+        public DebugInfo DebugInfo { get; set; }
     }
 }
