@@ -1,10 +1,18 @@
 ﻿using System.IO;
+using Vs.Graph.Core.Data;
 using YamlDotNet.Serialization;
 
-namespace Vs.Graph.Core.Data
+namespace Vs.Graph.Core
 {
     public class SchemaController
     {
+        public IGraphSchemaService Service { get; }
+
+        public SchemaController(IGraphSchemaService service)
+        {
+            Service = service;
+        }
+
         public string Serialize(NodeSchema schema)
         {
             var serializer = new SerializerBuilder().Build();

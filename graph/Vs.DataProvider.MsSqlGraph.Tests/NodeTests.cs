@@ -1,7 +1,7 @@
+using Vs.Graph.Core;
 using Vs.Graph.Core.Data;
 using Vs.Graph.Core.Data.AttributeTypes;
 using Xunit;
-using YamlDotNet.Serialization;
 
 namespace Vs.DataProvider.MsSqlGraph.Tests
 {
@@ -24,13 +24,11 @@ namespace Vs.DataProvider.MsSqlGraph.Tests
 
             n.Edges[0].Attributes.Add(new Attribute(name: "rating", type: new AttributeEuro()));
 
-            NodeSchemaScript script = new NodeSchemaScript();
-            SchemaController controller = new SchemaController();
+            SchemaController controller = new SchemaController(new MsSqlGraphSchemaService());
             var yaml = controller.Serialize(n);
+            var r = controller.Deserialize(yaml);
+            var sql = controller.Service.CreateScript(r);
 
-            var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
-            var r = deserializer.Deserialize<NodeSchema>(yaml);
-            var sql = script.CreateScript(n);
             Assert.True(sql== @"CREATE TABLE node.person (
 ID INTEGER PRIMARY KEY,
 FirstName  NTEXT,LastName  NTEXT,DateOfBirth DATETIME,
@@ -84,10 +82,9 @@ Edges:
   - Name: person
   Attributes: []
 ";
-            var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
-            var r = deserializer.Deserialize<NodeSchema>(yaml);
-            NodeSchemaScript script = new NodeSchemaScript();
-            var sql = script.CreateScript(r);
+            SchemaController controller = new SchemaController(new MsSqlGraphSchemaService());
+            var r = controller.Deserialize(yaml);
+            var sql = controller.Service.CreateScript(r);
             Assert.True(sql== @"CREATE TABLE node.person (
 ID INTEGER PRIMARY KEY,
 FirstName  NTEXT,LastName  NTEXT,
