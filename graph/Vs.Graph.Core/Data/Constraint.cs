@@ -6,10 +6,7 @@ namespace Vs.Graph.Core.Data
 {
     public class Constraint : IConstraintSchema
     {
-        private string _name;
-
-        public string Name => _name;
-
+        public string Name { get; set; }
 
         public Constraint()
         {
@@ -18,18 +15,18 @@ namespace Vs.Graph.Core.Data
 
         public Constraint(string name)
         {
-            _name = name;
+            Name = name;
         }
 
         private class DeserializeTemplate
         {
-            public string Name;
+            public string Name { get; set; }
         }
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
             var o = (DeserializeTemplate)nestedObjectDeserializer(typeof(DeserializeTemplate));
-            _name = o.Name;
+            Name = o.Name;
         }
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)

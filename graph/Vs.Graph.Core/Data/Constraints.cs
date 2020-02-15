@@ -14,7 +14,7 @@ namespace Vs.Graph.Core.Data
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
-            throw new NotImplementedException();
+            nestedObjectSerializer(new List<Constraint>(this));
         }
     }
 }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.WebSockets;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -11,26 +7,9 @@ namespace Vs.Graph.Core.Data
 {
     public class Attribute : IAttribute, ISerialize
     {
-        private IAttributeType _type;
-        private string _name;
+       public IAttributeType Type { get ;set; }
 
-        public IAttributeType Type
-        {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                _type = value;
-            }
-        }
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        public string Name { get; set; }
 
         public Attribute()
         {
@@ -39,45 +18,21 @@ namespace Vs.Graph.Core.Data
 
         public Attribute(string name, IAttributeType type)
         {
-            _name = name;
-            _type = type;
+            Name = name;
+            Type = type;
         }
 
         private class DeserializeTemplate
         {
-            private string _name;
+            public string Name { get; set; }
 
-            public string Name
-            {
-                get
-                {
-                    return _name;
-                }
-                set
-                {
-                    _name = value;
-                }
-            }
-
-            private string _type;
-
-            public string Type
-            {
-                get
-                {
-                    return _type;
-                }
-                set
-                {
-                    _type = value;
-                }
-            }
+            public string Type { get; set; }
         }
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
             var o = (DeserializeTemplate)nestedObjectDeserializer(typeof(DeserializeTemplate));
-            _name = o.Name;
+            Name = o.Name;
             // Convert to correct IAttribute implementation from the serialization template
             var type = typeof(IAttributeType);
             foreach (var item in AppDomain.CurrentDomain.GetAssemblies()
@@ -89,7 +44,7 @@ namespace Vs.Graph.Core.Data
                 {
                     if (o.Type.ToLower() == ((AttributeTypeAttribute)s[0]).Name.ToLower())
                     {
-                        _type = (IAttributeType)Activator.CreateInstance(item.UnderlyingSystemType);
+                        Type = (IAttributeType)Activator.CreateInstance(item.UnderlyingSystemType);
                     }
                 }
             }

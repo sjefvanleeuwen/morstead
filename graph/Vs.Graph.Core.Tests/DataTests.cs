@@ -1,8 +1,6 @@
-using System.Data.SqlClient;
 using Vs.DataProvider.MsSqlGraph;
 using Vs.Graph.Core.Data;
 using Xunit;
-using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Tests
 {
@@ -33,8 +31,13 @@ Edges:
   Constraints:
   - Name: persoon
 ";
-            var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
-            var r = deserializer.Deserialize<NodeSchema>(yaml);
+            
+            SchemaController controller = new SchemaController();
+            var r = controller.Deserialize(yaml);
+
+
+
+
             NodeSchemaScript script = new NodeSchemaScript();
             var s = script.CreateScript(r);
             Assert.True(s== @"CREATE TABLE persoon (

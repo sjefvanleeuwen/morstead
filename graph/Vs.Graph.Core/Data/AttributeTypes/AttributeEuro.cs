@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -14,7 +15,7 @@ namespace Vs.Graph.Core.Data.AttributeTypes
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
-            throw new NotImplementedException();
+            nestedObjectSerializer("euro");
         }
     }
 }

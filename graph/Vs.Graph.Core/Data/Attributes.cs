@@ -7,11 +7,6 @@ namespace Vs.Graph.Core.Data
 {
     public class Attributes : List<Attribute>, ISerialize
     {
-        public Attributes()
-        {
-
-        }
-
         private class DeserializeTemplate : List<Attribute> { }
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)=> 
@@ -19,7 +14,7 @@ namespace Vs.Graph.Core.Data
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
-            throw new NotImplementedException();
+            nestedObjectSerializer(new List<Attribute>(this));
         }
     }
 }

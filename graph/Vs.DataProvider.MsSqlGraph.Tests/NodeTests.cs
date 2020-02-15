@@ -1,4 +1,3 @@
-using System.IO;
 using Vs.Graph.Core.Data;
 using Vs.Graph.Core.Data.AttributeTypes;
 using Xunit;
@@ -8,7 +7,7 @@ namespace Vs.DataProvider.MsSqlGraph.Tests
 {
     public class NodeTests
     {
-      //  [Fact]
+        [Fact]
         public void Node_Create_Person()
         {
             NodeSchema n = new NodeSchema(name:"person");
@@ -25,18 +24,16 @@ namespace Vs.DataProvider.MsSqlGraph.Tests
 
             n.Edges[0].Attributes.Add(new Attribute(name: "rating", type: new AttributeEuro()));
 
-            //object p1 = from p in n select p;
             NodeSchemaScript script = new NodeSchemaScript();
-            var serializer = new SerializerBuilder().Build();
-            var sw = new StringWriter();
-            serializer.Serialize(sw, n);
-            var yaml = sw.ToString();
+            SchemaController controller = new SchemaController();
+            var yaml = controller.Serialize(n);
+
             var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
             var r = deserializer.Deserialize<NodeSchema>(yaml);
             var sql = script.CreateScript(n);
         }
 
-        //[Fact]
+        [Fact]
         public void Node_Can_Deserialize_And_Create_SqlSchema()
         {
             var yaml = @"Version: 15.0.0.0

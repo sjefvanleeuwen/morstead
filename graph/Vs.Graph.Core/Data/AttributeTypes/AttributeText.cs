@@ -14,7 +14,7 @@ namespace Vs.Graph.Core.Data.AttributeTypes
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
-            throw new NotImplementedException();
+            nestedObjectSerializer("text");
         }
     }
 }
