@@ -33,6 +33,9 @@ namespace Vs.Graph.Core.Data
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
             var o = (DeserializeTemplate)nestedObjectDeserializer(typeof(DeserializeTemplate));
+            if (o == null)
+                throw new Exception("No node schema start element found.");
+
             Name = o.Name;
             Attributes = o.Attributes;
             Edges = o.Edges;
