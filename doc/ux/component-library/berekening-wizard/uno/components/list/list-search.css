@@ -1,0 +1,16 @@
+.list--search {
+  list-style: none;
+  margin-left: 0;
+}
+
+.list__item--search {
+  list-style: none;
+  margin-bottom: 20px;
+  margin-bottom: 2rem;
+}
+
+.list__item--search a {
+  display: inline-block;
+  font-weight: normal;
+}
+/*# sourceMappingURL=list-search.css.map */

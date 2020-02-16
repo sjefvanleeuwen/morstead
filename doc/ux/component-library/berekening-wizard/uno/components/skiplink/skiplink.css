@@ -1,0 +1,40 @@
+.skiplink {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.skiplink:active, .skiplink:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+.skiplink:active .skiplink__text, .skiplink:focus .skiplink__text {
+  background: #ffb612;
+}
+
+.skiplink__text {
+  display: inline-block;
+  outline: none;
+  padding: 10px;
+  padding: 1rem;
+}
+
+/**
+ * LET OP: Niet vergeten om ook tabindex="-1" mee te geven aan dit element
+ * zie http://getbootstrap.com/getting-started/#callout-skiplinks
+ */
+.skiplink-target {
+  outline: none;
+}
+/*# sourceMappingURL=skiplink.css.map */

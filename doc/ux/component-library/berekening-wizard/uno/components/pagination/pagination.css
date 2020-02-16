@@ -1,0 +1,253 @@
+@charset "UTF-8";
+/* stylelint-disable */
+/* stylelint-disable */
+/* stylelint-disable */
+/* stylelint-disable */
+.pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 0;
+}
+
+.pagination--simple {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.pagination--simple .pagination__item {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+}
+
+.pagination--dots .pagination__item {
+  font-size: 16px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  min-width: 44px;
+  padding: 10px;
+  padding: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.pagination--dots .pagination__item .pagination__link {
+  color: black;
+  text-decoration: none;
+}
+
+.pagination--dots .pagination__item--active {
+  background: #005ea5;
+  color: white;
+}
+
+@media (min-width: 544px) {
+  .pagination--dots .pagination__item--first:not(.pagination__item--active):after {
+    content: '...';
+  }
+}
+
+@media (min-width: 544px) {
+  .pagination--dots .pagination__item--last:not(.pagination__item--active):before {
+    content: '...';
+  }
+}
+
+.pagination--dots .pagination__item--previous .pagination__link, .pagination--dots .pagination__item--next .pagination__link {
+  color: #005ea5;
+}
+
+.pagination--dots .pagination__item--previous .pagination__link:before, .pagination--dots .pagination__item--previous .pagination__link:after, .pagination--dots .pagination__item--next .pagination__link:before, .pagination--dots .pagination__item--next .pagination__link:after {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+
+@media (max-width: 543px) {
+  .pagination--dots .pagination__item:not(.pagination__item--previous):not(.pagination__item--next):not(.pagination__item--active):not(.pagination__item--last) {
+    display: none;
+  }
+  .pagination--dots .pagination__item--active, .pagination--dots .pagination__item--last {
+    padding: 1rem 0;
+    text-transform: lowercase;
+  }
+  .pagination--dots .pagination__item--active {
+    background: unset;
+    color: black;
+    padding: 1rem;
+    padding-right: 0;
+  }
+  .pagination--dots .pagination__item--active:after {
+    content: 'van';
+    font-weight: 400;
+    padding-left: 1rem;
+  }
+  .pagination--dots .pagination__item--last {
+    padding-right: 1rem;
+    text-transform: lowercase;
+  }
+  .pagination--dots .pagination__item--previous .pagination__link, .pagination--dots .pagination__item--next .pagination__link {
+    background: #cce0f1;
+    padding: 1rem;
+  }
+  .pagination--dots .pagination__item--previous .pagination__link--previous, .pagination--dots .pagination__item--previous .pagination__link--next, .pagination--dots .pagination__item--next .pagination__link--previous, .pagination--dots .pagination__item--next .pagination__link--next {
+    display: none;
+  }
+}
+
+.pagination--dots .pagination__item:last-child {
+  padding-right: 10px;
+  padding-right: 1rem;
+}
+
+.pagination__item {
+  display: inline;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  padding-right: 10px;
+  padding-right: 1rem;
+}
+
+@media (min-width: 544px) {
+  .pagination__item {
+    padding-right: 3rem;
+  }
+}
+
+.pagination__item:last-child {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 0;
+  text-align: right;
+}
+
+.pagination__item--previous {
+  -webkit-box-ordinal-group: 0;
+      -ms-flex-order: -1;
+          order: -1;
+}
+
+.pagination__link:focus {
+  outline: 4px solid #ffb612;
+  outline-offset: 2px;
+}
+
+.pagination__item--next .pagination__link,
+.pagination__item--previous .pagination__link {
+  width: 100%;
+}
+
+.pagination__item--next .pagination__link:before, .pagination__item--next .pagination__link:after,
+.pagination__item--previous .pagination__link:before,
+.pagination__item--previous .pagination__link:after {
+  display: inline-block;
+  font-size: 8px;
+  font-size: 0.8rem;
+  line-height: inherit;
+  -webkit-box-ordinal-group: 0;
+      -ms-flex-order: -1;
+          order: -1;
+  text-decoration: underline;
+}
+
+.pagination__item--next .pagination__link:after, .pagination__item--next .pagination__link:before,
+.pagination__item--previous .pagination__link:after,
+.pagination__item--previous .pagination__link:before {
+  text-decoration: none;
+}
+
+.pagination__item--next .pagination__link:before,
+.pagination__item--previous .pagination__link:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  /* stylelint-disable */
+  font-family: 'duo-basic' !important;
+  /* stylelint-enable */
+  /* Better Font Rendering */
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-transform: none;
+  content: "";
+  padding-right: 2.5px;
+  padding-right: 0.25rem;
+}
+
+.pagination__item--next .pagination__link:after,
+.pagination__item--previous .pagination__link:after {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  /* stylelint-disable */
+  font-family: 'duo-basic' !important;
+  /* stylelint-enable */
+  /* Better Font Rendering */
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-transform: none;
+  content: "";
+  padding-left: 2.5px;
+  padding-left: 0.25rem;
+}
+
+.pagination__item--previous .pagination__link:after {
+  display: none;
+}
+
+.pagination__item--next .pagination__link:before {
+  display: none;
+}
+
+.pagination__item--first .pagination__link {
+  margin-right: 10px;
+  margin-right: 1rem;
+}
+
+@media (min-width: 544px) {
+  .pagination__item--first .pagination__link {
+    margin-right: 2rem;
+  }
+}
+
+@media (min-width: 544px) {
+  .pagination__item--last .pagination__link {
+    margin-left: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .pagination__item--previous .pagination__link > span,
+  .pagination__item--next .pagination__link > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+}
+
+.pagination:not(.pagination--simple):not(.pagination--dots) > .pagination__item--previous:first-child,
+.pagination:not(.pagination--simple):not(.pagination--dots) > .pagination__item--previous:first-child + .pagination__item--next {
+  display: none;
+}
+
+.pagination:not(.pagination--simple):not(.pagination--dots) > .pagination__item--active:first-child ~ .pagination__item--previous,
+.pagination:not(.pagination--simple):not(.pagination--dots) .pagination__item--active + .pagination__item--previous + .pagination__item--next {
+  visibility: hidden;
+}
+/*# sourceMappingURL=pagination.css.map */

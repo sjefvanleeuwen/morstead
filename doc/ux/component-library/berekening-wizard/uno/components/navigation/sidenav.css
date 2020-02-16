@@ -1,0 +1,69 @@
+.sidenav ul {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+.sidenav__item {
+  list-style-type: none;
+  margin-bottom: 1px;
+  margin-bottom: 0.1rem;
+}
+
+.sidenav__item a {
+  background: white;
+  color: #2b2b2b;
+  display: block;
+  padding: 12px 10px 11px;
+  padding: 1.2rem 1rem 1.1rem;
+  text-decoration: none;
+}
+
+.sidenav__item a:focus, .sidenav__item a:hover {
+  text-decoration: underline;
+}
+
+.sidenav__item:last-child {
+  border-bottom: 2px solid #cccccc;
+  border-bottom: 0.2rem solid #cccccc;
+}
+
+.sidenav__item .sidenav__item {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.sidenav__item .sidenav__item a {
+  padding: 8px 10px 8px 20px;
+  padding: 0.8rem 1rem 0.8rem 2rem;
+}
+
+.sidenav__item .sidenav__item--active {
+  border: 0;
+  padding: 0;
+}
+
+.sidenav__item--active {
+  border-bottom: 2px solid #cccccc;
+  border-bottom: 0.2rem solid #cccccc;
+  border-top: 2px solid #cccccc;
+  border-top: 0.2rem solid #cccccc;
+  margin-bottom: 9px;
+  margin-bottom: 0.9rem;
+  padding-top: 9px;
+  padding-top: 0.9rem;
+}
+
+.sidenav__item--active:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.sidenav__item--active > a {
+  font-weight: 700;
+}
+
+.sidenav__item--active .sidenav__item:last-child a {
+  padding-bottom: 10px;
+  padding-bottom: 1rem;
+}
+/*# sourceMappingURL=sidenav.css.map */
