@@ -1,4 +1,4 @@
-## Virtual Society Graphs
+![logo](./doc/img/logo.svg) ## Virtual Society Graphs
 
 Virtual Society gebruikt YAML definities om Graph databases te modeleren. In Virtual Society bestaan Graphs als Nodes en Edges.
 Het minimum viable product (MVP) voor het design van de data opslag van Virtual Society is gebaseerd op 3 eigenschappen:
@@ -11,99 +11,118 @@ Het minimum viable product (MVP) voor het design van de data opslag van Virtual 
 
 Concept/Idee/Work in progres. Nog niet alle code voor deze MVP is in place.
 
+### Microsoft SQL 
+
+Voordat we ingaan op de YAML representaties voor graph, doen we eerst een dive in microsoft sql. Microsoft SQL wordt Primair
+ondersteund door Virtual Society.
+
+#### Voorbeeld Publicatie meschanismen
+
+##### Stap 1 Database opschonen
+
+```SQL
+drop table if exists beheert;
+drop table if exists reviewed;
+drop table if exists akkordeert;
+
+drop table if exists persoon;
+drop table if exists publicatie;
+```
+##### Stap 2 Graph Nodes aanmaken
+
+```SQL
+CREATE TABLE persoon (
+  ID INTEGER PRIMARY KEY,
+  [name] VARCHAR(100)
+) AS NODE;
+
+CREATE TABLE publicatie (
+  ID INTEGER PRIMARY KEY,
+) AS NODE;
+```
+
+##### Stap 3 Graph Edges aanmaken
+
+```SQL
+CREATE TABLE akkordeert (moment DATETIME) AS EDGE;
+CREATE TABLE reviewed (moment DATETIME) AS EDGE;
+CREATE TABLE beheert (moment DATETIME) AS EDGE;
+```
+
+Het schema kan nu als volgt ontologisch worden weergegeven:
+
+![logo](./doc/img/publicatie.svg)
+
+##### Stap 4 Nodes vullen met gegevens
+
+Personen leggen vanuit hun werkproces relaties. We voeren 3 personen op om te kunnen gaan testen.
+
+```SQL
+INSERT INTO persoon VALUES (1,'joost');
+INSERT INTO persoon VALUES (2,'henk');
+INSERT INTO persoon VALUES (3,'ingrid');
+```
+
+##### Stap 5 Edges vullen met relaties
+
+Het volgende script legt verbindingen tussen nodes door deze te verbinden met de beschikbare edge typen.
+Dit kan bijvoorbeeld gebeuren vanuit human-workflow waarin Joost, Henk en Ingrid participeren.
+
+```SQL
+-- stap 1. Er wordt een publicatie in het systeem aangemaakt
+INSERT INTO publicatie VALUES(1);
+-- stap 2. Joost beheert de publicatie
+INSERT INTO beheert VALUES ((SELECT $node_id FROM persoon WHERE ID = 1), 
+       (SELECT $node_id FROM publicatie WHERE ID = 1),GETDATE());
+-- stap 3. (a en b) Zowel henk als ingrid reviewen de publicatie
+INSERT INTO reviewed VALUES ((SELECT $node_id FROM persoon WHERE ID = 2), 
+       (SELECT $node_id FROM publicatie WHERE ID = 1),GETDATE());
+INSERT INTO reviewed VALUES ((SELECT $node_id FROM persoon WHERE ID = 3), 
+       (SELECT $node_id FROM publicatie WHERE ID = 1),GETDATE());
+-- stap 4. Ingrid akkordeert de publicatie
+INSERT INTO akkordeert VALUES ((SELECT $node_id FROM persoon WHERE ID = 3), 
+       (SELECT $node_id FROM publicatie WHERE ID = 1),GETDATE());
+       
+
+```
+
+Vanuit de eerdere ontologie ontstaan iedere keer moment opnamen op de edges. Deze worden opgeslagen in de graph.
+De uiteindelijk opname (state) na deze stappen kan als volgt weergeven worden:
+
+![logo](./doc/img/publicatie-state.svg)
+
+##### Stap 6 View voor een publicatiescherm
+
+Joost wil graag een overzicht van welke publicaties onder review zijn door welke personen en wie deze inmiddels geakkordeerd heeft.
+De volgende view modeleert semantisch een view om deze informatie weer te geven:
+
+```SQL
+--- Zoek welke items een persoon onder publicatiebeheer heeft 
+--- en door wie deze momenteel gereviewed of geakkoordeerd worden
+--- De nieuwste akkorderingen vershijnen boven aan de lijst
+--- Scenario: Zowel henk als ingrid zijn reviewer. Inmiddels heeft ingrid een akkordering gegeven
+--- Deze query voor deze view is semantisch gemodeleerd.
+SELECT publicatie.ID as publicatieId,
+       beheert.moment as beheermoment, 
+       reviewer.name as reviewer,
+       reviewer.ID as reviewerId,
+       akkordeerder.name as akkordeerder,
+       akkordeerder.ID as akkordeerderId,
+       akkordeert.moment as akkorderingsmoment,
+       reviewed.moment as reviewmoment
+FROM persoon,beheert, publicatie, persoon reviewer, reviewed, persoon akkordeerder, akkordeert
+WHERE MATCH (persoon-(beheert)->publicatie AND reviewer-(reviewed)->publicatie AND akkordeerder-(akkordeert)->publicatie)
+AND persoon.id = 1 ORDER BY akkorderingsmoment DESC
+```
+
+De volgende gegevens worden gecorreleerd:
+
+|       publicatieId    |             beheermoment          |             reviewer    |             reviewerId    |             akkordeerder    |             akkordeerderId    |             akkorderingsmoment    |             reviewmoment                      |
+|-----------------------|-----------------------------------|-------------------------|---------------------------|-----------------------------|-------------------------------|-----------------------------------|-----------------------------------------------|
+|          1            |    2020-02-16T13:59:28.3800000    |    henk                 |    2                      |    ingrid                   |    3                          |    2020-02-16T13:59:28.4030000    |    2020-02-16T13:59:28.3900000                |
+|    1                  |    2020-02-16T13:59:28.3800000    |    ingrid               |    3                      |    ingrid                   |    3                          |    2020-02-16T13:59:28.4030000    |    2020-02-16T13:59:28.3970000                |
+
 ### YAML Voorbeelden
 
-#### Voorbeeld Ouder <-> Kind Relaties
+[Voorbeeld Ouder <-> Kind Relaties](./doc/kind-ouder-relaties.md)
 
-Het yaml script hieronder toont een Persoon node met 3 edges. Deze edges hebben een constraint van persoon tot persoon. Dit wil zeggen
-dat de edges alleen van toepassing zijn op relaties van persoon tot persoon. Andere typen Nodes kunnen niet met elkaar verbonden worden.
-
-Dit helpt ons om de integriteit op relaties tussen node typen te waarborgen.
-
-De edges hebben periode attributen. Voor tijdreizen in de database kunnen we op deze manier historisch het verloop bekijken tussen
-interpersoonlijke relaties over tijd. De node heeft tevens ook een periode attribuut. Dit betreft in dit voorbeeld de levensduur van de persoon.
-
-```YAML
-Name: persoon
-Attributes:
-- Name: BSN
-  Type: elfproef
-- Name: periode
-  Type: periode
-Edges:
-- Name: partner
-  Constraints:
-  - Name: persoon
-  Attributes:
-  - Name: periode
-    Type: periode
-- Name: kind
-  Constraints:
-  - Name: persoon
-- Name: ouder
-  Constraints:
-  - Name: persoon
-"
-```
-
-![](doc/img/ouder-kind-relatie.svg)
-
-
-#### Voorbeeld Recht op Zorgtoeslag
-
-De graph voor recht op zorgtoeslag wordt gegenereerd vanuit de Urukagina rule engine. De gedigialiseerde regels omtrent de regelgeving zijn dus
-leidend voor het genereren van de data structuur. Generatie geschiedt als volgt:
-
-1. **Node**: Alle attributen die berekend worden d.m.v. formules worden opgeslagen in de Node zelf. In het geval van de zorgtoeslag berekening:
-
-```YAML
-Name regelingen.zorgtoeslag
-Attributes:
-- Name: toetsingsinkomen
-  Type: euro
-- Name: maximaalvermogen
-  Type: euro
-- Name: zorgtoeslag
-  Type: euro
-- Name: woonlandfactor
-  Type: double
-- Name: drempelinkomen
-  Type: euro
-- Name: buitenland
-  Type: boolean
-- Name: binnenland
-  Type: boolean
-- Name: normpremie
-  Type: euro
-- Name: standaardpremie
-  Type: euro
-- Name: periode
-  Type: periode
-```
-
-2. **Edge**: Aangezien Urukagina recht geeft tot regelingen en voorzieningen wordt het de edge "recht" uitgebreid met een constraint tot de regeling in kwestie.
-   In dit geval:
-
-```YAML
-Edges:
-- Name: recht
-  Constraint: persoon -> zorgtoeslag
-  Attributes:
-  - Name: periode
-    Type: periode
-```
-
-De opslagmogelijkheden van de graph is nu als volgt:
-
-![](doc/img/zorgtoeslag.svg)
-
-Zowel de Edge "recht" evenals de Node zelf kennen het tijdsaspect "periode". In het geval van de Edge betekent dit de duur van het recht hebben
-op de regeling (via toekenning vanuit human workflow binnen het business process). In het geval van de Node betreft dit de rechtsgeldende periode van de regeling zelf. Voor toeslagen geldt over het algemeen een
-jaar geldigheid.
-
-N.b. Er is dus een business proces nodig, welke nieuwe edges aanmaakt naar nieuwe versies van regelingen aanmaakt en daarbij de attributen moet 
-die nog niet voorhanden zijn voor het toekennen van recht.
-
-### Resources
-
-Graph illustraties gemaakt d.m.v.: https://csacademy.com/app/graph_editor/
