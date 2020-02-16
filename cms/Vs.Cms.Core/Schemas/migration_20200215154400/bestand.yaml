@@ -1,0 +1,12 @@
+﻿Name: bestand
+Attributes:
+- Name: content
+  Type: text
+- Name: type
+  Type: text
+- Name: versie
+  Type: int
+Edges:
+- Name: versies
+  Constraints:
+  - Name: bestand

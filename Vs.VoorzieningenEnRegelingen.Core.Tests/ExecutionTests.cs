@@ -539,5 +539,36 @@ formules:
             Exception ex1 = Assert.Throws<NotImplementedException>(() => new UnresolvedException());
             Exception ex3 = Assert.Throws<NotImplementedException>(() => new UnresolvedException("", new Exception()));
         }
+
+        [Fact]
+        public void Execution_YamlVermogensgrens_WithQA()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlVermogensgrens.Body);
+            Assert.False(result.IsError);
+            bool isException = false;
+            QuestionArgs argsret = null;
+            ExecutionResult executionResult = null;
+            var parameters = new ParametersCollection() { };
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                Assert.True(args.Parameters[0].Name == "keuze_boven_vermogensgrens");
+                // client geeft antwoord op de vraag onder 50000
+                parameters.Add(new Parameter("keuze_boven_vermogensgrens", true));
+            };
+
+            try
+            {
+                executionResult = new ExecutionResult(ref parameters);
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException)
+            {
+                isException = true;
+            }
+            Assert.True(isException);
+            controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            Assert.True(executionResult.Stacktrace.Last().IsStopExecution);
+        }
     }
 }

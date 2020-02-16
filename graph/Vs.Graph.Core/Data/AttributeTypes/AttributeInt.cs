@@ -4,8 +4,8 @@ using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Data.AttributeTypes
 {
-    [AttributeType("text")]
-    public class AttributeText : IAttributeType,ISerialize
+    [AttributeType("int")]
+    public class AttributeInt : IAttributeType, ISerialize
     {
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
@@ -14,7 +14,7 @@ namespace Vs.Graph.Core.Data.AttributeTypes
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
-            nestedObjectSerializer("text");
+            nestedObjectSerializer("int");
         }
     }
 }

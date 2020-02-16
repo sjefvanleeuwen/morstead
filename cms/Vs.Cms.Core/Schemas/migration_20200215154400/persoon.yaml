@@ -1,0 +1,15 @@
+﻿Name: persoon
+Attributes:
+- Name: voornamen
+  Type: text
+- Name: voorvoegsel
+  Type: text
+- Name: geslachtsnaam
+  Type: text
+Edges:
+- Name: digitaleIdentiteit
+  Constraints:
+  - Name: openId
+    Attributes:
+    - Name: periode
+      Type: periode

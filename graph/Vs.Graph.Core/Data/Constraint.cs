@@ -1,15 +1,13 @@
 ﻿using System;
+using Vs.Core.Diagnostics;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Data
 {
-    public class Constraint : IConstraintSchema
+    public class Constraint : IConstraintSchema, IDebugInfo
     {
-        private string _name;
-
-        public string Name => _name;
-
+        public string Name { get; set; }
 
         public Constraint()
         {
@@ -18,23 +16,26 @@ namespace Vs.Graph.Core.Data
 
         public Constraint(string name)
         {
-            _name = name;
+            Name = name;
         }
 
         private class DeserializeTemplate
         {
-            public string Name;
+            public string Name { get; set; }
         }
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
             var o = (DeserializeTemplate)nestedObjectDeserializer(typeof(DeserializeTemplate));
-            _name = o.Name;
+            Name = o.Name;
+            DebugInfo = DebugInfo.MapDebugInfo(parser.Current.Start, parser.Current.End);
         }
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
             nestedObjectSerializer(new { Name });
         }
+
+        public DebugInfo DebugInfo { get; set; }
     }
 }

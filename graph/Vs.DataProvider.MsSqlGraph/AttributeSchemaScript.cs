@@ -22,9 +22,18 @@ namespace Vs.DataProvider.MsSqlGraph
 
             foreach (var attribute in @object)
             {
+                if (attribute.Type == null)
+                {
+                    // this is an edge without type definitions.
+                    break;
+                }
+
                 // Resolve AttributeType from types that inherit from IAttributeType
                 switch (((AttributeTypeAttribute)attribute.Type.GetType().GetCustomAttributes(typeof(AttributeTypeAttribute), true)[0]).Name)
                 {
+                    case "int":
+                        sb.Append($"{attribute.Name} INTEGER,");
+                        break;
                     case "datum":
                         sb.Append($"{attribute.Name} DATETIME,");
                         break;
@@ -38,14 +47,15 @@ namespace Vs.DataProvider.MsSqlGraph
                         sb.Append($"{attribute.Name}_begin DATETIME,");
                         sb.Append($"{attribute.Name}_eind  DATETIME,");
                         break;
-                    case "Text":
+                    case "text":
                         sb.Append($"{attribute.Name}  NTEXT,");
                         break;
                     default:
                         throw new AttributeNotSupportedException();
                 }
             }
-            return sb.ToString().TrimEnd(',') + ' ';
+
+            return sb.ToString();
         }
     }
 }

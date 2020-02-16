@@ -17,13 +17,13 @@ namespace Vs.DataProvider.MsSqlGraph
         public string CreateScript(IEdgeSchema edge)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"CREATE TABLE {edge.Name} (");
+            sb.AppendLine($"CREATE TABLE edge.{edge.Name} (");
             sb.Append(new AttributeSchemaScript().CreateScript(edge.Attributes));
             if (edge.Constraints!= null && edge.Constraints.Count > 0) {
                 sb.AppendLine($"CONSTRAINT EC_{edge.Name.ToUpper()} CONNECTION (");
                 for (int i=0;i<edge.Constraints.Count;i++)
                 {
-                    sb.Append($"{Parent.Name} TO {edge.Constraints[i].Name}");
+                    sb.Append($"node.{Parent.Name} TO node.{edge.Constraints[i].Name}");
                     if (i < edge.Constraints.Count-1)
                         sb.Append(",");
                     sb.AppendLine();

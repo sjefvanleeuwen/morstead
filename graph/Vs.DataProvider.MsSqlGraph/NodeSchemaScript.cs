@@ -8,14 +8,17 @@ namespace Vs.DataProvider.MsSqlGraph
         public string CreateScript(INodeSchema node)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"CREATE TABLE {node.Name} (");
+            sb.AppendLine($"CREATE TABLE node.{node.Name} (");
             sb.AppendLine($"ID INTEGER PRIMARY KEY,");
             sb.AppendLine(new AttributeSchemaScript().CreateScript(node.Attributes));
             sb.AppendLine(") AS NODE;");
-            var s = new EdgeSchemaScript(node);
-            foreach (var edge in node.Edges)
+            if (node.Edges != null)
             {
-                sb.AppendLine(s.CreateScript(edge));
+                var s = new EdgeSchemaScript(node);
+                foreach (var edge in node.Edges)
+                {
+                    sb.AppendLine(s.CreateScript(edge));
+                }
             }
             return sb.ToString();
         }

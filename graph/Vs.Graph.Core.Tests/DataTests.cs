@@ -1,13 +1,26 @@
-using System.Data.SqlClient;
 using Vs.DataProvider.MsSqlGraph;
-using Vs.Graph.Core.Data;
 using Xunit;
-using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Tests
 {
     public class DataTests
     {
+        [Fact]
+        public void CanReadSchemaPackage()
+        {
+            var schemaPackage = @"SchemaSequence:
+Schemas:
+- Name: openId
+- Name: persoon
+- Name: bestand
+";
+            SchemaController controller = new SchemaController(new MsSqlGraphSchemaService());
+            var package = controller.SchemaSequence(schemaPackage);
+            Assert.NotNull(package.Schemas);
+            Assert.True(package.Schemas.Count==3);
+            Assert.True(package.Schemas[0].Name != string.Empty);
+        }
+
         [Fact]
         public void CreateEntityFromYamlWithCustomType()
         {
@@ -33,29 +46,29 @@ Edges:
   Constraints:
   - Name: persoon
 ";
-            var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
-            var r = deserializer.Deserialize<NodeSchema>(yaml);
-            NodeSchemaScript script = new NodeSchemaScript();
-            var s = script.CreateScript(r);
-            Assert.True(s== @"CREATE TABLE persoon (
+            
+            SchemaController controller = new SchemaController(new MsSqlGraphSchemaService());
+            var r = controller.Deserialize(yaml);
+            var s = controller.Service.CreateScript(r);
+            Assert.True(s== @"CREATE TABLE node.persoon (
 ID INTEGER PRIMARY KEY,
-BSN VARCHAR(10),periode_begin DATETIME,periode_eind  DATETIME 
+BSN VARCHAR(10),periode_begin DATETIME,periode_eind  DATETIME,
 ) AS NODE;
-CREATE TABLE partner (
-periode_begin DATETIME,periode_eind  DATETIME CONSTRAINT EC_PARTNER CONNECTION (
-persoon TO persoon
+CREATE TABLE edge.partner (
+periode_begin DATETIME,periode_eind  DATETIME,CONSTRAINT EC_PARTNER CONNECTION (
+node.persoon TO node.persoon
 )
 ) AS EDGE;
 
-CREATE TABLE kind (
+CREATE TABLE edge.kind (
 CONSTRAINT EC_KIND CONNECTION (
-persoon TO persoon
+node.persoon TO node.persoon
 )
 ) AS EDGE;
 
-CREATE TABLE ouder (
+CREATE TABLE edge.ouder (
 CONSTRAINT EC_OUDER CONNECTION (
-persoon TO persoon
+node.persoon TO node.persoon
 )
 ) AS EDGE;
 

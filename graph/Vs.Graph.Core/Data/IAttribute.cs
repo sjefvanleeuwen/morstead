@@ -1,4 +1,6 @@
-﻿namespace Vs.Graph.Core.Data
+﻿using YamlDotNet.Serialization;
+
+namespace Vs.Graph.Core.Data
 {
     public interface IAttribute
     {
@@ -6,6 +8,7 @@
             get; 
             set;
         }
+
         string Name { get; set; }
     }
 }
