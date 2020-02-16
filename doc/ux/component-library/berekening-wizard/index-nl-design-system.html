@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vs.VoorzieningenEnRegelingen.BurgerSite</title>
+  <base href="./" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="icon" href="./uno/components/favicon/ro-favicon-wit-0xffffff.png">
+  <link rel="stylesheet" href="./uno/core/base.css">
+  <link rel="stylesheet" href="./uno/core/grid.css">
+  <link rel="stylesheet" href="./uno/components/lists/lists.css">
+  <link rel="stylesheet" href="./uno/components/header/header.css">
+  <link rel="stylesheet" href="./uno/components/footer/footer.css">
+  <link rel="stylesheet" href="./uno/components/collapse/collapse.css">
+  <link rel="stylesheet" href="./uno/components/navigation/navigation.css">
+  <link rel="stylesheet" href="./uno/components/navigation/breadcrumbs.css">
+  <link rel="stylesheet" href="./uno/components/navigation/backlink.css">
+  <link rel="stylesheet" href="./uno/components/navigation/sidenav.css">
+  <link rel="stylesheet" href="./uno/components/form/form.css">
+  <link rel="stylesheet" href="./uno/components/form/input.css">
+  <link rel="stylesheet" href="./uno/components/button/button.css">
+  <link rel="stylesheet" href="./uno/components/skiplink/skiplink.css">
+  <link rel="stylesheet" href="./uno/components/tabs/tabs.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./uno/components/button/button.css">
+  <link rel="stylesheet" href="./uno/components/card/card.css">
+  <link rel="stylesheet" href="./uno/components/collapse/collapse.css">
+  <link rel="stylesheet" href="./uno/components/form/checkbox.css">
+  <link rel="stylesheet" href="./uno/components/form/filter.css">
+  <link rel="stylesheet" href="./uno/components/form/form.css">
+  <link rel="stylesheet" href="./uno/components/form/input.css">
+  <link rel="stylesheet" href="./uno/components/form/radio.css">
+  <link rel="stylesheet" href="./uno/components/hint/hint.css">
+  <link rel="stylesheet" href="./uno/components/label/label.css">
+  <link rel="stylesheet" href="./uno/components/label/badge.css">
+  <link rel="stylesheet" href="./uno/components/list/definition-list.css">
+  <link rel="stylesheet" href="./uno/components/list/list-card.css">
+  <link rel="stylesheet" href="./uno/components/list/list-grid.css">
+  <link rel="stylesheet" href="./uno/components/list/list-files.css">
+  <link rel="stylesheet" href="./uno/components/list/list-notification.css">
+  <link rel="stylesheet" href="./uno/components/list/list-subject.css">
+  <link rel="stylesheet" href="./uno/components/list/list-search.css">
+  <link rel="stylesheet" href="./uno/components/list/list-timeline.css">
+  <link rel="stylesheet" href="./uno/components/list/list-filter.css">
+  <link rel="stylesheet" href="./uno/components/meta/meta.css">
+  <link rel="stylesheet" href="./uno/components/navigation/inpage.css">
+  <link rel="stylesheet" href="./uno/components/notification/notification.css">
+  <link rel="stylesheet" href="./uno/components/pagination/pagination.css">
+  <link rel="stylesheet" href="./uno/components/quote/quote.css">
+  <link rel="stylesheet" href="./uno/components/section/edit-section.css">
+  <link rel="stylesheet" href="./uno/components/section/inner-section.css">
+  <link rel="stylesheet" href="./uno/components/table/table.css">
+  <link rel="stylesheet" href="./virtualsociety/site.css">
+  <script src="./uno/vendor/js/Promise.min.js"></script>
+  <script src="./uno/vendor/js/system.js"></script>
+  <script>
+      System.config({
+          packages: {
+              '/': {
+                  defaultExtension: 'js'
+              }
+          }
+      });
+  </script>
+  <!-- For Blazor Error Messages -->
+  <link href="./css/site.css" rel="stylesheet" />
+</head>
+<body>
+  <!--Header-->
+  <header class="header" role="banner">
+    <div class="header-logo">
+      <a href="/"  title="Logo Virtual Society">
+        Virtual Society
+        <span class="screenreader-only">naar de homepage</span>
+      </a>
+    </div>
+  </header>
+
+  <!--Title bar-->
+  <div class="collapse__header" >
+    <span class="collapse__title">Bereken uw zorgtoeslag</span>
+  </div>
+
+  <!--Collapsable-->
+  <!--Collapsable info 1-->
+  <div class="collapse">
+    <div class="collapse__header" x-uno-collapse="" x-uno-collapse-target="example-details">
+      <i class="collapse__indicator">
+        <span class="screenreader-only" data-contracted-i18n="ingeklapt" data-expanded-i18n="uitgeklapt"></span>
+      </i>
+      <span class="collapse__title">
+        <span class="badge badge--donkerblauw">3</span>
+        Waar bent u woonachtig?
+      </span>
+    </div>
+    <!--Collapsable content-->
+    <div class="collapse__details" id="example-details">
+      <!--Collapsable content items, each of them collapsable-->
+      <div class="collapse collapse--icons" x-uno-collapse-group="" role="status">
+        <div x-uno-collapse="" class="collapse__header">
+          <i class="collapse__indicator">
+            <span class="screenreader-only" data-contracted-i18n="ingeklapt" data-expanded-i18n="uitgeklapt"></span>
+          </i>
+          <span class="collapse__title">
+            <span class="badge badge--donkerblauw">1</span>
+            New Web Design 21 March, 2014
+          </span>
+        </div>
+        <div class="collapse__details collapse__details">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+          Quisque scelerisque diam non nisi semper, et elementum lorem ornare. 
+          Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....
+        </div>
+        <div x-uno-collapse="" class="collapse__header">
+          <i class="collapse__indicator">
+            <span class="screenreader-only" data-contracted-i18n="ingeklapt" data-expanded-i18n="uitgeklapt"></span>
+          </i>
+          <span class="collapse__title">
+            <span class="badge badge--donkerblauw">2</span>
+            21 000 Job Seekers 4 March, 2014
+          </span>
+        </div>
+        <div class="collapse__details collapse__details">
+          Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. 
+          Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...
+        </div>
+        <div x-uno-collapse="" class="collapse__header">
+          <i class="collapse__indicator">
+            <span class="screenreader-only" data-contracted-i18n="ingeklapt" data-expanded-i18n="uitgeklapt"></span>
+          </i>
+          <span class="collapse__title">
+            <span class="badge badge--donkerblauw">3</span>
+            Awesome Employers 1 April, 2014
+          </span>
+        </div>
+        <div class="collapse__details collapse__details">
+          Fusce ullamcorper ligula sit amet quam accumsan aliquet. 
+          Sed nulla odio, tincidunt vitae nunc vitae, mollis pharetra velit. 
+          Sed nec tempor nibh...
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Collapsable info 2-->
+  <div class="collapse">
+    <div class="collapse__header" x-uno-collapse="" x-uno-collapse-target="example-details2">
+      <i class="collapse__indicator">
+        <span class="screenreader-only" data-contracted-i18n="ingeklapt" data-expanded-i18n="uitgeklapt"></span>
+      </i>
+      <span class="collapse__title">
+        <span class="badge badge--donkerblauw">3</span>
+        Waar bent u woonachtig?
+      </span>
+    </div>
+    <!--Collapsable content timeline-->
+    <div class="collapse__details" id="example-details2">
+      <ul class="list list--timeline list--timeline-no-start list--timeline-no-end">
+        <li class="list__item">
+          <h3 class="list__item-heading">
+            <div style="float:left"><span class="badge badge--donkerblauw">1</span></div>
+            <div style="float:left">New Web Design<br />21 March, 2014</div>
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Quisque scelerisque diam non nisi semper, et elementum lorem ornare. 
+            Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....
+          </p>
+        </li>
+        <li class="list__item">
+          <h3 class="list__item-heading">
+            <span class="badge badge--donkerblauw">2</span>
+            <br />
+            21 000 Job Seekers<br />4 March, 2014
+          </h3>
+          <p>
+            Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. 
+            Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...
+          </p>
+          </li>
+        <li class="list__item">
+          <h3 class="list__item-heading">
+            <span class="badge badge--donkerblauw">3</span>
+            Awesome Employers<br />1 April, 2014
+          </h3>
+          <p>
+            Fusce ullamcorper ligula sit amet quam accumsan aliquet. 
+            Sed nulla odio, tincidunt vitae nunc vitae, mollis pharetra velit. 
+            Sed nec tempor nibh...
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!--Formitems-->
+  <div style="padding: 5px">
+  <form class="form">
+
+    <!--Text editor-->
+    <div class="input input--invalid">
+      <label class="input__label" for="name">Naam beheerder <span class="label label--optional">optioneel</span> </label>
+      <span class="input__hint" id="hint_name">Bijvoorbeeld Frank Masmeijer</span>
+      <div class="input__error">U heeft het veld Naam beheerder nog niet ingevuld</div>
+      <input required="" type="text" id="name" aria-describedby="hint_name" class="input__control input__control--text input__control--large">
+    </div>
+
+    <div class="input">
+        <label class="input__label" for="brin">BRIN-nummer</label>
+        <input type="text" id="brin" class="input__control input__control--m input__control--text">
+        <button class="btn">Gegevens ophalen</button>
+    </div>
+
+    <div class="input">
+        <label class="input__label" for="color">Kleur</label>
+        <select id="color" class="input__control input__control--m input__control--select ">
+            <option>Hemelblauw</option>
+            <option>Mosgroen</option>
+            <option>Robijnrood</option>
+        </select>
+    </div>
+
+    <div class="input input--search">
+        <label class="input__label" for="search">Zoeken</label>
+        <div class="input__control-group">
+            <input type="search" id="search" class="input__control input__control--m input__control--search">
+            <button class="btn btn--icon" title="Zoeken"><i class="icon icon-magnifier" role="presentation"></i></button>
+        </div>
+    </div>
+
+    <div class="input">
+        <label class="input__label" for="email">E-mailadres</label>
+        <input required="" type="email" id="email" class="input__control input__control--text">
+    </div>
+
+    <div class="input">
+        <label class="input__label">Geboortedatum</label>
+
+        <div class="input__control-group">
+            <div>
+                <label class="input__hint" for="date_of_birth-d">dag</label>
+                <input aria-label="Geboortedag" title="Geboortedag" required="" type="number" min="1" max="31" id="date_of_birth-d" class="input__control input__control--two-characters input__control--linked input__control--text">
+            </div>
+            <div>
+                <label class="input__hint" for="date_of_birth-m">maand</label>
+                <input aria-label="Geboortemaand" title="Geboortemaand" required="" type="number" min="1" max="12" id="date_of_birth-m" class="input__control input__control--two-characters input__control--linked input__control--text">
+            </div>
+            <div>
+                <span class="input__hint" for="date_of_birth-y">jaar</span>
+                <input aria-label="Geboortejaar" title="Geboortejaar" required="" type="number" id="date_of_birth-y" class="input__control input__control--four-characters input__control--linked input__control--text">
+            </div>
+        </div>
+    </div>
+
+    <div class="input">
+            <label class="input__label">Adres</label>
+
+            <div class="input__control-group">
+                <div>
+                    <label class="input__hint" for="address_postal_code">postcode</label>
+                    <input aria-label="Postcode" title="Postcode" required="" type="text" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" id="address_postal_code" class="input__control input__control--six-characters input__control--text">
+                </div>
+                <div>
+                    <label class="input__hint" for="address_number">huisnummer</label>
+                    <input aria-label="Huisnummer" title="Huisnummer" required="" type="number" minlength="1" maxlength="5" id="address_number" class="input__control input__control--five-characters input__control--text">
+                </div>
+                <div>
+                    <span class="input__hint" for="address_number-addition">toevoeging</span>
+                    <input aria-label="Toevoeging" title="Toevoeging" required="" type="text" maxlength="5" id="address_number-addition" class="input__control input__control--five-characters input__control--text">
+                </div>
+            </div>
+        </div>
+
+    <div class="input">
+        <label class="input__label" for="disabled">Uitgeschakeld veld</label>
+        <input disabled="" type="text" id="disabled" class="input__control input__control--m input__control--text" value="disabled text">
+    </div>
+
+    <div class="input">
+        <label class="input__label" for="textarea_voorbeeld">Tekstveld</label>
+        <textarea id="textarea_voorbeeld" class="input__control input__control--m input__control--text"></textarea>
+    </div>
+
+    <div class="input">
+        <button type="submit" class="btn btn--primary">Verder</button>&nbsp;&nbsp;of naar de <a href="#">vorige stap</a>
+    </div>
+      
+    <!--Radiobuttons-->
+    <!--Normal-->
+    <fieldset class="input">
+      <legend class="input__legend">Kanaal:</legend>
+      <div class="input__group input__group--radio">
+          <input type="radio" name="optradio" id="opt1" class="input__control input__control--radio" checked="">
+          <label class="input__label input__label--radio" for="opt1">Particulier portaal</label>
+      </div>
+      <div class="input__group input__group--radio">
+          <input type="radio" name="optradio" id="opt2" class="input__control input__control--radio">
+          <label class="input__label input__label--radio" for="opt2">Zakelijk portaal</label>
+      </div>
+    </fieldset>
+    <!--Short Radio Buttons-->
+    <fieldset class="input filter">
+      <legend class="filter__title">Antwoord:</legend>
+      <div class="input__group-horizontal">
+          <div class="input__group input__group--radio">
+              <input type="radio" id="choice_1" name="optradio2" class="input__control input__control--radio">
+              <label class="input__label input__label--radio" for="choice_1">Ja</label>
+          </div>
+          <div class="input__group input__group--radio">
+              <input type="radio" id="choice_2" name="optradio2" class="input__control input__control--radio">
+              <label class="input__label input__label--radio" for="choice_2">Nee</label>
+          </div>
+      </div>
+    </fieldset>
+    
+    <!--Checkboxes-->
+    <fieldset class="input">
+      <legend class="input__legend">Hobbies:</legend>
+      <div class="input__group input__group--checkbox">
+          <input name="hobbies[]" type="checkbox" id="chkbx1" class="input__control input__control--checkbox">
+          <label class="input__label input__label--checkbox" for="chkbx1">Het schrijven van hele mooie, goed doordachte, uitgebreide lange zinnen waar op wat komma's na geen enkel leesteken in te bekennen is.</label>
+      </div>
+      <div class="input__group input__group--checkbox">
+          <input name="hobbies[]" type="checkbox" id="chkbx2" class="input__control input__control--checkbox" checked="">
+          <label class="input__label input__label--checkbox" for="chkbx2">Postzegels verzamelen</label>
+      </div>
+    </fieldset>
+
+  <!--End Form-->
+  </form>
+  </div>
+
+  <!--Navitagion-->
+  <!--Type 1-->
+  <!---->
+  <div class="prev-next">
+    <a href="#fakelink" onclick="return false;" class="prev-next__prev">
+        <span class="prev-next__meta">VORIGE</span>
+        <span class="prev-next__text">1. Wat moet je doen</span>
+    </a>
+    <a href="#fakelink" onclick="return false;" class="prev-next__next">
+        <span class="prev-next__meta">VOLGENDE</span>
+        <span class="prev-next__text">3. Hoe het werkt</span>
+    </a>
+  </div>
+  <!--Simple TYpe-->
+  <nav>
+    <ul class="pagination pagination--simple" title="zoekresultaten">
+      <li class="pagination__item pagination__item--previous"><a href="#" class="pagination__link"><span>Vorige <span class="screenreader-only">pagina</span></span></a></li>
+      <li class="pagination__item pagination__item--next"><a href="#" class="pagination__link"><span>Volgende <span class="screenreader-only">pagina</span></span></a></li>
+    </ul>
+  </nav>
+  <!--Preferred type-->
+  <nav aria-label="pagination">
+    <ul class="pagination pagination--dots">
+        <li class="pagination__item pagination__item--previous"><a href="#" class="pagination__link"><span class="pagination__link--previous">Vorige</span><span class="screenreader-only">pagina</span></a></li>
+        <li class="pagination__item pagination__item--next"><a href="#" class="pagination__link"><span class="pagination__link--previous">Volgende</span><span class="screenreader-only">pagina</span></a></li>
+    </ul>
+  </nav>
+  <!--Button Type-->
+    <button class="btn btn--primary"><span class="btn__content">Annuleren</span></button>
+    <!--Alignment klopt niet wanneer het niet met tekst begint-->
+    <button class="btn btn--primary"><span class="btn__content">&nbsp<i class="btn__icon icon icon-arr-backward" title="" role=""></i> Vorige</span></button> 
+    <button class="btn btn--primary"><span class="btn__content">Volgende <i class="btn__icon icon icon-arr-forward" title="" role=""></i></span></button>
+
+  <!--<div class="fixed-top">
+  <table class="table table-striped table-dark">
+    <tr>
+      <td class="container-fluid bg-primary"><img src="https://regelingen.azurewebsites.net/images/logo.svg" width="32px"></img>Virtual Society</td>
+    </tr>
+    <tr>
+      <td class="container-fluid bg-secondary"><div class="float-left">Sectie</div>
+        <div class="fa fa-times float-right cursor-pointer"></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="container-fluid bg-secondary"><div class="step-number badge-primary float-left">2</div>
+        <div class="float-left">&nbsp;Sub Sectie</div>
+        <div class="fa fa-chevron-down float-right cursor-pointer" data-toggle="collapse" href="#formSteps"></div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="collapse" id="formSteps">
+  <a name="#formSteps"></a>
+  <ul class="timeline">
+    <li data-step="1">
+      <a target="_blank" href="https://www.totoprayogo.com/#">New Web Design</a>
+      <a href="#" class="float-right">21 March, 2014</a>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
+    </li>
+    <li>
+      <a href="#">21 000 Job Seekers</a>
+      <a href="#" class="float-right">4 March, 2014</a>
+      <p>Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+    </li>
+    <li>
+      <a href="#">Awesome Employers</a>
+      <a href="#" class="float-right">1 April, 2014</a>
+      <p>Fusce ullamcorper ligula sit amet quam accumsan aliquet. Sed nulla odio, tincidunt vitae nunc vitae, mollis pharetra velit. Sed nec tempor nibh...</p>
+    </li>
+  </ul>
+  </div>
+<div class="container">
+  <label class="" for="inlineFormInputName2">Vraag 1</label>
+  <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+
+  <label class="" for="inlineFormInputGroupUsername2">Vraag 2</label>
+  <div class="input-group mb-2 mr-sm-2">
+    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+    <div class="input-group-append">
+      <div class="input-group-text"><i class="fa fa-id-card"></i></div>
+    </div>
+  </div>
+</div>
+
+<div class="fixed-bottom">
+  <table class="table table-striped table-dark mb-0" style="height:100%">
+    <tr>
+      <td class="bg-light">
+        <div class="float-left">
+          <button type="button" class="btn btn-secondary btn-sm">Annuleren</button>
+        </div>
+        <div class="float-right">
+          <button type="button" class="btn btn-info btn-sm"><i class="fa fa-angle-double-left"></i>&nbsp;Vorige</button>
+          <button type="button" class="btn btn-info btn-sm">Volgende&nbsp;<i class="fa fa-angle-double-right"></i></button>
+        </div>
+      </td>
+    </tr>
+    <tr class="align-middle">
+      <td>
+        <div class="demo">
+          <span>
+           <div class="fa-stack has-badge align-middle" data-count="5">
+           <div class="fa fa-envelope fa-stack-2x cursor-pointer"></div>
+           </div>
+          </span>
+          <span>
+           <div class="fa-stack has-badge" data-count="5">
+           <div class="fa fa-bell fa-stack-2x cursor-pointer"></div>
+           </div>
+          </span>
+          <span>
+            <div class="has-badge fa-stack" data-count="5">
+            <div class="fa fa-life-ring fa-stack-2x cursor-pointer"></div>
+            </div>
+          </span>
+          <span>
+          <div class="fa-stack has-badge" data-count="5">
+          <div class="fa fa-heart fa-stack-2x cursor-pointer"></div>
+          </div>
+          </span>
+          <span>
+          <div class="fa-stack has-badge" data-count="5">
+          <div class="fa fa-user fa-stack-2x cursor-pointer"></div>
+          </div>
+          </span>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>-->
+
+<script>
+  System.import('./uno/components/collapse/collapse.js').then(function (module) {
+  // Select all collapsible elements on the page
+  var collapses = document.querySelectorAll('[x-uno-collapse]');
+  // Initialize all collapses
+  for (var i = 0; i < collapses.length; i++) {
+      new module.Collapse(collapses.item(i));
+  }
+});
+</script>
+<!-- 
+
+
+<script>
+  /* Load collapse component */
+  System.import('./uno/components/collapse/collapse.js').then(function (module) {
+
+      /* Select all collapsible elements on the page */
+      var elements = document.querySelectorAll('main [x-uno-collapse]');
+
+      /* Initialize all collapses */
+      for (var i = 0; i < elements.length; i++) {
+          new module.Collapse(elements.item(i));
+      }
+  });
+
+</script>
+
+<script>
+  // Load collapse component
+  System['import']('./uno/components/collapse/collapse.js').then(function (m) {
+
+      //gebruikt unieke id van de nav om te voorkomen dat example collapses ook automatisch geactiveerd worden.
+      new m.Collapse(document.querySelector('#search-trigger'));
+  });
+  // Load nav component
+  System.import('/uno/components/navigation/navigation.js').then(function (module) {
+      var navs = document.querySelectorAll('.top-nav-autoresize');
+      // Initialize all navs
+      for (var i = 0; i < navs.length; i++) {
+          new module.AutoResizeNavigation(navs.item(i));
+      }
+      var submenus = document.querySelectorAll('.nav--submenu');
+      // Initialize all submenus
+      for (var i = 0; i < submenus.length; i++) {
+          new module.SubMenuNavigation(submenus.item(i));
+      }
+  });
+
+  // Load example tabbing
+  System.import('./uno/components/tabs/tabs.js').then(function (module) {
+      // Select all .tab elements inside the examples on the page
+      var tabs = document.querySelectorAll('.example > .tab--example');
+
+      // Initialize all example tabs
+      for (var i = 0; i < tabs.length; i++) {
+          new module.Tabs(tabs.item(i));
+      }
+  }); 
+</script>-->
+</body>
+</html>

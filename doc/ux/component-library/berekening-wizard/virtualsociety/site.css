@@ -1,0 +1,19 @@
+.header-logo a:before {
+    background: transparent url("https://regelingen.azurewebsites.net/images/logo.svg") no-repeat bottom left;
+    top: -15px;
+}
+
+.header-logo {
+    color:rgb(21,66,115);
+}
+
+.header-logo a {
+    color:rgb(21,66,115);
+    height: 60px;
+    padding-left: 42px;
+    line-height: 60px;
+}
+
+.header-logo a:after {
+    background-image: none;
+}  
