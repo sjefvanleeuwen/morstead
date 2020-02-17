@@ -3,7 +3,7 @@
     /// <summary>
     /// Script used for mocking tests
     /// </summary>
-    public static class YamlZorgtoeslag
+    public static class YamlZorgtoeslag2
     {
         public readonly static string Body = @"# Minimal Script for Unit Tests
 stuurinformatie:
