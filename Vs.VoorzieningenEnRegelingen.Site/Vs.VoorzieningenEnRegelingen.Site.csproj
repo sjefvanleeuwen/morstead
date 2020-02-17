@@ -25,6 +25,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.0.0" />
     <PackageReference Include="Redbus" Version="1.0.2" />
     <PackageReference Include="WorkflowCore" Version="3.1.5" />
   </ItemGroup>
@@ -71,6 +72,15 @@
     <None Include="wwwroot\plugins\webvowl\js\d3.min.js" />
     <None Include="wwwroot\plugins\webvowl\js\webvowl.app.js" />
     <None Include="wwwroot\plugins\webvowl\js\webvowl.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="config.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="cred.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

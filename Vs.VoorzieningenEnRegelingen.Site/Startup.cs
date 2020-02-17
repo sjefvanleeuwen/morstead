@@ -24,7 +24,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site
         public Startup(IConfiguration configuration)
         {
             Configuration = new ConfigurationBuilder()
-                .AddJsonFile("auth0.json")
+                .AddYamlFile("config.yaml")
+            
                 .Build();
         }
 
