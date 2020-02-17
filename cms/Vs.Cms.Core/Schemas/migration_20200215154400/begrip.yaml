@@ -1,0 +1,12 @@
+﻿Name: begrip
+Attributes:
+- Name: term
+  Type: text
+- Name: omschrijving
+  Type: text
+- Name: versie
+  Type: int
+Edges:
+- Name: versies
+Constraints:
+- Name: begrip

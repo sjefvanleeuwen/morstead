@@ -1,5 +1,7 @@
 ﻿Name: bestand
 Attributes:
+- Name: naam
+  Type: text
 - Name: content
   Type: text
 - Name: type
