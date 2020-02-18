@@ -56,7 +56,10 @@ namespace Vs.Graph.Core
             throw new NotImplementedException();
         }
 
-        public int InsertEdge<T,TNode>(T obj, TNode van, TNode naar) where T : IEdge where TNode : INode
+        public int InsertEdge<T,TVan, TNaar>(T obj, TVan van, TNaar naar) 
+            where T : IEdge 
+            where TVan : INode 
+            where TNaar : INode
         {
             throw new NotImplementedException();
         }

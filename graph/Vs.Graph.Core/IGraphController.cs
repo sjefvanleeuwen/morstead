@@ -16,7 +16,10 @@ namespace Vs.Graph.Core
         bool DeleteAllNodes<T>() where T : INode;
         T GetEdge<T>(int id) where T : IEdge;
         IEnumerable<T> GetAllEdges<T>() where T : IEdge;
-        int InsertEdge<T, TNode>(T obj, TNode van, TNode naar) where T : IEdge where TNode : INode;
+        int InsertEdge<T, TVan, TNaar>(T obj, TVan van, TNaar naar)
+            where T : IEdge
+            where TVan : INode
+            where TNaar : INode;
         int InsertEdges<T>(IEnumerable<T> list) where T : IEdge;
         bool UpdateEdge<T>(T obj) where T : IEdge;
         bool UpdateEdges<T>(IEnumerable<T> list) where T : IEdge;
