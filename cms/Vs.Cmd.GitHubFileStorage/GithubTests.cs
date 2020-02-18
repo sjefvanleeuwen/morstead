@@ -12,6 +12,7 @@ namespace Vs.Cmd.GitHubFileStorage
     public class GithubTests
     {
         [Fact, Order(1)]
+        [Trait("Category", "Integration")]
         public async void Test1()
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
