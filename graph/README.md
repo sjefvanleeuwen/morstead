@@ -82,8 +82,6 @@ INSERT INTO reviewed VALUES ((SELECT $node_id FROM persoon WHERE ID = 3),
 -- stap 4. Ingrid akkordeert de publicatie
 INSERT INTO akkordeert VALUES ((SELECT $node_id FROM persoon WHERE ID = 3), 
        (SELECT $node_id FROM publicatie WHERE ID = 1),GETDATE());
-       
-
 ```
 
 Vanuit de eerdere ontologie ontstaan iedere keer moment opnamen op de edges. Deze worden opgeslagen in de graph.
@@ -121,6 +119,108 @@ De volgende gegevens worden gecorreleerd:
 |-----------------------|-----------------------------------|-------------------------|---------------------------|-----------------------------|-------------------------------|-----------------------------------|-----------------------------------------------|
 |          1            |    2020-02-16T13:59:28.3800000    |    henk                 |    2                      |    ingrid                   |    3                          |    2020-02-16T13:59:28.4030000    |    2020-02-16T13:59:28.3900000                |
 |    1                  |    2020-02-16T13:59:28.3800000    |    ingrid               |    3                      |    ingrid                   |    3                          |    2020-02-16T13:59:28.4030000    |    2020-02-16T13:59:28.3970000                |
+
+#### Opslag Regelgeving
+
+Om binnen het publicatieproces de configuratie omtrent regelgeving op te kunnen slaan, breiden we het model als volgt uit:
+
+##### Stap 1 Database opschonen
+
+```SQL
+drop table if exists regelgeving;
+```
+##### Stap 2 Graph Nodes aanmaken
+
+```SQL
+CREATE TABLE bestand (
+  ID INTEGER PRIMARY KEY,
+  Inhoud NTEXT
+) AS NODE
+```
+
+##### Stap 3 Graph Edges aanmaken
+
+```SQL
+CREATE TABLE regelgeving AS EDGE
+```
+
+Het schema kan nu als volgt ontologisch worden weergegeven:
+
+![logo](./doc/img/publicatie.svg)
+
+##### Stap 4 Nodes vullen met gegevens
+
+In het vorige voorbeeld waren Joost, Ingrid en Henk onderdeel van een werkproces om publicaties te reviewen en te akkorderen. Het is natuurlijk van
+belang dat men de regelgeving die geakkordeerd moet worden kunnen inzien. Hiertoe voegen we het document toe aan de publicatie.
+
+```SQL
+INSERT INTO bestand VALUES (1,'yaml content');
+```
+
+##### Stap 5 Edges vullen met relaties
+
+Het volgende script legt verbindingen tussen nodes door deze te verbinden met de beschikbare edge typen.
+Dit kan bijvoorbeeld gebeuren vanuit human-workflow waarin Joost, Henk en Ingrid participeren.
+
+```SQL
+-- stap 1. De publicatie wordt gekoppeld aan de het regelgevingsbestand.
+INSERT INTO regelgeving VALUES ((SELECT $node_id FROM publicatie WHERE ID = 1), 
+       (SELECT $node_id FROM bestand WHERE ID = 1));
+```
+
+Voorts kunnen alle publicaties getoond worden welke bestanden bevatten van het type regelgeving.
+
+```SQL
+SELECT bestand.Inhoud as bestandsinhoud 
+FROM publicatie,regelgeving,bestand
+WHERE MATCH ( publicatie-(regelgeving)->bestand)
+```
+
+| bestandsinhoud |
+|----------------|
+| yaml content   |
+
+De uiteindelijk opname (state) na deze stappen kan als volgt weergeven worden:
+
+*TODO: Plaatje bijvoegen*
+
+##### Stap 6 View voor het publicatiescherm
+
+Het publicatiescherm kan nu uitgebreid worden met de type bestanden als onderdeel van de publicatie.
+
+```SQL
+--- Zoek welke items een persoon onder publicatiebeheer heeft 
+--- en door wie deze momenteel gereviewed of geakkoordeerd worden
+--- De nieuwste akkorderingen verscheinen boven aan de lijst
+--- Scenario: Toon naast het vorige scenario ook de type bestanden binnen de publicatie.
+--- Deze query voor deze view is semantisch gemodeleerd.
+SELECT publicatie.ID as publicatieId,
+       beheert.moment as beheermoment, 
+       reviewer.name as reviewer,
+       reviewer.ID as reviewerId,
+       akkordeerder.name as akkordeerder,
+       akkordeerder.ID as akkordeerderId,
+       akkordeert.moment as akkorderingsmoment,
+       reviewed.moment as reviewmoment
+FROM persoon,beheert, publicatie, persoon reviewer, reviewed, persoon akkordeerder, akkordeert, regelgeving
+WHERE MATCH (
+        persoon-(beheert)->publicatie AND 
+        reviewer-(reviewed)->publicatie AND 
+        akkordeerder-(akkordeert)->publicatie AND
+        publicatie-(regelgeving)->bestand
+)
+AND persoon.id = 1 ORDER BY akkorderingsmoment DESC
+```
+
+De volgende gegevens worden gecorreleerd:
+
+|       publicatieId    |             beheermoment          |             reviewer    |             reviewerId    |             akkordeerder    |             akkordeerderId    |             akkorderingsmoment    |             reviewmoment                      |
+|-----------------------|-----------------------------------|-------------------------|---------------------------|-----------------------------|-------------------------------|-----------------------------------|-----------------------------------------------|
+|          1            |    2020-02-16T13:59:28.3800000    |    henk                 |    2                      |    ingrid                   |    3                          |    2020-02-16T13:59:28.4030000    |    2020-02-16T13:59:28.3900000                |
+|    1                  |    2020-02-16T13:59:28.3800000    |    ingrid               |    3                      |    ingrid                   |    3                          |    2020-02-16T13:59:28.4030000    |    2020-02-16T13:59:28.3970000                |
+
+
+
 
 ### YAML Voorbeelden
 
