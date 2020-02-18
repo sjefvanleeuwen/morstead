@@ -1,0 +1,11 @@
+﻿/*
+    General findings
+    <meta and <link tags are not closed with a /> (the / is missing)
+*/
+
+.collapse__details .list--timeline h2:first-of-type,
+.collapse__details .list--timeline h3:first-of-type,
+.collapse__details .list--timeline h4:first-of-type,
+.collapse__details .list--timeline h5:first-of-type {
+    margin-top: 0px;
+}

@@ -81,7 +81,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{5C4AF588-9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Diagnostics", "core\Vs.Core.Diagnostics\Vs.Core.Diagnostics.csproj", "{1E1C8C87-294F-4EFF-BD30-4015C946BA29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Cms.Core.Tests", "cms\Vs.Cms.Core.Tests\Vs.Cms.Core.Tests.csproj", "{1B839FFA-3DBB-409E-8FA1-DD407B6EBF7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Cms.Core.Tests", "cms\Vs.Cms.Core.Tests\Vs.Cms.Core.Tests.csproj", "{1B839FFA-3DBB-409E-8FA1-DD407B6EBF7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

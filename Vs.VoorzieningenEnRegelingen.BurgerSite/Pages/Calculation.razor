@@ -1,0 +1,205 @@
+﻿@page "/proefberekening"
+<!--Header-->
+<header class="header" role="banner">
+    <div class="header-logo">
+        <a href="/" title="Logo Virtual Society">
+            Virtual Society
+            <span class="screenreader-only">naar de homepage</span>
+        </a>
+    </div>
+</header>
+
+<!--Title bar-->
+<TitleBar Title="Bereken uw zorgtoeslag" />
+<!--Collapsable-->
+<Collapsable Name="Timeline">
+    <Title>
+        <Badge Number=3 />Waar bent u woonachtig?
+    </Title>
+    <CollapsableContent>
+        <Timeline IndicateEnds="true" Items="_timelineItems" />
+    </CollapsableContent>
+</Collapsable>
+
+<Form>
+    <!--Text editor-->
+    <FormElement Name="nameText" Label="Text"
+                 Type=FormElementType.Text
+                 Value="TestValue"
+                 Size=FormElementSize.Large
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Frank Masmeijer"
+                 IsValid="false"
+                 IsRequired="true"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <FormElement Name="nameNumber" Label="Number"
+                 Type=FormElementType.Number
+                 Value="123"
+                 Size=FormElementSize.Medium
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Frank Govers"
+                 IsValid="false"
+                 IsRequired="true"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <FormElement Name="nameDisabled" Label="Text"
+                 Type=FormElementType.Text
+                 Value="disabled"
+                 Size=FormElementSize.Large
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Frank Rijkaard"
+                 IsValid="false"
+                 IsDisabled="true"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <FormElement Name="nameEmail" Label="Email"
+                 Type=FormElementType.Email
+                 Value="test@test.nl"
+                 Size=FormElementSize.Large
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Frank de Boer"
+                 IsValid="false"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <FormElement Name="nameZoekIcon" Label="ZoekIcon"
+                 Type=FormElementType.Search
+                 Value="zoek1"
+                 Size=FormElementSize.Large
+                 ButtonIcon="icon-magnifier"
+                 ButtonText="Zoeken"
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Frank Lammers"
+                 IsValid="false"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <FormElement Name="nameZoekText" Label="ZoekText"
+                 Type=FormElementType.Search
+                 Value="zoek2"
+                 Size=FormElementSize.Large
+                 ButtonText="Zoeken"
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Frank Visser"
+                 IsValid="false"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <FormElement Name="nameDropdown" Label="DropDown"
+                 Type=FormElementType.Select
+                 Value="2"
+                 Size=FormElementSize.Large
+                 Options="_selectOptions"
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Frank Du Mosch"
+                 IsValid="false"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <FormElement Name="nameDate" Label="Date"
+                 Labels=@_dateLabels
+                 Type=FormElementType.Date
+                 Values=@_dateValues
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Anne Frank"
+                 IsValid="false"
+                 IsRequired="true"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <FormElement Name="nameAdres" Label="Adres"
+                 Labels=@_adresLabels
+                 Type=FormElementType.Adress
+                 Values=@_adresValues
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Frank en Vrij"
+                 IsValid="false"
+                 IsRequired="true"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <FormElement Name="nameTextarea" Label="Textarea"
+                 Type=FormElementType.TextArea
+                 Value="Dit is een test"
+                 Size=FormElementSize.ExtraLarge
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Frankly my dear I don't give a damn"
+                 IsValid="false"
+                 IsRequired="true"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <div class="input">
+        <button type="submit" class="btn btn--primary">Verder</button>&nbsp;&nbsp;of naar de <a href="#">vorige stap</a>
+    </div>
+
+    <!--Radiobuttons-->
+    <!--Normal-->
+    <fieldset class="input">
+        <legend class="input__legend">Kanaal:</legend>
+        <div class="input__group input__group--radio">
+            <input type="radio" name="optradio" id="opt1" class="input__control input__control--radio" checked="">
+            <label class="input__label input__label--radio" for="opt1">Particulier portaal</label>
+        </div>
+        <div class="input__group input__group--radio">
+            <input type="radio" name="optradio" id="opt2" class="input__control input__control--radio">
+            <label class="input__label input__label--radio" for="opt2">Zakelijk portaal</label>
+        </div>
+    </fieldset>
+    <!--Short Radio Buttons-->
+    <fieldset class="input filter">
+        <legend class="filter__title">Antwoord:</legend>
+        <div class="input__group-horizontal">
+            <div class="input__group input__group--radio">
+                <input type="radio" id="choice_1" name="optradio2" class="input__control input__control--radio">
+                <label class="input__label input__label--radio" for="choice_1">Ja</label>
+            </div>
+            <div class="input__group input__group--radio">
+                <input type="radio" id="choice_2" name="optradio2" class="input__control input__control--radio">
+                <label class="input__label input__label--radio" for="choice_2">Nee</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <!--Checkboxes-->
+    <fieldset class="input">
+        <legend class="input__legend">Hobbies:</legend>
+        <div class="input__group input__group--checkbox">
+            <input name="hobbies[]" type="checkbox" id="chkbx1" class="input__control input__control--checkbox">
+            <label class="input__label input__label--checkbox" for="chkbx1">Het schrijven van hele mooie, goed doordachte, uitgebreide lange zinnen waar op wat komma's na geen enkel leesteken in te bekennen is.</label>
+        </div>
+        <div class="input__group input__group--checkbox">
+            <input name="hobbies[]" type="checkbox" id="chkbx2" class="input__control input__control--checkbox" checked="">
+            <label class="input__label input__label--checkbox" for="chkbx2">Postzegels verzamelen</label>
+        </div>
+    </fieldset>
+
+
+
+    <!--Navigation-->
+    <!--Type 1-->
+    <!---->
+    <div class="prev-next">
+        <a href="#fakelink" onclick="return false;" class="prev-next__prev">
+            <span class="prev-next__meta">VORIGE</span>
+            <span class="prev-next__text">1. Wat moet je doen</span>
+        </a>
+        <a href="#fakelink" onclick="return false;" class="prev-next__next">
+            <span class="prev-next__meta">VOLGENDE</span>
+            <span class="prev-next__text">3. Hoe het werkt</span>
+        </a>
+    </div>
+    <!--Simple TYpe-->
+    <nav>
+        <ul class="pagination pagination--simple" title="zoekresultaten">
+            <li class="pagination__item pagination__item--previous"><a href="#" class="pagination__link"><span>Vorige <span class="screenreader-only">pagina</span></span></a></li>
+            <li class="pagination__item pagination__item--next"><a href="#" class="pagination__link"><span>Volgende <span class="screenreader-only">pagina</span></span></a></li>
+        </ul>
+    </nav>
+    <!--Preferred type-->
+    <nav aria-label="pagination">
+        <ul class="pagination pagination--dots">
+            <li class="pagination__item pagination__item--previous"><a href="#" class="pagination__link"><span class="pagination__link--previous">Vorige</span><span class="screenreader-only">pagina</span></a></li>
+            <li class="pagination__item pagination__item--next"><a href="#" class="pagination__link"><span class="pagination__link--previous">Volgende</span><span class="screenreader-only">pagina</span></a></li>
+        </ul>
+    </nav>
+    <!--Button Type-->
+    <button class="btn btn--primary"><span class="btn__content">Annuleren</span></button>
+    <!--Alignment klopt niet wanneer het niet met tekst begint-->
+    <button class="btn btn--primary"><span class="btn__content">&nbsp<i class="btn__icon icon icon-arr-backward" title="" role=""></i> Vorige</span></button>
+    <button class="btn btn--primary"><span class="btn__content">Volgende <i class="btn__icon icon icon-arr-forward" title="" role=""></i></span></button>
+</Form>
