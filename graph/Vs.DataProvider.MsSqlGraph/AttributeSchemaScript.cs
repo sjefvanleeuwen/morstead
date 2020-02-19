@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Vs.Graph.Core.Data;
 using Vs.Graph.Core.Data.Exceptions;
@@ -12,10 +13,8 @@ namespace Vs.DataProvider.MsSqlGraph
         {
             if (@object == null) return string.Empty;
             var sb = new StringBuilder();
-
             var typesWithMyAttribute =
-                from a in AppDomain.CurrentDomain.GetAssemblies()
-                from t in a.GetTypes()
+                from t in Assembly.GetAssembly(typeof(AttributeTypeAttribute)).GetTypes()
                 let attributes = t.GetCustomAttributes(typeof(AttributeTypeAttribute), true)
                 where attributes != null && attributes.Length > 0
                 select new { Type = t, Attributes = attributes.Cast<AttributeTypeAttribute>() };

@@ -195,6 +195,8 @@ Het publicatiescherm kan nu uitgebreid worden met de type bestanden als onderdee
 --- Scenario: Toon naast het vorige scenario ook de type bestanden binnen de publicatie.
 --- Deze query voor deze view is semantisch gemodeleerd.
 SELECT publicatie.ID as publicatieId,
+       bestand.ID as bestandsId,
+       bestand.Naam as bestandsnaam,
        beheert.moment as beheermoment, 
        reviewer.name as reviewer,
        reviewer.ID as reviewerId,
@@ -202,7 +204,7 @@ SELECT publicatie.ID as publicatieId,
        akkordeerder.ID as akkordeerderId,
        akkordeert.moment as akkorderingsmoment,
        reviewed.moment as reviewmoment
-FROM persoon,beheert, publicatie, persoon reviewer, reviewed, persoon akkordeerder, akkordeert, regelgeving
+FROM persoon,beheert, publicatie, persoon reviewer, reviewed, persoon akkordeerder, akkordeert, regelgeving, bestand
 WHERE MATCH (
         persoon-(beheert)->publicatie AND 
         reviewer-(reviewed)->publicatie AND 
