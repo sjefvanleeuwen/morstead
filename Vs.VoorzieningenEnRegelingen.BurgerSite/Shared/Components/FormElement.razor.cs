@@ -26,8 +26,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Shared.Components
         public string ButtonIcon { get; set; }
         [Parameter]
         public string ButtonText { get; set; }
-
-
         [Parameter]
         public FormElementSize Size { get; set; }
         [Parameter]
@@ -44,15 +42,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Shared.Components
         public bool IsRequired { get; set; } = false;
         [Parameter]
         public bool IsValid { get; set; } = true;
-        
 
-        private IEnumerable<string> _keys => Options.Keys;
-        private string _type => Type.GetDescription();
-        private string _size => Size.GetDescription();
-        private bool _buttonIsIcon => !string.IsNullOrWhiteSpace(ButtonIcon);
-        private bool _showTag => !string.IsNullOrWhiteSpace(TagText);
-        private bool _showHint => !string.IsNullOrWhiteSpace(HintText);
-        private bool _showError => !string.IsNullOrWhiteSpace(ErrorText);
+        protected IEnumerable<string> _keys => Options.Keys;
+        protected string _type => Type.GetDescription();
+        protected string _horizontalRadio => (Options.Count == 2 && Options.All(o => o.Value.Length <= 10)) ? "input__group-horizontal" : string.Empty;
+        protected string _size => Size.GetDescription();
+        protected bool _buttonIsIcon => !string.IsNullOrWhiteSpace(ButtonIcon);
+        protected bool _showTag => !string.IsNullOrWhiteSpace(TagText);
+        protected bool _showHint => !string.IsNullOrWhiteSpace(HintText);
+        protected bool _showError => !string.IsNullOrWhiteSpace(ErrorText);
     }
 
     public enum FormElementType
@@ -73,12 +71,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Shared.Components
         Select,
         [Description("input__control--search")]
         Search,
-        [Description("input__control--select")]
+        [Description("input__control--checkbox")]
         Checkbox,
-        [Description("input__control--select")]
-        Radio,
-        [Description("input__control--select")]
-        RadioShort
+        [Description("input__control--radio")]
+        Radio
     }
 
     public enum FormElementSize

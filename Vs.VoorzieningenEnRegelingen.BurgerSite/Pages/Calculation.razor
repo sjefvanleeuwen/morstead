@@ -9,9 +9,8 @@
     </div>
 </header>
 
-<!--Title bar-->
 <TitleBar Title="Bereken uw zorgtoeslag" />
-<!--Collapsable-->
+
 <Collapsable Name="Timeline">
     <Title>
         <Badge Number=3 />Waar bent u woonachtig?
@@ -22,7 +21,7 @@
 </Collapsable>
 
 <Form>
-    <!--Text editor-->
+
     <FormElement Name="nameText" Label="Text"
                  Type=FormElementType.Text
                  Value="TestValue"
@@ -69,9 +68,7 @@
                  ButtonIcon="icon-magnifier"
                  ButtonText="Zoeken"
                  TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frank Lammers"
-                 IsValid="false"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+                 HintText="Bijvoorbeeld Frank Lammers" />
 
     <FormElement Name="nameZoekText" Label="ZoekText"
                  Type=FormElementType.Search
@@ -109,7 +106,6 @@
                  Values=@_adresValues
                  TagText="optioneel verplicht"
                  HintText="Bijvoorbeeld Frank en Vrij"
-                 IsValid="false"
                  IsRequired="true"
                  ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
@@ -117,58 +113,43 @@
                  Type=FormElementType.TextArea
                  Value="Dit is een test"
                  Size=FormElementSize.ExtraLarge
+                 IsRequired="true"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+
+    <ButtonSubmit Text="Verder">
+        &nbsp;&nbsp;of naar de <a href="#">vorige stap</a>
+    </ButtonSubmit>
+
+    <FormElement Name="radio" Label="Radio"
+                 Type=FormElementType.Radio
+                 Value="2"
+                 Size=FormElementSize.Medium
+                 Options="_selectOptions"
                  TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frankly my dear I don't give a damn"
+                 HintText="Bijvoorbeeld James Franko"
                  IsValid="false"
                  IsRequired="true"
                  ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <div class="input">
-        <button type="submit" class="btn btn--primary">Verder</button>&nbsp;&nbsp;of naar de <a href="#">vorige stap</a>
-    </div>
+    <FormElement Name="radioHorzontal" Label="Woont u in Nederland?"
+                 Type=FormElementType.Radio
+                 Value="2"
+                 Options="_jaNeeOptions"
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Dave Franko"
+                 IsValid="false"
+                 IsRequired="true"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <!--Radiobuttons-->
-    <!--Normal-->
-    <fieldset class="input">
-        <legend class="input__legend">Kanaal:</legend>
-        <div class="input__group input__group--radio">
-            <input type="radio" name="optradio" id="opt1" class="input__control input__control--radio" checked="">
-            <label class="input__label input__label--radio" for="opt1">Particulier portaal</label>
-        </div>
-        <div class="input__group input__group--radio">
-            <input type="radio" name="optradio" id="opt2" class="input__control input__control--radio">
-            <label class="input__label input__label--radio" for="opt2">Zakelijk portaal</label>
-        </div>
-    </fieldset>
-    <!--Short Radio Buttons-->
-    <fieldset class="input filter">
-        <legend class="filter__title">Antwoord:</legend>
-        <div class="input__group-horizontal">
-            <div class="input__group input__group--radio">
-                <input type="radio" id="choice_1" name="optradio2" class="input__control input__control--radio">
-                <label class="input__label input__label--radio" for="choice_1">Ja</label>
-            </div>
-            <div class="input__group input__group--radio">
-                <input type="radio" id="choice_2" name="optradio2" class="input__control input__control--radio">
-                <label class="input__label input__label--radio" for="choice_2">Nee</label>
-            </div>
-        </div>
-    </fieldset>
-
-    <!--Checkboxes-->
-    <fieldset class="input">
-        <legend class="input__legend">Hobbies:</legend>
-        <div class="input__group input__group--checkbox">
-            <input name="hobbies[]" type="checkbox" id="chkbx1" class="input__control input__control--checkbox">
-            <label class="input__label input__label--checkbox" for="chkbx1">Het schrijven van hele mooie, goed doordachte, uitgebreide lange zinnen waar op wat komma's na geen enkel leesteken in te bekennen is.</label>
-        </div>
-        <div class="input__group input__group--checkbox">
-            <input name="hobbies[]" type="checkbox" id="chkbx2" class="input__control input__control--checkbox" checked="">
-            <label class="input__label input__label--checkbox" for="chkbx2">Postzegels verzamelen</label>
-        </div>
-    </fieldset>
-
-
+    <FormElement Name="selectedoptions" Label="NoemTweeNummers"
+                 Type=FormElementType.Checkbox
+                 Values=@(new List<string> { "2", "99"})
+                 Options="_selectOptions"
+                 TagText="optioneel verplicht"
+                 HintText="Bijvoorbeeld Frankfurt"
+                 IsValid="false"
+                 IsRequired="true"
+                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
     <!--Navigation-->
     <!--Type 1-->

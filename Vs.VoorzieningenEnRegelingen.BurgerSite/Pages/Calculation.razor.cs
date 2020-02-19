@@ -7,6 +7,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
     {
         private IEnumerable<TimelineItemDTO> _timelineItems;
         private Dictionary<string, string> _selectOptions;
+        private Dictionary<string, string> _jaNeeOptions;
         private IEnumerable<FormElementLabel> _dateLabels;
         private IEnumerable<string> _dateValues;
         private IEnumerable<FormElementLabel> _adresLabels;
@@ -16,6 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
         {
             InitTimeLineItems();
             InitSelectOptions();
+            InitJaNeeOptions();
             InitDate();
             InitAdres();
         }
@@ -38,6 +40,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
                 new FormElementLabel { Text = "Jaar", Title = "DateJaar" }
             };
             _dateValues = new List<string> { "18", "2", "2020" };
+        }
+
+        private void InitJaNeeOptions()
+        {
+            _jaNeeOptions = new Dictionary<string, string>
+            {
+                {"true", "Ja" },
+                {"false", "Nee" }
+            };
         }
 
         private void InitSelectOptions()

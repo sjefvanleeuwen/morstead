@@ -1,0 +1,99 @@
+﻿@inherits FormElement
+
+@if (_showHint)
+{
+    <span class="input__hint" id="hint_@Name">@HintText</span>
+}
+@if (_showError)
+{
+    <div class="input__error">@ErrorText</div>
+}
+
+@switch (Type)
+{
+    case FormElementType.Text:
+    case FormElementType.Number:
+    case FormElementType.Email:
+        <input required="@IsRequired" disabled="@IsDisabled" type="@(Type.ToString().ToLower())" id="@Name" aria-describedby="hint_@Name" class="input__control @_type @_size" value="@Value">
+        break;
+    case FormElementType.TextArea:
+        <textarea required="@IsRequired" disabled="@IsDisabled" id="@Name" aria-describedby="hint_@Name" class="input__control @_type @_size">@Value</textarea>
+        break;
+    case FormElementType.Select:
+        <select required="@IsRequired" disabled="@IsDisabled" id="@Name" aria-describedby="hint_@Name" class="input__control @_type @_size">
+            @foreach (var key in _keys)
+            {
+                <option value="@key" selected="@(key == Value)">@Options[key]</option>
+            }
+        </select>
+        break;
+    case FormElementType.Search:
+        <div class="input__control-group">
+            <input required="@IsRequired" disabled="@IsDisabled" type="search" id="@Name" class="input__control @_size @_type">
+            @if (_buttonIsIcon)
+            {
+                <button class="btn btn--icon" title="@ButtonText"><i class="icon @ButtonIcon" role="presentation" value="@Value"></i></button>
+            }
+            else
+            {
+                <button class="btn">@ButtonText</button>
+            }
+        </div>
+        break;
+    case FormElementType.Date:
+        <div class="input__control-group">
+            <div>
+                <label class="input__hint" for="@Name-d">@Labels.ElementAtOrDefault(0).Text</label>
+                <input required="@IsRequired" disabled="@IsDisabled" aria-label="@Labels.ElementAtOrDefault(0).Title" title="@Labels.ElementAtOrDefault(0).Title" type="number" min="1" max="31" id="@Name-d" class="input__control input__control--two-characters input__control--linked @_type" value="@Values.ElementAtOrDefault(0)">
+            </div>
+            <div>
+                <label class="input__hint" for="@Name-m">@Labels.ElementAtOrDefault(1).Text</label>
+                <input required="@IsRequired" disabled="@IsDisabled" aria-label="@Labels.ElementAtOrDefault(1).Title" title="@Labels.ElementAtOrDefault(1).Title" type="number" min="1" max="12" id="@Name-m" class="input__control input__control--two-characters input__control--linked @_type" value="@Values.ElementAtOrDefault(1)">
+            </div>
+            <div>
+                <span class="input__hint" for="@Name-y">@Labels.ElementAtOrDefault(2).Text</span>
+                <input required="@IsRequired" disabled="@IsDisabled" aria-label="@Labels.ElementAtOrDefault(2).Title" title="@Labels.ElementAtOrDefault(2).Title" type="number" id="@Name-y" class="input__control input__control--four-characters input__control--linked @_type" value="@Values.ElementAtOrDefault(2)">
+            </div>
+        </div>
+        break;
+    case FormElementType.Adress:
+        <div class="input__control-group">
+            <div>
+                <label class="input__hint" for="@Name-address_postal_code">@Labels.ElementAtOrDefault(0).Text</label>
+                <input required="@IsRequired" disabled="@IsDisabled" aria-label="@Labels.ElementAtOrDefault(0).Title" title="@Labels.ElementAtOrDefault(0).Title" type="text" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" id="@Name-address_postal_code" class="input__control input__control--six-characters @_type" value="@Values.ElementAtOrDefault(0)">
+            </div>
+            <div>
+                <label class="input__hint" for="@Name-address_number">@Labels.ElementAtOrDefault(1).Text</label>
+                <input required="@IsRequired" disabled="@IsDisabled" aria-label="@Labels.ElementAtOrDefault(1).Title" title="@Labels.ElementAtOrDefault(1).Title" type="number" minlength="1" maxlength="5" id="@Name-address_number" class="input__control input__control--five-characters @_type" value="@Values.ElementAtOrDefault(1)">
+            </div>
+            <div>
+                <span class="input__hint" for="@Name-address_number-addition">@Labels.ElementAtOrDefault(2).Text</span>
+                <input required="@IsRequired" disabled="@IsDisabled" aria-label="@Labels.ElementAtOrDefault(2).Title" title="@Labels.ElementAtOrDefault(2).Title" type="text" maxlength="5" id="@Name-address_number-addition" class="input__control input__control--five-characters @_type" value="@Values.ElementAtOrDefault(2)">
+            </div>
+        </div>
+        break;
+    case FormElementType.Checkbox:
+        var checkBoxNum = 0;
+        @foreach (var key in _keys)
+        {
+            checkBoxNum++;
+            <div class="input__group input__group--checkbox">
+                <input name="@(Name)[]" type="checkbox" id="@Name-checkbox_@checkBoxNum" class="input__control @_type @_size" checked="@(Values.Contains(key))">
+                <label class="input__label input__label--checkbox" for="@Name-checkbox_@checkBoxNum">@(Options[key])</label>
+            </div>
+        }
+        break;
+    case FormElementType.Radio:
+        var radioNum = 0;
+        <div class="@_horizontalRadio">
+            @foreach (var key in _keys)
+            {
+                radioNum++;
+                <div class="input__group input__group--radio">
+                    <input type="radio" name="@Name" id="@Name-radio_@radioNum" class="input__control @_type @_size" checked="@(key == Value)" value="@Value" />
+                    <label class="input__label input__label--radio" for="@Name-radio_@radioNum">@(Options[key])</label>
+                </div>
+            }
+        </div>
+        break;
+}
