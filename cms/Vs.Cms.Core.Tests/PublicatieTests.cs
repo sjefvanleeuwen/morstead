@@ -1,7 +1,9 @@
+using Dapper;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using Vs.Cms.Core.Edges;
 using Vs.Cms.Core.Nodes;
@@ -30,6 +32,45 @@ namespace Vs.Cms.Core.Tests
             };
         }
 
+        private void createDatabase()
+        {
+            string sql = @"drop table if exists beheert;
+drop table if exists reviewed;
+drop table if exists akkordeert;
+drop table if exists regelgeving;
+
+drop table if exists persoon;
+drop table if exists publicatie;
+
+CREATE TABLE persoon (
+  ID INTEGER PRIMARY KEY,
+  [name] VARCHAR(100)
+) AS NODE;
+
+CREATE TABLE publicatie (
+  ID INTEGER PRIMARY KEY,
+) AS NODE;
+
+CREATE TABLE bestand (
+  ID INTEGER PRIMARY KEY,
+  Inhoud NTEXT
+) AS NODE
+
+CREATE TABLE akkordeert (moment DATETIME) AS EDGE;
+CREATE TABLE reviewed (moment DATETIME) AS EDGE;
+CREATE TABLE beheert (moment DATETIME) AS EDGE;
+CREATE TABLE regelgeving AS EDGE
+";
+
+
+            using (var connection = new SqlConnection(Global.ConnectionString))
+            {
+                connection.Open();
+                var affectedRows = connection.Execute(sql);
+            }
+        }
+            
+
         [Theory, Order(1)]
         [Trait("Category", "Integration")]
         [ClassData(typeof(TestData))]
@@ -39,6 +80,7 @@ namespace Vs.Cms.Core.Tests
                 .AddYamlFile("config.yaml", optional: false)
                 .Build();
             Global.ConnectionString = configuration["Cms:SqlConnection"];
+            createDatabase();
             GraphController controller = new GraphController(Global.ConnectionString);
             controller.InsertNode(joost);
             controller.InsertNode(henk);
