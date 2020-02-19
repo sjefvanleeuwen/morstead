@@ -35,7 +35,11 @@ namespace Vs.Cms.Core.Tests
         [ClassData(typeof(TestData))]
         public void MaakPersonenAan(Persoon joost, Persoon henk, Persoon ingrid)
         {
-            GraphController controller = new GraphController();
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .AddYamlFile("config.yaml", optional: false)
+                .Build();
+            Global.ConnectionString = configuration["Cms:SqlConnection"];
+            GraphController controller = new GraphController(Global.ConnectionString);
             controller.InsertNode(joost);
             controller.InsertNode(henk);
             controller.InsertNode(ingrid);
@@ -45,16 +49,16 @@ namespace Vs.Cms.Core.Tests
         [Trait("Category", "Integration")]
         public void MaakPublicatieAan()
         {
-            GraphController controller = new GraphController();
+            GraphController controller = new GraphController(Global.ConnectionString);
             controller.InsertNode(new Publicatie() { Id=1,Moment=DateTime.Now});
         }
 
         [Theory, Order(3)]
         [Trait("Category", "Integration")]
         [ClassData(typeof(TestData))]
-        public void JoostBeheertDePublicatie(Persoon joost)
+        public void JoostBeheertDePublicatie(Persoon joost, Persoon henk, Persoon ingrid)
         {
-            GraphController controller = new GraphController();
+            GraphController controller = new GraphController(Global.ConnectionString);
             var publicatie = new Publicatie() { Id = 1 };
             controller.InsertEdge(new Beheert() { Id = 1, PeriodeBegin = DateTime.Now },  joost, new Publicatie() { Id = 1 });
         }
