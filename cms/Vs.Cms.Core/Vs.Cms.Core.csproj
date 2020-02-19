@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\core\Vs.Core\Vs.Core.csproj" />
     <ProjectReference Include="..\..\graph\Vs.Graph.Core\Vs.Graph.Core.csproj" />
   </ItemGroup>
 
