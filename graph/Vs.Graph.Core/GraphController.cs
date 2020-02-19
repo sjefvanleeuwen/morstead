@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using Vs.Graph.Core.Data;
+using Dapper.Contrib.Extensions;
+using System.Threading.Tasks;
+using Vs.Core;
 
 namespace Vs.Graph.Core
 {
     public class GraphController : IGraphController
     {
+        private readonly SqlConnection sql;
+
+        public GraphController(string connection)
+        {
+            sql = new SqlConnection(connection);
+        }
         public bool DeleteAllEdges<T>() where T : IEdge
         {
             throw new NotImplementedException();
@@ -56,12 +66,18 @@ namespace Vs.Graph.Core
             throw new NotImplementedException();
         }
 
-        public int InsertEdge<T,TVan, TNaar>(T obj, TVan van, TNaar naar) 
-            where T : IEdge 
+        public async Task<int> InsertEdge<TEdge,TVan, TNaar>(TEdge edge, TVan from, TNaar to) 
+            where TEdge : IEdge 
             where TVan : INode 
             where TNaar : INode
         {
-            throw new NotImplementedException();
+            string edgeTable = typeof(TEdge).GetAttributeValue((TableAttribute att) => att.Name);
+            string fromNode =typeof(TVan).GetAttributeValue((TableAttribute att) => att.Name);
+            string  toNode = typeof(TNaar).GetAttributeValue((TableAttribute att) => att.Name);
+            string query = @$"INSERT INTO {edgeTable} VALUES ((SELECT $node_id FROM {fromNode} WHERE ID = {from.Id},
+                (SELECT $node_id FROM {toNode} WHERE ID = {to.Id}));";
+            SqlCommand command = new SqlCommand(query, sql);
+            return (int) await command.ExecuteScalarAsync();
         }
 
         public int InsertEdges<T>(IEnumerable<T> list) where T : IEdge

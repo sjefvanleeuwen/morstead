@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Vs.Graph.Core.Data;
 
 namespace Vs.Graph.Core
@@ -16,7 +17,7 @@ namespace Vs.Graph.Core
         bool DeleteAllNodes<T>() where T : INode;
         T GetEdge<T>(int id) where T : IEdge;
         IEnumerable<T> GetAllEdges<T>() where T : IEdge;
-        int InsertEdge<T, TVan, TNaar>(T obj, TVan van, TNaar naar)
+        Task<int> InsertEdge<T, TVan, TNaar>(T obj, TVan van, TNaar naar)
             where T : IEdge
             where TVan : INode
             where TNaar : INode;
