@@ -83,6 +83,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Diagnostics", "core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Cms.Core.Tests", "cms\Vs.Cms.Core.Tests\Vs.Cms.Core.Tests.csproj", "{1B839FFA-3DBB-409E-8FA1-DD407B6EBF7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core", "core\Vs.Core\Vs.Core.csproj", "{F3A2931D-C46F-471F-B652-08A99DC63926}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{1B839FFA-3DBB-409E-8FA1-DD407B6EBF7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B839FFA-3DBB-409E-8FA1-DD407B6EBF7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B839FFA-3DBB-409E-8FA1-DD407B6EBF7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A2931D-C46F-471F-B652-08A99DC63926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A2931D-C46F-471F-B652-08A99DC63926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A2931D-C46F-471F-B652-08A99DC63926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A2931D-C46F-471F-B652-08A99DC63926}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,6 +176,7 @@ Global
 		{675B52A9-1CB2-483A-B7AA-4831DBE389CF} = {E3EFC9E8-AF92-4CA2-B6F8-43FEF9555A3E}
 		{1E1C8C87-294F-4EFF-BD30-4015C946BA29} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{1B839FFA-3DBB-409E-8FA1-DD407B6EBF7A} = {E3EFC9E8-AF92-4CA2-B6F8-43FEF9555A3E}
+		{F3A2931D-C46F-471F-B652-08A99DC63926} = {5C4AF588-9E89-4835-B899-12A16B587546}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
