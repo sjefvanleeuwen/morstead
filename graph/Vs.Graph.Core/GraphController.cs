@@ -77,7 +77,10 @@ namespace Vs.Graph.Core
             string query = @$"INSERT INTO {edgeTable} VALUES ((SELECT $node_id FROM {fromNode} WHERE ID = {from.Id},
                 (SELECT $node_id FROM {toNode} WHERE ID = {to.Id}));";
             SqlCommand command = new SqlCommand(query, sql);
-            return (int) await command.ExecuteScalarAsync();
+            await sql.OpenAsync();
+            var ret = (int) await command.ExecuteScalarAsync();
+            await sql.CloseAsync();
+            return ret;
         }
 
         public int InsertEdges<T>(IEnumerable<T> list) where T : IEdge
