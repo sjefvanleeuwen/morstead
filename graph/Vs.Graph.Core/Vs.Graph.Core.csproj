@@ -6,11 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper.Contrib" Version="2.0.30" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
     <PackageReference Include="YamlDotNet" Version="8.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\core\Vs.Core.Diagnostics\Vs.Core.Diagnostics.csproj" />
+    <ProjectReference Include="..\..\core\Vs.Core\Vs.Core.csproj" />
   </ItemGroup>
 
 </Project>
