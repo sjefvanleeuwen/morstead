@@ -8,8 +8,8 @@ namespace Vs.Graph.Core
     {
         T GetNode<T>(int id) where T : INode;
         IEnumerable<T> GetAllNodes<T>() where T : INode;
-        int InsertNode<T>(T obj) where T : INode;
-        int InsertNodes<T>(IEnumerable<T> list) where T : INode;
+        Task<int> InsertNode<T>(T obj) where T : class, INode;
+        Task<int[]> InsertNodes<T>(IEnumerable<T> list) where T : class, INode;
         bool UpdateNode<T>(T obj) where T : INode;
         bool UpdateNodes<T>(IEnumerable<T> list) where T : INode;
         bool DeleteNode<T>(T obj) where T : INode;

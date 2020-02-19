@@ -90,7 +90,7 @@ namespace Vs.Graph.Core
             return await sql.InsertAsync(obj);
         }
 
-        public int InsertNodes<T>(IEnumerable<T> list) where T : INode
+        public async Task<int[]> InsertNodes<T>(IEnumerable<T> list) where T : class, INode
         {
             throw new NotImplementedException();
         }
