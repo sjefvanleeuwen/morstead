@@ -1,6 +1,7 @@
 ﻿using System;
 using Vs.Graph.Core.Data;
 using Dapper.Contrib.Extensions;
+using Itenso.TimePeriod;
 
 namespace Vs.Cms.Core.Edges
 {
@@ -9,5 +10,6 @@ namespace Vs.Cms.Core.Edges
     {
         public int Id { get; set; }
         public DateTime Moment { get; set; }
+        public TimeRange Periode { get; set; }
     }
 }
