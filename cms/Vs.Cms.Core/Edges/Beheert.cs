@@ -1,14 +1,13 @@
 ﻿using Dapper.Contrib.Extensions;
-using System;
+using Itenso.TimePeriod;
 using Vs.Graph.Core.Data;
 
 namespace Vs.Cms.Core.Edges
 {
     [Table("beheert")]
-    public class Beheert : IEdge, IPeriode
+    public class Beheert : IEdge
     {
-        public DateTime PeriodeBegin { get; set; }
-        public DateTime PeriodeEind { get; set; }
         public int Id { get; set; }
+        public TimeRange Periode { get; set; }
     }
 }
