@@ -1,13 +1,5 @@
 ﻿@page "/proefberekening"
-<!--Header-->
-<header class="header" role="banner">
-    <div class="header-logo">
-        <a href="/" title="Logo Virtual Society">
-            Virtual Society
-            <span class="screenreader-only">naar de homepage</span>
-        </a>
-    </div>
-</header>
+<Header Text="Virtual Society" Title="Virtual Society Calculation" LinkScreenReaderDescription="naar de homepage" />
 
 <TitleBar Title="Bereken uw zorgtoeslag" />
 
@@ -151,36 +143,6 @@
                  IsRequired="true"
                  ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <!--Navigation-->
-    <!--Type 1-->
-    <!---->
-    <div class="prev-next">
-        <a href="#fakelink" onclick="return false;" class="prev-next__prev">
-            <span class="prev-next__meta">VORIGE</span>
-            <span class="prev-next__text">1. Wat moet je doen</span>
-        </a>
-        <a href="#fakelink" onclick="return false;" class="prev-next__next">
-            <span class="prev-next__meta">VOLGENDE</span>
-            <span class="prev-next__text">3. Hoe het werkt</span>
-        </a>
-    </div>
-    <!--Simple TYpe-->
-    <nav>
-        <ul class="pagination pagination--simple" title="zoekresultaten">
-            <li class="pagination__item pagination__item--previous"><a href="#" class="pagination__link"><span>Vorige <span class="screenreader-only">pagina</span></span></a></li>
-            <li class="pagination__item pagination__item--next"><a href="#" class="pagination__link"><span>Volgende <span class="screenreader-only">pagina</span></span></a></li>
-        </ul>
-    </nav>
-    <!--Preferred type-->
-    <nav aria-label="pagination">
-        <ul class="pagination pagination--dots">
-            <li class="pagination__item pagination__item--previous"><a href="#" class="pagination__link"><span class="pagination__link--previous">Vorige</span><span class="screenreader-only">pagina</span></a></li>
-            <li class="pagination__item pagination__item--next"><a href="#" class="pagination__link"><span class="pagination__link--previous">Volgende</span><span class="screenreader-only">pagina</span></a></li>
-        </ul>
-    </nav>
-    <!--Button Type-->
-    <button class="btn btn--primary"><span class="btn__content">Annuleren</span></button>
-    <!--Alignment klopt niet wanneer het niet met tekst begint-->
-    <button class="btn btn--primary"><span class="btn__content">&nbsp<i class="btn__icon icon icon-arr-backward" title="" role=""></i> Vorige</span></button>
-    <button class="btn btn--primary"><span class="btn__content">Volgende <i class="btn__icon icon icon-arr-forward" title="" role=""></i></span></button>
+    <Pagination Next="#" NextText="Volgende" Previous="#" PreviousText="Vorige" ScreenreaderDescription="pagina" />
+
 </Form>
