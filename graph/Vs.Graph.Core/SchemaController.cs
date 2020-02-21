@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Vs.Core;
 using Vs.Graph.Core.Data;
 using Vs.Graph.Core.Data.Exceptions;
 using YamlDotNet.Serialization;
@@ -80,7 +81,7 @@ namespace Vs.Graph.Core
             sb.AppendLine("using Vs.Graph.Core.Data;");
             sb.AppendLine($"namespace {nameSpace}");
             sb.AppendLine("{");
-            sb.AppendLine($"\tpartial class {schema.Name} : {typeof(T).Name}");
+            sb.AppendLine($"\tpartial class {schema.Name.ToPascalCase()} : {typeof(T).Name}");
             sb.AppendLine("\t{");
             foreach (var attribute in schema.Attributes)
             {
@@ -88,22 +89,22 @@ namespace Vs.Graph.Core
                 switch (((AttributeTypeAttribute)attribute.Type.GetType().GetCustomAttributes(typeof(AttributeTypeAttribute), true)[0]).Name)
                 {
                     case "int":
-                        sb.AppendLine($"\t\tpublic int {attribute.Name} {{get;set;}}");
+                        sb.AppendLine($"\t\tpublic int {attribute.Name.ToPascalCase()} {{get;set;}}");
                         break;
                     case "datum":
-                        sb.AppendLine($"\t\tpublic DateTime {attribute.Name} {{get;set;}}");
+                        sb.AppendLine($"\t\tpublic DateTime {attribute.Name.ToPascalCase()} {{get;set;}}");
                         break;
                     case "elfproef":
-                        sb.AppendLine($"\t\tpublic string {attribute.Name} {{get;set;}}");
+                        sb.AppendLine($"\t\tpublic string {attribute.Name.ToPascalCase()} {{get;set;}}");
                         break;
                     case "euro":
-                        sb.AppendLine($"\t\tpublic double {attribute.Name} {{get;set;}}");
+                        sb.AppendLine($"\t\tpublic double {attribute.Name.ToPascalCase()} {{get;set;}}");
                         break;
                     case "periode":
-                        sb.AppendLine($"\t\tpublic TimeRange {attribute.Name} {{get;set;}}");
+                        sb.AppendLine($"\t\tpublic TimeRange {attribute.Name.ToPascalCase()} {{get;set;}}");
                         break;
                     case "text":
-                        sb.AppendLine($"\t\tpublic string {attribute.Name} {{get;set;}}");
+                        sb.AppendLine($"\t\tpublic string {attribute.Name.ToPascalCase()} {{get;set;}}");
                         break;
                     default:
                         throw new AttributeNotSupportedException();
