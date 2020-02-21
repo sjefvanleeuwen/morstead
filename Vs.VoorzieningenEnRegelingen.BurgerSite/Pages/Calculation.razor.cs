@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using Vs.VoorzieningenEnRegelingen.BurgerRepository.Controllers.Interfaces;
+using Vs.VoorzieningenEnRegelingen.BurgerRepository.Objects.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerSite.Shared.Components;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
@@ -13,6 +16,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
         private IEnumerable<FormElementLabel> _adresLabels;
         private IEnumerable<string> _adresValues;
 
+        [Inject]
+        private IStepController _StepController { get; set; }
+
         protected override void OnInitialized()
         {
             InitTimeLineItems();
@@ -24,6 +30,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
 
         private void InitAdres()
         {
+            var step = _StepController.GetStep("yaml", new List<IParameter>());
+
             _adresLabels = new List<FormElementLabel> {
                 new FormElementLabel { Text = "Postcode", Title = "AdresPostcode" },
                 new FormElementLabel { Text = "Huisnummer", Title = "AdresHuisnummer" },
