@@ -19,6 +19,7 @@ berekening:
  - stap: 1
    omschrijving: Waar bent u woonachtig?
    formule: woonlandfactor
+   recht: woonlandfactor > 0
 formules:
  - woonlandfactor:
      formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
