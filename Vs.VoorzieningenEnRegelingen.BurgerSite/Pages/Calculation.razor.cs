@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.BurgerRepository.Controllers.Interfaces;
-using Vs.VoorzieningenEnRegelingen.BurgerRepository.Objects.Interfaces;
+using System.Threading.Tasks;
 using Vs.VoorzieningenEnRegelingen.BurgerSite.Shared.Components;
+using Vs.VoorzieningenEnRegelingen.Core;
+using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
 {
@@ -16,8 +20,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
         private IEnumerable<FormElementLabel> _adresLabels;
         private IEnumerable<string> _adresValues;
 
+        private string _yamlUrl = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml";
+        private ParseResult _parseResult;
+        private Dictionary<Step, QuestionArgs> _stepQuestions;
+
         [Inject]
-        private IStepController _StepController { get; set; }
+        private IServiceController _serviceController { get; set; }
 
         protected override void OnInitialized()
         {
@@ -28,9 +36,58 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
             InitAdres();
         }
 
+        protected override async Task OnInitializedAsync()
+        {
+            if (_parseResult == null)
+            {
+                _parseResult = _serviceController.Parse(GetParseRequest());
+                InitStepQuestions();
+            }
+            //RenderStep();
+        }
+
+        //private void RenderStep(Step)
+        //{
+        //    var executeResult = GetExecuteRequest();
+        //    //currentStep = 
+        //}
+
+        private ParseRequest GetParseRequest()
+        {
+            return new ParseRequest { 
+                Config = _yamlUrl
+            };
+        }
+
+        private ExecuteRequest GetExecuteRequest(ParametersCollection parameters = null)
+        {
+            return new ExecuteRequest
+            {
+                Config = _yamlUrl,
+                Parameters = parameters
+            };
+        }
+
+        private void InitStepQuestions()
+        {
+            //_stepQuestions = new Dictionary<Step, List<QuestionArgs>>();
+            //_parseResult.Model.Steps.ForEach(s => {
+            //    _stepQuestions[s] = null;
+            //    if (!_stepQuestions.ContainsKey(s.Name)) {
+            //        _stepQuestions[s.Name] = new List<Step>();
+            //    }
+            //    _stepQuestions[s.Name].Add(s);
+            //});
+        }
+
+        private void GetStep()
+        {
+            throw new NotImplementedException();
+        }
+
         private void InitAdres()
         {
-            var step = _StepController.GetStep("yaml", new List<IParameter>());
+            //var step = _StepController.GetStep("yaml", new List<IParameter>());
 
             _adresLabels = new List<FormElementLabel> {
                 new FormElementLabel { Text = "Postcode", Title = "AdresPostcode" },

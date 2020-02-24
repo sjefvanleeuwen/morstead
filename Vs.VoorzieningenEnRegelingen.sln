@@ -85,7 +85,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Cms.Core.Tests", "cms\Vs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core", "core\Vs.Core\Vs.Core.csproj", "{F3A2931D-C46F-471F-B652-08A99DC63926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.VoorzieningenEnRegelingen.BurgerRepository", "Vs.VoorzieningenEnRegelingen.BurgerRepository\Vs.VoorzieningenEnRegelingen.BurgerRepository.csproj", "{65C94E46-BAD9-4B3D-9D3A-0C3033CC48ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.BurgerRepository", "Vs.VoorzieningenEnRegelingen.BurgerRepository\Vs.VoorzieningenEnRegelingen.BurgerRepository.csproj", "{65C94E46-BAD9-4B3D-9D3A-0C3033CC48ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.VoorzieningenEnRegelingen.BurgerSiteTest", "Vs.VoorzieningenEnRegelingen.BurgerSiteTest\Vs.VoorzieningenEnRegelingen.BurgerSiteTest.csproj", "{166D806A-2C32-4F6E-A91F-2293570D1F58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -165,6 +167,10 @@ Global
 		{65C94E46-BAD9-4B3D-9D3A-0C3033CC48ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C94E46-BAD9-4B3D-9D3A-0C3033CC48ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65C94E46-BAD9-4B3D-9D3A-0C3033CC48ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166D806A-2C32-4F6E-A91F-2293570D1F58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166D806A-2C32-4F6E-A91F-2293570D1F58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166D806A-2C32-4F6E-A91F-2293570D1F58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166D806A-2C32-4F6E-A91F-2293570D1F58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
