@@ -75,6 +75,20 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.True((string)parameters[0].Value == "Finland");
             Assert.True(parameters[1].Name == "woonlandfactor");
             Assert.True((double)parameters[1].Value == 0.7161);
+            Assert.True(parameters[2].Name == "recht");
+            Assert.True((bool)parameters[2].Value == true);
+
+            // Quick Hack to see if recht is false by selecting woonland: Anders
+            parameters.Clear();
+            parameters.Add(new Parameter("woonland","Anders"));
+            var recalculate = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            Assert.True(parameters[0].Name == "woonland");
+            Assert.True((string)parameters[0].Value == "Anders");
+            Assert.True(parameters[1].Name == "woonlandfactor");
+            Assert.True((double)parameters[1].Value == 0);
+            Assert.True(parameters[2].Name == "recht");
+            Assert.True((bool)parameters[2].Value == false);
+            Assert.NotNull(recalculate.Stacktrace.FindLast(p => p.IsStopExecution == true));
         }
     }
 }

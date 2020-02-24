@@ -80,7 +80,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)])
             {
                 var debugInfoStep = DebugInfo.MapDebugInfo(step.Start, step.End);
-                string stepid ="", description="", formula = "", situation="";
+                string stepid ="", description="", formula = "", situation="", @break="";
                 foreach (var stepInfo in ((YamlMappingNode)step).Children)
                 {
                     switch (stepInfo.Key.ToString())
@@ -97,11 +97,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                         case "formule":
                             formula = stepInfo.Value.ToString();
                             break;
+                        case "recht":
+                            @break = stepInfo.Value.ToString();
+                            break;
                         default:
                             throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
                     }
                 }
-                steps.Add(new Step(stepid, description, formula, situation));
+                steps.Add(new Step(stepid, description, formula, situation, @break));
             }
             return steps;
         }

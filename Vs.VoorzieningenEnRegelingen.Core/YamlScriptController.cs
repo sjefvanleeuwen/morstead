@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
@@ -138,6 +139,18 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             var formula = GetFormula(step.Formula);
             var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback, this);
             context.Evaluate();
+            if (!string.IsNullOrEmpty(step.Break))
+            {
+                var breakContext = new FormulaExpressionContext(
+                    ref _model, 
+                    ref parameters, 
+                    new Formula(formula.DebugInfo, "recht",new List<Function>() { 
+                        new Function(formula.DebugInfo, step.Break)
+                    }), 
+                    QuestionCallback,
+                    this);
+                breakContext.Evaluate();
+            }
             CheckForStopExecution(parameters, executionResult);
         }
 
