@@ -138,7 +138,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 var columnTypes = new List<ColumnType>();
                 for (int i = 0; i < columns1.Length; i++)
                 {
-                    columnTypes.Add(new ColumnType(columnsDebugInfo, columns1[i], ColumnType.ColumnTypeEnum.text));
+                    columnTypes.Add(new ColumnType(columnsDebugInfo, columns1[i]));
                 }
                 tables.Add(new Table(debugInfoTable, tableName, columnTypes, rows));
             }
