@@ -9,7 +9,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ServiceController : ControllerBase
+    public class ServiceController : ControllerBase, IServiceController
     {
         private readonly ILogger<ServiceController> _logger;
 
@@ -73,7 +73,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
                 return executionResult;
             try
             {
-                
+
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
@@ -84,7 +84,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
 
         private void Execute_QuestionCallback(FormulaExpressionContext sender, QuestionArgs args)
         {
-           // throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
     }
 }
