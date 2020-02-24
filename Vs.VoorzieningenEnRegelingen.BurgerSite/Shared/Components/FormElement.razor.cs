@@ -45,12 +45,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Shared.Components
 
         protected IEnumerable<string> _keys => Options.Keys;
         protected string _type => Type.GetDescription();
-        protected string _horizontalRadio => (Options.Count == 2 && Options.All(o => o.Value.Length <= 10)) ? "input__group-horizontal" : string.Empty;
+        protected bool IsHorizontalRadio => Options.Count == 2 && Options.All(o => o.Value.Length <= 10);
         protected string _size => Size.GetDescription();
         protected bool _buttonIsIcon => !string.IsNullOrWhiteSpace(ButtonIcon);
         protected bool _showTag => !string.IsNullOrWhiteSpace(TagText);
         protected bool _showHint => !string.IsNullOrWhiteSpace(HintText);
         protected bool _showError => !string.IsNullOrWhiteSpace(ErrorText);
+        protected bool HasFieldset => new List<FormElementType> { FormElementType.Radio, FormElementType.Checkbox }.Contains(Type);
     }
 
     public enum FormElementType
