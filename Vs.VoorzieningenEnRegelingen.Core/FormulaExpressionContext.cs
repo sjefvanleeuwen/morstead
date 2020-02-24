@@ -231,6 +231,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             else
             {
+                if (_parameters.Find(p => p.Name == e.VariableName) != null)
+                    return;
                 // this variable is an input variable. Provide a question to the client for an answer.
                 if (OnQuestion == null)
                     throw new Exception($"In order to evaluate variable '${e.VariableName}', you need to provide a delegate callback to the client for providing an answer");
@@ -250,6 +252,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             else
             {
+                if (_parameters.Find(p => p.Name == e.VariableName) != null)
+                    return;
                 // this variable is an input variable. Provide a question to the client for an answer.
                 if (OnQuestion == null)
                     throw new Exception($"In order to evaluate variable '${e.VariableName}', you need to provide a delegate callback to the client for providing an answer");
