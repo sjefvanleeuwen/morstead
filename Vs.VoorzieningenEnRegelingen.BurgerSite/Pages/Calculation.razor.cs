@@ -30,7 +30,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
 
         private void InitAdres()
         {
-            var step = _StepController.GetStep("yaml", new List<IParameter>());
+            //var step = _StepController.GetStep("yaml", new List<IParameter>());
 
             _adresLabels = new List<FormElementLabel> {
                 new FormElementLabel { Text = "Postcode", Title = "AdresPostcode" },
