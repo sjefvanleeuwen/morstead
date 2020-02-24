@@ -14,5 +14,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Shared.Components
         public string PreviousText { get; set; }
         [Parameter]
         public string ScreenreaderDescription { get; set; }
+
+        protected bool NextDisabled => string.IsNullOrWhiteSpace(Next);
+        protected bool PreviousDisabled => string.IsNullOrWhiteSpace(Previous);
     }
 }
