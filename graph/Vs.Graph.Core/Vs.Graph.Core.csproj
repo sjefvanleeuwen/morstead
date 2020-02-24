@@ -7,6 +7,8 @@
   <ItemGroup>
     <PackageReference Include="Dapper.Contrib" Version="2.0.30" />
     <PackageReference Include="DapperExtensions" Version="1.6.3" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
     <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.1" />
     <PackageReference Include="YamlDotNet" Version="8.1.0" />
@@ -15,6 +17,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\core\Vs.Core.Diagnostics\Vs.Core.Diagnostics.csproj" />
     <ProjectReference Include="..\..\core\Vs.Core\Vs.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="JsonLd\" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Itenso.TimePeriod;
+using System;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Data.AttributeTypes
 {
     [AttributeType("periode")]
-    public class AttributePeriode : IAttributeType, ISerialize
+    public class AttributePeriode : TimeRange, IAttributeType, ISerialize
     {
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {

@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\core\Vs.Core\Vs.Core.csproj" />
+    <ProjectReference Include="..\..\graph\Vs.DataProvider.MsSqlGraph\Vs.DataProvider.MsSqlGraph.csproj" />
     <ProjectReference Include="..\Vs.Cms.Core\Vs.Cms.Core.csproj" />
   </ItemGroup>
 
