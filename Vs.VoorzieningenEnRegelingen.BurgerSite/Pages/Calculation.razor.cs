@@ -14,6 +14,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
     {
         private IEnumerable<TimelineItemDTO> _timelineItems;
         private Dictionary<string, string> _selectOptions;
+        private Dictionary<string, string> _countryOptions;
+        private Dictionary<string, string> _woonsituatieOptions;
         private Dictionary<string, string> _jaNeeOptions;
         private IEnumerable<FormElementLabel> _dateLabels;
         private IEnumerable<string> _dateValues;
@@ -54,7 +56,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
 
         private ParseRequest GetParseRequest()
         {
-            return new ParseRequest { 
+            return new ParseRequest
+            {
                 Config = _yamlUrl
             };
         }
@@ -125,6 +128,40 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
                 {"3", "drie" },
                 {"99", "negenennegentig" }
             };
+            _countryOptions = new Dictionary<string, string>
+            {
+                {"België", "België"},
+                {"Bosnië-Herzegovina", "Bosnië-Herzegovina"},
+                {"Bulgarije", "Bulgarije"},
+                {"Cyprus", "Cyprus"},
+                {"Denemarken", "Denemarken"},
+                {"Duitsland", "Duitsland"},
+                {"Estland", "Estland"},
+                {"Finland", "Finland"},
+                {"Frankrijk", "Frankrijk"},
+                {"Griekenland", "Griekenland"},
+                {"Hongarije", "Hongarije"},
+                {"Ierland", "Ierland"},
+                {"IJsland", "IJsland"},
+                {"Italië", "Italië"},
+                {"Kaapverdië", "Kaapverdië"},
+                {"Kroatië", "Kroatië"},
+                {"Letland", "Letland"},
+                {"Liechtenstein", "Liechtenstein"},
+                {"Litouwen", "Litouwen"},
+                {"Luxemburg", "Luxemburg"},
+                {"Macedonië", "Macedonië"},
+                {"Malta", "Malta"},
+                {"Marokko", "Marokko"},
+                {"Montenegro", "Montenegro"},
+                {"Nederland", "Nederland"},
+                {"Noorwegen", "Noorwegen"}
+            };
+            _woonsituatieOptions = new Dictionary<string, string>
+            {
+                {"alleenstaand", "Alleenstaand"},
+                {"samenwonend_met_toeslagpartner", "Samenwonend met toeslagpartner"},
+            };
         }
 
         private void InitTimeLineItems()
@@ -132,22 +169,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Pages
             _timelineItems = new List<TimelineItemDTO> {
                 new TimelineItemDTO {
                     Number = 1,
-                    Title = "New Web Design",
-                    Content ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                    "Quisque scelerisque diam non nisi semper, et elementum lorem ornare. " +
-                    "Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula...."
+                    Title = "Woonland",
+                    Content ="Selecteer het land waar u woonachtig bent. " +
+                    "Selecteer \"Anders\" Wanneer het land niet in de lijst staat."
                 },
                 new TimelineItemDTO {
                     Number = 2,
-                    Content = "Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. " +
-                    "Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin..."
-                },
-                new TimelineItemDTO {
-                    Number = 3,
-                    Content = "Fusce ullamcorper ligula sit amet quam accumsan aliquet. " +
-                    "Sed nulla odio, tincidunt vitae nunc vitae, mollis pharetra velit. " +
-                    "Sed nec tempor nibh..."
-                }
+                    Title = "Woonsituatie",
+                    Content = "Selecteer uw huidige woonsituatie."
+                }//,
+                //new TimelineItemDTO {
+                //    Number = 3,
+                //    Content = "Fusce ullamcorper ligula sit amet quam accumsan aliquet. " +
+                //    "Sed nulla odio, tincidunt vitae nunc vitae, mollis pharetra velit. " +
+                //    "Sed nec tempor nibh..."
+                //}
             };
         }
     }
