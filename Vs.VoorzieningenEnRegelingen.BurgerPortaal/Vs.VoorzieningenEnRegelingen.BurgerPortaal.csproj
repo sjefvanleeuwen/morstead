@@ -5,6 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Shared\Components\FormElements\Address.razor" />
+    <None Include="Shared\Components\FormElements\Checkbox.razor" />
+    <None Include="Shared\Components\FormElements\Date.razor" />
+    <None Include="Shared\Components\FormElements\Dressing\Error.razor" />
+    <None Include="Shared\Components\FormElements\Dressing\Hint.razor" />
+    <None Include="Shared\Components\FormElements\Dressing\Label.razor" />
+    <None Include="Shared\Components\FormElements\Dressing\Legend.razor" />
+    <None Include="Shared\Components\FormElements\Dressing\WrapperDefault.razor" />
+    <None Include="Shared\Components\FormElements\Dressing\WrapperFieldset.razor" />
+    <None Include="Shared\Components\FormElements\Email.razor" />
+    <None Include="Shared\Components\FormElements\Number.razor" />
+    <None Include="Shared\Components\FormElements\Radio.razor" />
+    <None Include="Shared\Components\FormElements\Search.razor" />
+    <None Include="Shared\Components\FormElements\Select.razor" />
+    <None Include="Shared\Components\FormElements\Text.razor" />
+    <None Include="Shared\Components\FormElements\TextArea.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core\Vs.VoorzieningenEnRegelingen.Core.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Service\Vs.VoorzieningenEnRegelingen.Service.csproj" />
   </ItemGroup>

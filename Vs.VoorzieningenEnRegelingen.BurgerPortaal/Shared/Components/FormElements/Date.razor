@@ -1,0 +1,20 @@
+﻿@inherits FormElement
+<WrapperDefault IsValid="@IsValid">
+    <Label Name="@Name" Text="@Label" TagText="@TagText" />
+    <Hint Name="@Name" Text="@HintText" />
+    <Error Text="@ErrorText" />
+    <div class="input__control-group">
+        <div>
+            <label class="input__hint" for="@Name-d">@Labels.ElementAtOrDefault(0).Text</label>
+            <input required="@IsRequired" disabled="@IsDisabled" aria-label="@Labels.ElementAtOrDefault(0).Title" title="@Labels.ElementAtOrDefault(0).Title" type="number" min="1" max="31" id="@Name-d" class="input__control input__control--two-characters input__control--linked input__control--text" value="@Values.ElementAtOrDefault(0)">
+        </div>
+        <div>
+            <label class="input__hint" for="@Name-m">@Labels.ElementAtOrDefault(1).Text</label>
+            <input required="@IsRequired" disabled="@IsDisabled" aria-label="@Labels.ElementAtOrDefault(1).Title" title="@Labels.ElementAtOrDefault(1).Title" type="number" min="1" max="12" id="@Name-m" class="input__control input__control--two-characters input__control--linked input__control--text" value="@Values.ElementAtOrDefault(1)">
+        </div>
+        <div>
+            <span class="input__hint" for="@Name-y">@Labels.ElementAtOrDefault(2).Text</span>
+            <input required="@IsRequired" disabled="@IsDisabled" aria-label="@Labels.ElementAtOrDefault(2).Title" title="@Labels.ElementAtOrDefault(2).Title" type="number" id="@Name-y" class="input__control input__control--four-characters input__control--linked input__control--text" value="@Values.ElementAtOrDefault(2)">
+        </div>
+    </div>
+</WrapperDefault>

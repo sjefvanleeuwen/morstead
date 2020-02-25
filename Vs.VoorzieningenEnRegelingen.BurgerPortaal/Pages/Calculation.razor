@@ -13,142 +13,128 @@
 </Collapsable>
 
 <Form>
-    <FormElement Name="Woonsituatie" Label="Woonsituatie"
-                 Type=FormElementType.Radio
-                 Size=FormElementSize.Large
-                 Options="_jaNeeOptions"
-                 TagText="verplicht"
-                 HintText="U kunt uw toetsingsinkomen opvragen bij de belastingdienst."
-                 IsRequired="true" />
+    <Radio Name="Woonsituatie" Label="Woonsituatie"
+        Size=FormElementSize.Large
+        Options="_jaNeeOptions"
+        TagText="verplicht"
+        HintText="U kunt uw toetsingsinkomen opvragen bij de belastingdienst."
+        IsRequired="true" />
 
-    <FormElement Name="nameText" Label="Text"
-                 Type=FormElementType.Text
-                 Value="TestValue"
-                 Size=FormElementSize.Large
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frank Masmeijer"
-                 IsValid="false"
-                 IsRequired="true"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <Text Name="nameText" Label="Text"
+        Value="TestValue"
+        Size=FormElementSize.Large
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Frank Masmeijer"
+        IsValid="false"
+        IsRequired="true"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-@*    <FormElement Name="nameNumber" Label="Number"
-                 Type=FormElementType.Number
-                 Value="123"
-                 Size=FormElementSize.Medium
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frank Govers"
-                 IsValid="false"
-                 IsRequired="true"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <Number Name="nameNumber" Label="Number"
+        Value="123"
+        Size=FormElementSize.Medium
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Frank Govers"
+        IsValid="false"
+        IsRequired="true"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <FormElement Name="nameDisabled" Label="Text"
-                 Type=FormElementType.Text
-                 Value="disabled"
-                 Size=FormElementSize.Large
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frank Rijkaard"
-                 IsValid="false"
-                 IsDisabled="true"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <Text Name="nameDisabled" Label="Text"
+        Value="disabled"
+        Size=FormElementSize.Large
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Frank Rijkaard"
+        IsValid="false"
+        IsDisabled="true"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <FormElement Name="nameEmail" Label="Email"
-                 Type=FormElementType.Email
-                 Value="test@test.nl"
-                 Size=FormElementSize.Large
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frank de Boer"
-                 IsValid="false"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <Email Name="nameEmail" Label="Email"
+        Value="test@test.nl"
+        Size=FormElementSize.Large
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Frank de Boer"
+        IsValid="false"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <FormElement Name="nameZoekIcon" Label="ZoekIcon"
-                 Type=FormElementType.Search
-                 Value="zoek1"
-                 Size=FormElementSize.Large
-                 ButtonIcon="icon-magnifier"
-                 ButtonText="Zoeken"
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frank Lammers" />
+    <Search Name="nameZoekIcon" Label="ZoekIcon"
+        Value="zoek1"
+        Size=FormElementSize.Large
+        ButtonIcon="icon-magnifier"
+        ButtonText="Zoeken"
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Frank Lammers" />
 
-    <FormElement Name="nameZoekText" Label="ZoekText"
-                 Type=FormElementType.Search
-                 Value="zoek2"
-                 Size=FormElementSize.Large
-                 ButtonText="Zoeken"
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frank Visser"
-                 IsValid="false"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <Search Name="nameZoekText" Label="ZoekText"
+        Value="zoek2"
+        Size=FormElementSize.Large
+        ButtonText="Zoeken"
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Frank Visser"
+        IsValid="false"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <FormElement Name="nameDropdown" Label="DropDown"
-                 Type=FormElementType.Select
-                 Value="2"
-                 Size=FormElementSize.Large
-                 Options="_selectOptions"
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frank Du Mosch"
-                 IsValid="false"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <Select Name="nameDropdown" Label="DropDown"
+        Value="2"
+        Size=FormElementSize.Large
+        Options="_selectOptions"
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Frank Du Mosch"
+        IsValid="false"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <FormElement Name="nameDate" Label="Date"
-                 Labels=@_dateLabels
-                 Type=FormElementType.Date
-                 Values=@_dateValues
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Anne Frank"
-                 IsValid="false"
-                 IsRequired="true"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <Date Name="nameDate" Label="Date"
+        Labels=@_dateLabels
+        Values=@_dateValues
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Anne Frank"
+        IsValid="false"
+        IsRequired="true"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <FormElement Name="nameAdres" Label="Adres"
-                 Labels=@_adresLabels
-                 Type=FormElementType.Adress
-                 Values=@_adresValues
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frank en Vrij"
-                 IsRequired="true"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <Address Name="nameAdres" Label="Adres"
+        Labels=@_adresLabels
+        Values=@_adresValues
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Frank en Vrij"
+        IsRequired="true"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <FormElement Name="nameTextarea" Label="Textarea"
-                 Type=FormElementType.TextArea
-                 Value="Dit is een test"
-                 Size=FormElementSize.ExtraLarge
-                 IsRequired="true"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <TextArea Name="nameTextarea" Label="Textarea"
+        Value="Dit is een test"
+        Size=FormElementSize.ExtraLarge
+        IsRequired="true"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
     <ButtonSubmit Text="Verder">
         &nbsp;&nbsp;of naar de <a href="#">vorige stap</a>
     </ButtonSubmit>
 
-    <FormElement Name="radio" Label="Radio"
-                 Type=FormElementType.Radio
-                 Value="2"
-                 Size=FormElementSize.Medium
-                 Options="_selectOptions"
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld James Franko"
-                 IsValid="false"
-                 IsRequired="true"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <Radio Name="radio" Label="Radio"
+        Value="2"
+        Size=FormElementSize.Medium
+        Options="_selectOptions"
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld James Franko"
+        IsValid="false"
+        IsRequired="true"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <FormElement Name="radioHorzontal" Label="Woont u in Nederland?"
-                 Type=FormElementType.Radio
-                 Value="2"
-                 Options="_jaNeeOptions"
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Dave Franko"
-                 IsValid="false"
-                 IsRequired="true"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
+    <Radio Name="radioHorzontal" Label="Woont u in Nederland?"
+        Value="2"
+        Options="_jaNeeOptions"
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Dave Franko"
+        IsValid="false"
+        IsRequired="true"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <FormElement Name="selectedoptions" Label="NoemTweeNummers"
-                 Type=FormElementType.Checkbox
-                 Values=@(new List<string> { "2", "99"})
-                 Options="_selectOptions"
-                 TagText="optioneel verplicht"
-                 HintText="Bijvoorbeeld Frankfurt"
-                 IsValid="false"
-                 IsRequired="true"
-                 ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />*@
+    <Checkbox Name="selectedoptions" Label="NoemTweeNummers"
+        Values=@(new List<string> { "2", "99"})
+        Options="_selectOptions"
+        TagText="optioneel verplicht"
+        HintText="Bijvoorbeeld Frankfurt"
+        IsValid="false"
+        IsRequired="true"
+        ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
 @*<Pagination Next="@GetNextStep" NextText="Volgende" Previous="@(if (_currentStep > 0) { GetPreviousStep(); })" PreviousText="Vorige" ScreenreaderDescription="pagina" />*@
 @*<Pagination Next="@GetNextStep" NextText="Volgende" Previous="@GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />*@
