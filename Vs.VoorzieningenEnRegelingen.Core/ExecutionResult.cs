@@ -2,7 +2,7 @@
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
-    public class ExecutionResult
+    public class ExecutionResult : IExecutionResult
     {
         public bool IsError { get; internal set; }
         public string Message { get; internal set; }
