@@ -1,0 +1,83 @@
+﻿@page "/"
+@namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vs.VoorzieningenEnRegelingen.BurgerPortaal</title>
+    <base href="~/" />
+
+    @*Uno*@
+    <link rel="icon" href="~/uno/components/favicon/ro-favicon-wit-0xffffff.png" />
+    <link rel="stylesheet" href="~/uno/core/base.css" />
+    <link rel="stylesheet" href="~/uno/components/collapse/collapse.css" />
+    <link rel="stylesheet" href="~/uno/components/header/header.css" />
+    <link rel="stylesheet" href="~/uno/components/lists/lists.css" />
+    <link rel="stylesheet" href="~/uno/components/list/list-timeline.css" />
+    <link rel="stylesheet" href="~/uno/components/label/label.css" />
+    <link rel="stylesheet" href="~/uno/components/label/badge.css" />
+    <link rel="stylesheet" href="~/uno/components/button/button.css">
+    <link rel="stylesheet" href="~/uno/components/form/form.css">
+    <link rel="stylesheet" href="~/uno/components/form/input.css">
+    <link rel="stylesheet" href="~/uno/components/form/file.css">
+    <link rel="stylesheet" href="~/uno/components/form/checkbox.css">
+    <link rel="stylesheet" href="~/uno/components/form/radio.css">
+    <link rel="stylesheet" href="~/uno/components/pagination/pagination.css">
+    @*/Uno*@
+
+    <link rel="stylesheet" href="~/css/blazor.css" />
+    <link rel="stylesheet" href="~/css/nl_design_overrides.css" />
+
+    @*Uno*@
+    <script src="~/uno/vendor/js/Promise.min.js"></script>
+    <script src="~/uno/vendor/js/system.js"></script>
+    <script>
+        System.config({
+            packages: {
+                '/': {
+                    defaultExtension: 'js'
+                }
+            }
+        });
+    </script>
+    @*/Uno*@
+
+</head>
+<body class="theme--large-padding">
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+
+    @*Uno*@
+    <script>
+        System.import('./uno/components/collapse/collapse.js').then(function (module) {
+            // Select all collapsible elements on the page
+            var collapses = document.querySelectorAll('[x-uno-collapse]');
+            // Initialize all collapses
+            for (var i = 0; i < collapses.length; i++) {
+                new module.Collapse(collapses.item(i));
+            }
+        });
+    </script>
+    @*/Uno*@
+</body>
+</html>

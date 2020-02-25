@@ -1,12 +1,10 @@
 ﻿@page "/proefberekening"
-<Header Text="Virtual Society" Title="Virtual Society Calculation" LinkScreenReaderDescription="naar de homepage" />
+@*<Header Text="Virtual Society" Title="Virtual Society Calculation" LinkScreenReaderDescription="naar de homepage" />
 
 <TitleBar Title="Bereken uw zorgtoeslag" />
 
 <Collapsable Name="Timeline">
     <Title>
-        @*<Badge Number=1 />Waar bent u woonachtig?*@
-        @*<Badge Number=2 />Wat is uw woonsituatie?*@
         <Badge Number=3 />Is uw toetsingsinkomen lager dan €29.562,00?
     </Title>
     <CollapsableContent>
@@ -21,7 +19,7 @@
                  Options="_jaNeeOptions"
                  TagText="verplicht"
                  HintText="U kunt uw toetsingsinkomen opvragen bij de belastingdienst."
-                 IsRequired="true" />
+                 IsRequired="true" />*@
 
     @*<FormElement Name="nameText" Label="Text"
                      Type=FormElementType.Text
@@ -152,6 +150,9 @@
                      IsRequired="true"
                      ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />*@
 
-    <Pagination Next="#" NextText="Volgende" Previous="#" PreviousText="Vorige" ScreenreaderDescription="pagina" />
+    @*<Pagination Next="@GetNextStep" NextText="Volgende" Previous="@(if (_currentStep > 0) { GetPreviousStep(); })" PreviousText="Vorige" ScreenreaderDescription="pagina" />*@
+    @*<Pagination Next="@GetNextStep" NextText="Volgende" Previous="@GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />*@
+    @*<Pagination NextText="Volgende" Previous="@GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />*@
+    <CRounter />
 
-</Form>
+@*</Form>*@
