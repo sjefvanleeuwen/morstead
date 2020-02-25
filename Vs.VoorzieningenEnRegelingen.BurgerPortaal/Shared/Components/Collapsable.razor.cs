@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using System.Threading.Tasks;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
 {
@@ -14,5 +16,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
         public RenderFragment Title { get; set; }
         [Parameter]
         public RenderFragment CollapsableContent { get; set; }
+
+        [Inject]
+        protected IJSRuntime JSRuntime { get; set; }
+
+        protected async override Task OnAfterRenderAsync(bool firstRender)
+        {
+            await InitCollapsable();
+        }
+
+        public async Task InitCollapsable()
+        {
+            await JSRuntime.InvokeAsync<string>("InitCollapsable");
+        }
+
     }
 }
