@@ -135,10 +135,7 @@
         IsValid="false"
         IsRequired="true"
         ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
-
-@*<Pagination Next="@GetNextStep" NextText="Volgende" Previous="@(if (_currentStep > 0) { GetPreviousStep(); })" PreviousText="Vorige" ScreenreaderDescription="pagina" />*@
-@*<Pagination Next="@GetNextStep" NextText="Volgende" Previous="@GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />*@
-@*<Pagination NextText="Volgende" Previous="@GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />*@
-<CRounter />
+    <Pagination NextDisabled="false" Next="@GetNextStep" NextText="Volgende" PreviousDisabled="@(_currentStep <= 1)" Previous="GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />
+    <CRounter />
 
 </Form>

@@ -5,8 +5,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
 {
     public partial class Pagination
     {
-        //[Parameter]
-        //public Action Next { get; set; }
+        [Parameter]
+        public Action Next { get; set; }
         [Parameter]
         public string NextText { get; set; }
         [Parameter]
@@ -15,18 +15,14 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
         public string PreviousText { get; set; }
         [Parameter]
         public string ScreenreaderDescription { get; set; }
-
-        //protected bool NextDisabled => Next == null;
-        protected bool PreviousDisabled => Previous == null;
+        [Parameter]
+        public bool NextDisabled { get; set; }
+        [Parameter]
+        public bool PreviousDisabled { get; set; }
 
         private void InvokeNext()
         {
-            //Next?.Invoke();
-        }
-
-        public void InvokeNextt()
-        {
-            Console.WriteLine("invokecalled");
+            Next?.Invoke();
         }
 
         private void InvokePrevious()
