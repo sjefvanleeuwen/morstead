@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.Core;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Library.Objects
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 {
     public class DisplayExecutionResult : IExecutionResult
     {

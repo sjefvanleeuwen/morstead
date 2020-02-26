@@ -8,6 +8,7 @@
         <Badge Number=3 />Is uw toetsingsinkomen lager dan €29.562,00?
     </Title>
     <CollapsableContent>
+        _timelineItems.
         <Timeline IndicateEnds="true" Items="_timelineItems" />
     </CollapsableContent>
 </Collapsable>
@@ -136,5 +137,5 @@
               IsRequired="true"
               ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />
 
-    <Pagination NextDisabled="false" Next="@GetNextStep" NextText="Volgende" PreviousDisabled="@(_currentStep <= 1)" Previous="GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />
+    <Pagination NextDisabled="false" Next="@GetNextStep" NextText="Volgende" PreviousDisabled="@(_sequenceController.CurrentStep <= 1)" Previous="GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />
 </Form>

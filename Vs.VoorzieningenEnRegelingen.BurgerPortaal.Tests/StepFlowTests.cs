@@ -4,14 +4,15 @@ using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
 using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Library.Objects;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 {
     public class StepFlowTests
     {
         [Fact]
-        public void CanDoTwoStepsAndOneBack()
+        public void CanDoTwoStepsAndOneBack_1()
         {
             var currentStep = 0;
             var maxStep = 0;
@@ -61,6 +62,28 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             Assert.Equal("alleenstaande", displaySequence.Questions.Parameters[0].Name);
             Assert.Equal("aanvrager_met_toeslagpartner", displaySequence.Questions.Parameters[1].Name);
             Assert.True(sequence.Count > 1);
+        }
+
+        [Fact]
+        public void CanDoTwoStepsAndOneBack_2()
+        {
+            var serviceController = new ServiceController(null);
+            var sequenceController = new SequenceController(serviceController);
+            //execute the first step
+            sequenceController.RequestStep++;
+            sequenceController.ExecuteStep(null);
+
+            Assert.Equal(1, sequenceController.CurrentStep);
+            Assert.Single(sequenceController.Sequence.Steps);
+            //.Questions.Parameters.Count);
+            //Assert.Empty(displaySequence.Parameters);
+            //Assert.Equal("alleenstaande", displaySequence.Questions.Parameters[0].Name);
+            //Assert.Equal("aanvrager_met_toeslagpartner", displaySequence.Questions.Parameters[1].Name);
+
+            //    new Parameter("alleenstaande", "ja")
+
+            //step 1 is done
+            //Assert.Empty(calculation.)
         }
     }
 }
