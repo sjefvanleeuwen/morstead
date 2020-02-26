@@ -15,8 +15,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         public static object Infer(this object value)
         {
             if (value is null) throw new ArgumentNullException(nameof(value));
-            if (value.GetType() == typeof(UnresolvedType))
-                return value;
+            if (value.GetType() == typeof(int))
+                return Convert.ToDouble(value);
             if (value.GetType() != typeof(object))
             {
                 if (value.GetType() == typeof(int))

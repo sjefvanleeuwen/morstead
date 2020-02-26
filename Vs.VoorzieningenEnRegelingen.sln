@@ -91,6 +91,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelinge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.BurgerPortaal", "Vs.VoorzieningenEnRegelingen.BurgerPortaal\Vs.VoorzieningenEnRegelingen.BurgerPortaal.csproj", "{2EE6C058-473C-40A4-BB03-B9C8391C41CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.VoorzieningenEnRegelingen.Core.SiteTest", "Vs.VoorzieningenEnRegelingen.Core.SiteTest\Vs.VoorzieningenEnRegelingen.Core.SiteTest.csproj", "{5BEAE11F-7B2C-42F6-BBB1-C14CB441F347}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -177,6 +179,10 @@ Global
 		{2EE6C058-473C-40A4-BB03-B9C8391C41CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EE6C058-473C-40A4-BB03-B9C8391C41CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EE6C058-473C-40A4-BB03-B9C8391C41CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BEAE11F-7B2C-42F6-BBB1-C14CB441F347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BEAE11F-7B2C-42F6-BBB1-C14CB441F347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BEAE11F-7B2C-42F6-BBB1-C14CB441F347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BEAE11F-7B2C-42F6-BBB1-C14CB441F347}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

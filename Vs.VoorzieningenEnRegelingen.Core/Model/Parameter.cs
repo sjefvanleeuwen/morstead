@@ -1,20 +1,98 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
+using System.Collections.Generic;
+using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
-    public class Parameter
+    public class Parameter : IParameter
     {
         public string Name { get; set; }
 
         private  object _value;
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        public TypeEnum Type { get; set; }
+
+        [JsonIgnore()]
+        public string ValueAsString
+        {
+            get
+            {
+                return _value.ToString();
+            }
+            set
+            {
+                Value = value.Infer();
+            }
+        }
+        public object Value
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                _value = value.Infer();
+                if (Type == null)
+                    Type = TypeInference.Infer(value.ToString()).Type;
+            }
+        }
+
+
+        public string TypeAsString
+        {
+            get
+            {
+                return Type.ToString();
+            }
+        }
+
+        public bool IsCalculated { get; internal set; }
+
         public Parameter() { }
 
-        public Parameter(string name, object value)
+        public Parameter(string name, object value, TypeEnum? type, ref Model model)
         {
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("message", nameof(name));
+            }
+            Name = name;
+
+                var woonlanden = new List<object>();
+                // Check if woonland can be found in a table
+                foreach (var table in model.Tables)
+                {
+                    foreach (var column in table.ColumnTypes)
+                    {
+                        if (column.Name == name)
+                        {
+                            // Give back a column list value of column woonland
+                            foreach (var row in table.Rows)
+                            {
+                                woonlanden.Add(row.Columns[column.Index].Value);
+                            }
+                            _value = woonlanden;
+                            Type = TypeEnum.List;
+                            return;
+                        }
+                    }
+                }
+            if (value == null && type == TypeEnum.Double)
+            {
+                _value = double.Parse("0");
+                Type = type.Value;
+                return;
+            }
+
+            if (value == null && type == TypeEnum.Boolean)
+            {
+                _value = false;
+                Type = type.Value;
+                return;
             }
 
             if (value is null)
@@ -22,29 +100,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
                 throw new ArgumentNullException(nameof(value));
             }
 
-            Name = name;
             _value = value.Infer();
-            Type = value.Infer().GetType().Name;
-
+            if (type == null)
+                Type = TypeInference.Infer(value.ToString()).Type;
         }
-
-
-
-        public object Value {
-            get
-            {
-                // for serialization, prefer to serialize as enumeration name.
-                if (_value.GetType() == typeof(UnresolvedType))
-                    return _value.ToString();
-                return _value;
-            }
-            set
-            {
-                _value = value.Infer();
-                Type = value.Infer().GetType().Name;
-            }
-        }
-
-        public string Type { get; set; }
     }
 }
+

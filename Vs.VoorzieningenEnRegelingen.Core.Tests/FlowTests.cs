@@ -33,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlZorgtoeslag.Body);
             var parameters = new ParametersCollection();
-            parameters.Add(new Parameter("woonland", "Nederland"));
+            parameters.Add(new ClientParameter("woonland", "Nederland"));
            //  var executionResult = controller.ExecuteWorkflow(parameters);
             // Tsjechië,            0.2412 
             // context.Variables.Add("woonland", "Tsjechië");
@@ -51,7 +51,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Flow_Shouldnt_Be_StepException()
         {
-            StepException ex = new StepException("exception", new Step("name", "description", "formula", "situation","break"));
+            StepException ex = new StepException("exception", new Step(1,"name", "description", "formula", "situation","break"));
+            Assert.True(ex.Step.Key == 1);
             Assert.True(ex.Step.Name == "name");
             Assert.True(ex.Step.Description == "description");
             Assert.True(ex.Step.Formula == "formula");

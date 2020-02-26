@@ -62,7 +62,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             Map(ref _parameters, _context.Variables);
         }
 
-        private static Parameter Evaluate(FormulaExpressionContext caller, ref ExpressionContext context, ref Formula formula, ref ParametersCollection parameters1, QuestionDelegate onQuestion)
+        private static Parameter Evaluate(FormulaExpressionContext caller, ref ExpressionContext context, ref Formula formula, ref ParametersCollection parameters1, QuestionDelegate onQuestion, ref Model.Model model)
         {
             if (parameters1 is null)
             {
@@ -77,7 +77,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     e = context.CompileDynamic(formula.Functions[0].Expression);
                     var result = e.Evaluate().Infer();
                     Parameter parameter;
-                    parameter = new Parameter(formula.Name, result.Infer());
+                    parameter = new Parameter(formula.Name, result.Infer(),null,ref model);
+                    parameter.IsCalculated = true;
                     parameters1.Add(parameter);
                     if (context.Variables.ContainsKey(parameter.Name))
                     {
@@ -104,7 +105,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             try
                             {
                                 e = context.CompileDynamic(function.Expression);
-                                var parameter = new Parameter(formula.Name, e.Evaluate().Infer());
+                                var parameter = new Parameter(formula.Name, e.Evaluate().Infer(), null, ref model);
+                                parameter.IsCalculated = true;
                                 parameters1.Add(parameter);
                                 if (context.Variables.ContainsKey(parameter.Name))
                                 {
@@ -127,7 +129,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 foreach (var function in formula.Functions)
                 {
                     situations.Append(function.Situation + ",");
-                    parameters.Add(new Parameter(function.Situation, UnresolvedType.Situation));
+                    var parameter = new Parameter(function.Situation, TypeInference.Infer(function).Type, null, ref model);
+                    parameters.Add(parameter);
                 }
                 if (onQuestion == null)
                     throw new Exception($"In order to evaluate variable one of the following situations:  {situations.ToString().Trim(',')}, you need to provide a delegate callback to the client for providing an answer");
@@ -158,7 +161,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 e = _context.CompileDynamic(_formula.Functions[0].Expression);
                 var result = e.Evaluate().Infer();
                 Parameter parameter;
-                parameter = new Parameter(_formula.Name, result.Infer());
+                parameter = new Parameter(_formula.Name, result.Infer(), null, ref _model);
+                parameter.IsCalculated = true;
                 _parameters.Add(parameter);
                 if (_context.Variables.ContainsKey(parameter.Name))
                 {
@@ -186,7 +190,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                         try
                         {
                             e = _context.CompileDynamic(function.Expression);
-                            var parameter = new Parameter(_formula.Name, e.Evaluate().Infer());
+                            var parameter = new Parameter(_formula.Name, e.Evaluate().Infer(), null, ref _model);
+                            parameter.IsCalculated = true;
                             _parameters.Add(parameter);
                             if (_context.Variables.ContainsKey(parameter.Name))
                             {
@@ -194,12 +199,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             }
                             _context.Variables.Add(parameter.Name, parameter.Value.Infer());
                             return parameter;
-
                         }
-                        catch (ExpressionCompileException)
+                        catch (ExpressionCompileException ex)
                         {
                             // Function can not evaluate further, before a Question/Answer sequence is fullfilled by the client.
-                            throw new UnresolvedException($"Function {function.Expression} can not evaluate further, before a Question/Answer sequence is fullfilled by the client.");
+                            throw new UnresolvedException($"Function {function.Expression} can not evaluate further, before a Question/Answer sequence is fullfilled by the client.",ex);
                         }
                     }
                 }
@@ -209,7 +213,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             foreach (var function in _formula.Functions)
             {
                 situations.Append(function.Situation + ",");
-                parameters.Add(new Parameter(function.Situation, UnresolvedType.Situation));
+                var parameter = new Parameter(function.Situation, null, TypeInference.Infer(function).Type, ref _model);
+                parameters.Add(parameter);
             }
             if (OnQuestion == null)
                 throw new Exception($"In order to evaluate variable one of the following situations:  {situations.ToString().Trim(',')}, you need to provide a delegate callback to the client for providing an answer");
@@ -225,7 +230,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             if (recursiveFormula != null)
             {
                 // this variable is a formula. Recurvsively execute this formula.
-                e.VariableValue = FormulaExpressionContext.Evaluate(this, ref _context, ref recursiveFormula, ref _parameters, OnQuestion).Value.Infer();
+                e.VariableValue = FormulaExpressionContext.Evaluate(this, ref _context, ref recursiveFormula, ref _parameters, OnQuestion,ref _model).Value.Infer();
                 //var context = new FormulaExpressionContext(ref _model, ref _parameters, recursiveFormula, OnQuestion);
                 //e.VariableValue = context.Evaluate().Value.Infer();
             }
@@ -236,7 +241,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 // this variable is an input variable. Provide a question to the client for an answer.
                 if (OnQuestion == null)
                     throw new Exception($"In order to evaluate variable '${e.VariableName}', you need to provide a delegate callback to the client for providing an answer");
-                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName, UnresolvedType.Situation) }));
+                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName,null, TypeInference.Infer(e.VariableType).Type, ref _model) }));
             }
         }
 
@@ -257,7 +262,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 // this variable is an input variable. Provide a question to the client for an answer.
                 if (OnQuestion == null)
                     throw new Exception($"In order to evaluate variable '${e.VariableName}', you need to provide a delegate callback to the client for providing an answer");
-                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName, UnresolvedType.Situation) }));
+                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName,null, TypeInference.Infer(e.VariableType).Type, ref _model) }));
             }
         }
     }

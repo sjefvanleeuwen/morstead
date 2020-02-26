@@ -77,6 +77,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         public List<Step> Flow()
         {
             var steps = new List<Step>();
+            int key = 0;
             foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)])
             {
                 var debugInfoStep = DebugInfo.MapDebugInfo(step.Start, step.End);
@@ -104,7 +105,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
                     }
                 }
-                steps.Add(new Step(stepid, description, formula, situation, @break));
+                steps.Add(new Step(key++, stepid, description, formula, situation, @break));
             }
             return steps;
         }
