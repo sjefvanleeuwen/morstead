@@ -1,0 +1,59 @@
+﻿@page "/"
+<h1>
+    @result.Model.Header.Onderwerp
+</h1>
+@if (show)
+{
+    <h2>@questionArgs.Parameters[0].Name</h2>
+    <input type="text" @bind="questionArgs.Parameters[0].ValueAsString" />
+    <button class="btn btn-primary" @onclick='(() => Evaluate("previous"))'>Previous</button>
+    <button class="btn btn-primary" @onclick='(() => Evaluate("next"))'>Next</button>
+}
+@if (!show)
+{
+    <button class="btn btn-primary" @onclick='(() => Evaluate("start"))'>Start</button>
+}
+@code {
+
+    [Parameter]
+    public string Name { get; set; }
+    [Parameter]
+    public string Value { get; set; }
+
+
+    private string previousDisabled = "disabled";
+    private YamlScriptController controller = new YamlScriptController();
+    private ParseResult result = null;
+    private ExecutionResult executionResult = null;
+    private ParametersCollection parameters = null;
+    private QuestionArgs questionArgs = null;
+    CancellationToken token = new CancellationToken();
+    bool show = false;
+    private readonly System.Threading.EventWaitHandle waitHandle = new System.Threading.AutoResetEvent(false);
+
+    private void Evaluate(string command)
+    {
+        try
+        {
+            executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+        }
+        catch (UnresolvedException ex)
+        {
+            StateHasChanged();
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        controller = new YamlScriptController();
+        result = controller.Parse(YamlHashExecutionTests.Body);
+        parameters = new ParametersCollection();
+        executionResult = new ExecutionResult(ref parameters);
+
+        controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+        {
+            questionArgs = args;
+            show = true;
+        };
+    }
+}

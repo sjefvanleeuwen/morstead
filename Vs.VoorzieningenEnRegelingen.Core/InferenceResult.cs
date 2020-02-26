@@ -1,4 +1,8 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
+
+namespace Vs.VoorzieningenEnRegelingen.Core
 {
     public static partial class TypeInference
     {
@@ -13,12 +17,22 @@
                 Value = value;
             }
 
+            [JsonConverter(typeof(StringEnumConverter))]
+            [DataContract]
             public enum TypeEnum
             {
+                [EnumMember(Value = "double")]
                 Double,
+                [EnumMember(Value = "timespan")]
                 TimeSpan,
+                [EnumMember(Value = "datetime")]
                 DateTime,
-                String
+                [EnumMember(Value = "string")]
+                String,
+                [EnumMember(Value = "boolean")]
+                Boolean,
+                [EnumMember(Value = "list")]
+                List
             }
         }
     }

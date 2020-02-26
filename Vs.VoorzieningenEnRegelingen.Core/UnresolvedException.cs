@@ -17,7 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public UnresolvedException(string message, Exception innerException) : base(message, innerException)
         {
-            throw new NotImplementedException();
+            
         }
 
         protected UnresolvedException(SerializationInfo info, StreamingContext context) : base(info, context)

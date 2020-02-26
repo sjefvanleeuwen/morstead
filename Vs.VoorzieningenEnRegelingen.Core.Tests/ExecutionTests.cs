@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 using Xunit;
@@ -15,7 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Theory]
         [InlineData("true", true, false, true)]
         [InlineData("false", false, true, null)]
-        public void Execution_Should_Stop(string rechtValue, bool rechtAssertionResult, 
+        public void Execution_Should_Stop(string rechtValue, bool rechtAssertionResult,
             bool isStopExecutionAssertResult, bool? executionAssertResult)
         {
             var controller = new YamlScriptController();
@@ -73,10 +75,10 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("woonland","Nederland")
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("woonland","Nederland")
             };
             var executionResult = new ExecutionResult(ref parameters);
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -101,10 +103,10 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)60000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("woonland","Nederland")
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)60000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("woonland","Nederland")
             };
             var executionResult = new ExecutionResult(ref parameters);
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -129,10 +131,10 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)150000),
-                new Parameter("woonland","Nederland")
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)150000),
+                new ClientParameter("woonland","Nederland")
             };
             var executionResult = new ExecutionResult(ref parameters);
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -158,10 +160,10 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("woonland","Malta")
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("woonland","Malta")
             };
             var executionResult = new ExecutionResult(ref parameters);
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -187,10 +189,10 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("woonland","Rusland")
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("woonland","Rusland")
             };
             var executionResult = new ExecutionResult(ref parameters);
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -211,10 +213,10 @@ formules:
                 argsret = args;
             };
             var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
                 //new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("woonland","Nederland")
+                new ClientParameter("woonland","Nederland")
             };
             try
             {
@@ -244,10 +246,10 @@ formules:
                 argsret = args;
             };
             var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
+                new ClientParameter("alleenstaande","ja"),
                 /*new Parameter("toetsingsinkomen_aanvrager",(double)19000),*/
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("woonland","Nederland")
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("woonland","Nederland")
             };
             try
             {
@@ -262,7 +264,7 @@ formules:
             Assert.NotNull(argsret);
             Assert.True(argsret.Parameters[0].Name == "toetsingsinkomen_aanvrager");
         }
-        
+
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1_WithQA_Woonland()
         {
@@ -277,9 +279,9 @@ formules:
                 argsret = args;
             };
             var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
                 //new Parameter("woonland","Nederland")
             };
             try
@@ -311,9 +313,9 @@ formules:
             };
             var parameters = new ParametersCollection() {
                 //new Parameter("alleenstaande","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("woonland","Nederland")
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("woonland","Nederland")
             };
             try
             {
@@ -347,12 +349,12 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new Parameter("aanvrager_met_toeslagpartner","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("toetsingsinkomen_toeslagpartner",(double)10500),
-                new Parameter("vermogen_toeslagpartner",(double)30000),
-                new Parameter("woonland","Nederland"),
+                new ClientParameter("aanvrager_met_toeslagpartner","ja"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)10500),
+                new ClientParameter("vermogen_toeslagpartner",(double)30000),
+                new ClientParameter("woonland","Nederland"),
             };
             var executionResult = new ExecutionResult(ref parameters);
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -378,12 +380,12 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new Parameter("aanvrager_met_toeslagpartner","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("toetsingsinkomen_toeslagpartner",(double)20500),
-                new Parameter("vermogen_toeslagpartner",(double)30000),
-                new Parameter("woonland","Nederland")
+                new ClientParameter("aanvrager_met_toeslagpartner","ja"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)20500),
+                new ClientParameter("vermogen_toeslagpartner",(double)30000),
+                new ClientParameter("woonland","Nederland")
             };
             var executionResult = new ExecutionResult(ref parameters);
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -409,12 +411,12 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new Parameter("aanvrager_met_toeslagpartner","ja"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("toetsingsinkomen_toeslagpartner",(double)10500),
-                new Parameter("vermogen_toeslagpartner",(double)300000),
-                new Parameter("woonland","Nederland")
+                new ClientParameter("aanvrager_met_toeslagpartner","ja"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)10500),
+                new ClientParameter("vermogen_toeslagpartner",(double)300000),
+                new ClientParameter("woonland","Nederland")
             };
             var executionResult = new ExecutionResult(ref parameters);
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -436,12 +438,11 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new Parameter("aanvrager_met_toeslagpartner","ja"),
-                new Parameter("woonland","Nederland"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                //new Parameter("toetsingsinkomen_toeslagpartner",(double)10500),
-                new Parameter("vermogen_toeslagpartner",(double)30000)
+                new ClientParameter("aanvrager_met_toeslagpartner","ja"),
+                new ClientParameter("woonland","Nederland"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("vermogen_toeslagpartner",(double)30000)
             };
             try
             {
@@ -471,11 +472,11 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new Parameter("aanvrager_met_toeslagpartner","ja"),
-                new Parameter("woonland","Nederland"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("vermogen_aanvrager",(double)1000),
-                new Parameter("toetsingsinkomen_toeslagpartner",(double)10500),
+                new ClientParameter("aanvrager_met_toeslagpartner","ja"),
+                new ClientParameter("woonland","Nederland"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("vermogen_aanvrager",(double)1000),
+                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)10500),
                 //new Parameter("vermogen_toeslagpartner",(double)30000)
             };
             try
@@ -490,6 +491,9 @@ formules:
             Assert.True(isException);
             Assert.NotNull(argsret);
             Assert.True(argsret.Parameters[0].Name == "vermogen_toeslagpartner");
+            Assert.True(argsret.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double);
+            Assert.True((double)argsret.Parameters[0].Value == 0);
+            Assert.True(argsret.Parameters[0].ValueAsString == "0");
         }
 
         [Fact]
@@ -503,11 +507,13 @@ formules:
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 Assert.True(args.Parameters[0].Name == "alleenstaande");
-                Assert.True(args.Parameters[0].Type == "UnresolvedType");
-                Assert.True(args.Parameters[0].Value.ToString() == "Situation");
+                Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Boolean);
+                Assert.True(args.Parameters[0].ValueAsString == "False");
+                Assert.False((bool)args.Parameters[0].Value);
                 Assert.True(args.Parameters[1].Name == "aanvrager_met_toeslagpartner");
-                Assert.True(args.Parameters[1].Type == "UnresolvedType");
-                Assert.True(args.Parameters[1].Value.ToString() == "Situation");
+                Assert.True(args.Parameters[1].Type == TypeInference.InferenceResult.TypeEnum.Boolean);
+                Assert.True(args.Parameters[1].ValueAsString == "False");
+                Assert.False((bool)args.Parameters[1].Value);
                 argsret = args;
             };
             var parameters = new ParametersCollection();
@@ -530,14 +536,59 @@ formules:
         {
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlZorgtoeslag.Body);
-           // var parameters = controller.GetInputParameters();
+            // var parameters = controller.GetInputParameters();
         }
 
         [Fact]
         public void Execution_Should_Be_Not_Implemented_Exception()
         {
             Exception ex1 = Assert.Throws<NotImplementedException>(() => new UnresolvedException());
-            Exception ex3 = Assert.Throws<NotImplementedException>(() => new UnresolvedException("", new Exception()));
+        }
+
+        [Fact]
+        void Execution_Should_Be_Boolean_Question()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag.Body);
+            Assert.False(result.IsError);
+            bool isException = false;
+            QuestionArgs argsret = null;
+            ExecutionResult executionResult = null;
+            var parameters = new ParametersCollection() { };
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                switch (args.Parameters[0].Name) {
+                case "alleenstaande":
+                    Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Boolean);
+                    parameters.Add(new ClientParameter("alleenstaande", true));
+                    break;
+                case "woonland":
+                    Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.List);
+                    parameters.Add(new ClientParameter("woonland", "Anders"));
+                    break;
+                }
+            };
+
+            try
+            {
+                executionResult = new ExecutionResult(ref parameters);
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException)
+            {
+                isException = true;
+            }
+            Assert.True(isException);
+            isException = false;
+            try
+            {
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException)
+            {
+                isException = true;
+            }
+            Assert.True(isException);
         }
 
         [Fact]
@@ -553,8 +604,7 @@ formules:
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 Assert.True(args.Parameters[0].Name == "keuze_boven_vermogensgrens");
-                // client geeft antwoord op de vraag onder 50000
-                parameters.Add(new Parameter("keuze_boven_vermogensgrens", true));
+                parameters.Add(new ClientParameter("keuze_boven_vermogensgrens", true));
             };
 
             try
@@ -569,6 +619,48 @@ formules:
             Assert.True(isException);
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True(executionResult.Stacktrace.Last().IsStopExecution);
+        }
+
+        [Fact]
+        public void HashExecutionTest()
+        {
+            //List<ParametersCollection> parameters = new List<ParametersCollection>();
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlHashExecutionTests.Body);
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                // Should not be called.
+                Assert.False(true);
+            };
+            Assert.True(result.Model.Steps.Count == 3);
+            Assert.True(result.Model.Steps[0].Key == 0);
+            Assert.True(result.Model.Steps[1].Key == 1);
+            Assert.True(result.Model.Steps[2].Key == 2);
+            Assert.False(result.IsError);
+            ExecutionResult executionResult = null;
+            var parameters = new ParametersCollection() { };
+            var stepSequence = new List<string>();
+            // Scenario 1: User fill in value 1 in first step.
+            parameters.Add(new ClientParameter("formule1_waarde", "1"));
+            executionResult = new ExecutionResult(ref parameters);
+            var executionResult1 = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            Assert.True((double)parameters[4].Value == 1000);
+            StringBuilder sb = new StringBuilder();
+            stepSequence.Add(string.Join(",", executionResult1.Stacktrace.Select(p => p.Step.Key).ToArray()));
+            parameters.Clear();
+            // Scenario 2: User fills in value 2 (in first step).
+            parameters.Add(new ClientParameter("formule1_waarde", "-1"));
+            executionResult = new ExecutionResult(ref parameters);
+            var executionResult2 = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            //string.Join(",", integerArray.Select(i => i.ToString()).ToArray());
+            Assert.True((double)parameters[3].Value == -100);
+            stepSequence.Add(string.Join(",", executionResult2.Stacktrace.Select(p => p.Step.Key).ToArray()));
+            // Get differences between sequence flows
+            Assert.True(stepSequence[0] == "0,2");
+            Assert.True(stepSequence[1] == "0,1");
+
+            var delta = executionResult1.Stacktrace.Except(executionResult2.Stacktrace);
+
         }
     }
 }

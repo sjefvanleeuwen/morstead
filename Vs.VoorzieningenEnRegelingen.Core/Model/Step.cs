@@ -2,7 +2,7 @@
 {
     public class Step
     {
-        public Step(string name, string description, string formula, string situation, string @break)
+        public Step(int key, string name, string description, string formula, string situation, string @break)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -14,6 +14,7 @@
                 throw new System.ArgumentException("message", nameof(description));
             }
 
+            Key = key;
             Name = name;
             Description = description;
             Formula = formula;
@@ -21,6 +22,7 @@
             Break = @break;
         }
 
+        public int Key { get; }
         public string Name { get; }
         public string Description { get; }
         public string Formula { get; }

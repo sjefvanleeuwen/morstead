@@ -39,7 +39,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             {
                 Config = YamlZorgtoeslag.Body,
                 Parameters = new ParametersCollection() {
-                    new Parameter("alleenstaande","ja")
+                    new ClientParameter("alleenstaande","ja")
                 }
             };
 

@@ -185,10 +185,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             };
             var result = controller.Parse(YamlZorgtoeslag.Body);
             var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("woonland","Nederland"),
-                new Parameter("toetsingsinkomen_aanvrager",(double)19000),
-                new Parameter("toetsingsinkomen_toeslagpartner",(double)0)
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("woonland","Nederland"),
+                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
+                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)0)
             };
             var model = result.Model;
             var context = new FormulaExpressionContext(ref model, ref parameters, controller.GetFormula("normpremie"), controller.QuestionCallback, controller);
@@ -205,10 +205,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlZorgtoeslag.Body);
             var parameters = new ParametersCollection() {
-                new Parameter("alleenstaande","ja"),
-                new Parameter("woonland","Nederland"),
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("woonland","Nederland"),
                 /*new Parameter("toetsingsinkomen_aanvrager",(double)19000),*/  // expect this question in FormulaTests_OnQuestion
-                new Parameter("toetsingsinkomen_toeslagpartner",(double)0)
+                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)0)
             };
             var model = result.Model;
             bool called = false;

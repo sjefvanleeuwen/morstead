@@ -38,26 +38,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 Assert.True(args.Parameters[0].Name == "woonland");
-                var woonlanden = new List<object>();
-                // Check if woonland can be found in a table
-                foreach (var table in result.Model.Tables)
-                {
-                    foreach (var column in table.ColumnTypes)
-                    {
-                        if (column.Name == args.Parameters[0].Name)
-                        {
-                            // Give back a column list value of column woonland
-                            foreach (var row in table.Rows)
-                            {
-                                woonlanden.Add(row.Columns[column.Index].Value);
-                            }
-                        }
-                    }
-                }
+                Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.List);
                 // This list can be used to do a selection of a valid woonland
-                Assert.True(woonlanden.Count > 0);
+                Assert.True(((List<object>)args.Parameters[0].Value).Count > 0);
                 // Provide an anwser by selecting an item: Finland from the list
-                parameters.Add(new Parameter(args.Parameters[0].Name, woonlanden[1]));
+                parameters.Add(new ClientParameter(args.Parameters[0].Name, ((List<object>)args.Parameters[0].Value)[1]));
             };
             var executionResult = new ExecutionResult(ref parameters);
             try
@@ -80,7 +65,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 
             // Quick Hack to see if recht is false by selecting woonland: Anders
             parameters.Clear();
-            parameters.Add(new Parameter("woonland","Anders"));
+            parameters.Add(new ClientParameter("woonland","Anders"));
             var recalculate = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True(parameters[0].Name == "woonland");
             Assert.True((string)parameters[0].Value == "Anders");

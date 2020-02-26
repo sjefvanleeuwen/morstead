@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RazorComponentsPreview" Version="0.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.Tests\Vs.VoorzieningenEnRegelingen.Core.Tests.csproj" />
+    <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core\Vs.VoorzieningenEnRegelingen.Core.csproj" />
+  </ItemGroup>
+
+</Project>
