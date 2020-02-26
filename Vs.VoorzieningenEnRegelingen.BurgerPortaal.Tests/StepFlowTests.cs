@@ -1,14 +1,12 @@
-using System;
-using Vs.VoorzieningenEnRegelingen.BurgerSite.Pages;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
 using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.BurgerSite.Library.Object;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Library.Objects;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerSiteTest
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 {
     public class StepFlowTests
     {
