@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Library.ExtensionMethods;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
-    public partial class FormElement
+    public partial class FormElement : ComponentBase
     {
         [Parameter]
         public string Name { get; set; }
@@ -18,8 +18,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
         public string Value { get; set; }
         [Parameter]
         public IEnumerable<string> Values { get; set; }
-        [Parameter]
-        public FormElementType Type { get; set; }
         [Parameter]
         public Dictionary<string, string> Options { get; set; }
         [Parameter]
@@ -43,37 +41,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
         [Parameter]
         public bool IsValid { get; set; } = true;
 
-        protected IEnumerable<string> _keys => Options.Keys;
-        protected string _type => Type.GetDescription();
-        protected bool IsHorizontalRadio => Options.Count == 2 && Options.All(o => o.Value.Length <= 10);
-        protected string _size => Size.GetDescription();
-        protected bool _buttonIsIcon => !string.IsNullOrWhiteSpace(ButtonIcon);
-        protected bool _showError => !string.IsNullOrWhiteSpace(ErrorText);
-        protected bool HasFieldset => new List<FormElementType> { FormElementType.Radio, FormElementType.Checkbox }.Contains(Type);
-    }
-
-    public enum FormElementType
-    {
-        [Description("input__control--text")]
-        Text,
-        [Description("input__control--text")]
-        TextArea,
-        [Description("input__control--text")]
-        Number,
-        [Description("input__control--text")]
-        Email,
-        [Description("input__control--text")]
-        Date,
-        [Description("input__control--text")]
-        Adress,
-        [Description("input__control--select")]
-        Select,
-        [Description("input__control--search")]
-        Search,
-        [Description("input__control--checkbox")]
-        Checkbox,
-        [Description("input__control--radio")]
-        Radio
+        protected string ElementSize => Size.GetDescription();
     }
 
     public enum FormElementSize

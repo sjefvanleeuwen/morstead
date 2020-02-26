@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Dressing
 {
     public partial class Error
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Dressing
 {
-    public partial class WrapperFieldset
+    public partial class WrapperDefault
     {
         [Parameter]
         public bool IsValid { get; set; }

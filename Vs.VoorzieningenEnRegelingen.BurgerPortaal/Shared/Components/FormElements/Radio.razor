@@ -1,0 +1,19 @@
+﻿@inherits FormElement
+@{
+    var radioNum = 0;
+}
+<WrapperFieldset IsValid="@IsValid">
+    <Legend Text="@Label" TagText="@TagText" />
+    <Hint Name="@Name" Text="@HintText" />
+    <Error Text="@ErrorText" />
+    <div class="@(_isHorizontalRadio ? "input__group-horizontal" : string.Empty)">
+        @foreach (var key in _keys)
+        {
+            radioNum++;
+            <div class="input__group input__group--radio">
+                <input type="radio" name="@Name" id="@Name-radio_@radioNum" class="input__control input__control--radio @ElementSize" checked="@(key == Value)" value="@Value" />
+                <label class="input__label input__label--radio" for="@Name-radio_@radioNum">@(Options[key])</label>
+            </div>
+        }
+    </div>
+</WrapperFieldset>
