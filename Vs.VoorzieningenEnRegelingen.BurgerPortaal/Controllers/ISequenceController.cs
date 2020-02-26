@@ -11,9 +11,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
         int CurrentStep { get; set; }
         int RequestStep { get; set; }
         ParseResult ParseResult { get; set; }
+        ExecutionResult LastExecutionResult { get; set; }
 
         ExecuteRequest GetExecuteRequest(ParametersCollection parameters = null);
         ParseRequest GetParseRequest();
-        void ExecuteStep(Parameter currentParameter);
+        void ExecuteStep(IParameter currentParameter);
     }
 }

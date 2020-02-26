@@ -27,7 +27,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             var steps = Steps.ToList().GetRange(0, Math.Min(Parameters.Count(), step - 1));
             steps.ForEach(s =>
             {
-                result.Add(Parameters.FirstOrDefault(p => p.Name == s.ParameterName /*&& p.Key == i.Key*/));
+                var parameter = Parameters.FirstOrDefault(p => s.IsMatch(p));
+                if (parameter != null)
+                {
+                    result.Add(parameter);
+                }
             });
             return result;
         }
@@ -37,14 +41,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             //remove all steps known for this stepnumber and beyond
             //for instance the result for step 3 (requestStep) is added, throw away everything after for step 1 and 2
             //number to take = 3 - 1
-            var items = Steps.ToList().GetRange(0, Math.Max(0, requestStep - 1));
+            var steps = Steps.ToList().GetRange(0, Math.Max(0, requestStep - 1));
             //add the new item requested item from the result question
-            items.Add(new Step
+            steps.Add(new Step
             {
-                Key = 0/*result.Parameters.FirstOrDefault(p => p.Name == newParameterName).Key*/,
-                ParameterName = "temp"/*result.Questions.Parameters.FirstOrDefault()*/
+                Key = result.Stacktrace.Last().Step.Key,
+                ParameterName = result.Questions.Parameters.FirstOrDefault()?.Type != TypeInference.InferenceResult.TypeEnum.Boolean ?
+                    result.Questions.Parameters.First().Name :
+                    null,
+                ValidParameterNames = result.Questions.Parameters.FirstOrDefault()?.Type == TypeInference.InferenceResult.TypeEnum.Boolean ?
+                    result.Questions.Parameters.Select(p => p.Name) :
+                    null
             });
-            Steps = items;
+            Steps = steps;
         }
 
         public void UpdateParametersCollection(ParametersCollection parameters)

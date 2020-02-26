@@ -12,9 +12,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return (Parameter)(from p in this where p.Name == name select p).SingleOrDefault();
         }
 
-        public void UpSert(Parameter parameter)
+        public void UpSert(IParameter parameter)
         {
-            var foundParameter = FindKnowParameter(parameter);
+            var foundParameter = FindKnownParameter(parameter);
             //new parameter: add
             if (foundParameter == null)
             {
@@ -27,9 +27,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
         }
 
-        private Parameter FindKnowParameter(Parameter searchParameter)
+        private IParameter FindKnownParameter(IParameter searchParameter)
         {
-            return this.FirstOrDefault(p => p.Name == searchParameter.Name /*&& p.Key == searchParameter.Key*/);
+            return this.FirstOrDefault(p => p.Name == searchParameter.Name 
+            /*&& p.Key == searchParameter.Key*/);
         }
 
     }

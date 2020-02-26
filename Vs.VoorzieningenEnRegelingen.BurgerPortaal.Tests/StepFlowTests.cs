@@ -6,6 +6,7 @@ using Xunit;
 using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
+using System.Linq;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 {
@@ -69,21 +70,34 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
         {
             var serviceController = new ServiceController(null);
             var sequenceController = new SequenceController(serviceController);
+            
             //execute the first step
             sequenceController.RequestStep++;
             sequenceController.ExecuteStep(null);
 
+            Assert.Equal(2, sequenceController.LastExecutionResult.Questions.Parameters.Count);
+            Assert.Empty(sequenceController.LastExecutionResult.Parameters);
+            Assert.Equal("alleenstaande", sequenceController.LastExecutionResult.Questions.Parameters[0].Name);
+            Assert.Equal("aanvrager_met_toeslagpartner", sequenceController.LastExecutionResult.Questions.Parameters[1].Name);
             Assert.Equal(1, sequenceController.CurrentStep);
             Assert.Single(sequenceController.Sequence.Steps);
-            //.Questions.Parameters.Count);
-            //Assert.Empty(displaySequence.Parameters);
-            //Assert.Equal("alleenstaande", displaySequence.Questions.Parameters[0].Name);
-            //Assert.Equal("aanvrager_met_toeslagpartner", displaySequence.Questions.Parameters[1].Name);
 
-            //    new Parameter("alleenstaande", "ja")
+            //execute the second step
+            sequenceController.RequestStep++;
+            sequenceController.ExecuteStep(new ClientParameter("alleenstaande", "ja"));
+            
+            Assert.Equal(2, sequenceController.LastExecutionResult.Parameters.Count); //standaardpremie is nu ook bekend
+            Assert.Equal("alleenstaande", sequenceController.LastExecutionResult.Parameters[0].Name);
+            Assert.True((bool)sequenceController.LastExecutionResult.Parameters[0].Value);
 
-            //step 1 is done
-            //Assert.Empty(calculation.)
+            sequenceController.RequestStep--;
+            sequenceController.ExecuteStep(null);
+
+            Assert.Equal(2, sequenceController.LastExecutionResult.Questions.Parameters.Count);
+            Assert.Empty(sequenceController.LastExecutionResult.Parameters);
+            Assert.Equal("alleenstaande", sequenceController.LastExecutionResult.Questions.Parameters[0].Name);
+            Assert.Equal("aanvrager_met_toeslagpartner", sequenceController.LastExecutionResult.Questions.Parameters[1].Name);
+            Assert.Single(sequenceController.Sequence.Steps);
         }
     }
 }
