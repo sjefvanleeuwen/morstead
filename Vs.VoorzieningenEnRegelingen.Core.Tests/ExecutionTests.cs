@@ -546,7 +546,7 @@ formules:
         }
 
         [Fact]
-        void Execution_Should_Be_Boolean_Question()
+        void Execution_ZorgToeslag_2019_Full_Scenario1()
         {
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlZorgtoeslag.Body);
@@ -558,14 +558,22 @@ formules:
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 switch (args.Parameters[0].Name) {
-                case "alleenstaande":
-                    Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Boolean);
-                    parameters.Add(new ClientParameter("alleenstaande", true));
-                    break;
-                case "woonland":
-                    Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.List);
-                    parameters.Add(new ClientParameter("woonland", "Anders"));
-                    break;
+                    case "alleenstaande":
+                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Boolean);
+                        parameters.Add(new ClientParameter("alleenstaande", true));
+                        break;
+                    case "woonland":
+                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.List);
+                        parameters.Add(new ClientParameter("woonland", "Finland"));
+                        break;
+                    case "vermogen_aanvrager":
+                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double);
+                        parameters.Add(new ClientParameter("vermogen_aanvrager",15000));
+                        break;
+                    case "toetsingsinkomen_aanvrager":
+                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double);
+                        parameters.Add(new ClientParameter("toetsingsinkomen_aanvrager", 1500));
+                        break;
                 }
             };
 
@@ -588,7 +596,36 @@ formules:
             {
                 isException = true;
             }
+            isException = false;
+            try
+            {
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException)
+            {
+                isException = true;
+            }
             Assert.True(isException);
+            isException = false;
+            try
+            {
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException)
+            {
+                isException = true;
+            }
+            Assert.True(isException);
+            isException = false;
+            try
+            {
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException)
+            {
+                isException = true;
+            }
+            Assert.False(isException);
         }
 
         [Fact]
