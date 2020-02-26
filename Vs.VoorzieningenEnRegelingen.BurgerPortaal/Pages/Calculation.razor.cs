@@ -13,16 +13,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
     public partial class Calculation
     {
-        private IEnumerable<TimelineItemDTO> _timelineItems;
-        private Dictionary<string, string> _selectOptions;
-        private Dictionary<string, string> _countryOptions;
-        private Dictionary<string, string> _woonsituatieOptions;
-        private Dictionary<string, string> _jaNeeOptions;
-        private IEnumerable<FormElementLabel> _dateLabels;
-        private IEnumerable<string> _dateValues;
-        private IEnumerable<FormElementLabel> _adresLabels;
-        private IEnumerable<string> _adresValues;
-
         private string _yamlUrl = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml";
         private ParseResult _parseResult;
         private IDictionary<int, ExecutionResult> _sequence = new Dictionary<int, ExecutionResult>();
@@ -36,15 +26,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         protected override void OnInitialized()
         {
-            InitTimeLineItems();
-            InitSelectOptions();
-            InitJaNeeOptions();
-            InitDate();
-            InitAdres();
-        }
-
-        protected override async Task OnInitializedAsync()
-        {
+            InitTestData();
+            //move to async method when these calls are async
             if (_parseResult == null)
             {
                 _parseResult = _serviceController.Parse(GetParseRequest());
@@ -134,10 +117,27 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         #region test display variables
 
+        private IEnumerable<TimelineItemDTO> _timelineItems;
+        private Dictionary<string, string> _selectOptions;
+        private Dictionary<string, string> _countryOptions;
+        private Dictionary<string, string> _woonsituatieOptions;
+        private Dictionary<string, string> _jaNeeOptions;
+        private IEnumerable<FormElementLabel> _dateLabels;
+        private IEnumerable<string> _dateValues;
+        private IEnumerable<FormElementLabel> _adresLabels;
+        private IEnumerable<string> _adresValues;
+
+        private void InitTestData()
+        {
+            InitTimeLineItems();
+            InitSelectOptions();
+            InitJaNeeOptions();
+            InitDate();
+            InitAdres();
+        }
+
         private void InitAdres()
         {
-            //var step = _StepController.GetStep("yaml", new List<IParameter>());
-
             _adresLabels = new List<FormElementLabel> {
                 new FormElementLabel { Text = "Postcode", Title = "AdresPostcode" },
                 new FormElementLabel { Text = "Huisnummer", Title = "AdresHuisnummer" },
