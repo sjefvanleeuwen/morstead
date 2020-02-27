@@ -12,26 +12,44 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return (Parameter)(from p in this where p.Name == name select p).SingleOrDefault();
         }
 
-        public void UpSert(IParameter parameter)
+        public void UpSert(IParameter parameter, IEnumerable<string> correspondingParameterNames = null)
         {
-            var foundParameter = FindKnownParameter(parameter);
-            //new parameter: add
-            if (foundParameter == null)
+            if (parameter == null)
             {
-                Add(parameter);
+                throw new ArgumentNullException(nameof(parameter));
             }
-            //known parameter: update Value
-            else
+            correspondingParameterNames ??= new List<string>
             {
-                foundParameter.Value = parameter.Value;
+                parameter.Name
+            };
+            var correspondingParameter = FindCorrespondingParameter(correspondingParameterNames);
+            if (correspondingParameter != null)
+            {
+                //update the parameter
+                //only name and value required, corresponding name-value pairs for parameters will always be of the same type.
+                correspondingParameter.Name = parameter.Name;
+                correspondingParameter.Value = correspondingParameter.Value;
+                correspondingParameter.ValueAsString = correspondingParameter.ValueAsString;
+                return;
             }
+            Add(parameter);
         }
 
-        private IParameter FindKnownParameter(IParameter searchParameter)
+        /// <summary>
+        /// There can be multiple names that represent a value, for instance in case of boolean
+        /// i.e alleenstaande = ja should replace samenwonend_met_toeslagpartner = ja
+        /// </summary>
+        private IParameter FindCorrespondingParameter(IEnumerable<string> correspondingParameterNames)
         {
-            return this.FirstOrDefault(p => p.Name == searchParameter.Name 
-            /*&& p.Key == searchParameter.Key*/);
-        }
+            foreach (var p in this)
+            {
+                if (correspondingParameterNames.ToList().Contains(p.Name))
+                {
+                    return p;
+                }
+            }
 
+            return null;
+        }
     }
 }

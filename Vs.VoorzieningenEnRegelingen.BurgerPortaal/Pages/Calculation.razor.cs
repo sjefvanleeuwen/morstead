@@ -34,7 +34,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             if (FormIsValid())
             {
                 //increase the request step
-                _sequenceController.RequestStep++;
+                _sequenceController.IncreaseStep();
                 _sequenceController.ExecuteStep(GetCurrentParameter());
             }
         }
@@ -42,7 +42,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private void GetPreviousStep()
         {
             //decrease the request step, can never be lower than 1
-            _sequenceController.RequestStep = Math.Max(1, _sequenceController.RequestStep - 1);
+            _sequenceController.DecreaseStep();
             _sequenceController.ExecuteStep(GetCurrentParameter());
         }
 

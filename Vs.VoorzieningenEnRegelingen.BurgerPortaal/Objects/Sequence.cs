@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core;
+using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 {
@@ -24,7 +25,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             //for each item up till the current step get the parameter that corresponds with the items parameterName and key
             //for instance step 3; give paramaters for step 1 and 2 (item 0 and 1)...
             //...i.e. the first 2 items; number to take = 3 - 1
-            var steps = Steps.ToList().GetRange(0, Math.Min(Parameters.Count(), step - 1));
+            var steps = Steps.ToList().GetRange(0, Math.Max(0, Math.Min(Parameters.Count(), step - 1)));
             steps.ForEach(s =>
             {
                 var parameter = Parameters.FirstOrDefault(p => s.IsMatch(p));
@@ -60,7 +61,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
         {
             parameters.ForEach(p =>
             {
-                Parameters.UpSert(p);
+                if (p is ClientParameter && !((ClientParameter)p).IsCalculated)
+                {
+                    IEnumerable<string> correspondingParameterNames = new List<string>
+                    {
+                        p.Name
+                    };
+                    var stepFound = Steps.FirstOrDefault(s => s.IsMatch(p));
+                    if (stepFound != null)
+                    {
+                        correspondingParameterNames = stepFound.ValidParameterNames;
+                    }
+                    Parameters.UpSert(p, correspondingParameterNames);
+                }
             });
         }
     }

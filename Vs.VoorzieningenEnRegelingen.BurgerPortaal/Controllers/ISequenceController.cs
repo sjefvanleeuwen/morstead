@@ -7,14 +7,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
 {
     public interface ISequenceController
     {
-        ISequence Sequence { get; set; }
-        int CurrentStep { get; set; }
-        int RequestStep { get; set; }
-        ParseResult ParseResult { get; set; }
-        ExecutionResult LastExecutionResult { get; set; }
+        ISequence Sequence { get; }
+        int CurrentStep { get; }
+        int RequestStep { get; }
+        ParseResult ParseResult { get; }
+        ExecutionResult LastExecutionResult { get; }
 
         ExecuteRequest GetExecuteRequest(ParametersCollection parameters = null);
         ParseRequest GetParseRequest();
+        void IncreaseStep();
+        void DecreaseStep();
         void ExecuteStep(IParameter currentParameter);
     }
 }
