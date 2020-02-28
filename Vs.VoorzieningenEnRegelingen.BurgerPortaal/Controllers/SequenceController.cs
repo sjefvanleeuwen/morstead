@@ -16,15 +16,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
 
         private IServiceController _serviceController { get; set; }
 
-        public SequenceController(IServiceController serviceController)
+        public SequenceController(IServiceController serviceController, ISequence sequence)
         {
             _serviceController = serviceController;
-
-            Sequence = new Sequence("https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml");
-            if (ParseResult == null)
-            {
-                ParseResult = _serviceController.Parse(GetParseRequest());
-            }
+            Sequence = sequence;
         }
 
         public ExecuteRequest GetExecuteRequest(ParametersCollection parameters = null)
@@ -38,6 +33,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
 
         public ParseRequest GetParseRequest()
         {
+            if (ParseResult == null)
+            {
+                ParseResult = _serviceController.Parse(GetParseRequest());
+            }
+
             return new ParseRequest
             {
                 Config = Sequence.Yaml

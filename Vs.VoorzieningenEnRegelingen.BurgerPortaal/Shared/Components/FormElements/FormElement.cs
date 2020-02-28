@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Library.ExtensionMethods;
+using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
-    public partial class FormElement : ComponentBase
+    public partial class FormElement : ComponentBase, IFormElement
     {
         [Parameter]
         public string Name { get; set; }
@@ -42,7 +41,33 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         [Parameter]
         public bool IsValid { get; set; } = true;
 
+        public TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
+
         protected string ElementSize => Size.GetDescription();
+
+        public bool Validate(bool unobtrusive)
+        {
+            var valid = 
+                ValidateValueSet(unobtrusive, out string errorText);
+            if (!unobtrusive)
+            {
+                IsValid = valid;
+                ErrorText = errorText;
+            }
+            return valid;
+        }
+
+        private bool ValidateValueSet(bool unobtrusive, out string errorText)
+        {
+            errorText = string.Empty;
+            var valid = !string.IsNullOrWhiteSpace(Value);
+            if (!valid)
+            {
+                errorText = "Vul een waarde in.";
+            }
+
+            return valid;
+        }
     }
 
     public enum FormElementSize

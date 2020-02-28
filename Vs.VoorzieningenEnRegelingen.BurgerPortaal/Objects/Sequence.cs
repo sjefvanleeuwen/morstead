@@ -8,13 +8,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 {
     public class Sequence : ISequence
     {
-        public string Yaml { get; private set; }
+        public string Yaml { get; set; }
         public ParametersCollection Parameters { get; private set; }
         public IEnumerable<IStep> Steps { get; private set; }
 
-        public Sequence(string yaml)
+        public Sequence()
         {
-            Yaml = yaml;
             Parameters = new ParametersCollection();
             Steps = new List<IStep>();
         }

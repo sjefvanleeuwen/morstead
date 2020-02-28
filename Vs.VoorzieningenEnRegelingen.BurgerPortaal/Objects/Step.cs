@@ -14,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 
         public bool IsMatch(IParameter parameter)
         {
-            return 
+            return parameter != null &&
                 (ParameterName == parameter.Name ||
                     (ValidParameterNames != null && ValidParameterNames.Contains(parameter.Name)))
                 //&& parameter.Key == Key

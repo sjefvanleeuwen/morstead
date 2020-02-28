@@ -5,7 +5,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 {
     public interface ISequence
     {
-        string Yaml { get; }
+        string Yaml { get; set; }
         ParametersCollection Parameters { get; }
         IEnumerable<IStep> Steps { get; }
 

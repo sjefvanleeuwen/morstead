@@ -69,7 +69,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
         public void CanDoTwoStepsAndOneBack_2()
         {
             var serviceController = new ServiceController(null);
-            var sequenceController = new SequenceController(serviceController);
+            var sequence = new Sequence()
+            {
+                Yaml = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml"
+            };
+            var sequenceController = new SequenceController(serviceController, sequence);
 
             //execute the first step
             sequenceController.IncreaseStep();
@@ -105,7 +109,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
         {
             //step sequence: 1-2-3-2-1-2
             var serviceController = new ServiceController(null);
-            var sequenceController = new SequenceController(serviceController);
+            var sequence = new Sequence()
+            {
+                Yaml = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml"
+            };
+            var sequenceController = new SequenceController(serviceController, sequence);
 
             //execute the first step 0 -> 1
             sequenceController.IncreaseStep();
