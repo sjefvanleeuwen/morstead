@@ -56,6 +56,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
             _formElement.Value = FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult);
             ValidateForm(true); //set the IsValid and ErrorText Property
+            StateHasChanged();
         }
 
         private bool FormIsValid()
@@ -84,15 +85,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         /// Only return the current value if it is a valid value
         /// </summary>
         /// <returns></returns>
-        private Parameter GetCurrentParameter()
+        private IParameter GetCurrentParameter()
         {
             ValidateForm();
             if (_formElement?.IsValid ?? false)
             {
-                return new Parameter
+                return new ClientParameter(_formElement.Name, _formElement.Value, _formElement.InferedType)
                 {
-                    Name = _formElement.Name,
-                    Value = _formElement.Value,
                     //Key = 0
                 };
             }
