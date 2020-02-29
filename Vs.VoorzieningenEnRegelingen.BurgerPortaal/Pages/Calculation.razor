@@ -28,7 +28,7 @@
             {
                 <Select Name="@_formElement.Name" 
                         Label="@_formElement.Label"
-                        Value="@_formElement.Value"
+                        @bind-Value="@_formElement.Value"
                         Size="@FormElementSize.Large"
                         Options="@_formElement.Options"
                         TagText="@_formElement.TagText"

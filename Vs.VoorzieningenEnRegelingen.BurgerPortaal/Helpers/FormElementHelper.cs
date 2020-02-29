@@ -126,7 +126,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
                 return string.Empty;
             }
 
-            return options.Keys.First();
+            return options.Keys?.FirstOrDefault() ?? string.Empty;
         }
     }
 }

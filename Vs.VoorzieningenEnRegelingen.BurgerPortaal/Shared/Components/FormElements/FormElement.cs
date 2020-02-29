@@ -8,6 +8,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 {
     public partial class FormElement : ComponentBase, IFormElement
     {
+        private string _value;
+
         [Parameter]
         public string Name { get; set; }
         [Parameter]
@@ -15,7 +17,24 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         [Parameter]
         public IEnumerable<FormElementLabel> Labels { get; set; }
         [Parameter]
-        public string Value { get; set; }
+        public string Value
+        {
+            get { return _value; }
+            set
+            {
+                if (_value == value)
+                {
+                    return;
+                }
+                _value = value;
+                if (ValueChanged.HasDelegate)
+                {
+                    ValueChanged.InvokeAsync(value);
+                }
+            }
+        }
+        [Parameter]
+        public EventCallback<string> ValueChanged { get; set; }
         [Parameter]
         public IEnumerable<string> Values { get; set; }
         [Parameter]
@@ -47,7 +66,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         public bool Validate(bool unobtrusive)
         {
-            var valid = 
+            var valid =
                 ValidateValueSet(out string errorText);
             if (!unobtrusive)
             {

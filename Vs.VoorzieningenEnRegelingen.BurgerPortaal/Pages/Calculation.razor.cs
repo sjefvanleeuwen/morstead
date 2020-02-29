@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Linq;
 using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
@@ -13,8 +12,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
     {
         //the formElement we are showing
         private IFormElement _formElement;
-
-        private bool _isValid = true;
 
         private int _displayQuestionNumber => FormTitleHelper.GetQuestionNumber(_sequenceController.Sequence);
         private string _displayQuestion => FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult);
