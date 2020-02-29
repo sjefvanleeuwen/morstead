@@ -17,7 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             formElement.Name = result.Questions.Parameters[0].Name;
             formElement.Label = GetFromLookupTable(result.Questions.Parameters, _labels);
             formElement.Options = DefineOptions(result.Questions);
-            formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false); 
+            formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false);
             formElement.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false);
             return formElement;
         }
@@ -38,7 +38,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             {
                 return dictionary[key];
             }
-            
+
             return showDefaultText ? $"Unknown for {parameters[0].Name}" : string.Empty;
         }
 
@@ -50,7 +50,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
         private static Dictionary<string, string> DefineOptions(QuestionArgs questions)
         {
-            switch(GetInferedType(questions))
+            switch (GetInferedType(questions))
             {
                 case TypeInference.InferenceResult.TypeEnum.Boolean:
                     return BooleanToOptions(questions);
@@ -75,22 +75,34 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return result;
         }
 
-        private static Dictionary<string, string> _labels = new Dictionary<string, string> { 
-            { "woonland", "Woonland" } 
+        private static Dictionary<string, string> _labels = new Dictionary<string, string> {
+            { "woonland", "Woonland" }
         };
 
-        private static Dictionary<string, string> _tagText = new Dictionary<string, string> {
+        private static Dictionary<string, string> _tagText = new Dictionary<string, string>
+        {
 
         };
 
         private static Dictionary<string, string> _hintText = new Dictionary<string, string> {
-            { "woonland", "Selecteer \"Anders\" Wanneer het land niet in de lijst staat." }
+            { "woonland", "Selecteer \"Anders\" wanneer het land niet in de lijst staat." }
         };
 
-        internal static string GetValue(ISequence sequence, ExecutionResult lastExecutionResult)
+        internal static string GetValue(ISequence sequence, ExecutionResult result)
+        {
+            var value = GetSavedValue(sequence, result);
+            if (string.IsNullOrWhiteSpace(value) && GetInferedType(result.Questions) == TypeInference.InferenceResult.TypeEnum.List)
+            {
+                value = GetDefaultListValue(result);
+            }
+
+            return value;
+        }
+
+        private static string GetSavedValue(ISequence sequence, ExecutionResult result)
         {
             //find the step that is a match for this name
-            var step = sequence.Steps.FirstOrDefault(s => s.IsMatch(lastExecutionResult.Questions.Parameters.FirstOrDefault()));
+            var step = sequence.Steps.FirstOrDefault(s => s.IsMatch(result.Questions.Parameters.FirstOrDefault()));
             if (step == null)
             {
                 return string.Empty;
@@ -104,6 +116,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             }
 
             return parameter.ValueAsString;
+        }
+
+        private static string GetDefaultListValue(ExecutionResult result)
+        {
+            var options = DefineOptions(result.Questions);
+            if (options.Keys.Contains(string.Empty))
+            {
+                return string.Empty;
+            }
+
+            return options.Keys.First();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         //the formElement we are showing
         private IFormElement _formElement;
 
-        private IEnumerable<object> _errors = new List<object>();
+        private bool _isValid = true;
 
         private int _displayQuestionNumber => FormTitleHelper.GetQuestionNumber(_sequenceController.Sequence);
         private string _displayQuestion => FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult);
@@ -27,7 +27,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         protected override void OnInitialized()
         {
             _sequenceController.Sequence.Yaml = _testYaml;
-            InitTestData();
+            //InitTestData();
             //get the first step
             GetNextStep();
         }
@@ -66,7 +66,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 return true;
             }
             ValidateForm();
-            return !_errors.Any();
+            StateHasChanged();
+            return _formElement.IsValid;
         }
 
         /// <summary>
@@ -233,9 +234,17 @@ berekening:
    omschrijving: Waar bent u woonachtig?
    formule: woonlandfactor
    recht: woonlandfactor > 0
+ - stap: 2
+   omschrijving: Wat is uw woonsituatie?
+   formule: standaardpremie
 formules:
  - woonlandfactor:
      formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
+ - standaardpremie:
+   - situatie: alleenstaande
+     formule: 1609
+   - situatie: aanvrager_met_toeslagpartner
+     formule: 3218
 tabellen:
   - naam: woonlandfactoren
     woonland, factor:

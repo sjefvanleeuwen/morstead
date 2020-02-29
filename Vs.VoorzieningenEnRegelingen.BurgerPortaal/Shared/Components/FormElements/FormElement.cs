@@ -48,7 +48,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         public bool Validate(bool unobtrusive)
         {
             var valid = 
-                ValidateValueSet(unobtrusive, out string errorText);
+                ValidateValueSet(out string errorText);
             if (!unobtrusive)
             {
                 IsValid = valid;
@@ -57,7 +57,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
             return valid;
         }
 
-        private bool ValidateValueSet(bool unobtrusive, out string errorText)
+        private bool ValidateValueSet(out string errorText)
         {
             errorText = string.Empty;
             var valid = !string.IsNullOrWhiteSpace(Value);

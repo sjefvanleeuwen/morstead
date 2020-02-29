@@ -41,9 +41,5 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         private static Dictionary<string, string> _questionDescription = new Dictionary<string, string> { 
             { "woonland", "Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de belastingdienst. Staat uw woonland niet in deze lijst, vul dan \"Anders\" in." }
         };
-
-        
-
-        
     }
 }
