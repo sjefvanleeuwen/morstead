@@ -42,8 +42,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             }
 
             _value = value.Infer();
-            if (type == null)
-                Type = TypeInference.Infer(value.ToString()).Type;
+            Type = type ?? TypeInference.Infer(value.ToString()).Type;
         }
 
         [JsonIgnore()]
