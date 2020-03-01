@@ -122,6 +122,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
                 return string.Empty;
             }
 
+            if (parameter.Type == TypeInference.InferenceResult.TypeEnum.Boolean)
+            {
+                return parameter.Name;
+            }
+
             return parameter.ValueAsString;
         }
 
