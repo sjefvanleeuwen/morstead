@@ -13,10 +13,20 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         //the formElement we are showing
         private IFormElement _formElement;
 
-        private int _displayQuestionNumber => FormTitleHelper.GetQuestionNumber(_sequenceController.Sequence);
-        private string _displayQuestion => FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult);
-        private string _displayQuestionTitle => FormTitleHelper.GetQuestionTitle(_sequenceController.LastExecutionResult);
-        private string _displayQuestionDescription => FormTitleHelper.GetQuestionDescription(_sequenceController.LastExecutionResult);
+        private int _displayQuestionNumber => _hasRights ? 
+            FormTitleHelper.GetQuestionNumber(_sequenceController.Sequence) :
+            -1 ;
+        private string _displayQuestion => _hasRights ?
+            FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult) :
+            "Geen recht";
+        private string _displayQuestionTitle => _hasRights ?
+            FormTitleHelper.GetQuestionTitle(_sequenceController.LastExecutionResult) :
+            "U heeft geen recht op zorgtoeslag.";
+        private string _displayQuestionDescription => _hasRights ?
+            FormTitleHelper.GetQuestionDescription(_sequenceController.LastExecutionResult) :
+            "Met de door u ingevulde waarden is bepaald dat hiervoor geen recht verleend kan worden op zorgtoeslag.";
+
+        private bool _hasRights = true;
 
         [Inject]
         private ISequenceController _sequenceController { get; set; }
@@ -36,23 +46,34 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 //increase the request step
                 _sequenceController.IncreaseStep();
                 _sequenceController.ExecuteStep(GetCurrentParameter());
-                BuildFormElement();
+                Display();
             }
         }
 
         private void GetPreviousStep()
         {
+            //reset the rights
+            _hasRights = true;
             //decrease the request step, can never be lower than 1
             _sequenceController.DecreaseStep();
             _sequenceController.ExecuteStep(GetCurrentParameter());
-            BuildFormElement();
+            Display();
         }
 
-        private void BuildFormElement()
+        private void Display()
         {
-            _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
-            _formElement.Value = FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult);
-            ValidateForm(true); //set the IsValid and ErrorText Property
+            
+            if (RechtHelper.HasRecht(_sequenceController.LastExecutionResult))
+            {
+                _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
+                _formElement.Value = FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult);
+                ValidateForm(true); //set the IsValid and ErrorText Property
+            }
+            else
+            {
+                _formElement = null;
+                _hasRights = false;
+            }
             StateHasChanged();
         }
 
@@ -286,5 +307,6 @@ tabellen:
       - [ Zwitserland,         0.8000 ]
       - [ Anders,              0      ]
 ";
+
     }
 }

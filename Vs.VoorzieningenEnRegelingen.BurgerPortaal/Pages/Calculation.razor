@@ -6,7 +6,11 @@
 
 <Collapsable Name="Timeline">
     <Title>
-        <Badge Number=@_displayQuestionNumber />@_displayQuestion
+        @if (_displayQuestionNumber > 0)
+        {
+            <Badge Number=@_displayQuestionNumber />
+        }
+        @_displayQuestion
     </Title>
     <CollapsableContent>
         <h2><strong>@_displayQuestionTitle</strong></h2>
@@ -16,27 +20,34 @@
 </Collapsable>
 
 <Form>
-    @switch (_formElement.InferedType)
+    @if (_hasRights && _formElement != null)
     {
-        case TypeInference.InferenceResult.TypeEnum.Double:
-        case TypeInference.InferenceResult.TypeEnum.TimeSpan:
-        case TypeInference.InferenceResult.TypeEnum.DateTime:
-        case TypeInference.InferenceResult.TypeEnum.String:
-        case TypeInference.InferenceResult.TypeEnum.Boolean:
-            break;
-        case TypeInference.InferenceResult.TypeEnum.List:
-            {
-                <Select Name="@_formElement.Name" 
-                        Label="@_formElement.Label"
-                        @bind-Value="@_formElement.Value"
-                        Size="@FormElementSize.Large"
-                        Options="@_formElement.Options"
-                        TagText="@_formElement.TagText"
-                        HintText="@_formElement.HintText"
-                        IsValid="@_formElement.IsValid"
-                        ErrorText="@_formElement.ErrorText" />
-            }
-            break;
+        @switch (_formElement.InferedType)
+        {
+            case TypeInference.InferenceResult.TypeEnum.Double:
+            case TypeInference.InferenceResult.TypeEnum.TimeSpan:
+            case TypeInference.InferenceResult.TypeEnum.DateTime:
+            case TypeInference.InferenceResult.TypeEnum.String:
+            case TypeInference.InferenceResult.TypeEnum.Boolean:
+                break;
+            case TypeInference.InferenceResult.TypeEnum.List:
+                {
+                    <Select Name="@_formElement.Name"
+                            Label="@_formElement.Label"
+                            @bind-Value="@_formElement.Value"
+                            Size="@FormElementSize.Large"
+                            Options="@_formElement.Options"
+                            TagText="@_formElement.TagText"
+                            HintText="@_formElement.HintText"
+                            IsValid="@_formElement.IsValid"
+                            ErrorText="@_formElement.ErrorText" />
+                }
+                break;
+        }
+    }
+    @if(!_hasRights)
+    {
+        <p>De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.</p>
     }
     @*<Radio Name="Woonsituatie" Label="Woonsituatie"
                Size=FormElementSize.Large
@@ -161,5 +172,5 @@
                       IsRequired="true"
                       ErrorText="U heeft het veld Naam beheerder nog niet ingevuld" />*@
 
-    <Pagination NextDisabled="false" Next="@GetNextStep" NextText="Volgende" PreviousDisabled="@(_sequenceController.CurrentStep <= 1)" Previous="GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />
+    <Pagination NextDisabled="@(!_hasRights)" Next="@GetNextStep" NextText="Volgende" PreviousDisabled="@(_sequenceController.CurrentStep <= 1)" Previous="GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />
 </Form>

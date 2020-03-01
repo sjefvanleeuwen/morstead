@@ -43,6 +43,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             //number to take = 3 - 1
             var steps = Steps.ToList().GetRange(0, Math.Max(0, requestStep - 1));
             //add the new item requested item from the result question
+            Steps = steps;
+            if (result.Questions == null)
+            {
+                Steps = steps;
+                return;
+            }
             steps.Add(new Step
             {
                 Key = result.Stacktrace.Last().Step.Key,
