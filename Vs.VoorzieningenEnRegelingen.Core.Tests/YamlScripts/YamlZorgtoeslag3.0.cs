@@ -20,15 +20,36 @@ berekening:
    omschrijving: Waar bent u woonachtig?
    formule: woonlandfactor
    recht: woonlandfactor > 0
+ - stap: 2
+   omschrijving: Wat is uw woonsituatie?
+   formule: standaardpremie
+ - stap: 3
+   situatie: alleenstaande
+   omschrijving: Is uw toetsingsinkomen hoger  dan de inkomensdrempel van 29562,00 euro per jaar?
+   formule: inkomensdrempel
+   recht: wel(lager_dan_de_inkomensdrempel)
+ - stap: 3
+   situatie: aanvrager_met_toeslagpartner
+   omschrijving: Is uw gezamelijk toetsingsinkomen hoger dan de inkomensdrempel van 37885,00 euro per jaar?
+   formule: inkomensdrempel
+   recht: wel(lager_dan_de_inkomensdrempel)
 formules:
  - woonlandfactor:
      formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
+ - standaardpremie:
+   - situatie: alleenstaande
+     formule: 1609
+   - situatie: aanvrager_met_toeslagpartner
+     formule: 3218
+ - lager_dan_inkomensdrempel:
+   - situatie: lager_dan_de_inkomensdrempel
+     formule: 1
+   - situatie: hoger_dan_de_inkomensdrempel
+     formule: 0
 tabellen:
   - naam: woonlandfactoren
     woonland, factor:
       - [ Nederland,           1.0    ]
-      - [ Finland,             0.7161 ]
-      - [ Frankrijk,           0.8316 ]
       - [ België,              0.7392 ]
       - [ Bosnië-Herzegovina,  0.0672 ]
       - [ Bulgarije,           0.0735 ]

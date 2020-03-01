@@ -13,9 +13,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         //the formElement we are showing
         private IFormElement _formElement;
 
-        private int _displayQuestionNumber => _hasRights ? 
+        private int _displayQuestionNumber => _hasRights ?
             FormTitleHelper.GetQuestionNumber(_sequenceController.Sequence) :
-            -1 ;
+            -1;
         private string _displayQuestion => _hasRights ?
             FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult) :
             "Geen recht";
@@ -62,7 +62,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private void Display()
         {
-            
+
             if (RechtHelper.HasRecht(_sequenceController.LastExecutionResult))
             {
                 _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
@@ -108,10 +108,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             ValidateForm();
             if (_formElement?.IsValid ?? false)
             {
-                return new ClientParameter(_formElement.Name, _formElement.Value, _formElement.InferedType)
+                if (_formElement.InferedType == Core.TypeInference.InferenceResult.TypeEnum.Boolean)
                 {
-                    //Key = 0
-                };
+                    return new ClientParameter(_formElement.Value, "ja", _formElement.InferedType);
+                }
+                return new ClientParameter(_formElement.Name, _formElement.Value, _formElement.InferedType);
+                //Key = 0
             }
             return null;
         }
@@ -254,6 +256,16 @@ berekening:
  - stap: 2
    omschrijving: Wat is uw woonsituatie?
    formule: standaardpremie
+ - stap: 3
+   situatie: alleenstaande
+   omschrijving: Is uw toetsingsinkomen hoger  dan de inkomensdrempel van 29562,00 euro per jaar?
+   formule: inkomensdrempel
+   recht: wel(lager_dan_de_inkomensdrempel)
+ - stap: 3
+   situatie: aanvrager_met_toeslagpartner
+   omschrijving: Is uw gezamelijk toetsingsinkomen hoger dan de inkomensdrempel van 37885,00 euro per jaar?
+   formule: inkomensdrempel
+   recht: wel(lager_dan_de_inkomensdrempel)
 formules:
  - woonlandfactor:
      formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
@@ -262,6 +274,11 @@ formules:
      formule: 1609
    - situatie: aanvrager_met_toeslagpartner
      formule: 3218
+ - inkomensdrempel:
+   - situatie: lager_dan_de_inkomensdrempel
+     formule: 1
+   - situatie: hoger_dan_de_inkomensdrempel
+     formule: 0
 tabellen:
   - naam: woonlandfactoren
     woonland, factor:

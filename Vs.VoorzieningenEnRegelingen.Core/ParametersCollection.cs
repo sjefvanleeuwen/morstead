@@ -7,9 +7,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 {
     public class ParametersCollection : List<IParameter>
     {
-        public Parameter GetParameter(string name)
+        public IParameter GetParameter(string name)
         {
-            return (Parameter)(from p in this where p.Name == name select p).SingleOrDefault();
+            return (from p in this where p.Name == name select p).SingleOrDefault();
         }
 
         public void UpSert(IParameter parameter, IEnumerable<string> correspondingParameterNames = null)

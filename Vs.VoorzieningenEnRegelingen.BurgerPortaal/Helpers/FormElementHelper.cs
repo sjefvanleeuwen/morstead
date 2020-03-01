@@ -64,7 +64,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         private static Dictionary<string, string> BooleanToOptions(QuestionArgs questions)
         {
             var result = new Dictionary<string, string>();
-            questions.Parameters.ForEach(p => result.Add(GetParameterDisplayName(p.Name), GetParameterDisplayName(p.Name)));
+            questions.Parameters.ForEach(p => result.Add(p.Name, GetParameterDisplayName(p.Name)));
             return result;
         }
 
