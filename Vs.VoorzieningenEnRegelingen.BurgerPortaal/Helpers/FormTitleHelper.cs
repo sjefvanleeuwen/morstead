@@ -35,11 +35,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         }
 
         private static Dictionary<string, string> _questionTitle = new Dictionary<string, string> {
-            { "woonland", "Selecteer uw woonland." }
+            { "woonland", "Selecteer uw woonland." },
+            { "alleenstaande", "Wat is uw woonsituatie?."}
         };
 
         private static Dictionary<string, string> _questionDescription = new Dictionary<string, string> { 
-            { "woonland", "Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de belastingdienst. Staat uw woonland niet in deze lijst, vul dan \"Anders\" in." }
+            { "woonland", "Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de belastingdienst. Staat uw woonland niet in deze lijst, vul dan \"Anders\" in." },
+            { "alleenstaande", "Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de beslatingdienst."}
         };
     }
 }

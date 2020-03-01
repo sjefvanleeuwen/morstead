@@ -29,6 +29,15 @@
             case TypeInference.InferenceResult.TypeEnum.DateTime:
             case TypeInference.InferenceResult.TypeEnum.String:
             case TypeInference.InferenceResult.TypeEnum.Boolean:
+                <Radio Name="@_formElement.Name"
+                       Label="@_formElement.Label"
+                       @bind-Value="@_formElement.Value"
+                       Size="@FormElementSize.Large"
+                       Options="@_formElement.Options"
+                       TagText="@_formElement.TagText"
+                       HintText="@_formElement.HintText"
+                       IsValid="@_formElement.IsValid"
+                       ErrorText="@_formElement.ErrorText" />
                 break;
             case TypeInference.InferenceResult.TypeEnum.List:
                 {
@@ -45,7 +54,7 @@
                 break;
         }
     }
-    @if(!_hasRights)
+    @if (!_hasRights)
     {
         <p>De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.</p>
     }

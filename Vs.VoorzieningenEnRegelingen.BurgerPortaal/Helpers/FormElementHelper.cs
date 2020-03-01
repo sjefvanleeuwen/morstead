@@ -64,8 +64,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         private static Dictionary<string, string> BooleanToOptions(QuestionArgs questions)
         {
             var result = new Dictionary<string, string>();
-            questions.Parameters.ForEach(p => result.Add(p.Name, p.Name));
+            questions.Parameters.ForEach(p => result.Add(GetParameterDisplayName(p.Name), GetParameterDisplayName(p.Name)));
             return result;
+        }
+
+        private static string GetParameterDisplayName(string name)
+        {
+            return name.Substring(0, 1).ToUpper() + name.Substring(1).Replace('_', ' ');
         }
 
         private static Dictionary<string, string> ListToOptions(QuestionArgs questions)
@@ -76,7 +81,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         }
 
         private static Dictionary<string, string> _labels = new Dictionary<string, string> {
-            { "woonland", "Woonland" }
+            { "woonland", "Woonland" },
+            { "alleenstaande", "Woonsituatie"}
         };
 
         private static Dictionary<string, string> _tagText = new Dictionary<string, string>
@@ -85,7 +91,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         };
 
         private static Dictionary<string, string> _hintText = new Dictionary<string, string> {
-            { "woonland", "Selecteer \"Anders\" wanneer het land niet in de lijst staat." }
+            { "woonland", "Selecteer \"Anders\" wanneer het land niet in de lijst staat." },
+            { "alleenstaande", "Geef aan of u alleenstaande bent of dat u samen woont met een toeslagpartner."}
         };
 
         internal static string GetValue(ISequence sequence, ExecutionResult result)
