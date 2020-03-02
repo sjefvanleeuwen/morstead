@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿    using System;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
 using Vs.VoorzieningenEnRegelingen.Core;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
