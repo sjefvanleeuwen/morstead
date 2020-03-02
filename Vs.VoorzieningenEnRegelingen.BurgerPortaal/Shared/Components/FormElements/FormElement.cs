@@ -38,7 +38,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         [Parameter]
         public IEnumerable<string> Values { get; set; }
         [Parameter]
-        public Dictionary<string, string> Options { get; set; }
+        public Dictionary<string, string> Options { get; set; } = new Dictionary<string, string>();
         [Parameter]
         public string ButtonIcon { get; set; }
         [Parameter]
