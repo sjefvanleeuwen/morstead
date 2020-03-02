@@ -7,8 +7,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
     {
         public static bool HasRecht(ExecutionResult result)
         {
-            var rechtParam = result.Parameters.FirstOrDefault(p => p.Name == "recht");
-            return rechtParam == null || (bool)rechtParam.Value == true;
+            return (!result.Parameters.Any(p => p.Name == "recht" && !(bool)p.Value));
         }
     }
 }
