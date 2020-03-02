@@ -27,11 +27,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             var steps = Steps.ToList().GetRange(0, Math.Max(0, Math.Min(Parameters.Count(), step - 1)));
             steps.ForEach(s =>
             {
-                var parameter = Parameters.FirstOrDefault(p => s.IsMatch(p));
-                if (parameter != null)
+                Parameters.ForEach(p =>
                 {
-                    result.Add(parameter);
-                }
+                    if (s.IsMatch(p))
+                    {
+                        result.Add(p);
+                    }
+                });
             });
             return result;
         }
@@ -68,16 +70,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             {
                 if (p is ClientParameter && !((ClientParameter)p).IsCalculated)
                 {
-                    IEnumerable<string> correspondingParameterNames = new List<string>
-                    {
-                        p.Name
-                    };
-                    var stepFound = Steps.FirstOrDefault(s => s.IsMatch(p));
-                    if (stepFound != null)
-                    {
-                        correspondingParameterNames = stepFound.ValidParameterNames;
-                    }
-                    Parameters.UpSert(p, correspondingParameterNames);
+                    //IEnumerable<string> correspondingParameterNames = new List<string>
+                    //{
+                    //    p.Name
+                    //};
+                    //var stepFound = Steps.FirstOrDefault(s => s.IsMatch(p));
+                    //if (stepFound != null)
+                    //{
+                    //    correspondingParameterNames = stepFound.ValidParameterNames;
+                    //}
+                    Parameters.UpSert(p);//, correspondingParameterNames);
                 }
             });
         }

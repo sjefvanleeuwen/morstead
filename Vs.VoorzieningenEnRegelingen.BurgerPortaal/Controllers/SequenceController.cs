@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
@@ -14,7 +15,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
         public ParseResult ParseResult { get; private set; }
         public ExecutionResult LastExecutionResult { get; private set; }
 
-        private IServiceController _serviceController { get; set; }
+        private IServiceController _serviceController;
 
         public SequenceController(IServiceController serviceController, ISequence sequence)
         {
@@ -54,9 +55,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
             RequestStep = Math.Max(1, RequestStep - 1);
         }
 
-        public void ExecuteStep(IParameter currentParameter)
+        public void ExecuteStep(ParametersCollection currentParameters)
         {
-            SaveCurrentParameter(currentParameter);
+            SaveCurrentParameters(currentParameters);
             //var requestParameters = GetRequestParameters();
             var requestParameters = Sequence.GetParametersToSend(RequestStep);
             var request = GetExecuteRequest(requestParameters);
@@ -68,11 +69,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
             CurrentStep = RequestStep;
         }
 
-        private void SaveCurrentParameter(IParameter currentParameter)
+        private void SaveCurrentParameters(ParametersCollection currentParameters)
         {
-            if (currentParameter != null)
+            if (currentParameters != null)
             {
-                Sequence.UpdateParametersCollection(new ParametersCollection { currentParameter });
+                Sequence.UpdateParametersCollection(currentParameters);
             }
         }
     }

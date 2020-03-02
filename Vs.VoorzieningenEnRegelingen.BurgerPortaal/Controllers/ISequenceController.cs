@@ -17,6 +17,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
         ParseRequest GetParseRequest();
         void IncreaseStep();
         void DecreaseStep();
-        void ExecuteStep(IParameter currentParameter);
+        void ExecuteStep(ParametersCollection currentParameters);
     }
 }

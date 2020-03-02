@@ -88,7 +88,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 
             //execute the second step
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ClientParameter("alleenstaande", "ja"));
+            sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("alleenstaande", "ja") });
             
             Assert.Equal(2, sequenceController.LastExecutionResult.Parameters.Count); //standaardpremie is nu ook bekend
             Assert.Equal("alleenstaande", sequenceController.LastExecutionResult.Parameters[0].Name);
@@ -132,7 +132,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 
             //once again try to go back one step, but this time a value was entered
             sequenceController.DecreaseStep();
-            sequenceController.ExecuteStep(new ClientParameter("aanvrager_met_toeslagpartner", "ja"));
+            sequenceController.ExecuteStep(new ParametersCollection() {
+                new ClientParameter("alleenstaande", "nee"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja") 
+            });
 
             //should be the same as the previous step
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
@@ -140,14 +143,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 
             //increase the step 1 -> 2
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ClientParameter("alleenstaande", "ja"));
+            sequenceController.ExecuteStep(new ParametersCollection() { 
+                new ClientParameter("alleenstaande", "ja"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "nee")
+            });
 
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(sequenceController);
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2b(sequenceController);
 
             //increase the step 2 ->3
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ClientParameter("toetsingsinkomen_aanvrager", "800"));
+            sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("toetsingsinkomen_aanvrager", "800") });
 
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep3(sequenceController);
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
@@ -180,7 +186,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
 
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ClientParameter("alleenstaande", "ja"));
+            sequenceController.ExecuteStep(new ParametersCollection() { 
+                new ClientParameter("alleenstaande", "ja"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "nee") 
+            });
 
             //should be the same as when step 1 was executed the first time
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(sequenceController);
@@ -192,7 +201,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             sequenceController.ExecuteStep(null);
             //then increase with a different value 1 -> 2
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ClientParameter("aanvrager_met_toeslagpartner", "ja"));
+            sequenceController.ExecuteStep(new ParametersCollection() {
+                new ClientParameter("alleenstaande", "nee"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja") 
+            });
             //should be the same as when step 1 was executed the first time, but we get 1 different variable back
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2b(sequenceController);
             //but we should have all the paramaters that were submitted, but now one is changed and an other has a different value
@@ -235,17 +247,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             //check that the prarmeters have the right name and type
             Assert.Equal("toetsingsinkomen_aanvrager", sequenceController.LastExecutionResult.Questions.Parameters[0].Name);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, sequenceController.LastExecutionResult.Questions.Parameters[0].Type);
-            //2 parameters known as a response after requesting step 1
-            Assert.Equal(2, sequenceController.LastExecutionResult.Parameters.Count);
+            //3 parameters known as a response after requesting step 1
+            Assert.Equal(3, sequenceController.LastExecutionResult.Parameters.Count);
             //check that the parameters have the right name and type & value
             var var1 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "alleenstaande");
             Assert.NotNull(var1);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var1.Type);
             Assert.True((bool)var1.Value);
-            var var2 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "standaardpremie");
+            var var2 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "aanvrager_met_toeslagpartner");
             Assert.NotNull(var2);
-            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var2.Type);
-            Assert.Equal(1609, (double)var2.Value);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var2.Type);
+            Assert.False((bool)var2.Value);
+            var var3 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "standaardpremie");
+            Assert.NotNull(var3);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var3.Type);
+            Assert.Equal(1609, (double)var3.Value);
             //we should be at step 2
             Assert.Equal(2, sequenceController.CurrentStep);
             //this step should have key 1
@@ -264,17 +280,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             //check that the prarmeters have the right name and type
             Assert.Equal("toetsingsinkomen_aanvrager", sequenceController.LastExecutionResult.Questions.Parameters[0].Name);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, sequenceController.LastExecutionResult.Questions.Parameters[0].Type);
-            //2 parameters known as a response after requesting step 1
-            Assert.Equal(2, sequenceController.LastExecutionResult.Parameters.Count);
+            //3 parameters known as a response after requesting step 1
+            Assert.Equal(3, sequenceController.LastExecutionResult.Parameters.Count);
             //check that the parameters have the right name and type & value
-            var var1 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "aanvrager_met_toeslagpartner");
+            var var1 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "alleenstaande");
             Assert.NotNull(var1);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var1.Type);
-            Assert.True((bool)var1.Value);
-            var var2 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "standaardpremie");
+            Assert.False((bool)var1.Value);
+            var var2 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "aanvrager_met_toeslagpartner");
             Assert.NotNull(var2);
-            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var2.Type);
-            Assert.Equal(3218, (double)var2.Value);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var2.Type);
+            Assert.True((bool)var2.Value);
+            var var3 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "standaardpremie");
+            Assert.NotNull(var3);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var3.Type);
+            Assert.Equal(3218, (double)var3.Value);
             //we should be at step 2
             Assert.Equal(2, sequenceController.CurrentStep);
             //this step should have key 1
@@ -296,21 +316,25 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             //check that the prarmeters have the right name and type
             Assert.Equal("toetsingsinkomen_toeslagpartner", sequenceController.LastExecutionResult.Questions.Parameters[0].Name);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, sequenceController.LastExecutionResult.Questions.Parameters[0].Type);
-            //3 parameters known as a response after requesting step 3
-            Assert.Equal(3, sequenceController.LastExecutionResult.Parameters.Count);
+            //4 parameters known as a response after requesting step 3
+            Assert.Equal(4, sequenceController.LastExecutionResult.Parameters.Count);
             //check that the parameters have the right name and type & value
             var var1 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "alleenstaande");
             Assert.NotNull(var1);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var1.Type);
             Assert.True((bool)var1.Value);
-            var var2 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "standaardpremie");
+            var var2 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "aanvrager_met_toeslagpartner");
             Assert.NotNull(var2);
-            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var2.Type);
-            Assert.Equal(1609, (double)var2.Value);
-            var var3 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "toetsingsinkomen_aanvrager");
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var2.Type);
+            Assert.False((bool)var2.Value);
+            var var3 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "standaardpremie");
             Assert.NotNull(var3);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var3.Type);
-            Assert.Equal(800, (double)var3.Value);
+            Assert.Equal(1609, (double)var3.Value);
+            var var4 = sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == "toetsingsinkomen_aanvrager");
+            Assert.NotNull(var4);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var4.Type);
+            Assert.Equal(800, (double)var4.Value);
             //we should be at step 3
             Assert.Equal(3, sequenceController.CurrentStep);
             //this step should have key 1 i.e. the same question requires 2 variable, thus now we have the same question
@@ -333,31 +357,24 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 
         private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2a(SequenceController sequenceController)
         {
-            //we should have saved 1 variables in steps
-            Assert.Single(sequenceController.Sequence.Parameters);
+            //we should have saved 2 variables in steps
+            Assert.Equal(2, sequenceController.Sequence.Parameters.Count);
             //check these variables
-            var var1 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "aanvrager_met_toeslagpartner");
+            var var1 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "alleenstaande");
             Assert.NotNull(var1);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var1.Type);
-            Assert.True((bool)var1.Value);
-            Assert.Equal("true", var1.ValueAsString.ToLower());
+            Assert.False((bool)var1.Value);
+            Assert.Equal("false", var1.ValueAsString.ToLower());
+            var var2 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "aanvrager_met_toeslagpartner");
+            Assert.NotNull(var2);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var2.Type);
+            Assert.True((bool)var2.Value);
+            Assert.Equal("true", var2.ValueAsString.ToLower());
         }
 
         private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2b(SequenceController sequenceController)
         {
             //we should have saved 1 variables in steps
-            Assert.Single(sequenceController.Sequence.Parameters);
-            //check these variables
-            var var1 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "alleenstaande");
-            Assert.NotNull(var1);
-            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var1.Type);
-            Assert.True((bool)var1.Value);
-            Assert.Equal("true", var1.ValueAsString.ToLower());
-        }
-
-        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(SequenceController sequenceController)
-        {
-            //we should have saved 2 variables in steps
             Assert.Equal(2, sequenceController.Sequence.Parameters.Count);
             //check these variables
             var var1 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "alleenstaande");
@@ -365,28 +382,55 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var1.Type);
             Assert.True((bool)var1.Value);
             Assert.Equal("true", var1.ValueAsString.ToLower());
-            var var2 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "toetsingsinkomen_aanvrager");
+            var var2 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "aanvrager_met_toeslagpartner");
             Assert.NotNull(var2);
-            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var2.Type);
-            Assert.Equal(800, (double)var2.Value);
-            Assert.Equal("800", var2.ValueAsString.ToLower());
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var2.Type);
+            Assert.False((bool)var2.Value);
+            Assert.Equal("false", var2.ValueAsString.ToLower());
+        }
+
+        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(SequenceController sequenceController)
+        {
+            //we should have saved 3 variables in steps
+            Assert.Equal(3, sequenceController.Sequence.Parameters.Count);
+            //check these variables
+            var var1 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "alleenstaande");
+            Assert.NotNull(var1);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var1.Type);
+            Assert.True((bool)var1.Value);
+            Assert.Equal("true", var1.ValueAsString.ToLower());
+            var var2 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "aanvrager_met_toeslagpartner");
+            Assert.NotNull(var2);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var2.Type);
+            Assert.False((bool)var2.Value);
+            Assert.Equal("false", var2.ValueAsString.ToLower());
+            var var3 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "toetsingsinkomen_aanvrager");
+            Assert.NotNull(var3);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var3.Type);
+            Assert.Equal(800, (double)var3.Value);
+            Assert.Equal("800", var3.ValueAsString.ToLower());
         }
 
         private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3b(SequenceController sequenceController)
         {
             //we should have saved 2 variables in steps
-            Assert.Equal(2, sequenceController.Sequence.Parameters.Count);
+            Assert.Equal(3, sequenceController.Sequence.Parameters.Count);
             //check these variables
-            var var1 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "aanvrager_met_toeslagpartner");
+            var var1 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "alleenstaande");
             Assert.NotNull(var1);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var1.Type);
-            Assert.True((bool)var1.Value);
-            Assert.Equal("true", var1.ValueAsString.ToLower());
-            var var2 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "toetsingsinkomen_aanvrager");
+            Assert.False((bool)var1.Value);
+            Assert.Equal("false", var1.ValueAsString.ToLower());
+            var var2 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "aanvrager_met_toeslagpartner");
             Assert.NotNull(var2);
-            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var2.Type);
-            Assert.Equal(800, (double)var2.Value);
-            Assert.Equal("800", var2.ValueAsString.ToLower());
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, var2.Type);
+            Assert.True((bool)var2.Value);
+            Assert.Equal("true", var2.ValueAsString.ToLower());
+            var var3 = sequenceController.Sequence.Parameters.FirstOrDefault(p => p.Name == "toetsingsinkomen_aanvrager");
+            Assert.NotNull(var3);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var3.Type);
+            Assert.Equal(800, (double)var3.Value);
+            Assert.Equal("800", var3.ValueAsString.ToLower());
         }
     }
 }

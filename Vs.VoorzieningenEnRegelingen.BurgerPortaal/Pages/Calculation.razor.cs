@@ -5,6 +5,7 @@ using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
+using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
@@ -45,7 +46,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             {
                 //increase the request step
                 _sequenceController.IncreaseStep();
-                _sequenceController.ExecuteStep(GetCurrentParameter());
+                _sequenceController.ExecuteStep(GetCurrentParameters());
                 Display();
             }
         }
@@ -56,7 +57,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             _hasRights = true;
             //decrease the request step, can never be lower than 1
             _sequenceController.DecreaseStep();
-            _sequenceController.ExecuteStep(GetCurrentParameter());
+            _sequenceController.ExecuteStep(GetCurrentParameters());
             Display();
         }
 
@@ -103,16 +104,25 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         /// Only return the current value if it is a valid value
         /// </summary>
         /// <returns></returns>
-        private IParameter GetCurrentParameter()
+        private ParametersCollection GetCurrentParameters()
         {
             ValidateForm();
             if (_formElement?.IsValid ?? false)
             {
-                if (_formElement.InferedType == Core.TypeInference.InferenceResult.TypeEnum.Boolean)
+                if (_formElement.InferedType == TypeInference.InferenceResult.TypeEnum.Boolean)
                 {
-                    return new ClientParameter(_formElement.Value, "ja", _formElement.InferedType);
+                    var result = new ParametersCollection();
+                    //get all parameter options
+                    foreach(var key in _formElement.Options.Keys)
+                    {
+                        result.Add(new ClientParameter(key, key == _formElement.Value ? "ja" : "nee", _formElement.InferedType));
+                    }
+
+                    return result;
                 }
-                return new ClientParameter(_formElement.Name, _formElement.Value, _formElement.InferedType);
+                return new ParametersCollection { 
+                    new ClientParameter(_formElement.Name, _formElement.Value, _formElement.InferedType) 
+                };
                 //Key = 0
             }
             return null;

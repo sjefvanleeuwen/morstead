@@ -12,17 +12,18 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return (from p in this where p.Name == name select p).SingleOrDefault();
         }
 
-        public void UpSert(IParameter parameter, IEnumerable<string> correspondingParameterNames = null)
+        public void UpSert(IParameter parameter)//, IEnumerable<string> correspondingParameterNames = null)
         {
             if (parameter == null)
             {
                 throw new ArgumentNullException(nameof(parameter));
             }
-            correspondingParameterNames ??= new List<string>
-            {
-                parameter.Name
-            };
-            var correspondingParameter = FindCorrespondingParameter(correspondingParameterNames);
+            //correspondingParameterNames ??= new List<string>
+            //{
+            //    parameter.Name
+            //};
+            //var correspondingParameter = FindCorrespondingParameter(correspondingParameterNames);
+            var correspondingParameter = FindCorrespondingParameter(parameter.Name);
             if (correspondingParameter != null)
             {
                 //update the parameter
@@ -39,17 +40,18 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         /// There can be multiple names that represent a value, for instance in case of boolean
         /// i.e alleenstaande = ja should replace samenwonend_met_toeslagpartner = ja
         /// </summary>
-        private IParameter FindCorrespondingParameter(IEnumerable<string> correspondingParameterNames)
+        private IParameter FindCorrespondingParameter(string parameterName)//IEnumerable<string> correspondingParameterNames)
         {
-            foreach (var p in this)
-            {
-                if (correspondingParameterNames.ToList().Contains(p.Name))
-                {
-                    return p;
-                }
-            }
+            return this.FirstOrDefault(p => p.Name == parameterName);
+            //foreach (var p in this)
+            //{
+            //    if (correspondingParameterNames.ToList().Contains(p.Name))
+            //    {
+            //        return p;
+            //    }
+            //}
 
-            return null;
+            //return null;
         }
     }
 }
