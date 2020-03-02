@@ -268,14 +268,24 @@ berekening:
    formule: standaardpremie
  - stap: 3
    situatie: alleenstaande
-   omschrijving: Is uw toetsingsinkomen hoger  dan de inkomensdrempel van 29562,00 euro per jaar?
+   omschrijving: Is uw toetsingsinkomen hoger dan de inkomensdrempel van 29562,00 euro per jaar?
    formule: inkomensdrempel
-   recht: wel(lager_dan_de_inkomensdrempel)
+   recht: inkomensdrempel = 1
  - stap: 3
    situatie: aanvrager_met_toeslagpartner
-   omschrijving: Is uw gezamelijk toetsingsinkomen hoger dan de inkomensdrempel van 37885,00 euro per jaar?
+   omschrijving: Is uw gezamenlijk toetsingsinkomen hoger dan de inkomensdrempel van 37885,00 euro per jaar?
    formule: inkomensdrempel
-   recht: wel(lager_dan_de_inkomensdrempel)
+   recht: inkomensdrempel = 1
+ - stap: 4
+   situatie: alleenstaande
+   omschrijving: Wat is uw toetsingsinkomen?
+   formule: toetsingsinkomen
+   recht: toetsingsinkomen_aanvrager < 29562
+ - stap: 4
+   situatie: aanvrager_met_toeslagpartner
+   omschrijving: Wat is uw gezamenlijk toetsingsinkomen?
+   formule: toetsingsinkomen
+   recht: toetsingsinkomen_gezamenlijk < 37885
 formules:
  - woonlandfactor:
      formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
@@ -289,6 +299,11 @@ formules:
      formule: 1
    - situatie: hoger_dan_de_inkomensdrempel
      formule: 0
+ - toetsingsinkomen: 
+    - situatie: alleenstaande
+      formule: toetsingsinkomen_aanvrager
+    - situatie: aanvrager_met_toeslagpartner
+      formule: 
 tabellen:
   - naam: woonlandfactoren
     woonland, factor:

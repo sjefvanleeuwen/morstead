@@ -121,18 +121,22 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             }
 
             //find the corresponding saved Parameter for this step
-            var parameter = sequence.Parameters.FirstOrDefault(p => step.IsMatch(p));
-            if (parameter == null)
+            var parameters = sequence.Parameters.Where(p => step.IsMatch(p));
+            if (parameters == null || !parameters.Any())
             {
                 return string.Empty;
             }
-
-            if (parameter.Type == TypeInference.InferenceResult.TypeEnum.Boolean)
+            if (parameters.Count() == 1)
             {
-                return parameter.Name;
+                return parameters.Single().ValueAsString;
             }
 
-            return parameter.ValueAsString;
+            if (parameters.First().Type == TypeInference.InferenceResult.TypeEnum.Boolean)
+            {
+                return parameters.FirstOrDefault(p => (bool)p.Value).Name;
+            }
+
+            return parameters.First().ValueAsString;
         }
 
         private static string GetDefaultListValue(ExecutionResult result)
