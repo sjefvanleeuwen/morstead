@@ -70,16 +70,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             {
                 if (p is ClientParameter && !((ClientParameter)p).IsCalculated)
                 {
-                    //IEnumerable<string> correspondingParameterNames = new List<string>
-                    //{
-                    //    p.Name
-                    //};
-                    //var stepFound = Steps.FirstOrDefault(s => s.IsMatch(p));
-                    //if (stepFound != null)
-                    //{
-                    //    correspondingParameterNames = stepFound.ValidParameterNames;
-                    //}
-                    Parameters.UpSert(p);//, correspondingParameterNames);
+                    Parameters.UpSert(p);
                 }
             });
         }
