@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
+using System.Globalization;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
@@ -10,9 +11,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         [Parameter]
         public bool DecimalsOptional { get; set; }
 
-        protected override void OnParametersSet()
+        protected override void OnInitialized()
         {
-            base.OnParametersSet();
+            base.OnInitialized();
             AddDecimalsToValue();
         }
 
@@ -27,7 +28,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
             //prepare the value for parsing
             var value = Value.Replace(',', '.');
             //continue only if parsable
-            if (!double.TryParse(value, out double d))
+            if (!double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
             {
                 return;
             }
