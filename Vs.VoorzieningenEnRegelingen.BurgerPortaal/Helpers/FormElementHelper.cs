@@ -128,18 +128,23 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
         private static string GetSavedValue(ISequence sequence, ExecutionResult result)
         {
+            //no saved value if there is no question
+            if (result.Questions == null)
+            {
+                return null;
+            }
             //find the step that is a match for this name
             var step = sequence.Steps.FirstOrDefault(s => s.IsMatch(result.Questions.Parameters.FirstOrDefault()));
             if (step == null)
             {
-                return string.Empty;
+                return null;
             }
 
             //find the corresponding saved Parameter for this step
             var parameters = sequence.Parameters.Where(p => step.IsMatch(p));
             if (parameters == null || !parameters.Any())
             {
-                return string.Empty;
+                return null;
             }
             if (parameters.Count() == 1)
             {
