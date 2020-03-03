@@ -26,14 +26,14 @@
         {
             case TypeInference.InferenceResult.TypeEnum.Double:
                 //Number does not work in firefox
-                <String Name="@_formElement.Name" 
-                        Label="@_formElement.Label"
-                        @bind-Value="@_formElement.Value"
-                        Size="@FormElementSize.Large"
-                        TagText="@_formElement.TagText"
-                        HintText="@_formElement.HintText"
-                        IsValid="_formElement.IsValid"
-                        ErrorText="@_formElement.ErrorText" />
+                <TextField Name="@_formElement.Name" 
+                           Label="@_formElement.Label"
+                           @bind-Value="@_formElement.Value"
+                           Size="@FormElementSize.Large"
+                           TagText="@_formElement.TagText"
+                           HintText="@_formElement.HintText"
+                           IsValid="_formElement.IsValid"
+                           ErrorText="@_formElement.ErrorText" />
 
                 break;
                 case TypeInference.InferenceResult.TypeEnum.TimeSpan:

@@ -51,13 +51,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             { "alleenstaande", "Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de belastingdienst."},
             { "lager_dan_de_inkomensdrempel", "Afhankelijk van us situatie; wanneer u als alleenstaande meer verdient " +
                 "dan 29.562,00 euro per jaar, of als u samen met een toeslagpartner meer verdient dan 37.885,00 euro per jaar, " +
-                "dan overschreidt u de inkomensdrempel voor zorgtoeslag. U heeft dan geen recht op zorgtoeslag." +
+                "dan overschreidt u de inkomensdrempel voor zorgtoeslag. U heeft dan geen recht op zorgtoeslag. " +
                 "Wij willen u alleen naar het daadwerkelijke bedrag vragen wanneer dit voor de berekening noodzakelijk is. " +
                 "Daarom vragen wij u eerst of u deze drempelwaarde overschreidt." +
                 "Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de belastingdienst."},
             { "lager_dan_de_vermogensdrempel", "Afhankelijk van us situatie; wanneer u als alleenstaande meer vermogen heeft dan " +
                 "dan 114.776,00 euro, of als u samen met een toeslagpartner meer vermogen heeft dan 145.136,00 euro, " +
-                "dan overschreidt u de vermogensdrempel voor zorgtoeslag. U heeft dan geen recht op zorgtoeslag." +
+                "dan overschreidt u de vermogensdrempel voor zorgtoeslag. U heeft dan geen recht op zorgtoeslag. " +
                 "Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de belastingdienst."},
             { "toetsingsinkomen_aanvrager", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen." },
             { "toetsingsinkomen_gezamenlijk", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen. " +
