@@ -85,16 +85,18 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return result;
         }
 
-        private static Dictionary<string, string> _labels = new Dictionary<string, string> {
+        private static Dictionary<string, string> _labels = new Dictionary<string, string>
+        {
             //{ "woonland", "Woonland" },
             //{ "alleenstaande", "Woonsituatie"},
             //{ "lager_dan_de_inkomensdrempel", "Inkomensdrempel"},
             //{ "lager_dan_de_vermogensdrempel", "Vermogensdrempel"}
+            //{ "toetsingsinkomen_aanvrager", "" },
+            //{ "toetsingsinkomen_gezamenlijk", "" }
         };
 
         private static Dictionary<string, string> _tagText = new Dictionary<string, string>
         {
-
         };
 
         private static Dictionary<string, string> _hintText = new Dictionary<string, string> {
@@ -102,14 +104,23 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             { "alleenstaande", "Geef aan of u alleenstaande bent of dat u samen woont met een toeslagpartner."},
             { "lager_dan_de_inkomensdrempel", ""},
             { "lager_dan_de_vermogensdrempel", ""},
+            { "toetsingsinkomen_aanvrager", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen." },
+            { "toetsingsinkomen_gezamenlijk", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen." }
         };
 
         internal static string GetValue(ISequence sequence, ExecutionResult result)
         {
             var value = GetSavedValue(sequence, result);
-            if (string.IsNullOrWhiteSpace(value) && GetInferedType(result.Questions) == TypeInference.InferenceResult.TypeEnum.List)
+            if (GetInferedType(result.Questions) == TypeInference.InferenceResult.TypeEnum.List)
             {
-                value = GetDefaultListValue(result);
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    value = GetDefaultListValue(result);
+                }
+            }
+            if (GetInferedType(result.Questions) == TypeInference.InferenceResult.TypeEnum.Double)
+            {
+                value = value.Replace('.', ',');
             }
 
             return value;

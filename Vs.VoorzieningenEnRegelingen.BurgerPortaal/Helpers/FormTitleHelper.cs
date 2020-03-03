@@ -40,7 +40,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             { "alleenstaand_lager_dan_de_inkomensdrempel", "Inkomensdrempel"},
             { "toeslagpartner_lager_dan_de_inkomensdrempel", "Inkomensdrempel"},
             { "alleenstaand_lager_dan_de_vermogensdrempel", "Vermogensdrempel"},
-            { "toeslagpartner_lager_dan_de_vermogensdrempel", "Vermogensdrempel"}
+            { "toeslagpartner_lager_dan_de_vermogensdrempel", "Vermogensdrempel"},
+            { "toetsingsinkomen_aanvrager", "Toetsingsinkomen" },
+            { "toetsingsinkomen_gezamenlijk", "Gezamenlijk toetsingsinkomen" }
         };
 
         private static Dictionary<string, string> _questionDescription = new Dictionary<string, string> { 
@@ -56,7 +58,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             { "lager_dan_de_vermogensdrempel", "Afhankelijk van us situatie; wanneer u als alleenstaande meer vermogen heeft dan " +
                 "dan 114.776,00 euro, of als u samen met een toeslagpartner meer vermogen heeft dan 145.136,00 euro, " +
                 "dan overschreidt u de vermogensdrempel voor zorgtoeslag. U heeft dan geen recht op zorgtoeslag." +
-                "Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de belastingdienst."}
+                "Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de belastingdienst."},
+            { "toetsingsinkomen_aanvrager", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen." },
+            { "toetsingsinkomen_gezamenlijk", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen. " +
+                "Vul de som van uw toetsingsinkomen en het toetsingsinkomen van uw toeslagpartner in." }
         };
     }
 }

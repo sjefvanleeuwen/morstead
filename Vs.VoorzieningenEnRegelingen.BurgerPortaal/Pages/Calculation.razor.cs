@@ -37,6 +37,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             _sequenceController.Sequence.Yaml = _testYaml;
             //InitTestData();
             //get the first step
+            base.OnInitialized();
             GetNextStep();
         }
 
@@ -67,15 +68,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             if (RechtHelper.HasRecht(_sequenceController.LastExecutionResult))
             {
                 _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
+                StateHasChanged();
                 _formElement.Value = FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult);
+                StateHasChanged();
                 ValidateForm(true); //set the IsValid and ErrorText Property
             }
             else
             {
                 _formElement = null;
                 _hasRights = false;
+                StateHasChanged();
             }
-            StateHasChanged();
         }
 
         private bool FormIsValid()
@@ -111,14 +114,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             {
                 if (_formElement.InferedType == TypeInference.InferenceResult.TypeEnum.Boolean)
                 {
-                    var result = new ParametersCollection();
-                    //get all parameter options
-                    foreach(var key in _formElement.Options.Keys)
-                    {
-                        result.Add(new ClientParameter(key, key == _formElement.Value ? "ja" : "nee", _formElement.InferedType));
-                    }
-
-                    return result;
+                    return GetCurrentBooleanParameter();
+                }
+                if (_formElement.InferedType == TypeInference.InferenceResult.TypeEnum.Double)
+                {
+                    return GetCurrentNumberParameter();
                 }
                 return new ParametersCollection { 
                     new ClientParameter(_formElement.Name, _formElement.Value, _formElement.InferedType) 
@@ -126,6 +126,26 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 //Key = 0
             }
             return null;
+        }
+
+        private ParametersCollection GetCurrentBooleanParameter()
+        {
+            var result = new ParametersCollection();
+            //get all parameter options
+            foreach (var key in _formElement.Options.Keys)
+            {
+                result.Add(new ClientParameter(key, key == _formElement.Value ? "ja" : "nee", _formElement.InferedType));
+            }
+
+            return result;
+        }
+
+        private ParametersCollection GetCurrentNumberParameter()
+        {
+            return new ParametersCollection
+            {
+                new ClientParameter(_formElement.Name, _formElement.Value.Replace(',', '.'), _formElement.InferedType)
+            };
         }
 
         #region test display variables
@@ -294,8 +314,11 @@ berekening:
  - stap: 5
    situatie: aanvrager_met_toeslagpartner
    omschrijving: Wat is uw gezamenlijk toetsingsinkomen?
-   formule: toetsingsinkomen
+   formule: toetsingsinkomen_gezamenlijk
    recht: toetsingsinkomen_gezamenlijk < 37885
+ - stap: 6
+   omschrijving: Maandelijkste zorgtoeslag.
+   formule: zorgtoeslag
 formules:
  - woonlandfactor:
      formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
@@ -314,11 +337,18 @@ formules:
      formule: 1
    - situatie: hoger_dan_de_inkomensdrempel
      formule: 0
- - toetsingsinkomen: 
+ - toetsingsinkomen:
    - situatie: alleenstaande
      formule: toetsingsinkomen_aanvrager
    - situatie: aanvrager_met_toeslagpartner
-     formule: toetsingsinkomen_aanvrager_en_toeslagpartner
+     formule: toetsingsinkomen_gezamenlijk
+ - normpremie:
+   - situatie: alleenstaande     
+     formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)
+   - situatie: aanvrager_met_toeslagpartner
+     formule: min(percentage(4.315) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 2314)
+ - zorgtoeslag:
+     formule: round((standaardpremie - normpremie) * woonlandfactor / 12,2)
 tabellen:
   - naam: woonlandfactoren
     woonland, factor:

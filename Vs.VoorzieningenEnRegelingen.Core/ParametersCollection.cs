@@ -26,7 +26,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 //only name and value required, corresponding name-value pairs for parameters will always be of the same type.
                 correspondingParameter.Name = parameter.Name;
                 correspondingParameter.Value = parameter.Value;
-                correspondingParameter.ValueAsString = parameter.ValueAsString;
                 return;
             }
             Add(parameter);

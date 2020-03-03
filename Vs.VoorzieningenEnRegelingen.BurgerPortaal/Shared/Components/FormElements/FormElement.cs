@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Library.ExtensionMethods;
 using Vs.VoorzieningenEnRegelingen.Core;
 
@@ -66,8 +68,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         public bool Validate(bool unobtrusive)
         {
+            string errorText = null;
             var valid =
-                ValidateValueSet(out string errorText);
+                ValidateValueIsSet(out errorText)
+                && (InferedType != TypeInference.InferenceResult.TypeEnum.Double || ValidateValueIsValidNumber(out errorText));
             if (!unobtrusive)
             {
                 IsValid = valid;
@@ -76,7 +80,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
             return valid;
         }
 
-        private bool ValidateValueSet(out string errorText)
+        private bool ValidateValueIsSet(out string errorText)
         {
             errorText = string.Empty;
             var valid = !string.IsNullOrWhiteSpace(Value);
@@ -86,6 +90,34 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
             }
 
             return valid;
+        }
+
+        private bool ValidateValueIsValidNumber(out string errorText)
+        {
+            errorText = string.Empty;
+            var chars = new List<char>(Value.ToCharArray());
+            var validChars = new List<char>("1234567890,".ToCharArray());
+            foreach(var c in Value)
+            {
+                if (!validChars.Contains(c))
+                {
+                    errorText = "Er zijn ongeldige tekens ingegeven. Een getal bestaat uit nummers en maximaal één komma met daarachter 2 cijfers.";
+                    return false;
+                }
+            }
+            if (chars.Where(c => c == ',').Count() > 1)
+            {
+                errorText = "Er zijn meer dan 1 komma's ingetyped. Een getal bestaat uit nummers en maximaal één komma met daarachter 2 cijfers.";
+                return false;
+            }
+            var parts = Value.Split(',');
+            if (parts.Count() == 2 && parts[1].Length != 2)
+            {
+                errorText = "Type 2 cijfers achter de komma.";
+                return false;
+            }
+
+            return true;
         }
     }
 
