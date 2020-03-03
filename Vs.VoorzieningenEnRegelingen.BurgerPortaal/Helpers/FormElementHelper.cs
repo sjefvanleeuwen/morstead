@@ -86,8 +86,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         }
 
         private static Dictionary<string, string> _labels = new Dictionary<string, string> {
-            { "woonland", "Woonland" },
-            { "alleenstaande", "Woonsituatie"}
+            //{ "woonland", "Woonland" },
+            //{ "alleenstaande", "Woonsituatie"},
+            //{ "lager_dan_de_inkomensdrempel", "Inkomensdrempel"},
+            //{ "lager_dan_de_vermogensdrempel", "Vermogensdrempel"}
         };
 
         private static Dictionary<string, string> _tagText = new Dictionary<string, string>
@@ -97,7 +99,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
         private static Dictionary<string, string> _hintText = new Dictionary<string, string> {
             { "woonland", "Selecteer \"Anders\" wanneer het land niet in de lijst staat." },
-            { "alleenstaande", "Geef aan of u alleenstaande bent of dat u samen woont met een toeslagpartner."}
+            { "alleenstaande", "Geef aan of u alleenstaande bent of dat u samen woont met een toeslagpartner."},
+            { "lager_dan_de_inkomensdrempel", ""},
+            { "lager_dan_de_vermogensdrempel", ""},
         };
 
         internal static string GetValue(ISequence sequence, ExecutionResult result)
