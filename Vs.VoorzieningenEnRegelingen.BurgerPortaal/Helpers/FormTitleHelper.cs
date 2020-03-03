@@ -8,8 +8,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 {
     public static class FormTitleHelper
     {
-        public static int GetQuestionNumber(ISequence sequence)
+        public static int GetQuestionNumber(ISequence sequence, ExecutionResult result)
         {
+            if (result.Questions == null)
+            {
+                return 0;
+            }
             return sequence.Steps.Count();
         }
 
@@ -20,11 +24,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
         public static string GetQuestionTitle(IExecutionResult result)
         {
+            if (result.Questions == null)
+            {
+                return "Resultaat";
+            }
             return GetFromLookupTable(result.Questions.Parameters, _questionTitle);
         }
 
         public static string GetQuestionDescription(IExecutionResult result)
         {
+            if (result.Questions == null)
+            {
+                return "Uw zorgtoeslag is berekend. Hieronder staat het bedrag in euro's waar u volgens de berekening maandelijks recht op hebt.";
+            }
             return GetFromLookupTable(result.Questions.Parameters, _questionDescription);
         }
 

@@ -120,7 +120,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             }
             if (GetInferedType(result.Questions) == TypeInference.InferenceResult.TypeEnum.Double)
             {
-                value = value.Replace('.', ',');
+                value = value?.Replace('.', ',');
             }
 
             return value;

@@ -3,5 +3,10 @@
     <Label Name="@Name" Text="@Label" TagText="@TagText" />
     <Hint Name="@Name" Text="@HintText" />
     <Error Text="@ErrorText" />
-    <input required="@IsRequired" disabled="@IsDisabled" type="number" id="@Name" aria-describedby="hint_@Name" class="input__control input__control--text @ElementSize" @bind="@Value">
+    @* type="number"
+        type=number Doesn't work the same in firefox as for google and in google it is a nightmare
+         That is that Chrome will allow a . or a , depending on the culture of the INSTALLED VERSION of the browser.
+         i.e. if you use an English browser in a Dutch culture it will not allow , but only .
+         This is why it is better to implement number logic ourselves rather then trust the type*@
+    <input required="@IsRequired" disabled="@IsDisabled" id="@Name" type="text" aria-describedby="hint_@Name" class="input__control input__control--text @ElementSize" @bind="@Value">
 </WrapperDefault>

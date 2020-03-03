@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
 using Vs.VoorzieningenEnRegelingen.Core;
+using System.Linq;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
@@ -15,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private IFormElement _formElement;
 
         private int _displayQuestionNumber => _hasRights ?
-            FormTitleHelper.GetQuestionNumber(_sequenceController.Sequence) :
+            FormTitleHelper.GetQuestionNumber(_sequenceController.Sequence, _sequenceController.LastExecutionResult) :
             -1;
         private string _displayQuestion => _hasRights ?
             FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult) :
@@ -26,6 +25,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private string _displayQuestionDescription => _hasRights ?
             FormTitleHelper.GetQuestionDescription(_sequenceController.LastExecutionResult) :
             "Met de door u ingevulde waarden is bepaald dat hiervoor geen recht verleend kan worden op zorgtoeslag.";
+
+        private string _result =>
+            _sequenceController.LastExecutionResult.Parameters.Any(p => p.Name == "zorgtoeslag") ?
+                "Uw zorgtoeslag is " +
+                ((double)
+                    _sequenceController.LastExecutionResult.Parameters.
+                        FirstOrDefault(p => p.Name == "zorgtoeslag").Value)
+                        .ToString("#.00").Replace('.', ',') + " euro per maand." :
+                null;
 
         private bool _hasRights = true;
 
@@ -49,6 +57,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 _sequenceController.ExecuteStep(GetCurrentParameters());
                 Display();
             }
+            StateHasChanged();
         }
 
         private void GetPreviousStep()
@@ -59,24 +68,24 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             _sequenceController.DecreaseStep();
             _sequenceController.ExecuteStep(GetCurrentParameters());
             Display();
+            StateHasChanged();
         }
 
         private void Display()
         {
-
             if (RechtHelper.HasRecht(_sequenceController.LastExecutionResult))
             {
                 _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
-                StateHasChanged();
-                _formElement.Value = FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult) ?? string.Empty;
-                StateHasChanged();
-                ValidateForm(true); //set the IsValid and ErrorText Property
+                if (_formElement != null)
+                {
+                    _formElement.Value = FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult) ?? string.Empty;
+                    ValidateForm(true); //set the IsValid and ErrorText Property
+                }
             }
             else
             {
                 _formElement = null;
                 _hasRights = false;
-                StateHasChanged();
             }
         }
 
@@ -88,7 +97,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 return true;
             }
             ValidateForm();
-            StateHasChanged();
             return _formElement.IsValid;
         }
 
@@ -193,10 +201,10 @@ berekening:
  - stap: 5
    situatie: aanvrager_met_toeslagpartner
    omschrijving: Wat is uw gezamenlijk toetsingsinkomen?
-   formule: toetsingsinkomen_gezamenlijk
+   formule: toetsingsinkomen
    recht: toetsingsinkomen_gezamenlijk < 37885
  - stap: 6
-   omschrijving: Maandelijkste zorgtoeslag.
+   omschrijving: Maandelijkse zorgtoeslag
    formule: zorgtoeslag
 formules:
  - woonlandfactor:

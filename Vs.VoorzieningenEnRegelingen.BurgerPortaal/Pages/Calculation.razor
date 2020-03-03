@@ -32,7 +32,9 @@
                         TagText="@_formElement.TagText"
                         HintText="@_formElement.HintText"
                         IsValid="_formElement.IsValid"
-                        ErrorText="@_formElement.ErrorText" />
+                        ErrorText="@_formElement.ErrorText"
+                        Decimals="2"
+                        DecimalsOptional=true />
 
                 break;
             case TypeInference.InferenceResult.TypeEnum.TimeSpan:
@@ -66,6 +68,12 @@
                 }
                 break;
         }
+    }
+
+    @if (_result != null)
+    {
+        //This is the end. My only friend, the end.
+        <h3>@_result</h3>
     }
     @if (!_hasRights)
     {
