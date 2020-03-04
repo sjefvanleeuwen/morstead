@@ -6,5 +6,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
     {
         [Parameter]
         public int Number { get; set; } = 0;
+        [Parameter]
+        public int GoUp { get; set; } = 0;
     }
 }
