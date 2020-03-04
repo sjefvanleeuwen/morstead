@@ -79,5 +79,5 @@
     {
         <p>De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.</p>
     }
-    <Pagination NextDisabled="@(!_hasRights)" Next="@GetNextStep" NextText="Volgende" PreviousDisabled="@(_sequenceController.CurrentStep <= 1)" Previous="GetPreviousStep" PreviousText="Vorige" ScreenreaderDescription="pagina" />
+    <Pagination PreviousDisabled="@(_showPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige" NextDisabled="@(_showNextButton)" Next="@GetNextStep" NextText="Volgende" ScreenreaderDescription="pagina" />
 </Form>

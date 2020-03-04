@@ -37,6 +37,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private bool _hasRights = true;
 
+        private bool _showPreviousButton => _sequenceController.CurrentStep <= 1;
+        private bool _showNextButton => !_hasRights || _result != null;
+
         [Inject]
         private ISequenceController _sequenceController { get; set; }
 
