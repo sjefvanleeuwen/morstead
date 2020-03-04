@@ -48,11 +48,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
         private static Dictionary<string, string> _questionTitle = new Dictionary<string, string> {
             { "woonland", "Selecteer uw woonland." },
-            { "alleenstaande", "Wat is uw woonsituatie?."},
-            { "alleenstaand_lager_dan_de_inkomensdrempel", "Inkomensdrempel"},
-            { "toeslagpartner_lager_dan_de_inkomensdrempel", "Inkomensdrempel"},
-            { "alleenstaand_lager_dan_de_vermogensdrempel", "Vermogensdrempel"},
-            { "toeslagpartner_lager_dan_de_vermogensdrempel", "Vermogensdrempel"},
+            { "alleenstaande", "Wat is uw woonsituatie?"},
+            { "hoger_dan_de_inkomensdrempel", "Inkomensdrempel"},
+            { "hoger_dan_de_vermogensdrempel", "Vermogensdrempel"},
             { "toetsingsinkomen_aanvrager", "Toetsingsinkomen" },
             { "toetsingsinkomen_gezamenlijk", "Gezamenlijk toetsingsinkomen" }
         };
@@ -61,13 +59,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             { "woonland", "Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de belastingdienst. " +
                 "Staat uw woonland niet in deze lijst, vul dan \"Anders\" in." },
             { "alleenstaande", "Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de belastingdienst."},
-            { "lager_dan_de_inkomensdrempel", "Afhankelijk van us situatie; wanneer u als alleenstaande meer verdient " +
+            { "hoger_dan_de_inkomensdrempel", "Afhankelijk van us situatie; wanneer u als alleenstaande meer verdient " +
                 "dan 29.562,00 euro per jaar, of als u samen met een toeslagpartner meer verdient dan 37.885,00 euro per jaar, " +
                 "dan overschreidt u de inkomensdrempel voor zorgtoeslag. U heeft dan geen recht op zorgtoeslag. " +
                 "Wij willen u alleen naar het daadwerkelijke bedrag vragen wanneer dit voor de berekening noodzakelijk is. " +
                 "Daarom vragen wij u eerst of u deze drempelwaarde overschreidt." +
                 "Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de belastingdienst."},
-            { "lager_dan_de_vermogensdrempel", "Afhankelijk van us situatie; wanneer u als alleenstaande meer vermogen heeft dan " +
+            { "hoger_dan_de_vermogensdrempel", "Afhankelijk van us situatie; wanneer u als alleenstaande meer vermogen heeft dan " +
                 "dan 114.776,00 euro, of als u samen met een toeslagpartner meer vermogen heeft dan 145.136,00 euro, " +
                 "dan overschreidt u de vermogensdrempel voor zorgtoeslag. U heeft dan geen recht op zorgtoeslag. " +
                 "Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de belastingdienst."},

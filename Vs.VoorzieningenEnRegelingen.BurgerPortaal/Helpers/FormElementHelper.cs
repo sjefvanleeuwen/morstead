@@ -21,7 +21,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
             formElement.Name = result.Questions.Parameters[0].Name;
             formElement.Label = GetFromLookupTable(result.Questions.Parameters, _labels);
-            formElement.Options = DefineOptions(result.Questions);
+            formElement.Options = DefineOptions(result);
             formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false);
             formElement.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false);
             return formElement;
@@ -47,28 +47,48 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return showDefaultText ? $"Unknown for {parameters[0].Name}" : string.Empty;
         }
 
-        private static Dictionary<string, string> DefineOptions(QuestionArgs questions)
+        private static Dictionary<string, string> DefineOptions(ExecutionResult result)
         {
-            switch (GetInferedType(questions))
+            switch (GetInferedType(result.Questions))
             {
                 case TypeInference.InferenceResult.TypeEnum.Boolean:
-                    return BooleanToOptions(questions);
+                    return BooleanToOptions(result);
                 case TypeInference.InferenceResult.TypeEnum.List:
-                    return ListToOptions(questions);
+                    return ListToOptions(result.Questions);
                 default:
                     return null;
             }
         }
 
-        private static Dictionary<string, string> BooleanToOptions(QuestionArgs questions)
+        private static Dictionary<string, string> BooleanToOptions(ExecutionResult result)
         {
-            var result = new Dictionary<string, string>();
-            questions.Parameters.ForEach(p => result.Add(p.Name, GetParameterDisplayName(p.Name)));
-            return result;
+            var options = new Dictionary<string, string>();
+            result.Questions.Parameters.ForEach(p => options.Add(p.Name, GetParameterDisplayName(p.Name, result.Parameters)));
+            return options;
         }
 
-        private static string GetParameterDisplayName(string name)
+        private static string GetParameterDisplayName(string name, ParametersCollection parameters)
         {
+            switch(name)
+            {
+                case "hoger_dan_de_vermogensdrempel":
+                    if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
+                        return "Ja, mijn vermogen is hoger dan €114.776,00";
+                    else return "Ja, het gezamenlijk vermogen is hoger dan €145.136,00";
+                case "lager_dan_de_vermogensdrempel":
+                    if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
+                        return "Nee, mijn vermogen is lager dan €114.776,00";
+                    else return "Nee, het gezamenlijk vermogen is lager dan €145.136,00";
+                case "hoger_dan_de_inkomensdrempel":
+                    if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
+                        return "Ja, mijn inkomen is hoger dan €29.562,00";
+                    else return "Ja, het gezamenlijk inkomen is hoger dan €37.885,00";
+                case "lager_dan_de_inkomensdrempel":
+                    if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
+                        return "Nee, mijn inkomen is lager dan €29.562,00";
+                    else return "Nee, het gezamenlijk inkomen is lager dan €37.885,00";
+            }
+
             return name.Substring(0, 1).ToUpper() + name.Substring(1).Replace('_', ' ');
         }
 
@@ -96,8 +116,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         private static Dictionary<string, string> _hintText = new Dictionary<string, string> {
             { "woonland", "Selecteer \"Anders\" wanneer het land niet in de lijst staat." },
             { "alleenstaande", "Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft."},
-            { "lager_dan_de_inkomensdrempel", ""},
-            { "lager_dan_de_vermogensdrempel", ""},
+            { "hoger_dan_de_inkomensdrempel", ""},
+            { "hoger_dan_de_vermogensdrempel", ""},
             { "toetsingsinkomen_aanvrager", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen." },
             { "toetsingsinkomen_gezamenlijk", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen." }
         };
@@ -155,7 +175,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
         private static string GetDefaultListValue(ExecutionResult result)
         {
-            var options = DefineOptions(result.Questions);
+            var options = DefineOptions(result);
             if (options.Keys.Contains(string.Empty))
             {
                 return string.Empty;

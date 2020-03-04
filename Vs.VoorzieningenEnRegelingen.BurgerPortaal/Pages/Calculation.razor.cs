@@ -178,22 +178,22 @@ berekening:
    formule: standaardpremie
  - stap: 3
    situatie: alleenstaande
-   omschrijving: Is uw vermogen hoger dan de drempelwaarde van 114.776,00 euro?
+   omschrijving: Is uw vermogen hoger dan de drempelwaarde?
    formule: vermogensdrempel
    recht: vermogensdrempel = 1
  - stap: 3
    situatie: aanvrager_met_toeslagpartner
-   omschrijving: Is uw gezamenlijk vermogen hoger dan de drempelwaarde van 145.136,00 euro?
+   omschrijving: Is uw gezamenlijk vermogen hoger dan de drempelwaarde?
    formule: vermogensdrempel
    recht: vermogensdrempel = 1
  - stap: 4
    situatie: alleenstaande
-   omschrijving: Is uw toetsingsinkomen hoger dan de inkomensdrempel van 29.562,00 euro per jaar?
+   omschrijving: Is uw toetsingsinkomen hoger dan de inkomensdrempel?
    formule: inkomensdrempel
    recht: inkomensdrempel = 1
  - stap: 4
    situatie: aanvrager_met_toeslagpartner
-   omschrijving: Is uw gezamenlijk toetsingsinkomen hoger dan de inkomensdrempel van 37.885,00 euro per jaar?
+   omschrijving: Is uw gezamenlijk toetsingsinkomen hoger dan de inkomensdrempel?
    formule: inkomensdrempel
    recht: inkomensdrempel = 1
  - stap: 5
@@ -218,15 +218,15 @@ formules:
    - situatie: aanvrager_met_toeslagpartner
      formule: 3218
  - vermogensdrempel:
+   - situatie: hoger_dan_de_vermogensdrempel
+     formule: 0   
    - situatie: lager_dan_de_vermogensdrempel
      formule: 1
-   - situatie: hoger_dan_de_vermogensdrempel
-     formule: 0 
  - inkomensdrempel:
-   - situatie: lager_dan_de_inkomensdrempel
-     formule: 1
    - situatie: hoger_dan_de_inkomensdrempel
      formule: 0
+   - situatie: lager_dan_de_inkomensdrempel
+     formule: 1
  - toetsingsinkomen:
    - situatie: alleenstaande
      formule: toetsingsinkomen_aanvrager
