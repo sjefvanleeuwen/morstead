@@ -24,7 +24,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             formElement.Label = GetFromLookupTable(result.Questions.Parameters, _labels);
             formElement.Options = DefineOptions(result);
             formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false);
-            formElement.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false);
+            formElement.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             return formElement;
         }
 
@@ -33,19 +33,41 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return questions.Parameters.FirstOrDefault().Type;
         }
 
-        private static string GetFromLookupTable(ParametersCollection parameters, Dictionary<string, string> dictionary, bool showDefaultText = false)
+        private static string GetFromLookupTable(ParametersCollection parameters, Dictionary<string, string> dictionary, bool showDefaultText = false, bool? alleenstaande = null)
         {
             if (dictionary == null)
             {
                 throw new ArgumentNullException(nameof(dictionary));
             }
-            var key = parameters.FirstOrDefault(p => dictionary.Keys.Contains(p.Name))?.Name ?? string.Empty;
+            var key = parameters.FirstOrDefault(p => dictionary.Keys.Contains(ModifyName(p.Name, alleenstaande)))?.Name ?? string.Empty;
+            if (key != null)
+            {
+                key = ModifyName(key, alleenstaande);
+            }
             if (dictionary.Keys.Contains(key))
             {
                 return dictionary[key];
             }
 
             return showDefaultText ? $"Unknown for {parameters[0].Name}" : string.Empty;
+        }
+
+        private static string ModifyName(string key, bool? alleenstaande)
+        {
+            if (alleenstaande == null)
+            {
+                return key;
+            }
+            if (key == "hoger_dan_de_vermogensdrempel")
+            {
+                return (alleenstaande ?? false) ? "alleenstaande_hoger_dan_de_vermogensdrempel" : "toeslagpartner_hoger_dan_de_vermogensdrempel";
+            }
+            if (key == "hoger_dan_de_inkomensdrempel")
+            {
+                return (alleenstaande ?? false) ? "alleenstaande_hoger_dan_de_inkomensdrempel" : "toeslagpartner_hoger_dan_de_inkomensdrempel";
+            }
+
+            return key;
         }
 
         private static Dictionary<string, string> DefineOptions(ExecutionResult result)
@@ -70,7 +92,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
         private static string GetParameterDisplayName(string name, ParametersCollection parameters)
         {
-            switch(name)
+            switch (name)
             {
                 case "hoger_dan_de_vermogensdrempel":
                     if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
@@ -117,8 +139,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         private static Dictionary<string, string> _hintText = new Dictionary<string, string> {
             { "woonland", "Selecteer \"Anders\" wanneer het land niet in de lijst staat." },
             { "alleenstaande", "Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft."},
-            { "hoger_dan_de_inkomensdrempel", ""},
-            { "hoger_dan_de_vermogensdrempel", ""},
+            { "alleenstaande_hoger_dan_de_vermogensdrempel", "De huidige vermogensdrempel voor alleenstaanden is €114.776,00."},
+            { "toeslagpartner_hoger_dan_de_vermogensdrempel", "De huidige vermogensdrempel voor aanvragers met toeslagpartners is €145.136,00"},
+            { "alleenstaande_hoger_dan_de_inkomensdrempel", "De huidige inkomensdrempel voor alleenstaanden is €29.562,00 per jaar."},
+            { "toeslagpartner_hoger_dan_de_inkomensdrempel", "De huidige inkomensdrempel voor aanvragers met toeslagpartners is €37.885,00 per jaar"},
             { "toetsingsinkomen_aanvrager", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen." },
             { "toetsingsinkomen_gezamenlijk", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen." }
         };
