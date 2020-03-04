@@ -11,12 +11,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
     {
         public static IFormElement ParseExecutionResult(ExecutionResult result)
         {
+            var formElement = new FormElement() as IFormElement;
+
             if (result.Questions == null)
             {
-                return null;
+                return formElement;
             }
 
-            var formElement = new FormElement() as IFormElement;
             formElement.InferedType = GetInferedType(result.Questions);
 
             formElement.Name = result.Questions.Parameters[0].Name;

@@ -79,7 +79,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             if (RechtHelper.HasRecht(_sequenceController.LastExecutionResult))
             {
                 _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
-                if (_formElement != null)
+                if (_formElement.ShowElement)
                 {
                     _formElement.Value = FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult) ?? string.Empty;
                     ValidateForm(true); //set the IsValid and ErrorText Property
@@ -87,7 +87,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             }
             else
             {
-                _formElement = null;
+                _formElement = new FormElement();
                 _hasRights = false;
             }
         }

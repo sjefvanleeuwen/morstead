@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -63,6 +62,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         public bool IsValid { get; set; } = true;
 
         public TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
+
+        public bool ShowElement => !string.IsNullOrWhiteSpace(Name);
 
         protected string ElementSize => Size.GetDescription();
 

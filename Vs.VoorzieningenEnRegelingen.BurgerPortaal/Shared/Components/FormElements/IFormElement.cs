@@ -25,5 +25,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
 
         bool Validate(bool unobtrusive);
+
+        bool ShowElement { get; }
     }
 }
