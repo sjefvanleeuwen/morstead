@@ -2,7 +2,7 @@
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
 {
-    public partial class FormWrapper
+    public partial class SpacingWrapper
     {
         [Parameter]
         public RenderFragment ChildContent { get; set; }

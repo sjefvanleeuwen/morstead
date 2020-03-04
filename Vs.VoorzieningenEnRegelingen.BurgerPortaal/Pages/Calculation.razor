@@ -2,23 +2,42 @@
 @using Vs.VoorzieningenEnRegelingen.Core
 @*<Header Text="Virtual Society" Title="Virtual Society Calculation" LinkScreenReaderDescription="naar de homepage" />*@
 
-<TitleBar Title="Bereken uw zorgtoeslag" />
+@*<TitleBar Title="Bereken uw zorgtoeslag" />
 
-<Collapsable Name="Timeline">
-    <Title>
+    <Collapsable Name="Timeline">
+            <Title>
+                @if (_displayQuestionNumber > 0)
+                {
+                    <Badge Number=@_displayQuestionNumber />
+                }
+                @((MarkupString)_displayQuestion)
+            </Title>
+            <CollapsableContent>
+                <h2><strong>@((MarkupString)_displayQuestionTitle)</strong></h2>
+                <p>@((MarkupString)_displayQuestionDescription)</p>
+            </CollapsableContent>
+        </Collapsable>*@
+
+<SpacingWrapper>
+    <h1><strong>Zorgtoeslag</strong></h1>
+    <h2>Proefberekening</h2>
+
+    <h3>
         @if (_displayQuestionNumber > 0)
         {
             <Badge Number=@_displayQuestionNumber />
         }
-        @((MarkupString)_displayQuestion)
-    </Title>
-    <CollapsableContent>
-        <h2><strong>@((MarkupString)_displayQuestionTitle)</strong></h2>
-        <p>@((MarkupString)_displayQuestionDescription)</p>
-    </CollapsableContent>
-</Collapsable>
+        <strong>
+            @((MarkupString)_displayQuestion)
+        </strong>
+    </h3>
 
-<FormWrapper>
+    <aside class="hint">
+        <h4 class="hint__title">@((MarkupString)_displayQuestionTitle)</h4>
+        @((MarkupString)_displayQuestionDescription)
+    </aside>
+
+
     <EditForm Model="_formElement">
         @if (_hasRights && _formElement.ShowElement)
         {
@@ -83,4 +102,4 @@
                     NextDisabled="@(_showNextButton)" Next="@GetNextStep" NextText="Volgende"
                     ScreenreaderDescription="pagina" />
     </EditForm>
-</FormWrapper>
+</SpacingWrapper>
