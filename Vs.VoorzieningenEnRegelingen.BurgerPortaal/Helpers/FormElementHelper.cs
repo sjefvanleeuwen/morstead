@@ -47,12 +47,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return showDefaultText ? $"Unknown for {parameters[0].Name}" : string.Empty;
         }
 
-        public static string DefineFormElementType(ExecutionResult result)
-        {
-            //if (result.Questions.ToList().Last())
-            return string.Empty;
-        }
-
         private static Dictionary<string, string> DefineOptions(QuestionArgs questions)
         {
             switch (GetInferedType(questions))
@@ -101,7 +95,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
         private static Dictionary<string, string> _hintText = new Dictionary<string, string> {
             { "woonland", "Selecteer \"Anders\" wanneer het land niet in de lijst staat." },
-            { "alleenstaande", "Geef aan of u alleenstaande bent of dat u samen woont met een toeslagpartner."},
+            { "alleenstaande", "Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft."},
             { "lager_dan_de_inkomensdrempel", ""},
             { "lager_dan_de_vermogensdrempel", ""},
             { "toetsingsinkomen_aanvrager", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidngsteken tussen euro's en centen." },
