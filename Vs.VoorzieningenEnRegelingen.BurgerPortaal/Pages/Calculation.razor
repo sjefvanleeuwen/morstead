@@ -19,24 +19,12 @@
         </Collapsable>*@
 
 <SpacingWrapper>
-    <h1><strong>Zorgtoeslag</strong></h1>
-    <h2>Proefberekening</h2>
+    <CalculationHeader Title="Zorgtoeslag" 
+                       SubTitle="Proefberekening" 
+                       Number=@_displayQuestionNumber
+                       Subject="@_displayQuestion" />
 
-    <h3>
-        @if (_displayQuestionNumber > 0)
-        {
-            <Badge Number=@_displayQuestionNumber />
-        }
-        <strong>
-            @((MarkupString)_displayQuestion)
-        </strong>
-    </h3>
-
-    <aside class="hint">
-        <h4 class="hint__title">@((MarkupString)_displayQuestionTitle)</h4>
-        @((MarkupString)_displayQuestionDescription)
-    </aside>
-
+    <Hint Title="@_displayQuestionTitle" Content="@_displayQuestionDescription" />
 
     <EditForm Model="_formElement">
         @if (_hasRights && _formElement.ShowElement)

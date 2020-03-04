@@ -2,7 +2,7 @@
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Dressing
 {
-    public partial class Hint
+    public partial class FormElementHint
     {
         [Parameter]
         public string Name { get; set; }

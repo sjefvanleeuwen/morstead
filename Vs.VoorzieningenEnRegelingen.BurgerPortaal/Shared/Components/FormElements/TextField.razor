@@ -1,7 +1,7 @@
 ﻿@inherits FormElement
 <WrapperDefault IsValid="@IsValid">
     <Label Name="@Name" Text="@Label" TagText="@TagText" />
-    <Hint Name="@Name" Text="@HintText" />
+    <FormElementHint Name="@Name" Text="@HintText" />
     <Error Text="@ErrorText" />
     <input required="@IsRequired" disabled="@IsDisabled" type="text" id="@Name" aria-describedby="hint_@Name" class="input__control input__control--text @ElementSize" @bind="@Value">
 </WrapperDefault>

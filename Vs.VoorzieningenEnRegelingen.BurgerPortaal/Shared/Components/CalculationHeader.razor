@@ -1,0 +1,12 @@
+﻿<h1><strong>@((MarkupString)Title)</strong></h1>
+<h2>@((MarkupString)SubTitle)</h2>
+
+<h3>
+    @if (Number > 0)
+    {
+        <Badge Number=@Number />
+    }
+    <strong>
+        @((MarkupString)Subject)
+    </strong>
+</h3>

@@ -4,7 +4,7 @@
 }
 <WrapperFieldset IsValid="@IsValid">
     <Legend Text="@Label" TagText="@TagText" />
-    <Hint Name="@Name" Text="@HintText" />
+    <FormElementHint Name="@Name" Text="@HintText" />
     <Error Text="@ErrorText" />
     <div class="@(_isHorizontalRadio ? "input__group-horizontal" : string.Empty)">
         @foreach (var key in _keys)

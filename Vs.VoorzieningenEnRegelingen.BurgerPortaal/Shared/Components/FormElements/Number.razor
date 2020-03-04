@@ -1,7 +1,7 @@
 ﻿@inherits FormElement
 <WrapperDefault IsValid="@IsValid">
     <Label Name="@Name" Text="@Label" TagText="@TagText" />
-    <Hint Name="@Name" Text="@HintText" />
+    <FormElementHint Name="@Name" Text="@HintText" />
     <Error Text="@ErrorText" />
     @* type="number"
         type=number Doesn't work the same in firefox as for google and in google it is a nightmare
