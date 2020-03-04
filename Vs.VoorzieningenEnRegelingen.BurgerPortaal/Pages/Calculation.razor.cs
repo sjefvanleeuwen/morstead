@@ -28,11 +28,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private string _result =>
             _sequenceController.LastExecutionResult.Parameters.Any(p => p.Name == "zorgtoeslag") ?
-                "Uw zorgtoeslag is " +
+                "Uw zorgtoeslag is <strong>€" +
                 ((double)
                     _sequenceController.LastExecutionResult.Parameters.
                         FirstOrDefault(p => p.Name == "zorgtoeslag").Value)
-                        .ToString("#.00").Replace('.', ',') + " euro per maand." :
+                        .ToString("#.00").Replace('.', ',') + "</strong> per maand." :
                 null;
 
         private bool _hasRights = true;

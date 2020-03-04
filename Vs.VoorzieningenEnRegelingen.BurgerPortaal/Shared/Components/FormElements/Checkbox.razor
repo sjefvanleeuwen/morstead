@@ -11,7 +11,7 @@
         checkBoxNum++;
         <div class="input__group input__group--checkbox">
             <input name="@(Name)[]" type="checkbox" id="@Name-checkbox_@checkBoxNum" class="input__control input__control--checkbox @ElementSize" checked="@(Values.Contains(key))">
-            <label class="input__label input__label--checkbox" for="@Name-checkbox_@checkBoxNum">@(Options[key])</label>
+            <label class="input__label input__label--checkbox" for="@Name-checkbox_@checkBoxNum">@((MarkupString)Options[key])</label>
         </div>
     }
 </WrapperFieldset>

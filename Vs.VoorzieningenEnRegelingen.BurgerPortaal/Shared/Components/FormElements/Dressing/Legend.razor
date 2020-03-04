@@ -1,7 +1,7 @@
 ﻿<legend class="input__legend">
-    @Text
+    @((MarkupString)Text)
     @if (_showTag)
     {
-        <span class="label label--optional">@TagText</span>
+        <span class="label label--optional">@((MarkupString)TagText)</span>
     }
 </legend>

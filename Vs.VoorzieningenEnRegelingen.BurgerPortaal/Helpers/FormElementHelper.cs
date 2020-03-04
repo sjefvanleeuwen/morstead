@@ -74,20 +74,20 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             {
                 case "hoger_dan_de_vermogensdrempel":
                     if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
-                        return "Ja, mijn vermogen is hoger dan €114.776,00";
-                    else return "Ja, het gezamenlijk vermogen is hoger dan €145.136,00";
+                        return "Ja, mijn vermogen is <strong>hoger</strong> dan €114.776,00";
+                    else return "Ja, het gezamenlijk vermogen is <strong>hoger</strong> dan €145.136,00";
                 case "lager_dan_de_vermogensdrempel":
                     if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
-                        return "Nee, mijn vermogen is lager dan €114.776,00";
-                    else return "Nee, het gezamenlijk vermogen is lager dan €145.136,00";
+                        return "Nee, mijn vermogen is <strong>lager</strong> dan €114.776,00";
+                    else return "Nee, het gezamenlijk vermogen is <strong>lager</strong> dan €145.136,00";
                 case "hoger_dan_de_inkomensdrempel":
                     if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
-                        return "Ja, mijn inkomen is hoger dan €29.562,00";
-                    else return "Ja, het gezamenlijk inkomen is hoger dan €37.885,00";
+                        return "Ja, mijn inkomen is <strong>hoger</strong> dan €29.562,00";
+                    else return "Ja, het gezamenlijk inkomen is <strong>hoger</strong> dan €37.885,00";
                 case "lager_dan_de_inkomensdrempel":
                     if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
-                        return "Nee, mijn inkomen is lager dan €29.562,00";
-                    else return "Nee, het gezamenlijk inkomen is lager dan €37.885,00";
+                        return "Nee, mijn inkomen is <strong>lager</strong> dan €29.562,00";
+                    else return "Nee, het gezamenlijk inkomen is <strong>lager</strong> dan €37.885,00";
             }
 
             return name.Substring(0, 1).ToUpper() + name.Substring(1).Replace('_', ' ');

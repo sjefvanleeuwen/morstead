@@ -10,12 +10,11 @@
         {
             <Badge Number=@_displayQuestionNumber />
         }
-        @_displayQuestion
+        @((MarkupString)_displayQuestion)
     </Title>
     <CollapsableContent>
-        <h2><strong>@_displayQuestionTitle</strong></h2>
-        <p>@_displayQuestionDescription</p>
-        @*<Timeline IndicateEnds="true" Items="_timelineItems" />*@
+        <h2><strong>@((MarkupString)_displayQuestionTitle)</strong></h2>
+        <p>@((MarkupString)_displayQuestionDescription)</p>
     </CollapsableContent>
 </Collapsable>
 
@@ -74,7 +73,7 @@
         @if (_result != null)
         {
             //This is the end. My only friend, the end.
-            <h3>@_result</h3>
+            <h3>@((MarkupString)_result)</h3>
         }
         @if (!_hasRights)
         {
