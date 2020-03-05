@@ -32,3 +32,20 @@
         .header-logo a:after {
             background-image: none;
         }
+
+
+@media (max-width: 543px) {
+    ul.pagination.pagination--dots
+    {
+        width: 117px;
+        float:right;
+    }
+    li.pagination__item.pagination__item--previous,
+    li.pagination__item.pagination__item--next {
+        min-width: 58.5px;
+    }
+}
+
+.clearboth {
+    clear: both;
+}
