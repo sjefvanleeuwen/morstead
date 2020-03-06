@@ -1,8 +1,8 @@
 ﻿<header class="header" role="banner">
     <div class="header-logo">
         <a href="@Link" title="@Title">
-            @Text
-            <span class="screenreader-only">@LinkScreenReaderDescription</span>
+            @((MarkupString)Text)
+            <span class="screenreader-only">@((MarkupString)LinkScreenReaderDescription)</span>
         </a>
     </div>
 </header>

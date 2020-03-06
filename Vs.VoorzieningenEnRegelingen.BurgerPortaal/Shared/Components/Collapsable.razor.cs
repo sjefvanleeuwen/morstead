@@ -20,7 +20,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
-        protected async override Task OnAfterRenderAsync(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             await InitCollapsable();
         }

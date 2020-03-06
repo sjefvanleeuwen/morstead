@@ -1,0 +1,22 @@
+﻿@page "/FormContentEditor"
+@attribute [Authorize]
+
+<!-- Main content -->
+<div id="splitcontainer" class="clear-fix row no-gutters" style="background-color: black;">
+    <div id="left-half" class="left-half_tree">
+        <div class="tree">
+            <ul>
+                <li>
+                    <TreeNode Node="@BaseNode" />
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="right-half" class="right-half_tree">
+        <article>
+            <h1>Right Half</h1>
+            <p>If your knees aren't green by the end of the day, you ought to seriously re-examine your life.</p>
+        </article>
+    </div>
+</div>
+<!-- /.content -->
