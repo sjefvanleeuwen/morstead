@@ -24,7 +24,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             "U heeft geen recht op zorgtoeslag.";
         private string _displayQuestionDescription => _hasRights ?
             FormTitleHelper.GetQuestionDescription(_sequenceController.LastExecutionResult) :
-            "Met de door u ingevulde waarden is bepaald dat hiervoor geen recht verleend kan worden op zorgtoeslag.";
+            "Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. " +
+            "Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst.";
 
         private string _result =>
             _sequenceController.LastExecutionResult.Parameters.Any(p => p.Name == "zorgtoeslag") ?
