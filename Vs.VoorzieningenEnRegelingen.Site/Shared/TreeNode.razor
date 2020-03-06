@@ -1,0 +1,14 @@
+﻿<a href="#">
+    @((MarkupString)_nodeText)
+</a>
+@if (Node.SubNodes.Any())
+{
+    <ul>
+        @foreach (var node in Node.SubNodes)
+        {
+            <li>
+                <TreeNode Node="node" />
+            </li>
+        }
+    </ul>
+}
