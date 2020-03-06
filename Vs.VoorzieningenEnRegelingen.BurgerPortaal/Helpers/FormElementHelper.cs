@@ -21,9 +21,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             formElement.InferedType = GetInferedType(result.Questions);
 
             formElement.Name = result.Questions.Parameters[0].Name;
-            formElement.Label = GetFromLookupTable(result.Questions.Parameters, _labels);
+            formElement.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             formElement.Options = DefineOptions(result);
-            formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false);
+            formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             formElement.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             return formElement;
         }
