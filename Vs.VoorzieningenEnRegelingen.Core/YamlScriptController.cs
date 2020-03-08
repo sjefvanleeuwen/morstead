@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Flee.PublicTypes;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Vs.Core.Collections.NodeTree;
+using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
@@ -12,6 +15,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private const string Ok = "OK";
         private Model.Model _model;
         private ParametersCollection _unresolved;
+        private ExpressionContext localContext;
 
         public delegate void QuestionDelegate(FormulaExpressionContext sender, QuestionArgs args);
 
@@ -160,6 +164,50 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 executionResult.Stacktrace.Last().StopExecution();
             }
+        }
+
+        public ParametersCollection GetFunctionTree(YamlScriptController controller, string expression = null)
+        {
+            localContext = new ExpressionContext(controller);
+            localContext.Options.ParseCulture = CultureInfo.InvariantCulture;
+            // Allow the expression to use all static public methods of System.Math
+            localContext.Imports.AddType(typeof(Math));
+            // Allow the expression to use all static overload public methods our CustomFunctions class
+            localContext.Imports.AddType(typeof(CustomFunctions));
+            var variables = new System.Collections.Generic.Dictionary<string, Type>();
+            var parameters = new ParametersCollection();
+            localContext.Variables.ResolveVariableType += (object sender, ResolveVariableTypeEventArgs e) =>
+            {
+                parameters.Add(new Parameter(e.VariableName, 0, null, ref _model));
+                variables.Add(e.VariableName, typeof(object));
+                e.VariableType = typeof(object);
+            };
+
+            if (expression != null)
+            {
+                try
+                {
+                    IGenericExpression<object> eDynamic = localContext.CompileGeneric<object>(expression);
+                }
+                catch
+                {
+
+                }
+                return parameters;
+            }
+
+            foreach (var formula in _model.Formulas)
+            {
+                try
+                {
+                    IGenericExpression<object> eDynamic = localContext.CompileGeneric<object>(formula.Functions[0].Expression);
+                }
+                catch
+                {
+
+                }
+            }
+            return parameters;
         }
 
         /// <summary>
