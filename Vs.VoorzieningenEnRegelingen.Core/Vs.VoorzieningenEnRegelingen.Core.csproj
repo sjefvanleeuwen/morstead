@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\core\Vs.Core.Diagnostics\Vs.Core.Diagnostics.csproj" />
+    <ProjectReference Include="..\core\Vs.Core\Vs.Core.csproj" />
   </ItemGroup>
 
 </Project>
