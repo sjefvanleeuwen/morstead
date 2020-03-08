@@ -249,5 +249,15 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.True(variables.ContainsKey("b"));
 
         }
+
+        [Fact]
+        void Formula_Can_Discover_Parameters_From_Yaml()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag.Body);
+            Assert.False(result.IsError);
+            var parameters = controller.GetFunctionTree(controller);
+            Assert.True(parameters.Count == 9);
+        }
     }
 }
