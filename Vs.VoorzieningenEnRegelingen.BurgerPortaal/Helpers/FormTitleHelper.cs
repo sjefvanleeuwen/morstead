@@ -35,7 +35,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         {
             if (result.Questions == null)
             {
-                return "Uw zorgtoeslag is berekend. Hieronder staat het bedrag in euro's waar u volgens de berekening maandelijks recht op hebt.";
+                return "Uw zorgtoeslag is berekend. Hieronder staat het bedrag in euro's waar u volgens de berekening maandelijks recht op hebt.<br />" +
+                    "Let op: dit is een proefberekening, nadat u uw zorgtoeslag hebt aangevraagd bij de Belastingdienst wordt de definitieve toeslag bekend.";
             }
             return GetFromLookupTable(result.Questions.Parameters, _questionDescription, false, (bool?)result.Parameters.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
         }
@@ -98,7 +99,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             { "toeslagpartner_hoger_dan_de_inkomensdrempel",
                 "Wanneer u samen met een toeslagpartner meer inkomen heeft dan €37.885,00 per jaar " +
                 "overschrijdt u de inkomensdrempel. U heeft dan geen recht op zorgtoeslag.<br />" +
-                "Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de Belastingdienst."},
+                "Indien u niet zeker weet wat uw gezamenlijk inkomen is, kijk dan op de website van de Belastingdienst."},
             { "alleenstaande_hoger_dan_de_vermogensdrempel",
                 "Wanneer u als alleenstaande meer vermogen heeft dan €114.776,00, overschrijdt u de vermogensdrempel. " +
                 "U heeft dan geen recht op zorgtoeslag.<br />" +
@@ -107,9 +108,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
                 "Wanneer u samen met een toeslagpartner meer vermogen heeft dan €145.136,00 " +
                 "overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag.<br />" +
                 "Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst."},
-            { "toetsingsinkomen_aanvrager", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidingsteken tussen euro's en centen." },
-            { "toetsingsinkomen_gezamenlijk", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidingsteken tussen euro's en centen. " +
-                "Vul de som van uw toetsingsinkomen en het toetsingsinkomen van uw toeslagpartner in." }
+            { "toetsingsinkomen_aanvrager", "Vul uw toetsingsinkomen in. Gebruik een komma als scheidingsteken tussen euro's en centen.<br />" +
+                "Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de Belastingdienst." },
+            { "toetsingsinkomen_gezamenlijk", "Vul de som van uw toetsingsinkomen en het toetsingsinkomen van uw toeslagpartner in. " +
+                "Gebruik een komma als scheidingsteken tussen euro's en centen.<br />" +
+                "Indien u niet zeker weet wat uw gezamenlijk inkomen is, kijk dan op de website van de Belastingdienst." }
         };
     }
 }

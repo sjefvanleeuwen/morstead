@@ -108,13 +108,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
             }
             if (chars.Where(c => c == ',').Count() > 1)
             {
-                errorText = "Er zijn meer dan 1 komma's ingetyped. Een getal bestaat uit nummers en maximaal één komma met daarachter 2 cijfers.";
+                errorText = "Er zijn ongeldige tekens ingevoerd. Een getal bestaat uit nummers en maximaal één komma met daarachter twee cijfers.";
                 return false;
             }
             var parts = Value.Split(',');
             if (parts.Count() == 2 && parts[1].Length != 2)
             {
-                errorText = "Type 2 cijfers achter de komma.";
+                errorText = "Typ twee cijfers achter de komma.";
                 return false;
             }
 

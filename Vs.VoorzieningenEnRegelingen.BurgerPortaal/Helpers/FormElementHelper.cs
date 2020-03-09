@@ -143,8 +143,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             { "toeslagpartner_hoger_dan_de_vermogensdrempel", "De huidige vermogensdrempel voor aanvragers met toeslagpartners is €145.136,00"},
             { "alleenstaande_hoger_dan_de_inkomensdrempel", "De huidige inkomensdrempel voor alleenstaanden is €29.562,00 per jaar."},
             { "toeslagpartner_hoger_dan_de_inkomensdrempel", "De huidige inkomensdrempel voor aanvragers met toeslagpartners is €37.885,00 per jaar"},
-            { "toetsingsinkomen_aanvrager", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidingsteken tussen euro's en centen." },
-            { "toetsingsinkomen_gezamenlijk", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidingsteken tussen euro's en centen." }
+            { "toetsingsinkomen_aanvrager", "Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen." },
+            { "toetsingsinkomen_gezamenlijk", "Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen." }
         };
 
         internal static string GetValue(ISequence sequence, ExecutionResult result)
