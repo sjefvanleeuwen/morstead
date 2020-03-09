@@ -89,15 +89,14 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         };
 
         private static Dictionary<string, string> _questionDescription = new Dictionary<string, string> {
-            { "woonland", "Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de Belastingdienst. " +
-                "Staat uw woonland niet in deze lijst, vul dan \"Anders\" in." },
+            { "woonland", "Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de Belastingdienst. "},
             { "alleenstaande", "Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de Belastingdienst."},
             { "alleenstaande_hoger_dan_de_inkomensdrempel",
                 "Wanneer u als alleenstaande meer inkomen heeft dan €29.562,00 per jaar, overschrijdt u de inkomensdrempel. " +
                 "U heeft dan geen recht op zorgtoeslag.<br />" +
                 "Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de Belastingdienst."},
             { "toeslagpartner_hoger_dan_de_inkomensdrempel",
-                "Als u samen met een toeslagpartner meer inkomen heeft dan €37.885,00 per jaar " +
+                "Wanneer u samen met een toeslagpartner meer inkomen heeft dan €37.885,00 per jaar " +
                 "overschrijdt u de inkomensdrempel. U heeft dan geen recht op zorgtoeslag.<br />" +
                 "Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de Belastingdienst."},
             { "alleenstaande_hoger_dan_de_vermogensdrempel",
@@ -105,7 +104,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
                 "U heeft dan geen recht op zorgtoeslag.<br />" +
                 "Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst."},
             { "toeslagpartner_hoger_dan_de_vermogensdrempel",
-                "Als u samen met een toeslagpartner meer vermogen heeft dan €145.136,00 " +
+                "Wanneer u samen met een toeslagpartner meer vermogen heeft dan €145.136,00 " +
                 "overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag.<br />" +
                 "Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst."},
             { "toetsingsinkomen_aanvrager", "Vul een getal in. Gebruik geen punt (\".\"), en slechts een komma (\",\") als scheidingsteken tussen euro's en centen." },

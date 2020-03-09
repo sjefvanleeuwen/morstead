@@ -137,7 +137,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         };
 
         private static Dictionary<string, string> _hintText = new Dictionary<string, string> {
-            { "woonland", "Selecteer \"Anders\" wanneer het land niet in de lijst staat." },
+            { "woonland", "Selecteer \"Anders\" wanneer het uw woonland niet in de lijst staat." },
             { "alleenstaande", "Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft."},
             { "alleenstaande_hoger_dan_de_vermogensdrempel", "De huidige vermogensdrempel voor alleenstaanden is €114.776,00."},
             { "toeslagpartner_hoger_dan_de_vermogensdrempel", "De huidige vermogensdrempel voor aanvragers met toeslagpartners is €145.136,00"},
