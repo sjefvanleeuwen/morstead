@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\cms\Vs.Cms.Core\Vs.Cms.Core.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.BurgerPortaal\Vs.VoorzieningenEnRegelingen.BurgerPortaal.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.Tests\Vs.VoorzieningenEnRegelingen.Core.Tests.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core\Vs.VoorzieningenEnRegelingen.Core.csproj" />

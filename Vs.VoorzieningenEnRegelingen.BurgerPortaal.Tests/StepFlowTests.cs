@@ -209,7 +209,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2b(sequenceController);
             //but we should have all the paramaters that were submitted, but now one is changed and an other has a different value
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3b(sequenceController);
-
         }
 
         /// <summary>

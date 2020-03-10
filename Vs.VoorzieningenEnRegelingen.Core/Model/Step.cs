@@ -1,6 +1,6 @@
 ﻿namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
-    public class Step
+    public class Step : IStep
     {
         public Step(int key, string name, string description, string formula, string situation, string @break)
         {

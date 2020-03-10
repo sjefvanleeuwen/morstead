@@ -5,7 +5,7 @@ using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
-    public class ParametersCollection : List<IParameter>
+    public class ParametersCollection : List<IParameter>, IParametersCollection
     {
         public IParameter GetParameter(string name)
         {
@@ -18,7 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 throw new ArgumentNullException(nameof(parameter));
             }
-            
+
             var correspondingParameter = FindCorrespondingParameter(parameter.Name);
             if (correspondingParameter != null)
             {

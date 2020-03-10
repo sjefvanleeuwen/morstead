@@ -5,13 +5,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 {
     public class FlowExecutionItem
     {
-        public FlowExecutionItem(Step step, Exception exception = null)
+        public FlowExecutionItem(IStep step, Exception exception = null)
         {
             Step = step ?? throw new ArgumentNullException(nameof(step));
             Exception = exception;
         }
 
-        public Step Step { get; }
+        public IStep Step { get; }
         public bool IsStopExecution { get; private set; }
         public Exception Exception { get; }
 

@@ -21,10 +21,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             formElement.InferedType = GetInferedType(result.Questions);
 
             formElement.Name = result.Questions.Parameters[0].Name;
-            formElement.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            formElement.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters?.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             formElement.Options = DefineOptions(result);
-            formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-            formElement.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters?.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            formElement.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters?.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             return formElement;
         }
 
@@ -33,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return questions.Parameters.FirstOrDefault().Type;
         }
 
-        private static string GetFromLookupTable(ParametersCollection parameters, Dictionary<string, string> dictionary, bool showDefaultText = false, bool? alleenstaande = null)
+        private static string GetFromLookupTable(IParametersCollection parameters, Dictionary<string, string> dictionary, bool showDefaultText = false, bool? alleenstaande = null)
         {
             if (dictionary == null)
             {
@@ -86,7 +86,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         private static Dictionary<string, string> BooleanToOptions(ExecutionResult result)
         {
             var options = new Dictionary<string, string>();
-            result.Questions.Parameters.ForEach(p => options.Add(p.Name, GetParameterDisplayName(p.Name, result.Parameters)));
+            foreach (var p in result.Questions.Parameters) {
+                options.Add(p.Name, GetParameterDisplayName(p.Name, result.Parameters));
+            }
             return options;
         }
 
