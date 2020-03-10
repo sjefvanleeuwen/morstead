@@ -23,10 +23,10 @@
 
     private string previousDisabled = "disabled";
     private YamlScriptController controller = new YamlScriptController();
-    private ParseResult result = null;
-    private ExecutionResult executionResult = null;
-    private ParametersCollection parameters = null;
-    private QuestionArgs questionArgs = null;
+    private IParseResult result = null;
+    private IExecutionResult executionResult = null;
+    private IParametersCollection parameters = null;
+    private IQuestionArgs questionArgs = null;
     CancellationToken token = new CancellationToken();
     bool show = false;
     private readonly System.Threading.EventWaitHandle waitHandle = new System.Threading.AutoResetEvent(false);

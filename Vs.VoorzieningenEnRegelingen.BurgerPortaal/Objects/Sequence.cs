@@ -9,7 +9,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
     public class Sequence : ISequence
     {
         public string Yaml { get; set; }
-        public ParametersCollection Parameters { get; private set; }
+        public IParametersCollection Parameters { get; private set; }
         public IEnumerable<IStep> Steps { get; private set; }
 
         public Sequence()
@@ -18,7 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             Steps = new List<IStep>();
         }
 
-        public ParametersCollection GetParametersToSend(int step)
+        public IParametersCollection GetParametersToSend(int step)
         {
             var result = new ParametersCollection();
             //for each item up till the current step get the parameter that corresponds with the items parameterName and key
@@ -27,18 +27,18 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             var steps = Steps.ToList().GetRange(0, Math.Max(0, Math.Min(Parameters.Count(), step - 1)));
             steps.ForEach(s =>
             {
-                Parameters.ForEach(p =>
+                foreach(var p in Parameters)
                 {
                     if (s.IsMatch(p))
                     {
                         result.Add(p);
                     }
-                });
+                }
             });
             return result;
         }
 
-        public void AddStep(int requestStep, ExecutionResult result)
+        public void AddStep(int requestStep, IExecutionResult result)
         {
             //remove all steps known for this stepnumber and beyond
             //for instance the result for step 3 (requestStep) is added, throw away everything after for step 1 and 2
@@ -64,15 +64,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             Steps = steps;
         }
 
-        public void UpdateParametersCollection(ParametersCollection parameters)
+        public void UpdateParametersCollection(IParametersCollection parameters)
         {
-            parameters.ForEach(p =>
+            foreach(var p in parameters) 
             {
                 if (p is ClientParameter && !((ClientParameter)p).IsCalculated)
                 {
                     Parameters.UpSert(p);
                 }
-            });
+            };
         }
     }
 }

@@ -84,7 +84,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             };
         }
 
-        private bool EvaluateSituation(ref ParametersCollection parameters, Step step)
+        private bool EvaluateSituation(ref IParametersCollection parameters, IStep step)
         {
             if (parameters is null)
             {
@@ -122,7 +122,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return match;
         }
 
-        private void ExecuteStep(ref ExecutionResult executionResult, ref ParametersCollection parameters, Step step)
+        private void ExecuteStep(ref IExecutionResult executionResult, ref IParametersCollection parameters, IStep step)
         {
             if (executionResult is null)
             {
@@ -158,7 +158,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             CheckForStopExecution(parameters, executionResult);
         }
 
-        private void CheckForStopExecution(ParametersCollection parameters, ExecutionResult executionResult)
+        private void CheckForStopExecution(IParametersCollection parameters, IExecutionResult executionResult)
         {
             if (parameters.Any(p => p.Name == "recht" && bool.TryParse(p.Value.ToString(), out bool value) && value == false))
             {
@@ -215,7 +215,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         /// </summary>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public ExecutionResult ExecuteWorkflow(ref ParametersCollection parameters, ref ExecutionResult executionResult)
+        public IExecutionResult ExecuteWorkflow(ref IParametersCollection parameters, ref IExecutionResult executionResult)
         {
             if (parameters is null)
             {

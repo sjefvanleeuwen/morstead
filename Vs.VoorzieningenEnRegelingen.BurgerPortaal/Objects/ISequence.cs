@@ -6,11 +6,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
     public interface ISequence
     {
         string Yaml { get; set; }
-        ParametersCollection Parameters { get; }
+        IParametersCollection Parameters { get; }
         IEnumerable<IStep> Steps { get; }
 
-        ParametersCollection GetParametersToSend(int step);
-        void AddStep(int requestStep, ExecutionResult result);
-        void UpdateParametersCollection(ParametersCollection parameters);
+        IParametersCollection GetParametersToSend(int step);
+        void AddStep(int requestStep, IExecutionResult result);
+        void UpdateParametersCollection(IParametersCollection parameters);
     }
 }

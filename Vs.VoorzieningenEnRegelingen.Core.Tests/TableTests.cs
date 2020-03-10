@@ -34,7 +34,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlTableTests.Body);
             Assert.False(result.IsError);
-            var parameters = new ParametersCollection();
+            var parameters = new ParametersCollection() as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 Assert.True(args.Parameters[0].Name == "woonland");
@@ -44,7 +44,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 // Provide an anwser by selecting an item: Finland from the list
                 parameters.Add(new ClientParameter(args.Parameters[0].Name, ((List<object>)args.Parameters[0].Value)[1]));
             };
-            var executionResult = new ExecutionResult(ref parameters);
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             try
             {
                 var workflow = controller.ExecuteWorkflow(ref parameters, ref executionResult);

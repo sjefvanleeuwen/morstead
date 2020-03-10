@@ -1,6 +1,6 @@
 ﻿namespace Vs.VoorzieningenEnRegelingen.Core
 {
-    public class QuestionArgs
+    public class QuestionArgs : IQuestionArgs
     {
         public QuestionArgs(string sessionId, IParametersCollection parameters)
         {

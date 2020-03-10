@@ -50,8 +50,8 @@ formules:
      formule: true
 ");
             Assert.False(result.IsError);
-            var parameters = new ParametersCollection() { };
-            var executionResult = new ExecutionResult(ref parameters);
+            var parameters = new ParametersCollection() as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True((bool)parameters.GetParameter("recht").Value == rechtAssertionResult);
             Assert.True(executionResult.Stacktrace.Where(s => s.Step.Name == "1").First().IsStopExecution == isStopExecutionAssertResult);
@@ -79,8 +79,8 @@ formules:
                 new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
                 new ClientParameter("vermogen_aanvrager",(double)1000),
                 new ClientParameter("woonland","Nederland")
-            };
-            var executionResult = new ExecutionResult(ref parameters);
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True((bool)parameters.GetParameter("recht")?.Value);
             Assert.True((double)parameters.GetParameter("zorgtoeslag").Value == 99.09);
@@ -107,8 +107,8 @@ formules:
                 new ClientParameter("toetsingsinkomen_aanvrager",(double)60000),
                 new ClientParameter("vermogen_aanvrager",(double)1000),
                 new ClientParameter("woonland","Nederland")
-            };
-            var executionResult = new ExecutionResult(ref parameters);
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.False((bool)parameters.GetParameter("recht")?.Value);
             Assert.Null((double?)parameters.GetParameter("zorgtoeslag")?.Value);
@@ -135,8 +135,8 @@ formules:
                 new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
                 new ClientParameter("vermogen_aanvrager",(double)150000),
                 new ClientParameter("woonland","Nederland")
-            };
-            var executionResult = new ExecutionResult(ref parameters);
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.False((bool)parameters.GetParameter("recht")?.Value);
             Assert.Null((double?)parameters.GetParameter("zorgtoeslag")?.Value);
@@ -164,8 +164,8 @@ formules:
                 new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
                 new ClientParameter("vermogen_aanvrager",(double)1000),
                 new ClientParameter("woonland","Malta")
-            };
-            var executionResult = new ExecutionResult(ref parameters);
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True((bool)parameters.GetParameter("recht")?.Value);
             Assert.True((double)parameters.GetParameter("zorgtoeslag").Value == 35.42);
@@ -193,8 +193,8 @@ formules:
                 new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
                 new ClientParameter("vermogen_aanvrager",(double)1000),
                 new ClientParameter("woonland","Rusland")
-            };
-            var executionResult = new ExecutionResult(ref parameters);
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.False((bool)parameters.GetParameter("recht")?.Value);
         }
@@ -217,10 +217,10 @@ formules:
                 new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
                 //new Parameter("vermogen_aanvrager",(double)1000),
                 new ClientParameter("woonland","Nederland")
-            };
+            } as IParametersCollection;
             try
             {
-                var executionResult = new ExecutionResult(ref parameters);
+                var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
@@ -250,10 +250,10 @@ formules:
                 /*new Parameter("toetsingsinkomen_aanvrager",(double)19000),*/
                 new ClientParameter("vermogen_aanvrager",(double)1000),
                 new ClientParameter("woonland","Nederland")
-            };
+            } as IParametersCollection;
             try
             {
-                var executionResult = new ExecutionResult(ref parameters);
+                var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
@@ -283,10 +283,10 @@ formules:
                 new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
                 new ClientParameter("vermogen_aanvrager",(double)1000),
                 //new Parameter("woonland","Nederland")
-            };
+            } as IParametersCollection;
             try
             {
-                var executionResult = new ExecutionResult(ref parameters);
+                var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
@@ -316,10 +316,10 @@ formules:
                 new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
                 new ClientParameter("vermogen_aanvrager",(double)1000),
                 new ClientParameter("woonland","Nederland")
-            };
+            } as IParametersCollection;
             try
             {
-                var executionResult = new ExecutionResult(ref parameters);
+                var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
@@ -355,8 +355,8 @@ formules:
                 new ClientParameter("toetsingsinkomen_toeslagpartner",(double)10500),
                 new ClientParameter("vermogen_toeslagpartner",(double)30000),
                 new ClientParameter("woonland","Nederland"),
-            };
-            var executionResult = new ExecutionResult(ref parameters);
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True((bool)parameters.GetParameter("recht")?.Value);
             Assert.True((double)parameters.GetParameter("zorgtoeslag").Value == 96.43);
@@ -386,8 +386,8 @@ formules:
                 new ClientParameter("toetsingsinkomen_toeslagpartner",(double)20500),
                 new ClientParameter("vermogen_toeslagpartner",(double)30000),
                 new ClientParameter("woonland","Nederland")
-            };
-            var executionResult = new ExecutionResult(ref parameters);
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.False((bool)parameters.GetParameter("recht")?.Value);
             Assert.Null((double?)parameters.GetParameter("zorgtoeslag")?.Value);
@@ -417,8 +417,8 @@ formules:
                 new ClientParameter("toetsingsinkomen_toeslagpartner",(double)10500),
                 new ClientParameter("vermogen_toeslagpartner",(double)300000),
                 new ClientParameter("woonland","Nederland")
-            };
-            var executionResult = new ExecutionResult(ref parameters);
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.False((bool)parameters.GetParameter("recht")?.Value);
             Assert.Null((double?)parameters.GetParameter("zorgtoeslag")?.Value);
@@ -443,10 +443,10 @@ formules:
                 new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
                 new ClientParameter("vermogen_aanvrager",(double)1000),
                 new ClientParameter("vermogen_toeslagpartner",(double)30000)
-            };
+            } as IParametersCollection;
             try
             {
-                var executionResult = new ExecutionResult(ref parameters);
+                var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
@@ -478,10 +478,10 @@ formules:
                 new ClientParameter("vermogen_aanvrager",(double)1000),
                 new ClientParameter("toetsingsinkomen_toeslagpartner",(double)10500),
                 //new Parameter("vermogen_toeslagpartner",(double)30000)
-            };
+            } as IParametersCollection;
             try
             {
-                var executionResult = new ExecutionResult(ref parameters);
+                var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
@@ -516,10 +516,10 @@ formules:
                 Assert.False((bool)args.Parameters[1].Value);
                 argsret = args;
             };
-            var parameters = new ParametersCollection();
+            var parameters = new ParametersCollection() as IParametersCollection;
             try
             {
-                var executionResult = new ExecutionResult(ref parameters);
+                var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
@@ -553,8 +553,8 @@ formules:
             Assert.False(result.IsError);
             bool isException = false;
             QuestionArgs argsret = null;
-            ExecutionResult executionResult = null;
-            var parameters = new ParametersCollection() { };
+            var executionResult = null as IExecutionResult;
+            var parameters = new ParametersCollection() as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 switch (args.Parameters[0].Name) {
@@ -636,8 +636,8 @@ formules:
             Assert.False(result.IsError);
             bool isException = false;
             QuestionArgs argsret = null;
-            ExecutionResult executionResult = null;
-            var parameters = new ParametersCollection() { };
+            var executionResult = null as IExecutionResult;
+            var parameters = new ParametersCollection() as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 Assert.True(args.Parameters[0].Name == "keuze_boven_vermogensgrens");
@@ -674,8 +674,8 @@ formules:
             Assert.True(result.Model.Steps[1].Key == 1);
             Assert.True(result.Model.Steps[2].Key == 2);
             Assert.False(result.IsError);
-            ExecutionResult executionResult = null;
-            var parameters = new ParametersCollection() { };
+            var executionResult = null as IExecutionResult;
+            var parameters = new ParametersCollection() as IParametersCollection;
             var stepSequence = new List<string>();
             // Scenario 1: User fill in value 1 in first step.
             parameters.Add(new ClientParameter("formule1_waarde", "1"));

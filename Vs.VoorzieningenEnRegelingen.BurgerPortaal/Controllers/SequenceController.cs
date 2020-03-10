@@ -10,8 +10,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
         public ISequence Sequence { get; private set; }
         public int CurrentStep { get; private set; } = 0;
         public int RequestStep { get; private set; } = 0;
-        public ParseResult ParseResult { get; private set; }
-        public ExecutionResult LastExecutionResult { get; private set; }
+        public IParseResult ParseResult { get; private set; }
+        public IExecutionResult LastExecutionResult { get; private set; }
 
         private IServiceController _serviceController;
 
@@ -21,7 +21,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
             Sequence = sequence;
         }
 
-        public ExecuteRequest GetExecuteRequest(ParametersCollection parameters = null)
+        public IExecuteRequest GetExecuteRequest(IParametersCollection parameters = null)
         {
             return new ExecuteRequest
             {
@@ -30,7 +30,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
             };
         }
 
-        public ParseRequest GetParseRequest()
+        public IParseRequest GetParseRequest()
         {
             if (ParseResult == null)
             {
@@ -53,7 +53,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
             RequestStep = Math.Max(1, RequestStep - 1);
         }
 
-        public void ExecuteStep(ParametersCollection currentParameters)
+        public void ExecuteStep(IParametersCollection currentParameters)
         {
             SaveCurrentParameters(currentParameters);
             //var requestParameters = GetRequestParameters();
@@ -67,7 +67,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
             CurrentStep = RequestStep;
         }
 
-        private void SaveCurrentParameters(ParametersCollection currentParameters)
+        private void SaveCurrentParameters(IParametersCollection currentParameters)
         {
             if (currentParameters != null)
             {

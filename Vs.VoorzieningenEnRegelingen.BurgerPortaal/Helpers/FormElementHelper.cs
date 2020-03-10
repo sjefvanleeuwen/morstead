@@ -9,7 +9,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 {
     public static class FormElementHelper
     {
-        public static IFormElement ParseExecutionResult(ExecutionResult result)
+        public static IFormElement ParseExecutionResult(IExecutionResult result)
         {
             var formElement = new FormElement() as IFormElement;
 
@@ -28,7 +28,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return formElement;
         }
 
-        private static TypeInference.InferenceResult.TypeEnum GetInferedType(QuestionArgs questions)
+        private static TypeInference.InferenceResult.TypeEnum GetInferedType(IQuestionArgs questions)
         {
             return questions.Parameters.FirstOrDefault().Type;
         }
@@ -70,7 +70,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return key;
         }
 
-        private static Dictionary<string, string> DefineOptions(ExecutionResult result)
+        private static Dictionary<string, string> DefineOptions(IExecutionResult result)
         {
             switch (GetInferedType(result.Questions))
             {
@@ -83,7 +83,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             }
         }
 
-        private static Dictionary<string, string> BooleanToOptions(ExecutionResult result)
+        private static Dictionary<string, string> BooleanToOptions(IExecutionResult result)
         {
             var options = new Dictionary<string, string>();
             foreach (var p in result.Questions.Parameters) {
@@ -92,7 +92,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return options;
         }
 
-        private static string GetParameterDisplayName(string name, ParametersCollection parameters)
+        private static string GetParameterDisplayName(string name, IParametersCollection parameters)
         {
             switch (name)
             {
@@ -117,7 +117,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return name.Substring(0, 1).ToUpper() + name.Substring(1).Replace('_', ' ');
         }
 
-        private static Dictionary<string, string> ListToOptions(QuestionArgs questions)
+        private static Dictionary<string, string> ListToOptions(IQuestionArgs questions)
         {
             var result = new Dictionary<string, string>();
             (questions.Parameters.First().Value as List<object>).ForEach(v => result.Add(v.ToString(), v.ToString()));
@@ -149,7 +149,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             { "toetsingsinkomen_gezamenlijk", "Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen." }
         };
 
-        internal static string GetValue(ISequence sequence, ExecutionResult result)
+        internal static string GetValue(ISequence sequence, IExecutionResult result)
         {
             var value = GetSavedValue(sequence, result);
             if (GetInferedType(result.Questions) == TypeInference.InferenceResult.TypeEnum.List)
@@ -167,7 +167,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return value;
         }
 
-        private static string GetSavedValue(ISequence sequence, ExecutionResult result)
+        private static string GetSavedValue(ISequence sequence, IExecutionResult result)
         {
             //no saved value if there is no question
             if (result.Questions == null)
@@ -200,7 +200,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return parameters.First().ValueAsString;
         }
 
-        private static string GetDefaultListValue(ExecutionResult result)
+        private static string GetDefaultListValue(IExecutionResult result)
         {
             var options = DefineOptions(result);
             if (options.Keys.Contains(string.Empty))

@@ -6,7 +6,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
     public class DisplayExecutionResult : IExecutionResult
     {
 
-        public DisplayExecutionResult(ExecutionResult executionResult, ParametersCollection parameters)
+        public DisplayExecutionResult(IExecutionResult executionResult, IParametersCollection parameters)
         {
             IsError = executionResult.IsError;
             Message = executionResult.Message;
@@ -19,9 +19,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 
         public string Message { get; set; }
 
-        public ParametersCollection Parameters { get; set; }
+        public IParametersCollection Parameters { get; set; }
 
-        public QuestionArgs Questions { get; set; }
+        public IQuestionArgs Questions { get; set; }
 
         public List<FlowExecutionItem> Stacktrace { get; set; }
     }

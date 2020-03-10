@@ -42,9 +42,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
         }
 
-        public FormulaExpressionContext(ref Model.Model model, ref ParametersCollection parameters, Formula formula, QuestionDelegate onQuestion, YamlScriptController controller)
+        public FormulaExpressionContext(ref Model.Model model, ref IParametersCollection parameters, Formula formula, QuestionDelegate onQuestion, YamlScriptController controller)
         {
-            _parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
+            _parameters = parameters as ParametersCollection ?? throw new ArgumentNullException(nameof(parameters));
             _formula = formula ?? throw new ArgumentNullException(nameof(formula));
             OnQuestion = onQuestion ?? throw new ArgumentNullException(nameof(onQuestion));
             _model = model ?? throw new ArgumentNullException(nameof(model));

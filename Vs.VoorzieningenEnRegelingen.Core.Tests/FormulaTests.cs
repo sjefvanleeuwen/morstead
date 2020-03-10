@@ -189,7 +189,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 new ClientParameter("woonland","Nederland"),
                 new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
                 new ClientParameter("toetsingsinkomen_toeslagpartner",(double)0)
-            };
+            } as IParametersCollection;
             var model = result.Model;
             var context = new FormulaExpressionContext(ref model, ref parameters, controller.GetFormula("normpremie"), controller.QuestionCallback, controller);
             var parameter = context.Evaluate();
@@ -209,7 +209,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 new ClientParameter("woonland","Nederland"),
                 /*new Parameter("toetsingsinkomen_aanvrager",(double)19000),*/  // expect this question in FormulaTests_OnQuestion
                 new ClientParameter("toetsingsinkomen_toeslagpartner",(double)0)
-            };
+            } as IParametersCollection;
             var model = result.Model;
             bool called = false;
             OnQuestion = (FormulaExpressionContext sender, QuestionArgs args) => {

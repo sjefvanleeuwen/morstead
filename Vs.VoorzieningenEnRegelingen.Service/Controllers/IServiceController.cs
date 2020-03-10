@@ -5,7 +5,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
 {
     public interface IServiceController
     {
-        ExecutionResult Execute([FromBody] ExecuteRequest executeRequest);
-        ParseResult Parse([FromBody] ParseRequest parseRequest);
+        IExecutionResult Execute([FromBody] IExecuteRequest executeRequest);
+        IParseResult Parse([FromBody] IParseRequest parseRequest);
     }
 }

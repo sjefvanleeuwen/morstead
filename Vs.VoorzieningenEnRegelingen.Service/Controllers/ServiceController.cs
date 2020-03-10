@@ -37,7 +37,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
         }
 
         [HttpPost("parse")]
-        public ParseResult Parse([FromBody] ParseRequest parseRequest)
+        public IParseResult Parse([FromBody] IParseRequest parseRequest)
         {
             if (parseRequest is null)
             {
@@ -49,7 +49,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
         }
 
         [HttpPost("execute")]
-        public ExecutionResult Execute([FromBody] ExecuteRequest executeRequest)
+        public IExecutionResult Execute([FromBody] IExecuteRequest executeRequest)
         {
             if (executeRequest is null)
             {
@@ -60,7 +60,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
                 executeRequest.Parameters = new ParametersCollection();
             }
             var parameters = executeRequest.Parameters;
-            ExecutionResult executionResult = new ExecutionResult(ref parameters);
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             executeRequest.Config = parseHelper(executeRequest.Config);
             var controller = new YamlScriptController();
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>

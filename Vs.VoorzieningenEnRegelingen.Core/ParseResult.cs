@@ -1,6 +1,6 @@
 ﻿namespace Vs.VoorzieningenEnRegelingen.Core
 {
-    public class ParseResult
+    public class ParseResult : IParseResult
     {
         public bool IsError { get; set; }
         public string Message { get; set; }

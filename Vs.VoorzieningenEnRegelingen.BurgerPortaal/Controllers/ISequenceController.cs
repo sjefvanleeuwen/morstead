@@ -1,6 +1,5 @@
 ﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
 using Vs.VoorzieningenEnRegelingen.Core;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
@@ -10,13 +9,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
         ISequence Sequence { get; }
         int CurrentStep { get; }
         int RequestStep { get; }
-        ParseResult ParseResult { get; }
-        ExecutionResult LastExecutionResult { get; }
+        IParseResult ParseResult { get; }
+        IExecutionResult LastExecutionResult { get; }
 
-        ExecuteRequest GetExecuteRequest(ParametersCollection parameters = null);
-        ParseRequest GetParseRequest();
+        IExecuteRequest GetExecuteRequest(IParametersCollection parameters = null);
+        IParseRequest GetParseRequest();
         void IncreaseStep();
         void DecreaseStep();
-        void ExecuteStep(ParametersCollection currentParameters);
+        void ExecuteStep(IParametersCollection currentParameters);
     }
 }

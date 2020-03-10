@@ -6,9 +6,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
     [Serializable]
     public class StepException : Exception
     {
-        public StepException(string message, Step step) : base(message)
+        public StepException(string message, IStep step) : base(message)
         {
-            Step = step ?? throw new ArgumentNullException(nameof(step));
+            Step = step as Step ?? throw new ArgumentNullException(nameof(step));
         }
 
         public Step Step { get; }

@@ -18,7 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             var currentStep = 0;
             var maxStep = 0;
 
-            var sequence = new List<ExecutionResult>();
+            var sequence = new List<IExecutionResult>();
             ServiceController controller = new ServiceController(null);
             var executeRequest = new ExecuteRequest()
             {

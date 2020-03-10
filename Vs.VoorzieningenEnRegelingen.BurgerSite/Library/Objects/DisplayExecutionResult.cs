@@ -19,9 +19,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerSite.Library.Object
 
         public string Message { get; set; }
 
-        public ParametersCollection Parameters { get; set; }
+        public IParametersCollection Parameters { get; set; }
 
-        public QuestionArgs Questions { get; set; }
+        public IQuestionArgs Questions { get; set; }
 
         public List<FlowExecutionItem> Stacktrace { get; set; }
     }
