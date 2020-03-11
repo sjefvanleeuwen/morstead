@@ -32,7 +32,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 [EnumMember(Value = "boolean")]
                 Boolean,
                 [EnumMember(Value = "list")]
-                List
+                List,
+                [EnumMember(Value = "period")]
+                Period
             }
         }
     }

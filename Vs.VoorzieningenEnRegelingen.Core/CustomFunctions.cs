@@ -1,9 +1,20 @@
-﻿using System;
+﻿using Itenso.TimePeriod;
+using System;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Calc
 {
     public static class CustomFunctions
     {
+        public static TimeRange Periode(DateTime moment)
+        {
+            return new TimeRange(moment);
+        }
+
+        public static TimeRange Periode(DateTime begin, DateTime einde)
+        {
+            return new TimeRange(begin, einde);
+        }
+
         public static TimeSpan Duration(DateTime begin, DateTime end)
         {
             return (begin - end);
