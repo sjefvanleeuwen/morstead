@@ -16,7 +16,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
             var parser = new YamlParser(YamlZorgtoeslag.Body, null);
             var steps = parser.Flow();
-            Assert.True(steps.Count == 3);
+            Assert.True(steps.Count() == 3);
             Assert.True((from p in steps where p.Formula == "recht" select p).Single().Situation == "");
             Assert.True((from p in steps where p.Situation == "buitenland" select p).Single().Description == "bereken de zorgtoeslag wanner men in het buitenland woont");
             Assert.True((from p in steps where p.Name == "2" select p).First().Description == "bereken de zorgtoeslag wanneer men binnen nederland woont");

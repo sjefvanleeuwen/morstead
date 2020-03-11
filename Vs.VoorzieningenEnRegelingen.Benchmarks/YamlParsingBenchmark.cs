@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Engines;
 using System.Collections.Generic;
+using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Benchmarks.YamlScripts;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
@@ -15,21 +16,21 @@ namespace Vs.VoorzieningenEnRegelingen.Benchmarks
         public List<Formula> GetFunctionsSimpleYaml()
         {
             var parser = new YamlParser(YamlSimple.Body, null);
-            return parser.Formulas();
+            return parser.Formulas().ToList();
         }
 
         [Benchmark]
         public List<Formula> GetFlowSimpleYaml()
         {
             var parser = new YamlParser(YamlSimple.Body, null);
-            return parser.Formulas();
+            return parser.Formulas().ToList();
         }
 
         [Benchmark]
         public List<Table> GetTablesSimpleYaml()
         {
             var parser = new YamlParser(YamlSimple.Body, null);
-            return parser.Tabellen();
+            return parser.Tabellen().ToList();
         }
 
         [Benchmark]

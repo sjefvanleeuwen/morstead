@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Vs.Core.Collections.NodeTree;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
+using Vs.VoorzieningenEnRegelingen.Core.Helpers;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
@@ -14,7 +14,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
     {
         private const string Ok = "OK";
         private Model.Model _model;
-        private ParametersCollection _unresolved;
         private ExpressionContext localContext;
 
         public delegate void QuestionDelegate(FormulaExpressionContext sender, QuestionArgs args);
@@ -67,13 +66,16 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             try
             {
                 YamlParser parser = new YamlParser(yaml, null);
-                _model = new Model.Model(parser.Header(), parser.Formulas(), parser.Tabellen(), parser.Flow());
+                _model = new Model.Model(parser.Header(), parser.Formulas().ToList(), parser.Tabellen().ToList(), parser.Flow().ToList());
+                _model.AddFormulas(parser.GetFormulasFromBooleanSteps(_model.Steps));
             }
             catch (Exception ex)
             {
-                var result = new ParseResult();
-                result.IsError = true;
-                result.Message = ex.Message;
+                var result = new ParseResult
+                {
+                    IsError = true,
+                    Message = ex.Message
+                };
                 return result;
             }
             return new ParseResult()
@@ -133,29 +135,39 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
+
             executionResult.Stacktrace.Add(new FlowExecutionItem(step, null));
-            // resolve parameter value from named formula.
-            if (string.IsNullOrEmpty(step.Formula))
-            {
-                throw new StepException($"Expected reference to a formula to evaluate in worflow step {step.Name} {step.Description} to execute.", step);
-            }
-            // calculate formula and add it to the parameter list.
-            var formula = GetFormula(step.Formula);
+            var formula = ResolveFormula(step);
             var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback, this);
             context.Evaluate();
             if (!string.IsNullOrEmpty(step.Break))
             {
                 var breakContext = new FormulaExpressionContext(
-                    ref _model, 
-                    ref parameters, 
-                    new Formula(formula.DebugInfo, "recht",new List<Function>() { 
+                    ref _model,
+                    ref parameters,
+                    new Formula(formula.DebugInfo, "recht", new List<Function>() {
                         new Function(formula.DebugInfo, step.Break)
-                    }), 
+                    }),
                     QuestionCallback,
                     this);
                 breakContext.Evaluate();
             }
             CheckForStopExecution(parameters, executionResult);
+        }
+
+        private Formula ResolveFormula(IStep step)
+        {
+            // resolve parameter value from named formula.
+            if (!string.IsNullOrEmpty(step.Formula))
+            {
+                return GetFormula(step.Formula);
+            }
+            //no formula, make a formula from the choices provided
+            if (step.Choices == null || !step.Choices.Any())
+            {
+                throw new StepException($"Expected reference to a formula or choices to evaluate in worflow step {step.Name} {step.Description} to execute.", step);
+            }
+            return GetFormula(YamlHelper.GetFormulaNameFromStep(step));
         }
 
         private void CheckForStopExecution(IParametersCollection parameters, IExecutionResult executionResult)
@@ -220,6 +232,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             if (parameters is null)
             {
                 throw new ArgumentNullException(nameof(parameters));
+            }
+            if (executionResult is null)
+            {
+                throw new ArgumentNullException(nameof(executionResult));
             }
 
             try

@@ -75,9 +75,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
             var yamlParser = new YamlParser(YamlScripts.YamlZorgtoeslag.Body, null);
             var functions = yamlParser.Formulas();
-            Assert.True(functions.Count == 11);
-            Assert.True(functions[1].Name == "maximaalvermogen");
-            Assert.True(functions[1].IsSituational == true);
+            Assert.True(functions.Count() == 11);
+            Assert.True(functions.ElementAt(1).Name == "maximaalvermogen");
+            Assert.True(functions.ElementAt(1).IsSituational == true);
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
             var yamlParser = new YamlParser(YamlScripts.YamlZorgtoeslag.Body, null);
             var tabellen = yamlParser.Tabellen();
-            Assert.True(tabellen.Count == 1);
+            Assert.True(tabellen.Count() == 1);
             var tabel = tabellen.Single();
             Assert.True(tabel.Name == "woonlandfactoren");
             Assert.True(tabel.ColumnTypes.Count == 2);

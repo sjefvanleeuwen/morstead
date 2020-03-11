@@ -1,4 +1,6 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.Model
+﻿using System.Collections.Generic;
+
+namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
     public interface IStep
     {
@@ -9,5 +11,6 @@
         int Key { get; }
         string Name { get; }
         string Situation { get; }
+        IEnumerable<string> Choices { get; }
     }
 }

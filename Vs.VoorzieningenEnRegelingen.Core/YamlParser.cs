@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Vs.Core.Diagnostics;
+using Vs.VoorzieningenEnRegelingen.Core.Helpers;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
-using YamlDotNet.Core;
 using YamlDotNet.RepresentationModel;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
@@ -29,14 +29,17 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private readonly string _yaml;
         private readonly YamlMappingNode map;
 
-        public YamlParser(string yaml, Dictionary<string,Parameter> parameters)
+        public YamlParser(string yaml, Dictionary<string, Parameter> parameters)
         {
             _parameters = parameters;
             _yaml = yaml;
             map = Map(_yaml);
         }
 
-       public StuurInformatie Header()
+        private LineInfo _dummyLineInfo => new LineInfo(0, 0, 0);
+        private DebugInfo _dummyDebugInfo => new DebugInfo(_dummyLineInfo, _dummyLineInfo);
+
+        public StuurInformatie Header()
         {
             var stuurinformatie = new StuurInformatie();
             foreach (var item in ((YamlMappingNode)map.Children[new YamlScalarNode(HeaderAttribute)]).Children)
@@ -74,7 +77,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return stuurinformatie;
         }
 
-        public List<Step> Flow()
+        public IEnumerable<Step> Flow()
         {
             var steps = new List<Step>();
             int key = 0;
@@ -118,7 +121,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private IEnumerable<string> GetSituations(YamlNode node)
         {
             var result = new List<string>();
-            foreach(var choiceInfo in ((YamlSequenceNode)node).Children)
+            foreach (var choiceInfo in ((YamlSequenceNode)node).Children)
             {
                 var choiceInfoItems = ((YamlMappingNode)choiceInfo).Children;
                 if (choiceInfoItems.Count != 1)
@@ -128,7 +131,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 var choiceInfoItem = choiceInfoItems.First();
                 switch (choiceInfoItem.Key.ToString())
                 {
-                    case "situatie":
+                    case SituationAttribute:
                         result.Add(choiceInfoItem.Value.ToString());
                         break;
                     default:
@@ -138,7 +141,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return result;
         }
 
-        public List<Table> Tabellen()
+        public IEnumerable<Table> Tabellen()
         {
             var tables = new List<Table>();
             if (!map.Children.ContainsKey(new YamlScalarNode(TablesAttribute)))
@@ -192,22 +195,22 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
         }
 
-        public List<Formula> Formulas()
+        public IEnumerable<Formula> Formulas()
         {
-            var funcs = new List<Formula>();
+            var formulas = new List<Formula>();
             foreach (var tabel in (YamlSequenceNode)map.Children[new YamlScalarNode(FormulasAttribute)])
             {
                 foreach (var row in ((YamlMappingNode)tabel).Children)
                 {
                     var variableName = row.Key;
-                    List<Function> functions = new List<Function>();
+                    var functions = new List<Function>();
                     if (row.Value.GetType() == typeof(YamlSequenceNode))
                     {
                         foreach (var situation in ((YamlSequenceNode)row.Value).Children)
                         {
                             var f = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == FormulaAttribute).Value;
                             var s = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == SituationAttribute).Value;
-                            var function = new Function(DebugInfo.MapDebugInfo(f.Start,f.End), s.ToString(), f.ToString().Replace("'","\""));
+                            var function = new Function(DebugInfo.MapDebugInfo(f.Start, f.End), s.ToString(), f.ToString().Replace("'", "\""));
                             functions.Add(function);
                         }
                     }
@@ -217,10 +220,28 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                         var function = new Function(DebugInfo.MapDebugInfo(f.Start, f.End), f.ToString().Replace("'", "\""));
                         functions.Add(function);
                     }
-                    funcs.Add(new Formula(DebugInfo.MapDebugInfo(variableName.Start, variableName.End), variableName.ToString(), functions));
+                    formulas.Add(new Formula(DebugInfo.MapDebugInfo(variableName.Start, variableName.End), variableName.ToString(), functions));
                 }
             }
-            return funcs;
+            return formulas;
+        }
+
+        internal IEnumerable<Formula> GetFormulasFromBooleanSteps(IEnumerable<Step> steps)
+        {
+            var formulas = new List<Formula>();
+            foreach (var step in steps)
+            {
+                if (step.Choices != null && step.Choices.Any())
+                {
+                    var functions = new List<Function>();
+                    foreach (var choice in step.Choices) {
+                        functions.Add(new Function(_dummyDebugInfo, choice, choice));
+                    }
+                    //the information comes from the step, so a dummy debug info will do
+                    formulas.Add(new Formula(_dummyDebugInfo, YamlHelper.GetFormulaNameFromStep(step), functions));
+                }
+            }
+            return formulas;
         }
     }
 }

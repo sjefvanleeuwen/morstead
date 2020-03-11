@@ -47,6 +47,23 @@ formules:
  - drempelinkomen:
      formule: 20941";
 
+        private string _testYaml3 = @"# Zorgtoeslag for burger site demo
+stuurinformatie:
+  onderwerp: zorgtoeslag
+  organisatie: belastingdienst
+  type: toeslagen
+  domein: zorg
+  versie: 1.0
+  status: ontwikkel
+  jaar: 2019
+  bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
+berekening:
+ - stap: Test A of B
+   recht: A
+formules:
+ - drempelinkomen:
+     formule: 20941";
+
         [Fact]
         public void ShouldAcceptKeuze()
         {
@@ -93,6 +110,32 @@ formules:
             Assert.Equal(2, stepToTest.Choices.Count());
             Assert.Equal("A", stepToTest.Choices.ElementAt(0));
             Assert.Equal("B", stepToTest.Choices.ElementAt(1));
+        }
+        
+        //does not work, it is caught, should be refactored
+        //[Fact]
+        //public void ShouldThrowExceptionIfNoFormulaORChoiceProvided()
+        //{
+        //    //List<ParametersCollection> parameters = new List<ParametersCollection>();
+        //    var controller = new YamlScriptController();
+        //    var parseResult = controller.Parse(_testYaml3);
+        //    //generate empty call
+        //    var parameters = new ParametersCollection() as IParametersCollection;
+        //    var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+        //    Assert.Throws<StepException>(() => controller.ExecuteWorkflow(ref parameters, ref executionResult));
+        //}
+
+        [Fact]
+        public void ShouldReturnBooleanAsFirstQuestion()
+        {
+            //List<ParametersCollection> parameters = new List<ParametersCollection>();
+            var controller = new YamlScriptController();
+            var parseResult = controller.Parse(_testYaml2);
+            //generate empty call
+            var parameters = new ParametersCollection() as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+            //controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            //var a = executionResult;
         }
 
         //[Fact]

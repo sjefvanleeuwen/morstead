@@ -17,5 +17,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             Tables = tables ?? throw new ArgumentNullException(nameof(tables));
             Steps = steps ?? throw new ArgumentNullException(nameof(steps));
         }
+
+        public void AddFormulas(IEnumerable<Formula> formulas)
+        {
+            Formulas.AddRange(formulas);
+        }
     }
 }
