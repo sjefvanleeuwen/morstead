@@ -2,11 +2,12 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using Vs.Core.Semantic;
 using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
-    public class Parameter : IParameter
+    public class Parameter : IParameter, ISemanticKey
     {
         public string Name { get; set; }
 
@@ -51,6 +52,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         }
 
         public bool IsCalculated { get; internal set; }
+        public string SemanticKey { get; set; }
 
         public Parameter() { }
 

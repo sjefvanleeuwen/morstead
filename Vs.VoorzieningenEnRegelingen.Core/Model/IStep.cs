@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using Vs.Core.Semantic;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
-    public interface IStep
+    public interface IStep : ISemanticKey
     {
-        string Break { get; }
+        IBreak Break { get; }
         string Description { get; }
         string Formula { get; }
         bool IsSituational { get; }

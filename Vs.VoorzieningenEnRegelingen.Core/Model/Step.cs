@@ -4,7 +4,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
     public class Step : IStep
     {
-        public Step(int key, string name, string description, string formula, string situation, string @break, IEnumerable<string> choices)
+        public Step(int key, string name, string description, string formula, string situation, IBreak @break, IEnumerable<string> choices)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -40,9 +40,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         /// Break is also a formula, but allows a condition to break out of a flow.
         /// For example, if someone has rights (recht) to a service.
         /// </summary>
-        public string Break { get; }
-        
+        public IBreak Break { get; }
 
         public bool IsSituational => !string.IsNullOrEmpty(Situation);
+
+        public string SemanticKey { get; set; }
+
     }
 }

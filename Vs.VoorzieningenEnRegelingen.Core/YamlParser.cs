@@ -84,7 +84,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)])
             {
                 var debugInfoStep = DebugInfo.MapDebugInfo(step.Start, step.End);
-                string stepid = "", description = "", formula = "", situation = "", @break = "";
+                string stepid = "", description = "", formula = "", situation = "";
+                var @break = null as IBreak;
                 IEnumerable<string> choices = null;
                 foreach (var stepInfo in ((YamlMappingNode)step).Children)
                 {
@@ -103,7 +104,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             formula = stepInfo.Value.ToString();
                             break;
                         case "recht":
-                            @break = stepInfo.Value.ToString();
+                            @break = new Break() { Expression = stepInfo.Value.ToString() };
                             break;
                         case "keuze":
                         case "choice":

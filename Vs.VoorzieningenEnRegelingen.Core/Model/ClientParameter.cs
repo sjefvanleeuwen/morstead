@@ -80,6 +80,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         }
 
         public bool IsCalculated { get; internal set; }
+        public string SemanticKey { get; set; }
     }
 }
 

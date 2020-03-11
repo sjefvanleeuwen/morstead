@@ -140,13 +140,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             var formula = ResolveFormula(step);
             var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback, this);
             context.Evaluate();
-            if (!string.IsNullOrEmpty(step.Break))
+            if (step.Break!=null && !string.IsNullOrEmpty(step.Break.Expression))
             {
                 var breakContext = new FormulaExpressionContext(
                     ref _model,
                     ref parameters,
                     new Formula(formula.DebugInfo, "recht", new List<Function>() {
-                        new Function(formula.DebugInfo, step.Break)
+                        new Function(formula.DebugInfo, step.Break.Expression)
                     }),
                     QuestionCallback,
                     this);

@@ -1,9 +1,10 @@
 ﻿using System;
 using Vs.Core.Diagnostics;
+using Vs.Core.Semantic;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
-    public class Function
+    public class Function : ISemanticKey
     {
         public Function(DebugInfo debugInfo, string situation, string expression)
         {
@@ -24,5 +25,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         public DebugInfo DebugInfo { get; }
         public string Situation { get; }
         public string Expression { get; }
+        public string SemanticKey { get; set; }
     }
 }
