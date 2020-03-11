@@ -16,50 +16,26 @@ stuurinformatie:
   jaar: 2019
   bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
 berekening:
- - stap: Test A of B
-   keuze:
-   - situatie: A
-   - situatie: B
-   recht: A
- - stap: 1
-   omschrijving: Woonland
+ - stap: woonland
    formule: woonlandfactor
    recht: woonlandfactor > 0
- - stap: 2
-   omschrijving: Wat is uw woonsituatie?
-   formule: standaardpremie
- - stap: 3
-   situatie: alleenstaande
-   omschrijving: Is uw vermogen hoger dan de drempelwaarde?
-   formule: vermogensdrempel
-   recht: vermogensdrempel = 1
- - stap: 3
-   situatie: aanvrager_met_toeslagpartner
-   omschrijving: Is uw gezamenlijk vermogen hoger dan de drempelwaarde?
-   formule: vermogensdrempel
-   recht: vermogensdrempel = 1
- - stap: 4
-   situatie: alleenstaande
-   omschrijving: Is uw toetsingsinkomen hoger dan de inkomensdrempel?
-   formule: inkomensdrempel
-   recht: inkomensdrempel = 1
- - stap: 4
-   situatie: aanvrager_met_toeslagpartner
-   omschrijving: Is uw gezamenlijk toetsingsinkomen hoger dan de inkomensdrempel?
-   formule: inkomensdrempel
-   recht: inkomensdrempel = 1
- - stap: 5
-   situatie: alleenstaande
-   omschrijving: Wat is uw toetsingsinkomen?
+ - stap: Wat is uw woonsituatie?
+   keuze:
+   - situatie: alleenstaande
+   - situatie: aanvrager_met_toeslagpartner
+ - stap: vermogensdrempel
+   keuze:
+   - situatie: hoger_dan_vermogensdrempel
+   - situatie: lager_dan_vermogensdrempel
+   recht: lager_dan_vermogensdrempel
+ - stap: inkomensdrempel
+   - situatie: hoger_dan_inkomensdrempel
+   - situatie: lager_dan_inkomensdrempel
+   recht: lager_dan_inkomensdrempel
+ - stap: toetsingsinkomen
    formule: toetsingsinkomen
-   recht: toetsingsinkomen_aanvrager < 29562
- - stap: 5
-   situatie: aanvrager_met_toeslagpartner
-   omschrijving: Wat is uw gezamenlijk toetsingsinkomen?
-   formule: toetsingsinkomen
-   recht: toetsingsinkomen_gezamenlijk < 37885
- - stap: 6
-   omschrijving: Maandelijkse zorgtoeslag
+   recht: toetsingsinkomen < toetsingsinkomensdrempel
+ - stap: zorgtoeslag
    formule: zorgtoeslag
 formules:
  - woonlandfactor:
@@ -69,21 +45,11 @@ formules:
      formule: 1609
    - situatie: aanvrager_met_toeslagpartner
      formule: 3218
- - vermogensdrempel:
-   - situatie: hoger_dan_de_vermogensdrempel
-     formule: 0   
-   - situatie: lager_dan_de_vermogensdrempel
-     formule: 1
- - inkomensdrempel:
-   - situatie: hoger_dan_de_inkomensdrempel
-     formule: 0
-   - situatie: lager_dan_de_inkomensdrempel
-     formule: 1
- - toetsingsinkomen:
+ - toetsingsinkomensdrempel:
    - situatie: alleenstaande
-     formule: toetsingsinkomen_aanvrager
+     formule: 29562
    - situatie: aanvrager_met_toeslagpartner
-     formule: toetsingsinkomen_gezamenlijk
+     formule: 37885
  - drempelinkomen:
      formule: 20941
  - normpremie:

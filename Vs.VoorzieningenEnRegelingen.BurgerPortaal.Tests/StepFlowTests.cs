@@ -25,7 +25,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
                 Config = YamlZorgtoeslag.Body
             };
             var result = controller.Execute(executeRequest);
-            
+
             sequence.Add(result);
             var displaySequence = new DisplayExecutionResult(sequence[currentStep], sequence[maxStep].Parameters);
             Assert.Equal(2, displaySequence.Questions.Parameters.Count);
@@ -89,7 +89,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             //execute the second step
             sequenceController.IncreaseStep();
             sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("alleenstaande", "ja") });
-            
+
             Assert.Equal(2, sequenceController.LastExecutionResult.Parameters.Count); //standaardpremie is nu ook bekend
             Assert.Equal("alleenstaande", sequenceController.LastExecutionResult.Parameters[0].Name);
             Assert.True((bool)sequenceController.LastExecutionResult.Parameters[0].Value);
@@ -134,7 +134,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             sequenceController.DecreaseStep();
             sequenceController.ExecuteStep(new ParametersCollection() {
                 new ClientParameter("alleenstaande", "nee"),
-                new ClientParameter("aanvrager_met_toeslagpartner", "ja") 
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja")
             });
 
             //should be the same as the previous step
@@ -143,7 +143,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 
             //increase the step 1 -> 2
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ParametersCollection() { 
+            sequenceController.ExecuteStep(new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja"),
                 new ClientParameter("aanvrager_met_toeslagpartner", "nee")
             });
@@ -186,9 +186,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
 
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ParametersCollection() { 
+            sequenceController.ExecuteStep(new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja"),
-                new ClientParameter("aanvrager_met_toeslagpartner", "nee") 
+                new ClientParameter("aanvrager_met_toeslagpartner", "nee")
             });
 
             //should be the same as when step 1 was executed the first time
@@ -203,7 +203,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             sequenceController.IncreaseStep();
             sequenceController.ExecuteStep(new ParametersCollection() {
                 new ClientParameter("alleenstaande", "nee"),
-                new ClientParameter("aanvrager_met_toeslagpartner", "ja") 
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja")
             });
             //should be the same as when step 1 was executed the first time, but we get 1 different variable back
             _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2b(sequenceController);

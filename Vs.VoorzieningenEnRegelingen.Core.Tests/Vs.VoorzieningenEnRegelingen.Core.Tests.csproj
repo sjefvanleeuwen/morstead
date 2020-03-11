@@ -33,7 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.BurgerPortaal\Vs.VoorzieningenEnRegelingen.BurgerPortaal.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core\Vs.VoorzieningenEnRegelingen.Core.csproj" />
+    <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Service\Vs.VoorzieningenEnRegelingen.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

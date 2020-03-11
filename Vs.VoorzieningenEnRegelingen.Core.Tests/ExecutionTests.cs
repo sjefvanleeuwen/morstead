@@ -552,7 +552,6 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             bool isException = false;
-            QuestionArgs argsret = null;
             var executionResult = null as IExecutionResult;
             var parameters = new ParametersCollection() as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>

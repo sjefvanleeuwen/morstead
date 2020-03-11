@@ -70,10 +70,11 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
 
             var result = controller.Parse(executeRequest.Config);
             if (result.IsError)
+            {
                 return executionResult;
+            }
             try
             {
-
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
