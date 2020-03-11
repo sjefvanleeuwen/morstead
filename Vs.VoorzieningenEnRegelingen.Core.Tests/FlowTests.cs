@@ -34,7 +34,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var result = controller.Parse(YamlZorgtoeslag.Body);
             var parameters = new ParametersCollection();
             parameters.Add(new ClientParameter("woonland", "Nederland"));
-           //  var executionResult = controller.ExecuteWorkflow(parameters);
+            //  var executionResult = controller.ExecuteWorkflow(parameters);
             // Tsjechië,            0.2412 
             // context.Variables.Add("woonland", "Tsjechië");
             // var formula = controller.GetFormula("woonlandfactor");
@@ -45,13 +45,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
             Exception ex1 = Assert.Throws<NotImplementedException>(() => new StepException());
             Exception ex2 = Assert.Throws<NotImplementedException>(() => new StepException("test"));
-            Exception ex3 = Assert.Throws<NotImplementedException>(() => new StepException("",new Exception()));
+            Exception ex3 = Assert.Throws<NotImplementedException>(() => new StepException("", new Exception()));
         }
 
         [Fact]
         public void Flow_Shouldnt_Be_StepException()
         {
-            StepException ex = new StepException("exception", new Step(1,"name", "description", "formula", "situation","break"));
+            StepException ex = new StepException("exception", new Step(1, "name", "description", "formula", "situation", "break", null));
             Assert.True(ex.Step.Key == 1);
             Assert.True(ex.Step.Name == "name");
             Assert.True(ex.Step.Description == "description");

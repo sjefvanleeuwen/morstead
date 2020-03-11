@@ -81,7 +81,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)])
             {
                 var debugInfoStep = DebugInfo.MapDebugInfo(step.Start, step.End);
-                string stepid ="", description="", formula = "", situation="", @break="";
+                string stepid = "", description = "", formula = "", situation = "", @break = "";
+                IEnumerable<string> choices = null;
                 foreach (var stepInfo in ((YamlMappingNode)step).Children)
                 {
                     switch (stepInfo.Key.ToString())
@@ -101,13 +102,40 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                         case "recht":
                             @break = stepInfo.Value.ToString();
                             break;
+                        case "keuze":
+                        case "choice":
+                            choices = GetSituations(stepInfo.Value);
+                            break;
                         default:
                             throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
                     }
                 }
-                steps.Add(new Step(key++, stepid, description, formula, situation, @break));
+                steps.Add(new Step(key++, stepid, description, formula, situation, @break, choices));
             }
             return steps;
+        }
+
+        private IEnumerable<string> GetSituations(YamlNode node)
+        {
+            var result = new List<string>();
+            foreach(var choiceInfo in ((YamlSequenceNode)node).Children)
+            {
+                var choiceInfoItems = ((YamlMappingNode)choiceInfo).Children;
+                if (choiceInfoItems.Count != 1)
+                {
+                    throw new Exception($"multipl step choice identifiders found; {choiceInfoItems.Count}");
+                }
+                var choiceInfoItem = choiceInfoItems.First();
+                switch (choiceInfoItem.Key.ToString())
+                {
+                    case "situatie":
+                        result.Add(choiceInfoItem.Value.ToString());
+                        break;
+                    default:
+                        throw new Exception($"unknown step choice identifider {choiceInfoItem.Key.ToString()}");
+                }
+            }
+            return result;
         }
 
         public List<Table> Tabellen()

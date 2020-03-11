@@ -287,6 +287,5 @@ tabellen:
       - [ Zwitserland,         0.8000 ]
       - [ Anders,              0      ]
 ";
-
     }
 }
