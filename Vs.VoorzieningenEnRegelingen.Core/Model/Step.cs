@@ -4,7 +4,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
     public class Step : IStep
     {
-        public Step(int key, string name, string description, string formula, string situation, IBreak @break, IEnumerable<string> choices)
+        public Step(int key, string name, string description, string formula, string value, string situation, IBreak @break, IEnumerable<string> choices)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -21,6 +21,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             Name = name;
             Description = description;
             Formula = formula;
+            Value = value;
             Situation = situation;
             Break = @break;
             Choices = choices;
@@ -30,6 +31,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         public string Name { get; }
         public string Description { get; }
         public string Formula { get; }
+        public string Value { get; }
         public string Situation { get; }
         /// <summary>
         /// Choices is a number of situations

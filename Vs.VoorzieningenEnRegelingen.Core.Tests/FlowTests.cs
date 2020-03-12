@@ -51,11 +51,12 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Flow_Shouldnt_Be_StepException()
         {
-            StepException ex = new StepException("exception", new Step(1, "name", "description", "formula", "situation", new Break() { Expression = "break" }, null));
+            StepException ex = new StepException("exception", new Step(1, "name", "description", "formula", "value", "situation", new Break() { Expression = "break" }, null));
             Assert.True(ex.Step.Key == 1);
             Assert.True(ex.Step.Name == "name");
             Assert.True(ex.Step.Description == "description");
             Assert.True(ex.Step.Formula == "formula");
+            Assert.True(ex.Step.Value == "value");
             Assert.True(ex.Step.Situation == "situation");
             Assert.True(ex.Step.Break.Expression == "break");
         }

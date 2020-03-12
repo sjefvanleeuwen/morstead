@@ -34,7 +34,7 @@ berekening:
    - situatie: lager_dan_inkomensdrempel
    recht: lager_dan_inkomensdrempel
  - stap: toetsingsinkomen
-   formule: toetsingsinkomen
+   waarde: toetsingsinkomen
    recht: toetsingsinkomen < toetsingsinkomensdrempel
  - stap: zorgtoeslag
    formule: zorgtoeslag
@@ -46,8 +46,6 @@ formules:
      formule: 1609
    - situatie: aanvrager_met_toeslagpartner
      formule: 3218
- - toetsingsinkomen:
-     formule: toetsingsinkomenbedrag
  - toetsingsinkomensdrempel:
    - situatie: alleenstaande
      formule: 29562
