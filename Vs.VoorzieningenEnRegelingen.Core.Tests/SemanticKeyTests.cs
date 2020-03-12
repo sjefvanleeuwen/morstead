@@ -17,26 +17,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 
             Assert.False(result.IsError);
             Assert.True(controller.ContentNodes.Count == 28);
-
-            // TODO: put flat item list with nodes in a multibranch dependency tree...
-            //var serializer = new YamlDotNet.Serialization.Serializer();
-            //var yaml = serializer.Serialize(items);
-
-            //List<string> tokens = new List<string>();
-
-            //foreach (var item in items)
-            //{
-            //    tokens.Add(item.Name);
-            //}
-            //var tokenYaml = serializer.Serialize(tokens);
-
         }
 
         [Fact]
         public void CanDeserializeContentYaml()
         {
             var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
-            var result = deserializer.Deserialize<ContentCollection>(YamlZorgtoeslag3Content.Body);
+            //var result = deserializer.Deserialize<ContentCollection>(YamlZorgtoeslag3Content.Body);
         }
     }
 }
