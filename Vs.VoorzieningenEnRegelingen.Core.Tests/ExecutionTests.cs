@@ -658,6 +658,48 @@ formules:
         }
 
         [Fact]
+        public void FormulaResolvesToCorrectSituationalFunction()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag3.Body);
+            Assert.False(result.IsError);
+            bool isException = false;
+            var executionResult = null as IExecutionResult;
+
+            var parameters = new ParametersCollection() {
+                new ClientParameter("woonland","Nederland"),
+                new ClientParameter("alleenstaande",true),
+                new ClientParameter("aanvrager_met_toeslagpartner",false),
+                new ClientParameter("hoger_dan_de_inkomensdrempel",false),
+                new ClientParameter("lager_dan_de_inkomensdrempel",true),
+                new ClientParameter("lager_dan_de_vermogensdrempel",true),
+                new ClientParameter("hoger_dan_de_vermogensdrempel",false),
+                new ClientParameter("toetsingsinkomen_aanvrager",15000),
+            } as IParametersCollection;
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                Assert.True(args.Parameters[0].Name == "keuze_boven_vermogensgrens");
+                parameters.Add(new ClientParameter("keuze_boven_vermogensgrens", true));
+            };
+            executionResult = new ExecutionResult(ref parameters);
+            executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            Assert.True((double)executionResult.Parameters.First(p=>p.Name=="zorgtoeslag").Value == 99.09);
+            parameters = new ParametersCollection() {
+                new ClientParameter("woonland","Nederland"),
+                new ClientParameter("alleenstaande",false),
+                new ClientParameter("aanvrager_met_toeslagpartner",true),
+                new ClientParameter("hoger_dan_de_inkomensdrempel",false),
+                new ClientParameter("lager_dan_de_inkomensdrempel",true),
+                new ClientParameter("lager_dan_de_vermogensdrempel",true),
+                new ClientParameter("hoger_dan_de_vermogensdrempel",false),
+                new ClientParameter("toetsingsinkomen_gezamenlijk",15000),
+            } as IParametersCollection;
+            executionResult = new ExecutionResult(ref parameters);
+            executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            Assert.True((double)executionResult.Parameters.First(p => p.Name == "zorgtoeslag").Value == 233.18);
+        }
+
+        [Fact]
         public void HashExecutionTest()
         {
             //List<ParametersCollection> parameters = new List<ParametersCollection>();
