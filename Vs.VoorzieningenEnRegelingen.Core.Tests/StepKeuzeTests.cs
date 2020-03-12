@@ -88,6 +88,33 @@ formules:
    - situatie: aanvrager_met_toeslagpartner
      formule: 3218";
 
+        private string _testYaml5 = @"# Zorgtoeslag for burger site demo
+stuurinformatie:
+  onderwerp: zorgtoeslag
+  organisatie: belastingdienst
+  type: toeslagen
+  domein: zorg
+  versie: 1.0
+  status: ontwikkel
+  jaar: 2019
+  bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
+berekening:
+ - stap: woonland
+   formule: woonlandfactor
+   recht: woonlandfactor > 0
+formules:
+ - woonlandfactor:
+   formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
+tabellen:
+  - naam: woonlandfactoren
+    woonland, factor:
+      - [ Nederland,           1.0    ]
+      - [ België,              0.7392 ]
+      - [ Bosnië-Herzegovina,  0.0672 ]
+      - [ Bulgarije,           0.0735 ]
+      - [ Cyprus,              0.1363 ]
+      - [ Denemarken,          0.9951 ]";
+
         [Fact]
         public void ShouldAcceptKeuze()
         {
@@ -183,6 +210,43 @@ formules:
             Assert.Equal("aanvrager_met_toeslagpartner", executionResult.Questions.Parameters[1].Name);
             Assert.Single(executionResult.Stacktrace);
             Assert.Equal("Wat is uw woonsituatie?", executionResult.Stacktrace.First().Step.Description);
+        }
+
+        [Fact]
+        public void ShouldReturnBooleanAsFirstQuestionOldSituation2()
+        {
+            var isException = false;
+
+            //prepare the result
+            var parameters = new ParametersCollection() as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+
+            //prepare yaml definition
+            var controller = new YamlScriptController();
+            //controller.Parse(_testYaml5);
+            controller.Parse(YamlZorgtoeslag4.Body);
+            //set the callback
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                executionResult.Questions = args;
+            };
+
+            try
+            {
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException)
+            {
+                isException = true;
+            }
+
+            Assert.True(isException);
+            Assert.Empty(executionResult.Parameters);
+            Assert.Single(executionResult.Questions.Parameters);
+            Assert.Equal("woonland", executionResult.Questions.Parameters[0].Name);
+            Assert.Equal(41, ((List<object>)executionResult.Questions.Parameters[0].Value).Count);
+            Assert.Single(executionResult.Stacktrace);
+            Assert.Equal("woonland", executionResult.Stacktrace.First().Step.Description);
         }
 
         [Fact]

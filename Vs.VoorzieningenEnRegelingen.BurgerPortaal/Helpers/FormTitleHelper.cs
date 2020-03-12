@@ -51,34 +51,34 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             if (key != null)
             {
                 key = ModifyName(key, alleenstaande);
-    }
+            }
             if (dictionary.Keys.Contains(key))
             {
                 return dictionary[key];
             }
 
-            return showDefaultText? $"Unknown for {parameters[0].Name}" : string.Empty;
+            return showDefaultText ? $"Unknown for {parameters[0].Name}" : string.Empty;
         }
 
         private static string ModifyName(string key, bool? alleenstaande)
-{
-    if (alleenstaande == null)
-    {
-        return key;
-    }
-    if (key == "hoger_dan_de_vermogensdrempel")
-    {
-        return (alleenstaande ?? false) ? "alleenstaande_hoger_dan_de_vermogensdrempel" : "toeslagpartner_hoger_dan_de_vermogensdrempel";
-    }
-    if (key == "hoger_dan_de_inkomensdrempel")
-    {
-        return (alleenstaande ?? false) ? "alleenstaande_hoger_dan_de_inkomensdrempel" : "toeslagpartner_hoger_dan_de_inkomensdrempel";
-    }
+        {
+            if (alleenstaande == null)
+            {
+                return key;
+            }
+            if (key == "hoger_dan_de_vermogensdrempel")
+            {
+                return (alleenstaande ?? false) ? "alleenstaande_hoger_dan_de_vermogensdrempel" : "toeslagpartner_hoger_dan_de_vermogensdrempel";
+            }
+            if (key == "hoger_dan_de_inkomensdrempel")
+            {
+                return (alleenstaande ?? false) ? "alleenstaande_hoger_dan_de_inkomensdrempel" : "toeslagpartner_hoger_dan_de_inkomensdrempel";
+            }
 
-    return key;
-}
+            return key;
+        }
 
-private static Dictionary<string, string> _questionTitle = new Dictionary<string, string> {
+        private static Dictionary<string, string> _questionTitle = new Dictionary<string, string> {
             { "woonland", "Selecteer uw woonland." },
             { "alleenstaande", "Wat is uw woonsituatie?"},
             { "alleenstaande_hoger_dan_de_inkomensdrempel", "Inkomensdrempel"},
@@ -89,7 +89,7 @@ private static Dictionary<string, string> _questionTitle = new Dictionary<string
             { "toetsingsinkomen_gezamenlijk", "Gezamenlijk toetsingsinkomen" }
         };
 
-private static Dictionary<string, string> _questionDescription = new Dictionary<string, string> {
+        private static Dictionary<string, string> _questionDescription = new Dictionary<string, string> {
             { "woonland", "Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de Belastingdienst."},
             { "alleenstaande", "Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de Belastingdienst."},
             { "alleenstaande_hoger_dan_de_inkomensdrempel",

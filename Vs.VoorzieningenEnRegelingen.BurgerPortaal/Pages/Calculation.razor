@@ -24,7 +24,10 @@
                        Number=@_displayQuestionNumber
                        Subject="@_displayQuestion" />
     <Spacer />
-    <Hint Title="@_displayQuestionTitle" Content="@_displayQuestionDescription" />
+    @if (!string.IsNullOrWhiteSpace(_displayQuestionTitle) || !string.IsNullOrWhiteSpace(_displayQuestionDescription))
+    {
+        <Hint Title="@_displayQuestionTitle" Content="@_displayQuestionDescription" />
+    }
     <Spacer />
     <EditForm Model="_formElement">
         @if (_hasRights && _formElement.ShowElement)

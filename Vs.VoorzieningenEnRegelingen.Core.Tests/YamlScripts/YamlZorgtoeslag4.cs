@@ -19,7 +19,7 @@ berekening:
  - stap: woonland
    formule: woonlandfactor
    recht: woonlandfactor > 0
- - stap: Wat is uw woonsituatie?
+ - stap: woonsituatie
    keuze:
    - situatie: alleenstaande
    - situatie: aanvrager_met_toeslagpartner
@@ -29,6 +29,7 @@ berekening:
    - situatie: lager_dan_vermogensdrempel
    recht: lager_dan_vermogensdrempel
  - stap: inkomensdrempel
+   keuze:
    - situatie: hoger_dan_inkomensdrempel
    - situatie: lager_dan_inkomensdrempel
    recht: lager_dan_inkomensdrempel
@@ -45,6 +46,8 @@ formules:
      formule: 1609
    - situatie: aanvrager_met_toeslagpartner
      formule: 3218
+ - toetsingsinkomen:
+     formule: toetsingsinkomenbedrag
  - toetsingsinkomensdrempel:
    - situatie: alleenstaande
      formule: 29562
