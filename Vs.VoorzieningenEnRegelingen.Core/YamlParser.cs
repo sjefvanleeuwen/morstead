@@ -84,7 +84,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)])
             {
                 var debugInfoStep = DebugInfo.MapDebugInfo(step.Start, step.End);
-                string stepid = "", description = "", formula = "", situation = "";
+                string stepid = "", description = "", formula = "", value = "", situation = "";
                 var @break = null as IBreak;
                 IEnumerable<string> choices = null;
                 foreach (var stepInfo in ((YamlMappingNode)step).Children)
@@ -97,11 +97,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                         case "omschrijving":
                             description = stepInfo.Value.ToString();
                             break;
-                        case "situatie":
-                            situation = stepInfo.Value.ToString();
-                            break;
                         case "formule":
                             formula = stepInfo.Value.ToString();
+                            break;
+                        case "waarde":
+                            value = stepInfo.Value.ToString();
+                            break;
+                        case "situatie":
+                            situation = stepInfo.Value.ToString();
                             break;
                         case "recht":
                             @break = new Break() { Expression = stepInfo.Value.ToString() };
@@ -114,7 +117,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
                     }
                 }
-                steps.Add(new Step(key++, stepid, description, formula, situation, @break, choices));
+                steps.Add(new Step(key++, stepid, description, formula, value, situation, @break, choices));
             }
             return steps;
         }
@@ -235,9 +238,33 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 if (step.Choices != null && step.Choices.Any())
                 {
                     var functions = new List<Function>();
-                    foreach (var choice in step.Choices) {
+                    foreach (var choice in step.Choices)
+                    {
                         functions.Add(new Function(_dummyDebugInfo, choice, choice));
                     }
+                    //the information comes from the step, so a dummy debug info will do
+                    formulas.Add(new Formula(_dummyDebugInfo, YamlHelper.GetFormulaNameFromStep(step), functions));
+                }
+            }
+            return formulas;
+        }
+
+        /// <summary>
+        /// A value should be the result of a formula
+        /// </summary>
+        /// <param name="steps"></param>
+        /// <returns></returns>
+        internal IEnumerable<Formula> GetFormulasFromStepValue(List<Step> steps)
+        {
+            var formulas = new List<Formula>();
+            foreach (var step in steps)
+            {
+                if (!string.IsNullOrWhiteSpace(step.Value))
+                {
+                    var functions = new List<Function>
+                    {
+                        new Function(_dummyDebugInfo, step.Value, step.Value)
+                    };
                     //the information comes from the step, so a dummy debug info will do
                     formulas.Add(new Formula(_dummyDebugInfo, YamlHelper.GetFormulaNameFromStep(step), functions));
                 }

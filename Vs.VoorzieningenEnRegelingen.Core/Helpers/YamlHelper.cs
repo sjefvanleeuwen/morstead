@@ -7,7 +7,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Helpers
     {
         public static string GetFormulaNameFromStep(IStep step)
         {
-            return "func_" + step.Name.Replace(" ", "_", StringComparison.InvariantCulture);
+            return "autofunc_" + step.Name.Replace(" ", "_", StringComparison.InvariantCulture);
         }
     }
 }

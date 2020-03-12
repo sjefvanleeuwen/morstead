@@ -68,6 +68,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 YamlParser parser = new YamlParser(yaml, null);
                 _model = new Model.Model(parser.Header(), parser.Formulas().ToList(), parser.Tabellen().ToList(), parser.Flow().ToList());
                 _model.AddFormulas(parser.GetFormulasFromBooleanSteps(_model.Steps));
+                _model.AddFormulas(parser.GetFormulasFromStepValue(_model.Steps));
             }
             catch (Exception ex)
             {
@@ -163,11 +164,16 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 return GetFormula(step.Formula);
             }
             //no formula, make a formula from the choices provided
-            if (step.Choices == null || !step.Choices.Any())
+            if (step.Choices != null && step.Choices.Any())
             {
-                throw new StepException($"Expected reference to a formula or choices to evaluate in worflow step {step.Name} {step.Description} to execute.", step);
+                return GetFormula(YamlHelper.GetFormulaNameFromStep(step));
             }
-            return GetFormula(YamlHelper.GetFormulaNameFromStep(step));
+            //no formula, or choices, make a formula from the value provided
+            if (!string.IsNullOrWhiteSpace(step.Value))
+            {
+                return GetFormula(YamlHelper.GetFormulaNameFromStep(step));
+            }
+            throw new StepException($"Expected reference to a formula or choices to evaluate in worflow step {step.Name} {step.Description} to execute.", step);
         }
 
         private void CheckForStopExecution(IParametersCollection parameters, IExecutionResult executionResult)

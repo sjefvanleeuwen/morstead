@@ -368,7 +368,7 @@ tabellen:
             Assert.False((bool)executionResult.Parameters[0].Value);
             Assert.Equal("B", executionResult.Parameters[1].Name);
             Assert.True((bool)executionResult.Parameters[1].Value);
-            Assert.Equal("func_Test_A_of_B", executionResult.Parameters[2].Name);
+            Assert.Equal("autofunc_Test_A_of_B", executionResult.Parameters[2].Name);
             Assert.True((bool)executionResult.Parameters[2].Value);
             Assert.Equal("recht", executionResult.Parameters[3].Name);
             Assert.False((bool)executionResult.Parameters[3].Value);

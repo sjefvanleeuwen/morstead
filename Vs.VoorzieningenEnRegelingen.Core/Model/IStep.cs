@@ -12,6 +12,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         int Key { get; }
         string Name { get; }
         string Situation { get; }
+        string Value { get; }
         IEnumerable<string> Choices { get; }
     }
 }
