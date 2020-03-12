@@ -11,7 +11,7 @@ stuurinformatie:
   organisatie: belastingdienst
   type: toeslagen
   domein: zorg
-  versie: 1.0
+  versie: 3.0
   status: ontwikkel
   jaar: 2019
   bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
