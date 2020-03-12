@@ -86,7 +86,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 var debugInfoStep = DebugInfo.MapDebugInfo(step.Start, step.End);
                 string stepid = "", description = "", formula = "", value = "", situation = "";
                 var @break = null as IBreak;
-                IEnumerable<string> choices = null;
+                IEnumerable<IChoice> choices = null;
                 foreach (var stepInfo in ((YamlMappingNode)step).Children)
                 {
                     switch (stepInfo.Key.ToString())
@@ -122,21 +122,21 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return steps;
         }
 
-        private IEnumerable<string> GetSituations(YamlNode node)
+        private IEnumerable<IChoice> GetSituations(YamlNode node)
         {
-            var result = new List<string>();
+            var result = new List<IChoice>();
             foreach (var choiceInfo in ((YamlSequenceNode)node).Children)
             {
                 var choiceInfoItems = ((YamlMappingNode)choiceInfo).Children;
                 if (choiceInfoItems.Count != 1)
                 {
-                    throw new Exception($"multipl step choice identifiders found; {choiceInfoItems.Count}");
+                    throw new Exception($"multiple step choice identifiders found; {choiceInfoItems.Count}");
                 }
                 var choiceInfoItem = choiceInfoItems.First();
                 switch (choiceInfoItem.Key.ToString())
                 {
                     case SituationAttribute:
-                        result.Add(choiceInfoItem.Value.ToString());
+                        result.Add(new Choice() { Situation = choiceInfoItem.Value.ToString() });
                         break;
                     default:
                         throw new Exception($"unknown step choice identifider {choiceInfoItem.Key.ToString()}");
@@ -240,7 +240,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     var functions = new List<Function>();
                     foreach (var choice in step.Choices)
                     {
-                        functions.Add(new Function(_dummyDebugInfo, choice, choice));
+                        functions.Add(new Function(_dummyDebugInfo, choice.Situation, choice.Situation));
                     }
                     //the information comes from the step, so a dummy debug info will do
                     formulas.Add(new Formula(_dummyDebugInfo, YamlHelper.GetFormulaNameFromStep(step), functions));

@@ -35,5 +35,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.True(header.Jaar == "2019");
             Assert.True(header.Bron == "https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf");
         }
+
+        [Fact]
+        public void CanParseChoices()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            Assert.False(result.IsError);
+        }
     }
 }

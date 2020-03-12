@@ -159,8 +159,8 @@ tabellen:
             Assert.Single(parseResult.Model.Steps);
             var stepToTest = parseResult.Model.Steps.First();
             Assert.Equal(2, stepToTest.Choices.Count());
-            Assert.Equal("A", stepToTest.Choices.ElementAt(0));
-            Assert.Equal("B", stepToTest.Choices.ElementAt(1));
+            Assert.Equal("A", stepToTest.Choices.ElementAt(0).Situation);
+            Assert.Equal("B", stepToTest.Choices.ElementAt(1).Situation);
         }
 
         //does not work, it is caught, should be refactored

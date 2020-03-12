@@ -4,7 +4,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
     public class Step : IStep
     {
-        public Step(int key, string name, string description, string formula, string value, string situation, IBreak @break, IEnumerable<string> choices)
+        public Step(int key, string name, string description, string formula, string value, string situation, IBreak @break, IEnumerable<IChoice> choices)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -37,7 +37,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         /// Choices is a number of situations
         /// This will lead to a question which of the situations should be taken
         /// </summary>
-        public IEnumerable<string> Choices { get; }
+        public IEnumerable<IChoice> Choices { get; }
         /// <summary>
         /// Break is also a formula, but allows a condition to break out of a flow.
         /// For example, if someone has rights (recht) to a service.

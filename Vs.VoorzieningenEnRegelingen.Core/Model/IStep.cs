@@ -13,6 +13,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         string Name { get; }
         string Situation { get; }
         string Value { get; }
-        IEnumerable<string> Choices { get; }
+        IEnumerable<IChoice> Choices { get; }
     }
 }
