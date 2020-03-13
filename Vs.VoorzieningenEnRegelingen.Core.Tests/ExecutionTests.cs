@@ -658,48 +658,6 @@ formules:
         }
 
         [Fact]
-        public void FormulaResolvesToCorrectSituationalFunction()
-        {
-            var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag3.Body);
-            Assert.False(result.IsError);
-            bool isException = false;
-            var executionResult = null as IExecutionResult;
-
-            var parameters = new ParametersCollection() {
-                new ClientParameter("woonland","Nederland"),
-                new ClientParameter("alleenstaande",true),
-                new ClientParameter("aanvrager_met_toeslagpartner",false),
-                new ClientParameter("hoger_dan_de_inkomensdrempel",false),
-                new ClientParameter("lager_dan_de_inkomensdrempel",true),
-                new ClientParameter("lager_dan_de_vermogensdrempel",true),
-                new ClientParameter("hoger_dan_de_vermogensdrempel",false),
-                new ClientParameter("toetsingsinkomen_aanvrager",15000),
-            } as IParametersCollection;
-            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
-            {
-                Assert.True(args.Parameters[0].Name == "keuze_boven_vermogensgrens");
-                parameters.Add(new ClientParameter("keuze_boven_vermogensgrens", true));
-            };
-            executionResult = new ExecutionResult(ref parameters);
-            executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
-            Assert.True((double)executionResult.Parameters.First(p=>p.Name=="zorgtoeslag").Value == 99.09);
-            parameters = new ParametersCollection() {
-                new ClientParameter("woonland","Nederland"),
-                new ClientParameter("alleenstaande",false),
-                new ClientParameter("aanvrager_met_toeslagpartner",true),
-                new ClientParameter("hoger_dan_de_inkomensdrempel",false),
-                new ClientParameter("lager_dan_de_inkomensdrempel",true),
-                new ClientParameter("lager_dan_de_vermogensdrempel",true),
-                new ClientParameter("hoger_dan_de_vermogensdrempel",false),
-                new ClientParameter("toetsingsinkomen_gezamenlijk",15000),
-            } as IParametersCollection;
-            executionResult = new ExecutionResult(ref parameters);
-            executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
-            Assert.True((double)executionResult.Parameters.First(p => p.Name == "zorgtoeslag").Value == 233.18);
-        }
-
-        [Fact]
         public void HashExecutionTest()
         {
             //List<ParametersCollection> parameters = new List<ParametersCollection>();
@@ -741,7 +699,49 @@ formules:
         }
 
         [Fact]
-        public void Execution_ZorgToeslag_2019_Scenario3()
+        public void FormulaResolvesToCorrectSituationalFunctionV3()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlZorgtoeslag3.Body);
+            Assert.False(result.IsError);
+            bool isException = false;
+            var executionResult = null as IExecutionResult;
+
+            var parameters = new ParametersCollection() {
+                new ClientParameter("woonland","Nederland"),
+                new ClientParameter("alleenstaande",true),
+                new ClientParameter("aanvrager_met_toeslagpartner",false),
+                new ClientParameter("hoger_dan_de_inkomensdrempel",false),
+                new ClientParameter("lager_dan_de_inkomensdrempel",true),
+                new ClientParameter("lager_dan_de_vermogensdrempel",true),
+                new ClientParameter("hoger_dan_de_vermogensdrempel",false),
+                new ClientParameter("toetsingsinkomen_aanvrager",15000),
+            } as IParametersCollection;
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                Assert.True(args.Parameters[0].Name == "keuze_boven_vermogensgrens");
+                parameters.Add(new ClientParameter("keuze_boven_vermogensgrens", true));
+            };
+            executionResult = new ExecutionResult(ref parameters);
+            executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            Assert.True((double)executionResult.Parameters.First(p => p.Name == "zorgtoeslag").Value == 99.09);
+            parameters = new ParametersCollection() {
+                new ClientParameter("woonland","Nederland"),
+                new ClientParameter("alleenstaande",false),
+                new ClientParameter("aanvrager_met_toeslagpartner",true),
+                new ClientParameter("hoger_dan_de_inkomensdrempel",false),
+                new ClientParameter("lager_dan_de_inkomensdrempel",true),
+                new ClientParameter("lager_dan_de_vermogensdrempel",true),
+                new ClientParameter("hoger_dan_de_vermogensdrempel",false),
+                new ClientParameter("toetsingsinkomen_gezamenlijk",15000),
+            } as IParametersCollection;
+            executionResult = new ExecutionResult(ref parameters);
+            executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            Assert.True((double)executionResult.Parameters.First(p => p.Name == "zorgtoeslag").Value == 233.18);
+        }
+
+        [Fact]
+        public void FormulaResolvesToCorrectSituationalFunctionV4_1()
         {
             //based on version 4 of the yaml
             var controller = new YamlScriptController();
@@ -768,7 +768,7 @@ formules:
         }
 
         [Fact]
-        public void Execution_ZorgToeslag_2019_Scenario3a()
+        public void FormulaResolvesToCorrectSituationalFunctionV4_2()
         {
             //based on version 4 of the yaml
             var controller = new YamlScriptController();
@@ -794,31 +794,32 @@ formules:
             Assert.Equal(35.00, (double)parameters.GetParameter("zorgtoeslag").Value);
         }
 
-        //[Fact]
-        //public void Execution_ZorgToeslag_2019_Scenario3b()
-        //{
-        //    //based on version 4 of the yaml
-        //    var controller = new YamlScriptController();
-        //    controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
-        //    {
-        //        // should not be called.
-        //        throw new Exception("Questioncallback should not be called.");
-        //    };
-        //    var result = controller.Parse(YamlZorgtoeslag4.Body);
-        //    Assert.False(result.IsError);
-        //    var parameters = new ParametersCollection() {
-        //        new ClientParameter("woonland","Nederland"),
-        //        new ClientParameter("alleenstaande",false),
-        //        new ClientParameter("aanvrager_met_toeslagpartner",true),
-        //        new ClientParameter("hoger_dan_vermogensdrempel",false),
-        //        new ClientParameter("lager_dan_vermogensdrempel",true),
-        //        new ClientParameter("hoger_dan_inkomensdrempel",false),
-        //        new ClientParameter("lager_dan_inkomensdrempel",true),
-        //        new ClientParameter("toetsingsinkomen", (double)19000),
-        //    } as IParametersCollection;
-        //    var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
-        //    controller.ExecuteWorkflow(ref parameters, ref executionResult);
-        //    Assert.Equal(233.18, (double)parameters.GetParameter("zorgtoeslag").Value);
-        //}
+        [Fact]
+        [Trait("Category", "Unfinished")]
+        public void FormulaResolvesToCorrectSituationalFunctionV4_3()
+        {
+            //based on version 4 of the yaml
+            var controller = new YamlScriptController();
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                // should not be called.
+                throw new Exception("Questioncallback should not be called.");
+            };
+            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            Assert.False(result.IsError);
+            var parameters = new ParametersCollection() {
+                new ClientParameter("woonland","Nederland"),
+                new ClientParameter("alleenstaande",false),
+                new ClientParameter("aanvrager_met_toeslagpartner",true),
+                new ClientParameter("hoger_dan_vermogensdrempel",false),
+                new ClientParameter("lager_dan_vermogensdrempel",true),
+                new ClientParameter("hoger_dan_inkomensdrempel",false),
+                new ClientParameter("lager_dan_inkomensdrempel",true),
+                new ClientParameter("toetsingsinkomen", (double)19000),
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+            controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            Assert.Equal(233.18, (double)parameters.GetParameter("zorgtoeslag").Value);
+        }
     }
 }
