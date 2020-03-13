@@ -85,7 +85,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         {
             var moqParameter = InitMoqParameter();
             var moq = new Mock<IParametersCollection>();
-            moq.Setup(m => m.GetEnumerator()).Returns(new List<IParameter> { moqParameter }.GetEnumerator());
+            moq.Setup(m => m.GetAll()).Returns(new List<IParameter> { moqParameter });
+            //moq.Setup(m => m.GetEnumerator()).Returns(new List<IParameter> { moqParameter }.GetEnumerator());
             return moq.Object;
         }
 

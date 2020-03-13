@@ -28,7 +28,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             {
                 return "Resultaat";
             }
-            return GetFromLookupTable(result.Questions.Parameters, _questionTitle, false, (bool?)result.Parameters?.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            return GetFromLookupTable(result.Questions.Parameters, _questionTitle, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
         }
 
         public static string GetQuestionDescription(IExecutionResult result)
@@ -38,7 +38,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
                 return "Uw zorgtoeslag is berekend. Hieronder staat het bedrag in euro's waar u volgens de berekening maandelijks recht op hebt.<br />" +
                     "Let op: dit is een proefberekening, nadat u uw zorgtoeslag hebt aangevraagd bij de Belastingdienst wordt de definitieve toeslag bekend.";
             }
-            return GetFromLookupTable(result.Questions.Parameters, _questionDescription, false, (bool?)result.Parameters?.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            return GetFromLookupTable(result.Questions.Parameters, _questionDescription, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
         }
 
         private static string GetFromLookupTable(IParametersCollection parameters, Dictionary<string, string> dictionary, bool showDefaultText = false, bool? alleenstaande = null)
@@ -47,7 +47,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             {
                 throw new ArgumentNullException(nameof(dictionary));
             }
-            var key = parameters.FirstOrDefault(p => dictionary.Keys.Contains(ModifyName(p.Name, alleenstaande)))?.Name ?? string.Empty;
+            var key = parameters.GetAll().FirstOrDefault(p => dictionary.Keys.Contains(ModifyName(p.Name, alleenstaande)))?.Name ?? string.Empty;
             if (key != null)
             {
                 key = ModifyName(key, alleenstaande);
@@ -57,7 +57,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
                 return dictionary[key];
             }
 
-            return showDefaultText ? $"Unknown for {parameters[0].Name}" : string.Empty;
+            return showDefaultText ? $"Unknown for {parameters.GetAll().First().Name}" : string.Empty;
         }
 
         private static string ModifyName(string key, bool? alleenstaande)
