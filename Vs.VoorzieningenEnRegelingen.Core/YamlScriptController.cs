@@ -113,6 +113,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 YamlParser parser = new YamlParser(yaml, null);
                 _model = new Model.Model(parser.Header(), parser.Formulas().ToList(), parser.Tabellen().ToList(), parser.Flow().ToList());
                 _model.AddFormulas(parser.GetFormulasFromBooleanSteps(_model.Steps));
+                _model.AddFormulas(parser.GetFormulasFromStepValue(_model.Steps));
             }
             catch (Exception ex)
             {
