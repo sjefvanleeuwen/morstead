@@ -6,6 +6,7 @@ using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using Vs.VoorzieningenEnRegelingen.Core.Helpers;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
@@ -15,6 +16,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private const string Ok = "OK";
         private Model.Model _model;
         private ExpressionContext localContext;
+        private List<ContentNode> _contentNodes;
+
+        public List<ContentNode> ContentNodes { get { return _contentNodes; } }
 
         public delegate void QuestionDelegate(FormulaExpressionContext sender, QuestionArgs args);
 
@@ -61,14 +65,54 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return _model.Tables.First(p => p.Name == name);
         }
 
+        /// <summary>
+        /// Resolve to question parameter or constant through recursion for a situation.
+        /// </summary>
+        /// <param name="expression"></param>
+        private void ResolveToQuestion(string name, ref List<ContentNode> items, string situation = null)
+        {
+            var formula = _model.Formulas.Find(p => p.Name == name);
+            if (formula == null)
+                return;
+            // resolve all situations.
+            foreach (var function in formula.Functions)
+            {
+                // Get Questions for function
+                var parameters = GetFunctionTree(this, function.Expression);
+                var nodeName = string.Join('.', new[] { situation, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
+                // Get Boolean Question for situation (if not previously asked)
+                if (function.IsSituational && items.Find(p => p.Name == nodeName) == null /* distinct */)
+                {
+                    function.SemanticKey = nodeName;
+                    items.Add(new ContentNode(nodeName) { IsSituational = function.IsSituational, Situation = function.Situation, Parameter = new Parameter(function.Situation, false, TypeEnum.Boolean, ref _model) });
+                }
+                foreach (var parameter in parameters)
+                {
+                    if (_model.Formulas.Find(p => p.Name == parameter.Name) == null)
+                    {
+                        parameter.SemanticKey = string.Join('.', new[] { parameter.Name, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
+                        // not a formula name, so it resolves to a question, add it to the list
+                        items.Add(new ContentNode(parameter.SemanticKey) { IsSituational = function.IsSituational, Situation = function.Situation, Parameter = parameter });
+                        // find formula's that use the answer to this question.
+                        ResolveToQuestion(parameter.Name, ref items);
+                    }
+                    else
+                    {
+                        // Recurse to find next question.
+                        ResolveToQuestion(parameter.Name, ref items);
+                    }
+                }
+            }
+        }
+
         public ParseResult Parse(string yaml)
         {
+            _contentNodes = new List<ContentNode>();
             try
             {
                 YamlParser parser = new YamlParser(yaml, null);
                 _model = new Model.Model(parser.Header(), parser.Formulas().ToList(), parser.Tabellen().ToList(), parser.Flow().ToList());
                 _model.AddFormulas(parser.GetFormulasFromBooleanSteps(_model.Steps));
-                _model.AddFormulas(parser.GetFormulasFromStepValue(_model.Steps));
             }
             catch (Exception ex)
             {
