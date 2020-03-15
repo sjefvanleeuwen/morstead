@@ -54,11 +54,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             steps.Add(new SequeceStep
             {
                 Key = result.Stacktrace.Last().Step.Key,
-                ParameterName = result.Questions.Parameters.FirstOrDefault()?.Type != TypeInference.InferenceResult.TypeEnum.Boolean ?
-                    result.Questions.Parameters.First().Name :
+                SemanticKey = result.Stacktrace.Last().Step.SemanticKey,
+                ParameterName = result.Questions.Parameters.GetAll().FirstOrDefault()?.Type != TypeInference.InferenceResult.TypeEnum.Boolean ?
+                    result.Questions.Parameters.GetAll().First().Name :
                     null,
-                ValidParameterNames = result.Questions.Parameters.FirstOrDefault()?.Type == TypeInference.InferenceResult.TypeEnum.Boolean ?
-                    result.Questions.Parameters.Select(p => p.Name) :
+                ValidParameterNames = result.Questions.Parameters.GetAll().FirstOrDefault()?.Type == TypeInference.InferenceResult.TypeEnum.Boolean ?
+                    result.Questions.Parameters.GetAll().Select(p => p.Name) :
                     null
             });
             Steps = steps;
@@ -66,9 +67,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 
         public void UpdateParametersCollection(IParametersCollection parameters)
         {
-            foreach(var p in parameters) 
+            foreach(var p in parameters.GetAll()) 
             {
-                if (p is ClientParameter && !((ClientParameter)p).IsCalculated)
+                if (p is IClientParameter && !((IClientParameter)p).IsCalculated)
                 {
                     Parameters.UpSert(p);
                 }

@@ -1,7 +1,6 @@
 ﻿using Moq;
 using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
-using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Xunit;
 
@@ -46,6 +45,5 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             moq.Setup(m => m.Name).Returns("woonland");
             return moq.Object;
         }
-
     }
 }

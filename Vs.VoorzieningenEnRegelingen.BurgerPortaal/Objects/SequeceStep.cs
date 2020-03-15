@@ -7,6 +7,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
     public class SequeceStep : ISequenceStep
     {
         public int Key { get; set; }
+        public string SemanticKey { get; set; }
         public string ParameterName { get; set; }
         public IEnumerable<string> ValidParameterNames { get; set; }
 
