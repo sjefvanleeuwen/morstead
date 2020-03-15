@@ -7,7 +7,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
     {
         string Yaml { get; set; }
         IParametersCollection Parameters { get; }
-        IEnumerable<IStep> Steps { get; }
+        IEnumerable<ISequenceStep> Steps { get; }
 
         IParametersCollection GetParametersToSend(int step);
         void AddStep(int requestStep, IExecutionResult result);

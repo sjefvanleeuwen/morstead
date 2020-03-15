@@ -10,12 +10,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
     {
         public string Yaml { get; set; }
         public IParametersCollection Parameters { get; private set; }
-        public IEnumerable<IStep> Steps { get; private set; }
+        public IEnumerable<ISequenceStep> Steps { get; private set; }
 
         public Sequence()
         {
             Parameters = new ParametersCollection();
-            Steps = new List<IStep>();
+            Steps = new List<ISequenceStep>();
         }
 
         public IParametersCollection GetParametersToSend(int step)
@@ -51,7 +51,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
                 Steps = steps;
                 return;
             }
-            steps.Add(new Step
+            steps.Add(new SequeceStep
             {
                 Key = result.Stacktrace.Last().Step.Key,
                 ParameterName = result.Questions.Parameters.FirstOrDefault()?.Type != TypeInference.InferenceResult.TypeEnum.Boolean ?

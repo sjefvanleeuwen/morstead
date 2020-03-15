@@ -3,7 +3,7 @@ using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 {
-    public interface IStep
+    public interface ISequenceStep
     {
         int Key { get; set; }
         string ParameterName { get; set; }

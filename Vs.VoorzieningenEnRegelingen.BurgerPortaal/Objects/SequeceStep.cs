@@ -4,7 +4,7 @@ using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 {
-    public class Step : IStep
+    public class SequeceStep : ISequenceStep
     {
         public int Key { get; set; }
         public string ParameterName { get; set; }
