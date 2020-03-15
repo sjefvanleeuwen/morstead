@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Library\Objects\" />
+    <Compile Remove="Library\Objects\**" />
+    <Content Remove="Library\Objects\**" />
+    <EmbeddedResource Remove="Library\Objects\**" />
+    <None Remove="Library\Objects\**" />
   </ItemGroup>
 
   <ItemGroup>
