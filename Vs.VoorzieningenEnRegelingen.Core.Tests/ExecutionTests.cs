@@ -669,9 +669,9 @@ formules:
                 Assert.False(true);
             };
             Assert.True(result.Model.Steps.Count == 3);
-            Assert.True(result.Model.Steps[0].SemanticKey == "0");
-            Assert.True(result.Model.Steps[1].SemanticKey == "1");
-            Assert.True(result.Model.Steps[2].SemanticKey == "2");
+            Assert.True(result.Model.Steps[0].Key == 0);
+            Assert.True(result.Model.Steps[1].Key == 1);
+            Assert.True(result.Model.Steps[2].Key == 2);
             Assert.False(result.IsError);
             var executionResult = null as IExecutionResult;
             var parameters = new ParametersCollection() as IParametersCollection;
@@ -682,7 +682,7 @@ formules:
             var executionResult1 = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True((double)parameters[4].Value == 1000);
             StringBuilder sb = new StringBuilder();
-            stepSequence.Add(string.Join(",", executionResult1.Stacktrace.Select(p => p.Step.SemanticKey).ToArray()));
+            stepSequence.Add(string.Join(",", executionResult1.Stacktrace.Select(p => p.Step.Key).ToArray()));
             parameters.Clear();
             // Scenario 2: User fills in value 2 (in first step).
             parameters.Add(new ClientParameter("formule1_waarde", "-1"));
@@ -690,7 +690,7 @@ formules:
             var executionResult2 = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             //string.Join(",", integerArray.Select(i => i.ToString()).ToArray());
             Assert.True((double)parameters[3].Value == -100);
-            stepSequence.Add(string.Join(",", executionResult2.Stacktrace.Select(p => p.Step.SemanticKey).ToArray()));
+            stepSequence.Add(string.Join(",", executionResult2.Stacktrace.Select(p => p.Step.Key).ToArray()));
             // Get differences between sequence flows
             Assert.True(stepSequence[0] == "0,2");
             Assert.True(stepSequence[1] == "0,1");
