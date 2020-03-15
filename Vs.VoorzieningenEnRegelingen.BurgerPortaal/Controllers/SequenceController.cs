@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
@@ -10,10 +10,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
         public ISequence Sequence { get; private set; }
         public int CurrentStep { get; private set; } = 0;
         public int RequestStep { get; private set; } = 0;
-        public IParseResult ParseResult { get; private set; }
         public IExecutionResult LastExecutionResult { get; private set; }
+        public IParseResult ParseResult { get; private set; }
 
         private IServiceController _serviceController;
+        private IParseRequest _parseRequest;
+        private IParseResult _parseResult;
+
 
         public SequenceController(IServiceController serviceController, ISequence sequence)
         {
@@ -30,17 +33,26 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
             };
         }
 
-        public IParseRequest GetParseRequest()
+        public IParseResult GetParseResult()
         {
-            if (ParseResult == null)
+            if (_parseResult == null)
             {
-                ParseResult = _serviceController.Parse(GetParseRequest());
+                _parseResult = _serviceController.Parse(GetParseRequest());
             }
 
-            return new ParseRequest
+            return _parseResult;
+        }
+
+        public IParseRequest GetParseRequest()
+        {
+            if (_parseRequest == null)
             {
-                Config = Sequence.Yaml
-            };
+                _parseRequest = new ParseRequest
+                {
+                    Config = Sequence.Yaml
+                };
+            }
+            return _parseRequest;
         }
 
         public void IncreaseStep()

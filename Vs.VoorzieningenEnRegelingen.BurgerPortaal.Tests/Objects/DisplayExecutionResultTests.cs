@@ -1,12 +1,10 @@
 ﻿using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Xunit;
-using IStep = Vs.VoorzieningenEnRegelingen.Core.Model.IStep;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
 {
