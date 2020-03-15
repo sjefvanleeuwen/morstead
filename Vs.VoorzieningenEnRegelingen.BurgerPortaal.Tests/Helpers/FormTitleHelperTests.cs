@@ -60,7 +60,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         private ISequence InitMoqSequence()
         {
             var moq = new Mock<ISequence>();
-            moq.Setup(m => m.Steps).Returns(new List<ISequenceStep> { new SequeceStep(), new SequeceStep() });
+            moq.Setup(m => m.Steps).Returns(new List<ISequenceStep> { new SequenceStep(), new SequenceStep() });
             return moq.Object;
         }
 

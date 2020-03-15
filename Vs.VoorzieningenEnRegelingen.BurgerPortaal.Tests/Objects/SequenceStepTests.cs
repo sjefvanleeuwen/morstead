@@ -16,7 +16,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
         [Fact]
         public void HasMultipleValidParameterNamesTest()
         {
-            var sut = new SequeceStep() { ValidParameterNames = _names };
+            var sut = new SequenceStep() { ValidParameterNames = _names };
 
             Assert.True(sut.HasMultipleValidParameterNames());
         }
@@ -26,16 +26,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
         {
             var parameter = InitMoqParameter();
 
-            var sut1 = new SequeceStep() { ValidParameterNames = _names };
+            var sut1 = new SequenceStep() { ValidParameterNames = _names };
             Assert.False(sut1.IsMatch(parameter));
 
-            var sut2 = new SequeceStep() { ValidParameterNames = _names2 };
+            var sut2 = new SequenceStep() { ValidParameterNames = _names2 };
             Assert.True(sut2.IsMatch(parameter));
 
-            var sut3 = new SequeceStep() { ParameterName = _name };
+            var sut3 = new SequenceStep() { ParameterName = _name };
             Assert.False(sut3.IsMatch(parameter));
 
-            var sut4 = new SequeceStep() { ParameterName = _name2 };
+            var sut4 = new SequenceStep() { ParameterName = _name2 };
             Assert.True(sut4.IsMatch(parameter));
         }
 

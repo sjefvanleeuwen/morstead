@@ -51,7 +51,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
                 Steps = steps;
                 return;
             }
-            steps.Add(new SequeceStep
+            steps.Add(new SequenceStep
             {
                 Key = result.Stacktrace.Last().Step.Key,
                 SemanticKey = result.Stacktrace.Last().Step.SemanticKey,
