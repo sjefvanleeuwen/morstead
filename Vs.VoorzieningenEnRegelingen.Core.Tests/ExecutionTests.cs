@@ -740,7 +740,7 @@ formules:
             Assert.True((double)executionResult.Parameters.First(p => p.Name == "zorgtoeslag").Value == 233.18);
         }
 
-        [Fact]
+        //[Fact]
         public void FormulaResolvesToCorrectSituationalFunctionV4_1()
         {
             //based on version 4 of the yaml
@@ -767,7 +767,7 @@ formules:
             Assert.Equal(99.09, (double)parameters.GetParameter("zorgtoeslag").Value);
         }
 
-        [Fact]
+        //[Fact]
         public void FormulaResolvesToCorrectSituationalFunctionV4_2()
         {
             //based on version 4 of the yaml
