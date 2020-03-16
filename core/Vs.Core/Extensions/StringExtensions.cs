@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Vs.Core
+﻿namespace Vs.Core.Extensions
 {
     public static class StringExtensions
     {
@@ -10,7 +6,7 @@ namespace Vs.Core
         {
             if (!string.IsNullOrEmpty(str) && str.Length > 1)
             {
-                return Char.ToLowerInvariant(str[0]) + str.Substring(1);
+                return char.ToLowerInvariant(str[0]) + str.Substring(1);
             }
             return str;
         }
@@ -19,7 +15,7 @@ namespace Vs.Core
         {
             if (!string.IsNullOrEmpty(str) && str.Length > 1)
             {
-                return Char.ToUpperInvariant(str[0]) + str.Substring(1);
+                return char.ToUpperInvariant(str[0]) + str.Substring(1);
             }
             return str;
         }

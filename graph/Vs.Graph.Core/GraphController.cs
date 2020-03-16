@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using Vs.Graph.Core.Data;
 using Dapper.Contrib.Extensions;
 using System.Threading.Tasks;
-using Vs.Core;
+using Vs.Core.Extensions;
 
 namespace Vs.Graph.Core
 {

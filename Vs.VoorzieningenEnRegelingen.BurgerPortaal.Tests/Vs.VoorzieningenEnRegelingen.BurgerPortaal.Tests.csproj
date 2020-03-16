@@ -22,9 +22,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\cms\Vs.Cms.Core\Vs.Cms.Core.csproj" />
+    <ProjectReference Include="..\core\Vs.Core\Vs.Core.csproj" />
+    <ProjectReference Include="..\library\Microsoft.AspNetCore.Components.Testing\Microsoft.AspNetCore.Components.Testing.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.BurgerPortaal\Vs.VoorzieningenEnRegelingen.BurgerPortaal.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.Tests\Vs.VoorzieningenEnRegelingen.Core.Tests.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core\Vs.VoorzieningenEnRegelingen.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\" />
   </ItemGroup>
 
 </Project>

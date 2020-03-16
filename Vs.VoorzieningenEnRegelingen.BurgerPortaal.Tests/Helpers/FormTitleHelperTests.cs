@@ -60,7 +60,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         private ISequence InitMoqSequence()
         {
             var moq = new Mock<ISequence>();
-            moq.Setup(m => m.Steps).Returns(new List<Objects.IStep> { new Objects.Step(), new Objects.Step() });
+            moq.Setup(m => m.Steps).Returns(new List<ISequenceStep> { new SequenceStep(), new SequenceStep() });
             return moq.Object;
         }
 
@@ -85,7 +85,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         {
             var moqParameter = InitMoqParameter();
             var moq = new Mock<IParametersCollection>();
-            moq.Setup(m => m.GetEnumerator()).Returns(new List<IParameter> { moqParameter }.GetEnumerator());
+            moq.Setup(m => m.GetAll()).Returns(new List<IParameter> { moqParameter });
+            //moq.Setup(m => m.GetEnumerator()).Returns(new List<IParameter> { moqParameter }.GetEnumerator());
             return moq.Object;
         }
 

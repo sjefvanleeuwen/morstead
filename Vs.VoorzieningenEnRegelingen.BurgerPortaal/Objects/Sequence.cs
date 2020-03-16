@@ -10,12 +10,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
     {
         public string Yaml { get; set; }
         public IParametersCollection Parameters { get; private set; }
-        public IEnumerable<IStep> Steps { get; private set; }
+        public IEnumerable<ISequenceStep> Steps { get; private set; }
 
         public Sequence()
         {
             Parameters = new ParametersCollection();
-            Steps = new List<IStep>();
+            Steps = new List<ISequenceStep>();
         }
 
         public IParametersCollection GetParametersToSend(int step)
@@ -51,14 +51,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
                 Steps = steps;
                 return;
             }
-            steps.Add(new Step
+            steps.Add(new SequenceStep
             {
                 Key = result.Stacktrace.Last().Step.Key,
-                ParameterName = result.Questions.Parameters.FirstOrDefault()?.Type != TypeInference.InferenceResult.TypeEnum.Boolean ?
-                    result.Questions.Parameters.First().Name :
+                SemanticKey = result.Stacktrace.Last().Step.SemanticKey,
+                ParameterName = result.Questions.Parameters.GetAll().FirstOrDefault()?.Type != TypeInference.InferenceResult.TypeEnum.Boolean ?
+                    result.Questions.Parameters.GetAll().First().Name :
                     null,
-                ValidParameterNames = result.Questions.Parameters.FirstOrDefault()?.Type == TypeInference.InferenceResult.TypeEnum.Boolean ?
-                    result.Questions.Parameters.Select(p => p.Name) :
+                ValidParameterNames = result.Questions.Parameters.GetAll().FirstOrDefault()?.Type == TypeInference.InferenceResult.TypeEnum.Boolean ?
+                    result.Questions.Parameters.GetAll().Select(p => p.Name) :
                     null
             });
             Steps = steps;
@@ -66,9 +67,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 
         public void UpdateParametersCollection(IParametersCollection parameters)
         {
-            foreach(var p in parameters) 
+            foreach(var p in parameters.GetAll()) 
             {
-                if (p is ClientParameter && !((ClientParameter)p).IsCalculated)
+                if (p is IClientParameter && !((IClientParameter)p).IsCalculated)
                 {
                     Parameters.UpSert(p);
                 }

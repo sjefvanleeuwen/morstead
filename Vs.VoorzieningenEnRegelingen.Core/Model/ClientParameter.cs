@@ -1,16 +1,15 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
-using System.Collections.Generic;
 using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
-    public class ClientParameter : IParameter
+    public class ClientParameter : IClientParameter 
     {
         public string Name { get; set; }
 
-        private  object _value;
+        private object _value;
 
         public ClientParameter() { }
 
@@ -46,8 +45,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         }
 
         [JsonIgnore()]
-        public string ValueAsString { 
-            get 
+        public string ValueAsString
+        {
+            get
             {
                 return _value.ToString();
             }
@@ -57,7 +57,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             }
         }
 
-        public object Value {
+        public object Value
+        {
             get
             {
                 return _value;
@@ -73,10 +74,12 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         [JsonConverter(typeof(StringEnumConverter))]
         public TypeEnum Type { get; set; }
 
-        public string TypeAsString { 
-            get { 
-                return Type.ToString(); 
-            } 
+        public string TypeAsString
+        {
+            get
+            {
+                return Type.ToString();
+            }
         }
 
         public bool IsCalculated { get; internal set; }

@@ -12,6 +12,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return (from p in this where p.Name == name select p).SingleOrDefault();
         }
 
+        public IEnumerable<IParameter> GetAll()
+        {
+            return this;
+        }
+
         public void UpSert(IParameter parameter)
         {
             if (parameter == null)

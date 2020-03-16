@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Library.ExtensionMethods;
+using Vs.Core.Extensions;
 using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements

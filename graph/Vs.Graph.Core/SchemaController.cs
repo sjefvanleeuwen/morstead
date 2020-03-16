@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Vs.Core;
+using Vs.Core.Extensions;
 using Vs.Graph.Core.Data;
 using Vs.Graph.Core.Data.Exceptions;
 using YamlDotNet.Serialization;

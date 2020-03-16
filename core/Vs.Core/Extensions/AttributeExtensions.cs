@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Vs.Core
+namespace Vs.Core.Extensions
 {
     public static class AttributeExtensions
     {
@@ -17,7 +17,7 @@ namespace Vs.Core
             {
                 return valueSelector(att);
             }
-            return default(TValue);
+            return default;
         }
     }
 }

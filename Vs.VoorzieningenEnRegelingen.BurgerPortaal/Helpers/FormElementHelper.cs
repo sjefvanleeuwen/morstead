@@ -20,17 +20,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
             formElement.InferedType = GetInferedType(result.Questions);
 
-            formElement.Name = result.Questions.Parameters[0].Name;
-            formElement.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters?.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            formElement.Name = result.Questions.Parameters.GetAll().First().Name;
+            formElement.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             formElement.Options = DefineOptions(result);
-            formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters?.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-            formElement.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters?.FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            formElement.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             return formElement;
         }
 
         private static TypeInference.InferenceResult.TypeEnum GetInferedType(IQuestionArgs questions)
         {
-            return questions.Parameters.FirstOrDefault().Type;
+            return questions.Parameters.GetAll().FirstOrDefault().Type;
         }
 
         private static string GetFromLookupTable(IParametersCollection parameters, Dictionary<string, string> dictionary, bool showDefaultText = false, bool? alleenstaande = null)
@@ -39,7 +39,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             {
                 throw new ArgumentNullException(nameof(dictionary));
             }
-            var key = parameters.FirstOrDefault(p => dictionary.Keys.Contains(ModifyName(p.Name, alleenstaande)))?.Name ?? string.Empty;
+            var key = parameters.GetAll().FirstOrDefault(p => dictionary.Keys.Contains(ModifyName(p.Name, alleenstaande)))?.Name ?? string.Empty;
             if (key != null)
             {
                 key = ModifyName(key, alleenstaande);
@@ -49,7 +49,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
                 return dictionary[key];
             }
 
-            return showDefaultText ? $"Unknown for {parameters[0].Name}" : string.Empty;
+            return showDefaultText ? $"Unknown for {parameters.GetAll().First().Name}" : string.Empty;
         }
 
         private static string ModifyName(string key, bool? alleenstaande)
@@ -86,7 +86,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         private static Dictionary<string, string> BooleanToOptions(IExecutionResult result)
         {
             var options = new Dictionary<string, string>();
-            foreach (var p in result.Questions.Parameters) {
+            foreach (var p in result.Questions.Parameters.GetAll()) {
                 options.Add(p.Name, GetParameterDisplayName(p.Name, result.Parameters));
             }
             return options;
@@ -97,19 +97,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             switch (name)
             {
                 case "hoger_dan_de_vermogensdrempel":
-                    if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
+                    if (parameters.GetAll().Any(p => p.Name == "alleenstaande" && (bool)p.Value))
                         return "Ja, mijn vermogen is <strong>hoger</strong> dan €114.776,00";
                     else return "Ja, het gezamenlijk vermogen is <strong>hoger</strong> dan €145.136,00";
                 case "lager_dan_de_vermogensdrempel":
-                    if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
+                    if (parameters.GetAll().Any(p => p.Name == "alleenstaande" && (bool)p.Value))
                         return "Nee, mijn vermogen is <strong>lager</strong> dan €114.776,00";
                     else return "Nee, het gezamenlijk vermogen is <strong>lager</strong> dan €145.136,00";
                 case "hoger_dan_de_inkomensdrempel":
-                    if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
+                    if (parameters.GetAll().Any(p => p.Name == "alleenstaande" && (bool)p.Value))
                         return "Ja, mijn inkomen is <strong>hoger</strong> dan €29.562,00";
                     else return "Ja, het gezamenlijk inkomen is <strong>hoger</strong> dan €37.885,00";
                 case "lager_dan_de_inkomensdrempel":
-                    if (parameters.Any(p => p.Name == "alleenstaande" && (bool)p.Value))
+                    if (parameters.GetAll().Any(p => p.Name == "alleenstaande" && (bool)p.Value))
                         return "Nee, mijn inkomen is <strong>lager</strong> dan €29.562,00";
                     else return "Nee, het gezamenlijk inkomen is <strong>lager</strong> dan €37.885,00";
             }
@@ -120,7 +120,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         private static Dictionary<string, string> ListToOptions(IQuestionArgs questions)
         {
             var result = new Dictionary<string, string>();
-            (questions.Parameters.First().Value as List<object>).ForEach(v => result.Add(v.ToString(), v.ToString()));
+            (questions.Parameters.GetAll().First().Value as List<object>).ForEach(v => result.Add(v.ToString(), v.ToString()));
             return result;
         }
 
@@ -175,14 +175,14 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
                 return null;
             }
             //find the step that is a match for this name
-            var step = sequence.Steps.FirstOrDefault(s => s.IsMatch(result.Questions.Parameters.FirstOrDefault()));
+            var step = sequence.Steps.FirstOrDefault(s => s.IsMatch(result.Questions.Parameters.GetAll().FirstOrDefault()));
             if (step == null)
             {
                 return null;
             }
 
             //find the corresponding saved Parameter for this step
-            var parameters = sequence.Parameters.Where(p => step.IsMatch(p));
+            var parameters = sequence.Parameters.GetAll().Where(p => step.IsMatch(p));
             if (parameters == null || !parameters.Any())
             {
                 return null;

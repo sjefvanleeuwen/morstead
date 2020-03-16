@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 
-namespace Vs.Core
+namespace Vs.Core.Extensions
 {
     public static class EnumExtensions
     {

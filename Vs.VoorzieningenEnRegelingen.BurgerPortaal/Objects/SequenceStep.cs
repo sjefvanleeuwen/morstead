@@ -4,9 +4,10 @@ using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 {
-    public class Step : IStep
+    public class SequenceStep : ISequenceStep
     {
         public int Key { get; set; }
+        public string SemanticKey { get; set; }
         public string ParameterName { get; set; }
         public IEnumerable<string> ValidParameterNames { get; set; }
 

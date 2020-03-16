@@ -5,7 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Library\Objects\" />
+    <Compile Remove="Shared\Components\ButtonSubmit.razor.cs" />
+    <Compile Remove="Shared\Components\Collapsable.razor.cs" />
+    <Compile Remove="Shared\Components\Header.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Shared\Components\ButtonSubmit.razor" />
+    <Content Remove="Shared\Components\Collapsable.razor" />
+    <Content Remove="Shared\Components\Header.razor" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,6 +6,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
     public interface IParametersCollection : IList<IParameter>
     {
         IParameter GetParameter(string name);
+
+        IEnumerable<IParameter> GetAll();
         void UpSert(IParameter parameter);
     }
 }
