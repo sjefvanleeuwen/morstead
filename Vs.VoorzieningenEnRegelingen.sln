@@ -89,6 +89,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelinge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests", "Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests\Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.csproj", "{4580478D-006D-434D-BCB9-8F89DB66CF28}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "library", "library", "{28C9EFA2-16CB-4C02-942B-892D8EC8DD10}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Components.Testing", "library\Microsoft.AspNetCore.Components.Testing\Microsoft.AspNetCore.Components.Testing.csproj", "{D3E9CBCB-26ED-4287-AFF5-8DAD5B2618D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -171,6 +175,10 @@ Global
 		{4580478D-006D-434D-BCB9-8F89DB66CF28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4580478D-006D-434D-BCB9-8F89DB66CF28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4580478D-006D-434D-BCB9-8F89DB66CF28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3E9CBCB-26ED-4287-AFF5-8DAD5B2618D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3E9CBCB-26ED-4287-AFF5-8DAD5B2618D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3E9CBCB-26ED-4287-AFF5-8DAD5B2618D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3E9CBCB-26ED-4287-AFF5-8DAD5B2618D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -189,6 +197,7 @@ Global
 		{1E1C8C87-294F-4EFF-BD30-4015C946BA29} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{1B839FFA-3DBB-409E-8FA1-DD407B6EBF7A} = {E3EFC9E8-AF92-4CA2-B6F8-43FEF9555A3E}
 		{F3A2931D-C46F-471F-B652-08A99DC63926} = {5C4AF588-9E89-4835-B899-12A16B587546}
+		{D3E9CBCB-26ED-4287-AFF5-8DAD5B2618D8} = {28C9EFA2-16CB-4C02-942B-892D8EC8DD10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
