@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Library.ExtensionMethods;
+using Vs.Core;
 using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Library.ExtensionMethods
+namespace Vs.Core.Tests
 {
-    public class EnumTests
+    public class EnumExtensionsTests
     {
         private enum _testEnum1
         {
@@ -24,10 +24,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Library.ExtensionMeth
         public void ShouldGetNullValueFromNonEnum()
         {
             var text = string.Empty;
-            Assert.Null(Enum.GetDescription(text));
+            Assert.Null(text.GetDescription());
 
             var number = int.MinValue;
-            Assert.Null(Enum.GetDescription(number));
+            Assert.Null(number.GetDescription());
         }
 
         [Fact]

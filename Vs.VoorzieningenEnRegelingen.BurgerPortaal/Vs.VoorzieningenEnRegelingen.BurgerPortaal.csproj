@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Library\Objects\**" />
-    <Content Remove="Library\Objects\**" />
-    <EmbeddedResource Remove="Library\Objects\**" />
-    <None Remove="Library\Objects\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Benchmarks\Vs.VoorzieningenEnRegelingen.Benchmarks.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Service\Vs.VoorzieningenEnRegelingen.Service.csproj" />
   </ItemGroup>
