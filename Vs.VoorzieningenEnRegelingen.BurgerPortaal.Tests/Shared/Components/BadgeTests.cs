@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
+using Vs.Core.Extensions;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
@@ -26,7 +27,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
             var variables = new Dictionary<string, object> { { "Number", number }, { "GoUp", translateY } };
             var component = _host.AddComponent<Badge>(variables);
             Assert.Equal(numberValue, component.Find("span").InnerText);
-            Assert.Equal($"transform: translateY({translateYValue}px);", component.Find("span").GetAttributeValue("style", ""));
+            Assert.Equal($"transform: translateY({translateYValue}px);", component.Find("span").Attr("style"));
         }
     }
 }
