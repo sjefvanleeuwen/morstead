@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using Vs.Core;
+using Vs.Core.Extensions;
 using Xunit;
 
 namespace Vs.Core.Tests
