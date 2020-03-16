@@ -5,6 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Shared\Components\ButtonSubmit.razor.cs" />
+    <Compile Remove="Shared\Components\Collapsable.razor.cs" />
+    <Compile Remove="Shared\Components\Header.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Shared\Components\ButtonSubmit.razor" />
+    <Content Remove="Shared\Components\Collapsable.razor" />
+    <Content Remove="Shared\Components\Header.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Benchmarks\Vs.VoorzieningenEnRegelingen.Benchmarks.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Service\Vs.VoorzieningenEnRegelingen.Service.csproj" />
   </ItemGroup>
