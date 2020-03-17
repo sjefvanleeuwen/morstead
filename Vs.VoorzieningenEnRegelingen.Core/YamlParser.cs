@@ -237,13 +237,23 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 if (step.Choices != null && step.Choices.Any())
                 {
-                    var functions = new List<Function>();
+                    //var functions = new List<Function>();
                     foreach (var choice in step.Choices)
                     {
-                        functions.Add(new Function(_dummyDebugInfo, choice.Situation, choice.Situation));
+                        formulas.Add(
+                            new Formula(
+                                _dummyDebugInfo, 
+                                choice.Situation, 
+                                new List<Function>() {new Function(
+                                    _dummyDebugInfo,
+                                    choice.Situation,
+                                    choice.Situation
+                                    )}
+                                )
+                            );
                     }
                     //the information comes from the step, so a dummy debug info will do
-                    formulas.Add(new Formula(_dummyDebugInfo, YamlHelper.GetFormulaNameFromStep(step), functions));
+                    
                 }
             }
             return formulas;
@@ -271,5 +281,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             return formulas;
         }
+
+
     }
 }

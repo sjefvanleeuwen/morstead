@@ -737,7 +737,7 @@ formules:
             } as IParametersCollection;
             executionResult = new ExecutionResult(ref parameters);
             executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
-            Assert.True((double)executionResult.Parameters.First(p => p.Name == "zorgtoeslag").Value == 233.18);
+            Assert.True((double)executionResult.Parameters.First(p => p.Name == "zorgtoeslag").Value == 192.87);
         }
 
         //[Fact]
@@ -794,32 +794,64 @@ formules:
             Assert.Equal(35.00, (double)parameters.GetParameter("zorgtoeslag").Value);
         }
 
-        //[Fact]
-        //[Trait("Category", "Unfinished")]
-        //public void FormulaResolvesToCorrectSituationalFunctionV4_3()
-        //{
-        //    //based on version 4 of the yaml
-        //    var controller = new YamlScriptController();
-        //    controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
-        //    {
-        //        // should not be called.
-        //        throw new Exception("Questioncallback should not be called.");
-        //    };
-        //    var result = controller.Parse(YamlZorgtoeslag4.Body);
-        //    Assert.False(result.IsError);
-        //    var parameters = new ParametersCollection() {
-        //        new ClientParameter("woonland","Nederland"),
-        //        new ClientParameter("alleenstaande",false),
-        //        new ClientParameter("aanvrager_met_toeslagpartner",true),
-        //        new ClientParameter("hoger_dan_vermogensdrempel",false),
-        //        new ClientParameter("lager_dan_vermogensdrempel",true),
-        //        new ClientParameter("hoger_dan_inkomensdrempel",false),
-        //        new ClientParameter("lager_dan_inkomensdrempel",true),
-        //        new ClientParameter("toetsingsinkomen", (double)19000),
-        //    } as IParametersCollection;
-        //    var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
-        //    controller.ExecuteWorkflow(ref parameters, ref executionResult);
-        //    Assert.Equal(233.18, (double)parameters.GetParameter("zorgtoeslag").Value);
-        //}
+        [Fact]
+        public void ResolveToCorrectSituation()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlSituationalTests.Body);
+            var parameters = new ParametersCollection() as IParametersCollection;
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                if ((bool)parameters.GetParameter("situatie1").Value == true)
+                {
+                    Assert.True(args.Parameters[0].Name == "vraag1");
+                    parameters.Add(new ClientParameter("vraag1", 2));
+                }
+                if ((bool)parameters.GetParameter("situatie2").Value == true)
+                {
+                    Assert.True(args.Parameters[0].Name == "vraag2");
+                    parameters.Add(new ClientParameter("vraag2", 4));
+                }
+            };
+            var executionResult = null as IExecutionResult;
+            parameters = new ParametersCollection() {
+                new ClientParameter("situatie1",true),
+                new ClientParameter("situatie2",false)
+            } as IParametersCollection;
+            try
+            {
+                executionResult = new ExecutionResult(ref parameters);
+                executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException ex)
+            {
+                executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            Assert.True((double)executionResult.Parameters.GetParameter("situatie").Value == 1);
+            Assert.True((double)executionResult.Parameters.GetParameter("berekening").Value == 1);
+            Assert.True((double)executionResult.Parameters.GetParameter("berekening2").Value == 3);
+            // formule: ((situatie [1] * berekening [1]) + 2) * vraag1 [2]
+            Assert.True((double)executionResult.Parameters.GetParameter("berekening3").Value == 6);
+            Assert.True((double)executionResult.Parameters.GetParameter("flowSituatie1").Value == 60);
+            parameters = new ParametersCollection() {
+                new ClientParameter("situatie1",false),
+                new ClientParameter("situatie2",true)
+            } as IParametersCollection;
+            try
+            {
+                executionResult = new ExecutionResult(ref parameters);
+                executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException ex)
+            {
+                executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            Assert.True((double)executionResult.Parameters.GetParameter("situatie").Value == 2);
+            Assert.True((double)executionResult.Parameters.GetParameter("berekening").Value == 2);
+            Assert.True((double)executionResult.Parameters.GetParameter("berekening2").Value == 8);
+            // formule: ((situatie [2] * berekening [2]) + 2) * vraag2 [4]
+            Assert.True((double)executionResult.Parameters.GetParameter("berekening3").Value == 24);
+            Assert.True((double)executionResult.Parameters.GetParameter("flowSituatie2").Value == 2400);
+        }
     }
 }

@@ -100,7 +100,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 {
                     foreach (var item in parameters1)
                     {
-                        if (item.Name == function.Situation)
+                        if (item.Name == function.Situation && (bool)item.Value==true)
                         {
                             try
                             {
@@ -189,16 +189,29 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     {
                         try
                         {
-                            e = _context.CompileDynamic(function.Expression);
-                            var parameter = new Parameter(_formula.Name, e.Evaluate().Infer(), null, ref _model);
-                            parameter.IsCalculated = true;
-                            _parameters.Add(parameter);
-                            if (_context.Variables.ContainsKey(parameter.Name))
+                            if (_formula.IsAutoFunc)
                             {
-                                _context.Variables.Remove(parameter.Name);
+                                // do not compile, autofunc is derived from a user choice from step.
+                                e = _context.CompileDynamic(function.Expression);
+                                return item as Parameter;
                             }
-                            _context.Variables.Add(parameter.Name, parameter.Value.Infer());
-                            return parameter;
+                            else
+                            {
+                                e = _context.CompileDynamic(function.Expression);
+                                var parameter = new Parameter(_formula.Name, e.Evaluate().Infer(), null, ref _model);
+                                parameter.IsCalculated = true;
+                                if (_parameters.GetParameter(_formula.Name) != null)
+                                    // while reclaculating make sure to keep parameters distinct
+                                    _parameters.Remove(_parameters.GetParameter(_formula.Name));
+
+                                _parameters.Add(parameter);
+                                if (_context.Variables.ContainsKey(parameter.Name))
+                                {
+                                    _context.Variables.Remove(parameter.Name);
+                                }
+                                _context.Variables.Add(parameter.Name, parameter.Value.Infer());
+                                return parameter;
+                            }
                         }
                         catch (ExpressionCompileException ex)
                         {
