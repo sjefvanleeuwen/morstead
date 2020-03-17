@@ -8,12 +8,17 @@
     <Compile Remove="Shared\Components\ButtonSubmit.razor.cs" />
     <Compile Remove="Shared\Components\Collapsable.razor.cs" />
     <Compile Remove="Shared\Components\Header.razor.cs" />
+    <Compile Remove="Shared\Components\Timeline.razor.cs" />
+    <Compile Remove="Shared\Components\TimelineItem.razor.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Shared\Components\ButtonSubmit.razor" />
     <Content Remove="Shared\Components\Collapsable.razor" />
     <Content Remove="Shared\Components\Header.razor" />
+    <Content Remove="Shared\Components\Timeline.razor" />
+    <Content Remove="Shared\Components\TimelineItem.razor" />
+    <Content Remove="Shared\Components\TitleBar.razor" />
   </ItemGroup>
 
   <ItemGroup>
