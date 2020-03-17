@@ -1,6 +1,6 @@
 ﻿namespace Vs.Core.Diagnostics
 {
-    public class LineInfo
+    public class LineInfo : ILineInfo
     {
         public LineInfo(int line, int col, int index)
         {
