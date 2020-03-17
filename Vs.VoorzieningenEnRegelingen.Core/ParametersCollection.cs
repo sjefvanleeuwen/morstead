@@ -24,21 +24,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 throw new ArgumentNullException(nameof(parameter));
             }
 
-            var correspondingParameter = FindCorrespondingParameter(parameter.Name);
-            if (correspondingParameter != null)
-            {
-                //update the parameter
-                //only name and value required, corresponding name-value pairs for parameters will always be of the same type.
-                correspondingParameter.Name = parameter.Name;
-                correspondingParameter.Value = parameter.Value;
-                return;
-            }
-            Add(parameter);
-        }
-
-        private IParameter FindCorrespondingParameter(string parameterName)
-        {
-            return this.FirstOrDefault(p => p.Name == parameterName);
+            this.RemoveAll(p => p.Name == parameter.Name);
+            this.Add(parameter);
         }
     }
 }
