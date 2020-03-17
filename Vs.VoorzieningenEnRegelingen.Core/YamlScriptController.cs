@@ -210,7 +210,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             CheckForStopExecution(parameters, executionResult);
         }
-
         private Formula ResolveFormula(IStep step)
         {
             // resolve parameter value from named formula.

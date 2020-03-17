@@ -13,6 +13,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             Functions = functions ?? throw new ArgumentNullException(nameof(functions));
         }
 
+        public bool IsAutoFunc { get { return Name.StartsWith("autofunc_"); } }
+
         public DebugInfo DebugInfo { get; }
         public string Name { get; }
         public List<Function> Functions { get; }
