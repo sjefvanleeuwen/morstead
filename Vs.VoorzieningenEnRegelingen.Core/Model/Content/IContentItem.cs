@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model.Content
 {
