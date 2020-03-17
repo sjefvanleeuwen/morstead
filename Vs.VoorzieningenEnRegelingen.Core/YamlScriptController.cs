@@ -235,28 +235,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             CheckForStopExecution(parameters, executionResult);
         }
-       
-        /*
-        private Formula ResolveFormula(IStep step)
-        {
-            // resolve parameter value from named formula.
-            if (!string.IsNullOrEmpty(step.Formula))
-            {
-                return GetFormula(step.Formula);
-            }
-            //no formula, make a formula from the choices provided
-            if (step.Choices != null && step.Choices.Any())
-            {
-                return GetFormula(YamlHelper.GetFormulaNameFromStep(step));
-            }
-            //no formula, or choices, make a formula from the value provided
-            if (!string.IsNullOrWhiteSpace(step.Value))
-            {
-                return GetFormula(YamlHelper.GetFormulaNameFromStep(step));
-            }
-            throw new StepException($"Expected reference to a formula or choices to evaluate in worflow step {step.Name} {step.Description} to execute.", step);
-        }
-        */
 
         private void CheckForStopExecution(IParametersCollection parameters, IExecutionResult executionResult)
         {
