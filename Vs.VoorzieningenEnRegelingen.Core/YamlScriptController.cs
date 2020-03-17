@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
-using Vs.VoorzieningenEnRegelingen.Core.Helpers;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 
@@ -112,7 +111,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 YamlParser parser = new YamlParser(yaml, null);
                 _model = new Model.Model(parser.Header(), parser.Formulas().ToList(), parser.Tabellen().ToList(), parser.Flow().ToList());
-                _model.AddFormulas(parser.GetFormulasFromBooleanSteps(_model.Steps));
+                //_model.AddFormulas(parser.GetFormulasFromBooleanSteps(_model.Steps));
                 foreach (var step in _model.Steps)
                 {
                     ResolveToQuestion(step.Formula, ref _contentNodes, step.Situation);
@@ -193,16 +192,42 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
 
             executionResult.Stacktrace.Add(new FlowExecutionItem(step, null));
-            var formula = ResolveFormula(step);
-            var context = new FormulaExpressionContext(ref _model, ref parameters, formula, QuestionCallback, this);
-            context.Evaluate();
+            
+
+            // Prescedence is (correct order of evaluation)
+            // #1 evaluate step variable (value Question) or evaluate situation (choice Question)
+            // #2 evaluate formula
+            // #3 evaluate break (recht)
+
+            // Evaluate step variable if available
+            // Ask a question for a direct input value from the client, if the parameter is unknown.
+            // Note: in inference we assume the input value is of type double.
+            // When used in combination with "recht", do not advance to the next step until recht is evaluated.
+            // When used in combination with "formule", do not advance to the next step until the formule is evaluated.
+            if (!string.IsNullOrEmpty(step.Value) && parameters.GetParameter(step.Value) == null)
+            {
+                if (QuestionCallback == null)
+                    throw new Exception($"In order to evaluate step variable  {step.Value}, you need to provide a delegate callback to the client for providing an answer");
+                parameters.Add(new Parameter(step.Value, 0, TypeEnum.Double, ref _model));
+                QuestionCallback(null, new QuestionArgs("", parameters));
+                // step variable has to be formulated as an input parameter by the client.
+                throw new UnresolvedException($"Can't evaluate step variable {step.Value}.");
+            }
+
+            if (!string.IsNullOrEmpty(step.Formula))
+            {
+                var context = new FormulaExpressionContext(ref _model, ref parameters, GetFormula(step.Formula), QuestionCallback, this);
+                context.Evaluate();
+            }
+
+            // Evaluate recht if available.
             if (step.Break!=null && !string.IsNullOrEmpty(step.Break.Expression))
             {
                 var breakContext = new FormulaExpressionContext(
                     ref _model,
                     ref parameters,
-                    new Formula(formula.DebugInfo, "recht", new List<Function>() {
-                        new Function(formula.DebugInfo, step.Break.Expression)
+                    new Formula(step.DebugInfo, "recht", new List<Function>() {
+                        new Function(step.DebugInfo, step.Break.Expression)
                     }),
                     QuestionCallback,
                     this);
@@ -210,6 +235,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             CheckForStopExecution(parameters, executionResult);
         }
+       
+        /*
         private Formula ResolveFormula(IStep step)
         {
             // resolve parameter value from named formula.
@@ -229,6 +256,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             throw new StepException($"Expected reference to a formula or choices to evaluate in worflow step {step.Name} {step.Description} to execute.", step);
         }
+        */
 
         private void CheckForStopExecution(IParametersCollection parameters, IExecutionResult executionResult)
         {
