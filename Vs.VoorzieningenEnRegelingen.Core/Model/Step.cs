@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using Vs.Core.Diagnostics;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
     public class Step : IStep
     {
-        public Step(int key, string name, string description, string formula, string value, string situation, IBreak @break, IEnumerable<IChoice> choices)
+        public Step(DebugInfo debugInfo, int key, string name, string description, string formula, string value, string situation, IBreak @break, IEnumerable<IChoice> choices)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -17,6 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
                 description = name;
             }
 
+            DebugInfo = debugInfo;
             Key = key;
             Name = name;
             Description = description;
@@ -48,5 +50,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
 
         public string SemanticKey { get; set; }
 
+        public DebugInfo DebugInfo { get; }
     }
 }
