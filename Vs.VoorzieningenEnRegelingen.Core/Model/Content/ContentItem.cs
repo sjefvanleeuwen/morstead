@@ -9,7 +9,7 @@ using YamlDotNet.Serialization;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model.Content
 {
-    public class ContentItem : IContentItem, ISerialize, ISemanticKey, IDebugInfo
+    public class ContentItem : IContentItem, ISerialize, ISemanticKey, Graph.Core.Data.IDebugInfo
     {
         public string SemanticKey { get; set; }
 
