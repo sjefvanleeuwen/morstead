@@ -4,7 +4,7 @@ using Vs.Core.Semantic;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
-    public class Function : ISemanticKey
+    public class Function : ISemanticKey, IFunction
     {
         public Function(DebugInfo debugInfo, string situation, string expression)
         {
