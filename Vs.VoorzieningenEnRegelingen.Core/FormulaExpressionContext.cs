@@ -100,7 +100,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 {
                     foreach (var item in parameters1)
                     {
-                        if (item.Name == function.Situation)
+                        if (item.Name == function.Situation && (bool)item.Value==true)
                         {
                             try
                             {
