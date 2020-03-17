@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Shared\Components\ButtonSubmit.razor.cs" />
     <Compile Remove="Shared\Components\Collapsable.razor.cs" />
+    <Compile Remove="Shared\Components\FormElements\Checkbox.razor.cs" />
+    <Compile Remove="Shared\Components\FormElements\Search.razor.cs" />
     <Compile Remove="Shared\Components\Header.razor.cs" />
     <Compile Remove="Shared\Components\Timeline.razor.cs" />
     <Compile Remove="Shared\Components\TimelineItem.razor.cs" />
@@ -15,6 +17,13 @@
   <ItemGroup>
     <Content Remove="Shared\Components\ButtonSubmit.razor" />
     <Content Remove="Shared\Components\Collapsable.razor" />
+    <Content Remove="Shared\Components\FormElements\Address.razor" />
+    <Content Remove="Shared\Components\FormElements\Checkbox.razor" />
+    <Content Remove="Shared\Components\FormElements\Date.razor" />
+    <Content Remove="Shared\Components\FormElements\Email.razor" />
+    <Content Remove="Shared\Components\FormElements\Search.razor" />
+    <Content Remove="Shared\Components\FormElements\TextArea.razor" />
+    <Content Remove="Shared\Components\FormElements\TextField.razor" />
     <Content Remove="Shared\Components\Header.razor" />
     <Content Remove="Shared\Components\Timeline.razor" />
     <Content Remove="Shared\Components\TimelineItem.razor" />
