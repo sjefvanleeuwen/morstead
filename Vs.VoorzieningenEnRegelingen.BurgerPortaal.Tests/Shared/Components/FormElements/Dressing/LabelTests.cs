@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
 using Vs.Core.Extensions;
 using Xunit;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Dressing;
