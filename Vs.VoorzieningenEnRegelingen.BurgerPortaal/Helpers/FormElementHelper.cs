@@ -11,7 +11,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
     {
         public static IFormElement ParseExecutionResult(IExecutionResult result)
         {
-            var formElement = GetFormElementFormInferedType(GetInferedType(result.Questions));
+            var formElement = result.Questions == null ? 
+                new FormElement() :
+                GetFormElementFormInferedType(GetInferedType(result.Questions));
 
             if (result.Questions == null)
             {
@@ -49,7 +51,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
         private static TypeInference.InferenceResult.TypeEnum GetInferedType(IQuestionArgs questions)
         {
-            return questions?.Parameters?.GetAll()?.FirstOrDefault()?.Type ?? TypeInference.InferenceResult.TypeEnum.Double;
+            return questions.Parameters.GetAll().FirstOrDefault().Type;
         }
 
         private static string GetFromLookupTable(IParametersCollection parameters, Dictionary<string, string> dictionary, bool showDefaultText = false, bool? alleenstaande = null)
