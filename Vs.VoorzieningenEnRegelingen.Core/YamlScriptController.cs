@@ -214,6 +214,31 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 throw new UnresolvedException($"Can't evaluate step variable {step.Value}.");
             }
 
+            if (step.Choices != null)
+            {
+                bool answered = false;
+                var questions = new ParametersCollection();
+                foreach (var choice in step.Choices)
+                {
+
+                    var situation = parameters.GetParameter(choice.Situation);
+                    if (situation == null)
+                        questions.UpSert(new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model));
+                    else
+                    {
+                        if ((bool)situation.Value == true)
+                        {
+                            answered = true;
+                        }
+                    }
+                }
+                if (!answered)
+                {
+                    QuestionCallback(null, new QuestionArgs("", questions));
+                    throw new UnresolvedException($"Choices {string.Join('.', step.Choices.Select(p => p.Situation))} can not evaluate further, before these are answered by the client.");
+                }
+            }
+
             if (!string.IsNullOrEmpty(step.Formula))
             {
                 var context = new FormulaExpressionContext(ref _model, ref parameters, GetFormula(step.Formula), QuestionCallback, this);
