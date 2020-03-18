@@ -4,6 +4,7 @@ using Xunit;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Microsoft.AspNetCore.Components.Testing;
 using System.Linq;
+using System;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements
 {
@@ -69,11 +70,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                     {
                         { "A", "ValueA" },
                         { "B", "ValueB" }
-                    } },
-                { "IsDisabled", true },
+                    } 
+                },
                 { "Name", "TheName" },
-                { "Size", FormElementSize.Large },
-                { "Value", "123" }
+                { "Size", FormElementSize.Large }
             };
             var component = _host.AddComponent<Radio>(variables);
             Assert.NotNull(component.Find("div > div"));
@@ -81,45 +81,158 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             var radios = component.FindAll("div > div").ToList();
             var opt1 = radios[0];
             Assert.Equal(2, opt1.Elements().Count);
-            Assert.Equal("input", opt1.Elements()[0].Name);
             var input1 = opt1.Elements()[0];
-
-            Assert.Equal("label", opt1.Elements()[1].Name);
+            Assert.Equal("input", input1.Name);
+            Assert.Equal("TheName", input1.Attr("Name"));
+            Assert.Equal("TheName-radio_1", input1.Attr("id"));
+            Assert.Equal("input__control input__control--radio input__control--l", input1.Attr("class"));
+            Assert.Equal("", input1.Attr("checked"));
+            Assert.Equal("A", input1.Attr("value"));
             var label1 = opt1.Elements()[1];
+            Assert.Equal("label", label1.Name);
+            Assert.Equal("TheName-radio_1", label1.Attr("for"));
+            Assert.Equal("ValueA", label1.InnerHtml);
 
             var opt2 = radios[1];
+            Assert.Equal(2, opt2.Elements().Count);
+            var input2 = opt2.Elements()[0];
+            Assert.Equal("input", input2.Name);
+            Assert.Equal("TheName", input2.Attr("Name"));
+            Assert.Equal("TheName-radio_2", input2.Attr("id"));
+            Assert.Equal("input__control input__control--radio input__control--l", input2.Attr("class"));
+            Assert.Equal("", input2.Attr("checked"));
+            Assert.Equal("B", input2.Attr("value"));
+            var label2 = opt2.Elements()[1];
+            Assert.Equal("label", label2.Name);
+            Assert.Equal("TheName-radio_2", label2.Attr("for"));
+            Assert.Equal("ValueB", label2.InnerHtml);
+        }
 
+        [Fact]
+        public void RadioValueSet()
+        {
+            var variables = new Dictionary<string, object> {
+                { "Options", new Dictionary<string, string>
+                    {
+                        { "A", "ValueA" },
+                        { "B", "ValueB" }
+                    }
+                },
+                { "Value", "A" }
+            };
+            var component = _host.AddComponent<Radio>(variables);
+            var inputs = component.FindAll("div > div > input").ToList();
+            Assert.True(inputs[0].IsChecked());
+            Assert.False(inputs[1].IsChecked());
+        }
 
+        [Fact]
+        public void RadioNotSizeSet()
+        {
+            var variables = new Dictionary<string, object> {
+                { "Options", new Dictionary<string, string>
+                    {
+                        { "A", "ValueA" }
+                    }
+                }
+            };
+            var component = _host.AddComponent<Radio>(variables);
+            Assert.Equal("input__control input__control--radio ", component.Find("div > div > input").Attr("class"));
+        }
 
-            Assert.NotNull(component.Find("input"));
-            Assert.True(component.Instance.IsRequired);
-            Assert.True(component.Instance.IsDisabled);
-            //there is no difference in the component at this pont regarding 
-            //the rendering of required="@Required" and disabled="@Disabled" True vs False
-            Assert.Empty(component.Find("input").Attr("required"));
-            Assert.Empty(component.Find("input").Attr("disabled"));
-            Assert.Equal("TheName", component.Find("input").Attr("id"));
-            Assert.Equal("hint_TheName", component.Find("input").Attr("aria-describedby"));
-            Assert.Equal("input__control input__control--text input__control--l", component.Find("input").Attr("class"));
-            Assert.Equal("123", component.Find("input").Attr("value"));
+        [Fact]
+        public void RadioFilledMarkup()
+        {
+            var variables = new Dictionary<string, object> {
+                { "Options", new Dictionary<string, string>
+                    {
+                        { "A", "Val<i>ue</i>A" },
+                        { "B", "V<u>alueB</u>" }
+                    }
+                }
+            };
+
+            var component = _host.AddComponent<Radio>(variables);
+            var labels = component.FindAll("label").ToList();
+            Assert.Equal("Val<i>ue</i>A", labels[0].InnerHtml);
+            Assert.Single(labels[0].Elements());
+            Assert.Equal("i", labels[0].Elements()[0].Name);
+            Assert.Equal("ue", labels[0].Elements()[0].InnerHtml);
+            Assert.Equal("V<u>alueB</u>", labels[1].InnerHtml);
+            Assert.Single(labels[1].Elements());
+            Assert.Equal("u", labels[1].Elements()[0].Name);
+            Assert.Equal("alueB", labels[1].Elements()[0].InnerHtml);
         }
 
         [Fact]
         public void RadioTwoWayBindTest()
         {
+            //string currentValue => ;
+
+            //Action<string> change = (val) => currentValue = val;
+
             var variables = new Dictionary<string, object> {
-                { "Name", "TheName" },
-                { "Size", FormElementSize.Large },
-                { "Value", "123" }
+                { "Options", new Dictionary<string, string>
+                    {
+                        { "A", "ValueA" },
+                        { "B", "ValueB" }
+                    }
+                }
+            };
+
+            var component = _host.AddComponent<Radio>(variables);
+            Assert.False(component.FindAll("div > div > input").ElementAt(0).IsChecked());
+            Assert.False(component.FindAll("div > div > input").ElementAt(1).IsChecked());
+            Assert.Null(component.Instance.Value);
+            
+            //click the first one
+            component.FindAll("div > div > input").ElementAt(0).Click();
+            Assert.True(component.FindAll("div > div > input").ElementAt(0).IsChecked());
+            Assert.False(component.FindAll("div > div > input").ElementAt(1).IsChecked());
+            Assert.Equal("A", component.Instance.Value);
+            
+            //click the first one again
+            component.FindAll("div > div > input").ElementAt(0).Click();
+            Assert.True(component.FindAll("div > div > input").ElementAt(0).IsChecked());
+            Assert.False(component.FindAll("div > div > input").ElementAt(1).IsChecked());
+            Assert.Equal("A", component.Instance.Value);
+
+            //click the second one
+            component.FindAll("div > div > input").ElementAt(1).Click();
+            Assert.False(component.FindAll("div > div > input").ElementAt(0).IsChecked());
+            Assert.True(component.FindAll("div > div > input").ElementAt(1).IsChecked());
+            Assert.Equal("B", component.Instance.Value);
+
+            //click the first one again
+            component.FindAll("div > div > input").ElementAt(0).Click();
+            Assert.True(component.FindAll("div > div > input").ElementAt(0).IsChecked());
+            Assert.False(component.FindAll("div > div > input").ElementAt(1).IsChecked());
+            Assert.Equal("A", component.Instance.Value);
+        }
+
+        [Fact]
+        public void HasDressingElements()
+        {
+            //make sure elements are rendered
+            var variables = new Dictionary<string, object> {
+                { "Options", new Dictionary<string, string>
+                    {
+                        { "A", "ValueA" }
+                    }
+                },
+                { "Label", "_" },
+                { "HintText", "_" },
+                { "ErrorText", "_" }
             };
             var component = _host.AddComponent<Radio>(variables);
-            Assert.Equal("123", component.Find("input").Attr("value"));
-
-            var element = component.Find("input");
-            element.Change("345");
-            Assert.Equal("345", component.Find("input").Attr("value"));
-
-            Assert.Equal("345", component.Instance.Value);
+            Assert.NotNull(component.Find("fieldset > div > div > input")); //it is contained in a wrapper
+            Assert.Single(component.FindAll("fieldset > div > div > input")); //only 1 input
+            Assert.NotNull(component.Find("fieldset > legend")); //label present
+            Assert.Equal("span", component.Find("fieldset > legend").NextElement().Name); //label followed by a hinttext
+            Assert.Equal("div", component.Find("fieldset > legend + span").NextElement().Name); //label followed by error
+            Assert.Equal("div", component.Find("fieldset > legend + span + div").NextElement().Name); //error followed by the element
+            Assert.Equal("div", component.Find("fieldset > legend + span + div + div").Elements()[0].Name); //element has a div
+            Assert.Equal("input", component.Find("fieldset > legend + span + div + div").Elements()[0].Elements()[0].Name); //div has an input
         }
     }
 }

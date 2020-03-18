@@ -11,7 +11,7 @@
         {
             radioNum++;
             <div class="input__group input__group--radio">
-                <input type="radio" name="@Name" id="@Name-radio_@radioNum" class="input__control input__control--radio @ElementSize" checked="@(key.Equals(Value))" @onchange="@(() => Value = key)" @onchange:preventDefault />
+                <input type="radio" name="@Name" id="@Name-radio_@radioNum" class="input__control input__control--radio @ElementSize" checked="@(key.Equals(Value))" @onclick="@(() => Value = key)" @onclick:preventDefault value="@key" />
                 <label class="input__label input__label--radio" for="@Name-radio_@radioNum">@((MarkupString)Options[key])</label>
             </div>
         }
