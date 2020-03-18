@@ -33,7 +33,7 @@ steps:
   inputs:
     command: 'test'
     projects: |
-              **/*.csproj
+              **/Vs.VoorzieningenEnRegelingen.Core.Tests.csproj
               !**/Vs.Cms.GitHubFileStorage.Tests.csproj
     arguments: '--filter Category!=Integration --configuration $(BuildConfiguration)  /p:CollectCoverage=true  /p:CoverletOutputFormat=cobertura   /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\Coverage\'
     testRunTitle: 'Urukagina Core Test'
