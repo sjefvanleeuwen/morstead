@@ -21,6 +21,44 @@ namespace Vs.Core.Extensions
             return node.ChildNodes.Where(n => n.Name == selector).ToList();
         }
 
+        public static HtmlNode NextElement(this HtmlNode node)
+        {
+            HtmlNode result = null;
+            while (result == null)
+            {
+                var sibling = node.NextSibling;
+                if (sibling == null)
+                {
+                    break;
+                }
+                if (sibling.Name != "#text")
+                {
+                    result = sibling;
+                }
+                node = sibling;
+            }
+            return result;
+        }
+
+        public static HtmlNode NextElement(this HtmlNode node, string selector)
+        {
+            HtmlNode result = null;
+            while (result == null)
+            {
+                var sibling = node.NextSibling;
+                if (sibling == null)
+                {
+                    break;
+                }
+                if (sibling.Name == selector)
+                {
+                    result = sibling;
+                }
+                node = sibling;
+            }
+            return result;
+        }
+
         public static bool IsEmpty(this HtmlNode node)
         {
             return string.IsNullOrWhiteSpace(node.InnerHtml);

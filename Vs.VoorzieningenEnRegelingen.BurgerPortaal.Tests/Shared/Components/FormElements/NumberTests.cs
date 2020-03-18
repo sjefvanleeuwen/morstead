@@ -11,7 +11,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void NumberEmpty()
         {
-            //var variables = new Dictionary<string, object> { { "Number", number }, { "GoUp", translateY } };
             var component = _host.AddComponent<Number>();
             Assert.NotNull(component.Find("input"));
             Assert.False(component.Instance.IsRequired);
@@ -64,6 +63,24 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("345", component.Find("input").Attr("value"));
 
             Assert.Equal("345", component.Instance.Value);
+        }
+
+        [Fact]
+        public void HasDressingElements()
+        {
+            //make sure elements are rendered
+            var variables = new Dictionary<string, object> {
+                { "Label", "_" },
+                { "HintText", "_" },
+                { "ErrorText", "_" }
+            };
+            var component = _host.AddComponent<Number>(variables);
+            Assert.NotNull(component.Find("div > input")); //it is contained in a wrapper
+            Assert.Single(component.FindAll("div > input")); //only 1 input
+            Assert.NotNull(component.Find("div > label")); //label present
+            Assert.Equal("span", component.Find("div > label").NextElement().Name); //label followed by a hinttext
+            Assert.Equal("div", component.Find("div > label + span").NextElement().Name); //label followed by error
+            Assert.Equal("input", component.Find("div > label + span + div").NextElement().Name); //error followed by the one and only input
         }
     }
 }
