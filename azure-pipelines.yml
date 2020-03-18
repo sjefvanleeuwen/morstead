@@ -27,16 +27,3 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: dotnet test
-  inputs:
-    command: 'test'
-    projects: |
-              **/*.csproj
-              !**/Vs.Cms.GitHubFileStorage.Tests.csproj
-              !**/Microsoft.AspNetCore.Components.Testing.csproj
-    arguments: '--filter Category!=Integration --configuration $(BuildConfiguration)'
-    testRunTitle: 'Urukagina Core Test'
-    nobuild: true
-
