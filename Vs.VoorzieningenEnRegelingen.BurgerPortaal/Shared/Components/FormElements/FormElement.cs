@@ -67,8 +67,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         protected string ElementSize => Size.GetDescription();
 
-        public bool Validate(bool unobtrusive)
+        public bool Validate(bool unobtrusive = false)
         {
+            //reset values
+            IsValid = true;
+            ErrorText = null;
+
             string errorText = null;
             var valid =
                 ValidateValueIsSet(out errorText)
@@ -102,13 +106,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
             {
                 if (!validChars.Contains(c))
                 {
-                    errorText = "Er zijn ongeldige tekens ingegeven. Een getal bestaat uit nummers en maximaal één komma met daarachter 2 cijfers.";
+                    errorText = "Er zijn ongeldige tekens ingegeven. Een getal bestaat uit nummers en maximaal één komma met daarachter twee cijfers.";
                     return false;
                 }
             }
             if (chars.Where(c => c == ',').Count() > 1)
             {
-                errorText = "Er zijn ongeldige tekens ingevoerd. Een getal bestaat uit nummers en maximaal één komma met daarachter twee cijfers.";
+                errorText = "Er zijn ongeldige tekens ingegeven. Een getal bestaat uit nummers en maximaal één komma met daarachter twee cijfers.";
                 return false;
             }
             var parts = Value.Split(',');
