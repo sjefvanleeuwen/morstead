@@ -78,5 +78,10 @@ namespace Vs.Core.Extensions
         {
             return node.GetAttributes().Any(a => a.Name.ToLower() == "required");
         }
+
+        public static bool IsSelected(this HtmlNode node)
+        {
+            return node.GetAttributes().Any(a => a.Name.ToLower() == "selected");
+        }
     }
 }

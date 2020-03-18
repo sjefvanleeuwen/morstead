@@ -84,7 +84,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             var input1 = opt1.Elements()[0];
             Assert.Equal("input", input1.Name);
             Assert.Equal("TheName", input1.Attr("Name"));
-            Assert.Equal("TheName-radio_1", input1.Attr("id"));
+            Assert.Equal("TheName-radio_1", input1.Id);
             Assert.Equal("input__control input__control--radio input__control--l", input1.Attr("class"));
             Assert.Equal("", input1.Attr("checked"));
             Assert.Equal("A", input1.Attr("value"));
@@ -98,7 +98,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             var input2 = opt2.Elements()[0];
             Assert.Equal("input", input2.Name);
             Assert.Equal("TheName", input2.Attr("Name"));
-            Assert.Equal("TheName-radio_2", input2.Attr("id"));
+            Assert.Equal("TheName-radio_2", input2.Id);
             Assert.Equal("input__control input__control--radio input__control--l", input2.Attr("class"));
             Assert.Equal("", input2.Attr("checked"));
             Assert.Equal("B", input2.Attr("value"));
@@ -165,12 +165,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         }
 
         [Fact]
-        public void RadioTwoWayBindTest()
+        public void ShouldDoTwoWayBinding()
         {
-            //string currentValue => ;
-
-            //Action<string> change = (val) => currentValue = val;
-
             var variables = new Dictionary<string, object> {
                 { "Options", new Dictionary<string, string>
                     {

@@ -17,7 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.False(component.Find("input").IsDisabled());
             Assert.Empty(component.Find("input").Attr("required"));
             Assert.Empty(component.Find("input").Attr("disabled"));
-            Assert.Empty(component.Find("input").Attr("id"));
+            Assert.Empty(component.Find("input").Id);
             Assert.Equal("hint_", component.Find("input").Attr("aria-describedby"));
             Assert.Equal("input__control input__control--text ", component.Find("input").Attr("class"));
             Assert.Empty(component.Find("input").Attr("value"));
@@ -37,14 +37,14 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.NotNull(component.Find("input"));
             Assert.True(component.Find("input").IsRequired());
             Assert.True(component.Find("input").IsDisabled());
-            Assert.Equal("TheName", component.Find("input").Attr("id"));
+            Assert.Equal("TheName", component.Find("input").Id);
             Assert.Equal("hint_TheName", component.Find("input").Attr("aria-describedby"));
             Assert.Equal("input__control input__control--text input__control--l", component.Find("input").Attr("class"));
             Assert.Equal("123", component.Find("input").Attr("value"));
         }
 
         [Fact]
-        public void NumberTwoWayBindTest()
+        public void ShouldDoTwoWayBinding()
         {
             var variables = new Dictionary<string, object> {
                 { "Name", "TheName" },

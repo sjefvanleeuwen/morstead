@@ -154,6 +154,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             var value = GetSavedValue(sequence, result);
             if (GetInferedType(result.Questions) == TypeInference.InferenceResult.TypeEnum.List)
             {
+                throw new Exception("This should no longer be called; the value is overridden in de select razor");
+
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     value = GetDefaultListValue(result);

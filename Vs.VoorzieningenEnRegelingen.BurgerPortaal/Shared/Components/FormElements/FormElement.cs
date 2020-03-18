@@ -18,7 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         [Parameter]
         public IEnumerable<FormElementLabel> Labels { get; set; }
         [Parameter]
-        public string Value
+        public virtual string Value
         {
             get { return _value; }
             set
