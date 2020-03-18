@@ -124,6 +124,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
     public enum FormElementSize
     {
+        [Description("")]
+        Default,
         [Description("input__control--xs")]
         ExtraSmall,
         [Description("input__control--s")]

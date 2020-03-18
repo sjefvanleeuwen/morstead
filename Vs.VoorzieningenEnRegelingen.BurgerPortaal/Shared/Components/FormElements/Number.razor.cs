@@ -26,7 +26,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
             }
 
             //prepare the value for parsing
-            var value = Value.Replace(',', '.');
+            var value = Value?.Replace(',', '.');
             //continue only if parsable
             if (!double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
             {
