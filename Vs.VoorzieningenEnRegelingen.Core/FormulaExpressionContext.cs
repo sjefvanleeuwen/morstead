@@ -17,7 +17,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private ParametersCollection _parameters;
 
         public QuestionDelegate OnQuestion { get; }
-        public bool Aborted { get; private set; }
 
         public static void Map(ref ParametersCollection parameters, VariableCollection variables)
         {

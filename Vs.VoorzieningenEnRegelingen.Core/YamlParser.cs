@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Vs.Core.Diagnostics;
-using Vs.VoorzieningenEnRegelingen.Core.Helpers;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using YamlDotNet.RepresentationModel;
 
@@ -110,14 +109,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             @break = new Break() { Expression = stepInfo.Value.ToString() };
                             break;
                         case "keuze":
-                        case "choice":
                             choices = GetSituations(stepInfo.Value);
                             break;
                         default:
                             throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
                     }
                 }
-                steps.Add(new Step(key++, stepid, description, formula, value, situation, @break, choices));
+                steps.Add(new Step(debugInfoStep,key++, stepid, description, formula, value, situation, @break, choices));
             }
             return steps;
         }
@@ -229,59 +227,5 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
             return formulas;
         }
-
-        internal IEnumerable<Formula> GetFormulasFromBooleanSteps(IEnumerable<Step> steps)
-        {
-            var formulas = new List<Formula>();
-            foreach (var step in steps)
-            {
-                if (step.Choices != null && step.Choices.Any())
-                {
-                    //var functions = new List<Function>();
-                    foreach (var choice in step.Choices)
-                    {
-                        formulas.Add(
-                            new Formula(
-                                _dummyDebugInfo, 
-                                choice.Situation, 
-                                new List<Function>() {new Function(
-                                    _dummyDebugInfo,
-                                    choice.Situation,
-                                    choice.Situation
-                                    )}
-                                )
-                            );
-                    }
-                    //the information comes from the step, so a dummy debug info will do
-                    
-                }
-            }
-            return formulas;
-        }
-
-        /// <summary>
-        /// A value should be the result of a formula
-        /// </summary>
-        /// <param name="steps"></param>
-        /// <returns></returns>
-        internal IEnumerable<Formula> GetFormulasFromStepValue(List<Step> steps)
-        {
-            var formulas = new List<Formula>();
-            foreach (var step in steps)
-            {
-                if (!string.IsNullOrWhiteSpace(step.Value))
-                {
-                    var functions = new List<Function>
-                    {
-                        new Function(_dummyDebugInfo, step.Value, step.Value)
-                    };
-                    //the information comes from the step, so a dummy debug info will do
-                    formulas.Add(new Formula(_dummyDebugInfo, YamlHelper.GetFormulaNameFromStep(step), functions));
-                }
-            }
-            return formulas;
-        }
-
-
     }
 }

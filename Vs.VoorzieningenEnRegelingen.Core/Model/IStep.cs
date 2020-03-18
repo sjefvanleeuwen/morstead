@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using Vs.Core.Diagnostics;
 using Vs.Core.Semantic;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
     public interface IStep : ISemanticKey
     {
+        DebugInfo DebugInfo { get; }
         IBreak Break { get; }
         string Description { get; }
         string Formula { get; }

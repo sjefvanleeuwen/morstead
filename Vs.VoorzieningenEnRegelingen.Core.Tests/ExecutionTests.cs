@@ -853,5 +853,74 @@ formules:
             Assert.True((double)executionResult.Parameters.GetParameter("berekening3").Value == 24);
             Assert.True((double)executionResult.Parameters.GetParameter("flowSituatie2").Value == 2400);
         }
+
+        [Fact]
+        public void StepChoiceTest()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlStepVariableAndChoiceTests.Body);
+            Assert.False(result.IsError);
+            var parameters = new ParametersCollection() as IParametersCollection;
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                switch (args.Parameters[0].Name)
+                {
+                    case "leeftijd":
+                        Assert.True(sender == null); // this question is not a formula expression context but a value (waarde)
+                        parameters.UpSert(new ClientParameter("leeftijd", 18));
+                        break;
+                    case "cider":
+                        Assert.True(args.Parameters[1].Name == "bier");
+                        parameters.UpSert(new ClientParameter("bier", true));
+                        parameters.UpSert(new ClientParameter("cider", false));
+                        break;
+                    case "drankje":
+                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.List);
+                        parameters.UpSert(new ClientParameter("drankje", "Hoegaarden Witbier (30cl)"));
+                        break;
+                    default:
+                        throw new Exception($"unexpected parameter {args.Parameters[0].Name}.");
+                }
+            };
+            var executionResult = null as IExecutionResult;
+            try
+            {
+                executionResult = new ExecutionResult(ref parameters);
+                // asks for leeftijd.
+                executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException ex)
+            {
+                
+            }
+            try
+            {
+                // asks for choice cider or bier
+                executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException ex)
+            {
+                
+            }
+            try
+            {
+                // asks for selecting a beer product
+                executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException ex)
+            {
+
+            }
+            try
+            {
+                // returns a price
+                executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException ex)
+            {
+
+            }
+            // todo, formule prijs returns the whole list ut should contain the selected item.
+        }
     }
 }

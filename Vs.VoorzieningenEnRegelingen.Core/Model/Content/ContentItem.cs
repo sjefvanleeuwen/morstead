@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Vs.Core.Diagnostics;
 using Vs.Core.Semantic;
 using Vs.Graph.Core.Data;
@@ -10,7 +9,7 @@ using YamlDotNet.Serialization;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model.Content
 {
-    public class ContentItem : IContentItem, ISerialize, ISemanticKey, IDebugInfo
+    public class ContentItem : IContentItem, ISerialize, ISemanticKey, Graph.Core.Data.IDebugInfo
     {
         public string SemanticKey { get; set; }
 

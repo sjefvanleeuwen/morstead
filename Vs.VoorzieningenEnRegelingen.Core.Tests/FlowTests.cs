@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Vs.Core.Diagnostics;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 using Xunit;
@@ -51,7 +52,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Flow_Shouldnt_Be_StepException()
         {
-            StepException ex = new StepException("exception", new Step(1, "name", "description", "formula", "value", "situation", new Break() { Expression = "break" }, null));
+            StepException ex = new StepException("exception", new Step(null,1, "name", "description", "formula", "value", "situation", new Break() { Expression = "break" }, null));
             Assert.True(ex.Step.Key == 1);
             Assert.True(ex.Step.Name == "name");
             Assert.True(ex.Step.Description == "description");

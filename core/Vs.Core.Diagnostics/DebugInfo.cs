@@ -3,7 +3,7 @@ using YamlDotNet.Core;
 
 namespace Vs.Core.Diagnostics
 {
-    public class DebugInfo
+    public class DebugInfo : IDebugInfo
     {
         public DebugInfo(LineInfo start, LineInfo end)
         {
