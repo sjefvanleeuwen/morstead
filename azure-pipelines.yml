@@ -35,6 +35,7 @@ steps:
     projects: |
               **/*.csproj
               !**/Vs.Cms.GitHubFileStorage.Tests.csproj
+              !**/Microsoft.AspNetCore.Components.Testing.csproj
     arguments: '--filter Category!=Integration --configuration $(BuildConfiguration)  /p:CollectCoverage=true  /p:CoverletOutputFormat=cobertura   /p:CoverletOutput=$(Build.SourcesDirectory)\TestResults\Coverage\'
     testRunTitle: 'Urukagina Core Test'
     nobuild: true
