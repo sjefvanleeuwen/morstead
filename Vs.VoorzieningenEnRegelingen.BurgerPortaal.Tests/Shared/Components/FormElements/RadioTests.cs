@@ -179,7 +179,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             var component = _host.AddComponent<Radio>(variables);
             Assert.False(component.FindAll("div > div > input").ElementAt(0).IsChecked());
             Assert.False(component.FindAll("div > div > input").ElementAt(1).IsChecked());
-            Assert.Null(component.Instance.Value);
+            Assert.Empty(component.Instance.Value);
             
             //click the first one
             component.FindAll("div > div > input").ElementAt(0).Click();
