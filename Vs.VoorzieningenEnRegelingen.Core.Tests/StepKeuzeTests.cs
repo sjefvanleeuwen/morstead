@@ -317,15 +317,13 @@ tabellen:
             }
 
             Assert.False(isException);
-            Assert.Equal(4, executionResult.Parameters.Count);
+            Assert.Equal(3, executionResult.Parameters.Count);
             Assert.Equal("A", executionResult.Parameters[0].Name);
             Assert.True((bool)executionResult.Parameters[0].Value);
             Assert.Equal("B", executionResult.Parameters[1].Name);
             Assert.False((bool)executionResult.Parameters[1].Value);
-            Assert.Equal("autofunc_Test_A_of_B", executionResult.Parameters[2].Name);
+            Assert.Equal("recht", executionResult.Parameters[2].Name);
             Assert.True((bool)executionResult.Parameters[2].Value);
-            Assert.Equal("recht", executionResult.Parameters[3].Name);
-            Assert.True((bool)executionResult.Parameters[3].Value);
             Assert.Null(executionResult.Questions);
             Assert.Single(executionResult.Stacktrace);
             Assert.Equal("Test A of B", executionResult.Stacktrace.First().Step.Description);
@@ -363,15 +361,13 @@ tabellen:
             }
 
             Assert.False(isException);
-            Assert.Equal(4, executionResult.Parameters.Count);
+            Assert.Equal(3, executionResult.Parameters.Count);
             Assert.Equal("A", executionResult.Parameters[0].Name);
             Assert.False((bool)executionResult.Parameters[0].Value);
             Assert.Equal("B", executionResult.Parameters[1].Name);
             Assert.True((bool)executionResult.Parameters[1].Value);
-            Assert.Equal("autofunc_Test_A_of_B", executionResult.Parameters[2].Name);
-            Assert.True((bool)executionResult.Parameters[2].Value);
-            Assert.Equal("recht", executionResult.Parameters[3].Name);
-            Assert.False((bool)executionResult.Parameters[3].Value);
+            Assert.Equal("recht", executionResult.Parameters[2].Name);
+            Assert.False((bool)executionResult.Parameters[2].Value);
             Assert.Null(executionResult.Questions);
             Assert.Single(executionResult.Stacktrace);
             Assert.Equal("Test A of B", executionResult.Stacktrace.First().Step.Description);
