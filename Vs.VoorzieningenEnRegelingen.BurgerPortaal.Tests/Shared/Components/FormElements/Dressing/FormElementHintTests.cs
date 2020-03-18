@@ -25,20 +25,20 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
         {
             var variables = new Dictionary<string, object> {
                 { "Name", "DeNaam" },
-                { "Text", "Error text" }
+                { "Text", "Hint text" }
             };
             var component = _host.AddComponent<FormElementHint>(variables);
             Assert.NotEmpty(component.GetMarkup());
             Assert.NotNull(component.Find("span"));
             Assert.Equal("hint_DeNaam", component.Find("span").Attr("id"));
-            Assert.Equal("Error text", component.Find("span").InnerHtml);
+            Assert.Equal("Hint text", component.Find("span").InnerHtml);
         }
 
         [Fact]
         public void FormElementHintExistsMarkup()
         {
             var variables = new Dictionary<string, object> {
-                { "Text", "Error<i> text</i>" }
+                { "Text", "Hint<i> text</i>" }
             };
             var component = _host.AddComponent<FormElementHint>(variables);
             Assert.NotEmpty(component.GetMarkup());
