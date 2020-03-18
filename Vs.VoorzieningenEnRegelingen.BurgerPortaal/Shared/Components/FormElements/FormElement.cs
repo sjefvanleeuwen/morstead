@@ -9,7 +9,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 {
     public partial class FormElement : ComponentBase, IFormElement
     {
-        private string _value;
+        private string _value = string.Empty;
 
         [Parameter]
         public string Name { get; set; }

@@ -11,7 +11,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
     {
         public static IFormElement ParseExecutionResult(IExecutionResult result)
         {
-            var formElement = new FormElement() as IFormElement;
+            var formElement = GetFormElementFormInferedType(GetInferedType(result.Questions));
 
             if (result.Questions == null)
             {
@@ -28,9 +28,28 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return formElement;
         }
 
+        private static IFormElement GetFormElementFormInferedType(TypeInference.InferenceResult.TypeEnum typeEnum)
+        {
+            switch (typeEnum)
+            {
+                case TypeInference.InferenceResult.TypeEnum.Double:
+                    return new Number() as IFormElement;
+                case TypeInference.InferenceResult.TypeEnum.Boolean:
+                    return new Radio() as IFormElement;
+                case TypeInference.InferenceResult.TypeEnum.List:
+                    return new Select() as IFormElement;
+                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
+                case TypeInference.InferenceResult.TypeEnum.DateTime:
+                case TypeInference.InferenceResult.TypeEnum.String:
+                case TypeInference.InferenceResult.TypeEnum.Period:
+                default:
+                    return new FormElement() as IFormElement;
+            }
+        }
+
         private static TypeInference.InferenceResult.TypeEnum GetInferedType(IQuestionArgs questions)
         {
-            return questions.Parameters.GetAll().FirstOrDefault().Type;
+            return questions?.Parameters?.GetAll()?.FirstOrDefault()?.Type ?? TypeInference.InferenceResult.TypeEnum.Double;
         }
 
         private static string GetFromLookupTable(IParametersCollection parameters, Dictionary<string, string> dictionary, bool showDefaultText = false, bool? alleenstaande = null)
@@ -120,7 +139,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         private static Dictionary<string, string> ListToOptions(IQuestionArgs questions)
         {
             var result = new Dictionary<string, string>();
-            (questions.Parameters.GetAll().First().Value as List<object>).ForEach(v => result.Add(v.ToString(), v.ToString()));
+            (questions.Parameters.GetAll().First().Value as List<object>)?.ForEach(v => result.Add(v.ToString(), v.ToString()));
             return result;
         }
 
@@ -152,16 +171,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         internal static string GetValue(ISequence sequence, IExecutionResult result)
         {
             var value = GetSavedValue(sequence, result);
-            if (GetInferedType(result.Questions) == TypeInference.InferenceResult.TypeEnum.List)
-            {
-                throw new Exception("This should no longer be called; the value is overridden in de select razor");
-
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    value = GetDefaultListValue(result);
-                }
-            }
-            if (GetInferedType(result.Questions) == TypeInference.InferenceResult.TypeEnum.Double)
+            if (value != null && GetInferedType(result.Questions) == TypeInference.InferenceResult.TypeEnum.Double)
             {
                 value = value?.Replace('.', ',');
             }

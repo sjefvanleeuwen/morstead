@@ -82,7 +82,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
                 if (_formElement.ShowElement)
                 {
-                    _formElement.Value = FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult) ?? string.Empty;
+                    _formElement.Value = 
+                        FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult) ??
+                        _formElement.Value;
                     ValidateForm(true); //set the IsValid and ErrorText Property
                 }
             }

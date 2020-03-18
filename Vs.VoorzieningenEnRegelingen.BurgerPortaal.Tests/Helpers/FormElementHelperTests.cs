@@ -1,6 +1,7 @@
 ﻿using Moq;
 using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Xunit;
@@ -46,6 +47,146 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             Assert.Equal("optie2", formElement.Options["optie2"]);
             Assert.Equal(string.Empty, formElement.TagText);
             Assert.Equal("Selecteer \"Anders\" wanneer het uw woonland niet in de lijst staat.", formElement.HintText);
+        }
+
+        [Fact]
+        public void ShouldGetCorrectFormElementTypeBoolean()
+        {
+            var ParameterList = new List<IParameter> { new ClientParameter()
+                {
+                    Type = TypeInference.InferenceResult.TypeEnum.Boolean,
+                    Name = "test"
+                }
+            } as IEnumerable<IParameter>;
+            var moqParameters = new Mock<IParametersCollection>();
+            moqParameters.Setup(m => m.GetAll()).Returns(ParameterList);
+            var moqQuestion = new Mock<IQuestionArgs>();
+            moqQuestion.Setup(m => m.Parameters).Returns(moqParameters.Object);
+            var moqExecutionResult = new Mock<IExecutionResult>();
+            moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
+            var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
+            Assert.True(formElement is Radio);
+            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+        }
+
+        [Fact]
+        public void ShouldGetCorrectFormElementTypeDouble()
+        {
+            var ParameterList = new List<IParameter> { new ClientParameter()
+                {
+                    Type = TypeInference.InferenceResult.TypeEnum.Double,
+                    Name = "test"
+                }
+            } as IEnumerable<IParameter>;
+            var moqParameters = new Mock<IParametersCollection>();
+            moqParameters.Setup(m => m.GetAll()).Returns(ParameterList);
+            var moqQuestion = new Mock<IQuestionArgs>();
+            moqQuestion.Setup(m => m.Parameters).Returns(moqParameters.Object);
+            var moqExecutionResult = new Mock<IExecutionResult>();
+            moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
+            var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
+            Assert.True(formElement is Number);
+            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+        }
+
+        [Fact]
+        public void ShouldGetCorrectFormElementTypeList()
+        {
+            var ParameterList = new List<IParameter> { new ClientParameter()
+                {
+                    Type = TypeInference.InferenceResult.TypeEnum.List,
+                    Name = "test"
+                }
+            } as IEnumerable<IParameter>;
+            var moqParameters = new Mock<IParametersCollection>();
+            moqParameters.Setup(m => m.GetAll()).Returns(ParameterList);
+            var moqQuestion = new Mock<IQuestionArgs>();
+            moqQuestion.Setup(m => m.Parameters).Returns(moqParameters.Object);
+            var moqExecutionResult = new Mock<IExecutionResult>();
+            moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
+            var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
+            Assert.True(formElement is Select);
+            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+        }
+
+        [Fact]
+        public void ShouldGetCorrectFormElementTypeTimeSpan()
+        {
+            var ParameterList = new List<IParameter> { new ClientParameter()
+                {
+                    Type = TypeInference.InferenceResult.TypeEnum.TimeSpan,
+                    Name = "test"
+                }
+            } as IEnumerable<IParameter>;
+            var moqParameters = new Mock<IParametersCollection>();
+            moqParameters.Setup(m => m.GetAll()).Returns(ParameterList);
+            var moqQuestion = new Mock<IQuestionArgs>();
+            moqQuestion.Setup(m => m.Parameters).Returns(moqParameters.Object);
+            var moqExecutionResult = new Mock<IExecutionResult>();
+            moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
+            var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
+            Assert.True(formElement is FormElement);
+            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+        }
+
+        [Fact]
+        public void ShouldGetCorrectFormElementTypeDateTime()
+        {
+            var ParameterList = new List<IParameter> { new ClientParameter()
+                {
+                    Type = TypeInference.InferenceResult.TypeEnum.DateTime,
+                    Name = "test"
+                }
+            } as IEnumerable<IParameter>;
+            var moqParameters = new Mock<IParametersCollection>();
+            moqParameters.Setup(m => m.GetAll()).Returns(ParameterList);
+            var moqQuestion = new Mock<IQuestionArgs>();
+            moqQuestion.Setup(m => m.Parameters).Returns(moqParameters.Object);
+            var moqExecutionResult = new Mock<IExecutionResult>();
+            moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
+            var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
+            Assert.True(formElement is FormElement);
+            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+        }
+
+        [Fact]
+        public void ShouldGetCorrectFormElementTypeString()
+        {
+            var ParameterList = new List<IParameter> { new ClientParameter()
+                {
+                    Type = TypeInference.InferenceResult.TypeEnum.String,
+                    Name = "test"
+                }
+            } as IEnumerable<IParameter>;
+            var moqParameters = new Mock<IParametersCollection>();
+            moqParameters.Setup(m => m.GetAll()).Returns(ParameterList);
+            var moqQuestion = new Mock<IQuestionArgs>();
+            moqQuestion.Setup(m => m.Parameters).Returns(moqParameters.Object);
+            var moqExecutionResult = new Mock<IExecutionResult>();
+            moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
+            var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
+            Assert.True(formElement is FormElement);
+            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+        }
+
+        [Fact]
+        public void ShouldGetCorrectFormElementTypePeriod()
+        {
+            var ParameterList = new List<IParameter> { new ClientParameter()
+                {
+                    Type = TypeInference.InferenceResult.TypeEnum.Period,
+                    Name = "test"
+                }
+            } as IEnumerable<IParameter>;
+            var moqParameters = new Mock<IParametersCollection>();
+            moqParameters.Setup(m => m.GetAll()).Returns(ParameterList);
+            var moqQuestion = new Mock<IQuestionArgs>();
+            moqQuestion.Setup(m => m.Parameters).Returns(moqParameters.Object);
+            var moqExecutionResult = new Mock<IExecutionResult>();
+            moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
+            var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
+            Assert.True(formElement is FormElement);
+            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElement)));
         }
 
         private IExecutionResult InitMoqExecutionResult(int type)

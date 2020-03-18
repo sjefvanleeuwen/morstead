@@ -16,7 +16,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         {
             get
             {
-                if (base.Value is null)
+                if (base.Value == string.Empty)
                 {
                     return Options.ToList().FirstOrDefault().Key;
                 }
