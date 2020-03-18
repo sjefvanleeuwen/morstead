@@ -63,6 +63,20 @@ namespace Vs.Core.Extensions
         {
             return string.IsNullOrWhiteSpace(node.InnerHtml);
         }
-        
+
+        public static bool IsChecked(this HtmlNode node)
+        {
+            return node.GetAttributes().Any(a => a.Name.ToLower() == "checked");
+        }
+
+        public static bool IsDisabled(this HtmlNode node)
+        {
+            return node.GetAttributes().Any(a => a.Name.ToLower() == "disabled");
+        }
+
+        public static bool IsRequired(this HtmlNode node)
+        {
+            return node.GetAttributes().Any(a => a.Name.ToLower() == "required");
+        }
     }
 }

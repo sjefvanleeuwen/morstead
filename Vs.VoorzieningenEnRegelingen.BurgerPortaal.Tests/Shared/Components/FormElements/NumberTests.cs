@@ -13,8 +13,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var component = _host.AddComponent<Number>();
             Assert.NotNull(component.Find("input"));
-            Assert.False(component.Instance.IsRequired);
-            Assert.False(component.Instance.IsDisabled);
+            Assert.False(component.Find("input").IsRequired());
+            Assert.False(component.Find("input").IsDisabled());
             Assert.Empty(component.Find("input").Attr("required"));
             Assert.Empty(component.Find("input").Attr("disabled"));
             Assert.Empty(component.Find("input").Attr("id"));
@@ -35,12 +35,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             };
             var component = _host.AddComponent<Number>(variables);
             Assert.NotNull(component.Find("input"));
-            Assert.True(component.Instance.IsRequired);
-            Assert.True(component.Instance.IsDisabled);
-            //there is no difference in the component at this pont regarding 
-            //the rendering of required="@Required" and disabled="@Disabled" True vs False
-            Assert.Empty(component.Find("input").Attr("required"));
-            Assert.Empty(component.Find("input").Attr("disabled"));
+            Assert.True(component.Find("input").IsRequired());
+            Assert.True(component.Find("input").IsDisabled());
             Assert.Equal("TheName", component.Find("input").Attr("id"));
             Assert.Equal("hint_TheName", component.Find("input").Attr("aria-describedby"));
             Assert.Equal("input__control input__control--text input__control--l", component.Find("input").Attr("class"));
