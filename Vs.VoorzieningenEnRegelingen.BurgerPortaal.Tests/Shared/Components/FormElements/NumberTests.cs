@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
 using Vs.Core.Extensions;
 using Xunit;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
+using Microsoft.AspNetCore.Components.Testing;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements
 {
     public class NumberTests : BlazorTestBase
     {
@@ -19,7 +19,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
             Assert.Empty(component.Find("input").Attr("required"));
             Assert.Empty(component.Find("input").Attr("disabled"));
             Assert.Empty(component.Find("input").Attr("id"));
-            Assert.Equal("hint_",component.Find("input").Attr("aria-describedby"));
+            Assert.Equal("hint_", component.Find("input").Attr("aria-describedby"));
             Assert.Equal("input__control input__control--text ", component.Find("input").Attr("class"));
             Assert.Empty(component.Find("input").Attr("value"));
         }
@@ -27,8 +27,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
         [Fact]
         public void NumberFilled()
         {
-            var variables = new Dictionary<string, object> { 
-                { "IsRequired", true }, 
+            var variables = new Dictionary<string, object> {
+                { "IsRequired", true },
                 { "IsDisabled", true },
                 { "Name", "TheName" },
                 { "Size", FormElementSize.Large },
@@ -46,6 +46,24 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
             Assert.Equal("hint_TheName", component.Find("input").Attr("aria-describedby"));
             Assert.Equal("input__control input__control--text input__control--l", component.Find("input").Attr("class"));
             Assert.Equal("123", component.Find("input").Attr("value"));
+        }
+
+        [Fact]
+        public void NumberTwoWayBindTest()
+        {
+            var variables = new Dictionary<string, object> {
+                { "Name", "TheName" },
+                { "Size", FormElementSize.Large },
+                { "Value", "123" }
+            };
+            var component = _host.AddComponent<Number>(variables);
+            Assert.Equal("123", component.Find("input").Attr("value"));
+
+            var element = component.Find("input");
+            element.Change("345");
+            Assert.Equal("345", component.Find("input").Attr("value"));
+
+            Assert.Equal("345", component.Instance.Value);
         }
     }
 }
