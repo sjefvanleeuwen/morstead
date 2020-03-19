@@ -931,14 +931,13 @@ formules:
             var controller = new YamlScriptController();
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
-                // should not be called.
                 Assert.Equal(2, args.Parameters.Count);
                 Assert.Equal("alleenstaande", args.Parameters[0].Name);
                 Assert.False((bool)args.Parameters[0].Value);
-                Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, args.Parameters[0].Type);
+                Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, args.Parameters[0].Type);
                 Assert.Equal("aanvrager_met_toeslagpartner", args.Parameters[1].Name);
                 Assert.False((bool)args.Parameters[1].Value);
-                Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, args.Parameters[1].Type);
+                Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, args.Parameters[1].Type);
             };
             var result = controller.Parse(YamlZorgtoeslag4.Body);
             Assert.False(result.IsError);

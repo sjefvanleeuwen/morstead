@@ -93,8 +93,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             if (value == null && type == TypeEnum.Boolean)
             {
                 _value = false;
-                Type = type.Value;
+                Type = TypeEnum.Boolean;
                 return;
+            }
+
+            if (type == TypeEnum.Boolean)
+            {
+                Type = TypeEnum.Boolean;
+                _value = value.Infer();
             }
 
             if (value is null)
