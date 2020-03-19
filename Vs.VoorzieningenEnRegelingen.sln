@@ -94,6 +94,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Cms.GitHubFileStorage.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.VoorzieningenEnRegelingen.Core.TestData", "Vs.VoorzieningenEnRegelingen.Core.TestData\Vs.VoorzieningenEnRegelingen.Core.TestData.csproj", "{49F184EA-0342-416D-8CCA-E0E3B3A055C3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Service.Tests", "Vs.VoorzieningenEnRegelingen.Service.Tests\Vs.VoorzieningenEnRegelingen.Service.Tests.csproj", "{107ECD92-BDEE-469C-BD4E-A7A4BB8E12A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -180,6 +182,10 @@ Global
 		{49F184EA-0342-416D-8CCA-E0E3B3A055C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49F184EA-0342-416D-8CCA-E0E3B3A055C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49F184EA-0342-416D-8CCA-E0E3B3A055C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{107ECD92-BDEE-469C-BD4E-A7A4BB8E12A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{107ECD92-BDEE-469C-BD4E-A7A4BB8E12A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{107ECD92-BDEE-469C-BD4E-A7A4BB8E12A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{107ECD92-BDEE-469C-BD4E-A7A4BB8E12A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
