@@ -1,0 +1,34 @@
+﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
+{
+    /// <summary>
+    /// Script used for mocking tests
+    /// </summary>
+    public static class YamlVermogensgrens
+    {
+        public readonly static string Body = @"# Minimal Script for Unit Tests
+stuurinformatie:
+  onderwerp: hoogte vermogen
+  organisatie: unit test
+  type: unit test
+  domein: unit test
+  versie: 1.0
+  status: ontwikkel
+  jaar: 2019
+  bron: unit test
+berekening:
+ - stap: 1
+   omschrijving: Is uw vermogen meer dan 50000 euro?
+   formule: boven_vermogensgrens
+ - stap: 2
+   omschrijving: U heeft geen recht
+   situatie: boven_vermogensgrens
+   formule: recht
+formules:
+ - boven_vermogensgrens:
+    formule: keuze_boven_vermogensgrens
+ - recht: 
+   - situatie: boven_vermogensgrens
+     formule: false
+";
+    }
+}
