@@ -181,6 +181,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         private void ExecuteStep(ref IExecutionResult executionResult, ref IParametersCollection parameters, IStep step)
         {
+            var questions = new ParametersCollection();
             if (executionResult is null)
             {
                 throw new ArgumentNullException(nameof(executionResult));
@@ -208,8 +209,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 if (QuestionCallback == null)
                     throw new Exception($"In order to evaluate step variable  {step.Value}, you need to provide a delegate callback to the client for providing an answer");
-                parameters.Add(new Parameter(step.Value, 0, TypeEnum.Double, ref _model));
-                QuestionCallback(null, new QuestionArgs("", parameters));
+                questions.UpSert(new Parameter(step.Value, 0, TypeEnum.Double, ref _model));
+                QuestionCallback(null, new QuestionArgs("", questions));
                 // step variable has to be formulated as an input parameter by the client.
                 throw new UnresolvedException($"Can't evaluate step variable {step.Value}.");
             }
@@ -217,7 +218,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             if (step.Choices != null)
             {
                 bool answered = false;
-                var questions = new ParametersCollection();
                 foreach (var choice in step.Choices)
                 {
 

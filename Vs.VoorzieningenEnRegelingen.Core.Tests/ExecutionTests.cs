@@ -961,10 +961,10 @@ formules:
             var controller = new YamlScriptController();
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
-                //Assert.Equal(1, args.Parameters.Count);
-                //Assert.Equal("toetsingsinkomen", args.Parameters[0].Name);
-                //Assert.Null(args.Parameters[0].Value);
-                //Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, args.Parameters[0].Type);
+                Assert.Equal(1, args.Parameters.Count);
+                Assert.Equal("toetsingsinkomen", args.Parameters[0].Name);
+                Assert.True((double)args.Parameters[0].Value == 0);
+                Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, args.Parameters[0].Type);
             };
             var result = controller.Parse(YamlZorgtoeslag4.Body);
             Assert.False(result.IsError);
