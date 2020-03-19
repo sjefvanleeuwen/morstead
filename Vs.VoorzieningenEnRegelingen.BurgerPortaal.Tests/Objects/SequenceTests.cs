@@ -285,66 +285,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             moq.Setup(m => m.Value).Returns("string_value");
             return moq.Object;
         }
-        
-
-        //[Fact]
-        //public void ShouldGetParametersToSend()
-        //{
-        //    var sut = new Sequence();
-        //    var executionResults = InitMoqExecutionResults();
-        //    for (int i = 0; i < executionResults.Count(); i++)
-        //    {
-        //        sut.AddStep(i + 1, executionResults.ElementAt(i));
-        //    }
-        //    sut.UpdateParametersCollection(InitMoqParameterCollection(new int[] { 1, 2, 3 }));
-        //}
-
-        /// <summary>
-        /// Initiates executionresults with the a corresponding step and parameters
-        /// </summary>
-        /// <param name="elements"></param>
-        /// <returns></returns>
-        //private IEnumerable<IExecutionResult> InitMoqExecutionResults(int[] elements)
-        //{
-        //    var result = new List<IExecutionResult>();
-
-        //    if (elements.Contains(1))
-        //    {
-        //        var moq1 = new Mock<IExecutionResult>();
-        //        var moq1CoreStep = InitMoqCoreStep(1);
-        //        var moq1ParameterCollection = InitMoqParameterCollection(new int[] { 1 });
-        //        moq1.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moq1ParameterCollection));
-        //        moq1.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { new FlowExecutionItem(moq1CoreStep) });
-        //        result.Add(moq1.Object);
-        //    }
-
-        //    if (elements.Contains(2))
-        //    {
-        //        var moq2 = new Mock<IExecutionResult>();
-        //        var moq2CoreStep = InitMoqCoreStep(2);
-        //        var moq2ParameterCollection = InitMoqParameterCollection(new int[] { 2 });
-        //        moq2.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moq2ParameterCollection));
-        //        moq2.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { new FlowExecutionItem(moq2CoreStep) });
-        //        result.Add(moq2.Object);
-        //    }
-        //    if (elements.Contains(3))
-        //    {
-        //        var moq3 = new Mock<IExecutionResult>();
-        //        var moq3CoreStep = InitMoqCoreStep(3);
-        //        var moq3ParameterCollection = InitMoqParameterCollection(new int[] { 3 });
-        //        moq3.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moq3ParameterCollection));
-        //        moq3.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { new FlowExecutionItem(moq3CoreStep) });
-        //        result.Add(moq3.Object);
-        //    }
-        //    var moqBool = new Mock<IExecutionResult>();
-        //    var moqBoolCoreStep = InitMoqCoreStep(4);
-        //    var moqBoolParameterCollection = InitMoqParameterCollection(new int[] { 4, 5 });
-        //    moqBool.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moqBoolParameterCollection));
-        //    moqBool.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { new FlowExecutionItem(moqBoolCoreStep) });
-        //    result.Add(moqBool.Object);
-
-        //    return result;
-        //}
 
         private IStep InitMoqCoreStep(int i)
         {
