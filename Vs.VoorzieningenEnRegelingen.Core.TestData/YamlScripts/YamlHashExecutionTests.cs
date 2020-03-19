@@ -1,13 +1,13 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts
+﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
 {
     /// <summary>
     /// Script used for mocking tests
     /// </summary>
-    public static class YamlVariableTypeTests
+    public static class YamlHashExecutionTests
     {
-        public readonly static string Body = @"# See if all variable types are correctly inferred Unit Tests
+        public readonly static string Body = @"# Hash Execution Test for Unit Tests
 stuurinformatie:
-  onderwerp: See if all variable types are correctly inferred Unit Tests
+  onderwerp: hash execution unit test
   organisatie: unit test
   type: unit test
   domein: unit test

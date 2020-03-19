@@ -1,4 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts
+﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
 {
     public class YamlStepVariableAndChoiceTests
     {

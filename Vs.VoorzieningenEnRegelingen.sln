@@ -94,6 +94,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Cms.Core.Tests", "cms\Vs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Cms.GitHubFileStorage.Tests", "cms\Vs.Cmd.GitHubFileStorage\Vs.Cms.GitHubFileStorage.Tests.csproj", "{5303C029-F6DF-4182-A51B-C21EDDDF19B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.VoorzieningenEnRegelingen.Core.TestData", "Vs.VoorzieningenEnRegelingen.Core.TestData\Vs.VoorzieningenEnRegelingen.Core.TestData.csproj", "{49F184EA-0342-416D-8CCA-E0E3B3A055C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -180,6 +182,10 @@ Global
 		{5303C029-F6DF-4182-A51B-C21EDDDF19B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5303C029-F6DF-4182-A51B-C21EDDDF19B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5303C029-F6DF-4182-A51B-C21EDDDF19B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49F184EA-0342-416D-8CCA-E0E3B3A055C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49F184EA-0342-416D-8CCA-E0E3B3A055C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49F184EA-0342-416D-8CCA-E0E3B3A055C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49F184EA-0342-416D-8CCA-E0E3B3A055C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

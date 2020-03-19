@@ -1,69 +1,80 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts
+﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
 {
-    /// <summary>
-    /// Script used for mocking tests
-    /// </summary>
-    public static class YamlZorgtoeslag4
+    public class YamlSimple
     {
-        public readonly static string Body = @"# Zorgtoeslag for burger site demo
+        public readonly static string Body = @"
 stuurinformatie:
   onderwerp: zorgtoeslag
   organisatie: belastingdienst
   type: toeslagen
   domein: zorg
-  versie: 4.0
+  versie: 1.0
   status: ontwikkel
   jaar: 2019
   bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
 berekening:
- - stap: woonland
-   formule: woonlandfactor
-   recht: woonlandfactor > 0
- - stap: woonsituatie
-   keuze:
-   - situatie: alleenstaande
-   - situatie: aanvrager_met_toeslagpartner
- - stap: vermogensdrempel
-   keuze:
-   - situatie: hoger_dan_vermogensdrempel
-   - situatie: lager_dan_vermogensdrempel
-   recht: lager_dan_vermogensdrempel
- - stap: inkomensdrempel
-   keuze:
-   - situatie: hoger_dan_inkomensdrempel
-   - situatie: lager_dan_inkomensdrempel
-   recht: lager_dan_inkomensdrempel
- - stap: toetsingsinkomen
-   waarde: toetsingsinkomen
-   recht: toetsingsinkomen < toetsingsinkomensdrempel
- - stap: zorgtoeslag
+ - stap: 1
+   omschrijving: bepaal de standaard premie
+   formule: standaardpremie
+ - stap: 2
+   omschrijving: bereken het gezamenlijke toestingsinkomen
+   formule: toetsingsinkomen
+ - stap: 3 
+   omschrijving: bereken de normpremie
+   formule: normpremie
+ - stap: 4 
+   situatie: binnenland
+   omschrijving: bereken de zorgtoeslag wanneer men binnen nederland woont
+   formule: zorgtoeslag
+ - stap: 5
+   situatie: buitenland
+   omschrijving: bereken de zorgtoeslag wanner men in het buitenland woont
    formule: zorgtoeslag
 formules:
- - woonlandfactor:
-     formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
  - standaardpremie:
    - situatie: alleenstaande
      formule: 1609
    - situatie: aanvrager_met_toeslagpartner
      formule: 3218
- - toetsingsinkomensdrempel:
+ - maximaalvermogen:
    - situatie: alleenstaande
-     formule: 29562
+     formule: 114776
    - situatie: aanvrager_met_toeslagpartner
-     formule: 37885
+     formule: 145136
+ - recht_op_zorgtoeslag: 
+   - situatie: alleenstaande
+     formule: toetsinginkomen <= 29562
+   - situatie: aanvrager_met_toeslagpartner
+     formule: toetsinginkomen <= 37885
  - drempelinkomen:
      formule: 20941
+ - toetsingsinkomen: 
+     formule: toetsingsinkomen_aanvrager + toetsingsinkomen_toeslagpartner
  - normpremie:
-   - situatie: alleenstaande     
+   - situatie: alleenstaande
      formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)
    - situatie: aanvrager_met_toeslagpartner
      formule: min(percentage(4.315) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 2314)
+ - buitenland:
+     formule: niet(woonland,'Nederland')
+ - binnenland:
+     formule: wel(woonland,'Nederland')
  - zorgtoeslag:
-     formule: round((standaardpremie - normpremie) * woonlandfactor / 12,2)
+     - situatie: binnenland
+       formule: round((standaardpremie - normpremie) / 12,2)
+     - situatie: buitenland
+       formule: round((standaardpremie - normpremie) * woonlandfactor / 12,2)
+ - woonlandfactor:
+     formule: lookup('woonlandfactoren',woonland,'woonland','factor')
 tabellen:
+  - naam: maximaalvermogen
+    situatie, waarde:
+      - [ alleenstaande,                11476 ] 
+      - [ aanvrager met toeslagpartner, 14536 ]
   - naam: woonlandfactoren
     woonland, factor:
-      - [ Nederland,           1.0    ]
+      - [ Finland,             0.7161 ]
+      - [ Frankrijk,           0.8316 ]
       - [ België,              0.7392 ]
       - [ Bosnië-Herzegovina,  0.0672 ]
       - [ Bulgarije,           0.0735 ]
@@ -103,6 +114,6 @@ tabellen:
       - [ Verenigd Koninkrijk, 0.7741 ]
       - [ Zweden,              0.8213 ]
       - [ Zwitserland,         0.8000 ]
-      - [ Anders,              0      ]";
+";
     }
 }

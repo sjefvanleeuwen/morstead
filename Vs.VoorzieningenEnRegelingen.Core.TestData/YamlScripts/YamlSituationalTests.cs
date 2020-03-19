@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts
+namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
 {
     public class YamlSituationalTests
     {

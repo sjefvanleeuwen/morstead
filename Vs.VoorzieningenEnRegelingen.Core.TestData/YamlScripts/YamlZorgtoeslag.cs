@@ -1,9 +1,9 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts
+﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
 {
     /// <summary>
     /// Script used for mocking tests
     /// </summary>
-    public static class YamlZorgtoeslag2
+    public static class YamlZorgtoeslag
     {
         public readonly static string Body = @"# Minimal Script for Unit Tests
 stuurinformatie:
@@ -11,68 +11,50 @@ stuurinformatie:
   organisatie: belastingdienst
   type: toeslagen
   domein: zorg
-  versie: 2.0
+  versie: 1.0
   status: ontwikkel
   jaar: 2019
   bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
 berekening:
  - stap: 1
-   omschrijving: woonachtig in Nederland
-   tekst: landrecht
-   formule: binnenland
- - stap: 1
-   situatie: niet(binnenland)
-   omschrijving: woonachtig in een land met recht
-   formule: selecteer(woonland)
-   recht: woonlandfactor > 0
+   omschrijving: bepaal of er recht is op de zorgtoeslag
+   formule: recht
  - stap: 2 
-   omschrijving: bepaal de woonsituatie
-   formule: alleenstaande
- - stap: 3
-   omschrijving: bepaal of het eigen vermogen groter is dan het maximaal_vermogen
-   formule: niet(maximaal_vermogen)
-   recht: niet(maximaal_vermogen) 
- - stap: 4
-   omschrijving: bepaal of het inkomen groter is dan het toetsingsinkomen
-   formule: niet(maximaal_toetsingsinkomen)
-   recht: niet(maximaal_toetsingsinkomen)
- - stap: 5
-   situatie: alleenstaande
-   omschrijving: bepaal het eigen vermogen van de alleenstaande
-   formule: eigen_vermogen
-- stap: 5
-   situatie: aanvrager_met_toeslagpartner
-   omschrijving: bepaal het eigen vermogen van de aanvrager_met_toeslagpartner
-   formule: eigen_vermogen
- - stap: 6
-   situatie: alleenstaande
-   omschrijving: bepaal het inkomen van de alleenstaande
-   formule: toetsingsinkomen
- - stap: 6
-   situatie: aanvrager_met_toeslagpartner
-   omschrijving: bepaal het inkomen van de aanvrager_met_toeslagpartner
-   formule: toetsingsinkomen
- - stap: 7
-   omschrijving: toon de berekende zorgtoeslag
+   situatie: binnenland
+   omschrijving: bereken de zorgtoeslag wanneer men binnen nederland woont
+   formule: zorgtoeslag
+ - stap: 2
+   situatie: buitenland
+   omschrijving: bereken de zorgtoeslag wanner men in het buitenland woont
    formule: zorgtoeslag
 formules:
- - maximaal_vermogen:
-   - situatie: wel(alleenstaande)
-     formule: 114776
-   - situatie: niet(alleenstaande)
-     formule: 145136
- - maximaal_toetsingsinkomen:
-   - situatie: wel(alleenstaande)
-     formule: 29562
-   - situatie: niet(alleenstaande)
-     formule: 37885
  - standaardpremie:
-   - situatie: wel(alleenstaande)
+   - situatie: alleenstaande
      formule: 1609
-   - situatie: niet(alleenstaande)
+   - situatie: aanvrager_met_toeslagpartner
      formule: 3218
+ - maximaalvermogen:
+   - situatie: alleenstaande
+     formule: 114776
+   - situatie: aanvrager_met_toeslagpartner
+     formule: 145136
+ - recht: 
+   - situatie: alleenstaande
+     formule: vermogen <= 114776 AND toetsingsinkomen <= 29562 AND (wel(woonland,'Nederland') OR woonlandfactor > 0)
+   - situatie: aanvrager_met_toeslagpartner
+     formule: vermogen <= 145136 AND toetsingsinkomen <= 37885 AND (wel(woonland,'Nederland') OR woonlandfactor > 0)
  - drempelinkomen:
      formule: 20941
+ - vermogen: 
+   - situatie: alleenstaande
+     formule: vermogen_aanvrager
+   - situatie: aanvrager_met_toeslagpartner
+     formule: vermogen_aanvrager + vermogen_toeslagpartner
+ - toetsingsinkomen:
+   - situatie: alleenstaande
+     formule: toetsingsinkomen_aanvrager
+   - situatie: aanvrager_met_toeslagpartner 
+     formule: toetsingsinkomen_aanvrager + toetsingsinkomen_toeslagpartner
  - normpremie:
    - situatie: alleenstaande
      formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)

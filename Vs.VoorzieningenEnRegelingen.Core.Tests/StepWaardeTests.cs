@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
-using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
-using Vs.VoorzieningenEnRegelingen.Service.Controllers;
+﻿using System.Linq;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests

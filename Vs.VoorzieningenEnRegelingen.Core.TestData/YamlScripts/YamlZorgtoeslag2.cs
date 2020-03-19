@@ -1,55 +1,78 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Benchmarks.YamlScripts
+﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
 {
-    public class YamlSimple
+    /// <summary>
+    /// Script used for mocking tests
+    /// </summary>
+    public static class YamlZorgtoeslag2
     {
-        public readonly static string Body = @"
+        public readonly static string Body = @"# Minimal Script for Unit Tests
 stuurinformatie:
   onderwerp: zorgtoeslag
   organisatie: belastingdienst
   type: toeslagen
   domein: zorg
-  versie: 1.0
+  versie: 2.0
   status: ontwikkel
   jaar: 2019
   bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
 berekening:
  - stap: 1
-   omschrijving: bepaal de standaard premie
-   formule: standaardpremie
- - stap: 2
-   omschrijving: bereken het gezamenlijke toestingsinkomen
-   formule: toetsingsinkomen
- - stap: 3 
-   omschrijving: bereken de normpremie
-   formule: normpremie
- - stap: 4 
-   situatie: binnenland
-   omschrijving: bereken de zorgtoeslag wanneer men binnen nederland woont
-   formule: zorgtoeslag
+   omschrijving: woonachtig in Nederland
+   tekst: landrecht
+   formule: binnenland
+ - stap: 1
+   situatie: niet(binnenland)
+   omschrijving: woonachtig in een land met recht
+   formule: selecteer(woonland)
+   recht: woonlandfactor > 0
+ - stap: 2 
+   omschrijving: bepaal de woonsituatie
+   formule: alleenstaande
+ - stap: 3
+   omschrijving: bepaal of het eigen vermogen groter is dan het maximaal_vermogen
+   formule: niet(maximaal_vermogen)
+   recht: niet(maximaal_vermogen) 
+ - stap: 4
+   omschrijving: bepaal of het inkomen groter is dan het toetsingsinkomen
+   formule: niet(maximaal_toetsingsinkomen)
+   recht: niet(maximaal_toetsingsinkomen)
  - stap: 5
-   situatie: buitenland
-   omschrijving: bereken de zorgtoeslag wanner men in het buitenland woont
+   situatie: alleenstaande
+   omschrijving: bepaal het eigen vermogen van de alleenstaande
+   formule: eigen_vermogen
+- stap: 5
+   situatie: aanvrager_met_toeslagpartner
+   omschrijving: bepaal het eigen vermogen van de aanvrager_met_toeslagpartner
+   formule: eigen_vermogen
+ - stap: 6
+   situatie: alleenstaande
+   omschrijving: bepaal het inkomen van de alleenstaande
+   formule: toetsingsinkomen
+ - stap: 6
+   situatie: aanvrager_met_toeslagpartner
+   omschrijving: bepaal het inkomen van de aanvrager_met_toeslagpartner
+   formule: toetsingsinkomen
+ - stap: 7
+   omschrijving: toon de berekende zorgtoeslag
    formule: zorgtoeslag
 formules:
- - standaardpremie:
-   - situatie: alleenstaande
-     formule: 1609
-   - situatie: aanvrager_met_toeslagpartner
-     formule: 3218
- - maximaalvermogen:
-   - situatie: alleenstaande
+ - maximaal_vermogen:
+   - situatie: wel(alleenstaande)
      formule: 114776
-   - situatie: aanvrager_met_toeslagpartner
+   - situatie: niet(alleenstaande)
      formule: 145136
- - recht_op_zorgtoeslag: 
-   - situatie: alleenstaande
-     formule: toetsinginkomen <= 29562
-   - situatie: aanvrager_met_toeslagpartner
-     formule: toetsinginkomen <= 37885
+ - maximaal_toetsingsinkomen:
+   - situatie: wel(alleenstaande)
+     formule: 29562
+   - situatie: niet(alleenstaande)
+     formule: 37885
+ - standaardpremie:
+   - situatie: wel(alleenstaande)
+     formule: 1609
+   - situatie: niet(alleenstaande)
+     formule: 3218
  - drempelinkomen:
      formule: 20941
- - toetsingsinkomen: 
-     formule: toetsingsinkomen_aanvrager + toetsingsinkomen_toeslagpartner
  - normpremie:
    - situatie: alleenstaande
      formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)
@@ -65,12 +88,8 @@ formules:
      - situatie: buitenland
        formule: round((standaardpremie - normpremie) * woonlandfactor / 12,2)
  - woonlandfactor:
-     formule: lookup('woonlandfactoren',woonland,'woonland','factor')
+     formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
 tabellen:
-  - naam: maximaalvermogen
-    situatie, waarde:
-      - [ alleenstaande,                11476 ] 
-      - [ aanvrager met toeslagpartner, 14536 ]
   - naam: woonlandfactoren
     woonland, factor:
       - [ Finland,             0.7161 ]

@@ -2,9 +2,9 @@
 using BenchmarkDotNet.Engines;
 using System.Collections.Generic;
 using System.Linq;
-using Vs.VoorzieningenEnRegelingen.Benchmarks.YamlScripts;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 
 namespace Vs.VoorzieningenEnRegelingen.Benchmarks
 {
