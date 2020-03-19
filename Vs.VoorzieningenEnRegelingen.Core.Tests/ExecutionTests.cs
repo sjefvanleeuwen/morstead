@@ -953,5 +953,38 @@ formules:
             {
             }
         }
+
+        [Fact]
+        public void QuestionCallBackCorrectWithValue()
+        {
+            //based on version 4 of the yaml
+            var controller = new YamlScriptController();
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                //Assert.Equal(1, args.Parameters.Count);
+                //Assert.Equal("toetsingsinkomen", args.Parameters[0].Name);
+                //Assert.Null(args.Parameters[0].Value);
+                //Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, args.Parameters[0].Type);
+            };
+            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            Assert.False(result.IsError);
+            var parameters = new ParametersCollection() {
+                new ClientParameter("woonland","Nederland"),
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("aanvrager_met_toeslagpartner","nee"),
+                new ClientParameter("hoger_dan_vermogensdrempel","nee"),
+                new ClientParameter("lager_dan_vermogensdrempel","ja"),
+                new ClientParameter("hoger_dan_inkomensdrempel","nee"),
+                new ClientParameter("lager_dan_inkomensdrempel","ja")
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+            try
+            {
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException ex)
+            {
+            }
+        }
     }
 }
