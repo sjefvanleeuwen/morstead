@@ -556,7 +556,8 @@ formules:
             var parameters = new ParametersCollection() as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
-                switch (args.Parameters[0].Name) {
+                switch (args.Parameters[0].Name)
+                {
                     case "alleenstaande":
                         Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Boolean);
                         parameters.Add(new ClientParameter("alleenstaande", true));
@@ -567,7 +568,7 @@ formules:
                         break;
                     case "vermogen_aanvrager":
                         Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double);
-                        parameters.Add(new ClientParameter("vermogen_aanvrager",15000));
+                        parameters.Add(new ClientParameter("vermogen_aanvrager", 15000));
                         break;
                     case "toetsingsinkomen_aanvrager":
                         Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double);
@@ -891,7 +892,7 @@ formules:
             }
             catch (UnresolvedException ex)
             {
-                
+
             }
             try
             {
@@ -900,7 +901,7 @@ formules:
             }
             catch (UnresolvedException ex)
             {
-                
+
             }
             try
             {
@@ -921,6 +922,37 @@ formules:
 
             }
             // todo, formule prijs returns the whole list ut should contain the selected item.
+        }
+
+        [Fact]
+        public void QuestionCallbackRequestsBooleansFromChoice()
+        {
+            //based on version 4 of the yaml
+            var controller = new YamlScriptController();
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                // should not be called.
+                Assert.Equal(2, args.Parameters.Count);
+                Assert.Equal("alleenstaande", args.Parameters[0].Name);
+                Assert.False((bool)args.Parameters[0].Value);
+                Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, args.Parameters[0].Type);
+                Assert.Equal("aanvrager_met_toeslagpartner", args.Parameters[1].Name);
+                Assert.False((bool)args.Parameters[1].Value);
+                Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, args.Parameters[1].Type);
+            };
+            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            Assert.False(result.IsError);
+            var parameters = new ParametersCollection() {
+                new ClientParameter("woonland","Nederland")
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+            try
+            {
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException ex)
+            {
+            }
         }
     }
 }
