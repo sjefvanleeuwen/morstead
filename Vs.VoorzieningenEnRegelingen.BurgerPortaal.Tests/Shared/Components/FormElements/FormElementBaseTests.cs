@@ -3,13 +3,12 @@ using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements
 {
-    public class FormElementTests
+    public class FormElementBaseTests
     {
         [Fact]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.", Justification = "We want to assign values here for testing")]
         public void CheckValidEmpty()
         {
-            var sut = new FormElement();
+            var sut = new FormElementData();
             sut.InferedType = Core.TypeInference.InferenceResult.TypeEnum.String;
             Assert.False(sut.Validate());
             Assert.Equal("Vul een waarde in.", sut.ErrorText);
@@ -25,20 +24,18 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         }
 
         [Fact]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.", Justification = "We want to assign values here for testing")]
         public void CheckValidFilled()
         {
-            var sut = new FormElement();
+            var sut = new FormElementData();
             sut.InferedType = Core.TypeInference.InferenceResult.TypeEnum.String;
             sut.Value = "test";
             Assert.True(sut.Validate());
         }
 
         [Fact]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.", Justification = "We want to assign values here for testing")]
         public void CheckValidFilledDouble()
         {
-            var sut = new FormElement();
+            var sut = new FormElementData();
             sut.InferedType = Core.TypeInference.InferenceResult.TypeEnum.Double;
             sut.Value = "123";
             Assert.True(sut.Validate());
@@ -60,7 +57,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void CheckValidUnobtrusive()
         {
-            var sut = new FormElement();
+            var sut = new FormElementData();
             sut.InferedType = Core.TypeInference.InferenceResult.TypeEnum.String;
             Assert.False(sut.Validate());
             Assert.NotEmpty(sut.ErrorText);

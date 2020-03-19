@@ -16,17 +16,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         {
             var moqExecutionResultEmpty = new Mock<IExecutionResult>().Object;
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResultEmpty);
-            Assert.Null(formElement.Name);
+            var formElementBase = formElement.Data;
+            Assert.Null(formElementBase);
             
             var moqExecutionResult = InitMoqExecutionResult(1);
             formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult);
-            Assert.Equal("woonland", formElement.Name);
-            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, formElement.InferedType);
-            Assert.Equal(string.Empty, formElement.Label);
-            Assert.NotNull(formElement.Options["woonland"]);
-            Assert.Equal("Woonland", formElement.Options["woonland"]);
-            Assert.Equal(string.Empty, formElement.TagText);
-            Assert.Equal("Selecteer \"Anders\" wanneer het uw woonland niet in de lijst staat.", formElement.HintText);
+            formElementBase = formElement.Data;
+            Assert.Equal("woonland", formElementBase.Name);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, formElementBase.InferedType);
+            Assert.Equal(string.Empty, formElementBase.Label);
+            Assert.NotNull(formElementBase.Options["woonland"]);
+            Assert.Equal("Woonland", formElementBase.Options["woonland"]);
+            Assert.Equal(string.Empty, formElementBase.TagText);
+            Assert.Equal("Selecteer \"Anders\" wanneer het uw woonland niet in de lijst staat.", formElementBase.HintText);
         }
 
         [Fact]
@@ -34,19 +36,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         {
             var moqExecutionResultEmpty = new Mock<IExecutionResult>().Object;
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResultEmpty);
-            Assert.Null(formElement.Name);
+            var formElementBase = formElement.Data;
+            Assert.Null(formElementBase);
 
             var moqExecutionResult = InitMoqExecutionResult(2);
             formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult);
-            Assert.Equal("woonland", formElement.Name);
-            Assert.Equal(TypeInference.InferenceResult.TypeEnum.List, formElement.InferedType);
-            Assert.Equal(string.Empty, formElement.Label);
-            Assert.NotNull(formElement.Options["optie1"]);
-            Assert.Equal("optie1", formElement.Options["optie1"]);
-            Assert.NotNull(formElement.Options["optie2"]);
-            Assert.Equal("optie2", formElement.Options["optie2"]);
-            Assert.Equal(string.Empty, formElement.TagText);
-            Assert.Equal("Selecteer \"Anders\" wanneer het uw woonland niet in de lijst staat.", formElement.HintText);
+            formElementBase = formElement.Data;
+            Assert.Equal("woonland", formElementBase.Name);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.List, formElementBase.InferedType);
+            Assert.Equal(string.Empty, formElementBase.Label);
+            Assert.NotNull(formElementBase.Options["optie1"]);
+            Assert.Equal("optie1", formElementBase.Options["optie1"]);
+            Assert.NotNull(formElementBase.Options["optie2"]);
+            Assert.Equal("optie2", formElementBase.Options["optie2"]);
+            Assert.Equal(string.Empty, formElementBase.TagText);
+            Assert.Equal("Selecteer \"Anders\" wanneer het uw woonland niet in de lijst staat.", formElementBase.HintText);
         }
 
         [Fact]
@@ -66,7 +70,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
             Assert.True(formElement is Radio);
-            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
         }
 
         [Fact]
@@ -86,7 +90,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
             Assert.True(formElement is Number);
-            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
         }
 
         [Fact]
@@ -106,7 +110,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
             Assert.True(formElement is Select);
-            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
         }
 
         [Fact]
@@ -125,8 +129,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             var moqExecutionResult = new Mock<IExecutionResult>();
             moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
-            Assert.True(formElement is FormElement);
-            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+            Assert.True(formElement is IFormElementBase);
+            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
         }
 
         [Fact]
@@ -145,8 +149,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             var moqExecutionResult = new Mock<IExecutionResult>();
             moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
-            Assert.True(formElement is FormElement);
-            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+            Assert.True(formElement is IFormElementBase);
+            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
         }
 
         [Fact]
@@ -165,8 +169,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             var moqExecutionResult = new Mock<IExecutionResult>();
             moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
-            Assert.True(formElement is FormElement);
-            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+            Assert.True(formElement is IFormElementBase);
+            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
         }
 
         [Fact]
@@ -185,8 +189,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             var moqExecutionResult = new Mock<IExecutionResult>();
             moqExecutionResult.Setup(m => m.Questions).Returns(moqQuestion.Object);
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult.Object);
-            Assert.True(formElement is FormElement);
-            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElement)));
+            Assert.True(formElement is IFormElementBase);
+            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
         }
 
         private IExecutionResult InitMoqExecutionResult(int type)

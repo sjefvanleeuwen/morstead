@@ -1,12 +1,12 @@
-﻿@inherits FormElement
-<WrapperDefault IsValid="@IsValid">
-    <Label Name="@Name" Text="@Label" TagText="@TagText" />
-    <FormElementHint Name="@Name" Text="@HintText" />
-    <Error Text="@ErrorText" />
-    <select required="@IsRequired" disabled="@IsDisabled" id="@Name" aria-describedby="hint_@Name" class="input__control input__control--select @ElementSize" @bind="@Value">
+﻿@inherits FormElementBase
+<WrapperDefault IsValid="@Data.IsValid">
+    <Label Name="@Data.Name" Text="@Data.Label" TagText="@Data.TagText" />
+    <FormElementHint Name="@Data.Name" Text="@Data.HintText" />
+    <Error Text="@Data.ErrorText" />
+    <select required="@Data.IsRequired" disabled="@Data.IsDisabled" id="@Data.Name" aria-describedby="hint_@Data.Name" class="input__control input__control--select @Data.ElementSize" @bind="@Data.Value">
         @foreach (var key in _keys)
         {
-            <option value="@key" selected="@(key == Value)">@Options[key]</option>
+            <option value="@key" selected="@(key == Value)">@Data.Options[key]</option>
         }
     </select>
 </WrapperDefault>
