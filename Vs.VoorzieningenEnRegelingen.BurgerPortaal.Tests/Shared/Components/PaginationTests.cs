@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
-using Vs.Core.Extensions;
 using Xunit;
 using System.Linq;
 using Microsoft.AspNetCore.Components.Testing;
 using System;
+using Vs.Core.Web;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
 {

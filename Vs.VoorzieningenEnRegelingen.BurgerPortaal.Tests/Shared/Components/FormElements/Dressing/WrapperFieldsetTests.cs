@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Vs.Core.Extensions;
 using Xunit;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Dressing;
+using Vs.Core.Web;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
 {
