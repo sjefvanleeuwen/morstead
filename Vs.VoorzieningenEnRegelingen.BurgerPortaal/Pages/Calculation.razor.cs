@@ -12,7 +12,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
     public partial class Calculation
     {
         //the formElement we are showing
-        private IFormElement _formElement;
+        private IFormElementBase _formElement;
 
         private int _displayQuestionNumber => _hasRights ?
             FormTitleHelper.GetQuestionNumber(_sequenceController.Sequence, _sequenceController.LastExecutionResult) :
@@ -91,7 +91,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             }
             else
             {
-                _formElement = new FormElement();
+                _formElement = new FormElementBase();
                 _hasRights = false;
             }
         }
@@ -104,7 +104,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 return true;
             }
             ValidateForm();
-            return _formElement.IsValid;
+            return _formElement.Data.IsValid;
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         /// <returns>Whether or not the form is valid.</returns>
         private bool ValidateForm(bool unobtrusive = false)
         {
-            return _formElement?.Validate(unobtrusive) ?? true;
+            return _formElement?.Data?.Validate(unobtrusive) ?? true;
         }
 
         /// <summary>
@@ -124,20 +124,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private ParametersCollection GetCurrentParameters()
         {
             ValidateForm();
-            if (_formElement?.IsValid ?? false)
+            if (_formElement?.Data?.IsValid ?? false)
             {
-                if (_formElement.InferedType == TypeInference.InferenceResult.TypeEnum.Boolean)
+                if (_formElement.Data.InferedType == TypeInference.InferenceResult.TypeEnum.Boolean)
                 {
                     return GetCurrentBooleanParameter();
                 }
-                if (_formElement.InferedType == TypeInference.InferenceResult.TypeEnum.Double)
+                if (_formElement.Data.InferedType == TypeInference.InferenceResult.TypeEnum.Double)
                 {
                     return GetCurrentNumberParameter();
                 }
                 return new ParametersCollection {
-                    new ClientParameter(_formElement.Name, _formElement.Value, _formElement.InferedType)
+                    new ClientParameter(_formElement.Data.Name, _formElement.Value, _formElement.Data.InferedType)
                 };
-                //Key = 0
             }
             return null;
         }
@@ -146,9 +145,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             var result = new ParametersCollection();
             //get all parameter options
-            foreach (var key in _formElement.Options.Keys)
+            foreach (var key in _formElement.Data.Options.Keys)
             {
-                result.Add(new ClientParameter(key, key == _formElement.Value ? "ja" : "nee", _formElement.InferedType));
+                result.Add(new ClientParameter(key, key == _formElement.Value ? "ja" : "nee", _formElement.Data.InferedType));
             }
 
             return result;
@@ -158,7 +157,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             return new ParametersCollection
             {
-                new ClientParameter(_formElement.Name, _formElement.Value.Replace(',', '.'), _formElement.InferedType)
+                new ClientParameter(_formElement.Data.Name, _formElement.Value.Replace(',', '.'), _formElement.Data.InferedType)
             };
         }
     }

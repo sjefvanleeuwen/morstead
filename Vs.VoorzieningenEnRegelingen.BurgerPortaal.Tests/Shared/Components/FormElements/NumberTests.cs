@@ -11,7 +11,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void NumberEmpty()
         {
-            var component = _host.AddComponent<Number>();
+            var variables = new Dictionary<string, object> { { "Data", new FormElementData() } };
+            var component = _host.AddComponent<Number>(variables);
             Assert.NotNull(component.Find("input"));
             Assert.False(component.Find("input").IsRequired());
             Assert.False(component.Find("input").IsDisabled());
@@ -27,12 +28,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         public void NumberFilled()
         {
             var variables = new Dictionary<string, object> {
-                { "IsRequired", true },
-                { "IsDisabled", true },
-                { "Name", "TheName" },
-                { "Size", FormElementSize.Large },
-                { "Value", "123" }
+                {
+                    "Data", new FormElementData() {
+                        IsRequired = true,
+                        IsDisabled = true,
+                        Name = "TheName",
+                        Size = FormElementSize.Large ,
+                        Value = "123"
+                    }
+                }
             };
+
             var component = _host.AddComponent<Number>(variables);
             Assert.NotNull(component.Find("input"));
             Assert.True(component.Find("input").IsRequired());
@@ -47,9 +53,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         public void ShouldDoTwoWayBinding()
         {
             var variables = new Dictionary<string, object> {
-                { "Name", "TheName" },
-                { "Size", FormElementSize.Large },
-                { "Value", "123" }
+                {
+                    "Data", new FormElementData() {
+                        Name = "TheName",
+                        Size = FormElementSize.Large ,
+                        Value = "123"
+                    }
+                }
             };
             var component = _host.AddComponent<Number>(variables);
             Assert.Equal("123", component.Find("input").Attr("value"));
@@ -66,9 +76,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             //make sure elements are rendered
             var variables = new Dictionary<string, object> {
-                { "Label", "_" },
-                { "HintText", "_" },
-                { "ErrorText", "_" }
+                { 
+                    "Data", new FormElementData() {
+                        Label = "_",
+                        HintText = "_" ,
+                        ErrorText = "_"
+                    }
+                }
             };
             var component = _host.AddComponent<Number>(variables);
             Assert.NotNull(component.Find("div > input")); //it is contained in a wrapper

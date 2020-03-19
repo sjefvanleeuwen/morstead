@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
-    public interface IFormElement
+    public interface IFormElementData
     {
         string ButtonIcon { get; set; }
         string ButtonText { get; set; }
@@ -21,11 +22,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         string TagText { get; set; }
         string Value { get; set; }
         IEnumerable<string> Values { get; set; }
-
+        EventCallback<string> ValueChanged { get; set; }
         TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
 
-        bool Validate(bool unobtrusive);
+        
+        string ElementSize { get; }
 
-        bool ShowElement { get; }
+        bool Validate(bool unobtrusive);
     }
 }

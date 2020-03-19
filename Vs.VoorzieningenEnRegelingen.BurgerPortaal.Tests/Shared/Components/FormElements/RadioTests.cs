@@ -13,7 +13,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void RadioEmpty()
         {
-            var component = _host.AddComponent<Radio>();
+            var variables = new Dictionary<string, object> { { "Data", new FormElementData() } };
+            var component = _host.AddComponent<Radio>(variables);
             //no elementes
             Assert.Null(component.Find("div > div"));
             Assert.Single(component.FindAll("div")); ;
@@ -25,10 +26,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             //only 2 lower than 10
             var variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", "<than10" },
-                        { "B", "and_only_2" }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                            { "A", "<than10" },
+                            { "B", "and_only_2" }
+                        }
                     }
                 }
             };
@@ -37,23 +40,27 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
 
             //lower than 10 in length, but 3
             variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", "Thisisshor" },
-                        { "B", "terthan10c" },
-                        { "C", "haracters" }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                            { "A", "Thisisshor" },
+                            { "B", "terthan10c" },
+                            { "C", "haracters" }
+                        }
                     }
                 }
             };
             component = _host.AddComponent<Radio>(variables);
             Assert.Empty(component.Find("div").Attr("class"));
 
-
+            //longer than 10
             variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", ">than10" },
-                        { "B", "and_onlytwo" }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                            { "A", ">than10" },
+                            { "B", "and_onlytwo" }
+                        }
                     }
                 }
             };
@@ -66,14 +73,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         public void RadioFilledTwoOptions()
         {
             var variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", "ValueA" },
-                        { "B", "ValueB" }
-                    } 
-                },
-                { "Name", "TheName" },
-                { "Size", FormElementSize.Large }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                            { "A", "ValueA" },
+                            { "B", "ValueB" }
+                        },
+                        Name = "TheName",
+                        Size = FormElementSize.Large
+                    }
+                }
             };
             var component = _host.AddComponent<Radio>(variables);
             Assert.NotNull(component.Find("div > div"));
@@ -112,13 +121,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         public void RadioValueSet()
         {
             var variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", "ValueA" },
-                        { "B", "ValueB" }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                            { "A", "ValueA" },
+                            { "B", "ValueB" }
+                        },
+                        Value = "A"
                     }
-                },
-                { "Value", "A" }
+                }
             };
             var component = _host.AddComponent<Radio>(variables);
             var inputs = component.FindAll("div > div > input").ToList();
@@ -130,9 +141,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         public void RadioNotSizeSet()
         {
             var variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", "ValueA" }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                            { "A", "ValueA" }
+                        }
                     }
                 }
             };
@@ -144,14 +157,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         public void RadioFilledMarkup()
         {
             var variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", "Val<i>ue</i>A" },
-                        { "B", "V<u>alueB</u>" }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                             { "A", "Val<i>ue</i>A" },
+                             { "B", "V<u>alueB</u>" }
+                        }
                     }
                 }
             };
-
             var component = _host.AddComponent<Radio>(variables);
             var labels = component.FindAll("label").ToList();
             Assert.Equal("Val<i>ue</i>A", labels[0].InnerHtml);
@@ -168,25 +182,26 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         public void ShouldDoTwoWayBinding()
         {
             var variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", "ValueA" },
-                        { "B", "ValueB" }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                             { "A", "ValueA" },
+                             { "B", "ValueB" }
+                        }
                     }
                 }
             };
-
             var component = _host.AddComponent<Radio>(variables);
             Assert.False(component.FindAll("div > div > input").ElementAt(0).IsChecked());
             Assert.False(component.FindAll("div > div > input").ElementAt(1).IsChecked());
             Assert.Empty(component.Instance.Value);
-            
+
             //click the first one
             component.FindAll("div > div > input").ElementAt(0).Click();
             Assert.True(component.FindAll("div > div > input").ElementAt(0).IsChecked());
             Assert.False(component.FindAll("div > div > input").ElementAt(1).IsChecked());
             Assert.Equal("A", component.Instance.Value);
-            
+
             //click the first one again
             component.FindAll("div > div > input").ElementAt(0).Click();
             Assert.True(component.FindAll("div > div > input").ElementAt(0).IsChecked());
@@ -209,17 +224,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void HasDressingElements()
         {
-            //make sure elements are rendered
             var variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", "ValueA" }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                             { "A", "ValueA" }
+                        },
+                        Label = "_",
+                        HintText = "_",
+                        ErrorText = "_"
                     }
-                },
-                { "Label", "_" },
-                { "HintText", "_" },
-                { "ErrorText", "_" }
+                }
             };
+            //make sure elements are rendered
             var component = _host.AddComponent<Radio>(variables);
             Assert.NotNull(component.Find("fieldset > div > div > input")); //it is contained in a wrapper
             Assert.Single(component.FindAll("fieldset > div > div > input")); //only 1 input

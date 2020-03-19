@@ -6,7 +6,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 {
     public partial class Select
     {
-        protected IEnumerable<string> _keys => Options.Keys;
+        protected IEnumerable<string> _keys => Data.Options.Keys;
 
         /// <summary>
         /// In a selectlist there is always a value selected
@@ -16,13 +16,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         {
             get
             {
-                if (base.Value == string.Empty)
+                if (Data.Value == string.Empty)
                 {
-                    return Options.ToList().FirstOrDefault().Key;
+                    return Data.Options.ToList().FirstOrDefault().Key;
                 }
-                return base.Value;
+                return Data.Value;
             }
-            set { base.Value = value; }
+            set { Data.Value = value; }
         }
+
+        [Parameter]
+        public EventCallback<string> ValueChanged { get => Data.ValueChanged; set => Data.ValueChanged = value; }
     }
 }

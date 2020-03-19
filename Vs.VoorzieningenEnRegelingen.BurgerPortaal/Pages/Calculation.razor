@@ -9,68 +9,43 @@
     {
         <Hint Title="@_displayQuestionTitle" Content="@_displayQuestionDescription" />
     }
+
     <EditForm Model="_formElement">
-        @if (_hasRights && _formElement.ShowElement)
-        {
-            @switch (_formElement.InferedType)
+        <CascadingValue Value="_formElement.Data">
+            @if (_hasRights && _formElement.ShowElement)
             {
-                case TypeInference.InferenceResult.TypeEnum.Double:
-                    <Number Name="@_formElement.Name"
-                            Label="@_formElement.Label"
-                            @bind-Value="_formElement.Value"
-                            Size="@FormElementSize.Large"
-                            TagText="@_formElement.TagText"
-                            HintText="@_formElement.HintText"
-                            IsValid="_formElement.IsValid"
-                            ErrorText="@_formElement.ErrorText"
-                            Decimals="2"
-                            DecimalsOptional=true />
-
-                    break;
-                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
-                    break;
-                case TypeInference.InferenceResult.TypeEnum.DateTime:
-                    break;
-                case TypeInference.InferenceResult.TypeEnum.String:
-                    break;
-                case TypeInference.InferenceResult.TypeEnum.Boolean:
-                    <Radio Name="@_formElement.Name"
-                           Label="@_formElement.Label"
-                           @bind-Value="_formElement.Value"
-                           Size="@FormElementSize.Large"
-                           Options="@_formElement.Options"
-                           TagText="@_formElement.TagText"
-                           HintText="@_formElement.HintText"
-                           IsValid="@_formElement.IsValid"
-                           ErrorText="@_formElement.ErrorText" />
-                    break;
-                case TypeInference.InferenceResult.TypeEnum.List:
-                    {
-                        <Select Name="@_formElement.Name"
-                                Label="@_formElement.Label"
-                                @bind-Value="_formElement.Value"
-                                Size="@FormElementSize.Large"
-                                Options="@_formElement.Options"
-                                TagText="@_formElement.TagText"
-                                HintText="@_formElement.HintText"
-                                IsValid="@_formElement.IsValid"
-                                ErrorText="@_formElement.ErrorText" />
-                    }
-                    break;
+                @switch (_formElement.Data.InferedType)
+                {
+                    case TypeInference.InferenceResult.TypeEnum.Double:
+                        <Number Decimals="2" DecimalsOptional=true Size="FormElementSize.Large" />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.TimeSpan:
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.DateTime:
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.String:
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.Boolean:
+                        <Radio />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.List:
+                        <Select Size="FormElementSize.Large" />
+                        break;
+                }
             }
-        }
 
-        @if (_result != null)
-        {
-            //This is the end. My only friend, the end.
-            <h3>@((MarkupString)_result)</h3>
-        }
-        @if (!_hasRights)
-        {
-            <p>De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.</p>
-        }
-        <Pagination PreviousDisabled="@(_showPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
-                    NextDisabled="@(_showNextButton)" Next="GetNextStep" NextText="Volgende"
-                    ScreenreaderDescription="pagina" />
+            @if (_result != null)
+            {
+                //This is the end. My only friend, the end.
+                <h3>@((MarkupString)_result)</h3>
+            }
+            @if (!_hasRights)
+            {
+                <p>De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.</p>
+            }
+            <Pagination PreviousDisabled="@(_showPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
+                        NextDisabled="@(_showNextButton)" Next="GetNextStep" NextText="Volgende"
+                        ScreenreaderDescription="pagina" />
+        </CascadingValue>
     </EditForm>
 </SpacingWrapper>

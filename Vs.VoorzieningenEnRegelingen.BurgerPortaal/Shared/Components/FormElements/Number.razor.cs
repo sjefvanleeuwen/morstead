@@ -20,13 +20,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         private void AddDecimalsToValue()
         {
             //if value is set and decimals is set
-            if (!string.IsNullOrWhiteSpace(Value) && (Decimals ?? -1) <= 0)
+            if (!string.IsNullOrWhiteSpace(Data.Value) && (Decimals ?? -1) <= 0)
             {
                 return;
             }
 
             //prepare the value for parsing
-            var value = Value?.Replace(',', '.');
+            var value = Data.Value?.Replace(',', '.');
             //continue only if parsable
             if (!double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out double d))
             {
@@ -39,7 +39,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
                 return;
             }
 
-            Value = d.ToString("#.00").Replace('.', ',');
+            Data.Value = d.ToString("#.00").Replace('.', ',');
         }
     }
 }

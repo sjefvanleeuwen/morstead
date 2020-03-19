@@ -7,18 +7,15 @@ using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
-    public partial class FormElement : ComponentBase, IFormElement
+    public partial class FormElementData : IFormElementData
     {
         private string _value = string.Empty;
 
-        [Parameter]
         public string Name { get; set; }
-        [Parameter]
         public string Label { get; set; }
-        [Parameter]
         public IEnumerable<FormElementLabel> Labels { get; set; }
-        [Parameter]
-        public virtual string Value
+
+        public string Value
         {
             get { return _value; }
             set
@@ -34,38 +31,36 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
                 }
             }
         }
-        [Parameter]
+
         public EventCallback<string> ValueChanged { get; set; }
-        [Parameter]
+
         public IEnumerable<string> Values { get; set; }
-        [Parameter]
+
         public Dictionary<string, string> Options { get; set; } = new Dictionary<string, string>();
-        [Parameter]
+
         public string ButtonIcon { get; set; }
-        [Parameter]
+
         public string ButtonText { get; set; }
-        [Parameter]
+
         public FormElementSize Size { get; set; }
-        [Parameter]
+
         public string TagText { get; set; }
-        [Parameter]
+
         public string HintText { get; set; }
-        [Parameter]
+
         public IEnumerable<string> HintTextList { get; set; }
-        [Parameter]
+
         public string ErrorText { get; set; }
-        [Parameter]
+
         public bool IsDisabled { get; set; } = false;
-        [Parameter]
+
         public bool IsRequired { get; set; } = false;
-        [Parameter]
+
         public bool IsValid { get; set; } = true;
 
         public TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
 
-        public bool ShowElement => !string.IsNullOrWhiteSpace(Name);
-
-        protected string ElementSize => Size.GetDescription();
+        public string ElementSize => Size.GetDescription();
 
         public bool Validate(bool unobtrusive = false)
         {

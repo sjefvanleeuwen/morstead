@@ -9,10 +9,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 {
     public static class FormElementHelper
     {
-        public static IFormElement ParseExecutionResult(IExecutionResult result)
+        public static IFormElementBase ParseExecutionResult(IExecutionResult result)
         {
             var formElement = result.Questions == null ? 
-                new FormElement() :
+                new FormElementBase() :
                 GetFormElementFormInferedType(GetInferedType(result.Questions));
 
             if (result.Questions == null)
@@ -20,32 +20,34 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
                 return formElement;
             }
 
-            formElement.InferedType = GetInferedType(result.Questions);
+            formElement.Data = new FormElementData();
 
-            formElement.Name = result.Questions.Parameters.GetAll().First().Name;
-            formElement.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-            formElement.Options = DefineOptions(result);
-            formElement.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-            formElement.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            formElement.Data.InferedType = GetInferedType(result.Questions);
+
+            formElement.Data.Name = result.Questions.Parameters.GetAll().First().Name;
+            formElement.Data.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            formElement.Data.Options = DefineOptions(result);
+            formElement.Data.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            formElement.Data.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             return formElement;
         }
 
-        private static IFormElement GetFormElementFormInferedType(TypeInference.InferenceResult.TypeEnum typeEnum)
+        private static IFormElementBase GetFormElementFormInferedType(TypeInference.InferenceResult.TypeEnum typeEnum)
         {
             switch (typeEnum)
             {
                 case TypeInference.InferenceResult.TypeEnum.Double:
-                    return new Number() as IFormElement;
+                    return new Number() as IFormElementBase;
                 case TypeInference.InferenceResult.TypeEnum.Boolean:
-                    return new Radio() as IFormElement;
+                    return new Radio() as IFormElementBase;
                 case TypeInference.InferenceResult.TypeEnum.List:
-                    return new Select() as IFormElement;
+                    return new Select() as IFormElementBase;
                 case TypeInference.InferenceResult.TypeEnum.TimeSpan:
                 case TypeInference.InferenceResult.TypeEnum.DateTime:
                 case TypeInference.InferenceResult.TypeEnum.String:
                 case TypeInference.InferenceResult.TypeEnum.Period:
                 default:
-                    return new FormElement() as IFormElement;
+                    return new FormElementBase();
             }
         }
 
