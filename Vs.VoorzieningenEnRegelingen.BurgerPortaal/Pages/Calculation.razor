@@ -1,34 +1,14 @@
 ﻿@page "/proefberekening"
 @using Vs.VoorzieningenEnRegelingen.Core
-@*<Header Text="Virtual Society" Title="Virtual Society Calculation" LinkScreenReaderDescription="naar de homepage" />*@
-
-@*<TitleBar Title="Bereken uw zorgtoeslag" />
-
-    <Collapsable Name="Timeline">
-            <Title>
-                @if (_displayQuestionNumber > 0)
-                {
-                    <Badge Number=@_displayQuestionNumber />
-                }
-                @((MarkupString)_displayQuestion)
-            </Title>
-            <CollapsableContent>
-                <h2><strong>@((MarkupString)_displayQuestionTitle)</strong></h2>
-                <p>@((MarkupString)_displayQuestionDescription)</p>
-            </CollapsableContent>
-        </Collapsable>*@
-
 <SpacingWrapper>
     <CalculationHeader Title="Zorgtoeslag"
                        SubTitle="Proefberekening"
                        Number=@_displayQuestionNumber
                        Subject="@_displayQuestion" />
-    <Spacer />
     @if (!string.IsNullOrWhiteSpace(_displayQuestionTitle) || !string.IsNullOrWhiteSpace(_displayQuestionDescription))
     {
         <Hint Title="@_displayQuestionTitle" Content="@_displayQuestionDescription" />
     }
-    <Spacer />
     <EditForm Model="_formElement">
         @if (_hasRights && _formElement.ShowElement)
         {
