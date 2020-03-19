@@ -22,7 +22,21 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         private const string TablesAttribute = "tabellen";
         private const string FlowAttribute = "berekening";
         private const string HeaderAttribute = "stuurinformatie";
-
+        private const string HeaderSubject = "onderwerp";
+        private const string HeaderOrganization = "organisatie";
+        private const string HeaderType = "type";
+        private const string HeaderDomain = "domein";
+        private const string HeaderVersion = "versie";
+        private const string HeaderStatus = "status";
+        private const string HeaderYear = "jaar";
+        private const string HeaderSource = "bron";
+        private const string Step = "stap";
+        private const string StepDescription = "omschrijving";
+        private const string StepFormula = "formule";
+        private const string StepValue = "waarde";
+        private const string StepSituation = "situatie";
+        private const string StepBreak = "recht";
+        private const string StepChoice = "keuze";
         private static ConcurrentDictionary<string, YamlMappingNode> Maps = new ConcurrentDictionary<string, YamlMappingNode>();
         private readonly Dictionary<string, Parameter> _parameters;
         private readonly string _yaml;
@@ -45,28 +59,28 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 switch (item.Key.ToString())
                 {
-                    case "onderwerp":
+                    case HeaderSubject:
                         stuurinformatie.Onderwerp = item.Value.ToString();
                         break;
-                    case "organisatie":
+                    case HeaderOrganization:
                         stuurinformatie.Organisatie = item.Value.ToString();
                         break;
-                    case "type":
+                    case HeaderType:
                         stuurinformatie.Type = item.Value.ToString();
                         break;
-                    case "domein":
+                    case HeaderDomain:
                         stuurinformatie.Domein = item.Value.ToString();
                         break;
-                    case "versie":
+                    case HeaderVersion:
                         stuurinformatie.Versie = item.Value.ToString();
                         break;
-                    case "status":
+                    case HeaderStatus:
                         stuurinformatie.Status = item.Value.ToString();
                         break;
-                    case "jaar":
+                    case HeaderYear:
                         stuurinformatie.Jaar = item.Value.ToString();
                         break;
-                    case "bron":
+                    case HeaderSource:
                         stuurinformatie.Bron = item.Value.ToString();
                         break;
                     default:
@@ -90,25 +104,25 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 {
                     switch (stepInfo.Key.ToString())
                     {
-                        case "stap":
+                        case Step:
                             stepid = stepInfo.Value.ToString();
                             break;
-                        case "omschrijving":
+                        case StepDescription:
                             description = stepInfo.Value.ToString();
                             break;
-                        case "formule":
+                        case StepFormula:
                             formula = stepInfo.Value.ToString();
                             break;
-                        case "waarde":
+                        case StepValue:
                             value = stepInfo.Value.ToString();
                             break;
-                        case "situatie":
+                        case StepSituation:
                             situation = stepInfo.Value.ToString();
                             break;
-                        case "recht":
+                        case StepBreak:
                             @break = new Break() { Expression = stepInfo.Value.ToString() };
                             break;
-                        case "keuze":
+                        case StepChoice:
                             choices = GetSituations(stepInfo.Value);
                             break;
                         default:
