@@ -1,15 +1,13 @@
 ﻿using Dapper.Contrib.Extensions;
 using Itenso.TimePeriod;
-using System;
 using Vs.Graph.Core.Data;
 
-namespace Vs.Cms.Core.Nodes
+namespace Vs.Cms.Core.Graph.Edges
 {
-    [Table("persoon")]
-    public class Persoon : INode
+    [Table("beheert")]
+    public class Beheert : IEdge
     {
         public int Id { get; set; }
-        public string Naam { get; set; }
         public TimeRange Periode { get; set; }
     }
 }

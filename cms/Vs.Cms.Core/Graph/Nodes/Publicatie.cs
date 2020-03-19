@@ -2,10 +2,10 @@
 using Itenso.TimePeriod;
 using Vs.Graph.Core.Data;
 
-namespace Vs.Cms.Core.Edges
+namespace Vs.Cms.Core.Graph.Nodes
 {
-    [Table("beheert")]
-    public class Beheert : IEdge
+    [Table("publicatie")]
+    public class Publicatie : INode
     {
         public int Id { get; set; }
         public TimeRange Periode { get; set; }

@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Dapper;
 
-namespace Vs.Cms.Core
+namespace Vs.Cms.Core.Graph.Views
 {
     public class PublicatieOverzicht
     {
@@ -34,8 +34,8 @@ AND persoon.id = @beheerderId ORDER BY akkorderingsmoment,reviewmoment DESC OFFS
             using (SqlConnection conn = new SqlConnection(Global.ConnectionString))
             {
                 return
-                    (await conn.QueryAsync<PublicatieOverzicht>(PublicatieOverzicht.Sql,
-                        new { beheerderId = beheerderId, vanaf = vanaf, paginaGrootte = paginaGrootte }));
+                    await conn.QueryAsync<PublicatieOverzicht>(Sql,
+                        new { beheerderId, vanaf, paginaGrootte });
             }
         }
     }

@@ -3,7 +3,7 @@ using Vs.Graph.Core.Data;
 using Dapper.Contrib.Extensions;
 using Itenso.TimePeriod;
 
-namespace Vs.Cms.Core.Edges
+namespace Vs.Cms.Core.Graph.Edges
 {
     [Table("akkordeert")]
     public class Akkordeert : IEdge, IMoment
