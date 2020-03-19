@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;
@@ -23,7 +24,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Yaml_Can_Deserialize_Root_Nodes()
         {
-            var map = YamlParser.Map(YamlScripts.YamlZorgtoeslag.Body);
+            var map = YamlParser.Map(YamlZorgtoeslag.Body);
             // Load the stream
             var s = "";
             foreach (var entry in map.Children)
@@ -36,7 +37,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Yaml_Passes_AttributeNaming_Stuurinformatie()
         {
-            var map = YamlParser.Map(YamlScripts.YamlZorgtoeslag.Body);
+            var map = YamlParser.Map(YamlZorgtoeslag.Body);
             var s = "";
             foreach (var entry in (YamlMappingNode)map.Children[new YamlScalarNode("stuurinformatie")])
             {
@@ -47,7 +48,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Yaml_Passes_AttributeValues_Stuurinformatie()
         {
-            var map = YamlParser.Map(YamlScripts.YamlZorgtoeslag.Body);
+            var map = YamlParser.Map(YamlZorgtoeslag.Body);
             var s = "";
             var entries = (YamlMappingNode)map.Children[new YamlScalarNode("stuurinformatie")];
             foreach (var entry in entries)
@@ -61,7 +62,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void Yaml_Can_Convert_To_Json()
         {
             var deserializer = new DeserializerBuilder().Build();
-            var yamlObject = deserializer.Deserialize(new StringReader(YamlScripts.YamlZorgtoeslag.Body));
+            var yamlObject = deserializer.Deserialize(new StringReader(YamlZorgtoeslag.Body));
 
             var serializer = new SerializerBuilder()
                 .JsonCompatible()
@@ -73,7 +74,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Yaml_Can_Parse_Formulas()
         {
-            var yamlParser = new YamlParser(YamlScripts.YamlZorgtoeslag.Body, null);
+            var yamlParser = new YamlParser(YamlZorgtoeslag.Body, null);
             var functions = yamlParser.Formulas();
             Assert.True(functions.Count() == 11);
             Assert.True(functions.ElementAt(1).Name == "maximaalvermogen");
@@ -83,7 +84,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Yaml_Can_Deserialize_Tables()
         {
-            var yamlParser = new YamlParser(YamlScripts.YamlZorgtoeslag.Body, null);
+            var yamlParser = new YamlParser(YamlZorgtoeslag.Body, null);
             var tabellen = yamlParser.Tabellen();
             Assert.True(tabellen.Count() == 1);
             var tabel = tabellen.Single();

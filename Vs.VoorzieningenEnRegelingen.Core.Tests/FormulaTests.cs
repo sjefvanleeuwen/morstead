@@ -1,13 +1,12 @@
 ﻿using Flee.PublicTypes;
 using Xunit;
 using System;
-using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using System.Globalization;
 using YamlDotNet.Serialization;
-using Vs.VoorzieningenEnRegelingen.Core.Tests.YamlScripts;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using static Vs.VoorzieningenEnRegelingen.Core.YamlScriptController;
+using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 {
