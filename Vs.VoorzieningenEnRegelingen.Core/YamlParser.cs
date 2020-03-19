@@ -49,9 +49,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             map = Map(_yaml);
         }
 
-        private LineInfo _dummyLineInfo => new LineInfo(0, 0, 0);
-        private DebugInfo _dummyDebugInfo => new DebugInfo(_dummyLineInfo, _dummyLineInfo);
-
         public StuurInformatie Header()
         {
             var stuurinformatie = new StuurInformatie();
