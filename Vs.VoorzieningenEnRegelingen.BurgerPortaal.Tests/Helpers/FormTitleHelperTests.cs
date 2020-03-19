@@ -29,7 +29,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         {
             var moqExecutionResult = InitMoqExecutionResult();
             var question = FormTitleHelper.GetQuestion(moqExecutionResult);
-            Assert.Equal("This is a test question", question);
+            Assert.Equal("Waar bent u woonachtig?", question);
         }
 
         [Fact]
@@ -69,15 +69,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             var moq = new Mock<IExecutionResult>();
             var moqCoreStep = InitMoqCoreStep();
             var moqParameterCollection = InitMoqParementerCollection();
-            moq.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moqParameterCollection ));
+            moq.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moqParameterCollection));
             moq.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { null, new FlowExecutionItem(moqCoreStep) });
             return moq.Object;
         }
 
-        private Core.Model.IStep InitMoqCoreStep()
+        private IStep InitMoqCoreStep()
         {
-            var moq = new Mock<Core.Model.IStep>();
-            moq.Setup(m => m.Description).Returns("This is a test question");
+            var moq = new Mock<IStep>();
+            moq.Setup(m => m.Description).Returns("woonland");
             return moq.Object;
         }
 
@@ -86,7 +86,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             var moqParameter = InitMoqParameter();
             var moq = new Mock<IParametersCollection>();
             moq.Setup(m => m.GetAll()).Returns(new List<IParameter> { moqParameter });
-            //moq.Setup(m => m.GetEnumerator()).Returns(new List<IParameter> { moqParameter }.GetEnumerator());
+            moq.Setup(m => m.GetEnumerator()).Returns(new List<IParameter> { moqParameter }.GetEnumerator());
             return moq.Object;
         }
 
