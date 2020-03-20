@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Vs.Cms.Core.Interfaces;
+﻿using Vs.Cms.Core.Interfaces;
 
 namespace Vs.Cms.Core
 {
