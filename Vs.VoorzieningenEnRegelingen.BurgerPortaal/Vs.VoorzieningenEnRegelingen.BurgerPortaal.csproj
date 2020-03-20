@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\core\Vs.Core.Web\Vs.Core.Web.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Benchmarks\Vs.VoorzieningenEnRegelingen.Benchmarks.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Service\Vs.VoorzieningenEnRegelingen.Service.csproj" />
   </ItemGroup>
