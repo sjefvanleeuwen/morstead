@@ -11,25 +11,44 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
     {
         public static IFormElementBase ParseExecutionResult(IExecutionResult result)
         {
-            var formElement = result.Questions == null ? 
+            var formElement = result.Questions == null ?
                 new FormElementBase() :
                 GetFormElementFormInferedType(GetInferedType(result.Questions));
 
-            if (result.Questions == null)
+            if (result.Questions != null)
             {
-                return formElement;
+                FillFormElementData(formElement, result);
             }
 
+            return formElement;
+        }
+
+        private static void FillFormElementData(IFormElementBase formElement, IExecutionResult result)
+        {
             formElement.Data = new FormElementData();
-
             formElement.Data.InferedType = GetInferedType(result.Questions);
-
             formElement.Data.Name = result.Questions.Parameters.GetAll().First().Name;
             formElement.Data.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             formElement.Data.Options = DefineOptions(result);
             formElement.Data.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             formElement.Data.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-            return formElement;
+
+            FillFormElementDataByInFeredType(formElement);
+        }
+
+        private static void FillFormElementDataByInFeredType(IFormElementBase formElement)
+        {
+            if (formElement.GetType() == typeof(Number)) {
+                formElement.Data.Size = FormElementSize.Large;
+                formElement.Data.Decimals = 2;
+                formElement.Data.DecimalsOptional = true;
+                return;
+            }
+            if (formElement.GetType() == typeof(Select))
+            {
+                formElement.Data.Size = FormElementSize.Large;
+                return;
+            }
         }
 
         private static IFormElementBase GetFormElementFormInferedType(TypeInference.InferenceResult.TypeEnum typeEnum)

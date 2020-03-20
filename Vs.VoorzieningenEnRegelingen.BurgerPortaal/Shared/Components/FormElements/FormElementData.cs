@@ -34,6 +34,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         public EventCallback<string> ValueChanged { get; set; }
 
+        public int? Decimals { get; set; } = null;
+
+        public bool DecimalsOptional { get; set; }
+
         public IEnumerable<string> Values { get; set; }
 
         public Dictionary<string, string> Options { get; set; } = new Dictionary<string, string>();

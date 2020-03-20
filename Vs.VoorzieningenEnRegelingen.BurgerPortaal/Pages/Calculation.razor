@@ -17,7 +17,7 @@
                 @switch (_formElement.Data.InferedType)
                 {
                     case TypeInference.InferenceResult.TypeEnum.Double:
-                        <Number Decimals="2" DecimalsOptional=true Size="FormElementSize.Large" />
+                        <Number />
                         break;
                     case TypeInference.InferenceResult.TypeEnum.TimeSpan:
                         break;
@@ -29,7 +29,7 @@
                         <Radio />
                         break;
                     case TypeInference.InferenceResult.TypeEnum.List:
-                        <Select Size="FormElementSize.Large" />
+                        <Select />
                         break;
                 }
             }

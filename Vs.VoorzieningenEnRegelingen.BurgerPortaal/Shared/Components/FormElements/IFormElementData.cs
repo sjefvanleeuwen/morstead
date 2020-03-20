@@ -21,11 +21,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         FormElementSize Size { get; set; }
         string TagText { get; set; }
         string Value { get; set; }
+        int? Decimals { get; set; }
+        bool DecimalsOptional { get; set; }
         IEnumerable<string> Values { get; set; }
         EventCallback<string> ValueChanged { get; set; }
         TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
 
-        
         string ElementSize { get; }
 
         bool Validate(bool unobtrusive);

@@ -17,18 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         [Parameter]
         public virtual string Value { get => Data.Value; set => Data.Value = value; }
-        [Parameter]
-        public FormElementSize Size { get; set; }
 
         public bool ShowElement => Data != null && !string.IsNullOrWhiteSpace(Data.Name);
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            if (Size != FormElementSize.Default)
-            {
-                Data.Size = Size;
-            }
-        }
     }
 }
