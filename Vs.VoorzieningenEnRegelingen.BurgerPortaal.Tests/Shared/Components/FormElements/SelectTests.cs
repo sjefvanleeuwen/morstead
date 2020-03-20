@@ -3,7 +3,6 @@ using Xunit;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Microsoft.AspNetCore.Components.Testing;
 using System.Linq;
-using System;
 using Vs.Core.Web;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements
@@ -13,7 +12,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void SelectEmpty()
         {
-            var component = _host.AddComponent<Select>();
+            var variables = new Dictionary<string, object> { { "Data", new FormElementData() } };
+            var component = _host.AddComponent<Select>(variables);
             //no elementes
             var selects = component.FindAll("select");
             Assert.Single(selects);
@@ -31,18 +31,20 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         public void SelectFilled()
         {
             var variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", "ListOptionA" },
-                        { "B", "ListOptionB" },
-                        { "C", "ListOptionC" },
-                        { "D", "ListOptionD" }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                            { "A", "ListOptionA" },
+                            { "B", "ListOptionB" },
+                            { "C", "ListOptionC" },
+                            { "D", "ListOptionD" }
+                        },
+                        IsRequired = true,
+                        IsDisabled = true,
+                        Name = "TheName",
+                        Size = FormElementSize.Large
                     }
-                },
-                { "IsRequired", true },
-                { "IsDisabled", true },
-                { "Name", "TheName" },
-                { "Size", FormElementSize.Large }
+                }
             };
             var component = _host.AddComponent<Select>(variables);
             //no elementes
@@ -73,12 +75,14 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         public void ShouldDoTwoWayBinding()
         {
             var variables = new Dictionary<string, object> {
-                { "Options", new Dictionary<string, string>
-                    {
-                        { "A", "ListOptionA" },
-                        { "B", "ListOptionB" },
-                        { "C", "ListOptionC" },
-                        { "D", "ListOptionD" }
+                {
+                    "Data", new FormElementData() {
+                        Options = new Dictionary<string, string> {
+                            { "A", "ListOptionA" },
+                            { "B", "ListOptionB" },
+                            { "C", "ListOptionC" },
+                            { "D", "ListOptionD" }
+                        }
                     }
                 }
             };
@@ -101,9 +105,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             //make sure elements are rendered
             var variables = new Dictionary<string, object> {
-                { "Label", "_" },
-                { "HintText", "_" },
-                { "ErrorText", "_" }
+                {
+                    "Data", new FormElementData() {
+                        Label = "_",
+                        HintText = "_",
+                        ErrorText = "_"
+                    }
+                }
             };
             var component = _host.AddComponent<Select>(variables);
             Assert.NotNull(component.Find("div > select")); //it is contained in a wrapper
