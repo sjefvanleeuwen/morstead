@@ -233,7 +233,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                         },
                         Label = "_",
                         HintText = "_",
-                        ErrorText = "_"
+                        ErrorText = "_",
+                        IsValid = false
                     }
                 }
             };

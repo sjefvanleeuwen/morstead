@@ -78,11 +78,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             //make sure elements are rendered
             var variables = new Dictionary<string, object> {
-                { 
+                {
                     "Data", new NumericFormElementData() {
                         Label = "_",
                         HintText = "_" ,
-                        ErrorText = "_"
+                        ErrorText = "_",
+                        IsValid = false
                     }
                 }
             };

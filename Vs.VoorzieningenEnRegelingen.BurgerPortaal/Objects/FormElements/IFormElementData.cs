@@ -19,6 +19,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         EventCallback<string> ValueChanged { get; set; }
         TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
         string ElementSize { get; }
-        bool Validate(bool unobtrusive);
+        void Validate(bool unobtrusive);
     }
 }

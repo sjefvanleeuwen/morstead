@@ -33,48 +33,36 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public string TagText { get; set; }
         public string HintText { get; set; }
         public IEnumerable<string> HintTextList { get; set; }
-        public string ErrorText { get; set; }
+        public string ErrorText { get => !IsValid ? _errorText : string.Empty; set => _errorText = value; }
         public bool IsDisabled { get; set; } = false;
         public bool IsRequired { get; set; } = false;
         public bool IsValid { get; set; } = true;
+
+        private string _errorText;
+
         public TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
         public string ElementSize => Size.GetDescription();
 
-        public virtual bool Validate(bool unobtrusive = false)
+        public virtual void Validate(bool unobtrusive = false)
         {
             //reset values
             IsValid = true;
-            ErrorText = null;
+            _errorText = string.Empty;
 
-            var validBase = ValidateValueIsSet(out string errorText);
-            var validForType = ValidateForType(out string errorTextForType);
-            var valid = validBase && validForType;
+            var valid = ValidateValueIsSet();
 
             if (!unobtrusive)
             {
                 IsValid = valid;
-                ErrorText =
-                    !string.IsNullOrWhiteSpace(errorText) ?
-                        errorText :
-                        errorTextForType;
             }
-
-            return valid;
         }
 
-        public virtual bool ValidateForType(out string errorText)
+        private bool ValidateValueIsSet()
         {
-            errorText = string.Empty;
-            return true;
-        }
-
-        private bool ValidateValueIsSet(out string errorText)
-        {
-            errorText = string.Empty;
             var valid = !string.IsNullOrWhiteSpace(Value);
             if (!valid)
             {
-                errorText = "Vul een waarde in.";
+                _errorText = "Vul een waarde in.";
             }
 
             return valid;

@@ -111,7 +111,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                     "Data", new MultipleOptionsFormElementData() {
                         Label = "_",
                         HintText = "_",
-                        ErrorText = "_"
+                        ErrorText = "_",
+                        IsValid = false
                     }
                 }
             };
