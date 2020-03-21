@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.Core;
 
