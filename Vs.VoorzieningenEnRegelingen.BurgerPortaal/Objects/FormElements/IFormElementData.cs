@@ -20,5 +20,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
         string ElementSize { get; }
         void Validate(bool unobtrusive);
+        void FillFromExecutionResult(IExecutionResult result);
     }
 }

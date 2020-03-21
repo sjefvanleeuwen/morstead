@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
+using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
@@ -46,6 +48,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
                     IsValid = false;
                 }
             }
+        }
+
+        public override void FillFromExecutionResult(IExecutionResult result)
+        {
+            base.FillFromExecutionResult(result);
+            
+            Size = FormElementSize.Large;
+            Decimals = 2;
+            DecimalsOptional = true;
         }
     }
 }

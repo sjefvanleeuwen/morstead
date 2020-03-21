@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
+using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
     public partial class Select
     {
-        private IMultipleOptionsFormElementData _data => Data as IMultipleOptionsFormElementData;
+        private IOptionsFormElementData _data => Data as IOptionsFormElementData;
         protected IEnumerable<string> _keys => _data.Options.Keys;
 
         /// <summary>
@@ -29,5 +30,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         [Parameter]
         public EventCallback<string> ValueChanged { get => _data.ValueChanged; set => _data.ValueChanged = value; }
+
+        public override void FillDataFromResult(IExecutionResult result)
+        {
+            Data = new ListFormElementData();
+            Data.FillFromExecutionResult(result);
+        }
     }
 }

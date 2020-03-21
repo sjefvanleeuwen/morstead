@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
+using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
@@ -20,5 +21,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         public virtual string Value { get => Data.Value; set => Data.Value = value; }
 
         public bool ShowElement => Data != null && !string.IsNullOrWhiteSpace(Data.Name);
+
+        public virtual void FillDataFromResult(IExecutionResult result)
+        {
+            Data = new FormElementData();
+            Data.FillFromExecutionResult(result);
+        }
     }
 }

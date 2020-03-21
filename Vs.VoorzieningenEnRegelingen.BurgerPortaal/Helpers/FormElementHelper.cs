@@ -19,60 +19,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
             if (result.Questions != null)
             {
-                FillFormElementData(formElement, result);
+                formElement.FillDataFromResult(result);
             }
 
             return formElement;
-        }
-
-        private static void FillFormElementData(IFormElementBase formElement, IExecutionResult result)
-        {
-            InitializeFormElementData(formElement);
-            FillFormElementGenericData(formElement, result);
-            FillFormElementDataByInFeredType(formElement, result);
-        }
-
-        private static void FillFormElementGenericData(IFormElementBase formElement, IExecutionResult result)
-        {
-            formElement.Data.InferedType = GetInferedType(result.Questions);
-            formElement.Data.Name = result.Questions.Parameters.GetAll().First().Name;
-            formElement.Data.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-            formElement.Data.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-            formElement.Data.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-        }
-
-        private static void InitializeFormElementData(IFormElementBase formElement)
-        {
-            var data = new FormElementData();
-            if (formElement.GetType() == typeof(Number))
-            {
-                data = new NumericFormElementData();
-            }
-            if (formElement.GetType() == typeof(Radio) ||
-                formElement.GetType() == typeof(Select))
-            {
-                data = new MultipleOptionsFormElementData();
-            }
-
-            formElement.Data = data;
-        }
-
-        private static void FillFormElementDataByInFeredType(IFormElementBase formElement, IExecutionResult result)
-        {
-            if (formElement.GetType() == typeof(Number)) {
-                formElement.Data.Size = FormElementSize.Large;
-                (formElement.Data as INumericFormElementData).Decimals = 2;
-                (formElement.Data as INumericFormElementData).DecimalsOptional = true;
-            }
-            if (formElement.GetType() == typeof(Select))
-            {
-                formElement.Data.Size = FormElementSize.Large;
-                (formElement.Data as IMultipleOptionsFormElementData).Options = DefineOptions(result);
-            }
-            if (formElement.GetType() == typeof(Radio))
-            {
-                (formElement.Data as IMultipleOptionsFormElementData).Options = DefineOptions(result);
-            }
         }
 
         private static IFormElementBase GetFormElementFormInferedType(TypeInference.InferenceResult.TypeEnum typeEnum)
@@ -94,12 +44,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             }
         }
 
-        private static TypeInference.InferenceResult.TypeEnum GetInferedType(IQuestionArgs questions)
+        public static TypeInference.InferenceResult.TypeEnum GetInferedType(IQuestionArgs questions)
         {
             return questions.Parameters.GetAll().FirstOrDefault().Type;
         }
 
-        private static string GetFromLookupTable(IParametersCollection parameters, Dictionary<string, string> dictionary, bool showDefaultText = false, bool? alleenstaande = null)
+        public static string GetFromContent(IParametersCollection parameters, Dictionary<string, string> dictionary, bool showDefaultText = false, bool? alleenstaande = null)
         {
             if (dictionary == null)
             {
@@ -140,7 +90,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return key;
         }
 
-        private static Dictionary<string, string> DefineOptions(IExecutionResult result)
+        public static Dictionary<string, string> DefineOptions(IExecutionResult result)
         {
             switch (GetInferedType(result.Questions))
             {
@@ -194,7 +144,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return result;
         }
 
-        private static Dictionary<string, string> _labels = new Dictionary<string, string>
+        public static Dictionary<string, string> Labels = new Dictionary<string, string>
         {
             //{ "woonland", "Woonland" },
             //{ "alleenstaande", "Woonsituatie"},
@@ -204,11 +154,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             //{ "toetsingsinkomen_gezamenlijk", "" }
         };
 
-        private static Dictionary<string, string> _tagText = new Dictionary<string, string>
+        public static Dictionary<string, string> TagText = new Dictionary<string, string>
         {
         };
 
-        private static Dictionary<string, string> _hintText = new Dictionary<string, string> {
+        public static Dictionary<string, string> HintText = new Dictionary<string, string> {
             { "woonland", "Selecteer \"Anders\" wanneer het uw woonland niet in de lijst staat." },
             { "alleenstaande", "Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft."},
             { "alleenstaande_hoger_dan_vermogensdrempel", "De huidige vermogensdrempel voor alleenstaanden is €114.776,00."},

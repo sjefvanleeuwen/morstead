@@ -147,7 +147,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             var result = new ParametersCollection();
             //get all parameter options
-            foreach (var key in (_formElement.Data as IMultipleOptionsFormElementData).Options.Keys)
+            foreach (var key in (_formElement.Data as IOptionsFormElementData).Options.Keys)
             {
                 result.Add(new ClientParameter(key, key == _formElement.Value ? "ja" : "nee", _formElement.Data.InferedType));
             }

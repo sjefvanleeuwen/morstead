@@ -18,12 +18,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         {
             var moqExecutionResultEmpty = new Mock<IExecutionResult>().Object;
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResultEmpty);
-            var formElementBase = formElement.Data as IMultipleOptionsFormElementData;
+            var formElementBase = formElement.Data as IOptionsFormElementData;
             Assert.Null(formElementBase);
             
             var moqExecutionResult = InitMoqExecutionResult(1);
             formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult);
-            formElementBase = formElement.Data as IMultipleOptionsFormElementData;
+            formElementBase = formElement.Data as IOptionsFormElementData;
             Assert.Equal("woonland", formElementBase.Name);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, formElementBase.InferedType);
             Assert.Equal(string.Empty, formElementBase.Label);
@@ -38,12 +38,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         {
             var moqExecutionResultEmpty = new Mock<IExecutionResult>().Object;
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResultEmpty);
-            var formElementBase = formElement.Data as IMultipleOptionsFormElementData;
+            var formElementBase = formElement.Data as IOptionsFormElementData;
             Assert.Null(formElementBase);
 
             var moqExecutionResult = InitMoqExecutionResult(2);
             formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult);
-            formElementBase = formElement.Data as IMultipleOptionsFormElementData;
+            formElementBase = formElement.Data as IOptionsFormElementData;
             Assert.Equal("woonland", formElementBase.Name);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.List, formElementBase.InferedType);
             Assert.Equal(string.Empty, formElementBase.Label);

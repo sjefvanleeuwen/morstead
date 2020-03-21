@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
+using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
@@ -17,5 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         public string Value { get; set; }
 
         bool ShowElement { get; }
+
+        void FillDataFromResult(IExecutionResult result);
     }
 }

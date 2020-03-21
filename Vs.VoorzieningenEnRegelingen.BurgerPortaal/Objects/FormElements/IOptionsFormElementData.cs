@@ -2,7 +2,7 @@
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public interface IMultipleOptionsFormElementData : IFormElementData
+    public interface IOptionsFormElementData : IFormElementData
     {
         Dictionary<string, string> Options { get; set; }
     }

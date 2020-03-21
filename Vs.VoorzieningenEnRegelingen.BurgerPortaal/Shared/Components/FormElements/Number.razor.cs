@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
+using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
@@ -38,6 +39,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
             }
 
             _data.Value = d.ToString("#.00").Replace('.', ',');
+        }
+
+        public override void FillDataFromResult(IExecutionResult result)
+        {
+            Data = new NumericFormElementData();
+            Data.FillFromExecutionResult(result);
         }
     }
 }
