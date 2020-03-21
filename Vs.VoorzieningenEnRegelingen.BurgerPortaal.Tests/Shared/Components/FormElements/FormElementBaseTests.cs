@@ -35,7 +35,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void CheckValidFilledDouble()
         {
-            var sut = new FormElementData();
+            var sut = new NumericFormElementData();
             sut.InferedType = Core.TypeInference.InferenceResult.TypeEnum.Double;
             sut.Value = "123";
             Assert.True(sut.Validate());

@@ -1,6 +1,8 @@
 ﻿using Moq;
 using System.Collections.Generic;
+using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
@@ -16,16 +18,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         {
             var moqExecutionResultEmpty = new Mock<IExecutionResult>().Object;
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResultEmpty);
-            var formElementBase = formElement.Data;
+            var formElementBase = formElement.Data as IMultipleOptionsFormElementData;
             Assert.Null(formElementBase);
             
             var moqExecutionResult = InitMoqExecutionResult(1);
             formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult);
-            formElementBase = formElement.Data;
+            formElementBase = formElement.Data as IMultipleOptionsFormElementData;
             Assert.Equal("woonland", formElementBase.Name);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, formElementBase.InferedType);
             Assert.Equal(string.Empty, formElementBase.Label);
-            Assert.NotNull(formElementBase.Options["woonland"]);
+            Assert.Contains("woonland", formElementBase.Options.Keys);
             Assert.Equal("Woonland", formElementBase.Options["woonland"]);
             Assert.Equal(string.Empty, formElementBase.TagText);
             Assert.Equal("Selecteer \"Anders\" wanneer het uw woonland niet in de lijst staat.", formElementBase.HintText);
@@ -36,12 +38,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         {
             var moqExecutionResultEmpty = new Mock<IExecutionResult>().Object;
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResultEmpty);
-            var formElementBase = formElement.Data;
+            var formElementBase = formElement.Data as IMultipleOptionsFormElementData;
             Assert.Null(formElementBase);
 
             var moqExecutionResult = InitMoqExecutionResult(2);
             formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult);
-            formElementBase = formElement.Data;
+            formElementBase = formElement.Data as IMultipleOptionsFormElementData;
             Assert.Equal("woonland", formElementBase.Name);
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.List, formElementBase.InferedType);
             Assert.Equal(string.Empty, formElementBase.Label);
@@ -214,7 +216,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
         {
             var moq = new Mock<IParametersCollection>();
             moq.Setup(m => m.GetAll()).Returns(new List<IParameter> { InitMoqParameter(type) });
-            //moq.Setup(m => m.GetEnumerator()).Returns(new List<IParameter> { InitMoqParameter(type) }.GetEnumerator());
             return moq.Object;
         }
 

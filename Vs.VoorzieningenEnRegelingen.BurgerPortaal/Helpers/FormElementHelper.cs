@@ -29,7 +29,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
         {
             InitializeFormElementData(formElement);
             FillFormElementGenericData(formElement, result);
-            FillFormElementDataByInFeredType(formElement);
+            FillFormElementDataByInFeredType(formElement, result);
         }
 
         private static void FillFormElementGenericData(IFormElementBase formElement, IExecutionResult result)
@@ -37,7 +37,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             formElement.Data.InferedType = GetInferedType(result.Questions);
             formElement.Data.Name = result.Questions.Parameters.GetAll().First().Name;
             formElement.Data.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-            formElement.Data.Options = DefineOptions(result);
             formElement.Data.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             formElement.Data.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
         }
@@ -49,22 +48,30 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             {
                 data = new NumericFormElementData();
             }
+            if (formElement.GetType() == typeof(Radio) ||
+                formElement.GetType() == typeof(Select))
+            {
+                data = new MultipleOptionsFormElementData();
+            }
 
             formElement.Data = data;
         }
 
-        private static void FillFormElementDataByInFeredType(IFormElementBase formElement)
+        private static void FillFormElementDataByInFeredType(IFormElementBase formElement, IExecutionResult result)
         {
             if (formElement.GetType() == typeof(Number)) {
                 formElement.Data.Size = FormElementSize.Large;
                 (formElement.Data as INumericFormElementData).Decimals = 2;
                 (formElement.Data as INumericFormElementData).DecimalsOptional = true;
-                return;
             }
             if (formElement.GetType() == typeof(Select))
             {
                 formElement.Data.Size = FormElementSize.Large;
-                return;
+                (formElement.Data as IMultipleOptionsFormElementData).Options = DefineOptions(result);
+            }
+            if (formElement.GetType() == typeof(Radio))
+            {
+                (formElement.Data as IMultipleOptionsFormElementData).Options = DefineOptions(result);
             }
         }
 

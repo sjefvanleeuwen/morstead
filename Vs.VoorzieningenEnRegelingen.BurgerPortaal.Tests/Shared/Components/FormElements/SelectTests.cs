@@ -14,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void SelectEmpty()
         {
-            var variables = new Dictionary<string, object> { { "Data", new FormElementData() } };
+            var variables = new Dictionary<string, object> { { "Data", new MultipleOptionsFormElementData() } };
             var component = _host.AddComponent<Select>(variables);
             //no elementes
             var selects = component.FindAll("select");
@@ -34,7 +34,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                             { "A", "ListOptionA" },
                             { "B", "ListOptionB" },
@@ -78,7 +78,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                             { "A", "ListOptionA" },
                             { "B", "ListOptionB" },
@@ -108,7 +108,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             //make sure elements are rendered
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Label = "_",
                         HintText = "_",
                         ErrorText = "_"

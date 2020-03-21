@@ -6,6 +6,7 @@ using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
 using Vs.VoorzieningenEnRegelingen.Core;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
@@ -145,7 +146,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             var result = new ParametersCollection();
             //get all parameter options
-            foreach (var key in _formElement.Data.Options.Keys)
+            foreach (var key in (_formElement.Data as IMultipleOptionsFormElementData).Options.Keys)
             {
                 result.Add(new ClientParameter(key, key == _formElement.Value ? "ja" : "nee", _formElement.Data.InferedType));
             }

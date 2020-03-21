@@ -14,7 +14,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         bool IsValid { get; set; }
         string Label { get; set; }
         string Name { get; set; }
-        Dictionary<string, string> Options { get; set; }
         FormElementSize Size { get; set; }
         string TagText { get; set; }
         string Value { get; set; }

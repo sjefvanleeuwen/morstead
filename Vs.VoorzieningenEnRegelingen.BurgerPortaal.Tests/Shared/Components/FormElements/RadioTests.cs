@@ -14,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void RadioEmpty()
         {
-            var variables = new Dictionary<string, object> { { "Data", new FormElementData() } };
+            var variables = new Dictionary<string, object> { { "Data", new MultipleOptionsFormElementData() } };
             var component = _host.AddComponent<Radio>(variables);
             //no elementes
             Assert.Null(component.Find("div > div"));
@@ -28,7 +28,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             //only 2 lower than 10
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                             { "A", "<than10" },
                             { "B", "and_only_2" }
@@ -42,7 +42,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             //lower than 10 in length, but 3
             variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                             { "A", "Thisisshor" },
                             { "B", "terthan10c" },
@@ -57,7 +57,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             //longer than 10
             variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                             { "A", ">than10" },
                             { "B", "and_onlytwo" }
@@ -75,7 +75,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                             { "A", "ValueA" },
                             { "B", "ValueB" }
@@ -123,7 +123,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                             { "A", "ValueA" },
                             { "B", "ValueB" }
@@ -143,7 +143,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                             { "A", "ValueA" }
                         }
@@ -159,7 +159,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                              { "A", "Val<i>ue</i>A" },
                              { "B", "V<u>alueB</u>" }
@@ -184,7 +184,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                              { "A", "ValueA" },
                              { "B", "ValueB" }
@@ -227,7 +227,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new MultipleOptionsFormElementData() {
                         Options = new Dictionary<string, string> {
                              { "A", "ValueA" }
                         },
