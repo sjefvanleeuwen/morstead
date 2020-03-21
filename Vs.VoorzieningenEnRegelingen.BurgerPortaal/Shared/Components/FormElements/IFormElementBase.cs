@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {

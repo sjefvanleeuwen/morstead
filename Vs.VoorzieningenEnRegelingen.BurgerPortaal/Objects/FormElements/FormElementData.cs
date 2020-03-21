@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Vs.Core.Extensions;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.Core;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
     public partial class FormElementData : IFormElementData
     {
@@ -13,7 +13,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         public string Name { get; set; }
         public string Label { get; set; }
-        public IEnumerable<FormElementLabel> Labels { get; set; }
 
         public string Value
         {
@@ -34,17 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         public EventCallback<string> ValueChanged { get; set; }
 
-        public int? Decimals { get; set; } = null;
-
-        public bool DecimalsOptional { get; set; }
-
-        public IEnumerable<string> Values { get; set; }
-
         public Dictionary<string, string> Options { get; set; } = new Dictionary<string, string>();
-
-        public string ButtonIcon { get; set; }
-
-        public string ButtonText { get; set; }
 
         public FormElementSize Size { get; set; }
 
@@ -101,7 +90,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
             errorText = string.Empty;
             var chars = new List<char>(Value.ToCharArray());
             var validChars = new List<char>("1234567890,".ToCharArray());
-            foreach(var c in Value)
+            foreach (var c in Value)
             {
                 if (!validChars.Contains(c))
                 {
@@ -123,35 +112,5 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
             return true;
         }
-    }
-
-    public enum FormElementSize
-    {
-        [Description("")]
-        Default,
-        [Description("input__control--xs")]
-        ExtraSmall,
-        [Description("input__control--s")]
-        Small,
-        [Description("input__control--m")]
-        Medium,
-        [Description("input__control--l")]
-        Large,
-        [Description("input__control--xl")]
-        ExtraLarge,
-        [Description("input__control--two-characters")]
-        Two,
-        [Description("input__control--four-characters")]
-        Four,
-        [Description("input__control--five-characters")]
-        Five,
-        [Description("input__control--six-characters")]
-        Six
-    }
-
-    public class FormElementLabel
-    {
-        public string Text { get; set; }
-        public string Title { get; set; }
     }
 }

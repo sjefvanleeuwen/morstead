@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Components;
-using System;
+﻿using System;
 using System.Globalization;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
     public partial class Number
     {
+        private INumericFormElementData _data => Data as INumericFormElementData;
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -14,8 +16,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         private void AddDecimalsToValue()
         {
+            
             //if value is set and decimals is set
-            if (!string.IsNullOrWhiteSpace(Data.Value) && (Data.Decimals ?? -1) <= 0)
+            if (!string.IsNullOrWhiteSpace(_data.Value) && (_data.Decimals ?? -1) <= 0)
             {
                 return;
             }
@@ -29,12 +32,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
             }
 
             //continue only if decimals are optional and there are decimals
-            if (Data.DecimalsOptional && Math.Round(d) == d)
+            if (_data.DecimalsOptional && Math.Round(d) == d)
             {
                 return;
             }
 
-            Data.Value = d.ToString("#.00").Replace('.', ',');
+            _data.Value = d.ToString("#.00").Replace('.', ',');
         }
     }
 }

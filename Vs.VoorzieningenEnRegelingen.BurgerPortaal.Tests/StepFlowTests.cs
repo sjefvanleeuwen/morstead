@@ -119,16 +119,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             sequenceController.IncreaseStep();
             sequenceController.ExecuteStep(null);
 
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters1(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters1(sequenceController);
 
             //go back one step (it does not work that way, so it should still be the first step)
             sequenceController.DecreaseStep();
             sequenceController.ExecuteStep(null);
 
             //should be the same as after the previous step.
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters1(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters1(sequenceController);
 
             //once again try to go back one step, but this time a value was entered
             sequenceController.DecreaseStep();
@@ -138,8 +138,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             });
 
             //should be the same as the previous step
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2a(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2a(sequenceController);
 
             //increase the step 1 -> 2
             sequenceController.IncreaseStep();
@@ -148,42 +148,42 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
                 new ClientParameter("aanvrager_met_toeslagpartner", "nee")
             });
 
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(sequenceController);
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2b(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2b(sequenceController);
 
             //increase the step 2 ->3
             sequenceController.IncreaseStep();
             sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("toetsingsinkomen_aanvrager", "800") });
 
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep3(sequenceController);
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckStep3(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
 
             //decrease the step 3 -> 2
             sequenceController.DecreaseStep();
             sequenceController.ExecuteStep(null);
 
             //should be the same as when step 2 was executed the first time
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(sequenceController);
             //but we still have the same parameters as last step
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
 
             //decrease the step 2 -> 1
             sequenceController.DecreaseStep();
             sequenceController.ExecuteStep(null);
 
             //should be the same as when step 1 was executed the first time
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
             //but we still have the same parameters as last step
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
 
             //decrease again (is not possible)
             sequenceController.DecreaseStep();
             sequenceController.ExecuteStep(null);
 
             //should be the same as when step 1 was executed the first time
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
             //but we still have the same parameters as last step
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
 
             sequenceController.IncreaseStep();
             sequenceController.ExecuteStep(new ParametersCollection() {
@@ -192,9 +192,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             });
 
             //should be the same as when step 1 was executed the first time
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(sequenceController);
             //but we still have the same parameters as last step
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
 
             //decrease 2 -> 1
             sequenceController.DecreaseStep();
@@ -206,15 +206,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
                 new ClientParameter("aanvrager_met_toeslagpartner", "ja")
             });
             //should be the same as when step 1 was executed the first time, but we get 1 different variable back
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2b(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2b(sequenceController);
             //but we should have all the paramaters that were submitted, but now one is changed and an other has a different value
-            _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3b(sequenceController);
+            CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3b(sequenceController);
         }
 
         /// <summary>
         /// check what should be true after every step 1
         /// </summary>
-        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(SequenceController sequenceController)
+        private void CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(SequenceController sequenceController)
         {
             //we are getting 2 parameters in the question
             Assert.Equal(2, sequenceController.LastExecutionResult.Questions.Parameters.Count);
@@ -239,7 +239,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
         /// <summary>
         /// check what should be true after every step 2
         /// </summary>
-        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(SequenceController sequenceController)
+        private void CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(SequenceController sequenceController)
         {
             //we are getting 1 parameters in the question
             Assert.Single(sequenceController.LastExecutionResult.Questions.Parameters);
@@ -272,7 +272,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             Assert.Equal(1, sequenceController.Sequence.Steps.Last().Key);
         }
 
-        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2b(SequenceController sequenceController)
+        private void CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2b(SequenceController sequenceController)
         {
             //we are getting 1 parameters in the question
             Assert.Single(sequenceController.LastExecutionResult.Questions.Parameters);
@@ -308,7 +308,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
         /// <summary>
         /// check what should be true after every step 3
         /// </summary>
-        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckStep3(SequenceController sequenceController)
+        private void CanDoThreeStepsAndTwoBackAnd1forward_CheckStep3(SequenceController sequenceController)
         {
             //we are getting 1 parameters in the question
             Assert.Single(sequenceController.LastExecutionResult.Questions.Parameters);
@@ -348,13 +348,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
         /// <summary>
         /// check what should be true after the maximum step done was only 1
         /// </summary>
-        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters1(SequenceController sequenceController)
+        private void CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters1(SequenceController sequenceController)
         {
             //no parameters yet
             Assert.Empty(sequenceController.Sequence.Parameters);
         }
 
-        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2a(SequenceController sequenceController)
+        private void CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2a(SequenceController sequenceController)
         {
             //we should have saved 2 variables in steps
             Assert.Equal(2, sequenceController.Sequence.Parameters.Count);
@@ -371,7 +371,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             Assert.Equal("true", var2.ValueAsString.ToLower());
         }
 
-        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2b(SequenceController sequenceController)
+        private void CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters2b(SequenceController sequenceController)
         {
             //we should have saved 1 variables in steps
             Assert.Equal(2, sequenceController.Sequence.Parameters.Count);
@@ -388,7 +388,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             Assert.Equal("false", var2.ValueAsString.ToLower());
         }
 
-        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(SequenceController sequenceController)
+        private void CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(SequenceController sequenceController)
         {
             //we should have saved 3 variables in steps
             Assert.Equal(3, sequenceController.Sequence.Parameters.Count);
@@ -410,7 +410,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             Assert.Equal("800", var3.ValueAsString.ToLower());
         }
 
-        private void _CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3b(SequenceController sequenceController)
+        private void CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3b(SequenceController sequenceController)
         {
             //we should have saved 2 variables in steps
             Assert.Equal(3, sequenceController.Sequence.Parameters.Count);

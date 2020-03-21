@@ -3,6 +3,8 @@ using Xunit;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Microsoft.AspNetCore.Components.Testing;
 using Vs.Core.Web;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements
 {
@@ -11,7 +13,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void NumberEmpty()
         {
-            var variables = new Dictionary<string, object> { { "Data", new FormElementData() } };
+            var variables = new Dictionary<string, object> { { "Data", new NumericFormElementData() } };
             var component = _host.AddComponent<Number>(variables);
             Assert.NotNull(component.Find("input"));
             Assert.False(component.Find("input").IsRequired());
@@ -29,7 +31,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new NumericFormElementData() {
                         IsRequired = true,
                         IsDisabled = true,
                         Name = "TheName",
@@ -54,7 +56,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var variables = new Dictionary<string, object> {
                 {
-                    "Data", new FormElementData() {
+                    "Data", new NumericFormElementData() {
                         Name = "TheName",
                         Size = FormElementSize.Large ,
                         Value = "123"
@@ -77,7 +79,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             //make sure elements are rendered
             var variables = new Dictionary<string, object> {
                 { 
-                    "Data", new FormElementData() {
+                    "Data", new NumericFormElementData() {
                         Label = "_",
                         HintText = "_" ,
                         ErrorText = "_"

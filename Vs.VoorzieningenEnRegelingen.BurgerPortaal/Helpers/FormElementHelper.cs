@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.Core;
 
@@ -25,23 +27,38 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
 
         private static void FillFormElementData(IFormElementBase formElement, IExecutionResult result)
         {
-            formElement.Data = new FormElementData();
+            InitializeFormElementData(formElement);
+            FillFormElementGenericData(formElement, result);
+            FillFormElementDataByInFeredType(formElement);
+        }
+
+        private static void FillFormElementGenericData(IFormElementBase formElement, IExecutionResult result)
+        {
             formElement.Data.InferedType = GetInferedType(result.Questions);
             formElement.Data.Name = result.Questions.Parameters.GetAll().First().Name;
             formElement.Data.Label = GetFromLookupTable(result.Questions.Parameters, _labels, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             formElement.Data.Options = DefineOptions(result);
             formElement.Data.TagText = GetFromLookupTable(result.Questions.Parameters, _tagText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
             formElement.Data.HintText = GetFromLookupTable(result.Questions.Parameters, _hintText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+        }
 
-            FillFormElementDataByInFeredType(formElement);
+        private static void InitializeFormElementData(IFormElementBase formElement)
+        {
+            var data = new FormElementData();
+            if (formElement.GetType() == typeof(Number))
+            {
+                data = new NumericFormElementData();
+            }
+
+            formElement.Data = data;
         }
 
         private static void FillFormElementDataByInFeredType(IFormElementBase formElement)
         {
             if (formElement.GetType() == typeof(Number)) {
                 formElement.Data.Size = FormElementSize.Large;
-                formElement.Data.Decimals = 2;
-                formElement.Data.DecimalsOptional = true;
+                (formElement.Data as INumericFormElementData).Decimals = 2;
+                (formElement.Data as INumericFormElementData).DecimalsOptional = true;
                 return;
             }
             if (formElement.GetType() == typeof(Select))
@@ -56,11 +73,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             switch (typeEnum)
             {
                 case TypeInference.InferenceResult.TypeEnum.Double:
-                    return new Number() as IFormElementBase;
+                    return new Number();
                 case TypeInference.InferenceResult.TypeEnum.Boolean:
-                    return new Radio() as IFormElementBase;
+                    return new Radio();
                 case TypeInference.InferenceResult.TypeEnum.List:
-                    return new Select() as IFormElementBase;
+                    return new Select();
                 case TypeInference.InferenceResult.TypeEnum.TimeSpan:
                 case TypeInference.InferenceResult.TypeEnum.DateTime:
                 case TypeInference.InferenceResult.TypeEnum.String:
