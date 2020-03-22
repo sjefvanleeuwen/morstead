@@ -9,7 +9,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         public void CheckValidEmpty()
         {
             var sut = new FormElementData();
-            sut.InferedType = Core.TypeInference.InferenceResult.TypeEnum.String;
             sut.Validate();
             Assert.False(sut.IsValid);
             Assert.Equal("Vul een waarde in.", sut.ErrorText);

@@ -9,7 +9,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         public void CheckValidEmptyFromParent()
         {
             var sut = new NumericFormElementData();
-            sut.InferedType = Core.TypeInference.InferenceResult.TypeEnum.String;
             sut.Validate();
             Assert.False(sut.IsValid);
             Assert.Equal("Vul een waarde in.", sut.ErrorText);
@@ -31,7 +30,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         public void CheckValidFilledDouble()
         {
             var sut = new NumericFormElementData();
-            sut.InferedType = Core.TypeInference.InferenceResult.TypeEnum.Double;
             sut.Value = "123";
             sut.Validate();
             Assert.True(sut.IsValid);

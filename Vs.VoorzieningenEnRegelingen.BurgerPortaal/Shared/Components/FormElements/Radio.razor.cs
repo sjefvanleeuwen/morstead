@@ -13,7 +13,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         public override void FillDataFromResult(IExecutionResult result)
         {
-            Data = new OptionsFormElementData();
+            Data = new BooleanFormElementData();
             Data.FillFromExecutionResult(result);
         }
     }

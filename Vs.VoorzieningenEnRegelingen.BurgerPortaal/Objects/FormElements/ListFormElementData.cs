@@ -1,4 +1,6 @@
-﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
@@ -10,6 +12,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             base.FillFromExecutionResult(result);
 
             Size = FormElementSize.Large;
+        }
+
+        public override void DefineOptions(IExecutionResult result)
+        {
+            (result.Questions.Parameters.GetAll().First().Value as List<object>)?.ForEach(v => Options.Add(v.ToString(), v.ToString()));
         }
     }
 }

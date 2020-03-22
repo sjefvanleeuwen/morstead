@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.Core;
 
@@ -90,29 +88,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             return key;
         }
 
-        public static Dictionary<string, string> DefineOptions(IExecutionResult result)
-        {
-            switch (GetInferedType(result.Questions))
-            {
-                case TypeInference.InferenceResult.TypeEnum.Boolean:
-                    return BooleanToOptions(result);
-                case TypeInference.InferenceResult.TypeEnum.List:
-                    return ListToOptions(result.Questions);
-                default:
-                    return null;
-            }
-        }
-
-        private static Dictionary<string, string> BooleanToOptions(IExecutionResult result)
-        {
-            var options = new Dictionary<string, string>();
-            foreach (var p in result.Questions.Parameters.GetAll()) {
-                options.Add(p.Name, GetParameterDisplayName(p.Name, result.Parameters));
-            }
-            return options;
-        }
-
-        private static string GetParameterDisplayName(string name, IParametersCollection parameters)
+        public static string GetParameterDisplayName(string name, IParametersCollection parameters)
         {
             switch (name)
             {
@@ -135,13 +111,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             }
 
             return name.Substring(0, 1).ToUpper() + name.Substring(1).Replace('_', ' ');
-        }
-
-        private static Dictionary<string, string> ListToOptions(IQuestionArgs questions)
-        {
-            var result = new Dictionary<string, string>();
-            (questions.Parameters.GetAll().First().Value as List<object>)?.ForEach(v => result.Add(v.ToString(), v.ToString()));
-            return result;
         }
 
         public static Dictionary<string, string> Labels = new Dictionary<string, string>
@@ -211,17 +180,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers
             }
 
             return parameters.First().ValueAsString;
-        }
-
-        private static string GetDefaultListValue(IExecutionResult result)
-        {
-            var options = DefineOptions(result);
-            if (options.Keys.Contains(string.Empty))
-            {
-                return string.Empty;
-            }
-
-            return options.Keys?.FirstOrDefault() ?? string.Empty;
         }
     }
 }

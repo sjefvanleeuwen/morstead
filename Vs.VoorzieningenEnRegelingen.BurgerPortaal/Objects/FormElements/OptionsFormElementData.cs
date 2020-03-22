@@ -12,7 +12,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         {
             base.FillFromExecutionResult(result);
 
-            Options = FormElementHelper.DefineOptions(result);
+            DefineOptions(result);
+        }
+
+        public virtual void DefineOptions(IExecutionResult result)
+        {
         }
     }
 }
