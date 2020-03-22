@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interface;
 using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers

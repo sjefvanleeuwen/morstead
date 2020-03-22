@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
 using Vs.VoorzieningenEnRegelingen.Core;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interface;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interface;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {

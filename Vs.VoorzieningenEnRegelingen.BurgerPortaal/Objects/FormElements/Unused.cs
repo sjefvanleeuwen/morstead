@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interface;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {

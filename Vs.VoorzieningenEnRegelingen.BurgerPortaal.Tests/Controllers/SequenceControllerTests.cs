@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interface;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;

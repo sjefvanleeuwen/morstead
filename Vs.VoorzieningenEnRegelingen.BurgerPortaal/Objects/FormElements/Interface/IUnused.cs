@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interface
 {
     public interface IUnused
     {

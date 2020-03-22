@@ -2,7 +2,7 @@
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.Core;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interface
 {
     public interface IFormElementData
     {
