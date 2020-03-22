@@ -11,7 +11,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
     public class DisplayExecutionResultTests
     {
         [Fact]
-        public void ShouldInitiateCorrectly() {
+        public void ShouldInitiateCorrectly()
+        {
             var moqExecutionResult = InitMoqExecutionResult();
             var moqParameterCollection = InitMoqParementerCollection(2);
             var sut = new DisplayExecutionResult(moqExecutionResult, moqParameterCollection);

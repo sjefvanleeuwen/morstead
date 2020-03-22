@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Xunit;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
-using Microsoft.AspNetCore.Components.Testing;
+﻿using Microsoft.AspNetCore.Components.Testing;
+using System.Collections.Generic;
 using Vs.Core.Web;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
+using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements
 {

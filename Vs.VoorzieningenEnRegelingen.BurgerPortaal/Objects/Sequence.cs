@@ -28,7 +28,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             var steps = Steps.ToList().GetRange(0, Math.Max(0, Math.Min(Parameters.Count(), step - 1)));
             steps.ForEach(s =>
             {
-                foreach(var p in Parameters)
+                foreach (var p in Parameters)
                 {
                     if (s.IsMatch(p))
                     {
@@ -68,7 +68,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 
         public void UpdateParametersCollection(IParametersCollection parameters)
         {
-            foreach(var p in parameters.GetAll()) 
+            foreach (var p in parameters.GetAll())
             {
                 if (p is IClientParameter && !((IClientParameter)p).IsCalculated)
                 {

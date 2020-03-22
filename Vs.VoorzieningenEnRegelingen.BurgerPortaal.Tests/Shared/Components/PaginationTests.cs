@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Components.Testing;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Vs.Core.Web;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
 using Xunit;
-using System.Linq;
-using Microsoft.AspNetCore.Components.Testing;
-using System;
-using Vs.Core.Web;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
 {
@@ -69,7 +69,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
             var testValue = 0;
             Action previousStep = () => testValue--;
             Action nextStep = () => testValue++;
-            
+
             var variables = new Dictionary<string, object> {
                 { "Previous", previousStep },
                 { "Next", nextStep }

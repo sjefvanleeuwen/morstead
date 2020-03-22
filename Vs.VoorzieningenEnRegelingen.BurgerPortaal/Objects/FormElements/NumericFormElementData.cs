@@ -54,7 +54,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public override void FillFromExecutionResult(IExecutionResult result)
         {
             base.FillFromExecutionResult(result);
-            
+
             Size = FormElementSize.Large;
             Decimals = 2;
             DecimalsOptional = true;

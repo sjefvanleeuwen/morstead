@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interface;
 using Vs.VoorzieningenEnRegelingen.Core;

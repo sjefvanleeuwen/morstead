@@ -24,8 +24,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
             var variables = new Dictionary<string, object> {
                 { "Title", "This is the Title" },
                 { "SubTitle", "Sub sub Sub" },
-                { "Number", 5 }, 
-                { "Subject", "Sub ject Sub" } 
+                { "Number", 5 },
+                { "Subject", "Sub ject Sub" }
             };
             var component = _host.AddComponent<CalculationHeader>(variables);
             Assert.Equal("strong", component.Find("h1").ChildNodes[0].Name);

@@ -224,7 +224,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             var moq = new Mock<IParametersCollection>();
             moq.Setup(m => m.GetAll()).Returns(new List<IParameter> {
                 InitMoqBooleanParameter(1),
-                InitMoqBooleanParameter(2) 
+                InitMoqBooleanParameter(2)
             });
 
             return moq.Object;
@@ -250,7 +250,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             return moq.Object;
         }
 
-        private IParameter InitMoqBooleanParameter(int i) { 
+        private IParameter InitMoqBooleanParameter(int i)
+        {
             var moq = new Mock<IParameter>();
             if (i == 1)
             {

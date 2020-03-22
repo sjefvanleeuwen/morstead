@@ -1,6 +1,5 @@
 ﻿using Moq;
 using System.Collections.Generic;
-using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interface;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
@@ -10,7 +9,6 @@ using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
 {
-
     public class FormElementHelperTests
     {
         [Fact]
@@ -20,7 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Helpers
             var formElement = FormElementHelper.ParseExecutionResult(moqExecutionResultEmpty);
             var formElementBase = formElement.Data as IOptionsFormElementData;
             Assert.Null(formElementBase);
-            
+
             var moqExecutionResult = InitMoqExecutionResult(1);
             formElement = FormElementHelper.ParseExecutionResult(moqExecutionResult);
             formElementBase = formElement.Data as IOptionsFormElementData;

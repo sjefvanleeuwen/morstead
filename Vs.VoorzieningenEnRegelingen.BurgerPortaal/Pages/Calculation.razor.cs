@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
-using Vs.VoorzieningenEnRegelingen.Core;
 using System.Linq;
-using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interface;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interface;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interface;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
+using Vs.VoorzieningenEnRegelingen.Core;
+using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
@@ -84,7 +84,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
                 if (_formElement.ShowElement)
                 {
-                    _formElement.Data.Value = 
+                    _formElement.Data.Value =
                         FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult) ??
                         _formElement.Data.Value;
                     ValidateForm(true); //set the IsValid and ErrorText Property

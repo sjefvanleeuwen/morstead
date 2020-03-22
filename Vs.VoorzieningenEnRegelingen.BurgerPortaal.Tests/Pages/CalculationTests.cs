@@ -18,7 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Pages
             var wrapper = component.Find("div");
             Assert.Equal(5, wrapper.Elements().ToList().Count);
             //check the CalculationHeader is the first 3 elements
-            Assert.Equal("h1", wrapper.Elements().ToList()[0].Name); 
+            Assert.Equal("h1", wrapper.Elements().ToList()[0].Name);
             Assert.Equal("h2", wrapper.Elements().ToList()[1].Name);
             Assert.Equal("h3", wrapper.Elements().ToList()[2].Name);
             Assert.Equal("aside", wrapper.Elements().ToList()[3].Name); //check the hint is the 4th

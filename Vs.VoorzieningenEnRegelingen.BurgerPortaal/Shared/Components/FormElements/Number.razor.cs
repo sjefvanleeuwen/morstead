@@ -18,7 +18,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         private void AddDecimalsToValue()
         {
-            
             //if value is set and decimals is set
             if (!string.IsNullOrWhiteSpace(_data.Value) && (_data.Decimals ?? -1) <= 0)
             {

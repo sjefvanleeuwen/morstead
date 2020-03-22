@@ -8,14 +8,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
     public class FormElementBase : ComponentBase, IFormElementBase
     {
         private IFormElementData _data;
-        
+
         [CascadingParameter]
         public IFormElementData CascadedData { get; set; }
 
         [Parameter]
-        public IFormElementData Data { 
-            get => CascadedData != null ? CascadedData : _data; 
-            set => _data = value; 
+        public IFormElementData Data
+        {
+            get => CascadedData != null ? CascadedData : _data;
+            set => _data = value;
         }
 
         [Parameter]

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using Vs.Core.Web;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
 using Xunit;
-using Vs.Core.Web;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
 {
@@ -29,8 +29,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
         [InlineData(5, "5", 5, "-5")]
         [InlineData(-5, "-5", 0, "0")]
         [InlineData(18, "18", -30, "30")]
-        public void BadgeShowsCorrectly(int number, string numberValue, int translateY, string translateYValue) 
-        { 
+        public void BadgeShowsCorrectly(int number, string numberValue, int translateY, string translateYValue)
+        {
             var variables = new Dictionary<string, object> { { "Number", number }, { "GoUp", translateY } };
             var component = _host.AddComponent<Badge>(variables);
             Assert.Equal(numberValue, component.Find("span").InnerText);

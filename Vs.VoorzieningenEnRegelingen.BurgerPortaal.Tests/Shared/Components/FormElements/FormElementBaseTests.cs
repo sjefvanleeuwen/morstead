@@ -24,7 +24,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             sut.Data.Name = "test2_1";
             Assert.Equal("test2_1", sut.Data.Name);
             //once cascaded data is set the value of data is completely ifnored
-            sut.Data = new NumericFormElementData { Name = "test3" }; 
+            sut.Data = new NumericFormElementData { Name = "test3" };
             Assert.Equal(typeof(OptionsFormElementData), sut.CascadedData.GetType());
             Assert.Equal("test2_1", sut.CascadedData.Name);
             Assert.Equal("test2_1", sut.Data.Name);

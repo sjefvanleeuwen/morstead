@@ -8,9 +8,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
     public class ListFormElementData : OptionsFormElementData, IListFormElementData
     {
-        public override string Value 
+        public override string Value
         {
-            get 
+            get
             {
                 if (_value == string.Empty)
                 {

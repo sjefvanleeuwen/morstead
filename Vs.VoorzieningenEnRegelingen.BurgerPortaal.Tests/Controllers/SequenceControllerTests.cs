@@ -105,7 +105,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Controllers
 
             sut.IncreaseStep();
             sut.ExecuteStep(moqParametersCollection);
-           
+
             moqSequence.Verify(m => m.GetParametersToSend(1), Times.Once());
             moqSequence.Verify(m => m.UpdateParametersCollection(It.IsAny<IParametersCollection>()), Times.Once());
             moqSequence.Verify(m => m.AddStep(1, It.IsAny<IExecutionResult>()), Times.Once());

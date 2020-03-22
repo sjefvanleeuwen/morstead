@@ -8,7 +8,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         public string Name { get; set; }
         [Parameter]
         public string Text { get; set; }
-        
+
         protected bool _show => !string.IsNullOrWhiteSpace(Text);
     }
 }
