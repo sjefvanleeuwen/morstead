@@ -8,6 +8,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
     public class ListFormElementData : OptionsFormElementData, IListFormElementData
     {
+        public override string Value 
+        {
+            get 
+            {
+                if (_value == string.Empty)
+                {
+                    return Options.ToList().FirstOrDefault().Key;
+                }
+                return _value;
+            }
+            set { _value = value; }
+        }
+
         public override void FillFromExecutionResult(IExecutionResult result)
         {
             base.FillFromExecutionResult(result);

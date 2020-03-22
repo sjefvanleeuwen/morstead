@@ -84,9 +84,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
                 if (_formElement.ShowElement)
                 {
-                    _formElement.Value = 
+                    _formElement.Data.Value = 
                         FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult) ??
-                        _formElement.Value;
+                        _formElement.Data.Value;
                     ValidateForm(true); //set the IsValid and ErrorText Property
                 }
             }
@@ -137,7 +137,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                     return GetCurrentNumberParameter();
                 }
                 return new ParametersCollection {
-                    new ClientParameter(_formElement.Data.Name, _formElement.Value, _formElement.Data.InferedType)
+                    new ClientParameter(_formElement.Data.Name, _formElement.Data.Value, _formElement.Data.InferedType)
                 };
             }
             return null;
@@ -149,7 +149,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             //get all parameter options
             foreach (var key in (_formElement.Data as IOptionsFormElementData).Options.Keys)
             {
-                result.Add(new ClientParameter(key, key == _formElement.Value ? "ja" : "nee", _formElement.Data.InferedType));
+                result.Add(new ClientParameter(key, key == _formElement.Data.Value ? "ja" : "nee", _formElement.Data.InferedType));
             }
 
             return result;
@@ -159,7 +159,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             return new ParametersCollection
             {
-                new ClientParameter(_formElement.Data.Name, _formElement.Value.Replace(',', '.'), _formElement.Data.InferedType)
+                new ClientParameter(_formElement.Data.Name, _formElement.Data.Value.Replace(',', '.'), _formElement.Data.InferedType)
             };
         }
     }

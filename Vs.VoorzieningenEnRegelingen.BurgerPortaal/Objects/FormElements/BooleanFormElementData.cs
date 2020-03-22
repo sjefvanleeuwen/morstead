@@ -4,7 +4,7 @@ using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class BooleanFormElementData : OptionsFormElementData, IListFormElementData
+    public class BooleanFormElementData : OptionsFormElementData, IBooleanFormElementData
     {
         public override void DefineOptions(IExecutionResult result)
         {

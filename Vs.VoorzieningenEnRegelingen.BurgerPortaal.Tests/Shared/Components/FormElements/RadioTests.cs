@@ -14,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         [Fact]
         public void RadioEmpty()
         {
-            var variables = new Dictionary<string, object> { { "Data", new OptionsFormElementData() } };
+            var variables = new Dictionary<string, object> { { "Data", new BooleanFormElementData() } };
             var component = _host.AddComponent<Radio>(variables);
             //no elementes
             Assert.Null(component.Find("div > div"));

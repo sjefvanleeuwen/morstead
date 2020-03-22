@@ -14,9 +14,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         [Parameter]
         public IFormElementData Data { get; set; }
 
-        [Parameter]
-        public string Value { get; set; }
-
         bool ShowElement { get; }
 
         void FillDataFromResult(IExecutionResult result);

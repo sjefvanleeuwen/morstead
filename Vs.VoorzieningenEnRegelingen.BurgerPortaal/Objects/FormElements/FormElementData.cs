@@ -11,11 +11,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
     public class FormElementData : IFormElementData
     {
-        private string _value = string.Empty;
+        protected string _value = string.Empty;
 
         public string Name { get; set; }
         public string Label { get; set; }
-        public string Value
+        public virtual string Value
         {
             get { return _value; }
             set
