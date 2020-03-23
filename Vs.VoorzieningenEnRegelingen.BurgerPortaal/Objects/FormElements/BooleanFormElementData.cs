@@ -1,5 +1,4 @@
-﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
+﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
@@ -8,9 +7,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
     {
         public override void DefineOptions(IExecutionResult result)
         {
-            foreach (var p in result.Questions.Parameters.GetAll())
+            foreach (var p in result.QuestionParameters)
             {
-                Options.Add(p.Name, FormElementHelper.GetParameterDisplayName(p.Name, result.Parameters));
+                //todo activate after texts have been restored
+                //Options.Add(p.Name, FormElementHelper.GetParameterDisplayName(p.Name, result.Parameters));
+                Options.Add(p.Name, p.Name);
             }
         }
     }

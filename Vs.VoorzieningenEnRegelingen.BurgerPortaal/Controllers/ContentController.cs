@@ -1,5 +1,6 @@
 ﻿using Vs.Cms.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
 {
@@ -12,6 +13,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
         {
             _templateEngine = templateEngine;
             _markupLanguage = markupLanguage;
+        }
+
+        public string GetText(FormElementContentType question, string semanticKey)
+        {
+            //todo implement
+            return "Text";
         }
     }
 }

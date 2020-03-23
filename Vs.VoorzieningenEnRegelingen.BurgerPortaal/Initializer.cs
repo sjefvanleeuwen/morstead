@@ -14,6 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal
         {
             services.AddScoped<ISequenceController, SequenceController>();
             services.AddScoped<ISequence, Sequence>();
+            services.AddScoped<IContentController, ContentController>();
             services.AddScoped<ITemplateEngine, Liquid>();
             services.AddScoped<IMarkupLanguage, Markdown>();
             Service.Initializer.Initialize(services);

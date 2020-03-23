@@ -11,11 +11,14 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces
         int RequestStep { get; }
         IParseResult ParseResult { get; }
         IExecutionResult LastExecutionResult { get; }
+        bool QuestionIsAsked { get; }
+        bool HasRights { get; }
 
         IExecuteRequest GetExecuteRequest(IParametersCollection parameters = null);
         IParseRequest GetParseRequest();
         void IncreaseStep();
         void DecreaseStep();
         void ExecuteStep(IParametersCollection currentParameters);
+        string GetSavedValue();
     }
 }

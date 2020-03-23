@@ -95,8 +95,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site
                         {
                             if (postLogoutUri.StartsWith("/"))
                             {
-                                 // transform to absolute
-                                 var request = context.Request;
+                                // transform to absolute
+                                var request = context.Request;
                                 postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
                             }
                             logoutUri += $"&returnTo={ Uri.EscapeDataString(postLogoutUri)}";

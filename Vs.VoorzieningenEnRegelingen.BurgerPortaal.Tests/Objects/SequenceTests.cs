@@ -192,9 +192,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
         private IExecutionResult InitMoqExecutionResultsWithBoolean()
         {
             var moq = new Mock<IExecutionResult>();
-            var moqCoreStep = InitMoqCoreStep(1); //ste 1
+            var moqCoreStep = InitMoqCoreStep(1); //step 1
             var moqParameterCollection = InitMoqBooleanParameterCollection();
+            var moqParameters = InitMoqBooleanParameters();
             moq.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moqParameterCollection));
+            moq.Setup(m => m.QuestionParameters).Returns(moqParameters);
             moq.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { new FlowExecutionItem(moqCoreStep) });
             return moq.Object;
         }
@@ -204,7 +206,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             var moq = new Mock<IExecutionResult>();
             var moqCoreStep = InitMoqCoreStep(2); //step 2
             var moqParameterCollection = InitMoqDoubleParameterCollection();
+            var moqParameters = InitMoqDoubleParameters();
             moq.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moqParameterCollection));
+            moq.Setup(m => m.QuestionParameters).Returns(moqParameters);
             moq.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { new FlowExecutionItem(moqCoreStep) });
             return moq.Object;
         }
@@ -214,9 +218,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             var moq = new Mock<IExecutionResult>();
             var moqCoreStep = InitMoqCoreStep(3); //step 3
             var moqParameterCollection = InitMoqStringParameterCollection();
+            var moqParameters = InitMoqStringParameters();
             moq.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moqParameterCollection));
+            moq.Setup(m => m.QuestionParameters).Returns(moqParameters);
             moq.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { new FlowExecutionItem(moqCoreStep) });
             return moq.Object;
+        }
+
+        private IEnumerable<IParameter> InitMoqBooleanParameters()
+        {
+            return new List<IParameter> {
+                InitMoqBooleanParameter(1),
+                InitMoqBooleanParameter(2)
+            };
         }
 
         private IParametersCollection InitMoqBooleanParameterCollection()
@@ -230,6 +244,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             return moq.Object;
         }
 
+        private IEnumerable<IParameter> InitMoqDoubleParameters()
+        {
+            return new List<IParameter> {
+                InitMoqDoubleParameter()
+            };
+        }
+
         private IParametersCollection InitMoqDoubleParameterCollection()
         {
             var moq = new Mock<IParametersCollection>();
@@ -238,6 +259,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             });
 
             return moq.Object;
+        }
+
+        private IEnumerable<IParameter> InitMoqStringParameters()
+        {
+            return new List<IParameter> {
+                InitMoqStringParameter()
+            };
         }
 
         private IParametersCollection InitMoqStringParameterCollection()

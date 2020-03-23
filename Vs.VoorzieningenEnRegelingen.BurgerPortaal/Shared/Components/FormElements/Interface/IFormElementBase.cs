@@ -2,7 +2,7 @@
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Interface
 {
     public interface IFormElementBase
     {
@@ -17,5 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         bool ShowElement { get; }
 
         void FillDataFromResult(IExecutionResult result);
+
+        IFormElementBase GetFormElement(IExecutionResult result);
     }
 }

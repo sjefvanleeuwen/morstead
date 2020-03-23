@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
@@ -13,6 +14,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
         public int RequestStep { get; private set; } = 0;
         public IExecutionResult LastExecutionResult { get; private set; }
         public IParseResult ParseResult { get; private set; }
+
+        public bool QuestionIsAsked => LastExecutionResult?.QuestionParameters.Any() ?? false;
+
+        public bool HasRights => !LastExecutionResult?.Parameters?.Any(p => p.Name == "recht" && !(bool)p.Value) ?? true;
 
         private IServiceController _serviceController;
         private IParseRequest _parseRequest;
@@ -86,6 +91,53 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
             {
                 Sequence.UpdateParametersCollection(currentParameters);
             }
+        }
+
+        public string GetSavedValue()
+        {
+            //no saved value if there is no question
+            if (LastExecutionResult?.Questions == null)
+            {
+                return null;
+            }
+
+            //find the step that is a match for this name
+            var step = Sequence.Steps.ToList().FirstOrDefault(s =>
+                s.IsMatch(LastExecutionResult.QuestionParameters.FirstOrDefault()));
+            if (step == null)
+            {
+                return null;
+            }
+
+            var value = GetValueFromSavedParameter(step);
+            if (value != null &&
+                LastExecutionResult.InferedType == TypeInference.InferenceResult.TypeEnum.Double)
+            {
+                value = value?.Replace('.', ',');
+            }
+
+            return value;
+        }
+
+        private string GetValueFromSavedParameter(ISequenceStep step)
+        {
+            //find the corresponding saved Parameter for this step
+            var parameters = Sequence.Parameters.GetAll().Where(p => step.IsMatch(p));
+            if (parameters == null || !parameters.Any())
+            {
+                return null;
+            }
+            if (parameters.Count() == 1)
+            {
+                return parameters.Single().ValueAsString;
+            }
+
+            if (parameters.First().Type == TypeInference.InferenceResult.TypeEnum.Boolean)
+            {
+                return parameters.FirstOrDefault(p => (bool)p.Value).Name;
+            }
+
+            return parameters.First().ValueAsString;
         }
     }
 }

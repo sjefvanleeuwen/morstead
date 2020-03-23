@@ -21,6 +21,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             [DataContract]
             public enum TypeEnum
             {
+                [EnumMember(Value = "unknown")]
+                Unknown,
                 [EnumMember(Value = "double")]
                 Double,
                 [EnumMember(Value = "timespan")]

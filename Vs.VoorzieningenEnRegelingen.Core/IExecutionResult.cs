@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
@@ -9,5 +10,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         IParametersCollection Parameters { get; }
         IQuestionArgs Questions { get; set; }
         List<FlowExecutionItem> Stacktrace { get; }
+        string SemanticKey { get; }
+        IEnumerable<IParameter> QuestionParameters { get; }
+        TypeInference.InferenceResult.TypeEnum InferedType { get; }
     }
 }

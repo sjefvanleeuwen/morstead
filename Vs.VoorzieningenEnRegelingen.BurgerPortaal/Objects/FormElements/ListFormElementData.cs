@@ -12,13 +12,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         {
             get
             {
-                if (_value == string.Empty)
+                if (value == string.Empty)
                 {
                     return Options.ToList().FirstOrDefault().Key;
                 }
-                return _value;
+                return value;
             }
-            set { _value = value; }
+            set { base.value = value; }
         }
 
         public override void FillFromExecutionResult(IExecutionResult result)
@@ -30,7 +30,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public override void DefineOptions(IExecutionResult result)
         {
-            (result.Questions.Parameters.GetAll().First().Value as List<object>)?.ForEach(v => Options.Add(v.ToString(), v.ToString()));
+            (result.QuestionParameters.First().Value as List<object>)?.ForEach(v => Options.Add(v.ToString(), v.ToString()));
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Interface;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
@@ -12,39 +13,47 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
     public partial class Calculation
     {
-        //the formElement we are showing
-        private IFormElementBase _formElement;
-
-        private int _displayQuestionNumber => _hasRights ?
-            FormTitleHelper.GetQuestionNumber(_sequenceController.Sequence, _sequenceController.LastExecutionResult) :
-            0;
-        private string _displayQuestion => _hasRights ?
-            FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult) :
-            "Geen recht";
-        private string _displayQuestionTitle => _hasRights ?
-            FormTitleHelper.GetQuestionTitle(_sequenceController.LastExecutionResult) :
-            "U heeft geen recht op zorgtoeslag.";
-        private string _displayQuestionDescription => _hasRights ?
-            FormTitleHelper.GetQuestionDescription(_sequenceController.LastExecutionResult) :
-            "Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. " +
-            "Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst.";
-
-        private string _result =>
-            _sequenceController.LastExecutionResult.Parameters.Any(p => p.Name == "zorgtoeslag") ?
-                " <strong>Uw zorgtoeslag is €" +
-                ((double)
-                    _sequenceController.LastExecutionResult.Parameters.
-                        FirstOrDefault(p => p.Name == "zorgtoeslag").Value)
-                        .ToString("#.00").Replace('.', ',') + " per maand.</strong>" :
-                null;
-
-        private bool _hasRights = true;
-
-        private bool _showPreviousButton => _sequenceController.CurrentStep <= 1;
-        private bool _showNextButton => !_hasRights || _result != null;
-
         [Inject]
         private ISequenceController _sequenceController { get; set; }
+        [Inject]
+        private IContentController _contentController { get; set; }
+
+        //the formElement we are showing
+        private IFormElementBase _formElement;
+        private string _semanticKey => _sequenceController.LastExecutionResult.SemanticKey;
+        private int _displayQuestionNumber
+        {
+            get
+            {
+                if (_sequenceController.LastExecutionResult.Questions == null)
+                {
+                    return 0;
+                }
+                return _sequenceController.Sequence.Steps.Count();
+            }
+        }
+
+        private string _textSummary => _contentController.GetText(FormElementContentType.Summary, _semanticKey);
+        //FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult) :
+        //"Geen recht";
+        private string _textTitle => _contentController.GetText(FormElementContentType.Title, _semanticKey);
+        //FormTitleHelper.GetQuestionTitle(_sequenceController.LastExecutionResult) :
+        //"U heeft geen recht op zorgtoeslag.";
+        private string _textDescription => _contentController.GetText(FormElementContentType.Description, _semanticKey);
+        //FormTitleHelper.GetQuestionDescription(_sequenceController.LastExecutionResult) :
+        //"Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. " +
+        //"Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst.";
+
+        //_sequenceController.LastExecutionResult.Parameters.Any(p => p.Name == "zorgtoeslag") ?
+        //    " <strong>Uw zorgtoeslag is €" +
+        //    ((double)
+        //        _sequenceController.LastExecutionResult.Parameters.
+        //            FirstOrDefault(p => p.Name == "zorgtoeslag").Value)
+        //            .ToString("#.00").Replace('.', ',') + " per maand.</strong>" :
+        private bool _hasRights => _sequenceController.HasRights;
+        private bool _questionAsked => _sequenceController.QuestionIsAsked;
+        private bool _showPreviousButton => _sequenceController.CurrentStep > 1;
+        private bool _showNextButton => _hasRights && _questionAsked;
 
         protected override void OnInitialized()
         {
@@ -68,8 +77,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private void GetPreviousStep()
         {
-            //reset the rights
-            _hasRights = true;
             //decrease the request step, can never be lower than 1
             _sequenceController.DecreaseStep();
             _sequenceController.ExecuteStep(GetCurrentParameters());
@@ -79,21 +86,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private void Display()
         {
-            if (RechtHelper.HasRecht(_sequenceController.LastExecutionResult))
+            if (_hasRights)
             {
-                _formElement = FormElementHelper.ParseExecutionResult(_sequenceController.LastExecutionResult);
+                _formElement = new FormElementBase().GetFormElement(_sequenceController.LastExecutionResult);
+                _formElement.FillDataFromResult(_sequenceController.LastExecutionResult);
                 if (_formElement.ShowElement)
                 {
-                    _formElement.Data.Value =
-                        FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult) ??
-                        _formElement.Data.Value;
+                    _formElement.Data.Value = _sequenceController.GetSavedValue() ?? _formElement.Data.Value;
+                    //FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult) ??
+                    //_formElement.Data.Value;
                     ValidateForm(true); //set the IsValid and ErrorText Property
                 }
             }
             else
             {
                 _formElement = new FormElementBase();
-                _hasRights = false;
             }
         }
 

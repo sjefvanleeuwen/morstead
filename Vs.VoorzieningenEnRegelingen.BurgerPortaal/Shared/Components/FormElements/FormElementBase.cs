@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Interface;
 using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
@@ -12,6 +13,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         [CascadingParameter]
         public IFormElementData CascadedData { get; set; }
 
+        /// <summary>
+        /// Needed for testing
+        /// Uses Cascasded Data only if available
+        /// </summary>
         [Parameter]
         public IFormElementData Data
         {
@@ -26,8 +31,32 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         public virtual void FillDataFromResult(IExecutionResult result)
         {
+            //todo write test
             Data = new FormElementData();
-            Data.FillFromExecutionResult(result);
+            if (result.InferedType != TypeInference.InferenceResult.TypeEnum.Unknown)
+            {
+                Data.FillFromExecutionResult(result);
+            }
+        }
+
+        public IFormElementBase GetFormElement(IExecutionResult result)
+        {
+            switch (result.InferedType)
+            {
+                case TypeInference.InferenceResult.TypeEnum.Double:
+                    return new Number();
+                case TypeInference.InferenceResult.TypeEnum.Boolean:
+                    return new Radio();
+                case TypeInference.InferenceResult.TypeEnum.List:
+                    return new Select();
+                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
+                case TypeInference.InferenceResult.TypeEnum.DateTime:
+                case TypeInference.InferenceResult.TypeEnum.String:
+                case TypeInference.InferenceResult.TypeEnum.Period:
+                case TypeInference.InferenceResult.TypeEnum.Unknown:
+                default:
+                    return this;
+            }
         }
     }
 }

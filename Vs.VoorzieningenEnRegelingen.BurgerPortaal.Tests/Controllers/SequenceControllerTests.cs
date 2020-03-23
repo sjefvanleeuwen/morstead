@@ -113,6 +113,95 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Controllers
             Assert.Equal(1, sut.CurrentStep);
         }
 
+        [Fact]
+        private void ShouldNotGetSavedValueNoExecutionResult()
+        {
+            var moqServiceController = InitMoqServiceController();
+            var moqSequence = InitMoqSequence();
+            var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
+            var result = sut.GetSavedValue();
+            Assert.Null(result);
+        }
+
+        [Fact]
+        private void ShouldNotGetSavedValueNoQuestion()
+        {
+            var moqServiceController = InitMoqServiceController();
+            var moqSequence = InitMoqSequence();
+            var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
+            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            var result = sut.GetSavedValue();
+            Assert.Null(result);
+        }
+
+        [Fact]
+        private void ShouldNotGetSavedValueNoStep()
+        {
+            var moqServiceController = InitMoqServiceController(true);
+            var moqSequence = InitMoqSequence();
+            var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
+            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            var result = sut.GetSavedValue();
+            Assert.Null(result);
+        }
+
+        [Fact]
+        private void ShouldNotGetSavedValueNoStepMatch()
+        {
+            var moqServiceController = InitMoqServiceController(true);
+            var moqSequence = InitMoqSequence(true);
+            var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
+            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            var result = sut.GetSavedValue();
+            Assert.Null(result);
+        }
+
+        [Fact]
+        private void ShouldGetSavedValueString()
+        {
+            var moqServiceController = InitMoqServiceController(true);
+            var moqSequence = InitMoqSequence(true, true,
+                new List<IClientParameter> {
+                    new ClientParameter("Name", "TestValue", TypeInference.InferenceResult.TypeEnum.String)
+                });
+            var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
+            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            var result = sut.GetSavedValue();
+            Assert.NotNull(result);
+            Assert.Equal("TestValue", result);
+        }
+
+        [Fact]
+        private void ShouldGetSavedValueBoolean()
+        {
+            var moqServiceController = InitMoqServiceController(true, TypeInference.InferenceResult.TypeEnum.Boolean);
+            var moqSequence = InitMoqSequence(true, true,
+                new List<IClientParameter> {
+                    new ClientParameter("Name1", true, TypeInference.InferenceResult.TypeEnum.Boolean),
+                    new ClientParameter("Name2", false, TypeInference.InferenceResult.TypeEnum.Boolean)
+                });
+            var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
+            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            var result = sut.GetSavedValue();
+            Assert.NotNull(result);
+            Assert.Equal("Name1", result);
+        }
+
+        [Fact]
+        private void ShouldGetSavedValueNumber()
+        {
+            var moqServiceController = InitMoqServiceController(true, TypeInference.InferenceResult.TypeEnum.Double);
+            var moqSequence = InitMoqSequence(true, true,
+                new List<IClientParameter> {
+                    new ClientParameter("TheName", "1234.23", TypeInference.InferenceResult.TypeEnum.Double),
+                });
+            var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
+            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            var result = sut.GetSavedValue();
+            Assert.NotNull(result);
+            Assert.Equal("1234,23", result);
+        }
+
         private IParametersCollection GetDummyParameterCollection()
         {
             var moqParam = new Mock<IParameter>();
@@ -122,26 +211,48 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Controllers
             return moq.Object;
         }
 
-        private Mock<ISequence> InitMoqSequence()
+        private Mock<ISequence> InitMoqSequence(bool shouldHaveSteps = false, bool stepShouldMatch = false, IEnumerable<IParameter> returnCollection = null)
         {
             var moq = new Mock<ISequence>();
             moq.Setup(m => m.Yaml).Returns("YamlFileUrl");
+            if (shouldHaveSteps)
+            {
+                var moqStep = InitMoqStep(stepShouldMatch);
+                moq.Setup(m => m.Steps).Returns(new List<ISequenceStep> { moqStep.Object });
+            }
+            var moqParameterCollection = new Mock<IParametersCollection>();
+            moqParameterCollection.Setup(m => m.GetAll()).Returns(returnCollection);
+            moq.Setup(m => m.Parameters).Returns(moqParameterCollection.Object);
             return moq;
         }
 
-        private Mock<IServiceController> InitMoqServiceController()
+        private Mock<ISequenceStep> InitMoqStep(bool stepShouldMatch)
+        {
+            var moq = new Mock<ISequenceStep>();
+            moq.Setup(m => m.IsMatch(It.IsAny<IParameter>())).Returns(stepShouldMatch);
+            return moq;
+        }
+
+        private Mock<IServiceController> InitMoqServiceController(bool hasQuestion = false,
+            TypeInference.InferenceResult.TypeEnum inferedType = TypeInference.InferenceResult.TypeEnum.String)
         {
             var moq = new Mock<IServiceController>();
-            var moqExecutionResult = InitExecutionResult();
+            var moqExecutionResult = InitMoqExecutionResult(hasQuestion, inferedType);
             moq.Setup(m => m.Execute(It.IsAny<IExecuteRequest>())).Returns(moqExecutionResult.Object);
             moq.Setup(m => m.Parse(It.IsAny<IParseRequest>())).Returns(It.IsAny<IParseResult>());
             return moq;
         }
 
-        private Mock<IExecutionResult> InitExecutionResult()
+        private Mock<IExecutionResult> InitMoqExecutionResult(bool hasQuestion, TypeInference.InferenceResult.TypeEnum inferedType)
         {
             var moq = new Mock<IExecutionResult>();
-            moq.Setup(m => m.Parameters).Returns(It.IsAny<IParametersCollection>());
+            var moqParameterCollection = new Mock<IParametersCollection>();
+            if (hasQuestion)
+            {
+                var moqQuestionArgs = new Mock<IQuestionArgs>();
+                moq.Setup(m => m.Questions).Returns(moqQuestionArgs.Object);
+                moq.Setup(m => m.InferedType).Returns(inferedType);
+            }
             return moq;
         }
     }

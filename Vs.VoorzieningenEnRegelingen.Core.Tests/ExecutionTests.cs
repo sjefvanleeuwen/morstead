@@ -964,7 +964,7 @@ formules:
                 Assert.Equal(1, args.Parameters.Count);
                 Assert.Equal("toetsingsinkomen", args.Parameters[0].Name);
                 Assert.True((double)args.Parameters[0].Value == 0);
-                Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, args.Parameters[0].Type);
+                Assert.Equal(TypeInference.InferenceResult.TypeEnum.Unknown, args.Parameters[0].Type);
             };
             var result = controller.Parse(YamlZorgtoeslag4.Body);
             Assert.False(result.IsError);

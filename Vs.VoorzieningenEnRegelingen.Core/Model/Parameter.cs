@@ -14,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         private object _value;
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public TypeEnum Type { get; set; }
+        public TypeEnum Type { get; set; } = TypeEnum.Double;
 
         [JsonIgnore()]
         public string ValueAsString

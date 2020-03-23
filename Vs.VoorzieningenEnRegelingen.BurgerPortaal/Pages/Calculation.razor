@@ -1,13 +1,14 @@
-﻿@page "/proefberekening"
+﻿@page "/"
+@page "/proefberekening"
 @using Vs.VoorzieningenEnRegelingen.Core
 <SpacingWrapper>
     <CalculationHeader Title="Zorgtoeslag"
                        SubTitle="Proefberekening"
                        Number=@_displayQuestionNumber
-                       Subject="@_displayQuestion" />
-    @if (!string.IsNullOrWhiteSpace(_displayQuestionTitle) || !string.IsNullOrWhiteSpace(_displayQuestionDescription))
+                       Subject="@_textSummary" />
+    @if (!string.IsNullOrWhiteSpace(_textTitle) || !string.IsNullOrWhiteSpace(_textDescription))
     {
-        <Hint Title="@_displayQuestionTitle" Content="@_displayQuestionDescription" />
+        <Hint Title="@_textTitle" Content="@_textDescription" />
     }
 
     <EditForm Model="_formElement">
@@ -34,17 +35,17 @@
                 }
             }
 
-            @if (_result != null)
-            {
-                //This is the end. My only friend, the end.
-                <h3>@((MarkupString)_result)</h3>
-            }
-            @if (!_hasRights)
-            {
-                <p>De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.</p>
-            }
-            <Pagination PreviousDisabled="@(_showPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
-                        NextDisabled="@(_showNextButton)" Next="GetNextStep" NextText="Volgende"
+            @*@if (_result != null)
+                {
+                    //This is the end. My only friend                                 , the end.
+                    <h3>@((MarkupString)_result)</h3>
+                }
+                @if (!_hasRights)
+                {
+                    <p>De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.</p>
+                }*@
+            <Pagination PreviousDisabled="@(!_showPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
+                        NextDisabled="@(!_showNextButton)" Next="GetNextStep" NextText="Volgende"
                         ScreenreaderDescription="pagina" />
         </CascadingValue>
     </EditForm>
