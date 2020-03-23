@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Objects\FormElements\Interfaces\IUnused.cs" />
+    <Compile Remove="Objects\FormElements\Unused.cs" />
     <Compile Remove="Shared\Components\ButtonSubmit.razor.cs" />
     <Compile Remove="Shared\Components\Collapsable.razor.cs" />
     <Compile Remove="Shared\Components\FormElements\Checkbox.razor.cs" />
