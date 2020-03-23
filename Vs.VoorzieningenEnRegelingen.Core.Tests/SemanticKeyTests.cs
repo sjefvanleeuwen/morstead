@@ -11,17 +11,17 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void BuildTreeForContent()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag3.Body);
+            var result = controller.Parse(YamlZorgtoeslag4.Body);
 
             Assert.False(result.IsError);
-            Assert.True(controller.ContentNodes.Count == 28);
+            Assert.True(controller.ContentNodes.Count == 16);
         }
 
         [Fact]
+        [Trait("Category", "Unfinished")]
         public void CanDeserializeContentYaml()
         {
             var deserializer = new DeserializerBuilder().IgnoreUnmatchedProperties().Build();
-            //var result = deserializer.Deserialize<ContentCollection>(YamlZorgtoeslag3Content.Body);
         }
     }
 }

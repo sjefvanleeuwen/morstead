@@ -16,27 +16,27 @@ namespace Vs.VoorzieningenEnRegelingen.Core
     /// </summary>
     public class YamlParser
     {
-        private const string FormulasAttribute = "formules";
-        private const string FormulaAttribute = "formule";
-        private const string SituationAttribute = "situatie";
-        private const string TablesAttribute = "tabellen";
-        private const string FlowAttribute = "berekening";
-        private const string HeaderAttribute = "stuurinformatie";
-        private const string HeaderSubject = "onderwerp";
-        private const string HeaderOrganization = "organisatie";
-        private const string HeaderType = "type";
-        private const string HeaderDomain = "domein";
-        private const string HeaderVersion = "versie";
-        private const string HeaderStatus = "status";
-        private const string HeaderYear = "jaar";
-        private const string HeaderSource = "bron";
-        private const string Step = "stap";
-        private const string StepDescription = "omschrijving";
-        private const string StepFormula = "formule";
-        private const string StepValue = "waarde";
-        private const string StepSituation = "situatie";
-        private const string StepBreak = "recht";
-        private const string StepChoice = "keuze";
+        public const string FormulasAttribute = "formules";
+        public const string FormulaAttribute = "formule";
+        public const string SituationAttribute = "situatie";
+        public const string TablesAttribute = "tabellen";
+        public const string FlowAttribute = "berekening";
+        public const string HeaderAttribute = "stuurinformatie";
+        public const string HeaderSubject = "onderwerp";
+        public const string HeaderOrganization = "organisatie";
+        public const string HeaderType = "type";
+        public const string HeaderDomain = "domein";
+        public const string HeaderVersion = "versie";
+        public const string HeaderStatus = "status";
+        public const string HeaderYear = "jaar";
+        public const string HeaderSource = "bron";
+        public const string Step = "stap";
+        public const string StepDescription = "omschrijving";
+        public const string StepFormula = "formule";
+        public const string StepValue = "waarde";
+        public const string StepSituation = "situatie";
+        public const string StepBreak = "recht";
+        public const string StepChoice = "keuze";
         private static ConcurrentDictionary<string, YamlMappingNode> Maps = new ConcurrentDictionary<string, YamlMappingNode>();
         private readonly Dictionary<string, Parameter> _parameters;
         private readonly string _yaml;

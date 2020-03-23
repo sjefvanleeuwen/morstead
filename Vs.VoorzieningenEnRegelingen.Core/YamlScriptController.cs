@@ -12,7 +12,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
     public class YamlScriptController
     {
-        private const string Ok = "OK";
+        private readonly string Ok = "OK";
         private Model.Model _model;
         private ExpressionContext localContext;
         private List<ContentNode> _contentNodes;
@@ -78,7 +78,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 // Get Questions for function
                 var parameters = GetFunctionTree(this, function.Expression);
-                var nodeName = string.Join('.', new[] { situation, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
+                var nodeName = string.Join('.', new[] { YamlParser.StepFormula, YamlParser.SituationAttribute, situation, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
                 // Get Boolean Question for situation (if not previously asked)
                 if (function.IsSituational && items.Find(p => p.Name == nodeName) == null /* distinct */)
                 {
@@ -114,12 +114,26 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 //_model.AddFormulas(parser.GetFormulasFromBooleanSteps(_model.Steps));
                 foreach (var step in _model.Steps)
                 {
+                    // first do steps and choices as they don't have to be recursively resolved.
+                    if (step.Choices != null)
+                    {
+                        foreach (var choice in step.Choices)
+                        {
+                            _contentNodes.Add(new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}"));
+                        }
+                    }
+       
+                    if (!string.IsNullOrEmpty(step.Value))
+                    {
+                        _contentNodes.Add(new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepValue}.{step.Value}"));
+                     }
                     ResolveToQuestion(step.Formula, ref _contentNodes, step.Situation);
                     // TODO: Resolve recht/geen recht.
                     if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
                     {
-                        step.Break.SemanticKey = string.Join('.', new[] { "geen_recht", step.Situation, step.Formula }.Where(s => !string.IsNullOrEmpty(s)));
-                        ContentNode node = new ContentNode(step.SemanticKey) { IsBreak = true, IsSituational = step.IsSituational, Situation = step.Situation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
+                        step.Break.SemanticKey = string.Join('.', new[] {YamlParser.Step, step.Name, "geen_recht" }.Where(s => !string.IsNullOrEmpty(s)));
+                        ContentNode node = new ContentNode(step.Break.SemanticKey) { IsBreak = true, IsSituational = step.IsSituational, Situation = step.Situation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
+                        node.Parameter.SemanticKey = step.Break.SemanticKey;
                         _contentNodes.Add(node);
                     }
                 }
