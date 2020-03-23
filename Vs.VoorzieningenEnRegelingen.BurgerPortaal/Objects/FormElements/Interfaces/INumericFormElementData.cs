@@ -1,4 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interface
+﻿namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces
 {
     public interface INumericFormElementData : IFormElementData
     {

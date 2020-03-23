@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.Core;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interface
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces
 {
     public interface IOptionsFormElementData : IFormElementData
     {

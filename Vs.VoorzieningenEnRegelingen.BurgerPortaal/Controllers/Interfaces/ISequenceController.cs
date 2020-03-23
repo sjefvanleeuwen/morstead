@@ -1,8 +1,8 @@
-﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interface;
+﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interface
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces
 {
     public interface ISequenceController
     {

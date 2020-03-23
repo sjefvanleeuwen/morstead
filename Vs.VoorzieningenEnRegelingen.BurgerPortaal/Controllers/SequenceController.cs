@@ -1,6 +1,6 @@
 ﻿using System;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interface;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interface;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 

@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Vs.Cms.Core;
+using Vs.Cms.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interface;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interface;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal
 {
@@ -12,6 +14,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal
         {
             services.AddScoped<ISequenceController, SequenceController>();
             services.AddScoped<ISequence, Sequence>();
+            services.AddScoped<ITemplateEngine, Liquid>();
+            services.AddScoped<IMarkupLanguage, Markdown>();
             Service.Initializer.Initialize(services);
         }
     }

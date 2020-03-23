@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Helpers;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interface;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Xunit;
