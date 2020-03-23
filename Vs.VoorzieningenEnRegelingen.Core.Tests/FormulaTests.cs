@@ -1,12 +1,12 @@
 ﻿using Flee.PublicTypes;
-using Xunit;
 using System;
-using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using System.Globalization;
-using YamlDotNet.Serialization;
+using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
-using static Vs.VoorzieningenEnRegelingen.Core.YamlScriptController;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
+using Xunit;
+using YamlDotNet.Serialization;
+using static Vs.VoorzieningenEnRegelingen.Core.YamlScriptController;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 {
@@ -98,7 +98,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             // stap 3
             // Let op!Leidt het tweede deel van de formule tot een negatief bedrag? Reken dan met € 0.
             // using c# math expression min(n,0)
-            IGenericExpression <Double> eDynamic = context.CompileGeneric<Double>("min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)");
+            IGenericExpression<Double> eDynamic = context.CompileGeneric<Double>("min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)");
             variables["normpremie"] = eDynamic.Evaluate();
             // stap 4
             IGenericExpression<Double> eDynamic2 = context.CompileGeneric<Double>("standaardpremie - normpremie");
@@ -211,7 +211,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             } as IParametersCollection;
             var model = result.Model;
             bool called = false;
-            OnQuestion = (FormulaExpressionContext sender, QuestionArgs args) => {
+            OnQuestion = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
                 Assert.True(args.Parameters[0].Name == "toetsingsinkomen_aanvrager");
                 called = true;
 
@@ -234,16 +235,16 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         void Formula_Can_Discover_Parameters()
         {
             var localContext = new ExpressionContext();
-            var variables = new System.Collections.Generic.Dictionary<string,Type>();
+            var variables = new System.Collections.Generic.Dictionary<string, Type>();
             localContext.Variables.ResolveVariableType += (object sender, ResolveVariableTypeEventArgs e) =>
             {
-                variables.Add(e.VariableName,typeof(double));
+                variables.Add(e.VariableName, typeof(double));
                 e.VariableType = typeof(double);
             };
 
             IGenericExpression<object> eDynamic = localContext.CompileGeneric<object>("a + b");
 
-            Assert.True(variables.Count==2);
+            Assert.True(variables.Count == 2);
             Assert.True(variables.ContainsKey("a"));
             Assert.True(variables.ContainsKey("b"));
 

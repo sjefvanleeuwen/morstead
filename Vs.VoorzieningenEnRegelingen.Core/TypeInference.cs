@@ -45,7 +45,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 return new InferenceResult(InferenceResult.TypeEnum.TimeSpan, timeSpanResult);
             }
-            if (DateTime.TryParse(inference, new CultureInfo("nl-NL"),DateTimeStyles.None,out dateTimeResult))
+            if (DateTime.TryParse(inference, new CultureInfo("nl-NL"), DateTimeStyles.None, out dateTimeResult))
             {
                 return new InferenceResult(InferenceResult.TypeEnum.DateTime, dateTimeResult);
             }

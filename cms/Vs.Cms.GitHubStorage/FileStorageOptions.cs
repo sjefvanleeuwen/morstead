@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Vs.Cms.GitHubFileStorage
+﻿namespace Vs.Cms.GitHubFileStorage
 {
     public class FileStorageOptions
     {

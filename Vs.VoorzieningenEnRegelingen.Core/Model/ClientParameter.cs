@@ -5,7 +5,7 @@ using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
-    public class ClientParameter : IClientParameter 
+    public class ClientParameter : IClientParameter
     {
         public string Name { get; set; }
 

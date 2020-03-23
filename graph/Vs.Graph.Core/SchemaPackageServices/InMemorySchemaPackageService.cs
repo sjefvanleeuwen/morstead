@@ -10,9 +10,9 @@ namespace Vs.Graph.Core.SchemaPackageServices
             Files = new Dictionary<string, string>();
         }
 
-        public Dictionary<string,string> Files { get; set; }
+        public Dictionary<string, string> Files { get; set; }
 
-        public IEnumerable<KeyValuePair<string,string>> GetFiles(string migrationUrn) =>
+        public IEnumerable<KeyValuePair<string, string>> GetFiles(string migrationUrn) =>
             Files.Where(p => p.Key.StartsWith(migrationUrn));
 
         public string Load(string urn)

@@ -2,7 +2,7 @@
 
 namespace Vs.Graph.Core.Data
 {
-    public interface ISerialize: IYamlConvertible
+    public interface ISerialize : IYamlConvertible
     {
     }
 }

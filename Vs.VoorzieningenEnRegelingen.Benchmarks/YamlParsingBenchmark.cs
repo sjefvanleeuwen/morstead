@@ -8,7 +8,7 @@ using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 
 namespace Vs.VoorzieningenEnRegelingen.Benchmarks
 {
-    [SimpleJob(runStrategy:RunStrategy.Monitoring,targetCount:100)]
+    [SimpleJob(runStrategy: RunStrategy.Monitoring, targetCount: 100)]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class YamlParsingBenchmark
     {

@@ -18,7 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model
 
         public UserProfile()
         {
- 
+
         }
     }
 }

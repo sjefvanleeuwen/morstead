@@ -9,10 +9,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         public bool IsBreak { get; set; }
         public IParameter Parameter { get; set; }
         public string Situation { get; set; }
-        
+
         public ContentNode(string name) : base(name)
         {
-           
+
         }
 
         protected override ContentNode MySelf

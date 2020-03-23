@@ -22,7 +22,7 @@ formules:
  - drempelinkomen:
      formule: 20941";
 
-        
+
 
         [Fact]
         public void ShouldAcceptWaarde()
@@ -41,12 +41,12 @@ formules:
             var parseResult = controller.Parse(_testYaml1);
             //Assert.Single(parseResult.Model.Steps);
             var stepToTest = parseResult.Model.Steps.First();
-           // Assert.Equal("toetsingsinkomen", stepToTest.Name);
-           // Assert.Equal("toetsingsinkomen", stepToTest.Description);
+            // Assert.Equal("toetsingsinkomen", stepToTest.Name);
+            // Assert.Equal("toetsingsinkomen", stepToTest.Description);
             //Assert.NotNull(parseResult.Model.Formulas.FirstOrDefault(f => f.Name == "autofunc_toetsingsinkomen"));
         }
 
-        
+
         public void ShouldAskForValue()
         {
             var isException = false;

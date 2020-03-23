@@ -11,7 +11,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
     {
         public string Name { get; set; }
 
-        private  object _value;
+        private object _value;
 
         [JsonConverter(typeof(StringEnumConverter))]
         public TypeEnum Type { get; set; }
@@ -64,25 +64,25 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             }
             Name = name;
 
-                var woonlanden = new List<object>();
-                // Check if woonland can be found in a table
-                foreach (var table in model.Tables)
+            var woonlanden = new List<object>();
+            // Check if woonland can be found in a table
+            foreach (var table in model.Tables)
+            {
+                foreach (var column in table.ColumnTypes)
                 {
-                    foreach (var column in table.ColumnTypes)
+                    if (column.Name == name)
                     {
-                        if (column.Name == name)
+                        // Give back a column list value of column woonland
+                        foreach (var row in table.Rows)
                         {
-                            // Give back a column list value of column woonland
-                            foreach (var row in table.Rows)
-                            {
-                                woonlanden.Add(row.Columns[column.Index].Value);
-                            }
-                            _value = woonlanden;
-                            Type = TypeEnum.List;
-                            return;
+                            woonlanden.Add(row.Columns[column.Index].Value);
                         }
+                        _value = woonlanden;
+                        Type = TypeEnum.List;
+                        return;
                     }
                 }
+            }
             if (value == null && type == TypeEnum.Double)
             {
                 _value = double.Parse("0");

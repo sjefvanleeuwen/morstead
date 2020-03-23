@@ -14,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         public SessionRepository(TimeSpan sessionTimeOut)
         {
             // make sure backend cache is still valid before sliding expiration on clients.
-            SessionTimeOut = sessionTimeOut.Add(new TimeSpan(0,1,0));
+            SessionTimeOut = sessionTimeOut.Add(new TimeSpan(0, 1, 0));
             _provider = new ServiceCollection()
                 .AddMemoryCache()
                 .BuildServiceProvider();

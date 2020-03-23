@@ -84,7 +84,7 @@ CREATE TABLE regelgeving AS EDGE
                 var affectedRows = connection.Execute(sql);
             }
         }
-            
+
 
         [Theory, Order(1)]
         [Trait("Category", "Integration")]
@@ -101,7 +101,7 @@ CREATE TABLE regelgeving AS EDGE
         [Trait("Category", "Integration")]
         public async void MaakPublicatieAan()
         {
-            Assert.True(await controller.InsertNode(new Publicatie() { Id=1,Periode=new TimeRange(DateTime.Now)}) == 1);
+            Assert.True(await controller.InsertNode(new Publicatie() { Id = 1, Periode = new TimeRange(DateTime.Now) }) == 1);
         }
 
         [Theory, Order(3)]
@@ -111,10 +111,11 @@ CREATE TABLE regelgeving AS EDGE
         {
             var publicatie = new Publicatie() { Id = 1, Periode = new TimeRange(DateTime.Now) };
             Assert.True(await controller.InsertEdge(
-                new Beheert() { 
+                new Beheert()
+                {
                     Id = 1,
                     Periode = new TimeRange(DateTime.Now, DateTime.Now.AddDays(10))
-                },  joost, publicatie)==1);
+                }, joost, publicatie) == 1);
         }
 
         [Fact, Order(4)]

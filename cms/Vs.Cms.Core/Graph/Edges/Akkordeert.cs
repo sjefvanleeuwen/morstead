@@ -1,7 +1,7 @@
-﻿using System;
-using Vs.Graph.Core.Data;
-using Dapper.Contrib.Extensions;
+﻿using Dapper.Contrib.Extensions;
 using Itenso.TimePeriod;
+using System;
+using Vs.Graph.Core.Data;
 
 namespace Vs.Cms.Core.Graph.Edges
 {

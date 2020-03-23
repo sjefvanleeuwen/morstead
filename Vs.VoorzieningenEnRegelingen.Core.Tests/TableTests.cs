@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Vs.Core.Diagnostics;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
@@ -23,7 +21,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             {
                 new Column(debugInfoFake,"Nederland"), new Column(debugInfoFake,"1.0")
             }));
-            Table table = new Table(debugInfoFake, "woonlandfactoren",columnTypes, rows);
+            Table table = new Table(debugInfoFake, "woonlandfactoren", columnTypes, rows);
             Assert.True(columnTypes[0].Type == TypeInference.InferenceResult.TypeEnum.String);
             Assert.True(columnTypes[1].Type == TypeInference.InferenceResult.TypeEnum.Double);
         }
@@ -65,7 +63,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 
             // Quick Hack to see if recht is false by selecting woonland: Anders
             parameters.Clear();
-            parameters.Add(new ClientParameter("woonland","Anders"));
+            parameters.Add(new ClientParameter("woonland", "Anders"));
             var recalculate = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True(parameters[0].Name == "woonland");
             Assert.True((string)parameters[0].Value == "Anders");

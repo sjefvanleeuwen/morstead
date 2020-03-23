@@ -36,7 +36,7 @@ namespace Microsoft.AspNetCore.Components.Testing
         public void AddService<T>(T implementation)
             => AddService<T, T>(implementation);
 
-        public void AddService<TContract, TImplementation>(TImplementation implementation) where TImplementation: TContract
+        public void AddService<TContract, TImplementation>(TImplementation implementation) where TImplementation : TContract
         {
             if (_renderer.IsValueCreated)
             {
@@ -58,7 +58,7 @@ namespace Microsoft.AspNetCore.Components.Testing
             }
         }
 
-        public RenderedComponent<TComponent> AddComponent<TComponent>() where TComponent: IComponent
+        public RenderedComponent<TComponent> AddComponent<TComponent>() where TComponent : IComponent
         {
             var result = new RenderedComponent<TComponent>(Renderer);
             result.SetParametersAndRender(ParameterView.Empty);

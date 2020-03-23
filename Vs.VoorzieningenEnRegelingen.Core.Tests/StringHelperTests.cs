@@ -11,7 +11,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
             var t = "48.56";
             var y = t.Infer();
-            Assert.True(t == Convert.ToString(y,new CultureInfo("en-US")));
+            Assert.True(t == Convert.ToString(y, new CultureInfo("en-US")));
         }
     }
 }

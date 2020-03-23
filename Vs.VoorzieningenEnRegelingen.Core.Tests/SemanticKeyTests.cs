@@ -1,8 +1,6 @@
-﻿using Vs.VoorzieningenEnRegelingen.Core.Model.Content;
-using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
+﻿using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 using YamlDotNet.Serialization;
-using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 {

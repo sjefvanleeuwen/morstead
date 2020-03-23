@@ -60,7 +60,7 @@ Schemas:
             var schemaService = new MsSqlGraphSchemaService();
             var controller = new SchemaPackageController(storageService, schemaService);
             var sql = controller.CreateMigrationScript($"/schemas/migration_{migration}");
-            Assert.True(sql== @"CREATE TABLE node.openId (
+            Assert.True(sql == @"CREATE TABLE node.openId (
 ID INTEGER PRIMARY KEY,
 gebruikersId  NTEXT,
 ) AS NODE;

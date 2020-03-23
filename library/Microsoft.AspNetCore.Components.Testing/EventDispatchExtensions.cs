@@ -59,7 +59,7 @@ namespace Microsoft.AspNetCore.Components.Testing
             var eventHandlerId = ulong.Parse(eventHandlerIdString);
 
             var renderer = ((TestHtmlDocument)element.OwnerDocument).Renderer;
-            return renderer.DispatchEventAsync(eventHandlerId, 
+            return renderer.DispatchEventAsync(eventHandlerId,
                 new EventFieldInfo(),
                 eventArgs);
         }

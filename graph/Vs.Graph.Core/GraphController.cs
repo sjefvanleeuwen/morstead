@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Dapper.Contrib.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using Vs.Graph.Core.Data;
-using Dapper.Contrib.Extensions;
 using System.Threading.Tasks;
 using Vs.Core.Extensions;
+using Vs.Graph.Core.Data;
 
 namespace Vs.Graph.Core
 {
@@ -66,19 +66,19 @@ namespace Vs.Graph.Core
             throw new NotImplementedException();
         }
 
-        public async Task<int> InsertEdge<TEdge,TVan, TNaar>(TEdge edge, TVan from, TNaar to) 
-            where TEdge : IEdge 
-            where TVan : INode 
+        public async Task<int> InsertEdge<TEdge, TVan, TNaar>(TEdge edge, TVan from, TNaar to)
+            where TEdge : IEdge
+            where TVan : INode
             where TNaar : INode
         {
             string edgeTable = typeof(TEdge).GetAttributeValue((TableAttribute att) => att.Name);
-            string fromNode =typeof(TVan).GetAttributeValue((TableAttribute att) => att.Name);
-            string  toNode = typeof(TNaar).GetAttributeValue((TableAttribute att) => att.Name);
+            string fromNode = typeof(TVan).GetAttributeValue((TableAttribute att) => att.Name);
+            string toNode = typeof(TNaar).GetAttributeValue((TableAttribute att) => att.Name);
             string query = @$"INSERT INTO {edgeTable} VALUES ((SELECT $node_id FROM {fromNode} WHERE ID = {from.Id},
                 (SELECT $node_id FROM {toNode} WHERE ID = {to.Id}));";
             SqlCommand command = new SqlCommand(query, sql);
             await sql.OpenAsync();
-            var ret = (int) await command.ExecuteScalarAsync();
+            var ret = (int)await command.ExecuteScalarAsync();
             await sql.CloseAsync();
             return ret;
         }

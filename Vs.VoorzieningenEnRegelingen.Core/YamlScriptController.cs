@@ -193,7 +193,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
 
             executionResult.Stacktrace.Add(new FlowExecutionItem(step, null));
-            
+
 
             // Prescedence is (correct order of evaluation)
             // #1 evaluate step variable (value Question) or evaluate situation (choice Question)
@@ -246,7 +246,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             }
 
             // Evaluate recht if available.
-            if (step.Break!=null && !string.IsNullOrEmpty(step.Break.Expression))
+            if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
             {
                 var breakContext = new FormulaExpressionContext(
                     ref _model,

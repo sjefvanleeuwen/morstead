@@ -18,7 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Workflow
 
         public void Build(IWorkflowBuilder<object> builder)
         {
-           //
+            //
         }
     }
 

@@ -1,11 +1,11 @@
 ﻿using Flee.PublicTypes;
 using System;
 using System.Globalization;
-using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using System.Linq;
+using System.Text;
+using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using static Vs.VoorzieningenEnRegelingen.Core.YamlScriptController;
-using System.Text;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
@@ -76,7 +76,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     e = context.CompileDynamic(formula.Functions[0].Expression);
                     var result = e.Evaluate().Infer();
                     Parameter parameter;
-                    parameter = new Parameter(formula.Name, result.Infer(),null,ref model);
+                    parameter = new Parameter(formula.Name, result.Infer(), null, ref model);
                     parameter.IsCalculated = true;
                     parameters1.Add(parameter);
                     if (context.Variables.ContainsKey(parameter.Name))
@@ -99,7 +99,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 {
                     foreach (var item in parameters1)
                     {
-                        if (item.Name == function.Situation && (bool)item.Value==true)
+                        if (item.Name == function.Situation && (bool)item.Value == true)
                         {
                             try
                             {
@@ -215,7 +215,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                         catch (ExpressionCompileException ex)
                         {
                             // Function can not evaluate further, before a Question/Answer sequence is fullfilled by the client.
-                            throw new UnresolvedException($"Function {function.Expression} can not evaluate further, before a Question/Answer sequence is fullfilled by the client.",ex);
+                            throw new UnresolvedException($"Function {function.Expression} can not evaluate further, before a Question/Answer sequence is fullfilled by the client.", ex);
                         }
                     }
                 }
@@ -242,7 +242,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             if (recursiveFormula != null)
             {
                 // this variable is a formula. Recurvsively execute this formula.
-                e.VariableValue = FormulaExpressionContext.Evaluate(this, ref _context, ref recursiveFormula, ref _parameters, OnQuestion,ref _model).Value.Infer();
+                e.VariableValue = FormulaExpressionContext.Evaluate(this, ref _context, ref recursiveFormula, ref _parameters, OnQuestion, ref _model).Value.Infer();
                 //var context = new FormulaExpressionContext(ref _model, ref _parameters, recursiveFormula, OnQuestion);
                 //e.VariableValue = context.Evaluate().Value.Infer();
             }
@@ -253,7 +253,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 // this variable is an input variable. Provide a question to the client for an answer.
                 if (OnQuestion == null)
                     throw new Exception($"In order to evaluate variable '${e.VariableName}', you need to provide a delegate callback to the client for providing an answer");
-                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName,null, TypeInference.Infer(e.VariableType).Type, ref _model) }));
+                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName, null, TypeInference.Infer(e.VariableType).Type, ref _model) }));
             }
         }
 
@@ -274,7 +274,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 // this variable is an input variable. Provide a question to the client for an answer.
                 if (OnQuestion == null)
                     throw new Exception($"In order to evaluate variable '${e.VariableName}', you need to provide a delegate callback to the client for providing an answer");
-                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName,null, TypeInference.Infer(e.VariableType).Type, ref _model) }));
+                OnQuestion(this, new QuestionArgs("", new ParametersCollection() { new Parameter(e.VariableName, null, TypeInference.Infer(e.VariableType).Type, ref _model) }));
             }
         }
     }

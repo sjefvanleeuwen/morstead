@@ -9,7 +9,7 @@ namespace Vs.Cms.Core.Tests
         public void CanRenderSimpleTemplate()
         {
             var renderer = new RenderStrategy(new Liquid(), new Markdown());
-            var result = renderer.Render(@"hello {{variable}}",  new { variable = "world" } );
+            var result = renderer.Render(@"hello {{variable}}", new { variable = "world" });
             Assert.True(result == "<p>hello world</p>\n");
         }
 
@@ -24,10 +24,10 @@ namespace Vs.Cms.Core.Tests
         [Fact]
         public void CanRenderTemplateUsingDictionary()
         {
-            var fields = new Dictionary<string,object>();
-            fields.Add("boolean",true);
-            fields.Add("double",4.25);
-            fields.Add("hello","hello");
+            var fields = new Dictionary<string, object>();
+            fields.Add("boolean", true);
+            fields.Add("double", 4.25);
+            fields.Add("hello", "hello");
             var renderer = new RenderStrategy(new Liquid(), new Markdown());
             var result = renderer.Render(@"**{{hello}}**
 € {{double}} 

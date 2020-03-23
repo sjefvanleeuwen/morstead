@@ -1,17 +1,14 @@
-using System;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
-using Redbus;
-using Redbus.Events;
-using Redbus.Interfaces;
+using System;
+using System.Threading.Tasks;
 using Vs.VoorzieningenEnRegelingen.Site.Workflow;
 using WorkflowCore.Interface;
 
@@ -25,7 +22,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site
         {
             Configuration = new ConfigurationBuilder()
                 .AddYamlFile("config.yaml")
-            
+
                 .Build();
         }
 
@@ -56,14 +53,14 @@ namespace Vs.VoorzieningenEnRegelingen.Site
             {
                 // Set the authority to your Auth0 domain
                 options.Authority = $"https://{Configuration["Auth0:Domain"].ToString()}";
-                
+
                 // Configure the Auth0 Client ID and Client Secret
                 options.ClientId = Configuration["Auth0:ClientId"];
                 options.ClientSecret = Configuration["Auth0:ClientSecret"];
                 options.GetClaimsFromUserInfoEndpoint = true;
-                
+
                 // Set response type to code
-                
+
                 // Configure the scope
                 options.Scope.Clear();
                 options.Scope.Add("openid");
@@ -83,14 +80,14 @@ namespace Vs.VoorzieningenEnRegelingen.Site
                 // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard
                 options.CallbackPath = new PathString("/callback");
 
-                 // Configure the Claims Issuer to be Auth0
+                // Configure the Claims Issuer to be Auth0
                 options.ClaimsIssuer = "Auth0";
 
                 options.Events = new OpenIdConnectEvents
                 {
                     // handle the logout redirection
-                     OnRedirectToIdentityProviderForSignOut = (context) =>
-                     {
+                    OnRedirectToIdentityProviderForSignOut = (context) =>
+                    {
                         var logoutUri = $"https://{Configuration["Auth0:Domain"]}/v2/logout?client_id={Configuration["Auth0:ClientId"]}";
 
                         var postLogoutUri = context.Properties.RedirectUri;
@@ -98,7 +95,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site
                         {
                             if (postLogoutUri.StartsWith("/"))
                             {
-                                // transform to absolute
+                                 // transform to absolute
                                  var request = context.Request;
                                 postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
                             }

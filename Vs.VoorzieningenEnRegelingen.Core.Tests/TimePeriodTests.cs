@@ -1,12 +1,10 @@
 ﻿using Itenso.TimePeriod;
 using System;
-using System.Globalization;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Globalization;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
-using Xunit;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
+using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 {
@@ -68,11 +66,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.True(result.Model.Tables[0].ColumnTypes[0].Type == TypeInference.InferenceResult.TypeEnum.DateTime);
             // Create TimeRange Array
             var range = new List<TimeRange>();
-            for (int i= result.Model.Tables[0].Rows.Count - 1; i>0;i--)
+            for (int i = result.Model.Tables[0].Rows.Count - 1; i > 0; i--)
             {
                 range.Add(new TimeRange(
                     DateTime.Parse(result.Model.Tables[0].Rows[i].Columns[0].Value.ToString(), new CultureInfo("nl-NL")),
-                    DateTime.Parse(result.Model.Tables[0].Rows[i-1].Columns[0].Value.ToString(), new CultureInfo("nl-NL")).AddDays(-1)));
+                    DateTime.Parse(result.Model.Tables[0].Rows[i - 1].Columns[0].Value.ToString(), new CultureInfo("nl-NL")).AddDays(-1)));
             }
             range.Add(new TimeRange(DateTime.Parse(result.Model.Tables[0].Rows[0].Columns[0].Value.ToString(), new CultureInfo("nl-NL")), DateTime.MaxValue));
             /*

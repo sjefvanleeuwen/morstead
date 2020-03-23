@@ -1,11 +1,10 @@
-﻿using YamlDotNet.Serialization;
-
-namespace Vs.Graph.Core.Data
+﻿namespace Vs.Graph.Core.Data
 {
     public interface IAttribute
     {
-        IAttributeType Type { 
-            get; 
+        IAttributeType Type
+        {
+            get;
             set;
         }
 

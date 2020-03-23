@@ -1,5 +1,4 @@
 ﻿using Itenso.TimePeriod;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Vs.Graph.Core.Data;
 using Xunit;

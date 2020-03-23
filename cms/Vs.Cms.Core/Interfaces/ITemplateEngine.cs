@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Vs.Cms.Core.Interfaces
+﻿namespace Vs.Cms.Core.Interfaces
 {
     public interface ITemplateEngine
     {

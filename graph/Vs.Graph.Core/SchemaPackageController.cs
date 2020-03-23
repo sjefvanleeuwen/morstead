@@ -22,8 +22,9 @@ namespace Vs.Graph.Core
             StringBuilder sb = new StringBuilder();
             SchemaController controller = new SchemaController(_graphSchemaService);
             var files = _schemaPackageStorageService.GetFiles(migrationUrn);
-            var f = (from p in files 
-                where p.Key.EndsWith("schema-package.yaml") select p).SingleOrDefault();
+            var f = (from p in files
+                     where p.Key.EndsWith("schema-package.yaml")
+                     select p).SingleOrDefault();
             if (string.IsNullOrEmpty(f.Value))
                 throw new Exception($"schema-package.yaml was not found at migration urn. {migrationUrn}");
             // get sequence of schemas from package to be converted.
@@ -31,8 +32,9 @@ namespace Vs.Graph.Core
             NodeSchema nodeSchema = null;
             foreach (var nodeSequence in sequence.Schemas)
             {
-                var schemaFile = (from p in files 
-                    where p.Key.EndsWith($"{nodeSequence.Name}.yaml") select p).SingleOrDefault();
+                var schemaFile = (from p in files
+                                  where p.Key.EndsWith($"{nodeSequence.Name}.yaml")
+                                  select p).SingleOrDefault();
                 if (string.IsNullOrEmpty(schemaFile.Value))
                     throw new Exception($"{nodeSequence.Name}.yaml wat not found at migration urn {migrationUrn}");
                 try
@@ -41,7 +43,7 @@ namespace Vs.Graph.Core
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception($"can't deserialize schema ${schemaFile.Key}",ex);
+                    throw new Exception($"can't deserialize schema ${schemaFile.Key}", ex);
                 }
 
                 sb.AppendLine(_graphSchemaService.CreateScript(nodeSchema));

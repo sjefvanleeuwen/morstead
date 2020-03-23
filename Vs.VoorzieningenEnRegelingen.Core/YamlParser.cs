@@ -126,7 +126,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
                     }
                 }
-                steps.Add(new Step(debugInfoStep,key++, stepid, description, formula, value, situation, @break, choices));
+                steps.Add(new Step(debugInfoStep, key++, stepid, description, formula, value, situation, @break, choices));
             }
             return steps;
         }

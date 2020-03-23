@@ -10,7 +10,7 @@ namespace Vs.DataProvider.MsSqlGraph.Tests
         [Fact]
         public void Node_Create_Person()
         {
-            NodeSchema n = new NodeSchema(name:"person");
+            NodeSchema n = new NodeSchema(name: "person");
             n.Attributes.Add(new Attribute(name: "FirstName", type: new AttributeText()));
             n.Attributes.Add(new Attribute(name: "LastName", type: new AttributeText()));
             n.Attributes.Add(new Attribute(name: "DateOfBirth", new AttributeDatum()));
@@ -29,7 +29,7 @@ namespace Vs.DataProvider.MsSqlGraph.Tests
             var r = controller.Deserialize(yaml);
             var sql = controller.Service.CreateScript(r);
 
-            Assert.True(sql== @"CREATE TABLE node.person (
+            Assert.True(sql == @"CREATE TABLE node.person (
 ID INTEGER PRIMARY KEY,
 FirstName  NTEXT,LastName  NTEXT,DateOfBirth DATETIME,
 ) AS NODE;
@@ -85,7 +85,7 @@ Edges:
             SchemaController controller = new SchemaController(new MsSqlGraphSchemaService());
             var r = controller.Deserialize(yaml);
             var sql = controller.Service.CreateScript(r);
-            Assert.True(sql== @"CREATE TABLE node.person (
+            Assert.True(sql == @"CREATE TABLE node.person (
 ID INTEGER PRIMARY KEY,
 FirstName  NTEXT,LastName  NTEXT,
 ) AS NODE;

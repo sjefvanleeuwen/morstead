@@ -1,8 +1,8 @@
-using System;
 using Microsoft.Extensions.Configuration;
 using Octokit;
 using Octokit.Helpers;
 using Octokit.Internal;
+using System;
 using Xunit;
 using Xunit.Extensions.Ordering;
 

@@ -13,7 +13,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model.Content
             var o = (dynamic)nestedObjectDeserializer(typeof(object));
             foreach (var item in o["content"])
             {
-                this.Add(new ContentItem() {SemanticKey=item[""] });
+                this.Add(new ContentItem() { SemanticKey = item[""] });
             }
         }
 

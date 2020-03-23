@@ -1,6 +1,4 @@
-﻿using DapperExtensions;
-
-namespace Vs.Graph.Core
+﻿namespace Vs.Graph.Core
 {
     public class CustomTypeMapper
     {

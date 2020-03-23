@@ -64,7 +64,7 @@ namespace Vs.Graph.Core
                 }
             }
         }
-    
+
 
         public string CreateCode<T>(NodeSchema schema, string nameSpace) where T : IGraphEntity
         {

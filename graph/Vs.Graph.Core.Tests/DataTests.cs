@@ -17,7 +17,7 @@ Schemas:
             SchemaController controller = new SchemaController(new MsSqlGraphSchemaService());
             var package = controller.SchemaSequence(schemaPackage);
             Assert.NotNull(package.Schemas);
-            Assert.True(package.Schemas.Count==3);
+            Assert.True(package.Schemas.Count == 3);
             Assert.True(package.Schemas[0].Name != string.Empty);
         }
 
@@ -46,11 +46,11 @@ Edges:
   Constraints:
   - Name: persoon
 ";
-            
+
             SchemaController controller = new SchemaController(new MsSqlGraphSchemaService());
             var r = controller.Deserialize(yaml);
             var s = controller.Service.CreateScript(r);
-            Assert.True(s== @"CREATE TABLE node.persoon (
+            Assert.True(s == @"CREATE TABLE node.persoon (
 ID INTEGER PRIMARY KEY,
 BSN VARCHAR(10),periode_begin DATETIME,periode_eind  DATETIME,
 ) AS NODE;

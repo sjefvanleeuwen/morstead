@@ -9,7 +9,7 @@ namespace Vs.Graph.Core.Data
 {
     public class Attribute : IAttribute, ISerialize, IDebugInfo
     {
-       public IAttributeType Type { get ;set; }
+        public IAttributeType Type { get; set; }
 
         public string Name { get; set; }
 
@@ -38,10 +38,10 @@ namespace Vs.Graph.Core.Data
             DebugInfo = DebugInfo.MapDebugInfo(parser.Current.Start, parser.Current.End);
             // Convert to correct IAttribute implementation from the serialization template
             var type = typeof(IAttributeType);
-            foreach(var item in Assembly.GetAssembly(typeof(AttributeTypeAttribute)).GetTypes()
+            foreach (var item in Assembly.GetAssembly(typeof(AttributeTypeAttribute)).GetTypes()
                 .Where(p => type.IsAssignableFrom(p)))
             {
-                var s =item.GetCustomAttributes(typeof(AttributeTypeAttribute), true);
+                var s = item.GetCustomAttributes(typeof(AttributeTypeAttribute), true);
                 if (s.Length == 1)
                 {
                     if (o.Type.ToLower() == ((AttributeTypeAttribute)s[0]).Name.ToLower())
@@ -54,7 +54,7 @@ namespace Vs.Graph.Core.Data
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
         {
-            nestedObjectSerializer(new { Name, Type});
+            nestedObjectSerializer(new { Name, Type });
         }
 
         public DebugInfo DebugInfo { get; set; }
