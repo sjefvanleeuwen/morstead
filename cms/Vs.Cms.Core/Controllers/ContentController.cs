@@ -1,8 +1,8 @@
-﻿using Vs.Cms.Core.Interfaces;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
+﻿using Vs.Cms.Core.Constants;
+using Vs.Cms.Core.Controllers.Interfaces;
+using Vs.Cms.Core.Interfaces;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
+namespace Vs.Cms.Core.Controllers
 {
     public class ContentController : IContentController
     {
@@ -17,7 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
 
         public string GetText(FormElementContentType question, string semanticKey)
         {
-            //todo implement
+            //todo MPS implement
             return "Text";
         }
     }

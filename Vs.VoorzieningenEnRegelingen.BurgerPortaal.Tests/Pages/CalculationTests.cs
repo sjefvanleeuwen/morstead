@@ -7,7 +7,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Pages
 {
     public class CalculationTests : BlazorTestBase
     {
-        //todo activate after texts have been restored
+        //todo MPS activate after texts have been restored
         //[Fact]
         public void HasElements()
         {

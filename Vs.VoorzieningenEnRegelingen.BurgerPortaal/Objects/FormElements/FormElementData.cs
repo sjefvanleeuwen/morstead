@@ -72,7 +72,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public virtual void FillFromExecutionResult(IExecutionResult result)
         {
-            //todo write test for this
+            //todo MPS write test for this
+            //todo MPS get the values from the controller
             InferedType = result.InferedType;
             Name = result.QuestionParameters.First().Name;
             //Label = FormElementHelper.GetFromContent(result.Questions.Parameters, FormElementHelper.Labels, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);

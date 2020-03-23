@@ -10,7 +10,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
 {
     public class ListFormElementDataTests
     {
-        //todo activate after texts have been restored
+        //todo MPS activate after texts have been restored
         //[Fact]
         public void ShouldDefineOptions()
         {
