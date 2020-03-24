@@ -34,13 +34,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             }
         }
 
-        private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Summary);
+        private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question).ToString();
         //FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult) :
         //"Geen recht";
-        private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title);
+        private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title).ToString();
         //FormTitleHelper.GetQuestionTitle(_sequenceController.LastExecutionResult) :
         //"U heeft geen recht op zorgtoeslag.";
-        private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description);
+        private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description).ToString();
         //FormTitleHelper.GetQuestionDescription(_sequenceController.LastExecutionResult) :
         //"Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. " +
         //"Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst.";

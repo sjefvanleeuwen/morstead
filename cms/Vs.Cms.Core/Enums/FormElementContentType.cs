@@ -1,13 +1,15 @@
-﻿namespace Vs.Cms.Core.Enums
+﻿using System.ComponentModel;
+
+namespace Vs.Cms.Core.Enums
 {
     public enum FormElementContentType
     {
-        Summary,
+        Question,
         Title,
         Description,
         Label,
         Tag,
         Hint,
-        ParameterDisplay
+        Options
     }
 }

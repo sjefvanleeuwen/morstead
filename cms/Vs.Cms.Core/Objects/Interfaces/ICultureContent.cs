@@ -5,8 +5,8 @@ namespace Vs.Cms.Core.Objects.Interfaces
 {
     public interface ICultureContent
     {
-        void AddContent(string semanticKey, Dictionary<FormElementContentType, string> content);
-        void AddContent(string semanticKey, FormElementContentType type, string contentItem);
-        string GetContent(string semanticKey, FormElementContentType type);
+        void AddContent(string semanticKey, Dictionary<FormElementContentType, object> content);
+        void AddContent(string semanticKey, FormElementContentType type, object contentItem);
+        object GetContent(string semanticKey, FormElementContentType type);
     }
 }

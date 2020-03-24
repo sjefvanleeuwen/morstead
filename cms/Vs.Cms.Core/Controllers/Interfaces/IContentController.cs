@@ -10,5 +10,6 @@ namespace Vs.Cms.Core.Controllers.Interfaces
         void SetParsedContent(IParsedContent parsedContent);
         void SetCulture(CultureInfo cultureInfo);
         string GetText(string semanticKey, FormElementContentType type, Dictionary<string, object> parameters = null);
+        string GetText(string semanticKey, FormElementContentType type, string option, Dictionary<string, object> parameters = null);
     }
 }

@@ -45,7 +45,23 @@ namespace Vs.Cms.Core.Controllers
             }
             var cultureContent = _parsedContent.GetDefaultContent();
             var template = cultureContent.GetContent(semanticKey, type);
-            return _renderStrategy.Render(template, parameters);
+            return _renderStrategy.Render(template.ToString(), parameters);
+        }
+
+        public string GetText(string semanticKey, FormElementContentType type, string option, Dictionary<string, object> parameters = null)
+        {
+            if (_parsedContent == null)
+            {
+                throw new ArgumentNullException("The ContentController contains no parsed data");
+            }
+            var cultureContent = _parsedContent.GetDefaultContent();
+            var templates = cultureContent.GetContent(semanticKey, type) as Dictionary<string, string>;
+            if (!templates.ContainsKey(option))
+            {
+                throw new IndexOutOfRangeException($"The option '{option}' is not known in the content for key '{semanticKey}' - '{type}'");
+            }
+            var template = templates[option];
+            return _renderStrategy.Render(template.ToString(), parameters);
         }
     }
 }
