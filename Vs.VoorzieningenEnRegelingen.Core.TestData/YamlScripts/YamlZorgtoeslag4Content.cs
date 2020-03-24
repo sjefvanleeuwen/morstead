@@ -70,7 +70,6 @@ content:
       label: 
       tag:
       hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
-      opties:
     - stap: aanvrager_met_toeslagpartner.toetsingsinkomen
       vraag: Wat is uw toetsingsinkomen?
       titel: Gezamenlijk toetsingsinkomen
@@ -85,7 +84,6 @@ content:
       label: 
       tag:
       hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
-      opties:
     - stap: geenRecht
       vraag: Geen Recht
       titel: U heeft geen recht op zorgtoeslag.
@@ -93,9 +91,6 @@ content:
       label: 
       tag:
       hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
-      opties:
-
-    
 ";
     }
 }
