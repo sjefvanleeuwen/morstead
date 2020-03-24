@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Cms.Core.Enums;
@@ -38,6 +39,10 @@ namespace Vs.Cms.Core.Controllers
 
         public string GetText(string semanticKey, FormElementContentType type, Dictionary<string, object> parameters = null)
         {
+            if (_parsedContent == null)
+            {
+                throw new ArgumentNullException("The ContentController contains no parsed data");
+            }
             var cultureContent = _parsedContent.GetDefaultContent();
             var template = cultureContent.GetContent(semanticKey, type);
             return _renderStrategy.Render(template, parameters);
