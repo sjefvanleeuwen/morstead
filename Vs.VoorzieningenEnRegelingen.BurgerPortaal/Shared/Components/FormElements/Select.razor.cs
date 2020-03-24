@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
@@ -10,10 +11,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         private IListFormElementData _data => Data as IListFormElementData;
         protected IEnumerable<string> _keys => _data.Options.Keys;
 
-        public override void FillDataFromResult(IExecutionResult result)
+        public override void FillDataFromResult(IExecutionResult result, IContentController contentController)
         {
             Data = new ListFormElementData();
-            Data.FillFromExecutionResult(result);
+            Data.FillFromExecutionResult(result, contentController);
         }
     }
 }

@@ -64,7 +64,7 @@ namespace Vs.Cms.Core.Objects
         {
             if (!_cultureContents.ContainsKey(cultureInfo))
             {
-                throw new IndexOutOfRangeException($"There is no content defined for the culture {cultureInfo.Name}");
+                throw new IndexOutOfRangeException($"There is no content defined for the culture '{cultureInfo.Name}'");
             }
             return _cultureContents[cultureInfo];
         }

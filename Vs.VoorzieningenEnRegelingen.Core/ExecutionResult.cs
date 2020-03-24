@@ -13,7 +13,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         public IQuestionArgs Questions { get; set; }
 
         //todo MPS implement
-        public string SemanticKey => "TheSemanticKey";
+        public string SemanticKey => "woonland";
 
         public ExecutionResult(ref IParametersCollection parameters)
         {

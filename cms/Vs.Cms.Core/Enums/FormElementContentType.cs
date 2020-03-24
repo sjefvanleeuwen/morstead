@@ -2,12 +2,12 @@
 {
     public enum FormElementContentType
     {
-        Summary,
+        Question,
         Title,
         Description,
         Label,
         Tag,
         Hint,
-        ParameterDisplay
+        Options
     }
 }

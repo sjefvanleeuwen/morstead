@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces
@@ -7,6 +8,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
     {
         Dictionary<string, string> Options { get; set; }
 
-        void DefineOptions(IExecutionResult result);
+        void DefineOptions(IExecutionResult result, IContentController contentController);
     }
 }

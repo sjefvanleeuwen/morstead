@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
@@ -51,9 +52,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             }
         }
 
-        public override void FillFromExecutionResult(IExecutionResult result)
+        public override void FillFromExecutionResult(IExecutionResult result, IContentController contentController)
         {
-            base.FillFromExecutionResult(result);
+            base.FillFromExecutionResult(result, contentController);
 
             Size = FormElementSize.Large;
             Decimals = 2;
