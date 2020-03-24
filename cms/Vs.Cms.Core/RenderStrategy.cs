@@ -6,16 +6,18 @@ namespace Vs.Cms.Core
     {
         private readonly ITemplateEngine templateEngine;
         private readonly IMarkupLanguage markupLanguage;
+        private readonly IContentFilter contentFilter;
 
-        public RenderStrategy(ITemplateEngine templateEngine, IMarkupLanguage markupLanguage)
+        public RenderStrategy(ITemplateEngine templateEngine, IMarkupLanguage markupLanguage, IContentFilter contentFilter)
         {
             this.templateEngine = templateEngine;
             this.markupLanguage = markupLanguage;
+            this.contentFilter = contentFilter;
         }
 
         public string Render(string template, dynamic model)
         {
-            return markupLanguage.Render(templateEngine.Render(template, model));
+            return contentFilter.Filter(markupLanguage.Render(templateEngine.Render(template, model)));
         }
     }
 }

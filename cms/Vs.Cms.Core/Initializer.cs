@@ -12,6 +12,7 @@ namespace Vs.Cms.Core
             services.AddSingleton<IContentController, ContentController>();
             services.AddSingleton<IRenderStrategy, RenderStrategy>();
             services.AddSingleton<ITemplateEngine, Liquid>();
+            services.AddSingleton<IContentFilter, HtmlContentFilter>();
             services.AddSingleton<IMarkupLanguage, Markdown>();
         }
     }
