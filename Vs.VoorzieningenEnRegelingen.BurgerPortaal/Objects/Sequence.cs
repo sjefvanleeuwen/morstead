@@ -57,7 +57,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
                 Key = result.Stacktrace.Last().Step.Key,
                 SemanticKey = result.Stacktrace.Last().Step.SemanticKey,
                 ParameterName = result.QuestionParameters.FirstOrDefault()?.Type != TypeInference.InferenceResult.TypeEnum.Boolean ?
-                    result.QuestionParameters.First().Name :
+                    result.QuestionFirstParameter.Name :
                     null,
                 ValidParameterNames = result.QuestionParameters.FirstOrDefault()?.Type == TypeInference.InferenceResult.TypeEnum.Boolean ?
                     result.QuestionParameters.Select(p => p.Name) :

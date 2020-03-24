@@ -12,6 +12,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         List<FlowExecutionItem> Stacktrace { get; }
         string SemanticKey { get; }
         IEnumerable<IParameter> QuestionParameters { get; }
+        IParameter QuestionFirstParameter { get; }
         TypeInference.InferenceResult.TypeEnum InferedType { get; }
+        
     }
 }

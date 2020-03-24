@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
+using Vs.Cms.Core.Enums;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
@@ -31,10 +32,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public override void DefineOptions(IExecutionResult result, IContentController contentController)
         {
-            (result.QuestionParameters.First().Value as List<object>)?
-                .ForEach(v => Options.Add(v.ToString(), contentController.GetText(
-                    result.SemanticKey, Cms.Core.Enums.FormElementContentType.Options,
-                    v.ToString())));
+            if (result?.QuestionFirstParameter?.Value == null)
+            {
+                return;
+            }
+            foreach (var item in result.QuestionFirstParameter.Value as IEnumerable<object>)
+            {
+                Options.Add(
+                    item.ToString(),
+                    contentController.GetText(result.SemanticKey, FormElementContentType.Options, item.ToString()));
+            }
         }
     }
 }

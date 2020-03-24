@@ -76,7 +76,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         {
             //todo MPS write test for this
             InferedType = result.InferedType;
-            Name = result.QuestionParameters.First().Name;
+            Name = result.QuestionFirstParameter.Name;
             Label = contentController.GetText(result.SemanticKey, FormElementContentType.Label);
             TagText = contentController.GetText(result.SemanticKey, FormElementContentType.Tag);
             HintText = contentController.GetText(result.SemanticKey, FormElementContentType.Hint);
