@@ -9,11 +9,11 @@ namespace Vs.Cms.Core
     {
         public static void Initialize(IServiceCollection services)
         {
-            services.AddScoped<IContentController, ContentController>();
-            services.AddScoped<IRenderStrategy, RenderStrategy>();
-            services.AddScoped<ITemplateEngine, Liquid>();
-            services.AddScoped<IContentFilter, HtmlContentFilter>();
-            services.AddScoped<IMarkupLanguage, Markdown>();
+            services.AddSingleton<IContentController, ContentController>();
+            services.AddSingleton<IRenderStrategy, RenderStrategy>();
+            services.AddSingleton<ITemplateEngine, Liquid>();
+            services.AddSingleton<IContentFilter, HtmlContentFilter>();
+            services.AddSingleton<IMarkupLanguage, Markdown>();
         }
     }
 }
