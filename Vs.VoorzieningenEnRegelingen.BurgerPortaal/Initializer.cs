@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Vs.Cms.Core;
 using Vs.Cms.Core.Controllers;
+using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Cms.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;

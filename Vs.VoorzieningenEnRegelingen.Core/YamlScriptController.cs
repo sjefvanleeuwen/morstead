@@ -122,16 +122,16 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                             _contentNodes.Add(new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}"));
                         }
                     }
-       
+
                     if (!string.IsNullOrEmpty(step.Value))
                     {
                         _contentNodes.Add(new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepValue}.{step.Value}"));
-                     }
+                    }
                     ResolveToQuestion(step.Formula, ref _contentNodes, step.Situation);
                     // TODO: Resolve recht/geen recht.
                     if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
                     {
-                        step.Break.SemanticKey = string.Join('.', new[] {YamlParser.Step, step.Name, "geen_recht" }.Where(s => !string.IsNullOrEmpty(s)));
+                        step.Break.SemanticKey = string.Join('.', new[] { YamlParser.Step, step.Name, "geen_recht" }.Where(s => !string.IsNullOrEmpty(s)));
                         ContentNode node = new ContentNode(step.Break.SemanticKey) { IsBreak = true, IsSituational = step.IsSituational, Situation = step.Situation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
                         node.Parameter.SemanticKey = step.Break.SemanticKey;
                         _contentNodes.Add(node);

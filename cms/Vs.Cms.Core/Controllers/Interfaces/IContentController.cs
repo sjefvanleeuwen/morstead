@@ -1,9 +1,14 @@
-﻿using Vs.Cms.Core.Constants;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using Vs.Cms.Core.Enums;
+using Vs.Cms.Core.Objects.Interfaces;
 
 namespace Vs.Cms.Core.Controllers.Interfaces
 {
-    interface IContentController
+    public interface IContentController
     {
-        string GetText(FormElementContentType question, string semanticKey);
+        void SetParsedContent(IParsedContent parsedContent);
+        void SetCulture(CultureInfo cultureInfo);
+        string GetText(string semanticKey, FormElementContentType type, Dictionary<string, object> parameters = null);
     }
 }

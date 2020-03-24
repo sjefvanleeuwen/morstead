@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Linq;
-using Vs.Cms.Core.Constants;
+using Vs.Cms.Core.Controllers.Interfaces;
+using Vs.Cms.Core.Enums;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
@@ -33,13 +34,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             }
         }
 
-        private string _textSummary => _contentController.GetText(FormElementContentType.Summary, _semanticKey);
+        private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Summary);
         //FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult) :
         //"Geen recht";
-        private string _textTitle => _contentController.GetText(FormElementContentType.Title, _semanticKey);
+        private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title);
         //FormTitleHelper.GetQuestionTitle(_sequenceController.LastExecutionResult) :
         //"U heeft geen recht op zorgtoeslag.";
-        private string _textDescription => _contentController.GetText(FormElementContentType.Description, _semanticKey);
+        private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description);
         //FormTitleHelper.GetQuestionDescription(_sequenceController.LastExecutionResult) :
         //"Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. " +
         //"Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst.";
