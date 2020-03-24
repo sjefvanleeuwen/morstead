@@ -81,13 +81,6 @@ namespace Vs.Cms.Core.Tests.Objects
             Assert.Equal("ru", cultureInfo.TwoLetterISOLanguageName);
             Assert.Equal("русский (Казахстан)", cultureInfo.DisplayName);
             Assert.Equal("ru-KZ", cultureInfo.Name);
-
-            //underscore is same as dash
-            sut.SetDefaultCulture(new CultureInfo("en_GB"));
-            cultureInfo = sut.GetDefaultCulture();
-            Assert.Equal("en", cultureInfo.TwoLetterISOLanguageName);
-            Assert.Equal("English (United Kingdom)", cultureInfo.DisplayName);
-            Assert.Equal("en-GB", cultureInfo.Name);
         }
 
         [Fact]
