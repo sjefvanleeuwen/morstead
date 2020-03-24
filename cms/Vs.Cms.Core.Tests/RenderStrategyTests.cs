@@ -8,17 +8,17 @@ namespace Vs.Cms.Core.Tests
         [Fact]
         public void CanRenderSimpleTemplate()
         {
-            var renderer = new RenderStrategy(new Liquid(), new Markdown());
+            var renderer = new RenderStrategy(new Liquid(), new Markdown(), new HtmlContentFilter());
             var result = renderer.Render(@"hello {{variable}}", new { variable = "world" });
-            Assert.True(result == "<p>hello world</p>\n");
+            Assert.True(result == "hello world");
         }
 
         [Fact]
         public void CanRenderSimpleTemplateWithMarkdown()
         {
-            var renderer = new RenderStrategy(new Liquid(), new Markdown());
+            var renderer = new RenderStrategy(new Liquid(), new Markdown(), new HtmlContentFilter());
             var result = renderer.Render(@"**hello {{variable}}**", new { variable = "world" });
-            Assert.True(result == "<p><strong>hello world</strong></p>\n");
+            Assert.True(result == "<strong>hello world</strong>");
         }
 
         [Fact]
@@ -28,14 +28,14 @@ namespace Vs.Cms.Core.Tests
             fields.Add("boolean", true);
             fields.Add("double", 4.25);
             fields.Add("hello", "hello");
-            var renderer = new RenderStrategy(new Liquid(), new Markdown());
+            var renderer = new RenderStrategy(new Liquid(), new Markdown(), new HtmlContentFilter());
             var result = renderer.Render(@"**{{hello}}**
 € {{double}} 
 {% if boolean %}
   world!
 {% endif %}
 ", fields);
-            Assert.True(result == "<p><strong>hello</strong>\n€ 4.25</p>\n<p>world!</p>\n");
+            Assert.True(result == "<strong>hello</strong> € 4.25 world!");
         }
     }
 }

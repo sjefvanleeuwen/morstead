@@ -12,6 +12,7 @@ namespace Vs.Cms.Core
             services.AddScoped<IContentController, ContentController>();
             services.AddScoped<IRenderStrategy, RenderStrategy>();
             services.AddScoped<ITemplateEngine, Liquid>();
+            services.AddScoped<IContentFilter, HtmlContentFilter>();
             services.AddScoped<IMarkupLanguage, Markdown>();
         }
     }
