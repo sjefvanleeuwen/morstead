@@ -54,7 +54,7 @@ namespace Vs.Cms.Core.Tests.Objects
             Assert.Equal("TestTitleContent", sut.GetContent("testKey", FormElementContentType.Title));
             Assert.Equal("TestSummaryContent", sut.GetContent("testKey", FormElementContentType.Question));
             //Tag should not be available
-            Assert.Throws<IndexOutOfRangeException>(() => sut.GetContent("testKey", FormElementContentType.Tag));
+            Assert.Null(sut.GetContent("testKey", FormElementContentType.Tag));
         }
 
         [Fact]

@@ -17,7 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
             var moqExecutionResult = InitMoqExecutionResult(1);
 
             var sut = new BooleanFormElementData();
-            sut.DefineOptions(moqExecutionResult);
+            //sut.DefineOptions(moqExecutionResult);
             Assert.Equal(2, sut.Options.Count);
             Assert.Equal("test1", sut.Options.ToList()[0].Key);
             Assert.Equal("Test1", sut.Options.ToList()[0].Value);

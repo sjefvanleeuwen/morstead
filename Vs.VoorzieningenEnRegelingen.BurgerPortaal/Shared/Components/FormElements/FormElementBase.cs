@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Interface;
@@ -29,13 +30,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         public bool ShowElement => Data != null && !string.IsNullOrWhiteSpace(Data.Name);
 
-        public virtual void FillDataFromResult(IExecutionResult result)
+        public virtual void FillDataFromResult(IExecutionResult result, IContentController contentController)
         {
             //todo MPS write test
             Data = new FormElementData();
             if (result.InferedType != TypeInference.InferenceResult.TypeEnum.Unknown)
             {
-                Data.FillFromExecutionResult(result);
+                Data.FillFromExecutionResult(result, contentController);
             }
         }
 

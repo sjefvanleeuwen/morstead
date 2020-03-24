@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.Core;
 
@@ -20,6 +21,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
         TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
         string ElementSize { get; }
         void Validate(bool unobtrusive);
-        void FillFromExecutionResult(IExecutionResult result);
+        void FillFromExecutionResult(IExecutionResult result, IContentController contentController);
     }
 }

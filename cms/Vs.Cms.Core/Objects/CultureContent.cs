@@ -40,7 +40,7 @@ namespace Vs.Cms.Core.Objects
             }
             if (!_semanticContent[semanticKey].ContainsKey(type))
             {
-                throw new IndexOutOfRangeException($"There is no content defined for key '{semanticKey}' - '{type}'");
+                return null;
             }
             return _semanticContent[semanticKey][type];
         }

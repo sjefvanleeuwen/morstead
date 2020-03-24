@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Vs.Cms.Core.Enums
+﻿namespace Vs.Cms.Core.Enums
 {
     public enum FormElementContentType
     {

@@ -34,13 +34,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             }
         }
 
-        private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question).ToString();
+        private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question);
         //FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult) :
         //"Geen recht";
-        private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title).ToString();
+        private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title);
         //FormTitleHelper.GetQuestionTitle(_sequenceController.LastExecutionResult) :
         //"U heeft geen recht op zorgtoeslag.";
-        private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description).ToString();
+        private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description);
         //FormTitleHelper.GetQuestionDescription(_sequenceController.LastExecutionResult) :
         //"Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. " +
         //"Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst.";
@@ -58,8 +58,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         protected override void OnInitialized()
         {
-            base.OnInitialized();
+            _contentController.Initialize(YamlZorgtoeslag4Content.Body);
             _sequenceController.Sequence.Yaml = YamlZorgtoeslag4.Body;
+            base.OnInitialized();
             //get the first step
             GetNextStep();
         }
@@ -87,21 +88,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private void Display()
         {
+            _formElement = new FormElementBase();
             if (_hasRights)
             {
-                _formElement = new FormElementBase().GetFormElement(_sequenceController.LastExecutionResult);
-                _formElement.FillDataFromResult(_sequenceController.LastExecutionResult);
+                _formElement = _formElement.GetFormElement(_sequenceController.LastExecutionResult);
+                _formElement.FillDataFromResult(_sequenceController.LastExecutionResult, _contentController);
                 if (_formElement.ShowElement)
                 {
                     _formElement.Data.Value = _sequenceController.GetSavedValue() ?? _formElement.Data.Value;
-                    //FormElementHelper.GetValue(_sequenceController.Sequence, _sequenceController.LastExecutionResult) ??
-                    //_formElement.Data.Value;
-                    ValidateForm(true); //set the IsValid and ErrorText Property
+                    ValidateForm(true); //set the IsValid and ErrorText Property unobtrusive
                 }
-            }
-            else
-            {
-                _formElement = new FormElementBase();
             }
         }
 

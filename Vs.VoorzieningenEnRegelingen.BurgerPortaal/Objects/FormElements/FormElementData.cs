@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
+using Vs.Cms.Core.Controllers.Interfaces;
+using Vs.Cms.Core.Enums;
 using Vs.Core.Extensions;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
@@ -70,15 +72,14 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             return valid;
         }
 
-        public virtual void FillFromExecutionResult(IExecutionResult result)
+        public virtual void FillFromExecutionResult(IExecutionResult result, IContentController contentController)
         {
             //todo MPS write test for this
-            //todo MPS get the values from the controller
             InferedType = result.InferedType;
             Name = result.QuestionParameters.First().Name;
-            //Label = FormElementHelper.GetFromContent(result.Questions.Parameters, FormElementHelper.Labels, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-            //TagText = FormElementHelper.GetFromContent(result.Questions.Parameters, FormElementHelper.TagText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
-            //HintText = FormElementHelper.GetFromContent(result.Questions.Parameters, FormElementHelper.HintText, false, (bool?)result.Parameters?.GetAll().FirstOrDefault(p => p.Name == "alleenstaande")?.Value);
+            Label = contentController.GetText(result.SemanticKey, FormElementContentType.Label);
+            TagText = contentController.GetText(result.SemanticKey, FormElementContentType.Tag);
+            HintText = contentController.GetText(result.SemanticKey, FormElementContentType.Hint);
         }
     }
 }
