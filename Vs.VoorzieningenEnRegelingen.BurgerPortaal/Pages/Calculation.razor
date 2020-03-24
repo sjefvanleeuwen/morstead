@@ -34,16 +34,6 @@
                         break;
                 }
             }
-
-            @*@if (_result != null)
-                {
-                    //This is the end. My only friend                                 , the end.
-                    <h3>@((MarkupString)_result)</h3>
-                }
-                @if (!_hasRights)
-                {
-                    <p>De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.</p>
-                }*@
             <Pagination PreviousDisabled="@(!_showPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
                         NextDisabled="@(!_showNextButton)" Next="GetNextStep" NextText="Volgende"
                         ScreenreaderDescription="pagina" />

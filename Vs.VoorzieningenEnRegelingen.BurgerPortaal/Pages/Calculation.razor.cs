@@ -35,22 +35,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         }
 
         private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question);
-        //FormTitleHelper.GetQuestion(_sequenceController.LastExecutionResult) :
-        //"Geen recht";
         private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title);
-        //FormTitleHelper.GetQuestionTitle(_sequenceController.LastExecutionResult) :
-        //"U heeft geen recht op zorgtoeslag.";
         private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description);
-        //FormTitleHelper.GetQuestionDescription(_sequenceController.LastExecutionResult) :
-        //"Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. " +
-        //"Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst.";
-
-        //_sequenceController.LastExecutionResult.Parameters.Any(p => p.Name == "zorgtoeslag") ?
-        //    " <strong>Uw zorgtoeslag is €" +
-        //    ((double)
-        //        _sequenceController.LastExecutionResult.Parameters.
-        //            FirstOrDefault(p => p.Name == "zorgtoeslag").Value)
-        //            .ToString("#.00").Replace('.', ',') + " per maand.</strong>" :
         private bool _hasRights => _sequenceController.HasRights;
         private bool _questionAsked => _sequenceController.QuestionIsAsked;
         private bool _showPreviousButton => _sequenceController.CurrentStep > 1;
