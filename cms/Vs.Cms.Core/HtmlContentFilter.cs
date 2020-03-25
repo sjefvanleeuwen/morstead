@@ -7,7 +7,7 @@ namespace Vs.Cms.Core
     {
         public string Filter(string content)
         {
-            return new Regex(@"\s+").Replace(new Regex(@"<p>|</p>|\n").Replace(content, " ").Trim()," ");
+            return new Regex(@"\s+").Replace(new Regex(@"<p>|</p>|\n").Replace(content, " ").Trim(), " ");
         }
     }
 }

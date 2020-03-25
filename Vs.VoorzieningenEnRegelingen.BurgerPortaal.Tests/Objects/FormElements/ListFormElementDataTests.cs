@@ -1,5 +1,4 @@
 ﻿using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
@@ -21,7 +20,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
 
             var sut = new ListFormElementData();
             sut.DefineOptions(moqExecutionResult.Object, moqContentController.Object);
-            
+
             Assert.Equal(2, sut.Options.Count);
             Assert.Equal("optie1", sut.Options.ToList()[0].Key);
             Assert.Equal("TestOpt1", sut.Options.ToList()[0].Value);
