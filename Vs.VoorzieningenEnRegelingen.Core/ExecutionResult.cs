@@ -22,7 +22,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         }
 
         public IEnumerable<IParameter> QuestionParameters => Questions?.Parameters?.GetAll() ?? new List<IParameter>();
-        public IParameter QuestionFirstParameter => QuestionParameters.First();
+        public IParameter QuestionFirstParameter => QuestionParameters.FirstOrDefault();
 
         public static ExecutionResult NotExecutedBecauseOfParseError(ref IParametersCollection parameters) =>
             new ExecutionResult(ref parameters) { IsError = true, Message = "Not Executed Because Of Parse Error" };

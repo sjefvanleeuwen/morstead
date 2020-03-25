@@ -56,10 +56,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
             {
                 Key = result.Stacktrace.Last().Step.Key,
                 SemanticKey = result.Stacktrace.Last().Step.SemanticKey,
-                ParameterName = result.QuestionParameters.FirstOrDefault()?.Type != TypeInference.InferenceResult.TypeEnum.Boolean ?
+                ParameterName = result.QuestionFirstParameter?.Type != TypeInference.InferenceResult.TypeEnum.Boolean ?
                     result.QuestionFirstParameter.Name :
                     null,
-                ValidParameterNames = result.QuestionParameters.FirstOrDefault()?.Type == TypeInference.InferenceResult.TypeEnum.Boolean ?
+                ValidParameterNames = result.QuestionFirstParameter?.Type == TypeInference.InferenceResult.TypeEnum.Boolean ?
                     result.QuestionParameters.Select(p => p.Name) :
                     null
             });

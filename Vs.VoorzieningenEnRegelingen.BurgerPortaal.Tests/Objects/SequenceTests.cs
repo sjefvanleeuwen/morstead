@@ -197,6 +197,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             var moqParameters = InitMoqBooleanParameters();
             moq.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moqParameterCollection));
             moq.Setup(m => m.QuestionParameters).Returns(moqParameters);
+            moq.Setup(m => m.QuestionFirstParameter).Returns(moqParameters.First());
             moq.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { new FlowExecutionItem(moqCoreStep) });
             return moq.Object;
         }
@@ -209,6 +210,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             var moqParameters = InitMoqDoubleParameters();
             moq.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moqParameterCollection));
             moq.Setup(m => m.QuestionParameters).Returns(moqParameters);
+            moq.Setup(m => m.QuestionFirstParameter).Returns(moqParameters.First());
             moq.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { new FlowExecutionItem(moqCoreStep) });
             return moq.Object;
         }
@@ -221,6 +223,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             var moqParameters = InitMoqStringParameters();
             moq.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moqParameterCollection));
             moq.Setup(m => m.QuestionParameters).Returns(moqParameters);
+            moq.Setup(m => m.QuestionFirstParameter).Returns(moqParameters.First());
             moq.Setup(m => m.Stacktrace).Returns(new List<FlowExecutionItem> { new FlowExecutionItem(moqCoreStep) });
             return moq.Object;
         }
