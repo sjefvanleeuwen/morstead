@@ -3,9 +3,9 @@ using System.Globalization;
 
 namespace Vs.Cms.Core.Objects.Interfaces
 {
-    public interface IParsedContent
+    public interface IContentHandler
     {
-        void SetCultureContents(Dictionary<CultureInfo, ICultureContent> cultureContents);
+        void AddCultureContents(Dictionary<CultureInfo, ICultureContent> cultureContents);
 
         void SetDefaultCulture(CultureInfo cultureInfo);
 
@@ -14,5 +14,7 @@ namespace Vs.Cms.Core.Objects.Interfaces
         ICultureContent GetContentByCulture(CultureInfo cultureinfo);
 
         ICultureContent GetDefaultContent();
+
+        void TransLateParsedContentToContent(CultureInfo cultureInfo, IDictionary<string, object> parsedContent);
     }
 }

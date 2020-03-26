@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Vs.Cms.Core.Helper;
+using Vs.Cms.Core.Tests.TestYaml;
 using Xunit;
 
 namespace Vs.Cms.Core.Tests.Helper
@@ -10,7 +11,7 @@ namespace Vs.Cms.Core.Tests.Helper
         [Fact]
         public void ShouldRenderContentYamlToObject()
         {
-            var root = YamlContentParser.RenderContentYamlToObject(_testYaml);
+            var root = YamlContentParser.RenderContentYamlToObject(ContentYamlTest1.Body);
             Assert.Single(root);
             Assert.Equal("Content", root.First().Key);
             Assert.Equal(typeof(List<object>), root.First().Value.GetType());
@@ -28,11 +29,9 @@ namespace Vs.Cms.Core.Tests.Helper
             Assert.Empty(item1["tag"].ToString());
             Assert.Equal("Selecteer \"Anders\" wanneer het uw woonland niet in de lijst staat.", item1["hint"]);
 
-
             Assert.Equal(typeof(Dictionary<string, object>), content[1].GetType());
             var item2 = content[1] as Dictionary<string, object>;
             Assert.Equal(6, item2.Count);
-
 
             Assert.Equal(typeof(Dictionary<string, object>), content[2].GetType());
             var item3 = content[2] as Dictionary<string, object>;
@@ -42,25 +41,5 @@ namespace Vs.Cms.Core.Tests.Helper
             var item4 = content[3] as Dictionary<string, object>;
             Assert.Equal(2, item4.Count);
         }
-
-        private string _testYaml = @"Content:
- - key: stap.woonland.woonlandfactor
-   vraag: Waar bent u woonachtig?
-   titel: Selecteer uw woonland.
-   tekst: Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de Belastingdienst.
-   label: 
-   tag:   
-   hint: Selecteer ""Anders"" wanneer het uw woonland niet in de lijst staat.
- - key: stap.woonsituatie
-   vraag: Wat is uw woonsituatie?
-   titel: Wat is uw woonsituatie?
-   tekst: Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de Belastingdienst.
-   label: 
-   hint: Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft.    
- - key: stap.woonsituatie.keuze.alleenstaande
-   tran: ALeenstaande
- - key: stap.woonsituatie.keuze.aanvrager_met_toeslagpartner
-   tekst: Aanvrager met toeslagpartner 
-";
     }
 }

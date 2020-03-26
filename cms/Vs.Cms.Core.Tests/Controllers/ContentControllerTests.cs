@@ -13,49 +13,24 @@ namespace Vs.Cms.Core.Tests.Controllers
     public class ContentControllerTests
     {
         [Fact]
-        public void ShouldSetParsedContent()
-        {
-            var moqRenderStrategy = InitMoqRenderStrategy();
-            var moqParsedContent = InitMoqParsedContent();
-            var sut = new ContentController(moqRenderStrategy.Object);
-            var dutchCulture = new CultureInfo("nl-NL");
-            sut.SetCulture(dutchCulture);
-            moqParsedContent.Verify(x => x.SetDefaultCulture(dutchCulture), Times.Never());
-            sut.SetParsedContent(moqParsedContent.Object);
-            moqParsedContent.Verify(x => x.SetDefaultCulture(dutchCulture), Times.Once());
-        }
-
-        [Fact]
         public void ShouldSetCulture()
         {
             var moqRenderStrategy = InitMoqRenderStrategy();
-            var moqParsedContent = InitMoqParsedContent();
-            var sut = new ContentController(moqRenderStrategy.Object);
+            var moqContentHandler = InitMoqContentHandler();
+            var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object);
             var dutchCulture = new CultureInfo("nl-NL");
-            sut.SetParsedContent(moqParsedContent.Object);
-            moqParsedContent.Verify(x => x.SetDefaultCulture(It.IsAny<CultureInfo>()), Times.Never());
+            moqContentHandler.Verify(x => x.SetDefaultCulture(It.IsAny<CultureInfo>()), Times.Never());
             sut.SetCulture(dutchCulture);
-            moqParsedContent.Verify(x => x.SetDefaultCulture(dutchCulture), Times.Once());
-        }
-
-        [Fact]
-        public void ShouldGetTextNullException()
-        {
-            var moqRenderStrategy = InitMoqRenderStrategy();
-            var sut = new ContentController(moqRenderStrategy.Object);
-            var dutchCulture = new CultureInfo("nl-NL");
-            sut.SetCulture(dutchCulture);
-            Assert.Throws<ArgumentNullException>(() => sut.GetText("semanticKey", FormElementContentType.Description));
+            moqContentHandler.Verify(x => x.SetDefaultCulture(dutchCulture), Times.Once());
         }
 
         [Fact]
         public void ShouldGetTextOptionException()
         {
             var moqRenderStrategy = InitMoqRenderStrategy();
-            var moqParsedContent = InitMoqParsedContent();
-            var sut = new ContentController(moqRenderStrategy.Object);
+            var moqContentHandler = InitMoqContentHandler();
+            var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object);
             var dutchCulture = new CultureInfo("nl-NL");
-            sut.SetParsedContent(moqParsedContent.Object);
             sut.SetCulture(dutchCulture);
             Assert.Throws<IndexOutOfRangeException>(() => sut.GetText("semanticKey", FormElementContentType.Options, "opt"));
         }
@@ -63,14 +38,13 @@ namespace Vs.Cms.Core.Tests.Controllers
         [Fact]
         public void ShouldGetTextOptionOriginalValue()
         {
-            var moqParsedContent = new Mock<IParsedContent>();
+            var moqContentHandler = new Mock<IContentHandler>();
             var moqCultureContent = new Mock<ICultureContent>();
-            moqParsedContent.Setup(m => m.GetDefaultContent()).Returns(moqCultureContent.Object);
+            moqContentHandler.Setup(m => m.GetDefaultContent()).Returns(moqCultureContent.Object);
 
             var moqRenderStrategy = InitMoqRenderStrategy();
-            var sut = new ContentController(moqRenderStrategy.Object);
+            var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object);
             var dutchCulture = new CultureInfo("nl-NL");
-            sut.SetParsedContent(moqParsedContent.Object);
             sut.SetCulture(dutchCulture);
             Assert.Equal("opt", sut.GetText("semanticKey", FormElementContentType.Options, "opt"));
         }
@@ -79,10 +53,9 @@ namespace Vs.Cms.Core.Tests.Controllers
         public void ShouldGetText()
         {
             var moqRenderStrategy = InitMoqRenderStrategy();
-            var moqParsedContent = InitMoqParsedContent();
-            var sut = new ContentController(moqRenderStrategy.Object);
+            var moqContentHandler = InitMoqContentHandler();
+            var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object);
             var dutchCulture = new CultureInfo("nl-NL");
-            sut.SetParsedContent(moqParsedContent.Object);
             sut.SetCulture(dutchCulture);
             var text = sut.GetText("semanticKey", FormElementContentType.Description);
             Assert.Equal("result1", text);
@@ -104,9 +77,9 @@ namespace Vs.Cms.Core.Tests.Controllers
             return moq;
         }
 
-        private Mock<IParsedContent> InitMoqParsedContent()
+        private Mock<IContentHandler> InitMoqContentHandler()
         {
-            var moq = new Mock<IParsedContent>();
+            var moq = new Mock<IContentHandler>();
             var moqCultureContent = InitCultureContent();
             moq.Setup(m => m.GetDefaultContent()).Returns(moqCultureContent.Object);
             return moq;

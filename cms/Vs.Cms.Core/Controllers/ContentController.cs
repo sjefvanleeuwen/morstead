@@ -14,39 +14,27 @@ namespace Vs.Cms.Core.Controllers
     {
         private readonly IRenderStrategy _renderStrategy;
         private CultureInfo _cultureInfo;
-        private IParsedContent _parsedContent;
+        private IContentHandler _contentHandler;
 
-        public ContentController(IRenderStrategy renderStrategy)
+        public ContentController(IRenderStrategy renderStrategy, IContentHandler contentHandler)
         {
             _renderStrategy = renderStrategy;
-        }
-
-        public void SetParsedContent(IParsedContent parsedContent)
-        {
-            _parsedContent = parsedContent;
-            if (_cultureInfo != null)
-            {
-                _parsedContent.SetDefaultCulture(_cultureInfo);
-            }
+            _contentHandler = contentHandler;
         }
 
         public void SetCulture(CultureInfo cultureInfo)
         {
             _cultureInfo = cultureInfo;
-            if (_parsedContent != null)
+            if (_contentHandler != null)
             {
-                _parsedContent.SetDefaultCulture(_cultureInfo);
+                _contentHandler.SetDefaultCulture(_cultureInfo);
             }
         }
 
         public string GetText(string semanticKey, FormElementContentType type, Dictionary<string, object> parameters = null)
         {
             parameters ??= new Dictionary<string, object>();
-            if (_parsedContent == null)
-            {
-                throw new ArgumentNullException("The ContentController contains no parsed data");
-            }
-            var cultureContent = _parsedContent.GetDefaultContent();
+            var cultureContent = _contentHandler.GetDefaultContent();
             var template = cultureContent.GetContent(semanticKey, type);
             if (template == null)
             {
@@ -58,11 +46,11 @@ namespace Vs.Cms.Core.Controllers
         public string GetText(string semanticKey, FormElementContentType type, string option, Dictionary<string, object> parameters = null)
         {
             parameters ??= new Dictionary<string, object>();
-            if (_parsedContent == null)
+            if (_contentHandler == null)
             {
                 throw new ArgumentNullException("The ContentController contains no parsed data");
             }
-            var cultureContent = _parsedContent.GetDefaultContent();
+            var cultureContent = _contentHandler.GetDefaultContent();
             var templates = cultureContent.GetContent(semanticKey, type) as Dictionary<string, string>;
             if (!templates?.Any() ?? true)
             {
@@ -81,9 +69,8 @@ namespace Vs.Cms.Core.Controllers
         {
             //todo MPS Rewrite to get this from the body supplied
             _cultureInfo = new CultureInfo("nl-NL");
-            _parsedContent = new ParsedContent();
-            _parsedContent.SetDefaultCulture(_cultureInfo);
-            _parsedContent.SetCultureContents(GetCultureContents(_cultureInfo));
+            _contentHandler.SetDefaultCulture(_cultureInfo);
+            _contentHandler.AddCultureContents(GetCultureContents(_cultureInfo));
         }
 
         private Dictionary<CultureInfo, ICultureContent> GetCultureContents(CultureInfo cultureInfo)
