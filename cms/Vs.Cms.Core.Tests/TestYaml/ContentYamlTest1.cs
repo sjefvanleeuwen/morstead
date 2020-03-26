@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Vs.Cms.Core.Tests.TestYaml
+﻿namespace Vs.Cms.Core.Tests.TestYaml
 {
     public static class ContentYamlTest1
     {

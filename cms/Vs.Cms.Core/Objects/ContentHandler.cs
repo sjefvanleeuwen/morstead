@@ -111,7 +111,8 @@ namespace Vs.Cms.Core.Objects
                 }
                 var content = new Dictionary<FormElementContentType, object>();
                 var key = subItems[Key].ToString();
-                foreach (var formElementContentType in Enum.GetValues(typeof(FormElementContentType)).Cast<FormElementContentType>()) {
+                foreach (var formElementContentType in Enum.GetValues(typeof(FormElementContentType)).Cast<FormElementContentType>())
+                {
                     var label = formElementContentType.GetDescription();
                     if (label != "key" && subItems.ContainsKey(label))
                     {
