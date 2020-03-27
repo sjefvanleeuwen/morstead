@@ -1,4 +1,6 @@
-﻿using Vs.Cms.Core.Controllers.Interfaces;
+﻿using Microsoft.AspNetCore.Components;
+using System.Globalization;
+using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.Core;
 
@@ -16,7 +18,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
         FormElementSize Size { get; set; }
         string TagText { get; set; }
         TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
+        CultureInfo Culture { get; set; }
         string Value { get; set; }
+        EventCallback<string> ValueChanged { get; set; }
         string ElementSize { get; }
 
         void Validate(bool unobtrusive);

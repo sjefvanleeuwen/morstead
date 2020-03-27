@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Cms.Core.Enums;
 using Vs.Core.Extensions;
@@ -11,6 +13,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
     public class FormElementData : IFormElementData
     {
+        protected string value = string.Empty;
+
         public string Name { get; set; }
         public string Label { get; set; }
         public FormElementSize Size { get; set; }
@@ -22,7 +26,24 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public bool IsRequired { get; set; } = false;
         public bool IsValid { get; set; } = true;
         public TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
-        public virtual string Value { get; set; }
+        public CultureInfo Culture { get; set; } = new CultureInfo("nl-NL");
+        public virtual string Value
+        {
+            get { return value; }
+            set
+            {
+                if (this.value == value)
+                {
+                    return;
+                }
+                this.value = value;
+                if (ValueChanged.HasDelegate)
+                {
+                    ValueChanged.InvokeAsync(value);
+                }
+            }
+        }
+        public virtual EventCallback<string> ValueChanged { get; set; }
 
         public string ElementSize => Size.GetDescription();
 
