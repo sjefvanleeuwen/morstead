@@ -1,6 +1,6 @@
 ﻿namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces
 {
-    public interface INumericFormElementData : IFormElementData
+    public interface INumericFormElementData : IFormElementSingleValue
     {
         int? Decimals { get; set; }
         bool DecimalsOptional { get; set; }

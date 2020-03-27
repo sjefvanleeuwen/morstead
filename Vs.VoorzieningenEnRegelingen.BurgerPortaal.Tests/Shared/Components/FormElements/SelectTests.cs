@@ -111,7 +111,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                     "Data", new ListFormElementData() {
                         Label = "_",
                         HintText = "_",
-                        ErrorText = "_",
+                        ErrorTexts = new List<string> { "_" },
                         IsValid = false
                     }
                 }

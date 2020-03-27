@@ -7,7 +7,7 @@ using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class NumericFormElementData : FormElementData, INumericFormElementData
+    public class NumericFormElementData : FormElementSingleValue, INumericFormElementData
     {
         public int? Decimals { get; set; } = null;
 
@@ -26,7 +26,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             {
                 if (!validChars.Contains(c))
                 {
-                    ErrorText = "Er zijn ongeldige tekens ingegeven. Een getal bestaat uit nummers en maximaal één komma met daarachter twee cijfers.";
+                    ErrorTexts.Add("Er zijn ongeldige tekens ingegeven. Een getal bestaat uit nummers en maximaal één komma met daarachter twee cijfers.");
                     if (!unobtrusive)
                     {
                         IsValid = false;
@@ -35,7 +35,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             }
             if (chars.Where(c => c == ',').Count() > 1)
             {
-                ErrorText = "Er zijn ongeldige tekens ingegeven. Een getal bestaat uit nummers en maximaal één komma met daarachter twee cijfers.";
+                ErrorTexts.Add("Er zijn ongeldige tekens ingegeven. Een getal bestaat uit nummers en maximaal één komma met daarachter twee cijfers.");
                 if (!unobtrusive)
                 {
                     IsValid = false;
@@ -44,7 +44,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             var parts = Value.Split(',');
             if (parts.Count() == 2 && parts[1].Length != 2)
             {
-                ErrorText = "Typ twee cijfers achter de komma.";
+                ErrorTexts.Add("Typ twee cijfers achter de komma.");
                 if (!unobtrusive)
                 {
                     IsValid = false;

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using Vs.Cms.Core.Controllers.Interfaces;
+﻿using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.Core;
 
@@ -7,7 +6,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
 {
     public interface IFormElementData
     {
-        string ErrorText { get; set; }
+        string ErrorText { get; }
         string HintText { get; set; }
         bool IsDisabled { get; set; }
         bool IsRequired { get; set; }
@@ -16,10 +15,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
         string Name { get; set; }
         FormElementSize Size { get; set; }
         string TagText { get; set; }
-        string Value { get; set; }
-        EventCallback<string> ValueChanged { get; set; }
         TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
+        string Value { get; set; }
         string ElementSize { get; }
+
         void Validate(bool unobtrusive);
         void FillFromExecutionResult(IExecutionResult result, IContentController contentController);
     }

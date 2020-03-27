@@ -82,7 +82,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                     "Data", new NumericFormElementData() {
                         Label = "_",
                         HintText = "_" ,
-                        ErrorText = "_",
+                        ErrorTexts = new List<string> { "_" },
                         IsValid = false
                     }
                 }
