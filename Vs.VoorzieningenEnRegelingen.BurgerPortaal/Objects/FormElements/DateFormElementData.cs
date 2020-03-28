@@ -50,9 +50,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             {
                 date = new DateTime(year, month, day);
                 //make sure month 13 is not parsed to a date a day later
-                if (date.Year.ToString("0000") != Values["year"] ||
-                    date.Month.ToString("00") != Values["month"] ||
-                    date.Day.ToString("00") != Values["day"])
+                if (date.Year != int.Parse(Values["year"]) ||
+                    date.Month != int.Parse(Values["month"]) ||
+                    date.Day != int.Parse(Values["day"]))
                 {
                     throw new Exception("Values out or range.");
                 }
@@ -115,7 +115,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             {
                 base.Validate(unobtrusive);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 errors.Add("De waarden ingegeven vormen samen geen geldige datum.");
             }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Vs.Core.Web;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Xunit;
 
@@ -115,6 +116,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             };
             var component = _host.AddComponent<Date>(variables);
 
+            //the ValueDate should not be changed before the get is called
+
             var inputs = component.FindAll("input").ToList();
             Assert.Equal("08", inputs[0].Attr("value"));
             Assert.Equal("03", inputs[1].Attr("value"));
@@ -141,6 +144,97 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("08", inputs[1].Attr("value"));
             Assert.Equal("1949", inputs[2].Attr("value"));
             Assert.Equal("1949-08-01", component.Instance.Value);
+        }
+
+        /// <summary>
+        /// Should never parse a value when changed
+        /// </summary>
+        [Fact]
+        public void ShouldDoTwoWayBindingNeverParse()
+        {
+            var variables = new Dictionary<string, object>
+            {
+                {
+                    "Data", new DateFormElementData() {
+                        Value = "1979-03-08"
+                    }
+                }
+            };
+            var component = _host.AddComponent<Date>(variables);
+
+            //the ValueDate should not be changed before the get is called
+
+            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            var inputs = component.FindAll("input").ToList();
+            inputs[0].Change("01");
+            Assert.Equal("01", (component.Instance.Data as IDateFormElementData).Values["day"]);
+            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            inputs = component.FindAll("input").ToList();
+            inputs[1].Change("08");
+            Assert.Equal("08", (component.Instance.Data as IDateFormElementData).Values["month"]);
+            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            inputs = component.FindAll("input").ToList();
+            inputs[2].Change("1949");
+            Assert.Equal("1949", (component.Instance.Data as IDateFormElementData).Values["year"]);
+            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            component.Instance.Data.Validate();
+            Assert.Equal(new DateTime(1949, 08, 01), (component.Instance.Data as IDateFormElementData).ValueDate);
+        }
+
+        [Fact]
+        public void ShouldDoTwoWayBindingInvalidInput()
+        {
+            var variables = new Dictionary<string, object>
+            {
+                {
+                    "Data", new DateFormElementData() {
+                        Value = "1979-03-08"
+                    }
+                }
+            };
+            var component = _host.AddComponent<Date>(variables);
+
+            //the ValueDate should not be changed before the get is called
+
+            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            var inputs = component.FindAll("input").ToList();
+            inputs[0].Change("Ma");
+            Assert.Equal("Ma", (component.Instance.Data as IDateFormElementData).Values["day"]);
+            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            inputs = component.FindAll("input").ToList();
+            inputs[1].Change("ma");
+            Assert.Equal("ma", (component.Instance.Data as IDateFormElementData).Values["month"]);
+            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            inputs = component.FindAll("input").ToList();
+            inputs[2].Change("love");
+            Assert.Equal("love", (component.Instance.Data as IDateFormElementData).Values["year"]);
+            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            component.Instance.Data.Validate();
+            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+        }
+
+        [Fact]
+        public void ShouldDoTwoWayBindingNoLeadingZeros()
+        {
+            var variables = new Dictionary<string, object>
+            {
+                {
+                    "Data", new DateFormElementData() {
+                        Value = "1979-03-08"
+                    }
+                }
+            };
+            var component = _host.AddComponent<Date>(variables);
+
+            //when typing a vlue the value should not get a leading 0
+            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            var inputs = component.FindAll("input").ToList();
+            inputs[0].Change("1");
+            Assert.Equal("1", (component.Instance.Data as IDateFormElementData).Values["day"]);
+            inputs = component.FindAll("input").ToList();
+            Assert.Equal("1", inputs[0].Attr("value"));
+            component.Instance.Data.Validate();
+            Assert.Equal(new DateTime(1979, 03, 01), (component.Instance.Data as IDateFormElementData).ValueDate);
         }
 
         [Fact]

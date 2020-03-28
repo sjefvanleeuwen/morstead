@@ -23,7 +23,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
         EventCallback<string> ValueChanged { get; set; }
         string ElementSize { get; }
 
-        void Validate(bool unobtrusive);
+        void Validate(bool unobtrusive = false);
         void FillFromExecutionResult(IExecutionResult result, IContentController contentController);
     }
 }

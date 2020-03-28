@@ -40,6 +40,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         }
 
         [Fact]
+        public void ShouldSetValueNoLeadingZeros()
+        {
+            var sut = new DateFormElementData
+            {
+                Value = "1979-3-8"
+            };
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            Assert.Equal("1979", sut.Values["year"]);
+            Assert.Equal("03", sut.Values["month"]);
+            Assert.Equal("08", sut.Values["day"]);
+        }
+
+        [Fact]
         public void ShouldSetDateTimeForDefaultCulture()
         {
             var sut = new DateFormElementData
@@ -148,6 +161,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
                 }
             };
             Assert.Throws<ArgumentOutOfRangeException>(() => sut.Value);
+        }
+
+        [Fact]
+        private void ShouldAcceptNoLeadingValues()
+        {
+            var sut = new DateFormElementData
+            {
+                Values = new Dictionary<string, string> {
+                    { "year", "1979" },
+                    { "month", "3" },
+                    { "day", "8" }
+                }
+            };
+            Assert.Equal("1979-03-08", sut.Value);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
         }
 
         [Fact]
