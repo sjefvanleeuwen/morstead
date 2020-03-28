@@ -21,7 +21,6 @@
     <Content Remove="Shared\Components\Collapsable.razor" />
     <Content Remove="Shared\Components\FormElements\Address.razor" />
     <Content Remove="Shared\Components\FormElements\Checkbox.razor" />
-    <Content Remove="Shared\Components\FormElements\Date.razor" />
     <Content Remove="Shared\Components\FormElements\Email.razor" />
     <Content Remove="Shared\Components\FormElements\Search.razor" />
     <Content Remove="Shared\Components\FormElements\TextArea.razor" />

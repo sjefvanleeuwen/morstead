@@ -18,8 +18,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.NotNull(component.Find("input"));
             Assert.False(component.Find("input").IsRequired());
             Assert.False(component.Find("input").IsDisabled());
-            Assert.Empty(component.Find("input").Attr("required"));
-            Assert.Empty(component.Find("input").Attr("disabled"));
             Assert.Empty(component.Find("input").Id);
             Assert.Equal("hint_", component.Find("input").Attr("aria-describedby"));
             Assert.Equal("input__control input__control--text ", component.Find("input").Attr("class"));
@@ -35,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                         IsRequired = true,
                         IsDisabled = true,
                         Name = "TheName",
-                        Size = FormElementSize.Large ,
+                        Size = FormElementSize.Large,
                         Value = "123"
                     }
                 }
@@ -58,7 +56,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                 {
                     "Data", new NumericFormElementData() {
                         Name = "TheName",
-                        Size = FormElementSize.Large ,
+                        Size = FormElementSize.Large,
                         Value = "123"
                     }
                 }

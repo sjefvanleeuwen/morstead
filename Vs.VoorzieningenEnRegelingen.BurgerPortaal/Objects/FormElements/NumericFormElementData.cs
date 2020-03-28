@@ -7,7 +7,7 @@ using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class NumericFormElementData : FormElementSingleValue, INumericFormElementData
+    public class NumericFormElementData : FormElementSingleValueData, INumericFormElementData
     {
         public int? Decimals { get; set; } = null;
 

@@ -50,8 +50,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
                     return new Radio();
                 case TypeInference.InferenceResult.TypeEnum.List:
                     return new Select();
-                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
                 case TypeInference.InferenceResult.TypeEnum.DateTime:
+                    return new Date();
+                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
                 case TypeInference.InferenceResult.TypeEnum.String:
                 case TypeInference.InferenceResult.TypeEnum.Period:
                 case TypeInference.InferenceResult.TypeEnum.Unknown:

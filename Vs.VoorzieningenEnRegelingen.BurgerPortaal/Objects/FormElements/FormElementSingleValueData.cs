@@ -2,7 +2,7 @@
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class FormElementSingleValue : FormElementData, IFormElementSingleValue
+    public class FormElementSingleValueData : FormElementData, IFormElementSingleValueDate
     {
     }
 }

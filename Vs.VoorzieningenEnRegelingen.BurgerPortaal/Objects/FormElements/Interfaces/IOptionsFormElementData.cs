@@ -4,7 +4,7 @@ using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces
 {
-    public interface IOptionsFormElementData : IFormElementSingleValue
+    public interface IOptionsFormElementData : IFormElementSingleValueDate
     {
         Dictionary<string, string> Options { get; set; }
 

@@ -9,7 +9,7 @@ using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class DateFormElementData : FormElementMultipleValue, IDateFormElementData
+    public class DateFormElementData : FormElementMultipleValueData, IDateFormElementData
     {
         public DateTime MinimumAllowedDate { get; set; } = DateTime.MinValue;
         public DateTime MaximumAllowedDate { get; set; } = DateTime.MaxValue;
