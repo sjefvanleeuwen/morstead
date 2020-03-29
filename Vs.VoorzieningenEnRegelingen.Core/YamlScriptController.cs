@@ -68,7 +68,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         /// Resolve to question parameter or constant through recursion for a situation.
         /// </summary>
         /// <param name="expression"></param>
-        private void ResolveToQuestion(string name, ref List<ContentNode> items, string situation = null)
+        private void ResolveToQuestion(string name, ref List<ContentNode> items, string situation = null, string stepName = null)
         {
             var formula = _model.Formulas.Find(p => p.Name == name);
             if (formula == null)
@@ -83,13 +83,15 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 if (function.IsSituational && items.Find(p => p.Name == nodeName) == null /* distinct */)
                 {
                     function.SemanticKey = nodeName;
-                    items.Add(new ContentNode(nodeName) { IsSituational = function.IsSituational, Situation = function.Situation, Parameter = new Parameter(function.Situation, false, TypeEnum.Boolean, ref _model) });
+                    var contentNode = new ContentNode(nodeName) { IsSituational = function.IsSituational, Situation = function.Situation, Parameter = new Parameter(function.Situation, false, TypeEnum.Boolean, ref _model) };
+                    contentNode.Parameter.SemanticKey = nodeName;
+                    items.Add(contentNode);
                 }
                 foreach (var parameter in parameters)
                 {
                     if (_model.Formulas.Find(p => p.Name == parameter.Name) == null)
                     {
-                        parameter.SemanticKey = string.Join('.', new[] { parameter.Name, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
+                        parameter.SemanticKey = string.Join('.', new[] { YamlParser.FormulaAttribute, parameter.Name, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
                         // not a formula name, so it resolves to a question, add it to the list
                         items.Add(new ContentNode(parameter.SemanticKey) { IsSituational = function.IsSituational, Situation = function.Situation, Parameter = parameter });
                         // find formula's that use the answer to this question.
@@ -119,15 +121,20 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     {
                         foreach (var choice in step.Choices)
                         {
-                            _contentNodes.Add(new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}"));
+                            var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
+                            contentNode.Parameter.SemanticKey = contentNode.Name;
+                            _contentNodes.Add(contentNode);
                         }
                     }
 
                     if (!string.IsNullOrEmpty(step.Value))
                     {
-                        _contentNodes.Add(new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepValue}.{step.Value}"));
+                        var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepValue}.{step.Value}");
+                        contentNode.Parameter = new Parameter(step.Name,null, TypeEnum.Double, ref _model);
+                        contentNode.Parameter.SemanticKey = contentNode.Name;
+                        _contentNodes.Add(contentNode);
                     }
-                    ResolveToQuestion(step.Formula, ref _contentNodes, step.Situation);
+                    ResolveToQuestion(step.Formula, ref _contentNodes, step.Situation, step.Name);
                     // TODO: Resolve recht/geen recht.
                     if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
                     {
