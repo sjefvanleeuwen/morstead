@@ -26,6 +26,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         }
 
         [Fact]
+        public void NegativeTimePeriodWillBeFlipped()
+        {
+            var range = new TimeRange(new DateTime(2020, 3, 30), new DateTime(2020, 3, 29));
+            Assert.Equal(new DateTime(2020, 3, 29), range.Start);
+            Assert.Equal(new DateTime(2020, 3, 30), range.End);
+        }
+
+        [Fact]
         public void TimePeriodCanReadDutchDate()
         {
             var date = DateTime.Parse("11 maart 2020", new CultureInfo("nl-NL"));
