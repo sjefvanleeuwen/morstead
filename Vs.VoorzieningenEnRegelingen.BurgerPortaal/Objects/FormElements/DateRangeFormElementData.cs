@@ -19,7 +19,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public void SetYear(DateRangeType type, string value)
         {
             //set the actually filled value
-            Values["year"] = value;
+            Values[type + "year"] = value;
             if (!int.TryParse(value, out int year))
             {
                 //do nothing, value invalid.
@@ -37,7 +37,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public void SetMonth(DateRangeType type, string value)
         {
-            Values["month"] = value;
+            Values[type + "month"] = value;
             if (!int.TryParse(value, out int month))
             {
                 //do nothing, value invalid
@@ -55,7 +55,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public void SetDay(DateRangeType type, string value)
         {
-            Values["day"] = value;
+            Values[type + "day"] = value;
             if (!int.TryParse(value, out int day))
             {
                 //do nothing, value invalid
@@ -88,6 +88,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public DateRangeFormElementData()
         {
+            ValueDates = new Dictionary<DateRangeType, DateTime>
+            {
+                { DateRangeType.Start, DateTime.MinValue },
+                { DateRangeType.End, DateTime.MaxValue }
+            };
             SetDateRange(new TimeRange(DateTime.Today, DateTime.Today).ToString());
         }
 
@@ -129,7 +134,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         private void SetDateRange(string value)
         {
-            var dateTimeStrings = value.Split('|')[0].Split(" - ");
+            var dateTimeStrings = value.Split('|')[0].Split(" - ").ToList();
+            //in case the startdate and enddate are the same
+            if (dateTimeStrings.Count == 1)
+            {
+                dateTimeStrings.Add(dateTimeStrings[0]);
+            }
             try
             {
                 SetDate(DateRangeType.Start, dateTimeStrings[0]);
@@ -137,7 +147,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             }
             catch (Exception ex)
             {
-                throw new Exception($"Unable to process the timerange formate proviced '{value}'.", ex);
+                throw new ArgumentException($"Unable to process the timerange format  provided '{value}'.", ex);
             }
         }
         private void SetDate(DateRangeType type, string value)
@@ -145,29 +155,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             base.value = value;
             int year, month, day;
             DateTime date;
-            try
+            if (DateTime.TryParse(value, Culture, DateTimeStyles.None, out date)
+                || DateTime.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
-                year = int.Parse(value.Substring(0, 4));
-                month = int.Parse(value.Substring(5, 2));
-                day = int.Parse(value.Substring(8, 2));
-                SetYear(type, year.ToString());
-                SetMonth(type, month.ToString());
-                SetDay(type, day.ToString());
-                ValueDates[type] = new DateTime(year, month, day);
+                SetYear(type, date.Year.ToString());
+                SetMonth(type, date.Month.ToString());
+                SetDay(type, date.Day.ToString());
+                ValueDates[type] = date;
             }
-            catch (Exception)
+            else
             {
-                if (DateTime.TryParse(value, Culture, DateTimeStyles.None, out date))
-                {
-                    SetYear(type, date.Year.ToString());
-                    SetMonth(type, date.Month.ToString());
-                    SetDay(type, date.Day.ToString());
-                    ValueDates[type] = date;
-                }
-                else
-                {
-                    throw new ArgumentException($"The date provided coult not be parsed as universal or culture: '{Culture.Name}'.");
-                }
+                throw new ArgumentException($"The date provided could not be parsed as universal or culture: '{Culture.Name}'.");
             }
         }
 
@@ -181,9 +179,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             {
                 errors.Add("De waarden ingegeven vormen samen geen geldige datum range.");
             }
-            if (ValueDates[DateRangeType.Start] < ValueDates[DateRangeType.End])
+            if (ValueDates[DateRangeType.Start] > ValueDates[DateRangeType.End])
             {
-                errors.Add($"De startdatum is kleiner dan de einddatum.");
+                errors.Add($"De startdatum is groter dan de einddatum.");
             }
             if (ValueDates[DateRangeType.Start] < MinimumAllowedDate)
             {

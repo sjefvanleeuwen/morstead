@@ -117,29 +117,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             base.value = value;
             int year, month, day;
             DateTime date;
-            try
+            if (DateTime.TryParse(value, Culture, DateTimeStyles.None, out date)
+                || DateTime.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
-                year = int.Parse(value.Substring(0, 4));
-                month = int.Parse(value.Substring(5, 2));
-                day = int.Parse(value.Substring(8, 2));
-                SetYear(year.ToString());
-                SetMonth(month.ToString());
-                SetDay(day.ToString());
-                ValueDate = new DateTime(year, month, day);
+                SetYear(date.Year.ToString());
+                SetMonth(date.Month.ToString());
+                SetDay(date.Day.ToString());
+                ValueDate = date;
             }
-            catch (Exception)
+            else
             {
-                if (DateTime.TryParse(value, Culture, DateTimeStyles.None, out date))
-                {
-                    SetYear(date.Year.ToString());
-                    SetMonth(date.Month.ToString());
-                    SetDay(date.Day.ToString());
-                    ValueDate = date;
-                }
-                else
-                {
-                    throw new ArgumentException($"The date provided coult not be parsed as universal or culture: '{Culture.Name}'.");
-                }
+                throw new ArgumentException($"The date provided could not be parsed as universal or culture: '{Culture.Name}'.");
             }
         }
 

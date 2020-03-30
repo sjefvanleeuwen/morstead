@@ -166,7 +166,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         }
 
         [Fact]
-        public void ShouldGetYearFromValueDate()
+        public void ShouldGetDateItemsFromValueDate()
         {
             var sut = new DateFormElementData
             {
@@ -178,40 +178,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
                 }
             };
             Assert.Equal(1979, sut.GetYear());
-        }
-
-        [Fact]
-        public void ShouldGetMonth()
-        {
-            var sut = new DateFormElementData
-            {
-                ValueDate = new DateTime(1979, 3, 8),
-                Values = new Dictionary<string, string> {
-                    { "year", "1949" },
-                    { "month", "8" },
-                    { "day", "1" }
-                }
-            };
             Assert.Equal(3, sut.GetMonth());
-        }
-
-        [Fact]
-        public void ShouldGetDay()
-        {
-            var sut = new DateFormElementData
-            {
-                ValueDate = new DateTime(1979, 3, 8),
-                Values = new Dictionary<string, string> {
-                    { "year", "1949" },
-                    { "month", "8" },
-                    { "day", "1" }
-                }
-            };
             Assert.Equal(8, sut.GetDay());
         }
 
         [Fact]
-        public void ShouldSetYear()
+        public void ShouldSetDateItem()
         {
             var sut = new DateFormElementData
             {
@@ -220,30 +192,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
             sut.SetYear("1949");
             Assert.Equal("1949", sut.Values["year"]);
             Assert.Equal(new DateTime(1949, 3, 8), sut.ValueDate);
-        }
-
-        [Fact]
-        public void ShouldSetMonth()
-        {
-            var sut = new DateFormElementData
-            {
-                ValueDate = new DateTime(1979, 3, 8)
-            };
             sut.SetMonth("8");
             Assert.Equal("8", sut.Values["month"]);
-            Assert.Equal(new DateTime(1979, 8, 8), sut.ValueDate);
-        }
-
-        [Fact]
-        public void ShouldSetDay()
-        {
-            var sut = new DateFormElementData
-            {
-                ValueDate = new DateTime(1979, 3, 8)
-            };
+            Assert.Equal(new DateTime(1949, 8, 8), sut.ValueDate);
             sut.SetDay("1");
             Assert.Equal("1", sut.Values["day"]);
-            Assert.Equal(new DateTime(1979, 3, 1), sut.ValueDate);
+            Assert.Equal(new DateTime(1949, 8, 1), sut.ValueDate);
         }
 
         [Fact]
