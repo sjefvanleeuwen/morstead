@@ -13,9 +13,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         {
             var sut = new DateFormElementData();
             Assert.Equal(DateTime.Today, sut.ValueDate);
-            Assert.Equal(DateTime.Today.Year.ToString("0000"), sut.Values["year"]);
-            Assert.Equal(DateTime.Today.Month.ToString("00"), sut.Values["month"]);
-            Assert.Equal(DateTime.Today.Day.ToString("00"), sut.Values["day"]);
+            Assert.Equal(DateTime.Today.Year.ToString(), sut.Values["year"]);
+            Assert.Equal(DateTime.Today.Month.ToString(), sut.Values["month"]);
+            Assert.Equal(DateTime.Today.Day.ToString(), sut.Values["day"]);
         }
 
         [Fact]
@@ -35,8 +35,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
             };
             Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
             Assert.Equal("1979", sut.Values["year"]);
-            Assert.Equal("03", sut.Values["month"]);
-            Assert.Equal("08", sut.Values["day"]);
+            Assert.Equal("3", sut.Values["month"]);
+            Assert.Equal("8", sut.Values["day"]);
         }
 
         [Fact]
@@ -48,8 +48,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
             };
             Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
             Assert.Equal("1979", sut.Values["year"]);
-            Assert.Equal("03", sut.Values["month"]);
-            Assert.Equal("08", sut.Values["day"]);
+            Assert.Equal("3", sut.Values["month"]);
+            Assert.Equal("8", sut.Values["day"]);
         }
 
         [Fact]
@@ -61,8 +61,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
             };
             Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
             Assert.Equal("1979", sut.Values["year"]);
-            Assert.Equal("03", sut.Values["month"]);
-            Assert.Equal("08", sut.Values["day"]);
+            Assert.Equal("3", sut.Values["month"]);
+            Assert.Equal("8", sut.Values["day"]);
         }
 
         [Fact]
@@ -75,8 +75,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
             };
             Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
             Assert.Equal("1979", sut.Values["year"]);
-            Assert.Equal("03", sut.Values["month"]);
-            Assert.Equal("08", sut.Values["day"]);
+            Assert.Equal("3", sut.Values["month"]);
+            Assert.Equal("8", sut.Values["day"]);
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
                     Culture = new CultureInfo("en-US"),
                     Value = "29/03/1979"
                 });
-            //does not thow then the dormat matches the culture
+            //does not thow then the format matches the culture
             new DateFormElementData
             {
                 Culture = new CultureInfo("en-US"),
@@ -113,7 +113,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         }
 
         [Fact]
-        private void ShouldGetDate()
+        public void ShouldGetDate()
         {
             var sut = new DateFormElementData
             {
@@ -123,20 +123,36 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         }
 
         [Fact]
-        private void ShouldThrowExceptionGetDateNoneSet()
+        public void ShouldThrowExceptionGetDateNoneSet()
         {
             var sut = new DateFormElementData
             {
                 Values = new Dictionary<string, string> {
-                    { "year", "1979" },
-                    { "month", "13" }
+                    { "month", "13" },
+                    { "day", "80" },
                 }
             };
-            Assert.Throws<ArgumentNullException>(() => sut.Value);
+            Assert.Throws<KeyNotFoundException>(() => sut.Value);
+            sut = new DateFormElementData
+            {
+                Values = new Dictionary<string, string> {
+                    { "year", "19790" },
+                    { "day", "80" },
+                }
+            };
+            Assert.Throws<KeyNotFoundException>(() => sut.Value);
+            sut = new DateFormElementData
+            {
+                Values = new Dictionary<string, string> {
+                    { "year", "19790" },
+                    { "month", "13" },
+                }
+            };
+            Assert.Throws<KeyNotFoundException>(() => sut.Value);
         }
 
         [Fact]
-        private void ShouldThrowExceptionGetDateIllegalValue()
+        public void ShouldThrowExceptionGetDateIllegalValue()
         {
             var sut = new DateFormElementData
             {
@@ -146,28 +162,194 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
                     { "day", "Eight" }
                 }
             };
-            Assert.Throws<ArgumentException>(() => sut.Value);
+            Assert.Throws<FormatException>(() => sut.Value);
         }
 
         [Fact]
-        private void ShouldThrowExceptionGetDateOutOfRange()
+        public void ShouldGetYearFromValueDate()
         {
             var sut = new DateFormElementData
             {
+                ValueDate = new DateTime(1979, 3, 8),
+                Values = new Dictionary<string, string> {
+                    { "year", "1949" },
+                    { "month", "8" },
+                    { "day", "1" }
+                }
+            };
+            Assert.Equal(1979, sut.GetYear());
+        }
+
+        [Fact]
+        public void ShouldGetMonth()
+        {
+            var sut = new DateFormElementData
+            {
+                ValueDate = new DateTime(1979, 3, 8),
+                Values = new Dictionary<string, string> {
+                    { "year", "1949" },
+                    { "month", "8" },
+                    { "day", "1" }
+                }
+            };
+            Assert.Equal(3, sut.GetMonth());
+        }
+
+        [Fact]
+        public void ShouldGetDay()
+        {
+            var sut = new DateFormElementData
+            {
+                ValueDate = new DateTime(1979, 3, 8),
+                Values = new Dictionary<string, string> {
+                    { "year", "1949" },
+                    { "month", "8" },
+                    { "day", "1" }
+                }
+            };
+            Assert.Equal(8, sut.GetDay());
+        }
+
+        [Fact]
+        public void ShouldSetYear()
+        {
+            var sut = new DateFormElementData
+            {
+                ValueDate = new DateTime(1979, 3, 8)
+            };
+            sut.SetYear("1949");
+            Assert.Equal("1949", sut.Values["year"]);
+            Assert.Equal(new DateTime(1949, 3, 8), sut.ValueDate);
+        }
+
+        [Fact]
+        public void ShouldSetMonth()
+        {
+            var sut = new DateFormElementData
+            {
+                ValueDate = new DateTime(1979, 3, 8)
+            };
+            sut.SetMonth("8");
+            Assert.Equal("8", sut.Values["month"]);
+            Assert.Equal(new DateTime(1979, 8, 8), sut.ValueDate);
+        }
+
+        [Fact]
+        public void ShouldSetDay()
+        {
+            var sut = new DateFormElementData
+            {
+                ValueDate = new DateTime(1979, 3, 8)
+            };
+            sut.SetDay("1");
+            Assert.Equal("1", sut.Values["day"]);
+            Assert.Equal(new DateTime(1979, 3, 1), sut.ValueDate);
+        }
+
+        [Fact]
+        public void ShouldNotAcceptWrongYearInDate()
+        {
+            var sut = new DateFormElementData
+            {
+                ValueDate = new DateTime(1979, 3, 8)
+            };
+            sut.SetYear("-10");
+            Assert.Equal("-10", sut.Values["year"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            sut.SetYear("0");
+            Assert.Equal("0", sut.Values["year"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            sut.SetYear("10000");
+            Assert.Equal("10000", sut.Values["year"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            sut.SetYear("Foo");
+            Assert.Equal("Foo", sut.Values["year"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+        }
+
+        [Fact]
+        public void ShouldNotAcceptWrongMonthInDate()
+        {
+            var sut = new DateFormElementData
+            {
+                ValueDate = new DateTime(1979, 3, 8)
+            };
+            sut.SetMonth("-10");
+            Assert.Equal("-10", sut.Values["month"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            sut.SetMonth("0");
+            Assert.Equal("0", sut.Values["month"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            sut.SetMonth("13");
+            Assert.Equal("13", sut.Values["month"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            sut.SetMonth("Foo");
+            Assert.Equal("Foo", sut.Values["month"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+        }
+
+        [Fact]
+        public void ShouldNotAcceptWrongDayInDate()
+        {
+            var sut = new DateFormElementData
+            {
+                ValueDate = new DateTime(1979, 3, 8)
+            };
+            sut.SetDay("-10");
+            Assert.Equal("-10", sut.Values["day"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            sut.SetDay("0");
+            Assert.Equal("0", sut.Values["day"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            sut.SetDay("32");
+            Assert.Equal("32", sut.Values["day"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            sut.SetDay("Foo");
+            Assert.Equal("Foo", sut.Values["day"]);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
+            sut.SetMonth("2");
+            sut.SetDay("29");
+            Assert.Equal("29", sut.Values["day"]);
+            Assert.Equal(new DateTime(1979, 2, 8), sut.ValueDate);
+        }
+
+        [Fact]
+        private void ShouldThrowExceptionWhenValueAndDateMismatch()
+        {
+            var sut = new DateFormElementData
+            {
+                ValueDate = new DateTime(1979, 3, 7),
                 Values = new Dictionary<string, string> {
                     { "year", "1979" },
-                    { "month", "13" },
+                    { "month", "3" },
+                    { "day", "Seven" }
+                }
+            };
+            Assert.Throws<FormatException>(() => sut.Value);
+        }
+
+        [Fact]
+        private void ShouldAcceptLeadingZeros()
+        {
+            var sut = new DateFormElementData
+            {
+                ValueDate = new DateTime(1979, 3, 8),
+                Values = new Dictionary<string, string> {
+                    { "year", "1979" },
+                    { "month", "03" },
                     { "day", "08" }
                 }
             };
-            Assert.Throws<ArgumentOutOfRangeException>(() => sut.Value);
+            Assert.Equal("1979-03-08", sut.Value);
+            Assert.Equal(new DateTime(1979, 3, 8), sut.ValueDate);
         }
 
         [Fact]
-        private void ShouldAcceptNoLeadingValues()
+        private void ShouldAcceptNoLeadingZeros()
         {
             var sut = new DateFormElementData
             {
+                ValueDate = new DateTime(1979, 3, 8),
                 Values = new Dictionary<string, string> {
                     { "year", "1979" },
                     { "month", "3" },
@@ -183,7 +365,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         {
             var sut = new DateFormElementData
             {
-                Values = new Dictionary<string, string>()
+                Values = new Dictionary<string, string> { 
+                    { "year", string.Empty },
+                    { "month", string.Empty },
+                    { "day", string.Empty }
+                }
             };
             sut.Validate();
             Assert.False(sut.IsValid);
@@ -194,6 +380,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         {
             var sut = new DateFormElementData
             {
+                ValueDate = new DateTime(1979, 3, 8),
                 Values = new Dictionary<string, string> {
                     { "year", "1979" },
                     { "month", "13" },
@@ -210,6 +397,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         {
             var sut = new DateFormElementData
             {
+                ValueDate = new DateTime(1979, 3, 8),
                 Values = new Dictionary<string, string> {
                     { "year", "1979" },
                     { "month", "03" },
@@ -227,6 +415,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         {
             var sut = new DateFormElementData
             {
+                ValueDate = new DateTime(1979, 3, 8),
                 Values = new Dictionary<string, string> {
                     { "year", "1979" },
                     { "month", "03" },

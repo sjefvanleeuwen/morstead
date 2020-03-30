@@ -8,20 +8,20 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         private string Year
         {
-            get => _data.Values["year"];
-            set => _data.Values["year"] = value;
+            get => _data.GetYear().ToString();
+            set => _data.SetYear(value);
         }
 
         private string Month
         {
-            get => _data.Values["month"];
-            set => _data.Values["month"] = value;
+            get => _data.GetMonth().ToString();
+            set => _data.SetMonth(value);
         }
 
         private string Day
         {
-            get => _data.Values["day"];
-            set => _data.Values["day"] = value;
+            get => _data.GetDay().ToString();
+            set => _data.SetDay(value);
         }
     }
 }

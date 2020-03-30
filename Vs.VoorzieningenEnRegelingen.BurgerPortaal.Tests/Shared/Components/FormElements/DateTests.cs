@@ -24,7 +24,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
 
             Assert.Equal("-d", labels[0].Attr("for"));
             Assert.Empty(labels[0].InnerHtml);
-            Assert.Equal(date.Day.ToString("00"), inputs[0].Attr("value"));
+            Assert.Equal(date.Day.ToString(), inputs[0].Attr("value"));
             Assert.Empty(inputs[0].Attr("aria-label"));
             Assert.Empty(inputs[0].Attr("title"));
             Assert.Equal("-d", inputs[0].Id);
@@ -33,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
 
             Assert.Equal("-m", labels[1].Attr("for"));
             Assert.Empty(labels[1].InnerHtml);
-            Assert.Equal(date.Month.ToString("00"), inputs[1].Attr("value"));
+            Assert.Equal(date.Month.ToString(), inputs[1].Attr("value"));
             Assert.Empty(inputs[1].Attr("aria-label"));
             Assert.Empty(inputs[1].Attr("title"));
             Assert.Equal("-m", inputs[1].Id);
@@ -42,7 +42,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
 
             Assert.Equal("-y", labels[2].Attr("for"));
             Assert.Empty(labels[2].InnerHtml);
-            Assert.Equal(date.Year.ToString("0000"), inputs[2].Attr("value"));
+            Assert.Equal(date.Year.ToString(), inputs[2].Attr("value"));
             Assert.Empty(inputs[2].Attr("aria-label"));
             Assert.Empty(inputs[2].Attr("title"));
             Assert.Equal("-y", inputs[2].Id);
@@ -77,7 +77,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
 
             Assert.Equal("TheName-d", labels[0].Attr("for"));
             Assert.Equal("dayText", labels[0].InnerHtml);
-            Assert.Equal("08", inputs[0].Attr("value"));
+            Assert.Equal("8", inputs[0].Attr("value"));
             Assert.Equal("dayTitle", inputs[0].Attr("aria-label"));
             Assert.Equal("dayTitle", inputs[0].Attr("title"));
             Assert.Equal("TheName-d", inputs[0].Id);
@@ -86,7 +86,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
 
             Assert.Equal("TheName-m", labels[1].Attr("for"));
             Assert.Equal("monthText", labels[1].InnerHtml);
-            Assert.Equal("03", inputs[1].Attr("value"));
+            Assert.Equal("3", inputs[1].Attr("value"));
             Assert.Equal("monthTitle", inputs[1].Attr("aria-label"));
             Assert.Equal("monthTitle", inputs[1].Attr("title"));
             Assert.Equal("TheName-m", inputs[1].Id);
@@ -119,29 +119,29 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             //the ValueDate should not be changed before the get is called
 
             var inputs = component.FindAll("input").ToList();
-            Assert.Equal("08", inputs[0].Attr("value"));
-            Assert.Equal("03", inputs[1].Attr("value"));
+            Assert.Equal("8", inputs[0].Attr("value"));
+            Assert.Equal("3", inputs[1].Attr("value"));
             Assert.Equal("1979", inputs[2].Attr("value"));
             Assert.Equal("1979-03-08", component.Instance.Value);
 
             inputs[0].Change("01");
             inputs = component.FindAll("input").ToList();
-            Assert.Equal("01", inputs[0].Attr("value"));
-            Assert.Equal("03", inputs[1].Attr("value"));
+            Assert.Equal("1", inputs[0].Attr("value"));
+            Assert.Equal("3", inputs[1].Attr("value"));
             Assert.Equal("1979", inputs[2].Attr("value"));
             Assert.Equal("1979-03-01", component.Instance.Value);
 
             inputs[1].Change("08");
             inputs = component.FindAll("input").ToList();
-            Assert.Equal("01", inputs[0].Attr("value"));
-            Assert.Equal("08", inputs[1].Attr("value"));
+            Assert.Equal("1", inputs[0].Attr("value"));
+            Assert.Equal("8", inputs[1].Attr("value"));
             Assert.Equal("1979", inputs[2].Attr("value"));
             Assert.Equal("1979-08-01", component.Instance.Value);
 
             inputs[2].Change("1949");
             inputs = component.FindAll("input").ToList();
-            Assert.Equal("01", inputs[0].Attr("value"));
-            Assert.Equal("08", inputs[1].Attr("value"));
+            Assert.Equal("1", inputs[0].Attr("value"));
+            Assert.Equal("8", inputs[1].Attr("value"));
             Assert.Equal("1949", inputs[2].Attr("value"));
             Assert.Equal("1949-08-01", component.Instance.Value);
         }
@@ -150,7 +150,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         /// Should never parse a value when changed
         /// </summary>
         [Fact]
-        public void ShouldDoTwoWayBindingNeverParse()
+        public void ShouldDoTwoWayBindingImmediatelyParse()
         {
             var variables = new Dictionary<string, object>
             {
@@ -162,21 +162,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             };
             var component = _host.AddComponent<Date>(variables);
 
-            //the ValueDate should not be changed before the get is called
+            //the ValueDate is always changed on valid input
 
             Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
             var inputs = component.FindAll("input").ToList();
             inputs[0].Change("01");
             Assert.Equal("01", (component.Instance.Data as IDateFormElementData).Values["day"]);
-            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            Assert.Equal(new DateTime(1979, 03, 01), (component.Instance.Data as IDateFormElementData).ValueDate);
             inputs = component.FindAll("input").ToList();
             inputs[1].Change("08");
             Assert.Equal("08", (component.Instance.Data as IDateFormElementData).Values["month"]);
-            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            Assert.Equal(new DateTime(1979, 08, 01), (component.Instance.Data as IDateFormElementData).ValueDate);
             inputs = component.FindAll("input").ToList();
             inputs[2].Change("1949");
             Assert.Equal("1949", (component.Instance.Data as IDateFormElementData).Values["year"]);
-            Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
+            Assert.Equal(new DateTime(1949, 08, 01), (component.Instance.Data as IDateFormElementData).ValueDate);
             component.Instance.Data.Validate();
             Assert.Equal(new DateTime(1949, 08, 01), (component.Instance.Data as IDateFormElementData).ValueDate);
         }

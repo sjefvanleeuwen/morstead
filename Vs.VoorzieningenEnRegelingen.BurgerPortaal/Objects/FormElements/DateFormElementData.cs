@@ -15,60 +15,108 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public DateTime MaximumAllowedDate { get; set; } = DateTime.MaxValue;
         public DateTime ValueDate { get; set; }
 
+        public int GetYear() => ValueDate.Year;
+
+        public void SetYear(string value)
+        {
+            //set the actually filled value
+            Values["year"] = value;
+            if (!int.TryParse(value, out int year))
+            {
+                //do nothing, value invalid.
+                return;
+            }
+            if (year < 1 || year > 9999)
+            {
+                //do nothing, value invalid
+                return;
+            }
+            ValueDate = new DateTime(year, GetMonth(), GetDay());
+        }
+
+        public int GetMonth() => ValueDate.Month;
+
+        public void SetMonth(string value)
+        {
+            Values["month"] = value;
+            if (!int.TryParse(value, out int month))
+            {
+                //do nothing, value invalid
+                return;
+            }
+            if (month < 1 || month > 12)
+            {
+                //do nothing, value invalid
+                return;
+            }
+            ValueDate = new DateTime(GetYear(), month, GetDay());
+        }
+
+        public int GetDay() => ValueDate.Day;
+
+        public void SetDay(string value)
+        {
+            Values["day"] = value;
+            if (!int.TryParse(value, out int day))
+            {
+                //do nothing, value invalid
+                return;
+            }
+            if (day < 1 || day > 31)
+            {
+                //do nothing, value invalid
+                return;
+            }
+            DateTime proposedDate;
+            try
+            {
+                proposedDate = new DateTime(GetYear(), GetMonth(), day);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                //an invalid day for the month has been entered
+                return;
+            }
+
+            ValueDate = proposedDate;
+        }
+
         public override string Value
         {
-            get => GetDateString();
-            set => SetDateString(value);
+            get => GetDate();
+            set => SetDate(value);
         }
 
         public DateFormElementData()
         {
             ValueDate = DateTime.Today;
-            SetDateString(ValueDate.ToString("yyyy-MM-dd"));
+            SetDate(ValueDate.ToString("yyyy-MM-dd"));
         }
 
-        private string GetDateString()
+        private string GetDate()
         {
-            if (!Values.ContainsKey("year") || !Values.ContainsKey("month") || !Values.ContainsKey("day"))
+            if (!FieldsContainValidDate())
             {
-                throw new ArgumentNullException("Three values are needed to make up a date.");
-            }
-            int year, month, day;
-            DateTime date;
-            try
-            {
-                year = int.Parse(Values["year"]);
-                month = int.Parse(Values["month"]);
-                day = int.Parse(Values["day"]);
-            }
-            catch (Exception ex)
-            {
-                throw new ArgumentException(
-                    $"At least one of the arguments provided was not numeric; year: '{Values["year"]}', month: '{Values["month"]}', day: '{Values["day"]}'.", ex);
-            }
-            try
-            {
-                date = new DateTime(year, month, day);
-                //make sure month 13 is not parsed to a date a day later
-                if (date.Year != int.Parse(Values["year"]) ||
-                    date.Month != int.Parse(Values["month"]) ||
-                    date.Day != int.Parse(Values["day"]))
+                string year = "unknown", month = "unknown", day = "unknown";
+                if (!Values.ContainsKey("year"))
                 {
-                    throw new Exception("Values out or range.");
+                    throw new KeyNotFoundException("The value for Year has not been set.");
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new ArgumentOutOfRangeException(
-                    $"A valid date could not be formed from the supplied values; year: '{Values["year"]}', month: '{Values["month"]}', day: '{Values["day"]}'.", ex);
+                if (!Values.ContainsKey("month"))
+                {
+                    throw new KeyNotFoundException("The value for month has not been set.");
+                }
+                if (!Values.ContainsKey("day"))
+                {
+                    throw new KeyNotFoundException("The value for day has not been set.");
+                }
+                throw new FormatException($"The values defined do not form a valid date '{year}-{month}-{day}'");
             }
 
-            ValueDate = date;
-
-            return date.ToString("yyyy-MM-dd");
+            return ValueDate.ToString("yyyy-MM-dd");
         }
 
-        private void SetDateString(string value)
+        private void SetDate(string value)
         {
             base.value = value;
             int year, month, day;
@@ -78,14 +126,18 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
                 year = int.Parse(value.Substring(0, 4));
                 month = int.Parse(value.Substring(5, 2));
                 day = int.Parse(value.Substring(8, 2));
-                SetValues(year, month, day);
+                SetYear(year.ToString());
+                SetMonth(month.ToString());
+                SetDay(day.ToString());
                 ValueDate = new DateTime(year, month, day);
             }
             catch (Exception)
             {
                 if (DateTime.TryParse(value, Culture, DateTimeStyles.None, out date))
                 {
-                    SetValues(date);
+                    SetYear(date.Year.ToString());
+                    SetMonth(date.Month.ToString());
+                    SetDay(date.Day.ToString());
                     ValueDate = date;
                 }
                 else
@@ -95,34 +147,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             }
         }
 
-        private void SetValues(DateTime date)
-        {
-            SetValues(date.Year, date.Month, date.Day);
-        }
-
-        private void SetValues(int year, int month, int day)
-        {
-            Values["year"] = year.ToString("0000");
-            Values["month"] = month.ToString("00");
-            Values["day"] = day.ToString("00");
-        }
-
         public override void Validate(bool unobtrusive = false)
         {
+            base.Validate();
+
             var errors = new List<string>();
 
-            try
-            {
-                base.Validate(unobtrusive);
-            }
-            catch (Exception ex)
+            if (!FieldsContainValidDate())
             {
                 errors.Add("De waarden ingegeven vormen samen geen geldige datum.");
-            }
-
-            if (!IsValid)
-            {
-                return;
             }
 
             if (ValueDate < MinimumAllowedDate)
@@ -133,6 +166,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             {
                 errors.Add($"De datum is groter dan de maximaal toegestane datum: '{MaximumAllowedDate.ToString("d", Culture)}'.");
             }
+
             if (!errors.Any())
             {
                 return;
@@ -143,6 +177,26 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             {
                 IsValid = false;
             }
+        }
+
+        private bool FieldsContainValidDate()
+        {
+            try
+            {
+                if (int.Parse(Values["year"]) == ValueDate.Year &&
+                    int.Parse(Values["month"]) == ValueDate.Month &&
+                    int.Parse(Values["day"]) == ValueDate.Day)
+                {
+                    return true;
+                }
+            }
+            catch (FormatException)
+            {
+                //parsing went wrong
+                return false;
+            }
+
+            return false;
         }
 
         public override void FillFromExecutionResult(IExecutionResult result, IContentController contentController)

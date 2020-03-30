@@ -7,7 +7,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
         IDictionary<string, string> Values { get; set; }
         IDictionary<string, FormElementLabel> Labels { get; set; }
 
-        string GetDisplayValue(string key);
         string GetLabelTitle(string key);
         string GetLabelText(string key);
     }
