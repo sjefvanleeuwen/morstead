@@ -16,13 +16,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-NL");
             var range = new Itenso.TimePeriod.TimeRange();
             // range.m
-
             // "01/01/0001 00:00:00 - 31/12/9999 23:59:59 | 3652058.23:59"
+            Assert.Equal("1-1-0001 00:00:00 - 31-12-9999 23:59:59 | 3652058.23:59", range.ToString());
             var s = range.ToString();
-
             var dateTimeStrings = s.Split('|')[0].Split(" - ");
-
             var l = new TimeRange(DateTime.Parse(dateTimeStrings[0], new CultureInfo("nl-NL")), DateTime.Parse(dateTimeStrings[1], new CultureInfo("nl-NL")));
+            Assert.Equal(new DateTime(1, 1, 1), l.Start);
+            Assert.Equal(new DateTime(9999, 12, 31, 23, 59, 59), l.End);
         }
 
         [Fact]
