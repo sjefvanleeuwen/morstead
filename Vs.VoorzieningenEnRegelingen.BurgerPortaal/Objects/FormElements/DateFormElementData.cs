@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Vs.Cms.Core.Controllers.Interfaces;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
@@ -89,8 +86,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public DateFormElementData()
         {
-            ValueDate = DateTime.Today;
-            SetDate(ValueDate.ToString("yyyy-MM-dd"));
+            SetDate(DateTime.Today.ToString("yyyy-MM-dd"));
         }
 
         private string GetDate()
@@ -100,7 +96,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
                 string year = "unknown", month = "unknown", day = "unknown";
                 if (!Values.ContainsKey("year"))
                 {
-                    throw new KeyNotFoundException("The value for Year has not been set.");
+                    throw new KeyNotFoundException("The value for year has not been set.");
                 }
                 if (!Values.ContainsKey("month"))
                 {
@@ -157,7 +153,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             {
                 errors.Add("De waarden ingegeven vormen samen geen geldige datum.");
             }
-
             if (ValueDate < MinimumAllowedDate)
             {
                 errors.Add($"De datum is kleiner dan de minimaal toegestane datum: '{MinimumAllowedDate.ToString("d", Culture)}'.");
@@ -197,13 +192,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             }
 
             return false;
-        }
-
-        public override void FillFromExecutionResult(IExecutionResult result, IContentController contentController)
-        {
-            base.FillFromExecutionResult(result, contentController);
-
-            Size = FormElementSize.Large;
         }
     }
 }

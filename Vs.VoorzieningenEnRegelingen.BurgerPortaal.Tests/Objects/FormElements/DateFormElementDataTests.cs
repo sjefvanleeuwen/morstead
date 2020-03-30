@@ -365,7 +365,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         {
             var sut = new DateFormElementData
             {
-                Values = new Dictionary<string, string> { 
+                Values = new Dictionary<string, string> {
                     { "year", string.Empty },
                     { "month", string.Empty },
                     { "day", string.Empty }

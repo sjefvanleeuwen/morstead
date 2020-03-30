@@ -130,7 +130,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     if (!string.IsNullOrEmpty(step.Value))
                     {
                         var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepValue}.{step.Value}");
-                        contentNode.Parameter = new Parameter(step.Name,null, TypeEnum.Double, ref _model);
+                        contentNode.Parameter = new Parameter(step.Name, null, TypeEnum.Double, ref _model);
                         contentNode.Parameter.SemanticKey = contentNode.Name;
                         _contentNodes.Add(contentNode);
                     }
