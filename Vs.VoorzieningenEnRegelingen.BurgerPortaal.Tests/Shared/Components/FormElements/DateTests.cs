@@ -194,7 +194,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             };
             var component = _host.AddComponent<Date>(variables);
 
-            //the ValueDate should not be changed before the get is called
+            //the ValueDate should not be changed when wrong data is entered
 
             Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
             var inputs = component.FindAll("input").ToList();
@@ -226,7 +226,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             };
             var component = _host.AddComponent<Date>(variables);
 
-            //when typing a vlue the value should not get a leading 0
+            //when typing a value the value should not get a leading 0
             Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
             var inputs = component.FindAll("input").ToList();
             inputs[0].Change("1");
