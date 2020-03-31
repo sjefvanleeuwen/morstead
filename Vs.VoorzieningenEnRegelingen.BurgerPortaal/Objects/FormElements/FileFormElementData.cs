@@ -64,7 +64,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
             if (file.Size > MaximumFileSize)
             {
-                ErrorTexts.Add($"Het bestand is groter dan de maximaal toegestane grootte ({MaximumFileSize / (1024f * 1024f):#.00}MB). Probeer het opnieuw.");
+                ErrorTexts.Add($"Het bestand is groter dan de maximaal toegestane grootte ({(MaximumFileSize / (1024f * 1024f)).ToString("#.00", Culture)}MB). Probeer het opnieuw.");
                 IsValid = false;
                 return false;
             }
