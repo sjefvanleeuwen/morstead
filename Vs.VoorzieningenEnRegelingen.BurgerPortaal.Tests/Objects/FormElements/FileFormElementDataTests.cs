@@ -1,6 +1,5 @@
 ﻿using BlazorInputFile;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
@@ -26,7 +25,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
             var sut = new FileFormElementData
             {
                 Files = new List<IFileListEntry> {
-                    InitMockFile("Test1").Object 
+                    InitMockFile("Test1").Object
                 }
             };
             sut.Validate();
@@ -61,8 +60,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
                 MaximumNumberOfFiles = 3,
                 Files = new List<IFileListEntry> {
                     InitMockFile("Test2").Object,
-                    InitMockFile("Test1").Object, 
-                    InitMockFile("Test3").Object 
+                    InitMockFile("Test1").Object,
+                    InitMockFile("Test3").Object
                 }
             };
             Assert.Equal(3, sut.Files.Count());
