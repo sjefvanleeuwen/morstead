@@ -19,15 +19,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         private string DisplayFileSize(long size)
         {
-            if ((size / 1024) > 1)
+            if ((size / 1024f) > 1)
             {
                 return size + "B";
             }
-            if ((size / 1024) > 1 && (size / 1024) < 1024)
+            if ((size / 1024f) > 1 && (size / 1024f) < 1024)
             {
-                return (size / 1024).ToString("#,00") + "kB";
+                return (size / 1024f).ToString("#,00") + "kB";
             }
-            return (size / (1024 * 1024)).ToString("#,00") + "mB";
+            return (size / (1024f * 1024f)).ToString("#,00") + "mB";
         }
 
         private async Task HandleSelection(IFileListEntry[] files)

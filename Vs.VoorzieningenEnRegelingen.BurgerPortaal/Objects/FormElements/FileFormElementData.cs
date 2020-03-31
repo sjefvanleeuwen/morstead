@@ -1,5 +1,6 @@
 ﻿using BlazorInputFile;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
     public class FileFormElementData : FormElementSingleValueData, IFileFormElementData
     {
+        private IEnumerable<string> _allowedExtensions;
+
         public IEnumerable<IFileListEntry> Files { get; set; } = new List<IFileListEntry>();
         public string ButtonText { get; set; }
         public string RemoveText { get; set; }
-        public int MaximumFiles { get; set; }
+        public int MaximumNumberOfFiles { get; set; }
         public IEnumerable<string> AllowedExtensions { get; set; }
         public long MaximumFileSize { get; set; }
 
@@ -41,7 +44,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public void MakeRoomForNewFile()
         {
-            while (Files.Count() >= MaximumFiles && Files.Count() > 0)
+            while (Files.Count() >= MaximumNumberOfFiles && Files.Count() > 0)
             {
                 (Files as List<IFileListEntry>).Remove(Files.FirstOrDefault());
             }
@@ -52,16 +55,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             IsValid = true;
             ErrorTexts = new List<string>();
 
-            if (!AllowedExtensions.Contains(Path.GetExtension(file.Name)))
+            var extension = Path.GetExtension(file.Name).ToLower().Replace(".", "");
+            if (!GetAllowedExtensions().Contains(extension))
             {
-                ErrorTexts.Add("Het bestand heeft niet de juiste extensie; PDF, Word documenten en afbeeldingen zijn toegestaan. Probeer het opnieuw.");
+                ErrorTexts.Add($"Het bestand heeft niet de juiste extensie (.{extension}); PDF, Word documenten en afbeeldingen zijn toegestaan. Probeer het opnieuw.");
                 IsValid = false;
                 return false;
             }
 
             if (file.Size > MaximumFileSize)
             {
-                ErrorTexts.Add($"Het bestand is groter dan de maximaal toegestane grootte ({MaximumFileSize / (1024 * 1024):#.00}MB). ; PDF, Word documenten en afbeeldingen zijn toegestaan. Probeer het opnieuw.");
+                ErrorTexts.Add($"Het bestand is groter dan de maximaal toegestane grootte ({MaximumFileSize / (1024f * 1024f):#.00}MB). Probeer het opnieuw.");
                 IsValid = false;
                 return false;
             }
@@ -75,9 +79,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
             ButtonText = "Bestand uploaden";
             RemoveText = "Verwijder";
-            MaximumFiles = 1;
-            AllowedExtensions = new List<string> { ".doc", ".docx", ".pdf", ".jpg", ".jpeg", ".png", ".tif", ".bmp", ".jfif", ".tiff", ".gif" };
+            MaximumNumberOfFiles = 1;
+            AllowedExtensions = new List<string> { "doc", "docx", "pdf", "jpg", "jpeg", "png", "tif", "bmp", "jfif", "tiff", "gif" };
             MaximumFileSize = 5 * 1024 * 1024; //5 MB
+        }
+
+        private IEnumerable<string> GetAllowedExtensions()
+        {
+            if (_allowedExtensions == null)
+            {
+                var allowedExtensions = new List<string>();
+                AllowedExtensions.ToList().ForEach(m => allowedExtensions.Add(m.ToLower().Replace(".", "")));
+                _allowedExtensions = allowedExtensions;
+            }
+
+            return _allowedExtensions;
         }
     }
 }
