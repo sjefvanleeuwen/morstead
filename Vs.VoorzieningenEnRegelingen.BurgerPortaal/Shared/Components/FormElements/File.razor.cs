@@ -1,4 +1,5 @@
 ﻿using BlazorInputFile;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,23 +33,24 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         private async Task HandleSelection(IFileListEntry[] files)
         {
             var file = files.FirstOrDefault();
-            if (file != null)
+            if (file == null)
             {
-                RemoveFile(file.Name);
-
-                (_data.Files as List<IFileListEntry>).Add(file);
-                var ms = new MemoryStream();
-                await file.Data.CopyToAsync(ms);
+                return;
             }
-        }
 
-        private void RemoveFile(string name)
-        {
-            var fileToRemove = _data.Files.Where(f => f.Name == name).FirstOrDefault();
-            if (fileToRemove != null)
+            if (!_data.ValidateUploadedFile(file))
             {
-                (_data.Files as List<IFileListEntry>).Remove(fileToRemove);
+                return;
             }
+
+            _data.RemoveFile(file.Name);
+
+            _data.MakeRoomForNewFile();
+
+            (_data.Files as List<IFileListEntry>).Add(file);
+            
+            var ms = new MemoryStream();
+            await file.Data.CopyToAsync(ms);
         }
     }
 }

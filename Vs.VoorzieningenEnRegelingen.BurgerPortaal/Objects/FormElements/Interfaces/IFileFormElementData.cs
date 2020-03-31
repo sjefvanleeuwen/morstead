@@ -8,5 +8,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
         IEnumerable<IFileListEntry> Files { get; set; }
         string ButtonText { get; set; }
         string RemoveText { get; set; }
+        int MaximumFiles { get; set; }
+        IEnumerable<string> AllowedExtensions { get; set; }
+        long MaximumFileSize { get; set; }
+
+        void RemoveFile(string name);
+        void MakeRoomForNewFile();
+        bool ValidateUploadedFile(IFileListEntry file);
     }
 }
