@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Vs.Core.Web;
+using Vs.Core.Web.Extensions;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Vs.Core.Web
+namespace Vs.Core.Web.Extensions
 {
     public static class HtmlNodeExtensions
     {
