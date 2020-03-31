@@ -1,6 +1,7 @@
 ﻿using BlazorInputFile;
 using Moq;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Xunit;
@@ -74,8 +75,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         [Fact]
         public void ShouldValidateUploadedFile()
         {
-            var sut = new FileFormElementData();
-            sut.AllowedExtensions = new List<string> { ".pdf" };
+            var sut = new FileFormElementData
+            {
+                Culture = new CultureInfo("nl-NL"),
+                AllowedExtensions = new List<string> { ".pdf" }
+            };
             var moq = InitMockFile("uploadedFile.not");
             sut.ValidateUploadedFile(moq.Object);
             Assert.False(sut.IsValid);
