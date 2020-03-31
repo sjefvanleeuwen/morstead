@@ -1,0 +1,32 @@
+﻿@inherits FormElementBase
+@if (_data.Files.Any())
+{
+    <ul class="list list--files">
+        @foreach (var file in _data.Files)
+        {
+            <li class="file" @key="file.Name">
+                <i class="file__icon icon icon-document" role="presentation"></i>
+
+                <div class="file__data">
+                    <div class="file__filename">
+                        <strong class="file__title break-all">@file.Name</strong>
+                        <span class="meta">@file.ContentType, @DisplayFileSize(file.Length)</span>
+                    </div>
+                    <button class="btn btn--link file__button" title="@_data.RemoveText @file.Name">@_data.RemoveText</button>
+                </div>
+            </li>
+        }
+    </ul>
+}
+<WrapperDefault IsValid="@_data.IsValid">
+    <Label Name="@_data.Name" Text="@_data.Label" TagText="@_data.TagText" />
+    <FormElementHint Name="@_data.Name" Text="@_data.HintText" />
+    <Error Text="@_data.ErrorText" />
+    <label>
+        <input type="file" class="input__control--file" multiple="" aria-describedby="input-upload-hint" />
+        <span class="btn" role="button">@_data.ButtonText</span>
+    </label>
+</WrapperDefault>
+<div class="hidden hidden--for-a11y">
+    <input type="submit" value="submit">
+</div>

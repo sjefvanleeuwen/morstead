@@ -11,7 +11,5 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
     {
         
         public string ButtonIcon { get; set; }
-
-        public string ButtonText { get; set; }
     }
 }
