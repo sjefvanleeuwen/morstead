@@ -10,7 +10,7 @@
                 <div class="file__data">
                     <div class="file__filename">
                         <strong class="file__title break-all">@file.Name</strong>
-                        <span class="meta">@file.ContentType, @DisplayFileSize(file.Length)</span>
+                        <span class="meta">@file.Type, @DisplayFileSize(file.Size)</span>
                     </div>
                     <button class="btn btn--link file__button" title="@_data.RemoveText @file.Name">@_data.RemoveText</button>
                 </div>
@@ -23,7 +23,7 @@
     <FormElementHint Name="@_data.Name" Text="@_data.HintText" />
     <Error Text="@_data.ErrorText" />
     <label>
-        <input type="file" class="input__control--file" multiple="" aria-describedby="input-upload-hint" />
+        <InputFile type="file" class="input__control--file" multiple="" aria-describedby="input-upload-hint" OnChange="HandleSelection" />
         <span class="btn" role="button">@_data.ButtonText</span>
     </label>
 </WrapperDefault>

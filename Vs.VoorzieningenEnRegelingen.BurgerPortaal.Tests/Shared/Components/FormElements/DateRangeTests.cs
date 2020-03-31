@@ -363,7 +363,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("1", inputs[0].Attr("value"));
             component.Instance.Data.Validate();
             Assert.Equal(new DateTime(1979, 03, 01), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.Start]);
-            
+
             Assert.Equal(new DateTime(1988, 05, 21), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.End]);
             inputs = component.FindAll("input").ToList();
             inputs[3].Change("9");

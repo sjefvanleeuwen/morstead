@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BlazorInputFile;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
@@ -9,7 +10,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
     public class FileFormElementData : FormElementSingleValueData, IFileFormElementData
     {
-        public IEnumerable<IFormFile> Files { get; set; }
+        public IEnumerable<IFileListEntry> Files { get; set; } = new List<IFileListEntry>();
         public string ButtonText { get; set; }
         public string RemoveText { get; set; }
 
