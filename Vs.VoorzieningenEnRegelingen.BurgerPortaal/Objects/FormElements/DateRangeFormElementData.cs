@@ -93,6 +93,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
                 { DateRangeType.Start, DateTime.MinValue },
                 { DateRangeType.End, DateTime.MaxValue }
             };
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = Culture; //nl-NL
+
             SetDateRange(new TimeRange(DateTime.Today, DateTime.Today).ToString());
         }
 
