@@ -15,5 +15,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         IParameter QuestionFirstParameter { get; }
         TypeInference.InferenceResult.TypeEnum InferedType { get; }
         IEnumerable<ContentNode> ContentNodes { get; set; }
+
+        string FindSemanticKeyForParameterName(string parameterName);
     }
 }

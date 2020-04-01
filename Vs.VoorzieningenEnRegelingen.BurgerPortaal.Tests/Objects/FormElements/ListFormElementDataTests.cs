@@ -21,18 +21,20 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
             var sut = new ListFormElementData();
             sut.DefineOptions(moqExecutionResult.Object, moqContentController.Object);
 
-            Assert.Equal(2, sut.Options.Count);
+            Assert.Equal(3, sut.Options.Count);
             Assert.Equal("optie1", sut.Options.ToList()[0].Key);
             Assert.Equal("TestOpt1", sut.Options.ToList()[0].Value);
             Assert.Equal("optie2", sut.Options.ToList()[1].Key);
             Assert.Equal("TestOpt2", sut.Options.ToList()[1].Value);
+            Assert.Equal("optie3", sut.Options.ToList()[2].Key);
+            Assert.Equal("Optie3", sut.Options.ToList()[2].Value);
         }
 
         private Mock<IExecutionResult> InitMoqExecutionResult()
         {
             var moq = new Mock<IExecutionResult>();
             var moqParameter = new Mock<IParameter>();
-            moqParameter.Setup(m => m.Value).Returns(new List<string> { "optie1", "optie2" });
+            moqParameter.Setup(m => m.Value).Returns(new List<string> { "optie1", "optie2", "optie3" });
             moq.Setup(m => m.QuestionFirstParameter).Returns(moqParameter.Object);
             moq.Setup(m => m.SemanticKey).Returns("semKey");
             return moq;
@@ -40,8 +42,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         private Mock<IContentController> InitMoqContentController()
         {
             var moq = new Mock<IContentController>();
-            moq.Setup(m => m.GetText("semKey", FormElementContentType.Options, "optie1", null)).Returns("TestOpt1");
-            moq.Setup(m => m.GetText("semKey", FormElementContentType.Options, "optie2", null)).Returns("TestOpt2");
+            moq.Setup(m => m.GetText("semKey", FormElementContentType.Option, null, "Optie1")).Returns("TestOpt1");
+            moq.Setup(m => m.GetText("semKey", FormElementContentType.Option, null, "Optie2")).Returns("TestOpt2");
+            moq.Setup(m => m.GetText("semKey", FormElementContentType.Option, null, "Optie3")).Returns("Optie3");
             return moq;
         }
     }

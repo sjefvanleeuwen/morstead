@@ -10,8 +10,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         {
             foreach (var p in result.QuestionParameters)
             {
-                //todo MPS activate after texts have been restored
-                Options.Add(p.Name, contentController.GetText(result.SemanticKey, Cms.Core.Enums.FormElementContentType.Options, p.Name));
+                Options.Add(p.Name, contentController.GetText(result.FindSemanticKeyForParameterName(p.Name), 
+                    Cms.Core.Enums.FormElementContentType.Option, null, result.FindSemanticKeyForParameterName(p.Name)));
             }
         }
     }

@@ -25,17 +25,6 @@ namespace Vs.Cms.Core.Tests.Controllers
         }
 
         [Fact]
-        public void ShouldGetTextOptionException()
-        {
-            var moqRenderStrategy = InitMoqRenderStrategy();
-            var moqContentHandler = InitMoqContentHandler();
-            var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object);
-            var dutchCulture = new CultureInfo("nl-NL");
-            sut.SetCulture(dutchCulture);
-            Assert.Throws<IndexOutOfRangeException>(() => sut.GetText("semanticKey", FormElementContentType.Options, "opt"));
-        }
-
-        [Fact]
         public void ShouldGetTextOptionOriginalValue()
         {
             var moqContentHandler = new Mock<IContentHandler>();
@@ -46,7 +35,7 @@ namespace Vs.Cms.Core.Tests.Controllers
             var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object);
             var dutchCulture = new CultureInfo("nl-NL");
             sut.SetCulture(dutchCulture);
-            Assert.Equal("opt", sut.GetText("semanticKey", FormElementContentType.Options, "opt"));
+            Assert.Equal("opt", sut.GetText("semanticKey", FormElementContentType.Option, null, "opt"));
         }
 
         [Fact]
@@ -61,10 +50,8 @@ namespace Vs.Cms.Core.Tests.Controllers
             Assert.Equal("result1", text);
             text = sut.GetText("semanticKey", FormElementContentType.Tag);
             Assert.Equal("result2", text);
-            text = sut.GetText("semanticKey", FormElementContentType.Options, "opt1");
+            text = sut.GetText("semanticKey", FormElementContentType.Option);
             Assert.Equal("option is ONE", text);
-            text = sut.GetText("semanticKey", FormElementContentType.Options, "opt2");
-            Assert.Equal("option is NOT ONE", text);
         }
 
         private Mock<IRenderStrategy> InitMoqRenderStrategy()
@@ -73,7 +60,6 @@ namespace Vs.Cms.Core.Tests.Controllers
             moq.Setup(m => m.Render("template1", It.IsAny<object>())).Returns("result1");
             moq.Setup(m => m.Render("template2", It.IsAny<object>())).Returns("result2");
             moq.Setup(m => m.Render("option one", It.IsAny<object>())).Returns("option is ONE");
-            moq.Setup(m => m.Render("option two", It.IsAny<object>())).Returns("option is NOT ONE");
             return moq;
         }
 
@@ -90,10 +76,7 @@ namespace Vs.Cms.Core.Tests.Controllers
             var moq = new Mock<ICultureContent>();
             moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Description)).Returns("template1");
             moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Tag)).Returns("template2");
-            moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Options)).Returns(new Dictionary<string, string> {
-                { "opt1", "option one" },
-                { "opt2", "option two" }
-            });
+            moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Option)).Returns("option one");
             return moq;
         }
     }
