@@ -173,6 +173,22 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             // evaluate if the situation (condition) is appropiate, otherwise skip it.
             // not in input parameters. Evaluate the
             var parameter = parameters.GetParameter(step.Situation);
+            if (step.Situation.Contains(','))
+            {
+                foreach (var inclusiveSituation in step.Situation.Split(',')
+                    .Select(x => x.Trim())
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .ToArray())
+                {
+                    parameter = parameters.GetParameter(inclusiveSituation);
+                    if (parameter != null && parameter.Type == TypeEnum.Boolean)
+                    {
+                        return true;
+                    }
+                }
+                throw new StepException($"Can't resolve any of the inclusive situations ${step.Situation}. One of these parameters must exist and be of boolean type.", step);
+            }
+
             if (parameter == null)
             {
                 // resolve parameter value from named formula.
@@ -256,7 +272,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 if (!answered)
                 {
                     QuestionCallback(null, new QuestionArgs("", questions));
-                    throw new UnresolvedException($"Choices {string.Join('.', step.Choices.Select(p => p.Situation))} can not evaluate further, before these are answered by the client.");
+                    throw new UnresolvedException($"Choices {string.Join(',', step.Choices.Select(p => p.Situation))} can not evaluate further, before these are answered by the client.");
                 }
             }
 

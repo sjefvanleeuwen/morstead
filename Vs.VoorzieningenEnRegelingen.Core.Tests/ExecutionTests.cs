@@ -986,5 +986,32 @@ formules:
             {
             }
         }
+
+        [Fact]
+        public void Execution_ZorgToeslag_Step_Flow_Resolves_Inclusive_Gate()
+        {
+            var controller = new YamlScriptController();
+            var parameters = new ParametersCollection() {
+                new ClientParameter("alleenstaande","ja"),
+                new ClientParameter("woonland","Nederland")
+            } as IParametersCollection;
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                Assert.True(args.Parameters[0].Name == "hoger_dan_vermogensdrempel");
+                Assert.True(args.Parameters[1].Name == "lager_dan_vermogensdrempel");
+            };
+            var result = controller.Parse(YamlZorgtoeslag5.Body);
+            Assert.False(result.IsError);
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+            try
+            {
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException ex)
+            {
+                Assert.True(executionResult.Stacktrace.Count == 3);
+                Assert.True(executionResult.Stacktrace[2].Step.Situation == "alleenstaande, aanvrager_met_toeslagpartner");
+            }
+        }
     }
 }
