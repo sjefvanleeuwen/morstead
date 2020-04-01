@@ -156,20 +156,23 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         private void SetDate(DateRangeType type, string value)
         {
             base.value = value;
-            int year, month, day;
-            DateTime date;
-            if (DateTime.TryParse(value, Culture, DateTimeStyles.None, out date)
+            if (DateTime.TryParse(value, Culture, DateTimeStyles.None, out DateTime date)
                 || DateTime.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
-                SetYear(type, date.Year.ToString());
-                SetMonth(type, date.Month.ToString());
-                SetDay(type, date.Day.ToString());
+                SetValues(type, date.Year.ToString(), date.Month.ToString(), date.Day.ToString());
                 ValueDates[type] = date;
             }
             else
             {
                 throw new ArgumentException($"The date provided could not be parsed as universal or culture: '{Culture.Name}'.");
             }
+        }
+
+        private void SetValues(DateRangeType type, string year, string month, string day)
+        {
+            Values[type + "year"] = year;
+            Values[type + "month"] = month;
+            Values[type + "day"] = day;
         }
 
         public override void Validate(bool unobtrusive = false)
