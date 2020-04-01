@@ -116,6 +116,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 //_model.AddFormulas(parser.GetFormulasFromBooleanSteps(_model.Steps));
                 foreach (var step in _model.Steps)
                 {
+                    var contentNodeStep = new ContentNode($"{YamlParser.Step}.{step.Name}") { Parameter = new Parameter(step.Name, false, TypeEnum.Step, ref _model) };
+                    contentNodeStep.Parameter.SemanticKey = contentNodeStep.Name;
+                    _contentNodes.Add(contentNodeStep);
+                    step.SemanticKey = contentNodeStep.Name;
                     // first do steps and choices as they don't have to be recursively resolved.
                     if (step.Choices != null)
                     {

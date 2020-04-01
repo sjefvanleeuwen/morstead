@@ -36,7 +36,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 [EnumMember(Value = "list")]
                 List,
                 [EnumMember(Value = "period")]
-                Period
+                Period,
+                [EnumMember(Value = "step")]
+                Step
             }
         }
     }

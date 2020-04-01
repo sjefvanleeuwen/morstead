@@ -16,7 +16,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var result = controller.Parse(YamlZorgtoeslag5.Body);
 
             Assert.False(result.IsError);
-            Assert.True(controller.ContentNodes.Count == 20);
+            Assert.True(controller.ContentNodes.Count == 26);
             List<string> keys = new List<string>();
             foreach (var item in controller.ContentNodes)
             {
