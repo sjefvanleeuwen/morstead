@@ -156,9 +156,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         private void SetDate(DateRangeType type, string value)
         {
             base.value = value;
-            int year, month, day;
-            DateTime date;
-            if (DateTime.TryParse(value, Culture, DateTimeStyles.None, out date)
+            if (DateTime.TryParse(value, Culture, DateTimeStyles.None, out DateTime date)
                 || DateTime.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
                 SetYear(type, date.Year.ToString());
