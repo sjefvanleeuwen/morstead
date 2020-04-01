@@ -341,6 +341,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         /// <returns></returns>
         public IExecutionResult ExecuteWorkflow(ref IParametersCollection parameters, ref IExecutionResult executionResult)
         {
+            executionResult.ContentNodes = _contentNodes;
             if (parameters is null)
             {
                 throw new ArgumentNullException(nameof(parameters));

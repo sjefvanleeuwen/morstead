@@ -14,5 +14,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         IEnumerable<IParameter> QuestionParameters { get; }
         IParameter QuestionFirstParameter { get; }
         TypeInference.InferenceResult.TypeEnum InferedType { get; }
+        IEnumerable<ContentNode> ContentNodes { get; set; }
     }
 }
