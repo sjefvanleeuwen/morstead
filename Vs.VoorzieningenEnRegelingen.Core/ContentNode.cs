@@ -3,21 +3,17 @@ using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
-    public class ContentNode : TreeNodeBase<ContentNode>
+    public class ContentNode
     {
         public bool IsSituational { get; set; }
         public bool IsBreak { get; set; }
         public IParameter Parameter { get; set; }
         public string Situation { get; set; }
+        public string Name { get; private set; }
 
-        public ContentNode(string name) : base(name)
+        public ContentNode(string name)
         {
-
-        }
-
-        protected override ContentNode MySelf
-        {
-            get { return this; }
+            Name = name;
         }
     }
 }
