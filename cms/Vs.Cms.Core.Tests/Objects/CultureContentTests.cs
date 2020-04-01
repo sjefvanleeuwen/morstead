@@ -24,11 +24,11 @@ namespace Vs.Cms.Core.Tests.Objects
         public void ShouldAddContentDictionaryValue()
         {
             var sut = new CultureContent();
-            sut.AddContent("testKey", FormElementContentType.Options, new Dictionary<string, string>() {
+            sut.AddContent("testKey", FormElementContentType.Option, new Dictionary<string, string>() {
                 { "opt1", "option1" },
                 { "opt2", "option2" }
             });
-            var options = sut.GetContent("testKey", FormElementContentType.Options) as Dictionary<string, string>;
+            var options = sut.GetContent("testKey", FormElementContentType.Option) as Dictionary<string, string>;
             Assert.Equal(2, options.Count);
             Assert.Equal("option1", options["opt1"]);
             Assert.Equal("option2", options["opt2"]);

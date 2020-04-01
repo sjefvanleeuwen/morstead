@@ -15,7 +15,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         public IEnumerable<ContentNode> ContentNodes { get; set; }
 
         //todo MPS implement
-        public string SemanticKey => "woonland";//QuestionFirstParameter.SemanticKey;
+        public string SemanticKey => FindSemanticKeyForParameterName(QuestionFirstParameter.Name);
 
         public ExecutionResult(ref IParametersCollection parameters)
         {
@@ -28,6 +28,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public static ExecutionResult NotExecutedBecauseOfParseError(ref IParametersCollection parameters, ref IEnumerable<ContentNode> contentNodes) =>
             new ExecutionResult(ref parameters) { IsError = true, Message = "Not Executed Because Of Parse Error" };
+
+        public string FindSemanticKeyForParameterName(string parameterName)
+        {
+            return ContentNodes.FirstOrDefault(c => c.Parameter.Name == parameterName).Parameter.SemanticKey;
+        }
 
         public TypeInference.InferenceResult.TypeEnum InferedType =>
             Questions?.Parameters?.GetAll()?.FirstOrDefault()?.Type ?? TypeInference.InferenceResult.TypeEnum.Unknown;

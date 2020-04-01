@@ -38,9 +38,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             }
             foreach (var item in result.QuestionFirstParameter.Value as IEnumerable<object>)
             {
+                var itemString = item.ToString();
                 Options.Add(
-                    item.ToString(),
-                    contentController.GetText(result.SemanticKey, FormElementContentType.Options, item.ToString()));
+                    itemString,
+                    contentController.GetText(result.SemanticKey, FormElementContentType.Option, null,
+                        itemString.Substring(0, 1).ToUpper() + itemString.Substring(1)));
             }
         }
     }

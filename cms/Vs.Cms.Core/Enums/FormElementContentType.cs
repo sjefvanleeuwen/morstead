@@ -16,7 +16,7 @@ namespace Vs.Cms.Core.Enums
         Tag,
         [Description("hint")]
         Hint,
-        [Description("options")]
-        Options
+        [Description("optiontext")]
+        Option
     }
 }
