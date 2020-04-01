@@ -54,7 +54,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             catch (UnresolvedException ex)
             {
             }
-            Assert.Equal(16, executionResult.ContentNodes.Count());
+            Assert.Equal(22, executionResult.ContentNodes.Count());
             Assert.Equal("stap.woonsituatie.keuze.situatie.alleenstaande",
                 executionResult.ContentNodes.FirstOrDefault(c => c.Parameter.Name == argsret.Parameters.ToList()[0].Name).Parameter.SemanticKey);
             Assert.Equal("stap.woonsituatie.keuze.situatie.aanvrager_met_toeslagpartner",
