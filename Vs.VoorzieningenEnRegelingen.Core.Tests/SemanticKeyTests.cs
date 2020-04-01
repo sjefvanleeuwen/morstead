@@ -13,10 +13,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void CanDiscoverAllSemanticKeysAndBindToParameters()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            var result = controller.Parse(YamlZorgtoeslag5.Body);
 
             Assert.False(result.IsError);
-            Assert.True(controller.ContentNodes.Count == 16);
+            Assert.True(controller.ContentNodes.Count == 20);
             List<string> keys = new List<string>();
             foreach (var item in controller.ContentNodes)
             {

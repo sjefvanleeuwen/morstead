@@ -119,11 +119,30 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     // first do steps and choices as they don't have to be recursively resolved.
                     if (step.Choices != null)
                     {
-                        foreach (var choice in step.Choices)
+                        if (step.IsSituational)
                         {
-                            var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
-                            contentNode.Parameter.SemanticKey = contentNode.Name;
-                            _contentNodes.Add(contentNode);
+                            var inclusiveSituations = step.Situation.Split(',')
+                                .Select(x => x.Trim())
+                                .Where(x => !string.IsNullOrWhiteSpace(x))
+                                .ToArray();
+                            foreach (var inclusiveSituation in inclusiveSituations)
+                            {
+                                foreach (var choice in step.Choices)
+                                {
+                                    var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepSituation}.{inclusiveSituation}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
+                                    contentNode.Parameter.SemanticKey = contentNode.Name;
+                                    _contentNodes.Add(contentNode);
+                                }
+                            }
+                        }
+                        else
+                        { 
+                            foreach (var choice in step.Choices)
+                            {
+                                var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
+                                contentNode.Parameter.SemanticKey = contentNode.Name;
+                                _contentNodes.Add(contentNode);
+                            }
                         }
                     }
 
