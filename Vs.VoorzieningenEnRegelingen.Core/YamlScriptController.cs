@@ -119,11 +119,30 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     // first do steps and choices as they don't have to be recursively resolved.
                     if (step.Choices != null)
                     {
-                        foreach (var choice in step.Choices)
+                        if (step.IsSituational)
                         {
-                            var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
-                            contentNode.Parameter.SemanticKey = contentNode.Name;
-                            _contentNodes.Add(contentNode);
+                            var inclusiveSituations = step.Situation.Split(',')
+                                .Select(x => x.Trim())
+                                .Where(x => !string.IsNullOrWhiteSpace(x))
+                                .ToArray();
+                            foreach (var inclusiveSituation in inclusiveSituations)
+                            {
+                                foreach (var choice in step.Choices)
+                                {
+                                    var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepSituation}.{inclusiveSituation}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
+                                    contentNode.Parameter.SemanticKey = contentNode.Name;
+                                    _contentNodes.Add(contentNode);
+                                }
+                            }
+                        }
+                        else
+                        { 
+                            foreach (var choice in step.Choices)
+                            {
+                                var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
+                                contentNode.Parameter.SemanticKey = contentNode.Name;
+                                _contentNodes.Add(contentNode);
+                            }
                         }
                     }
 
@@ -173,6 +192,22 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             // evaluate if the situation (condition) is appropiate, otherwise skip it.
             // not in input parameters. Evaluate the
             var parameter = parameters.GetParameter(step.Situation);
+            if (step.Situation.Contains(','))
+            {
+                foreach (var inclusiveSituation in step.Situation.Split(',')
+                    .Select(x => x.Trim())
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .ToArray())
+                {
+                    parameter = parameters.GetParameter(inclusiveSituation);
+                    if (parameter != null && parameter.Type == TypeEnum.Boolean)
+                    {
+                        return true;
+                    }
+                }
+                throw new StepException($"Can't resolve any of the inclusive situations ${step.Situation}. One of these parameters must exist and be of boolean type.", step);
+            }
+
             if (parameter == null)
             {
                 // resolve parameter value from named formula.
@@ -256,7 +291,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 if (!answered)
                 {
                     QuestionCallback(null, new QuestionArgs("", questions));
-                    throw new UnresolvedException($"Choices {string.Join('.', step.Choices.Select(p => p.Situation))} can not evaluate further, before these are answered by the client.");
+                    throw new UnresolvedException($"Choices {string.Join(',', step.Choices.Select(p => p.Situation))} can not evaluate further, before these are answered by the client.");
                 }
             }
 
