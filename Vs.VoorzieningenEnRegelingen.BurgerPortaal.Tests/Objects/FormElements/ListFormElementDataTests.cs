@@ -42,9 +42,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         private Mock<IContentController> InitMoqContentController()
         {
             var moq = new Mock<IContentController>();
-            moq.Setup(m => m.GetText("semKey", FormElementContentType.Option, null, "Optie1")).Returns("TestOpt1");
-            moq.Setup(m => m.GetText("semKey", FormElementContentType.Option, null, "Optie2")).Returns("TestOpt2");
-            moq.Setup(m => m.GetText("semKey", FormElementContentType.Option, null, "Optie3")).Returns("Optie3");
+            moq.Setup(m => m.GetText("semKey", FormElementContentType.Description, null, "Optie1")).Returns("TestOpt1");
+            moq.Setup(m => m.GetText("semKey", FormElementContentType.Description, null, "Optie2")).Returns("TestOpt2");
+            moq.Setup(m => m.GetText("semKey", FormElementContentType.Description, null, "Optie3")).Returns("Optie3");
             return moq;
         }
     }

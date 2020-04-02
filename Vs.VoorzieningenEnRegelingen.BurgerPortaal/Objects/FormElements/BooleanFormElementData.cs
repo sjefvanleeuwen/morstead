@@ -11,7 +11,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             foreach (var p in result.QuestionParameters)
             {
                 Options.Add(p.Name, contentController.GetText(result.FindSemanticKeyForParameterName(p.Name), 
-                    Cms.Core.Enums.FormElementContentType.Option, null, result.FindSemanticKeyForParameterName(p.Name)));
+                    Cms.Core.Enums.FormElementContentType.Description, null, result.FindSemanticKeyForParameterName(p.Name)));
             }
         }
     }

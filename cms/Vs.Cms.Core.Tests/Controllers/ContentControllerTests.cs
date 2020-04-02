@@ -35,7 +35,7 @@ namespace Vs.Cms.Core.Tests.Controllers
             var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object);
             var dutchCulture = new CultureInfo("nl-NL");
             sut.SetCulture(dutchCulture);
-            Assert.Equal("opt", sut.GetText("semanticKey", FormElementContentType.Option, null, "opt"));
+            Assert.Equal("opt", sut.GetText("semanticKey", FormElementContentType.Description, null, "opt"));
         }
 
         [Fact]
@@ -50,8 +50,6 @@ namespace Vs.Cms.Core.Tests.Controllers
             Assert.Equal("result1", text);
             text = sut.GetText("semanticKey", FormElementContentType.Tag);
             Assert.Equal("result2", text);
-            text = sut.GetText("semanticKey", FormElementContentType.Option);
-            Assert.Equal("option is ONE", text);
         }
 
         private Mock<IRenderStrategy> InitMoqRenderStrategy()
@@ -76,7 +74,6 @@ namespace Vs.Cms.Core.Tests.Controllers
             var moq = new Mock<ICultureContent>();
             moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Description)).Returns("template1");
             moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Tag)).Returns("template2");
-            moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Option)).Returns("option one");
             return moq;
         }
     }

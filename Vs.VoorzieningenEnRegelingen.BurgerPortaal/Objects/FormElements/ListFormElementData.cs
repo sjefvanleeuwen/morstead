@@ -41,7 +41,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
                 var itemString = item.ToString();
                 Options.Add(
                     itemString,
-                    contentController.GetText(result.SemanticKey, FormElementContentType.Option, null,
+                    contentController.GetText(result.SemanticKey, FormElementContentType.Description, null,
                         itemString.Substring(0, 1).ToUpper() + itemString.Substring(1)));
             }
         }
