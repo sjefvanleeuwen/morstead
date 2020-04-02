@@ -23,9 +23,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
 
             Assert.Equal(3, sut.Options.Count);
             Assert.Equal("optie1", sut.Options.ToList()[0].Key);
-            Assert.Equal("TestOpt1", sut.Options.ToList()[0].Value);
+            Assert.Equal("Optie1", sut.Options.ToList()[0].Value);
             Assert.Equal("optie2", sut.Options.ToList()[1].Key);
-            Assert.Equal("TestOpt2", sut.Options.ToList()[1].Value);
+            Assert.Equal("Optie2", sut.Options.ToList()[1].Value);
             Assert.Equal("optie3", sut.Options.ToList()[2].Key);
             Assert.Equal("Optie3", sut.Options.ToList()[2].Value);
         }
