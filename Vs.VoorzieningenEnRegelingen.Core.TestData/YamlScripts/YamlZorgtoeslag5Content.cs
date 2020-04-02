@@ -23,9 +23,9 @@
    tekst: Wanneer u als alleenstaande meer vermogen heeft dan €114.776,00, overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag.
      <br />Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst.
    hint: De huidige vermogensdrempel voor alleenstaanden is €114.776,00.
- - key: key: stap.vermogensdrempel.situatie.alleenstaande.keuze.situatie.hoger_dan_vermogensdrempel   
+ - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.situatie.hoger_dan_vermogensdrempel   
    tekst: Ja, mijn vermogen is **hoger** dan €114.776,00
- - key: key: stap.vermogensdrempel.situatie.alleenstaande.keuze.situatie.lager_dan_vermogensdrempel
+ - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.situatie.lager_dan_vermogensdrempel
    tekst: Nee, mijn vermogen is **lager** dan €114.776,00
  - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner
    vraag: Is uw vermogen hoger dan de drempelwaarde?
@@ -71,11 +71,11 @@
    hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
  - key: stap.zorgtoeslag.situatie.alleenstaande
    vraag: Maandelijkse zorgtoeslag
-   titel: **Uw zorgtoeslag is €{zorgtoeslag} per maand.**
+   titel: Uw zorgtoeslag is **€{zorgtoeslag} per maand.**
    tekst: De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
  - key: stap.zorgtoeslag.situatie.aanvrager_met_toeslagpartner
    vraag: Maandelijkse zorgtoeslag samen met uw toeslagpartner
-   titel: **Uw gezamenlijke zorgtoeslag is €{zorgtoeslag} per maand.**
+   titel: Uw gezamenlijke zorgtoeslag is **€zorgtoeslag per maand.**
    tekst: De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
    hint: De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
  - key: 
