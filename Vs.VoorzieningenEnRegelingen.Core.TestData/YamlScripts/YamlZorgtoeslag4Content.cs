@@ -3,7 +3,7 @@
     public class YamlZorgtoeslag4Content
     {
         public readonly static string Body = @"Content:
- - key: formule.woonland.woonlandfactor
+ - key: stap.woonland
    vraag: Waar bent u woonachtig?
    titel: Selecteer uw woonland.
    tekst: Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de Belastingdienst.
