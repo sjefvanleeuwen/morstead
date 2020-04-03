@@ -63,6 +63,12 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
                 throw new ArgumentException("message", nameof(name));
             }
             Name = name;
+            if (type == TypeEnum.Step)
+            {
+                _value = null;
+                Type = TypeEnum.Step;
+                return;
+            }
 
             var woonlanden = new List<object>();
             // Check if woonland can be found in a table

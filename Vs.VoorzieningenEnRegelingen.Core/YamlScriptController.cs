@@ -85,6 +85,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     function.SemanticKey = nodeName;
                     var contentNode = new ContentNode(nodeName) { IsSituational = function.IsSituational, Situation = function.Situation, Parameter = new Parameter(function.Situation, false, TypeEnum.Boolean, ref _model) };
                     contentNode.Parameter.SemanticKey = nodeName;
+                    contentNode.Situation = function.Situation;
                     items.Add(contentNode);
                 }
                 foreach (var parameter in parameters)
@@ -93,7 +94,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     {
                         parameter.SemanticKey = string.Join('.', new[] { YamlParser.FormulaAttribute, parameter.Name, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
                         // not a formula name, so it resolves to a question, add it to the list
-                        items.Add(new ContentNode(parameter.SemanticKey) { IsSituational = function.IsSituational, Situation = function.Situation, Parameter = parameter });
+                        var contentNode = new ContentNode(parameter.SemanticKey) { IsSituational = function.IsSituational, Situation = function.Situation, Parameter = parameter };
+                        contentNode.Situation = function.Situation;
+                        items.Add(contentNode);
                         // find formula's that use the answer to this question.
                         ResolveToQuestion(parameter.Name, ref items);
                     }
@@ -114,57 +117,89 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 YamlParser parser = new YamlParser(yaml, null);
                 _model = new Model.Model(parser.Header(), parser.Formulas().ToList(), parser.Tabellen().ToList(), parser.Flow().ToList());
                 //_model.AddFormulas(parser.GetFormulasFromBooleanSteps(_model.Steps));
+                List<string> inclusiveSituations = null;
                 foreach (var step in _model.Steps)
                 {
-                    var contentNodeStep = new ContentNode($"{YamlParser.Step}.{step.Name}") { Parameter = new Parameter(step.Name, false, TypeEnum.Step, ref _model) };
-                    contentNodeStep.Parameter.SemanticKey = contentNodeStep.Name;
-                    _contentNodes.Add(contentNodeStep);
-                    step.SemanticKey = contentNodeStep.Name;
-                    // first do steps and choices as they don't have to be recursively resolved.
-                    if (step.Choices != null)
+                    if (step.IsSituational)
                     {
-                        if (step.IsSituational)
+                        inclusiveSituations = step.Situation.Split(',')
+                            .Select(x => x.Trim())
+                            .Where(x => !string.IsNullOrWhiteSpace(x))
+                            .ToList();
+                        foreach (var inclusiveSituation in inclusiveSituations)
                         {
-                            var inclusiveSituations = step.Situation.Split(',')
-                                .Select(x => x.Trim())
-                                .Where(x => !string.IsNullOrWhiteSpace(x))
-                                .ToArray();
-                            foreach (var inclusiveSituation in inclusiveSituations)
+                            var contentNodeStep = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepSituation}.{inclusiveSituation}") { Parameter = new Parameter(step.Name, false, TypeEnum.Step, ref _model) };
+                            contentNodeStep.Parameter.SemanticKey = contentNodeStep.Name;
+                            contentNodeStep.Situation = inclusiveSituation;
+                            _contentNodes.Add(contentNodeStep);
+                            step.SemanticKey = contentNodeStep.Name;
+
+                            if (step.Choices != null)
                             {
                                 foreach (var choice in step.Choices)
                                 {
-                                    var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepSituation}.{inclusiveSituation}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
+                                    var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepSituation}.{inclusiveSituation}.{YamlParser.StepChoice}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
                                     contentNode.Parameter.SemanticKey = contentNode.Name;
+                                    contentNode.Situation = inclusiveSituation;
                                     _contentNodes.Add(contentNode);
                                 }
                             }
-                        }
-                        else
-                        { 
-                            foreach (var choice in step.Choices)
+
+                            if (!string.IsNullOrEmpty(step.Value))
                             {
-                                var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepChoice}.{YamlParser.StepSituation}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
+                                var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepSituation}.{inclusiveSituation}.{step.Value}");
+                                contentNode.Parameter = new Parameter(step.Name, null, TypeEnum.Double, ref _model);
                                 contentNode.Parameter.SemanticKey = contentNode.Name;
+                                contentNodeStep.Situation = inclusiveSituation;
                                 _contentNodes.Add(contentNode);
+                            }
+
+                            ResolveToQuestion(step.Formula, ref _contentNodes, step.Situation, step.Name);
+
+                            if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
+                            {
+                                ContentNode node = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepSituation}.{inclusiveSituation}.geen_recht") { IsBreak = true, IsSituational = step.IsSituational, Situation = inclusiveSituation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
+                                step.Break.SemanticKey = node.Name;
+                                node.Parameter.SemanticKey = node.Name;
+                                contentNodeStep.Situation = inclusiveSituation;
+                                _contentNodes.Add(node);
                             }
                         }
                     }
+                    else
+                    {
+                        var contentNodeStep = new ContentNode($"{YamlParser.Step}.{step.Name}") { Parameter = new Parameter(step.Name, false, TypeEnum.Step, ref _model) };
+                        contentNodeStep.Parameter.SemanticKey = contentNodeStep.Name;
+                        _contentNodes.Add(contentNodeStep);
+                        step.SemanticKey = contentNodeStep.Name;
 
-                    if (!string.IsNullOrEmpty(step.Value))
-                    {
-                        var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepValue}.{step.Value}");
-                        contentNode.Parameter = new Parameter(step.Name, null, TypeEnum.Double, ref _model);
-                        contentNode.Parameter.SemanticKey = contentNode.Name;
-                        _contentNodes.Add(contentNode);
-                    }
-                    ResolveToQuestion(step.Formula, ref _contentNodes, step.Situation, step.Name);
-                    // TODO: Resolve recht/geen recht.
-                    if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
-                    {
-                        step.Break.SemanticKey = string.Join('.', new[] { YamlParser.Step, step.Name, "geen_recht" }.Where(s => !string.IsNullOrEmpty(s)));
-                        ContentNode node = new ContentNode(step.Break.SemanticKey) { IsBreak = true, IsSituational = step.IsSituational, Situation = step.Situation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
-                        node.Parameter.SemanticKey = step.Break.SemanticKey;
-                        _contentNodes.Add(node);
+                        if (step.Choices != null)
+                        {
+                            foreach (var choice in step.Choices)
+                            {
+                                var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepChoice}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
+                                contentNode.Parameter.SemanticKey = contentNode.Name;
+                                _contentNodes.Add(contentNode);
+                            }
+
+                            if (!string.IsNullOrEmpty(step.Value))
+                            {
+                                var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepValue}.{step.Value}");
+                                contentNode.Parameter = new Parameter(step.Name, null, TypeEnum.Double, ref _model);
+                                contentNode.Parameter.SemanticKey = contentNode.Name;
+                                _contentNodes.Add(contentNode);
+                            }
+
+                            ResolveToQuestion(step.Formula, ref _contentNodes, step.Situation, step.Name);
+
+                            if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
+                            {
+                                step.Break.SemanticKey = string.Join('.', new[] { YamlParser.Step, step.Name, "geen_recht" }.Where(s => !string.IsNullOrEmpty(s)));
+                                ContentNode node = new ContentNode(step.Break.SemanticKey) { IsBreak = true, IsSituational = step.IsSituational, Situation = step.Situation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
+                                node.Parameter.SemanticKey = step.Break.SemanticKey;
+                                _contentNodes.Add(node);
+                            }
+                        }
                     }
                 }
             }
@@ -177,6 +212,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 };
                 return result;
             }
+            ContentNodes.Add(new ContentNode("end") { Parameter = new Parameter("end",null,TypeEnum.Step, ref _model) });
             return new ParseResult()
             {
                 Message = Ok,
@@ -185,13 +221,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             };
         }
 
-        private bool EvaluateSituation(ref IParametersCollection parameters, IStep step)
+        private bool EvaluateSituation(ref IParametersCollection parameters, IStep step, out IStep stepActiveSituation)
         {
             if (parameters is null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
+            stepActiveSituation = step.Clone();
             var match = false;
             // evaluate if the situation (condition) is appropiate, otherwise skip it.
             // not in input parameters. Evaluate the
@@ -206,6 +243,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     parameter = parameters.GetParameter(inclusiveSituation);
                     if (parameter != null && parameter.Type == TypeEnum.Boolean)
                     {
+                        stepActiveSituation = step.Clone();
+                        stepActiveSituation.Situation = inclusiveSituation;
+                        // seach in  content nodes for this parameter in typenum steps
+                        var s = ContentNodes.FindAll(p => p.Parameter.Type == TypeEnum.Step);
                         return true;
                     }
                 }
@@ -398,17 +439,19 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     bool match = false;
                     if (!string.IsNullOrEmpty(step.Situation))
                     {
-                        match = EvaluateSituation(ref parameters, step);
+                        match = EvaluateSituation(ref parameters, step, out IStep stepActiveSituation);
+                        executionResult.Step = stepActiveSituation;
                     }
                     // unconditional step
                     else
                     {
+                        executionResult.Step = step.Clone();
                         match = true;
                     }
                     // execute step.
                     if (match)
                     {
-                        ExecuteStep(ref executionResult, ref parameters, step);
+                        ExecuteStep(ref executionResult, ref parameters, executionResult.Step);
                         if (executionResult != null && executionResult.Stacktrace.Last().IsStopExecution)
                         {
                             break;

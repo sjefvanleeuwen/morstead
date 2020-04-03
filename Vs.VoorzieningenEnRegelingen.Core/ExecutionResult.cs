@@ -14,8 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public IEnumerable<ContentNode> ContentNodes { get; set; }
 
-        //todo MPS implement
-        public string SemanticKey => FindSemanticKeyForParameterName(QuestionFirstParameter.Name);
+        public IStep Step { get; set; }
 
         public ExecutionResult(ref IParametersCollection parameters)
         {

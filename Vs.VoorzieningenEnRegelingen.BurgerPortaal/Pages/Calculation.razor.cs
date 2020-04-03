@@ -21,7 +21,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         //the formElement we are showing
         private IFormElementBase _formElement;
-        private string _semanticKey => _sequenceController.LastExecutionResult.SemanticKey;
+        private string _semanticKey => _sequenceController.LastExecutionResult.Step.SemanticKey;
         private int _displayQuestionNumber
         {
             get

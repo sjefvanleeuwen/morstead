@@ -39,6 +39,7 @@ berekening:
    waarde: toetsingsinkomen
    recht: toetsingsinkomen < toetsingsinkomensdrempel
  - stap: zorgtoeslag
+   situatie: alleenstaande, aanvrager_met_toeslagpartner
    formule: zorgtoeslag
 formules:
  - woonlandfactor:

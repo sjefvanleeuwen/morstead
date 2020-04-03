@@ -34,7 +34,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         public string Description { get; }
         public string Formula { get; }
         public string Value { get; }
-        public string Situation { get; }
+        public string Situation { get; set; }
         /// <summary>
         /// Choices is a number of situations
         /// This will lead to a question which of the situations should be taken
@@ -51,5 +51,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         public string SemanticKey { get; set; }
 
         public DebugInfo DebugInfo { get; }
+
+        public IStep Clone()
+        {
+            return (Step)this.MemberwiseClone();
+        }
     }
 }

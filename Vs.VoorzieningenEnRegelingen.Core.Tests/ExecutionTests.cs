@@ -1010,7 +1010,8 @@ formules:
             catch (UnresolvedException ex)
             {
                 Assert.True(executionResult.Stacktrace.Count == 3);
-                Assert.True(executionResult.Stacktrace[2].Step.Situation == "alleenstaande, aanvrager_met_toeslagpartner");
+                Assert.True(executionResult.Stacktrace[2].Step.Situation == "alleenstaande");
+                Assert.True(executionResult.Step.Situation == "alleenstaande");
             }
         }
     }

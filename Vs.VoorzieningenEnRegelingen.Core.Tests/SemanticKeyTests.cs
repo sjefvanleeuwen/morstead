@@ -16,14 +16,18 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var result = controller.Parse(YamlZorgtoeslag5.Body);
 
             Assert.False(result.IsError);
-            Assert.True(controller.ContentNodes.Count == 26);
+            Assert.True(controller.ContentNodes.Count == 28);
             List<string> keys = new List<string>();
             foreach (var item in controller.ContentNodes)
             {
-                Assert.NotNull(item.Parameter);
-                Assert.NotNull(item.Parameter.SemanticKey);
-                Assert.True(item.Parameter.SemanticKey == item.Name);
+                if (item.Name != "end")
+                {
+                    Assert.NotNull(item.Parameter);
+                    Assert.NotNull(item.Parameter.SemanticKey);
+                    Assert.True(item.Parameter.SemanticKey == item.Name);
+                }
                 keys.Add(item.Name);
+
             }
         }
 
@@ -38,13 +42,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void GetContentNodesFromExecutionResult()
         {
             QuestionArgs argsret = null;
-            //just an example call
-            //based on version 4 of the yaml
             var controller = new YamlScriptController();
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) => {
                 argsret = args;
             };
-            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            var result = controller.Parse(YamlZorgtoeslag5.Body);
             var parameters = new ParametersCollection() { new ClientParameter("woonland", "Nederland") } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             try 
@@ -54,10 +56,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             catch (UnresolvedException ex)
             {
             }
-            Assert.Equal(22, executionResult.ContentNodes.Count());
-            Assert.Equal("stap.woonsituatie.keuze.situatie.alleenstaande",
+            Assert.Equal(28, executionResult.ContentNodes.Count());
+            Assert.Equal("stap.woonsituatie.keuze.alleenstaande",
                 executionResult.ContentNodes.FirstOrDefault(c => c.Parameter.Name == argsret.Parameters.ToList()[0].Name).Parameter.SemanticKey);
-            Assert.Equal("stap.woonsituatie.keuze.situatie.aanvrager_met_toeslagpartner",
+            Assert.Equal("stap.woonsituatie.keuze.aanvrager_met_toeslagpartner",
                 executionResult.ContentNodes.FirstOrDefault(c => c.Parameter.Name == argsret.Parameters.ToList()[1].Name).Parameter.SemanticKey);
         }
     }

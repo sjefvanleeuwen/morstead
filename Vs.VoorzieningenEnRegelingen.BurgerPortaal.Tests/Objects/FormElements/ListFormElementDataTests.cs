@@ -36,7 +36,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
             var moqParameter = new Mock<IParameter>();
             moqParameter.Setup(m => m.Value).Returns(new List<string> { "optie1", "optie2", "optie3" });
             moq.Setup(m => m.QuestionFirstParameter).Returns(moqParameter.Object);
-            moq.Setup(m => m.SemanticKey).Returns("semKey");
+            moq.Setup(m => m.Step.SemanticKey).Returns("semKey");
             return moq;
         }
         private Mock<IContentController> InitMoqContentController()

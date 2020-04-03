@@ -10,7 +10,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         IParametersCollection Parameters { get; }
         IQuestionArgs Questions { get; set; }
         List<FlowExecutionItem> Stacktrace { get; }
-        string SemanticKey { get; }
+        IStep Step { get; set; }
         IEnumerable<IParameter> QuestionParameters { get; }
         IParameter QuestionFirstParameter { get; }
         TypeInference.InferenceResult.TypeEnum InferedType { get; }
