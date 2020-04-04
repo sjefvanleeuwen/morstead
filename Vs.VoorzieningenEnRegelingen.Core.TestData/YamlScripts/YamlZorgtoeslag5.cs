@@ -36,6 +36,7 @@ berekening:
    - situatie: lager_dan_inkomensdrempel
    recht: lager_dan_inkomensdrempel
  - stap: toetsingsinkomen
+   situatie: alleenstaande, aanvrager_met_toeslagpartner
    waarde: toetsingsinkomen
    recht: toetsingsinkomen < toetsingsinkomensdrempel
  - stap: zorgtoeslag

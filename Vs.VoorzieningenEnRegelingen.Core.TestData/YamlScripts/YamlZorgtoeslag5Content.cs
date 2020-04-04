@@ -13,9 +13,9 @@
    titel: Wat is uw woonsituatie?
    tekst: Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de Belastingdienst.
    hint: Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft.
- - key: stap.woonsituatie.keuze.situatie.alleenstaande
+ - key: stap.woonsituatie.keuze.alleenstaande
    tekst: Alleenstaande
- - key: stap.woonsituatie.keuze.situatie.aanvrager_met_toeslagpartner
+ - key: stap.woonsituatie.keuze.aanvrager_met_toeslagpartner
    tekst: Aanvrager met toeslagpartner 
  - key: stap.vermogensdrempel.situatie.alleenstaande
    vraag: Is uw vermogen hoger dan de drempelwaarde?
@@ -23,9 +23,9 @@
    tekst: Wanneer u als alleenstaande meer vermogen heeft dan €114.776,00, overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag.
      <br />Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst.
    hint: De huidige vermogensdrempel voor alleenstaanden is €114.776,00.
- - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.situatie.hoger_dan_vermogensdrempel   
+ - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.hoger_dan_vermogensdrempel   
    tekst: Ja, mijn vermogen is **hoger** dan €114.776,00
- - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.situatie.lager_dan_vermogensdrempel
+ - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.lager_dan_vermogensdrempel
    tekst: Nee, mijn vermogen is **lager** dan €114.776,00
  - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner
    vraag: Is uw vermogen hoger dan de drempelwaarde?
@@ -33,9 +33,9 @@
    tekst: Wanneer u samen met een toeslagpartner meer vermogen heeft dan €145.136,00 overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag. 
      <br />Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst.
    hint: De huidige vermogensdrempel voor aanvragers met toeslagpartners is €145.136,00
- - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.situatie.hoger_dan_vermogensdrempel   
+ - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.hoger_dan_vermogensdrempel   
    tekst: Ja, het gezamenlijk vermogen is **hoger** dan €145.136,00
- - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.situatie.lager_dan_vermogensdrempel   
+ - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.lager_dan_vermogensdrempel   
    tekst: Nee, het gezamenlijk vermogen is **lager** dan €145.136,00
  - key: stap.inkomensdrempel.situatie.alleenstaande
    vraag: Is uw toetsingsinkomen hoger dan de inkomensdrempel?
@@ -43,9 +43,9 @@
    tekst: Wanneer u als alleenstaande meer inkomen heeft dan €29.562,00 per jaar, overschrijdt u de inkomensdrempel. U heeft dan geen recht op zorgtoeslag.
      <br />Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de Belastingdienst.
    hint: De huidige inkomensdrempel voor alleenstaanden is €29.562,00 per jaar.
- - key: stap.inkomensdrempel.situatie.alleenstaande.keuze.situatie.hoger_dan_inkomensdrempel
+ - key: stap.inkomensdrempel.situatie.alleenstaande.keuze.hoger_dan_inkomensdrempel
    tekst: Ja, mijn inkomen is **hoger** dan €29.562,00
- - key: stap.inkomensdrempel.situatie.alleenstaande.keuze.situatie.lager_dan_inkomensdrempel
+ - key: stap.inkomensdrempel.situatie.alleenstaande.keuze.lager_dan_inkomensdrempel
    tekst: Nee, mijn inkomen is **lager** dan €29.562,00
  - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner
    vraag: Is uw toetsingsinkomen hoger dan de inkomensdrempel?
@@ -53,9 +53,9 @@
    tekst: Wanneer u samen met een toeslagpartner meer inkomen heeft dan €37.885,00 per jaar overschrijdt u de inkomensdrempel. U heeft dan geen recht op zorgtoeslag.
      <br />Indien u niet zeker weet wat uw gezamenlijk inkomen is, kijk dan op de website van de Belastingdienst.
    hint: De huidige inkomensdrempel voor aanvragers met toeslagpartners is €37.885,00 per jaar
- - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.situatie.hoger_dan_inkomensdrempel
+ - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.hoger_dan_inkomensdrempel
    tekst: Ja, het gezamenlijk inkomen is **hoger** dan €37.885,00
- - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.situatie.lager_dan_inkomensdrempel   
+ - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.lager_dan_inkomensdrempel   
    tekst: Nee, het gezamenlijk inkomen is **lager** dan €37.885,00
  - key: stap.toetsingsinkomen.situatie.alleenstaande
    vraag: Wat is uw toetsingsinkomen?
