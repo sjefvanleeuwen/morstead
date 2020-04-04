@@ -1012,6 +1012,7 @@ formules:
                 Assert.True(executionResult.Stacktrace.Count == 3);
                 Assert.True(executionResult.Stacktrace[2].Step.Situation == "alleenstaande");
                 Assert.True(executionResult.Step.Situation == "alleenstaande");
+                Assert.True(executionResult.Step.SemanticKey == "stap.vermogensdrempel.situatie.alleenstaande");
             }
         }
     }
