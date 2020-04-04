@@ -29,6 +29,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 keys.Add(item.Name);
 
             }
+            var s = string.Join('\n', keys);
         }
 
         [Fact]

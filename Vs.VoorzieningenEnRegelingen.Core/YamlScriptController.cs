@@ -241,10 +241,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     parameter = parameters.GetParameter(inclusiveSituation);
                     if (parameter != null && parameter.Type == TypeEnum.Boolean)
                     {
-                        stepActiveSituation = step.Clone();
-                        stepActiveSituation.Situation = inclusiveSituation;
+                        if ((bool)parameter.Value == true)
+                        {
+                            stepActiveSituation = step.Clone();
+                            stepActiveSituation.Situation = inclusiveSituation;
+                            stepActiveSituation.SemanticKey = string.Join('.', stepActiveSituation.SemanticKey.Split('.').Take(3).ToArray()) + "." + inclusiveSituation;  // this is a hack, please refactor.
+                        }
                         // seach in  content nodes for this parameter in typenum steps
-                        var s = ContentNodes.FindAll(p => p.Parameter.Type == TypeEnum.Step);
+                        //var s = ContentNodes.FindAll(p => p.Parameter.Type == TypeEnum.Step);
                         return true;
                     }
                 }
