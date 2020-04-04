@@ -52,10 +52,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
                     return new Select();
                 case TypeInference.InferenceResult.TypeEnum.DateTime:
                     return new Date();
-                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
-                    return new DateRange();
-                case TypeInference.InferenceResult.TypeEnum.String:
                 case TypeInference.InferenceResult.TypeEnum.Period:
+                    return new DateRange();
+                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
+                case TypeInference.InferenceResult.TypeEnum.String:
                 case TypeInference.InferenceResult.TypeEnum.Unknown:
                 default:
                     return this;
