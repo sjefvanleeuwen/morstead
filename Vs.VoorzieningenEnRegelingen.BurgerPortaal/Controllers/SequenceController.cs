@@ -3,6 +3,7 @@ using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
+using Vs.VoorzieningenEnRegelingen.Core.Interface;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers

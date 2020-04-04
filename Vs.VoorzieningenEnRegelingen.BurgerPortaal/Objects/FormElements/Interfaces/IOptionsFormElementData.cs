@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Vs.Cms.Core.Controllers.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core;
+using Vs.VoorzieningenEnRegelingen.Core.Interface;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces
 {

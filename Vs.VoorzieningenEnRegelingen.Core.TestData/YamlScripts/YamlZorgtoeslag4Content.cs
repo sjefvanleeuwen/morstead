@@ -78,20 +78,20 @@
      <br />Indien u niet zeker weet wat uw gezamenlijk inkomen is, kijk dan op de website van de Belastingdienst.
    hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
 ";
-//    - stap: alleenstaande.zorgtoeslag
-//      vraag: Maandelijkse zorgtoeslag
-//      titel: **Uw zorgtoeslag is €((double)_sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == ""zorgtoeslag"").Value).ToString(""#.00"").Replace('.', ',') + "" per maand.**
-//      beschrijving: Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst.
-//      label: 
-//      tag:
-//      hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
-//    - stap: geenRecht
-//      vraag: Geen Recht
-//      titel: U heeft geen recht op zorgtoeslag.
-//      beschrijving: De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
-//      label: 
-//      tag:
-//      hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
-//";
+        //    - stap: alleenstaande.zorgtoeslag
+        //      vraag: Maandelijkse zorgtoeslag
+        //      titel: **Uw zorgtoeslag is €((double)_sequenceController.LastExecutionResult.Parameters.FirstOrDefault(p => p.Name == ""zorgtoeslag"").Value).ToString(""#.00"").Replace('.', ',') + "" per maand.**
+        //      beschrijving: Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst.
+        //      label: 
+        //      tag:
+        //      hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
+        //    - stap: geenRecht
+        //      vraag: Geen Recht
+        //      titel: U heeft geen recht op zorgtoeslag.
+        //      beschrijving: De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
+        //      label: 
+        //      tag:
+        //      hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
+        //";
     }
 }

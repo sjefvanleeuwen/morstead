@@ -8,6 +8,7 @@ using Vs.Core.Extensions;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
+using Vs.VoorzieningenEnRegelingen.Core.Interface;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
@@ -66,9 +67,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             //todo MPS write test for this
             InferedType = result.InferedType;
             Name = result.QuestionFirstParameter.Name;
-            Label = contentController.GetText(result.Step.SemanticKey, FormElementContentType.Label);
-            TagText = contentController.GetText(result.Step.SemanticKey, FormElementContentType.Tag);
-            HintText = contentController.GetText(result.Step.SemanticKey, FormElementContentType.Hint);
+            var parameterSemanticKey = result.GetParameterSemanticKey();
+            Label = contentController.GetText(parameterSemanticKey, FormElementContentType.Label);
+            TagText = contentController.GetText(parameterSemanticKey, FormElementContentType.Tag);
+            HintText = contentController.GetText(parameterSemanticKey, FormElementContentType.Hint);
         }
     }
 }

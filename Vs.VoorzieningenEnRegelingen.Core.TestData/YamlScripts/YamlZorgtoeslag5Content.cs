@@ -12,8 +12,8 @@
    vraag: Wat is uw woonsituatie?
    titel: Wat is uw woonsituatie?
    tekst: Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de Belastingdienst.
-   hint: Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft.
  - key: stap.woonsituatie.keuze.alleenstaande
+   hint: Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft.
    tekst: Alleenstaande
  - key: stap.woonsituatie.keuze.aanvrager_met_toeslagpartner
    tekst: Aanvrager met toeslagpartner 
@@ -22,9 +22,9 @@
    titel: Vermogensdrempel
    tekst: Wanneer u als alleenstaande meer vermogen heeft dan €114.776,00, overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag.
      <br />Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst.
-   hint: De huidige vermogensdrempel voor alleenstaanden is €114.776,00.
  - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.hoger_dan_vermogensdrempel   
    tekst: Ja, mijn vermogen is **hoger** dan €114.776,00
+   hint: De huidige vermogensdrempel voor alleenstaanden is €114.776,00.
  - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.lager_dan_vermogensdrempel
    tekst: Nee, mijn vermogen is **lager** dan €114.776,00
  - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner
@@ -32,9 +32,9 @@
    titel: Vermogensdrempel
    tekst: Wanneer u samen met een toeslagpartner meer vermogen heeft dan €145.136,00 overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag. 
      <br />Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst.
-   hint: De huidige vermogensdrempel voor aanvragers met toeslagpartners is €145.136,00
  - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.hoger_dan_vermogensdrempel   
    tekst: Ja, het gezamenlijk vermogen is **hoger** dan €145.136,00
+   hint: De huidige vermogensdrempel voor aanvragers met toeslagpartners is €145.136,00
  - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.lager_dan_vermogensdrempel   
    tekst: Nee, het gezamenlijk vermogen is **lager** dan €145.136,00
  - key: stap.inkomensdrempel.situatie.alleenstaande
@@ -42,9 +42,9 @@
    titel: Inkomensdrempel
    tekst: Wanneer u als alleenstaande meer inkomen heeft dan €29.562,00 per jaar, overschrijdt u de inkomensdrempel. U heeft dan geen recht op zorgtoeslag.
      <br />Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de Belastingdienst.
-   hint: De huidige inkomensdrempel voor alleenstaanden is €29.562,00 per jaar.
  - key: stap.inkomensdrempel.situatie.alleenstaande.keuze.hoger_dan_inkomensdrempel
    tekst: Ja, mijn inkomen is **hoger** dan €29.562,00
+   hint: De huidige inkomensdrempel voor alleenstaanden is €29.562,00 per jaar.
  - key: stap.inkomensdrempel.situatie.alleenstaande.keuze.lager_dan_inkomensdrempel
    tekst: Nee, mijn inkomen is **lager** dan €29.562,00
  - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner
@@ -52,9 +52,9 @@
    titel: Inkomensdrempel
    tekst: Wanneer u samen met een toeslagpartner meer inkomen heeft dan €37.885,00 per jaar overschrijdt u de inkomensdrempel. U heeft dan geen recht op zorgtoeslag.
      <br />Indien u niet zeker weet wat uw gezamenlijk inkomen is, kijk dan op de website van de Belastingdienst.
-   hint: De huidige inkomensdrempel voor aanvragers met toeslagpartners is €37.885,00 per jaar
  - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.hoger_dan_inkomensdrempel
    tekst: Ja, het gezamenlijk inkomen is **hoger** dan €37.885,00
+   hint: De huidige inkomensdrempel voor aanvragers met toeslagpartners is €37.885,00 per jaar
  - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.lager_dan_inkomensdrempel   
    tekst: Nee, het gezamenlijk inkomen is **lager** dan €37.885,00
  - key: stap.toetsingsinkomen.situatie.alleenstaande
@@ -62,12 +62,14 @@
    titel: Toetsingsinkomen
    tekst: Vul uw toetsingsinkomen in. Gebruik een komma als scheidingsteken tussen euro's en centen.
      <br />Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de Belastingdienst.
+ - key: stap.toetsingsinkomen.situatie.alleenstaande.toetsingsinkomen
    hint: De huidige inkomensdrempel voor alleenstaanden is €29.562,00 per jaar.
  - key: stap.toetsingsinkomen.situatie.aanvrager_met_toeslagpartner
    vraag: Wat is uw toetsingsinkomen?
    titel: Gezamenlijk toetsingsinkomen
    tekst: Vul de som van uw toetsingsinkomen en het toetsingsinkomen van uw toeslagpartner in. Gebruik een komma als scheidingsteken tussen euro's en centen.
      <br />Indien u niet zeker weet wat uw gezamenlijk inkomen is, kijk dan op de website van de Belastingdienst.
+ - key: stap.toetsingsinkomen.situatie.aanvrager_met_toeslagpartner.toetsingsinkomen
    hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
  - key: stap.zorgtoeslag.situatie.alleenstaande
    vraag: Maandelijkse zorgtoeslag
@@ -77,7 +79,6 @@
    vraag: Maandelijkse zorgtoeslag samen met uw toeslagpartner
    titel: Uw gezamenlijke zorgtoeslag is **€zorgtoeslag per maand.**
    tekst: De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
-   hint: De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
  - key: 
      stap.woonland.geen_recht, 
      stap.vermogensdrempel.situatie.alleenstaande.geen_recht,
@@ -88,8 +89,8 @@
      stap.toetsingsinkomen.situatie.aanvrager_met_toeslagpartner.geen_recht
    vraag: Geen Recht
    titel: U heeft geen recht op zorgtoeslag.
-   beschrijving: Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst.
-   hint: De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
+   tekst: Met de door u ingevulde gegevens heeft u geen recht op zorgtoeslag. Voor meer informatie over zorgtoeslag in uw situatie, neem contact op met de Belastingdienst. 
+     <br />De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
 ";
     }
 }

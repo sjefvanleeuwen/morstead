@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Vs.VoorzieningenEnRegelingen.Core.Interface;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
@@ -44,13 +45,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
             QuestionArgs argsret = null;
             var controller = new YamlScriptController();
-            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) => {
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
                 argsret = args;
             };
             var result = controller.Parse(YamlZorgtoeslag5.Body);
             var parameters = new ParametersCollection() { new ClientParameter("woonland", "Nederland") } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
-            try 
+            try
             {
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }

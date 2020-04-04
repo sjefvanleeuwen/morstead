@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.VoorzieningenEnRegelingen.Core.Interface
 {
     public interface IParametersCollection : IList<IParameter>
     {

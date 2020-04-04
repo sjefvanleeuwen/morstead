@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Vs.VoorzieningenEnRegelingen.Core.Interface;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
@@ -28,9 +29,24 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         public static ExecutionResult NotExecutedBecauseOfParseError(ref IParametersCollection parameters, ref IEnumerable<ContentNode> contentNodes) =>
             new ExecutionResult(ref parameters) { IsError = true, Message = "Not Executed Because Of Parse Error" };
 
-        public string FindSemanticKeyForParameterName(string parameterName)
+        public string GetParameterSemanticKey(string parametername = null)
         {
-            return ContentNodes.FirstOrDefault(c => c.Parameter.Name == parameterName).Parameter.SemanticKey;
+            if (string.IsNullOrWhiteSpace(parametername))
+            {
+                parametername = QuestionFirstParameter?.Name;
+            }
+            var paramenterSementicKey = $"{Step.SemanticKey}.{parametername}";
+            var paramenterSementicKeyKeuze = $"{Step.SemanticKey}.keuze.{parametername}";
+
+            if (ContentNodes.Any(c => c.Parameter.SemanticKey == paramenterSementicKey))
+            {
+                return paramenterSementicKey;
+            }
+            if (ContentNodes.Any(c => c.Parameter.SemanticKey == paramenterSementicKeyKeuze))
+            {
+                return paramenterSementicKeyKeuze;
+            }
+            return Step.SemanticKey;
         }
 
         public TypeInference.InferenceResult.TypeEnum InferedType =>

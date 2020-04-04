@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
+using Vs.VoorzieningenEnRegelingen.Core.Interface;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 
@@ -210,7 +211,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 };
                 return result;
             }
-            ContentNodes.Add(new ContentNode("end") { Parameter = new Parameter("end",null,TypeEnum.Step, ref _model) });
+            ContentNodes.Add(new ContentNode("end") { Parameter = new Parameter("end", null, TypeEnum.Step, ref _model) });
             return new ParseResult()
             {
                 Message = Ok,

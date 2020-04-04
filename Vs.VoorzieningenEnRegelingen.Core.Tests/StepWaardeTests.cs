@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Vs.VoorzieningenEnRegelingen.Core.Interface;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests

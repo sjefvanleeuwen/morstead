@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Vs.Core.Collections.NodeTree;
+using Vs.VoorzieningenEnRegelingen.Core.Interface;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
-    public class ContentNode
+    public class ContentNode : IContentNode
     {
         public bool IsSituational { get; set; }
         public bool IsBreak { get; set; }

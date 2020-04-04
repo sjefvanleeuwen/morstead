@@ -1,4 +1,6 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core
+﻿using Vs.VoorzieningenEnRegelingen.Core.Interface;
+
+namespace Vs.VoorzieningenEnRegelingen.Core
 {
     public class QuestionArgs : IQuestionArgs
     {

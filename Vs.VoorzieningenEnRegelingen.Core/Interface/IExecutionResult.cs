@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.VoorzieningenEnRegelingen.Core.Interface
 {
     public interface IExecutionResult
     {
@@ -16,6 +16,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         TypeInference.InferenceResult.TypeEnum InferedType { get; }
         IEnumerable<ContentNode> ContentNodes { get; set; }
 
-        string FindSemanticKeyForParameterName(string parameterName);
+        string GetParameterSemanticKey(string parametername = null);
     }
 }
