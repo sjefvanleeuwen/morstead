@@ -16,7 +16,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var result = controller.Parse(YamlZorgtoeslag5.Body);
 
             Assert.False(result.IsError);
-            Assert.True(controller.ContentNodes.Count == 28);
+            Assert.True(controller.ContentNodes.Count == 32);
             List<string> keys = new List<string>();
             foreach (var item in controller.ContentNodes)
             {
@@ -56,7 +56,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             catch (UnresolvedException ex)
             {
             }
-            Assert.Equal(28, executionResult.ContentNodes.Count());
+            Assert.Equal(32, executionResult.ContentNodes.Count());
             Assert.Equal("stap.woonsituatie.keuze.alleenstaande",
                 executionResult.ContentNodes.FirstOrDefault(c => c.Parameter.Name == argsret.Parameters.ToList()[0].Name).Parameter.SemanticKey);
             Assert.Equal("stap.woonsituatie.keuze.aanvrager_met_toeslagpartner",

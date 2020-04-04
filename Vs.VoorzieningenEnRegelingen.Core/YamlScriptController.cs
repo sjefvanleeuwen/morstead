@@ -181,24 +181,22 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                                 contentNode.Parameter.SemanticKey = contentNode.Name;
                                 _contentNodes.Add(contentNode);
                             }
+                        }
+                        if (!string.IsNullOrEmpty(step.Value))
+                        {
+                            var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepValue}.{step.Value}");
+                            contentNode.Parameter = new Parameter(step.Name, null, TypeEnum.Double, ref _model);
+                            contentNode.Parameter.SemanticKey = contentNode.Name;
+                            _contentNodes.Add(contentNode);
+                        }
+                        ResolveToQuestion(step.Formula, ref _contentNodes, step.Situation, step.Name);
 
-                            if (!string.IsNullOrEmpty(step.Value))
-                            {
-                                var contentNode = new ContentNode($"{YamlParser.Step}.{step.Name}.{YamlParser.StepValue}.{step.Value}");
-                                contentNode.Parameter = new Parameter(step.Name, null, TypeEnum.Double, ref _model);
-                                contentNode.Parameter.SemanticKey = contentNode.Name;
-                                _contentNodes.Add(contentNode);
-                            }
-
-                            ResolveToQuestion(step.Formula, ref _contentNodes, step.Situation, step.Name);
-
-                            if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
-                            {
-                                step.Break.SemanticKey = string.Join('.', new[] { YamlParser.Step, step.Name, "geen_recht" }.Where(s => !string.IsNullOrEmpty(s)));
-                                ContentNode node = new ContentNode(step.Break.SemanticKey) { IsBreak = true, IsSituational = step.IsSituational, Situation = step.Situation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
-                                node.Parameter.SemanticKey = step.Break.SemanticKey;
-                                _contentNodes.Add(node);
-                            }
+                        if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
+                        {
+                            step.Break.SemanticKey = string.Join('.', new[] { YamlParser.Step, step.Name, "geen_recht" }.Where(s => !string.IsNullOrEmpty(s)));
+                            ContentNode node = new ContentNode(step.Break.SemanticKey) { IsBreak = true, IsSituational = step.IsSituational, Situation = step.Situation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
+                            node.Parameter.SemanticKey = step.Break.SemanticKey;
+                            _contentNodes.Add(node);
                         }
                     }
                 }
