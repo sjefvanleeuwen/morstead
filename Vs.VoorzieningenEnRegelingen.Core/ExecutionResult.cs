@@ -35,16 +35,16 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             {
                 parametername = QuestionFirstParameter?.Name;
             }
-            var paramenterSementicKey = $"{Step.SemanticKey}.{parametername}";
-            var paramenterSementicKeyKeuze = $"{Step.SemanticKey}.keuze.{parametername}";
+            var parameterSementicKey = $"{Step.SemanticKey}.{parametername}";
+            var parameterSementicKeyKeuze = $"{Step.SemanticKey}.keuze.{parametername}";
 
-            if (ContentNodes.Any(c => c.Parameter.SemanticKey == paramenterSementicKey))
+            if (ContentNodes.Any(c => c.Parameter.SemanticKey == parameterSementicKey))
             {
-                return paramenterSementicKey;
+                return parameterSementicKey;
             }
-            if (ContentNodes.Any(c => c.Parameter.SemanticKey == paramenterSementicKeyKeuze))
+            if (ContentNodes.Any(c => c.Parameter.SemanticKey == parameterSementicKeyKeuze))
             {
-                return paramenterSementicKeyKeuze;
+                return parameterSementicKeyKeuze;
             }
             return Step.SemanticKey;
         }
