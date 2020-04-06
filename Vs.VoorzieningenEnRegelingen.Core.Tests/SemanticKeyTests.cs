@@ -65,5 +65,28 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.Equal("stap.woonsituatie.keuze.aanvrager_met_toeslagpartner",
                 executionResult.ContentNodes.FirstOrDefault(c => c.Parameter.Name == argsret.Parameters.ToList()[1].Name).Parameter.SemanticKey);
         }
+
+        [Fact]
+        public void ExecutionResultHasCorrectSemanticKeyOnGeenRecht()
+        {
+            QuestionArgs argsret = null;
+            var controller = new YamlScriptController();
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                argsret = args;
+            };
+            var result = controller.Parse(YamlZorgtoeslag5.Body);
+            var parameters = new ParametersCollection() { new ClientParameter("woonland", "Anders") } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+            try
+            {
+                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException ex)
+            {
+            }
+            Assert.Equal("stap.woonland", executionResult.Step.SemanticKey);
+            //Assert.Equal("stap.woonland.geen_recht", executionResult.Step.SemanticKey);
+        }
     }
 }
