@@ -11,6 +11,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         private IListFormElementData _data => Data as IListFormElementData;
         protected IEnumerable<string> _keys => _data.Options.Keys;
 
+        public override bool HasInput => true;
+
         public override void FillDataFromResult(IExecutionResult result, IContentController contentController)
         {
             Data = new ListFormElementData();

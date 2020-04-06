@@ -93,5 +93,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("div", component.Find("div > label + span").NextElement().Name); //label followed by error
             Assert.Equal("input", component.Find("div > label + span + div").NextElement().Name); //error followed by the one and only input
         }
+
+        [Fact]
+        public void ShouldHaveInput()
+        {
+            var sut = new Number();
+            Assert.True(sut.HasInput);
+        }
     }
 }

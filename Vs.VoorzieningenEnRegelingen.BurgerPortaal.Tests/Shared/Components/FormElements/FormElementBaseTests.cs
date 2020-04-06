@@ -1,4 +1,5 @@
 ﻿using Moq;
+using System.Collections.Generic;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Interface;
@@ -124,6 +125,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.True(formElement is IFormElementBase);
             Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
             Assert.Equal(typeof(FormElementBase), formElement.GetType());
+        }
+
+        [Fact]
+        public void ShouldNotHaveInput()
+        {
+            var sut = new FormElementBase();
+            Assert.False(sut.HasInput);
         }
     }
 }

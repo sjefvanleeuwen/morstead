@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Cms.Core.Enums;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
@@ -113,12 +114,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         /// <summary>
         /// Only return the current value if it is a valid value
+        /// Also a name must be set (i.e. a form element should be present)
         /// </summary>
         /// <returns></returns>
         private ParametersCollection GetCurrentParameters()
         {
+            if (_formElement == null || !_formElement.HasInput)
+            {
+                return null;
+            }
             ValidateForm();
-            if (_formElement?.Data?.IsValid ?? false)
+            if (_formElement.Data?.IsValid ?? false)
             {
                 if (_formElement.Data.InferedType == TypeInference.InferenceResult.TypeEnum.Boolean)
                 {

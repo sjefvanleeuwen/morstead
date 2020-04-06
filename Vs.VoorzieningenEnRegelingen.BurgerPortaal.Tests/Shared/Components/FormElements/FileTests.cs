@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
+using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements
 {
@@ -40,6 +41,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             //todo MPS implement
             //Can not be run since there is no JSInvokeable?
+        }
+
+        [Fact]
+        public void ShouldHaveInput()
+        {
+            var sut = new File();
+            Assert.True(sut.HasInput);
         }
     }
 }

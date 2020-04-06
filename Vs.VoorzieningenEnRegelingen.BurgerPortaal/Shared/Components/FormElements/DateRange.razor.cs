@@ -7,6 +7,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
     {
         private IDateRangeFormElementData _data => Data as IDateRangeFormElementData;
 
+        public override bool HasInput => true;
+
         private string YearStart
         {
             get => _data.GetYear(DateRangeType.Start).ToString();

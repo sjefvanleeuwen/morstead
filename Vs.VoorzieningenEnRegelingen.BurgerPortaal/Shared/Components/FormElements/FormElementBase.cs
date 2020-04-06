@@ -31,6 +31,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 
         public bool ShowElement => Data != null && !string.IsNullOrWhiteSpace(Data.Name);
 
+        public virtual bool HasInput => false;
+
         public virtual void FillDataFromResult(IExecutionResult result, IContentController contentController)
         {
             //todo MPS write test

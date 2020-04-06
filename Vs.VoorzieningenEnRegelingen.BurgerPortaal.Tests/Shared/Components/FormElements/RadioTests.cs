@@ -249,5 +249,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("div", component.Find("fieldset > legend + span + div + div").Elements()[0].Name); //element has a div
             Assert.Equal("input", component.Find("fieldset > legend + span + div + div").Elements()[0].Elements()[0].Name); //div has an input
         }
+
+        [Fact]
+        public void ShouldHaveInput()
+        {
+            var sut = new Radio();
+            Assert.True(sut.HasInput);
+        }
     }
 }

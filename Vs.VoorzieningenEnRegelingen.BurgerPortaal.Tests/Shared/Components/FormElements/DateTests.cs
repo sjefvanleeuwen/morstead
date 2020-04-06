@@ -260,5 +260,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("div", component.Find("div > label + span + div").NextElement().Name); //error followed by the group div
             Assert.Equal("input__control-group", component.Find("div > label + span + div").NextElement().Attr("class")); //check div class
         }
+
+        [Fact]
+        public void ShouldHaveInput()
+        {
+            var sut = new Date();
+            Assert.True(sut.HasInput);
+        }
     }
 }

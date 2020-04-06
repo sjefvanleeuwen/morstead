@@ -6,6 +6,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
     {
         private IDateFormElementData _data => Data as IDateFormElementData;
 
+        public override bool HasInput => true;
+
         private string Year
         {
             get => _data.GetYear().ToString();

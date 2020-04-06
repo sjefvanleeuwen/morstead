@@ -124,5 +124,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("div", component.Find("div > label + span").NextElement().Name); //label followed by error
             Assert.Equal("select", component.Find("div > label + span + div").NextElement().Name); //error followed by the one and only select
         }
+
+        [Fact]
+        public void ShouldHaveInput()
+        {
+            var sut = new Select();
+            Assert.True(sut.HasInput);
+        }
     }
 }

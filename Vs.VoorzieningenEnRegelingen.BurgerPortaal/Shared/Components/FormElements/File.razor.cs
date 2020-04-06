@@ -11,6 +11,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
     {
         private IFileFormElementData _data => Data as IFileFormElementData;
 
+        public override bool HasInput => true;
+
         protected override void OnInitialized()
         {
             base.OnInitialized();
