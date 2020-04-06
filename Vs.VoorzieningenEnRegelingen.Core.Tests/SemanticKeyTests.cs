@@ -86,7 +86,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             {
             }
             Assert.Equal("stap.woonland", executionResult.Step.SemanticKey);
-            //Assert.Equal("stap.woonland.geen_recht", executionResult.Step.SemanticKey);
+            Assert.Equal("stap.woonland.geen_recht", executionResult.Step.Break.SemanticKey);
+            Assert.True(executionResult?.Parameters?.Any(p => p.Name == "recht" && !(bool)p.Value));
         }
     }
 }
