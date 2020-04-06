@@ -7,7 +7,7 @@
    vraag: Waar bent u woonachtig?
    titel: Selecteer uw woonland.
    tekst: Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de Belastingdienst.
-   hint: Selecteer ""Anders"" wanneer het uw woonland niet in de lijst staat.
+   hint: Selecteer ""Anders"" wanneer uw woonland niet in de lijst staat.
  - key: stap.woonsituatie
    vraag: Wat is uw woonsituatie?
    titel: Wat is uw woonsituatie?
