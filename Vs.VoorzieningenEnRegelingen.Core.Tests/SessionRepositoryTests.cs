@@ -13,10 +13,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var sessionRepository = new SessionRepository(new TimeSpan(0, 15, 0));
             var sessionId = Guid.NewGuid();
             var parameters = new ParametersCollection() {
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("woonland","Nederland"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)0)
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("toetsingsinkomen_toeslagpartner", (double)0, TypeInference.InferenceResult.TypeEnum.Double, "Dummy")
             };
 
             sessionRepository.Persist(sessionId, parameters);

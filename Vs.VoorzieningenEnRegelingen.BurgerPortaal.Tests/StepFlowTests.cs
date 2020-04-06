@@ -33,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 
             //execute the second step
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("alleenstaande", "ja") });
+            sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1") });
 
             Assert.Equal(2, sequenceController.LastExecutionResult.Parameters.Count); //standaardpremie is nu ook bekend
             Assert.Equal("alleenstaande", sequenceController.LastExecutionResult.Parameters[0].Name);
@@ -78,8 +78,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             //once again try to go back one step, but this time a value was entered
             sequenceController.DecreaseStep();
             sequenceController.ExecuteStep(new ParametersCollection() {
-                new ClientParameter("alleenstaande", "nee"),
-                new ClientParameter("aanvrager_met_toeslagpartner", "ja")
+                new ClientParameter("alleenstaande", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1")
             });
 
             //should be the same as the previous step
@@ -89,8 +89,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             //increase the step 1 -> 2
             sequenceController.IncreaseStep();
             sequenceController.ExecuteStep(new ParametersCollection() {
-                new ClientParameter("alleenstaande", "ja"),
-                new ClientParameter("aanvrager_met_toeslagpartner", "nee")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1")
             });
 
             CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(sequenceController);
@@ -98,7 +98,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 
             //increase the step 2 ->3
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("toetsingsinkomen_aanvrager", "800") });
+            sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("toetsingsinkomen_aanvrager", "800", TypeInference.InferenceResult.TypeEnum.Double, "stap.2") });
 
             CanDoThreeStepsAndTwoBackAnd1forward_CheckStep3(sequenceController);
             CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
@@ -132,8 +132,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 
             sequenceController.IncreaseStep();
             sequenceController.ExecuteStep(new ParametersCollection() {
-                new ClientParameter("alleenstaande", "ja"),
-                new ClientParameter("aanvrager_met_toeslagpartner", "nee")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1")
             });
 
             //should be the same as when step 1 was executed the first time
@@ -147,8 +147,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
             //then increase with a different value 1 -> 2
             sequenceController.IncreaseStep();
             sequenceController.ExecuteStep(new ParametersCollection() {
-                new ClientParameter("alleenstaande", "nee"),
-                new ClientParameter("aanvrager_met_toeslagpartner", "ja")
+                new ClientParameter("alleenstaande", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1")
             });
             //should be the same as when step 1 was executed the first time, but we get 1 different variable back
             CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2b(sequenceController);

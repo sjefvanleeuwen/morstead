@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Cms.Core.Enums;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
@@ -135,7 +134,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                     return GetCurrentNumberParameter();
                 }
                 return new ParametersCollection {
-                    new ClientParameter(_formElement.Data.Name, _formElement.Data.Value, _formElement.Data.InferedType)
+                    new ClientParameter(_formElement.Data.Name, _formElement.Data.Value, _formElement.Data.InferedType, _semanticKey)
                 };
             }
             return null;
@@ -147,7 +146,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             //get all parameter options
             foreach (var key in (_formElement.Data as IOptionsFormElementData).Options.Keys)
             {
-                result.Add(new ClientParameter(key, key == _formElement.Data.Value ? "ja" : "nee", _formElement.Data.InferedType));
+                result.Add(new ClientParameter(key, key == _formElement.Data.Value ? "ja" : "nee", _formElement.Data.InferedType, _semanticKey));
             }
 
             return result;
@@ -157,7 +156,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             return new ParametersCollection
             {
-                new ClientParameter(_formElement.Data.Name, _formElement.Data.Value.Replace(',', '.'), _formElement.Data.InferedType)
+                new ClientParameter(_formElement.Data.Name, _formElement.Data.Value.Replace(',', '.'), _formElement.Data.InferedType, _semanticKey)
             };
         }
     }

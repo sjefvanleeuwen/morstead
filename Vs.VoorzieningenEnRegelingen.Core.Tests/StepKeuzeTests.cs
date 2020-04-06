@@ -292,8 +292,8 @@ tabellen:
             //prepare the result
             var parameters = new ParametersCollection
             {
-                new ClientParameter("A","ja"),
-                new ClientParameter("B","nee")
+                new ClientParameter("A", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("B", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
 
@@ -336,8 +336,8 @@ tabellen:
             //prepare the result
             var parameters = new ParametersCollection
             {
-                new ClientParameter("A","nee"),
-                new ClientParameter("B","ja")
+                new ClientParameter("A","nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("B","ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
 

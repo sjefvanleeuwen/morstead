@@ -35,7 +35,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
             {
                 Config = YamlZorgtoeslag.Body,
                 Parameters = new ParametersCollection() {
-                    new ClientParameter("alleenstaande","ja")
+                    new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
                 }
             };
 

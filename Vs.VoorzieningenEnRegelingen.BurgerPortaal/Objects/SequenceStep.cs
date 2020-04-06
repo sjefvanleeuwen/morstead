@@ -17,10 +17,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
         public bool IsMatch(IParameter parameter)
         {
             return parameter != null &&
-                (ParameterName == parameter.Name ||
-                    (ValidParameterNames != null && ValidParameterNames.Contains(parameter.Name)))
-                //&& parameter.Key == Key
-                ;
+                (
+                    (!(parameter is IClientParameter) || SemanticKey == parameter.SemanticKey) &&
+                    (
+                        ParameterName == parameter.Name ||
+                        (ValidParameterNames != null && ValidParameterNames.Contains(parameter.Name))
+                    )
+                );
         }
     }
 }

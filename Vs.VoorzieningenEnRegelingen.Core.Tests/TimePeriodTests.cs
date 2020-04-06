@@ -58,15 +58,15 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 {
                     case "hoofdsom":
                         Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double);
-                        parameters.Add(new ClientParameter("hoofdsom", 7500));
+                        parameters.Add(new ClientParameter("hoofdsom", 7500, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"));
                         break;
                     case "looptijd":
                         Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Period);
-                        parameters.Add(new ClientParameter("vanaf", "30 Januari 2017"));
+                        parameters.Add(new ClientParameter("vanaf", "30 Januari 2017", TypeInference.InferenceResult.TypeEnum.Period, "Dummy"));
                         break;
                     case "soort_rente":
                         Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.List);
-                        parameters.Add(new ClientParameter("soort_rente", 1500));
+                        parameters.Add(new ClientParameter("soort_rente", 1500, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"));
                         break; ;
                 }
             };

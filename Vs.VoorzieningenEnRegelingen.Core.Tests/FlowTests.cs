@@ -33,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlZorgtoeslag.Body);
             var parameters = new ParametersCollection();
-            parameters.Add(new ClientParameter("woonland", "Nederland"));
+            parameters.Add(new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"));
             //  var executionResult = controller.ExecuteWorkflow(parameters);
             // Tsjechië,            0.2412 
             // context.Variables.Add("woonland", "Tsjechië");

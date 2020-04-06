@@ -22,11 +22,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, sut.Parameters.GetAll().ElementAt(0).Type);
             Assert.True((bool)sut.Parameters.GetAll().ElementAt(0).Value);
             Assert.Equal("double_test3", sut.Parameters.GetAll().ElementAt(1).Name);
-            Assert.Equal(TypeInference.InferenceResult.TypeEnum.String, sut.Parameters.GetAll().ElementAt(1).Type);
-            Assert.Equal("test2_waarde", (string)sut.Parameters.GetAll().ElementAt(1).Value);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, sut.Parameters.GetAll().ElementAt(1).Type);
+            Assert.Equal(125.01, (double)sut.Parameters.GetAll().ElementAt(1).Value);
             Assert.Equal("string_test4", sut.Parameters.GetAll().ElementAt(2).Name);
-            Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, sut.Parameters.GetAll().ElementAt(2).Type);
-            Assert.Equal(125.01, (double)sut.Parameters.GetAll().ElementAt(2).Value);
+            Assert.Equal(TypeInference.InferenceResult.TypeEnum.String, sut.Parameters.GetAll().ElementAt(2).Type);
+            Assert.Equal("test2_waarde", (string)sut.Parameters.GetAll().ElementAt(2).Value);
         }
 
         [Fact]
@@ -167,27 +167,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects
         /// <returns></returns>
         private IClientParameter InitMoqClientParameter(int i)
         {
-            var moq = new Mock<IClientParameter>();
             if (i == 1)
             {
-                moq.Setup(m => m.Name).Returns("boolean_test1");
-                moq.Setup(m => m.Type).Returns(TypeInference.InferenceResult.TypeEnum.Boolean);
-                moq.Setup(m => m.Value).Returns(true);
+                return new ClientParameter("boolean_test1", true, TypeInference.InferenceResult.TypeEnum.Boolean, "test_key1");
             }
             if (i == 2)
             {
-                moq.Setup(m => m.Name).Returns("double_test3");
-                moq.Setup(m => m.Type).Returns(TypeInference.InferenceResult.TypeEnum.String);
-                moq.Setup(m => m.Value).Returns("test2_waarde");
+                return new ClientParameter("double_test3", 125.01, TypeInference.InferenceResult.TypeEnum.Double, "test_key2");
             }
             if (i == 3)
             {
-                moq.Setup(m => m.Name).Returns("string_test4");
-                moq.Setup(m => m.Type).Returns(TypeInference.InferenceResult.TypeEnum.Double);
-                moq.Setup(m => m.Value).Returns(125.01);
+                return new ClientParameter("string_test4", "test2_waarde", TypeInference.InferenceResult.TypeEnum.String, "test_key3");
             }
-
-            return moq.Object;
+            return null;
         }
 
         private IExecutionResult InitMoqExecutionResultsWithBoolean()

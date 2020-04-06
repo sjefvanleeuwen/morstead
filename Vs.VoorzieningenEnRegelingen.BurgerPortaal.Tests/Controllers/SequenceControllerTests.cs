@@ -163,7 +163,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Controllers
             var moqServiceController = InitMoqServiceController(true);
             var moqSequence = InitMoqSequence(true, true,
                 new List<IClientParameter> {
-                    new ClientParameter("Name", "TestValue", TypeInference.InferenceResult.TypeEnum.String)
+                    new ClientParameter("Name", "TestValue", TypeInference.InferenceResult.TypeEnum.String, "Dummy")
                 });
             var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
             sut.ExecuteStep(It.IsAny<IParametersCollection>());
@@ -178,8 +178,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Controllers
             var moqServiceController = InitMoqServiceController(true, TypeInference.InferenceResult.TypeEnum.Boolean);
             var moqSequence = InitMoqSequence(true, true,
                 new List<IClientParameter> {
-                    new ClientParameter("Name1", true, TypeInference.InferenceResult.TypeEnum.Boolean),
-                    new ClientParameter("Name2", false, TypeInference.InferenceResult.TypeEnum.Boolean)
+                    new ClientParameter("Name1", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                    new ClientParameter("Name2", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
                 });
             var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
             sut.ExecuteStep(It.IsAny<IParametersCollection>());
@@ -194,7 +194,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Controllers
             var moqServiceController = InitMoqServiceController(true, TypeInference.InferenceResult.TypeEnum.Double);
             var moqSequence = InitMoqSequence(true, true,
                 new List<IClientParameter> {
-                    new ClientParameter("TheName", "1234.23", TypeInference.InferenceResult.TypeEnum.Double),
+                    new ClientParameter("TheName", "1234.23", TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
                 });
             var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
             sut.ExecuteStep(It.IsAny<IParametersCollection>());

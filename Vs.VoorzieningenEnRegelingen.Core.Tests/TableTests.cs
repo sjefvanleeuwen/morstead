@@ -41,7 +41,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 // This list can be used to do a selection of a valid woonland
                 Assert.True(((List<object>)args.Parameters[0].Value).Count > 0);
                 // Provide an anwser by selecting an item: Finland from the list
-                parameters.Add(new ClientParameter(args.Parameters[0].Name, ((List<object>)args.Parameters[0].Value)[1]));
+                parameters.Add(new ClientParameter(args.Parameters[0].Name, 
+                    ((List<object>)args.Parameters[0].Value)[1], TypeInference.InferenceResult.TypeEnum.List, "Dummy"));
             };
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             try
@@ -64,7 +65,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 
             // Quick Hack to see if recht is false by selecting woonland: Anders
             parameters.Clear();
-            parameters.Add(new ClientParameter("woonland", "Anders"));
+            parameters.Add(new ClientParameter("woonland", "Anders", TypeInference.InferenceResult.TypeEnum.List, "Dummy"));
             var recalculate = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True(parameters[0].Name == "woonland");
             Assert.True((string)parameters[0].Value == "Anders");

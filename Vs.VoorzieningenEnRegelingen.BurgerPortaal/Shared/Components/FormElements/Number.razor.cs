@@ -10,7 +10,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
     public partial class Number
     {
         private INumericFormElementData _data => Data as INumericFormElementData;
-        
+
         public override bool HasInput => true;
 
         protected override void OnInitialized()

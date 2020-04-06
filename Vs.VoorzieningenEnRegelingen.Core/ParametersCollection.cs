@@ -25,7 +25,16 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 throw new ArgumentNullException(nameof(parameter));
             }
 
-            this.RemoveAll(p => p.Name == parameter.Name);
+            if (parameter is IClientParameter)
+            {
+                this.RemoveAll(
+                    p => p.SemanticKey == parameter.SemanticKey &&
+                    p.Name == parameter.Name);
+            }
+            else
+            {
+                this.RemoveAll(p => p.Name == parameter.Name);
+            }
             this.Add(parameter);
         }
     }

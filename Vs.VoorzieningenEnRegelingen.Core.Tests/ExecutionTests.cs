@@ -76,10 +76,10 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("woonland","Nederland")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -104,10 +104,10 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)60000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("woonland","Nederland")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)60000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -132,10 +132,10 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)150000),
-                new ClientParameter("woonland","Nederland")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)150000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -161,10 +161,10 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("woonland","Malta")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("woonland", "Malta", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -190,10 +190,10 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("woonland","Rusland")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Rusland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -214,10 +214,9 @@ formules:
                 argsret = args;
             };
             var parameters = new ParametersCollection() {
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                //new Parameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("woonland","Nederland")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             try
             {
@@ -247,10 +246,9 @@ formules:
                 argsret = args;
             };
             var parameters = new ParametersCollection() {
-                new ClientParameter("alleenstaande","ja"),
-                /*new Parameter("toetsingsinkomen_aanvrager",(double)19000),*/
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("woonland","Nederland")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             try
             {
@@ -280,10 +278,10 @@ formules:
                 argsret = args;
             };
             var parameters = new ParametersCollection() {
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                //new Parameter("woonland","Nederland")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                //new Parameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             try
             {
@@ -313,10 +311,9 @@ formules:
                 argsret = args;
             };
             var parameters = new ParametersCollection() {
-                //new Parameter("alleenstaande","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("woonland","Nederland")
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             try
             {
@@ -350,12 +347,12 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("aanvrager_met_toeslagpartner","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)10500),
-                new ClientParameter("vermogen_toeslagpartner",(double)30000),
-                new ClientParameter("woonland","Nederland"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("toetsingsinkomen_toeslagpartner", (double)10500, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_toeslagpartner", (double)30000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -381,12 +378,12 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("aanvrager_met_toeslagpartner","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)20500),
-                new ClientParameter("vermogen_toeslagpartner",(double)30000),
-                new ClientParameter("woonland","Nederland")
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("toetsingsinkomen_toeslagpartner", (double)20500, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_toeslagpartner", (double)30000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -412,12 +409,12 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("aanvrager_met_toeslagpartner","ja"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)10500),
-                new ClientParameter("vermogen_toeslagpartner",(double)300000),
-                new ClientParameter("woonland","Nederland")
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("toetsingsinkomen_toeslagpartner", (double)10500, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_toeslagpartner", (double)300000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -439,11 +436,11 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("aanvrager_met_toeslagpartner","ja"),
-                new ClientParameter("woonland","Nederland"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("vermogen_toeslagpartner",(double)30000)
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_toeslagpartner", (double)30000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy")
             } as IParametersCollection;
             try
             {
@@ -473,12 +470,12 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("aanvrager_met_toeslagpartner","ja"),
-                new ClientParameter("woonland","Nederland"),
-                new ClientParameter("toetsingsinkomen_aanvrager",(double)19000),
-                new ClientParameter("vermogen_aanvrager",(double)1000),
-                new ClientParameter("toetsingsinkomen_toeslagpartner",(double)10500),
-                //new Parameter("vermogen_toeslagpartner",(double)30000)
+                new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("toetsingsinkomen_toeslagpartner", (double)10500, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                //new Parameter("vermogen_toeslagpartner", (double)30000)
             } as IParametersCollection;
             try
             {
@@ -492,7 +489,7 @@ formules:
             Assert.True(isException);
             Assert.NotNull(argsret);
             Assert.True(argsret.Parameters[0].Name == "vermogen_toeslagpartner");
-            Assert.True(argsret.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double);
+            Assert.True(argsret.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double, "Dummy");
             Assert.True((double)argsret.Parameters[0].Value == 0);
             Assert.True(argsret.Parameters[0].ValueAsString == "0");
         }
@@ -508,11 +505,11 @@ formules:
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 Assert.True(args.Parameters[0].Name == "alleenstaande");
-                Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Boolean);
+                Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy");
                 Assert.True(args.Parameters[0].ValueAsString == "False");
                 Assert.False((bool)args.Parameters[0].Value);
                 Assert.True(args.Parameters[1].Name == "aanvrager_met_toeslagpartner");
-                Assert.True(args.Parameters[1].Type == TypeInference.InferenceResult.TypeEnum.Boolean);
+                Assert.True(args.Parameters[1].Type == TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy");
                 Assert.True(args.Parameters[1].ValueAsString == "False");
                 Assert.False((bool)args.Parameters[1].Value);
                 argsret = args;
@@ -560,20 +557,20 @@ formules:
                 switch (args.Parameters[0].Name)
                 {
                     case "alleenstaande":
-                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Boolean);
-                        parameters.Add(new ClientParameter("alleenstaande", true));
+                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy");
+                        parameters.Add(new ClientParameter("alleenstaande", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"));
                         break;
                     case "woonland":
-                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.List);
-                        parameters.Add(new ClientParameter("woonland", "Finland"));
+                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.List, "Dummy");
+                        parameters.Add(new ClientParameter("woonland", "Finland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"));
                         break;
                     case "vermogen_aanvrager":
-                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double);
-                        parameters.Add(new ClientParameter("vermogen_aanvrager", 15000));
+                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double, "Dummy");
+                        parameters.Add(new ClientParameter("vermogen_aanvrager", 15000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"));
                         break;
                     case "toetsingsinkomen_aanvrager":
-                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double);
-                        parameters.Add(new ClientParameter("toetsingsinkomen_aanvrager", 1500));
+                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.Double, "Dummy");
+                        parameters.Add(new ClientParameter("toetsingsinkomen_aanvrager", 1500, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"));
                         break;
                 }
             };
@@ -642,7 +639,7 @@ formules:
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 Assert.True(args.Parameters[0].Name == "keuze_boven_vermogensgrens");
-                parameters.Add(new ClientParameter("keuze_boven_vermogensgrens", true));
+                parameters.Add(new ClientParameter("keuze_boven_vermogensgrens", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"));
             };
 
             try
@@ -662,7 +659,6 @@ formules:
         [Fact]
         public void HashExecutionTest()
         {
-            //List<ParametersCollection> parameters = new List<ParametersCollection>();
             var controller = new YamlScriptController();
             var result = controller.Parse(YamlHashExecutionTests.Body);
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -679,23 +675,22 @@ formules:
             var parameters = new ParametersCollection() as IParametersCollection;
             var stepSequence = new List<string>();
             // Scenario 1: User fill in value 1 in first step.
-            parameters.Add(new ClientParameter("formule1_waarde", "1"));
+            parameters.Add(new ClientParameter("formule1_waarde", "1", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"));
             executionResult = new ExecutionResult(ref parameters);
             var executionResult1 = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True((double)parameters[4].Value == 1000);
             StringBuilder sb = new StringBuilder();
-            stepSequence.Add(string.Join(",", executionResult1.Stacktrace.Select(p => p.Step.Key).ToArray()));
+            stepSequence.Add(string.Join(", ", executionResult1.Stacktrace.Select(p => p.Step.Key).ToArray()));
             parameters.Clear();
             // Scenario 2: User fills in value 2 (in first step).
-            parameters.Add(new ClientParameter("formule1_waarde", "-1"));
+            parameters.Add(new ClientParameter("formule1_waarde", "-1", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"));
             executionResult = new ExecutionResult(ref parameters);
             var executionResult2 = controller.ExecuteWorkflow(ref parameters, ref executionResult);
-            //string.Join(",", integerArray.Select(i => i.ToString()).ToArray());
             Assert.True((double)parameters[3].Value == -100);
-            stepSequence.Add(string.Join(",", executionResult2.Stacktrace.Select(p => p.Step.Key).ToArray()));
+            stepSequence.Add(string.Join(", ", executionResult2.Stacktrace.Select(p => p.Step.Key).ToArray()));
             // Get differences between sequence flows
-            Assert.True(stepSequence[0] == "0,2");
-            Assert.True(stepSequence[1] == "0,1");
+            Assert.True(stepSequence[0] == "0, 2");
+            Assert.True(stepSequence[1] == "0, 1");
 
             var delta = executionResult1.Stacktrace.Except(executionResult2.Stacktrace);
         }
@@ -710,32 +705,32 @@ formules:
             var executionResult = null as IExecutionResult;
 
             var parameters = new ParametersCollection() {
-                new ClientParameter("woonland","Nederland"),
-                new ClientParameter("alleenstaande",true),
-                new ClientParameter("aanvrager_met_toeslagpartner",false),
-                new ClientParameter("hoger_dan_de_inkomensdrempel",false),
-                new ClientParameter("lager_dan_de_inkomensdrempel",true),
-                new ClientParameter("lager_dan_de_vermogensdrempel",true),
-                new ClientParameter("hoger_dan_de_vermogensdrempel",false),
-                new ClientParameter("toetsingsinkomen_aanvrager",15000),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
+                new ClientParameter("alleenstaande", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("aanvrager_met_toeslagpartner", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("hoger_dan_de_inkomensdrempel", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("lager_dan_de_inkomensdrempel", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("lager_dan_de_vermogensdrempel", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("hoger_dan_de_vermogensdrempel", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", 15000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
             } as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 Assert.True(args.Parameters[0].Name == "keuze_boven_vermogensgrens");
-                parameters.Add(new ClientParameter("keuze_boven_vermogensgrens", true));
+                parameters.Add(new ClientParameter("keuze_boven_vermogensgrens", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"));
             };
             executionResult = new ExecutionResult(ref parameters);
             executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             Assert.True((double)executionResult.Parameters.First(p => p.Name == "zorgtoeslag").Value == 99.09);
             parameters = new ParametersCollection() {
-                new ClientParameter("woonland","Nederland"),
-                new ClientParameter("alleenstaande",false),
-                new ClientParameter("aanvrager_met_toeslagpartner",true),
-                new ClientParameter("hoger_dan_de_inkomensdrempel",false),
-                new ClientParameter("lager_dan_de_inkomensdrempel",true),
-                new ClientParameter("lager_dan_de_vermogensdrempel",true),
-                new ClientParameter("hoger_dan_de_vermogensdrempel",false),
-                new ClientParameter("toetsingsinkomen_gezamenlijk",15000),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
+                new ClientParameter("alleenstaande", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("aanvrager_met_toeslagpartner", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("hoger_dan_de_inkomensdrempel", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("lager_dan_de_inkomensdrempel", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("lager_dan_de_vermogensdrempel", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("hoger_dan_de_vermogensdrempel", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_gezamenlijk", 15000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
             } as IParametersCollection;
             executionResult = new ExecutionResult(ref parameters);
             executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -755,14 +750,14 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag4.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("woonland","Nederland"),
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("aanvrager_met_toeslagpartner","nee"),
-                new ClientParameter("hoger_dan_vermogensdrempel","nee"),
-                new ClientParameter("lager_dan_vermogensdrempel","ja"),
-                new ClientParameter("hoger_dan_inkomensdrempel","nee"),
-                new ClientParameter("lager_dan_inkomensdrempel","ja"),
-                new ClientParameter("toetsingsinkomen", (double)19000),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("hoger_dan_vermogensdrempel", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("lager_dan_vermogensdrempel", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("hoger_dan_inkomensdrempel", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("lager_dan_inkomensdrempel", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -782,14 +777,14 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag4.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("woonland","Nederland"),
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("aanvrager_met_toeslagpartner","nee"),
-                new ClientParameter("hoger_dan_vermogensdrempel","nee"),
-                new ClientParameter("lager_dan_vermogensdrempel","ja"),
-                new ClientParameter("hoger_dan_inkomensdrempel","nee"),
-                new ClientParameter("lager_dan_inkomensdrempel","ja"),
-                new ClientParameter("toetsingsinkomen", (double)27000),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("hoger_dan_vermogensdrempel", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("lager_dan_vermogensdrempel", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("hoger_dan_inkomensdrempel", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("lager_dan_inkomensdrempel", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen", (double)27000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             controller.ExecuteWorkflow(ref parameters, ref executionResult);
@@ -807,18 +802,18 @@ formules:
                 if ((bool)parameters.GetParameter("situatie1").Value == true)
                 {
                     Assert.True(args.Parameters[0].Name == "vraag1");
-                    parameters.Add(new ClientParameter("vraag1", 2));
+                    parameters.Add(new ClientParameter("vraag1", 2, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"));
                 }
                 if ((bool)parameters.GetParameter("situatie2").Value == true)
                 {
                     Assert.True(args.Parameters[0].Name == "vraag2");
-                    parameters.Add(new ClientParameter("vraag2", 4));
+                    parameters.Add(new ClientParameter("vraag2", 4, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"));
                 }
             };
             var executionResult = null as IExecutionResult;
             parameters = new ParametersCollection() {
-                new ClientParameter("situatie1",true),
-                new ClientParameter("situatie2",false)
+                new ClientParameter("situatie1", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("situatie2", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
             } as IParametersCollection;
             try
             {
@@ -836,8 +831,8 @@ formules:
             Assert.True((double)executionResult.Parameters.GetParameter("berekening3").Value == 6);
             Assert.True((double)executionResult.Parameters.GetParameter("flowSituatie1").Value == 60);
             parameters = new ParametersCollection() {
-                new ClientParameter("situatie1",false),
-                new ClientParameter("situatie2",true)
+                new ClientParameter("situatie1", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("situatie2", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
             } as IParametersCollection;
             try
             {
@@ -869,16 +864,16 @@ formules:
                 {
                     case "leeftijd":
                         Assert.True(sender == null); // this question is not a formula expression context but a value (waarde)
-                        parameters.UpSert(new ClientParameter("leeftijd", 18));
+                        parameters.UpSert(new ClientParameter("leeftijd", 18, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"));
                         break;
                     case "cider":
                         Assert.True(args.Parameters[1].Name == "bier");
-                        parameters.UpSert(new ClientParameter("bier", true));
-                        parameters.UpSert(new ClientParameter("cider", false));
+                        parameters.UpSert(new ClientParameter("bier", true, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"));
+                        parameters.UpSert(new ClientParameter("cider", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"));
                         break;
                     case "drankje":
-                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.List);
-                        parameters.UpSert(new ClientParameter("drankje", "Hoegaarden Witbier (30cl)"));
+                        Assert.True(args.Parameters[0].Type == TypeInference.InferenceResult.TypeEnum.List, "Dummy");
+                        parameters.UpSert(new ClientParameter("drankje", "Hoegaarden Witbier (30cl)", TypeInference.InferenceResult.TypeEnum.String, "Dummy"));
                         break;
                     default:
                         throw new Exception($"unexpected parameter {args.Parameters[0].Name}.");
@@ -891,7 +886,7 @@ formules:
                 // asks for leeftijd.
                 executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
-            catch (UnresolvedException ex)
+            catch (UnresolvedException)
             {
 
             }
@@ -900,7 +895,7 @@ formules:
                 // asks for choice cider or bier
                 executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
-            catch (UnresolvedException ex)
+            catch (UnresolvedException)
             {
 
             }
@@ -909,7 +904,7 @@ formules:
                 // asks for selecting a beer product
                 executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
-            catch (UnresolvedException ex)
+            catch (UnresolvedException)
             {
 
             }
@@ -918,7 +913,7 @@ formules:
                 // returns a price
                 executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
             }
-            catch (UnresolvedException ex)
+            catch (UnresolvedException)
             {
 
             }
@@ -943,7 +938,7 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag4.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("woonland","Nederland")
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             try
@@ -970,13 +965,13 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag4.Body);
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
-                new ClientParameter("woonland","Nederland"),
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("aanvrager_met_toeslagpartner","nee"),
-                new ClientParameter("hoger_dan_vermogensdrempel","nee"),
-                new ClientParameter("lager_dan_vermogensdrempel","ja"),
-                new ClientParameter("hoger_dan_inkomensdrempel","nee"),
-                new ClientParameter("lager_dan_inkomensdrempel","ja")
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("aanvrager_met_toeslagpartner", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("hoger_dan_vermogensdrempel", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("lager_dan_vermogensdrempel", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("hoger_dan_inkomensdrempel", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("lager_dan_inkomensdrempel", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             try
@@ -993,8 +988,8 @@ formules:
         {
             var controller = new YamlScriptController();
             var parameters = new ParametersCollection() {
-                new ClientParameter("alleenstaande","ja"),
-                new ClientParameter("woonland","Nederland")
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {

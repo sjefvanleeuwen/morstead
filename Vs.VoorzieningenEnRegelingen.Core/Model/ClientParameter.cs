@@ -11,11 +11,11 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
 
         private object _value;
 
-        public ClientParameter() { }
-
-        public ClientParameter(string name, object value, TypeEnum? type = null)
+        public ClientParameter(string name, object value, TypeEnum type, string semanticKey)
         {
             Name = name;
+            SemanticKey = semanticKey;
+            Type = type;
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("message", nameof(name));
@@ -23,15 +23,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
 
             if (value == null && type == TypeEnum.Double)
             {
-                _value = double.Parse("0");
-                Type = type.Value;
+                _value = 0d;
                 return;
             }
 
             if (value == null && type == TypeEnum.Boolean)
             {
                 _value = false;
-                Type = type.Value;
                 return;
             }
 
@@ -41,7 +39,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             }
 
             _value = value.Infer();
-            Type = type ?? TypeInference.Infer(value.ToString()).Type;
         }
 
         [JsonIgnore()]
