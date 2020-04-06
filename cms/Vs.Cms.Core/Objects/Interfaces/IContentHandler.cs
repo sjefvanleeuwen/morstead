@@ -15,6 +15,6 @@ namespace Vs.Cms.Core.Objects.Interfaces
 
         ICultureContent GetDefaultContent();
 
-        void TransLateParsedContentToContent(CultureInfo cultureInfo, IDictionary<string, object> parsedContent);
+        void TranslateParsedContentToContent(CultureInfo cultureInfo, IDictionary<string, object> parsedContent);
     }
 }

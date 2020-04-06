@@ -47,7 +47,7 @@ namespace Vs.Cms.Core.Controllers
             _cultureInfo = new CultureInfo("nl-NL");
             _contentHandler.SetDefaultCulture(_cultureInfo);
             var parsedContent = YamlContentParser.RenderContentYamlToObject(body);
-            _contentHandler.TransLateParsedContentToContent(_cultureInfo, parsedContent);
+            _contentHandler.TranslateParsedContentToContent(_cultureInfo, parsedContent);
         }
     }
 }

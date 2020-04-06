@@ -83,7 +83,7 @@ namespace Vs.Cms.Core.Objects
             return _cultureContentContainer.Content[cultureInfo];
         }
 
-        public void TransLateParsedContentToContent(CultureInfo cultureInfo, IDictionary<string, object> parsedContent)
+        public void TranslateParsedContentToContent(CultureInfo cultureInfo, IDictionary<string, object> parsedContent)
         {
             const string Content = "Content";
             const string Key = "key";
@@ -100,28 +100,43 @@ namespace Vs.Cms.Core.Objects
             var cultureContent = new CultureContent();
             foreach (var item in parsedContent[Content] as IEnumerable<object>)
             {
-                if (!(item is IDictionary<string, object>))
+                var subItems = item as IDictionary<string, object>;
+                if (subItems == null)
                 {
                     throw new ArgumentException($"An item in the ParsedContent element '{Content}' is not of the correct type.");
                 }
-                var subItems = item as IDictionary<string, object>;
                 if (!subItems.ContainsKey(Key))
                 {
                     throw new ArgumentException($"An item in the ParsedContent is missing the value '{Key}'.");
                 }
-                var content = new Dictionary<FormElementContentType, object>();
-                var key = subItems[Key].ToString();
-                foreach (var formElementContentType in Enum.GetValues(typeof(FormElementContentType)).Cast<FormElementContentType>())
+
+                var keys = GetAllKeys(subItems[Key].ToString());
+                var content = GetContent(subItems);
+                foreach (var key in keys)
                 {
-                    var label = formElementContentType.GetDescription();
-                    if (label != "key" && subItems.ContainsKey(label))
-                    {
-                        content.Add(formElementContentType, subItems[label]);
-                    }
+                    cultureContent.AddContent(key, content);
                 }
-                cultureContent.AddContent(key, content);
             }
             _cultureContentContainer.Add(cultureInfo, cultureContent);
+        }
+
+        private static Dictionary<FormElementContentType, object> GetContent(IDictionary<string, object> subItems)
+        {
+            var content = new Dictionary<FormElementContentType, object>();
+            foreach (var formElementContentType in Enum.GetValues(typeof(FormElementContentType)).Cast<FormElementContentType>())
+            {
+                var label = formElementContentType.GetDescription();
+                if (label != "key" && subItems.ContainsKey(label))
+                {
+                    content.Add(formElementContentType, subItems[label]);
+                }
+            }
+            return content;
+        }
+
+        private IEnumerable<string> GetAllKeys(string keyString)
+        {
+            return keyString.Split(",").Select(s => s.Trim());
         }
     }
 }
