@@ -23,25 +23,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         [Inject]
         private NavigationManager _navigationManager { get; set; }
 
+        private System.Uri _uri => _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
+        private string _ruleYaml => QueryHelpers.ParseQuery(_uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
+        private string _contentYaml => QueryHelpers.ParseQuery(_uri.Query).TryGetValue("content", out var param) ? param.First() : null;
+
         //the formElement we are showing
         private IFormElementBase _formElement;
 
         private IStep _lastStep => _sequenceController.LastExecutionResult.Step;
         private string _semanticKey => _sequenceController.HasRights ? _lastStep.SemanticKey : _lastStep.Break.SemanticKey;
-        private int _displayQuestionNumber
-        {
-            get
-            {
-                if (_sequenceController.LastExecutionResult.Questions == null)
-                {
-                    return 0;
-                }
-                return _sequenceController.Sequence.Steps.Count();
-            }
-        }
-        private System.Uri _uri => _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
-        private string _ruleYaml => QueryHelpers.ParseQuery(_uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
-        private string _contentYaml => QueryHelpers.ParseQuery(_uri.Query).TryGetValue("content", out var param) ? param.First() : null;
+        private int _displayQuestionNumber => _sequenceController.LastExecutionResult.Questions == null ? 0 : _sequenceController.Sequence.Steps.Count();
         private string _pageTitle => _contentController.GetText("berekening.header", "titel");
         private string _pageSubTitle => _contentController.GetText("berekening.header", "ondertitel");
         private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question);
@@ -55,9 +46,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         protected override void OnInitialized()
         {
             _sequenceController.Sequence.Yaml = _ruleYaml ?? YamlZorgtoeslag5.Body;
-            //_sequenceController.Sequence.Yaml = YamlZorgtoeslag5.Body;
             _contentController.Initialize(_contentYaml ?? YamlZorgtoeslag5Content.Body);
-            //_contentController.Initialize(YamlZorgtoeslag5Content.Body);
             base.OnInitialized();
             //get the first step
             GetNextStep();
