@@ -2,8 +2,8 @@
 @page "/proefberekening"
 @using Vs.VoorzieningenEnRegelingen.Core
 <SpacingWrapper>
-    <CalculationHeader Title="Zorgtoeslag"
-                       SubTitle="Proefberekening"
+    <CalculationHeader Title="@_pageTitle"
+                       SubTitle="@_pageSubTitle"
                        Number=@_displayQuestionNumber
                        Subject="@_textSummary" />
     @if (!string.IsNullOrWhiteSpace(_textTitle) || !string.IsNullOrWhiteSpace(_textDescription))

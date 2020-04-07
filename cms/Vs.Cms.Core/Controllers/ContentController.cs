@@ -5,6 +5,7 @@ using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Helper;
 using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
+using Vs.Core.Extensions;
 
 namespace Vs.Cms.Core.Controllers
 {
@@ -30,6 +31,11 @@ namespace Vs.Cms.Core.Controllers
         }
 
         public string GetText(string semanticKey, FormElementContentType type, Dictionary<string, object> parameters = null, string defaultResult = "")
+        {
+            return GetText(semanticKey, type.GetDescription(), parameters, defaultResult);
+        }
+
+        public string GetText(string semanticKey, string type, Dictionary<string, object> parameters = null, string defaultResult = "")
         {
             parameters ??= new Dictionary<string, object>();
             var cultureContent = _contentHandler.GetDefaultContent();

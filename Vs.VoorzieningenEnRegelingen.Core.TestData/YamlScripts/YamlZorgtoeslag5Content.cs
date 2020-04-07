@@ -3,6 +3,9 @@
     public class YamlZorgtoeslag5Content
     {
         public readonly static string Body = @"Content:
+ - key: berekening.header
+   titel: Zorgtoeslag
+   ondertitel: Proefberekening
  - key: stap.woonland
    vraag: Waar bent u woonachtig?
    titel: Selecteer uw woonland.

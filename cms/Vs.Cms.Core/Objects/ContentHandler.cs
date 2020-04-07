@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Objects.Interfaces;
-using Vs.Core.Extensions;
 
 namespace Vs.Cms.Core.Objects
 {
@@ -13,6 +11,9 @@ namespace Vs.Cms.Core.Objects
         private CultureInfo _defaultCulture;
 
         private readonly ICultureContentContainer _cultureContentContainer;
+
+        private const string _content = "Content";
+        private const string _key = "key";
 
         public ContentHandler(ICultureContentContainer cultureContentContainer)
         {
@@ -85,32 +86,28 @@ namespace Vs.Cms.Core.Objects
 
         public void TranslateParsedContentToContent(CultureInfo cultureInfo, IDictionary<string, object> parsedContent)
         {
-            const string Content = "Content";
-            const string Key = "key";
-
-            if (!parsedContent.ContainsKey(Content))
+            if (!parsedContent.ContainsKey(_content))
             {
-                throw new ArgumentException($"The ParsedContent does not have a top element '{Content}'.");
+                throw new ArgumentException($"The ParsedContent does not have a top element '{_content}'.");
             }
-            if (!(parsedContent[Content] is IEnumerable<object>))
+            if (!(parsedContent[_content] is IEnumerable<object>))
             {
-                throw new ArgumentException($"The ParsedContent element '{Content}' is not of the correct type.");
+                throw new ArgumentException($"The ParsedContent element '{_content}' is not of the correct type.");
             }
 
             var cultureContent = new CultureContent();
-            foreach (var item in parsedContent[Content] as IEnumerable<object>)
+            foreach (var item in parsedContent[_content] as IEnumerable<object>)
             {
-                var subItems = item as IDictionary<string, object>;
-                if (subItems == null)
+                if (!(item is IDictionary<string, object> subItems))
                 {
-                    throw new ArgumentException($"An item in the ParsedContent element '{Content}' is not of the correct type.");
+                    throw new ArgumentException($"An item in the ParsedContent element '{_content}' is not of the correct type.");
                 }
-                if (!subItems.ContainsKey(Key))
+                if (!subItems.ContainsKey(_key))
                 {
-                    throw new ArgumentException($"An item in the ParsedContent is missing the value '{Key}'.");
+                    throw new ArgumentException($"An item in the ParsedContent is missing the value '{_key}'.");
                 }
 
-                var keys = GetAllKeys(subItems[Key].ToString());
+                var keys = GetAllKeys(subItems[_key].ToString());
                 var content = GetContent(subItems);
                 foreach (var key in keys)
                 {
@@ -120,18 +117,10 @@ namespace Vs.Cms.Core.Objects
             _cultureContentContainer.Add(cultureInfo, cultureContent);
         }
 
-        private static Dictionary<FormElementContentType, object> GetContent(IDictionary<string, object> subItems)
+        private static IDictionary<string, object> GetContent(IDictionary<string, object> subItems)
         {
-            var content = new Dictionary<FormElementContentType, object>();
-            foreach (var formElementContentType in Enum.GetValues(typeof(FormElementContentType)).Cast<FormElementContentType>())
-            {
-                var label = formElementContentType.GetDescription();
-                if (label != "key" && subItems.ContainsKey(label))
-                {
-                    content.Add(formElementContentType, subItems[label]);
-                }
-            }
-            return content;
+            subItems.Remove(subItems.Where(i => i.Key == _key).FirstOrDefault());
+            return subItems;
         }
 
         private IEnumerable<string> GetAllKeys(string keyString)

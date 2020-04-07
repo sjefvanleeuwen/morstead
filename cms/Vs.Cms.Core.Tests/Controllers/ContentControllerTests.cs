@@ -6,6 +6,7 @@ using Vs.Cms.Core.Controllers;
 using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
+using Vs.Core.Extensions;
 using Xunit;
 
 namespace Vs.Cms.Core.Tests.Controllers
@@ -39,7 +40,7 @@ namespace Vs.Cms.Core.Tests.Controllers
         }
 
         [Fact]
-        public void ShouldGetText()
+        public void ShouldGetTextByFormElementContentType()
         {
             var moqRenderStrategy = InitMoqRenderStrategy();
             var moqContentHandler = InitMoqContentHandler();
@@ -49,6 +50,20 @@ namespace Vs.Cms.Core.Tests.Controllers
             var text = sut.GetText("semanticKey", FormElementContentType.Description);
             Assert.Equal("result1", text);
             text = sut.GetText("semanticKey", FormElementContentType.Tag);
+            Assert.Equal("result2", text);
+        }
+
+        [Fact]
+        public void ShouldGetText()
+        {
+            var moqRenderStrategy = InitMoqRenderStrategy();
+            var moqContentHandler = InitMoqContentHandler();
+            var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object);
+            var dutchCulture = new CultureInfo("nl-NL");
+            sut.SetCulture(dutchCulture);
+            var text = sut.GetText("semanticKey", FormElementContentType.Description.GetDescription());
+            Assert.Equal("result1", text);
+            text = sut.GetText("semanticKey", FormElementContentType.Tag.GetDescription());
             Assert.Equal("result2", text);
         }
 
@@ -74,6 +89,8 @@ namespace Vs.Cms.Core.Tests.Controllers
             var moq = new Mock<ICultureContent>();
             moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Description)).Returns("template1");
             moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Tag)).Returns("template2");
+            moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Description.GetDescription())).Returns("template1");
+            moq.Setup(m => m.GetContent("semanticKey", FormElementContentType.Tag.GetDescription())).Returns("template2");
             return moq;
         }
     }

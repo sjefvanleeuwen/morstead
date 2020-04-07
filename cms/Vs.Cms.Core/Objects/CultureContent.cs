@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Objects.Interfaces;
+using Vs.Core.Extensions;
 
 namespace Vs.Cms.Core.Objects
 {
     public class CultureContent : ICultureContent
     {
-        private Dictionary<string, Dictionary<FormElementContentType, object>> _semanticContent = new Dictionary<string, Dictionary<FormElementContentType, object>>();
+        private IDictionary<string, IDictionary<string, object>> _semanticContent = new Dictionary<string, IDictionary<string, object>>();
 
-        public void AddContent(string semanticKey, Dictionary<FormElementContentType, object> content)
+        public void AddContent(string semanticKey, IDictionary<string, object> content)
         {
             if (!_semanticContent.ContainsKey(semanticKey))
             {
-                _semanticContent[semanticKey] = new Dictionary<FormElementContentType, object>();
+                _semanticContent[semanticKey] = new Dictionary<string, object>();
             }
             _semanticContent[semanticKey] = content;
         }
 
-        public void AddContent(string semanticKey, FormElementContentType type, object contentItem)
+        public void AddContent(string semanticKey, string type, object contentItem)
         {
             if (!_semanticContent.ContainsKey(semanticKey))
             {
-                _semanticContent[semanticKey] = new Dictionary<FormElementContentType, object>();
+                _semanticContent[semanticKey] = new Dictionary<string, object>();
             }
             if (!_semanticContent[semanticKey].ContainsKey(type))
             {
@@ -34,6 +35,11 @@ namespace Vs.Cms.Core.Objects
 
         public object GetContent(string semanticKey, FormElementContentType type)
         {
+            return GetContent(semanticKey, type.GetDescription());
+        }
+
+        public object GetContent(string semanticKey, string type)
+        {
             if (!_semanticContent.ContainsKey(semanticKey))
             {
                 throw new IndexOutOfRangeException($"There is no content defined for key '{semanticKey}'");
@@ -44,5 +50,6 @@ namespace Vs.Cms.Core.Objects
             }
             return _semanticContent[semanticKey][type];
         }
+
     }
 }

@@ -8,6 +8,7 @@ namespace Vs.Cms.Core.Controllers.Interfaces
     {
         void SetCulture(CultureInfo cultureInfo);
         string GetText(string semanticKey, FormElementContentType type, Dictionary<string, object> parameters = null, string defaultResult = "");
+        string GetText(string semanticKey, string type, Dictionary<string, object> parameters = null, string defaultResult = "");
         void Initialize(string body);
     }
 }

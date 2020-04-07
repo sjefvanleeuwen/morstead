@@ -157,5 +157,18 @@ namespace Vs.Cms.Core.Tests.Objects
             Assert.Equal("Alleenstaande", cultureContent.GetContent("stap.woonsituatie.keuze.alleenstaande", FormElementContentType.Description));
             Assert.Equal("Alleenstaande", cultureContent.GetContent("multipleKeys", FormElementContentType.Description));
         }
+
+        [Fact]
+        public void ShouldGetHeaderContent()
+        {
+            //parse the content tested in the YamlContentParser, do not mock in this case
+            var container = new CultureContentContainer();
+            var sut = new ContentHandler(container);
+            var dutch = new CultureInfo("nl-NL");
+            sut.TranslateParsedContentToContent(dutch, YamlContentParser.RenderContentYamlToObject(ContentYamlTest3.Body));
+            var cultureContent = sut.GetContentByCulture(dutch);
+            Assert.Equal("#Zorgtoeslag", cultureContent.GetContent("berekening.header", "titel"));
+            Assert.Equal("##Proefbekrekening", cultureContent.GetContent("berekening.header", "ondertitel"));
+        }
     }
 }

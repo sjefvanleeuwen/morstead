@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Objects;
+using Vs.Core.Extensions;
 using Xunit;
 
 namespace Vs.Cms.Core.Tests.Objects
@@ -12,9 +13,9 @@ namespace Vs.Cms.Core.Tests.Objects
         public void ShouldAddContentSingleValue()
         {
             var sut = new CultureContent();
-            sut.AddContent("testKey", FormElementContentType.Title, "TestTitleContent");
+            sut.AddContent("testKey", FormElementContentType.Title.GetDescription(), "TestTitleContent");
             Assert.Equal("TestTitleContent", sut.GetContent("testKey", FormElementContentType.Title));
-            sut.AddContent("testKey", FormElementContentType.Tag, "TestTagContent");
+            sut.AddContent("testKey", FormElementContentType.Tag.GetDescription(), "TestTagContent");
             //old one should be available
             Assert.Equal("TestTitleContent", sut.GetContent("testKey", FormElementContentType.Title));
             Assert.Equal("TestTagContent", sut.GetContent("testKey", FormElementContentType.Tag));
@@ -24,7 +25,7 @@ namespace Vs.Cms.Core.Tests.Objects
         public void ShouldAddContentDictionaryValue()
         {
             var sut = new CultureContent();
-            sut.AddContent("testKey", FormElementContentType.Description, new Dictionary<string, string>() {
+            sut.AddContent("testKey", FormElementContentType.Description.GetDescription(), new Dictionary<string, string>() {
                 { "opt1", "option1" },
                 { "opt2", "option2" }
             });
@@ -40,16 +41,16 @@ namespace Vs.Cms.Core.Tests.Objects
             var sut = new CultureContent();
             Assert.Throws<IndexOutOfRangeException>(() => sut.GetContent("testKey", FormElementContentType.Title));
 
-            sut.AddContent("testKey", new Dictionary<FormElementContentType, object> {
-                { FormElementContentType.Title, "TestTitleContent" },
-                { FormElementContentType.Tag, "TestTagContent" }
+            sut.AddContent("testKey", new Dictionary<string, object> {
+                { FormElementContentType.Title.GetDescription(), "TestTitleContent" },
+                { FormElementContentType.Tag.GetDescription(), "TestTagContent" }
             });
             Assert.Equal("TestTitleContent", sut.GetContent("testKey", FormElementContentType.Title));
             Assert.Equal("TestTagContent", sut.GetContent("testKey", FormElementContentType.Tag));
 
-            sut.AddContent("testKey", new Dictionary<FormElementContentType, object> {
-                { FormElementContentType.Title, "TestTitleContent" },
-                { FormElementContentType.Question, "TestSummaryContent" }
+            sut.AddContent("testKey", new Dictionary<string, object> {
+                { FormElementContentType.Title.GetDescription(), "TestTitleContent" },
+                { FormElementContentType.Question.GetDescription(), "TestSummaryContent" }
             });
             Assert.Equal("TestTitleContent", sut.GetContent("testKey", FormElementContentType.Title));
             Assert.Equal("TestSummaryContent", sut.GetContent("testKey", FormElementContentType.Question));
@@ -61,7 +62,7 @@ namespace Vs.Cms.Core.Tests.Objects
         public void ShouldGetContent()
         {
             var sut = new CultureContent();
-            sut.AddContent("testKey", FormElementContentType.Title, "TestTitleContent");
+            sut.AddContent("testKey", FormElementContentType.Title.GetDescription(), "TestTitleContent");
             Assert.Equal("TestTitleContent", sut.GetContent("testKey", FormElementContentType.Title));
         }
     }

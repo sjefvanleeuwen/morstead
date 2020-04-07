@@ -36,6 +36,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             }
         }
 
+        private string _pageTitle => _contentController.GetText("berekening.header", "titel");
+        private string _pageSubTitle => _contentController.GetText("berekening.header", "ondertitel");
         private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question);
         private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title);
         private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description);
