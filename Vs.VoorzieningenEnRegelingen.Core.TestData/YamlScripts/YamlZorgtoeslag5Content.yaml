@@ -81,9 +81,9 @@
  - key: 
      stap.woonland.geen_recht, 
      stap.vermogensdrempel.situatie.alleenstaande.geen_recht,
-     stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner.geen_recht,
+     stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner.geen_recht, 
      stap.inkomensdrempel.situatie.alleenstaande.geen_recht,
-     stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.geen_recht, 
+     stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.geen_recht,
      stap.toetsingsinkomen.situatie.aanvrager_met_toeslagpartner.geen_recht, 
      stap.toetsingsinkomen.situatie.aanvrager_met_toeslagpartner.geen_recht
    vraag: Geen Recht

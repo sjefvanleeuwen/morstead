@@ -50,8 +50,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 argsret = args;
             };
             var result = controller.Parse(YamlZorgtoeslag5.Body);
-            var parameters = new ParametersCollection() { 
-                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy") 
+            var parameters = new ParametersCollection() {
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             try

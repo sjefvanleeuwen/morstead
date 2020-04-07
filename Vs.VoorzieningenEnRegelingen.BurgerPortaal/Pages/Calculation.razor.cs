@@ -9,6 +9,8 @@ using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
+using Microsoft.AspNetCore.WebUtilities;
+
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
@@ -18,6 +20,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private ISequenceController _sequenceController { get; set; }
         [Inject]
         private IContentController _contentController { get; set; }
+        [Inject]
+        private NavigationManager _navigationManager { get; set; }
 
         //the formElement we are showing
         private IFormElementBase _formElement;
@@ -35,7 +39,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 return _sequenceController.Sequence.Steps.Count();
             }
         }
-
+        private System.Uri _uri => _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
+        private string _ruleYaml => QueryHelpers.ParseQuery(_uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
+        private string _contentYaml => QueryHelpers.ParseQuery(_uri.Query).TryGetValue("content", out var param) ? param.First() : null;
         private string _pageTitle => _contentController.GetText("berekening.header", "titel");
         private string _pageSubTitle => _contentController.GetText("berekening.header", "ondertitel");
         private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question);
@@ -48,8 +54,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         protected override void OnInitialized()
         {
-            _contentController.Initialize(YamlZorgtoeslag5Content.Body);
-            _sequenceController.Sequence.Yaml = YamlZorgtoeslag5.Body;
+            _sequenceController.Sequence.Yaml = _ruleYaml ?? YamlZorgtoeslag5.Body;
+            //_sequenceController.Sequence.Yaml = YamlZorgtoeslag5.Body;
+            _contentController.Initialize(_contentYaml ?? YamlZorgtoeslag5Content.Body);
+            //_contentController.Initialize(YamlZorgtoeslag5Content.Body);
             base.OnInitialized();
             //get the first step
             GetNextStep();

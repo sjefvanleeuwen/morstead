@@ -11,6 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "proefberekening/?rules=https%3A%2F%2Fraw.githubusercontent.com%2Fsjefvanleeuwen%2Fvirtual-society-urukagina%2Fmaster%2FVs.VoorzieningenEnRegelingen.Core.TestData%2FYamlScripts%2FYamlZorgtoeslag5.yaml&content=https%3A%2F%2Fraw.githubusercontent.com%2Fsjefvanleeuwen%2Fvirtual-society-urukagina%2Fmaster%2FVs.VoorzieningenEnRegelingen.Core.TestData%2FYamlScripts%2FYamlZorgtoeslag5Content.yaml",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

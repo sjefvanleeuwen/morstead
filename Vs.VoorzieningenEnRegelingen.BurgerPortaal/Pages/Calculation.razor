@@ -1,5 +1,5 @@
 ﻿@page "/"
-@page "/proefberekening"
+@page "/proefberekening/"
 @using Vs.VoorzieningenEnRegelingen.Core
 <SpacingWrapper>
     <CalculationHeader Title="@_pageTitle"
@@ -11,34 +11,34 @@
         <Hint Title="@_textTitle" Content="@_textDescription" />
     }
 
-<EditForm Model="_formElement">
-    <CascadingValue Value="_formElement.Data">
-        @if (_hasRights && _formElement.ShowElement)
-        {
-            @switch (_formElement.Data.InferedType)
+    <EditForm Model="_formElement">
+        <CascadingValue Value="_formElement.Data">
+            @if (_hasRights && _formElement.ShowElement)
             {
-                case TypeInference.InferenceResult.TypeEnum.Double:
-                    <Number />
-                    break;
-                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
-                    <DateRange />
-                    break;
-                case TypeInference.InferenceResult.TypeEnum.DateTime:
-                    <Date />
-                    break;
-                case TypeInference.InferenceResult.TypeEnum.String:
-                    break;
-                case TypeInference.InferenceResult.TypeEnum.Boolean:
-                    <Radio />
-                    break;
-                case TypeInference.InferenceResult.TypeEnum.List:
-                    <Select />
-                    break;
+                @switch (_formElement.Data.InferedType)
+                {
+                    case TypeInference.InferenceResult.TypeEnum.Double:
+                        <Number />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.TimeSpan:
+                        <DateRange />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.DateTime:
+                        <Date />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.String:
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.Boolean:
+                        <Radio />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.List:
+                        <Select />
+                        break;
+                }
             }
-        }
-        <Pagination PreviousDisabled="@(!_showPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
-                    NextDisabled="@(!_showNextButton)" Next="GetNextStep" NextText="Volgende"
-                    ScreenreaderDescription="pagina" />
-    </CascadingValue>
-</EditForm>
+            <Pagination PreviousDisabled="@(!_showPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
+                        NextDisabled="@(!_showNextButton)" Next="GetNextStep" NextText="Volgende"
+                        ScreenreaderDescription="pagina" />
+        </CascadingValue>
+    </EditForm>
 </SpacingWrapper>

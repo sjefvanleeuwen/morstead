@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using YamlDotNet.RepresentationModel;
 
 namespace Vs.Cms.Core.Helper
@@ -9,10 +11,29 @@ namespace Vs.Cms.Core.Helper
     {
         public const string MainNode = "content";
 
+        static ConcurrentDictionary<string, string> UrlContentCache = new ConcurrentDictionary<string, string>();
+
         public static IDictionary<string, object> RenderContentYamlToObject(string yaml)
         {
+            yaml = parseHelper(yaml);
             YamlMappingNode node = Map(yaml);
             return RenderYamlMappingNodeToObject(node);
+        }
+
+        private static string parseHelper(string yaml)
+        {
+            if (yaml.StartsWith("http"))
+            {
+                if (UrlContentCache.ContainsKey(yaml))
+                {
+                    return UrlContentCache[yaml];
+                }
+                using (var client = new WebClient())
+                {
+                    return client.DownloadString(yaml);
+                }
+            }
+            return yaml;
         }
 
         private static YamlMappingNode Map(string body)

@@ -41,7 +41,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 // This list can be used to do a selection of a valid woonland
                 Assert.True(((List<object>)args.Parameters[0].Value).Count > 0);
                 // Provide an anwser by selecting an item: Finland from the list
-                parameters.Add(new ClientParameter(args.Parameters[0].Name, 
+                parameters.Add(new ClientParameter(args.Parameters[0].Name,
                     ((List<object>)args.Parameters[0].Value)[1], TypeInference.InferenceResult.TypeEnum.List, "Dummy"));
             };
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
