@@ -39,30 +39,30 @@
  - key: stap.inkomensdrempel.situatie.alleenstaande
    vraag: Is uw toetsingsinkomen hoger dan de inkomensdrempel?
    titel: Inkomensdrempel
-   tekst: Wanneer u als alleenstaande meer inkomen heeft dan €29.562,00 per jaar, overschrijdt u de inkomensdrempel. U heeft dan geen recht op zorgtoeslag.
+   tekst: Wanneer u als alleenstaande meer inkomen heeft dan €{{toetsingsinkomensdrempel}} per jaar, overschrijdt u de inkomensdrempel. U heeft dan geen recht op zorgtoeslag.
      <br />Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de Belastingdienst.
  - key: stap.inkomensdrempel.situatie.alleenstaande.keuze.hoger_dan_inkomensdrempel
-   tekst: Ja, mijn inkomen is **hoger** dan €29.562,00
-   hint: De huidige inkomensdrempel voor alleenstaanden is €29.562,00 per jaar.
+   tekst: Ja, mijn inkomen is **hoger** dan €{{toetsingsinkomensdrempel}}
+   hint: De huidige inkomensdrempel voor alleenstaanden is €{{toetsingsinkomensdrempel}} per jaar.
  - key: stap.inkomensdrempel.situatie.alleenstaande.keuze.lager_dan_inkomensdrempel
-   tekst: Nee, mijn inkomen is **lager** dan €29.562,00
+   tekst: Nee, mijn inkomen is **lager** dan €{{toetsingsinkomensdrempel}}
  - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner
    vraag: Is uw toetsingsinkomen hoger dan de inkomensdrempel?
    titel: Inkomensdrempel
-   tekst: Wanneer u samen met een toeslagpartner meer inkomen heeft dan €37.885,00 per jaar overschrijdt u de inkomensdrempel. U heeft dan geen recht op zorgtoeslag.
+   tekst: Wanneer u samen met een toeslagpartner meer inkomen heeft dan €{{toetsingsinkomensdrempel}} per jaar overschrijdt u de inkomensdrempel. U heeft dan geen recht op zorgtoeslag.
      <br />Indien u niet zeker weet wat uw gezamenlijk inkomen is, kijk dan op de website van de Belastingdienst.
  - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.hoger_dan_inkomensdrempel
-   tekst: Ja, het gezamenlijk inkomen is **hoger** dan €37.885,00
-   hint: De huidige inkomensdrempel voor aanvragers met toeslagpartners is €37.885,00 per jaar
+   tekst: Ja, het gezamenlijk inkomen is **hoger** dan €{{toetsingsinkomensdrempel}}
+   hint: De huidige inkomensdrempel voor aanvragers met toeslagpartners is €{{toetsingsinkomensdrempel}} per jaar
  - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.lager_dan_inkomensdrempel   
-   tekst: Nee, het gezamenlijk inkomen is **lager** dan €37.885,00
+   tekst: Nee, het gezamenlijk inkomen is **lager** dan €{{toetsingsinkomensdrempel}}
  - key: stap.toetsingsinkomen.situatie.alleenstaande
    vraag: Wat is uw toetsingsinkomen?
    titel: Toetsingsinkomen
    tekst: Vul uw toetsingsinkomen in. Gebruik een komma als scheidingsteken tussen euro's en centen.
      <br />Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de Belastingdienst.
  - key: stap.toetsingsinkomen.situatie.alleenstaande.toetsingsinkomen
-   hint: De huidige inkomensdrempel voor alleenstaanden is €29.562,00 per jaar.
+   hint: De huidige inkomensdrempel voor alleenstaanden is €{{toetsingsinkomensdrempel}} per jaar.
  - key: stap.toetsingsinkomen.situatie.aanvrager_met_toeslagpartner
    vraag: Wat is uw toetsingsinkomen?
    titel: Gezamenlijk toetsingsinkomen
