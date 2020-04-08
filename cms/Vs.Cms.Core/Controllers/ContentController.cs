@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Cms.Core.Enums;
@@ -6,6 +7,7 @@ using Vs.Cms.Core.Helper;
 using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
 using Vs.Core.Extensions;
+using Vs.VoorzieningenEnRegelingen.Core.Interface;
 
 namespace Vs.Cms.Core.Controllers
 {
@@ -30,21 +32,56 @@ namespace Vs.Cms.Core.Controllers
             }
         }
 
-        public string GetText(string semanticKey, FormElementContentType type, Dictionary<string, object> parameters = null, string defaultResult = "")
+        public string GetText(string semanticKey, FormElementContentType type)
+        {
+            return GetText(semanticKey, type, null, string.Empty);
+        }
+        public string GetText(string semanticKey, FormElementContentType type, IParametersCollection parameters)
+        {
+            return GetText(semanticKey, type, parameters, string.Empty);
+        }
+        public string GetText(string semanticKey, FormElementContentType type, IParametersCollection parameters, string defaultResult)
         {
             return GetText(semanticKey, type.GetDescription(), parameters, defaultResult);
         }
-
-        public string GetText(string semanticKey, string type, Dictionary<string, object> parameters = null, string defaultResult = "")
+        public string GetText(string semanticKey, string type)
         {
-            parameters ??= new Dictionary<string, object>();
+            return GetText(semanticKey, type, null, string.Empty);
+        }
+        public string GetText(string semanticKey, string type, IParametersCollection parameters)
+        {
+            return GetText(semanticKey, type, parameters, string.Empty);
+        }
+        public string GetText(string semanticKey, string type, IParametersCollection parameters, string defaultResult)
+        {
             var cultureContent = _contentHandler.GetDefaultContent();
             var template = cultureContent.GetContent(semanticKey, type);
             if (template == null)
             {
                 return defaultResult;
             }
-            return _renderStrategy.Render(template.ToString(), parameters);
+            return _renderStrategy.Render(template.ToString(), ConvertParametersCollectionToDictionary(parameters));
+        }
+
+        private IDictionary<string, object> ConvertParametersCollectionToDictionary(IParametersCollection parameters)
+        {
+            var result = new Dictionary<string, object>();
+            if (parameters == null)
+            {
+                return result;
+            }
+            foreach (var parameter in parameters)
+            {
+                if (result.ContainsKey(parameter.Name))
+                {
+                    //always take the last supplied value in the chain
+                    result[parameter.Name] = parameter.ValueAsString;
+                    continue;
+                }
+                result.Add(parameter.Name, parameter.ValueAsString);
+                
+            }
+            return result;
         }
 
         public void Initialize(string body)

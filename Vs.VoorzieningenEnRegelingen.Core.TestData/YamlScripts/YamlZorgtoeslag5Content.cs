@@ -76,11 +76,11 @@
    hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
  - key: stap.zorgtoeslag.situatie.alleenstaande
    vraag: Maandelijkse zorgtoeslag
-   titel: Uw zorgtoeslag is **€{zorgtoeslag} per maand.**
+   titel: Uw zorgtoeslag is €{{zorgtoeslag}} per maand.
    tekst: De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
  - key: stap.zorgtoeslag.situatie.aanvrager_met_toeslagpartner
    vraag: Maandelijkse zorgtoeslag samen met uw toeslagpartner
-   titel: Uw gezamenlijke zorgtoeslag is **€zorgtoeslag per maand.**
+   titel: Uw gezamenlijke zorgtoeslag is €{{zorgtoeslag}} per maand.
    tekst: De berekening is afgelopen. U kunt eventueel naar een vorige pagina gaan om een antwoord aan te passen.
  - key: 
      stap.woonland.geen_recht, 

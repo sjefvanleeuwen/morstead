@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\core\Vs.Core\Vs.Core.csproj" />
     <ProjectReference Include="..\..\graph\Vs.Graph.Core\Vs.Graph.Core.csproj" />
+    <ProjectReference Include="..\..\Vs.VoorzieningenEnRegelingen.Core\Vs.VoorzieningenEnRegelingen.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -32,11 +32,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private IStep _lastStep => _sequenceController.LastExecutionResult.Step;
         private string _semanticKey => _sequenceController.HasRights ? _lastStep.SemanticKey : _lastStep.Break.SemanticKey;
         private int _displayQuestionNumber => _sequenceController.LastExecutionResult.Questions == null ? 0 : _sequenceController.Sequence.Steps.Count();
-        private string _pageTitle => _contentController.GetText("berekening.header", "titel");
-        private string _pageSubTitle => _contentController.GetText("berekening.header", "ondertitel");
-        private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question);
-        private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title);
-        private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description);
+        private string _pageTitle => _contentController.GetText("berekening.header", "titel", _sequenceController.LastExecutionResult.Parameters);
+        private string _pageSubTitle => _contentController.GetText("berekening.header", "ondertitel", _sequenceController.LastExecutionResult.Parameters);
+        private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question, _sequenceController.LastExecutionResult.Parameters);
+        private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title, _sequenceController.LastExecutionResult.Parameters);
+        private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description, _sequenceController.LastExecutionResult.Parameters);
         private bool _hasRights => _sequenceController.HasRights;
         private bool _questionAsked => _sequenceController.QuestionIsAsked;
         private bool _showPreviousButton => _sequenceController.CurrentStep > 1;
