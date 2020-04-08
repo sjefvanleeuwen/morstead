@@ -1011,5 +1011,25 @@ formules:
                 Assert.True(executionResult.Step.SemanticKey == "stap.vermogensdrempel.situatie.alleenstaande");
             }
         }
+
+        [Fact]
+        public void ShouldEvaluateFormulaWithoutQA()
+        {
+            var controller = new YamlScriptController();
+            var parameters = new ParametersCollection() {
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
+            } as IParametersCollection;
+            var result = controller.Parse(YamlZorgtoeslag5.Body);
+            Assert.False(result.IsError);
+            controller.EvaluateFormulaWithoutQA(ref parameters, new[] { "toetsingsinkomensdrempel", "drempelinkomen", "standaardpremie" } );
+            Assert.True(parameters.Count == 4);
+            Assert.True(parameters[0].Name == "alleenstaande");
+            Assert.True(parameters[1].Name == "toetsingsinkomensdrempel");
+            Assert.True((double)parameters[1].Value == 29562);
+            Assert.True(parameters[2].Name == "drempelinkomen");
+            Assert.True((double)parameters[2].Value == 20941);
+            Assert.True(parameters[3].Name == "standaardpremie");
+            Assert.True((double)parameters[3].Value == 1609);
+        }
     }
 }

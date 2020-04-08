@@ -45,6 +45,25 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return result;
         }
 
+        public void EvaluateFormulaWithoutQA(ref IParametersCollection parameters, string formula)
+        {
+            void callback(FormulaExpressionContext sender, QuestionArgs args)
+            {
+                throw new Exception($"Can't resolve formula {formula} without answering question {args.Parameters[0].Name} first.");
+            };
+
+            var context = new FormulaExpressionContext(ref _model, ref parameters, GetFormula(formula), callback, this);
+            context.Evaluate();
+        }
+
+        public void EvaluateFormulaWithoutQA(ref IParametersCollection parameters, IEnumerable<string> formulas)
+        {
+            foreach (var formula in formulas)
+            {
+                EvaluateFormulaWithoutQA(ref  parameters, formula);
+            }
+        }
+
         public StuurInformatie GetHeader()
         {
             return _model.Header;
