@@ -1,0 +1,22 @@
+﻿@page "/ContentTemplate/"
+<SpacingWrapper>
+    <CascadingValue Value="@YamlLogic">
+        <Text />
+    </CascadingValue>
+
+    <button class="btn" @onclick="SubmitUrl">Verstuur</button>
+    <div id="YamlLogicResult" style="display:@_urlDisplay">
+        <Hint Title="Resultaat van de Regels Yaml Url" Content="@_urlYamlContent" />
+        <button class="btn" @onclick="HideUrlContentResult">Verberg</button>
+    </div>
+
+    <CascadingValue Value="@YamlLogicText">
+        <TextArea />
+    </CascadingValue>
+
+    <button class="btn" @onclick="SubmitText">Verstuur</button>
+    <div id="YamlLogicResult" style="display:@_textDisplay">
+        <Hint Title="Resultaat van de Regels Yaml Text" Content="@_urlTextContent" />
+        <button class="btn" @onclick="HideTextContentResult">Verberg</button>
+    </div>
+</SpacingWrapper>
