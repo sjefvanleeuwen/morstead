@@ -98,8 +98,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelinge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Web", "core\Vs.Core.Web\Vs.Core.Web.csproj", "{A13575CC-D4D7-4BE2-852C-561522381580}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Logic", "Vs.Logic\Vs.Logic.csproj", "{5A3C271E-C5BB-485C-8BEF-54FAB49FBBEE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
