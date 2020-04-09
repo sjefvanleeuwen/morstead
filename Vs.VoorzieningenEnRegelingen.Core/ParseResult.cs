@@ -1,4 +1,4 @@
-﻿using Vs.VoorzieningenEnRegelingen.Core.Interface;
+﻿using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Core
 {

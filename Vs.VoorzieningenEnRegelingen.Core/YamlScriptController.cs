@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
-using Vs.VoorzieningenEnRegelingen.Core.Interface;
+using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 

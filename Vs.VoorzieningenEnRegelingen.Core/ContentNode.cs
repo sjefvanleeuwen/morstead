@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.Core.Interface;
+using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.Core

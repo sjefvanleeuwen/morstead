@@ -1,6 +1,6 @@
-﻿using Vs.VoorzieningenEnRegelingen.Core.Interface;
+﻿using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
-namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
+namespace Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces
 {
     public interface IExecuteRequest
     {

@@ -7,7 +7,7 @@ using Vs.Cms.Core.Helper;
 using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
 using Vs.Core.Extensions;
-using Vs.VoorzieningenEnRegelingen.Core.Interface;
+using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.Cms.Core.Controllers
 {

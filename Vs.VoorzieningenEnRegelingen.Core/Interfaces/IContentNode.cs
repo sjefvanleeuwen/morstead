@@ -1,6 +1,6 @@
 ﻿using Vs.VoorzieningenEnRegelingen.Core.Model;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Interface
+namespace Vs.VoorzieningenEnRegelingen.Core.Interfaces
 {
     public interface IContentNode
     {

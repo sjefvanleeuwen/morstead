@@ -4,9 +4,9 @@ using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
-using Vs.VoorzieningenEnRegelingen.Core.Interface;
+using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
-using Vs.VoorzieningenEnRegelingen.Service.Controllers;
+using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Controllers

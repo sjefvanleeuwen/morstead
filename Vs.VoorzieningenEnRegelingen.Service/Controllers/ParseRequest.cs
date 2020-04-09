@@ -1,4 +1,6 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
+﻿using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
+
+namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
 {
     public class ParseRequest : IParseRequest
     {

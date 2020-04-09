@@ -4,7 +4,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Net;
 using Vs.VoorzieningenEnRegelingen.Core;
-using Vs.VoorzieningenEnRegelingen.Core.Interface;
+using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
+using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
 {

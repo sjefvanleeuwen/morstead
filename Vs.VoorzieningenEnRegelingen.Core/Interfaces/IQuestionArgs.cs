@@ -1,4 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.Interface
+﻿namespace Vs.VoorzieningenEnRegelingen.Core.Interfaces
 {
     public interface IQuestionArgs
     {
