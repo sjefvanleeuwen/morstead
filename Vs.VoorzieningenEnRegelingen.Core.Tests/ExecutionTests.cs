@@ -1022,14 +1022,14 @@ formules:
             var result = controller.Parse(YamlZorgtoeslag5.Body);
             Assert.False(result.IsError);
             controller.EvaluateFormulaWithoutQA(ref parameters, new[] { "toetsingsinkomensdrempel", "drempelinkomen", "standaardpremie" });
-            Assert.True(parameters.Count == 4);
-            Assert.True(parameters[0].Name == "alleenstaande");
-            Assert.True(parameters[1].Name == "toetsingsinkomensdrempel");
-            Assert.True((double)parameters[1].Value == 29562);
-            Assert.True(parameters[2].Name == "drempelinkomen");
-            Assert.True((double)parameters[2].Value == 20941);
-            Assert.True(parameters[3].Name == "standaardpremie");
-            Assert.True((double)parameters[3].Value == 1609);
+            Assert.Equal(4, parameters.Count);
+            Assert.Equal("alleenstaande", parameters[0].Name);
+            Assert.Equal("toetsingsinkomensdrempel", parameters[1].Name);
+            Assert.Equal(29562, (double)parameters[1].Value);
+            Assert.Equal("drempelinkomen", parameters[2].Name);
+            Assert.Equal(20941, (double)parameters[2].Value);
+            Assert.Equal("standaardpremie", parameters[3].Name);
+            Assert.Equal(1609,(double)parameters[3].Value);
         }
     }
 }

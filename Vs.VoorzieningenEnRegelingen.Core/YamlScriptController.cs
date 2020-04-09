@@ -118,7 +118,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public Formula GetFormula(string name)
         {
-            Console.WriteLine(name);
             return _model.Formulas.First(p => p.Name == name);
         }
 

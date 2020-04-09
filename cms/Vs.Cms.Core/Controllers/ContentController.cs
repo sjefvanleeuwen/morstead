@@ -7,6 +7,7 @@ using Vs.Cms.Core.Helper;
 using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
 using Vs.Core.Extensions;
+using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.Cms.Core.Controllers
@@ -64,7 +65,7 @@ namespace Vs.Cms.Core.Controllers
                 if (result.ContainsKey(parameter.Name))
                 {
                     //always take the last supplied value in the chain
-                    if (parameter.Type == VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult.TypeEnum.Double)
+                    if (parameter.Type == TypeInference.InferenceResult.TypeEnum.Double)
                     {
                         result[parameter.Name] = parameter.Value;
                     }
@@ -75,7 +76,7 @@ namespace Vs.Cms.Core.Controllers
 
                     continue;
                 }
-                if (parameter.Type == VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult.TypeEnum.Double)
+                if (parameter.Type == TypeInference.InferenceResult.TypeEnum.Double)
                 {
                     result.Add(parameter.Name, parameter.Value);
                 }
