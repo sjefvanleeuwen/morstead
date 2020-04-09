@@ -18,7 +18,7 @@ namespace Vs.Cms.Core.Controllers
         private readonly ITemplateEngine _templateEngine;
         private CultureInfo _cultureInfo;
 
-        private IParametersCollection _parameters;
+        public IParametersCollection _parameters { get; set; }
 
         public ContentController(IRenderStrategy renderStrategy, IContentHandler contentHandler, ITemplateEngine templateEngine)
         {
@@ -64,11 +64,25 @@ namespace Vs.Cms.Core.Controllers
                 if (result.ContainsKey(parameter.Name))
                 {
                     //always take the last supplied value in the chain
-                    result[parameter.Name] = parameter.ValueAsString;
+                    if (parameter.Type == VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult.TypeEnum.Double)
+                    {
+                        result[parameter.Name] = parameter.Value;
+                    }
+                    else
+                    {
+                        result[parameter.Name] = parameter.ValueAsString;
+                    }
+
                     continue;
                 }
-                result.Add(parameter.Name, parameter.ValueAsString);
-
+                if (parameter.Type == VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult.TypeEnum.Double)
+                {
+                    result.Add(parameter.Name, parameter.Value);
+                }
+                else
+                {
+                    result.Add(parameter.Name, parameter.ValueAsString);
+                }
             }
             return result;
         }

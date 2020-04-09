@@ -22,7 +22,12 @@ namespace Vs.Cms.Core
             var expressions = t.Page.Body.Statements.Where(p => p is ScriptExpressionStatement);
             foreach (var expression in expressions)
             {
-                result.Add((expression as ScriptExpressionStatement).Expression.ToString());
+                var expr = (expression as ScriptExpressionStatement).Expression;
+                if ((expression as ScriptExpressionStatement).Expression is ScriptPipeCall)
+                {
+                    expr = ((expression as ScriptExpressionStatement).Expression as ScriptPipeCall).From;
+                }
+                result.Add(((ScriptVariable)expr).Name);
             }
             return result;
         }

@@ -103,7 +103,6 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             }
 
             var parameters = evaluateFormulaWithoutQARequest.Parameters;
-            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             evaluateFormulaWithoutQARequest.Config = parseHelper(evaluateFormulaWithoutQARequest.Config);
 
             var controller = new YamlScriptController();

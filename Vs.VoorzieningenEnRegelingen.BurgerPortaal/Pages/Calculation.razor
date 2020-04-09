@@ -1,6 +1,12 @@
 ﻿@page "/"
 @page "/proefberekening/"
 @using Vs.VoorzieningenEnRegelingen.Core
+@{ 
+    foreach (var item in _contentController._parameters)
+    {
+        <span>@item.Name - @item.ValueAsString</span>
+    }
+}
 <SpacingWrapper>
     <CalculationHeader Title="@_pageTitle"
                        SubTitle="@_pageSubTitle"

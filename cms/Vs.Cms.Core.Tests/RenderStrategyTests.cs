@@ -42,8 +42,10 @@ namespace Vs.Cms.Core.Tests
         public void CanRenderTemplateWithNumberFormatting()
         {
             var renderer = new RenderStrategy(new Liquid(), new Markdown(), new HtmlContentFilter());
-            var result = renderer.Render(@"hello {{variable | math.format ""N"" ""nl-NL""}}", new { variable = 1345 });
+            var result = renderer.Render(@"hello {{variable | string.to_double | math.format ""N"" ""nl-NL""}}", new { variable = "1345" });
             Assert.Equal("hello 1.345,00", result);
+            result = renderer.Render(@"hello {{variable | string.to_double | math.format ""N"" ""nl-NL""}}", new { variable = "1345.1" });
+            Assert.Equal("hello 1.345,10", result);
         }
     }
 }

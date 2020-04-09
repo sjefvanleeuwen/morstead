@@ -7,6 +7,7 @@ namespace Vs.Cms.Core.Controllers.Interfaces
 {
     public interface IContentController
     {
+        IParametersCollection _parameters { get; set; }
         void SetCulture(CultureInfo cultureInfo);
         string GetText(string semanticKey, FormElementContentType type, string defaultResult = null);
         string GetText(string semanticKey, string type, string defaultResult = null);

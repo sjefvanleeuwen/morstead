@@ -48,6 +48,11 @@ formules:
      formule: 29562
    - situatie: aanvrager_met_toeslagpartner
      formule: 37885
+ - toetsingsvermogensdrempel:
+   - situatie: alleenstaande
+     formule: 114776
+   - situatie: aanvrager_met_toeslagpartner
+     formule: 145136
  - drempelinkomen:
      formule: 20941
  - normpremie:
