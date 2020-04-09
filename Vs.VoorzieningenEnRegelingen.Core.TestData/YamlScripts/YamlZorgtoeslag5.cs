@@ -61,7 +61,7 @@ formules:
    - situatie: aanvrager_met_toeslagpartner
      formule: 145136
  - drempelinkomen:
-     formule: 20941.12
+     formule: 20941
  - normpremie:
    - situatie: alleenstaande     
      formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)
