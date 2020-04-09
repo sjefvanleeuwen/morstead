@@ -1,4 +1,5 @@
-﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
+﻿using System.Collections.Generic;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
 
@@ -16,9 +17,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces
 
         IExecuteRequest GetExecuteRequest(IParametersCollection parameters = null);
         IParseRequest GetParseRequest();
+        IParseResult GetParseResult();
         void IncreaseStep();
         void DecreaseStep();
         void ExecuteStep(IParametersCollection currentParameters);
+        void FillUnresolvedParameters(ref IParametersCollection parameters, IEnumerable<string> unresolvedParameters);
+        IEvaluateFormulaWithoutQARequest GetEvaluateFormulaWithoutQARequest(ref IParametersCollection parameters, IEnumerable<string> unresolvedParameters);
         string GetSavedValue();
     }
 }

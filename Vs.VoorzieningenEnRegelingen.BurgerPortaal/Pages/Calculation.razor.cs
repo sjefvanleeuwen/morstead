@@ -57,9 +57,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             {
                 //increase the request step
                 _sequenceController.IncreaseStep();
-                _sequenceController.ExecuteStep(GetCurrentParameters());
-                _contentController.SetParameters(_semanticKey, _sequenceController.LastExecutionResult.Parameters);
-                Display();
+                ProcessStep();
             }
             StateHasChanged();
         }
@@ -68,10 +66,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             //decrease the request step, can never be lower than 1
             _sequenceController.DecreaseStep();
-            _sequenceController.ExecuteStep(GetCurrentParameters());
-            _contentController.SetParameters(_semanticKey, _sequenceController.LastExecutionResult.Parameters);
-            Display();
+            ProcessStep();
             StateHasChanged();
+        }
+
+        private void ProcessStep()
+        {
+            _sequenceController.ExecuteStep(GetCurrentParameters());
+            var unresolvedParameters = _contentController.GetUnresolvedParameters(_semanticKey, _sequenceController.LastExecutionResult.Parameters);
+            var parameters = _sequenceController.LastExecutionResult.Parameters;
+            if (unresolvedParameters != null && unresolvedParameters.Any())
+            {
+                _sequenceController.FillUnresolvedParameters(ref parameters, unresolvedParameters);
+            }
+            _contentController.SetParameters(parameters);
+            Display();
         }
 
         private void Display()

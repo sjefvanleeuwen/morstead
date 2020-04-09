@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using Vs.Cms.Core.Enums;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
@@ -10,6 +11,7 @@ namespace Vs.Cms.Core.Controllers.Interfaces
         string GetText(string semanticKey, FormElementContentType type, string defaultResult = null);
         string GetText(string semanticKey, string type, string defaultResult = null);
         void Initialize(string body);
-        void SetParameters(string semanticKey, IParametersCollection parameters);
+        IEnumerable<string> GetUnresolvedParameters(string semanticKey, IParametersCollection parameters);
+        void SetParameters(IParametersCollection parameters);
     }
 }

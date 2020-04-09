@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
+using System.Linq;
 using System.Net;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
@@ -83,6 +84,44 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             {
             }
             return executionResult;
+        }
+
+        [HttpPost("EvaluateFormulaWithoutQA")]
+        public void GetExtraParameters([FromBody] IEvaluateFormulaWithoutQARequest evaluateFormulaWithoutQARequest)
+        {
+            if (evaluateFormulaWithoutQARequest is null)
+            {
+                throw new ArgumentNullException(nameof(evaluateFormulaWithoutQARequest));
+            }
+            if (evaluateFormulaWithoutQARequest.Parameters == null)
+            {
+                evaluateFormulaWithoutQARequest.Parameters = new ParametersCollection();
+            }
+            if (evaluateFormulaWithoutQARequest.UnresolvedParameters == null || !evaluateFormulaWithoutQARequest.UnresolvedParameters.Any())
+            {
+                return;
+            }
+
+            var parameters = evaluateFormulaWithoutQARequest.Parameters;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+            evaluateFormulaWithoutQARequest.Config = parseHelper(evaluateFormulaWithoutQARequest.Config);
+
+            var controller = new YamlScriptController();
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+            };
+
+            var result = controller.Parse(evaluateFormulaWithoutQARequest.Config);
+            if (result.IsError)
+            {
+            }
+            try
+            {
+                controller.EvaluateFormulaWithoutQA(ref parameters, evaluateFormulaWithoutQARequest.UnresolvedParameters);
+            }
+            catch (UnresolvedException)
+            {
+            }
         }
     }
 }

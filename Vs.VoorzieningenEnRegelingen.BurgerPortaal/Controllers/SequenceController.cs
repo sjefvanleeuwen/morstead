@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
@@ -76,13 +77,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
         public void ExecuteStep(IParametersCollection currentParameters)
         {
             SaveCurrentParameters(currentParameters);
-            //var requestParameters = GetRequestParameters();
             var requestParameters = Sequence.GetParametersToSend(RequestStep);
             var request = GetExecuteRequest(requestParameters);
             LastExecutionResult = _serviceController.Execute(request);
             //only save non-calculated parameters
             Sequence.UpdateParametersCollection(LastExecutionResult.Parameters);
-
             Sequence.AddStep(RequestStep, LastExecutionResult);
             CurrentStep = RequestStep;
         }
@@ -93,6 +92,22 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
             {
                 Sequence.UpdateParametersCollection(currentParameters);
             }
+        }
+
+        public void FillUnresolvedParameters(ref IParametersCollection parameters, IEnumerable<string> unresolvedParameters)
+        {
+            var evaluateFormulaWithoutQARequest = GetEvaluateFormulaWithoutQARequest(ref parameters, unresolvedParameters);
+            _serviceController.GetExtraParameters(evaluateFormulaWithoutQARequest);
+        }
+
+        public IEvaluateFormulaWithoutQARequest GetEvaluateFormulaWithoutQARequest(ref IParametersCollection parameters, IEnumerable<string> unresolvedParameters)
+        {
+            return new EvaluateFormulaWithoutQARequest
+            {
+                Config = Sequence.Yaml,
+                Parameters = parameters,
+                UnresolvedParameters = unresolvedParameters ?? new List<string>()
+            };
         }
 
         public string GetSavedValue()

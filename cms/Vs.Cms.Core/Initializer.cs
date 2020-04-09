@@ -18,8 +18,6 @@ namespace Vs.Cms.Core
             services.AddSingleton<ITemplateEngine, Liquid>();
             services.AddSingleton<IContentFilter, HtmlContentFilter>();
             services.AddSingleton<IMarkupLanguage, Markdown>();
-
-            VoorzieningenEnRegelingen.Core.Initializer.Initialize(services);
         }
     }
 }

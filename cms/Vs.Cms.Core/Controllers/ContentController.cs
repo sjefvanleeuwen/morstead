@@ -16,17 +16,15 @@ namespace Vs.Cms.Core.Controllers
         private readonly IRenderStrategy _renderStrategy;
         private IContentHandler _contentHandler;
         private readonly ITemplateEngine _templateEngine;
-        private readonly IYamlScriptController _yamlScriptController;
         private CultureInfo _cultureInfo;
 
         private IParametersCollection _parameters;
 
-        public ContentController(IRenderStrategy renderStrategy, IContentHandler contentHandler, ITemplateEngine templateEngine, IYamlScriptController yamlScriptController)
+        public ContentController(IRenderStrategy renderStrategy, IContentHandler contentHandler, ITemplateEngine templateEngine)
         {
             _renderStrategy = renderStrategy;
             _contentHandler = contentHandler;
             _templateEngine = templateEngine;
-            _yamlScriptController = yamlScriptController;
         }
 
         public void SetCulture(CultureInfo cultureInfo)
@@ -84,16 +82,11 @@ namespace Vs.Cms.Core.Controllers
             _contentHandler.TranslateParsedContentToContent(_cultureInfo, parsedContent);
         }
 
-        public void SetParameters(string semanticKey, IParametersCollection parameters)
+        public IEnumerable<string> GetUnresolvedParameters(string semanticKey, IParametersCollection parameters)
         {
             _parameters = parameters;
             var texts = GetAllApplicableTexts(semanticKey);
-            var neededParameters = GetNeededParameters(texts);
-            if (!neededParameters.Any())
-            {
-                return;
-            }
-            _yamlScriptController.EvaluateFormulaWithoutQA(ref _parameters, neededParameters);
+            return GetUnresolvedParameters(texts);
         }
 
         private IEnumerable<string> GetAllApplicableTexts(string semanticKey)
@@ -103,7 +96,7 @@ namespace Vs.Cms.Core.Controllers
             return objects.Select(o => o.ToString());
         }
 
-        private IEnumerable<string> GetNeededParameters(IEnumerable<string> texts)
+        private IEnumerable<string> GetUnresolvedParameters(IEnumerable<string> texts)
         {
             var needed = new List<string>();
             foreach (var text in texts)
@@ -111,6 +104,11 @@ namespace Vs.Cms.Core.Controllers
                 needed.AddRange(_templateEngine.GetExpressionNames(text));
             }
             return needed.Except(_parameters.GetAll().Select(p => p.Name));
+        }
+
+        public void SetParameters(IParametersCollection parameters)
+        {
+            _parameters = parameters;
         }
     }
 }

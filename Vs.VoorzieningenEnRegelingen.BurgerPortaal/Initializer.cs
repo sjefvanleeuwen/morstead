@@ -15,7 +15,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal
 
             Service.Initializer.Initialize(services);
             Cms.Core.Initializer.Initialize(services);
-            Core.Initializer.Initialize(services);
         }
     }
 }
