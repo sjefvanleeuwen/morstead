@@ -23,7 +23,6 @@
     <Content Remove="Shared\Components\FormElements\Checkbox.razor" />
     <Content Remove="Shared\Components\FormElements\Email.razor" />
     <Content Remove="Shared\Components\FormElements\Search.razor" />
-    <Content Remove="Shared\Components\FormElements\TextArea.razor" />
     <Content Remove="Shared\Components\FormElements\TextField.razor" />
     <Content Remove="Shared\Components\Header.razor" />
     <Content Remove="Shared\Components\Timeline.razor" />
