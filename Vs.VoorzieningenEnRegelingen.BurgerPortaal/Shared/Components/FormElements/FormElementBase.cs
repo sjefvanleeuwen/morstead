@@ -57,8 +57,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
                     return new Date();
                 case TypeInference.InferenceResult.TypeEnum.Period:
                     return new DateRange();
-                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
                 case TypeInference.InferenceResult.TypeEnum.String:
+                    return new Text();
+                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
                 case TypeInference.InferenceResult.TypeEnum.Unknown:
                 default:
                     return this;

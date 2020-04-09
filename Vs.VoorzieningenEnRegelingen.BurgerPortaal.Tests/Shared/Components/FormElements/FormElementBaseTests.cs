@@ -110,8 +110,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             moq.Setup(m => m.InferedType).Returns(TypeInference.InferenceResult.TypeEnum.String);
             formElement = sut.GetFormElement(moq.Object);
             Assert.True(formElement is IFormElementBase);
-            Assert.False(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
-            Assert.Equal(typeof(FormElementBase), formElement.GetType());
+            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
+            Assert.Equal(typeof(Text), formElement.GetType());
 
             moq.Setup(m => m.InferedType).Returns(TypeInference.InferenceResult.TypeEnum.TimeSpan);
             formElement = sut.GetFormElement(moq.Object);

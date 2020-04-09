@@ -96,7 +96,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelinge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Service.Tests", "Vs.VoorzieningenEnRegelingen.Service.Tests\Vs.VoorzieningenEnRegelingen.Service.Tests.csproj", "{107ECD92-BDEE-469C-BD4E-A7A4BB8E12A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Web", "core\Vs.Core.Web\Vs.Core.Web.csproj", "{A13575CC-D4D7-4BE2-852C-561522381580}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Web", "core\Vs.Core.Web\Vs.Core.Web.csproj", "{A13575CC-D4D7-4BE2-852C-561522381580}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
