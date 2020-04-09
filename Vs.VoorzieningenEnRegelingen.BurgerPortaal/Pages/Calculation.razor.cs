@@ -45,8 +45,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         protected override void OnInitialized()
         {
             _sequenceController.Sequence.Yaml = _ruleYaml ?? YamlZorgtoeslag5.Body;
-            //_contentController.Initialize(_contentYaml ?? YamlZorgtoeslag5Content.Body);
-            _contentController.Initialize(YamlZorgtoeslag5Content.Body);
+            _contentController.Initialize(_contentYaml ?? YamlZorgtoeslag5Content.Body);
             base.OnInitialized();
             //get the first step
             GetNextStep();
