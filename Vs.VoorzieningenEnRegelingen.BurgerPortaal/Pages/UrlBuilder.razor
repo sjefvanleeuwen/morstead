@@ -1,0 +1,12 @@
+﻿@page "/UrlBuilder/"
+<SpacingWrapper>
+    @*<EditForm>*@
+    <CascadingValue Value="@YamlContent">
+        <Text />
+    </CascadingValue>
+    <CascadingValue Value="@YamlLogic">
+        <Text />
+    </CascadingValue>
+    <button class="btn" @onclick="Submit">Verstuur</button>
+    @*</EditForm>*@
+</SpacingWrapper>
