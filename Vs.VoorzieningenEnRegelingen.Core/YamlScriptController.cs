@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using Vs.VoorzieningenEnRegelingen.Core.Interface;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
@@ -43,6 +44,52 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             double result = defaultValue;
             double.TryParse(value?.Value.ToString(), NumberStyles.Float, _numberCulture, out result);
             return result;
+        }
+
+        public string CreateYamlContentTemplate()
+        {
+            string ret = string.Empty;
+            bool hasPreviousChoice = false;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Content:");
+            sb.AppendLine(" - key: berekening.header");
+            sb.AppendLine(" - titel: voer een titel in.");
+            foreach (var contentNode in _contentNodes)
+            {
+                if (contentNode.Name.StartsWith("formule."))
+                {
+                    continue;
+                }
+                sb.AppendLine($" - key: {contentNode.Name}");
+                if (contentNode.Parameter.Type == TypeEnum.Step)
+                {
+                    sb.AppendLine($"   titel: voer een titel in");
+                    sb.AppendLine($"   vraag: voer de vraagstelling in.");
+                    sb.AppendLine($"   tekst: voer een korte uitleg in.");
+                    sb.AppendLine($"   hint: geef een hint voor het onderstaande invoerveld.");
+                    hasPreviousChoice = false;
+                    continue;
+                }
+                if (contentNode.IsBreak)
+                {
+                    sb.AppendLine($"   vraag: Geen Recht");
+                    sb.AppendLine($"   titel: U heeft geen recht");
+                    sb.AppendLine($"   tekst: Met de door u ingevulde gegevens heeft u geen recht.");
+                    hasPreviousChoice = false;
+                    continue;
+                }
+                if (contentNode.Name.Contains(".keuze."))
+                {
+                    if (!hasPreviousChoice)
+                    {
+                        sb.AppendLine($"   hint: Voer een hint tekst voor de keuzes in.");
+                    }
+                    sb.AppendLine($"   tekst: Voer een tekst voor de keuze in.");
+                    hasPreviousChoice = true;
+                    continue;
+                }
+            }
+            return sb.ToString();
         }
 
         public void EvaluateFormulaWithoutQA(ref IParametersCollection parameters, string formula)
