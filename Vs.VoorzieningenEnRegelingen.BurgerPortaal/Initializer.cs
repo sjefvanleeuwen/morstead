@@ -12,8 +12,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal
         {
             services.AddScoped<ISequenceController, SequenceController>();
             services.AddScoped<ISequence, Sequence>();
+
             Service.Initializer.Initialize(services);
             Cms.Core.Initializer.Initialize(services);
+            Core.Initializer.Initialize(services);
         }
     }
 }

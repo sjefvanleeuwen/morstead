@@ -68,9 +68,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             InferedType = result.InferedType;
             Name = result.QuestionFirstParameter.Name;
             var parameterSemanticKey = result.GetParameterSemanticKey();
-            Label = contentController.GetText(parameterSemanticKey, FormElementContentType.Label, result.Parameters);
-            TagText = contentController.GetText(parameterSemanticKey, FormElementContentType.Tag, result.Parameters);
-            HintText = contentController.GetText(parameterSemanticKey, FormElementContentType.Hint, result.Parameters);
+            Label = contentController.GetText(parameterSemanticKey, FormElementContentType.Label);
+            TagText = contentController.GetText(parameterSemanticKey, FormElementContentType.Tag);
+            HintText = contentController.GetText(parameterSemanticKey, FormElementContentType.Hint);
         }
     }
 }

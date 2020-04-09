@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Objects;
 using Vs.Core.Extensions;
@@ -56,6 +57,20 @@ namespace Vs.Cms.Core.Tests.Objects
             Assert.Equal("TestSummaryContent", sut.GetContent("testKey", FormElementContentType.Question));
             //Tag should not be available
             Assert.Null(sut.GetContent("testKey", FormElementContentType.Tag));
+        }
+
+        [Fact]
+        public void ShouldGetCompleteContent()
+        {
+            var sut = new CultureContent();
+            sut.AddContent("testKey", FormElementContentType.Title.GetDescription(), "TestTitleContent");
+            sut.AddContent("testKey", FormElementContentType.Description.GetDescription(), "TestDescriptionContent {{test}}");
+            sut.AddContent("testKey_sub", FormElementContentType.Description.GetDescription(), "subsub");
+            var content = sut.GetCompleteContent("testKey");
+            Assert.Equal(3, content.Count());
+            Assert.Equal("TestTitleContent", content.ElementAt(0));
+            Assert.Equal("TestDescriptionContent {{test}}", content.ElementAt(1));
+            Assert.Equal("subsub", content.ElementAt(2));
         }
 
         [Fact]

@@ -11,7 +11,7 @@ using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 namespace Vs.VoorzieningenEnRegelingen.Core
 {
 
-    public class YamlScriptController
+    public class YamlScriptController : IYamlScriptController
     {
         private readonly string Ok = "OK";
         private Model.Model _model;
@@ -60,7 +60,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         {
             foreach (var formula in formulas)
             {
-                EvaluateFormulaWithoutQA(ref  parameters, formula);
+                EvaluateFormulaWithoutQA(ref parameters, formula);
             }
         }
 
@@ -71,6 +71,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
 
         public Formula GetFormula(string name)
         {
+            Console.WriteLine(name);
             return _model.Formulas.First(p => p.Name == name);
         }
 

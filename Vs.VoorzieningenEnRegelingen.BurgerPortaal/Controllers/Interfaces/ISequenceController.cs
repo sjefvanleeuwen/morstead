@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
+﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Interface;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 

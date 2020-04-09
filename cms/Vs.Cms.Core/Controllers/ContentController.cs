@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Helper;
@@ -14,13 +14,19 @@ namespace Vs.Cms.Core.Controllers
     public class ContentController : IContentController
     {
         private readonly IRenderStrategy _renderStrategy;
-        private CultureInfo _cultureInfo;
         private IContentHandler _contentHandler;
+        private readonly ITemplateEngine _templateEngine;
+        private readonly IYamlScriptController _yamlScriptController;
+        private CultureInfo _cultureInfo;
 
-        public ContentController(IRenderStrategy renderStrategy, IContentHandler contentHandler)
+        private IParametersCollection _parameters;
+
+        public ContentController(IRenderStrategy renderStrategy, IContentHandler contentHandler, ITemplateEngine templateEngine, IYamlScriptController yamlScriptController)
         {
             _renderStrategy = renderStrategy;
             _contentHandler = contentHandler;
+            _templateEngine = templateEngine;
+            _yamlScriptController = yamlScriptController;
         }
 
         public void SetCulture(CultureInfo cultureInfo)
@@ -32,27 +38,12 @@ namespace Vs.Cms.Core.Controllers
             }
         }
 
-        public string GetText(string semanticKey, FormElementContentType type)
+        public string GetText(string semanticKey, FormElementContentType type, string defaultResult = null)
         {
-            return GetText(semanticKey, type, null, string.Empty);
+            return GetText(semanticKey, type.GetDescription(), defaultResult);
         }
-        public string GetText(string semanticKey, FormElementContentType type, IParametersCollection parameters)
-        {
-            return GetText(semanticKey, type, parameters, string.Empty);
-        }
-        public string GetText(string semanticKey, FormElementContentType type, IParametersCollection parameters, string defaultResult)
-        {
-            return GetText(semanticKey, type.GetDescription(), parameters, defaultResult);
-        }
-        public string GetText(string semanticKey, string type)
-        {
-            return GetText(semanticKey, type, null, string.Empty);
-        }
-        public string GetText(string semanticKey, string type, IParametersCollection parameters)
-        {
-            return GetText(semanticKey, type, parameters, string.Empty);
-        }
-        public string GetText(string semanticKey, string type, IParametersCollection parameters, string defaultResult)
+
+        public string GetText(string semanticKey, string type, string defaultResult = null)
         {
             var cultureContent = _contentHandler.GetDefaultContent();
             var template = cultureContent.GetContent(semanticKey, type);
@@ -60,17 +51,17 @@ namespace Vs.Cms.Core.Controllers
             {
                 return defaultResult;
             }
-            return _renderStrategy.Render(template.ToString(), ConvertParametersCollectionToDictionary(parameters));
+            return _renderStrategy.Render(template.ToString(), GetParametersDictionary());
         }
 
-        private IDictionary<string, object> ConvertParametersCollectionToDictionary(IParametersCollection parameters)
+        private IDictionary<string, object> GetParametersDictionary()
         {
             var result = new Dictionary<string, object>();
-            if (parameters == null)
+            if (_parameters == null)
             {
                 return result;
             }
-            foreach (var parameter in parameters)
+            foreach (var parameter in _parameters)
             {
                 if (result.ContainsKey(parameter.Name))
                 {
@@ -79,7 +70,7 @@ namespace Vs.Cms.Core.Controllers
                     continue;
                 }
                 result.Add(parameter.Name, parameter.ValueAsString);
-                
+
             }
             return result;
         }
@@ -91,6 +82,35 @@ namespace Vs.Cms.Core.Controllers
             _contentHandler.SetDefaultCulture(_cultureInfo);
             var parsedContent = YamlContentParser.RenderContentYamlToObject(body);
             _contentHandler.TranslateParsedContentToContent(_cultureInfo, parsedContent);
+        }
+
+        public void SetParameters(string semanticKey, IParametersCollection parameters)
+        {
+            _parameters = parameters;
+            var texts = GetAllApplicableTexts(semanticKey);
+            var neededParameters = GetNeededParameters(texts);
+            if (!neededParameters.Any())
+            {
+                return;
+            }
+            _yamlScriptController.EvaluateFormulaWithoutQA(ref _parameters, neededParameters);
+        }
+
+        private IEnumerable<string> GetAllApplicableTexts(string semanticKey)
+        {
+            var cultureContent = _contentHandler.GetDefaultContent();
+            var objects = cultureContent.GetCompleteContent(semanticKey);
+            return objects.Select(o => o.ToString());
+        }
+
+        private IEnumerable<string> GetNeededParameters(IEnumerable<string> texts)
+        {
+            var needed = new List<string>();
+            foreach (var text in texts)
+            {
+                needed.AddRange(_templateEngine.GetExpressionNames(text));
+            }
+            return needed.Except(_parameters.GetAll().Select(p => p.Name));
         }
     }
 }

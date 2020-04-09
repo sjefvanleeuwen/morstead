@@ -83,10 +83,5 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             }
             return executionResult;
         }
-
-        private void Execute_QuestionCallback(FormulaExpressionContext sender, QuestionArgs args)
-        {
-            // throw new NotImplementedException();
-        }
     }
 }

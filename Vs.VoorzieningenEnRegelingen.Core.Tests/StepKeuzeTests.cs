@@ -162,19 +162,6 @@ tabellen:
             Assert.Equal("B", stepToTest.Choices.ElementAt(1).Situation);
         }
 
-        //does not work, it is caught, should be refactored
-        //[Fact]
-        //public void ShouldThrowExceptionIfNoFormulaORChoiceProvided()
-        //{
-        //    //List<ParametersCollection> parameters = new List<ParametersCollection>();
-        //    var controller = new YamlScriptController();
-        //    var parseResult = controller.Parse(_testYaml3);
-        //    //generate empty call
-        //    var parameters = new ParametersCollection() as IParametersCollection;
-        //    var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
-        //    Assert.Throws<StepException>(() => controller.ExecuteWorkflow(ref parameters, ref executionResult));
-        //}
-
         [Fact]
         public void ShouldReturnBooleanAsFirstQuestionOldSituation()
         {

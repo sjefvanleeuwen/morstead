@@ -1021,7 +1021,7 @@ formules:
             } as IParametersCollection;
             var result = controller.Parse(YamlZorgtoeslag5.Body);
             Assert.False(result.IsError);
-            controller.EvaluateFormulaWithoutQA(ref parameters, new[] { "toetsingsinkomensdrempel", "drempelinkomen", "standaardpremie" } );
+            controller.EvaluateFormulaWithoutQA(ref parameters, new[] { "toetsingsinkomensdrempel", "drempelinkomen", "standaardpremie" });
             Assert.True(parameters.Count == 4);
             Assert.True(parameters[0].Name == "alleenstaande");
             Assert.True(parameters[1].Name == "toetsingsinkomensdrempel");

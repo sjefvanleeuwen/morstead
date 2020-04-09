@@ -32,11 +32,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private IStep _lastStep => _sequenceController.LastExecutionResult.Step;
         private string _semanticKey => _sequenceController.HasRights ? _lastStep.SemanticKey : _lastStep.Break.SemanticKey;
         private int _displayQuestionNumber => _sequenceController.LastExecutionResult.Questions == null ? 0 : _sequenceController.Sequence.Steps.Count();
-        private string _pageTitle => _contentController.GetText("berekening.header", "titel", _sequenceController.LastExecutionResult.Parameters);
-        private string _pageSubTitle => _contentController.GetText("berekening.header", "ondertitel", _sequenceController.LastExecutionResult.Parameters);
-        private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question, _sequenceController.LastExecutionResult.Parameters);
-        private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title, _sequenceController.LastExecutionResult.Parameters);
-        private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description, _sequenceController.LastExecutionResult.Parameters);
+        private string _pageTitle => _contentController.GetText("berekening.header", "titel");
+        private string _pageSubTitle => _contentController.GetText("berekening.header", "ondertitel");
+        private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question);
+        private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title);
+        private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description);
         private bool _hasRights => _sequenceController.HasRights;
         private bool _questionAsked => _sequenceController.QuestionIsAsked;
         private bool _showPreviousButton => _sequenceController.CurrentStep > 1;
@@ -45,7 +45,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         protected override void OnInitialized()
         {
             _sequenceController.Sequence.Yaml = _ruleYaml ?? YamlZorgtoeslag5.Body;
-            _contentController.Initialize(_contentYaml ?? YamlZorgtoeslag5Content.Body);
+            //_contentController.Initialize(_contentYaml ?? YamlZorgtoeslag5Content.Body);
+            _contentController.Initialize(YamlZorgtoeslag5Content.Body);
             base.OnInitialized();
             //get the first step
             GetNextStep();
@@ -58,6 +59,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                 //increase the request step
                 _sequenceController.IncreaseStep();
                 _sequenceController.ExecuteStep(GetCurrentParameters());
+                _contentController.SetParameters(_semanticKey, _sequenceController.LastExecutionResult.Parameters);
                 Display();
             }
             StateHasChanged();
@@ -68,6 +70,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             //decrease the request step, can never be lower than 1
             _sequenceController.DecreaseStep();
             _sequenceController.ExecuteStep(GetCurrentParameters());
+            _contentController.SetParameters(_semanticKey, _sequenceController.LastExecutionResult.Parameters);
             Display();
             StateHasChanged();
         }

@@ -1,7 +1,11 @@
-﻿namespace Vs.Cms.Core.Interfaces
+﻿using System.Collections.Generic;
+
+namespace Vs.Cms.Core.Interfaces
 {
     public interface ITemplateEngine
     {
         string Render(string template, dynamic model);
+
+        IEnumerable<string> GetExpressionNames(string template);
     }
 }
