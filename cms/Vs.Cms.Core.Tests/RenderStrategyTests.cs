@@ -10,7 +10,7 @@ namespace Vs.Cms.Core.Tests
         {
             var renderer = new RenderStrategy(new Liquid(), new Markdown(), new HtmlContentFilter());
             var result = renderer.Render(@"hello {{variable}}", new { variable = "world" });
-            Assert.True(result == "hello world");
+            Assert.Equal("hello world", result);
         }
 
         [Fact]
@@ -18,7 +18,7 @@ namespace Vs.Cms.Core.Tests
         {
             var renderer = new RenderStrategy(new Liquid(), new Markdown(), new HtmlContentFilter());
             var result = renderer.Render(@"**hello {{variable}}**", new { variable = "world" });
-            Assert.True(result == "<strong>hello world</strong>");
+            Assert.Equal("<strong>hello world</strong>", result);
         }
 
         [Fact]
@@ -35,7 +35,15 @@ namespace Vs.Cms.Core.Tests
   world!
 {% endif %}
 ", fields);
-            Assert.True(result == "<strong>hello</strong> € 4.25 world!");
+            Assert.Equal("<strong>hello</strong> € 4.25 world!", result);
+        }
+
+        [Fact]
+        public void CanRenderTemplateWithNumberFormatting()
+        {
+            var renderer = new RenderStrategy(new Liquid(), new Markdown(), new HtmlContentFilter());
+            var result = renderer.Render(@"hello {{variable | math.format ""N"" ""nl-NL""}}", new { variable = 1345 });
+            Assert.Equal("hello 1.345,00", result);
         }
     }
 }
