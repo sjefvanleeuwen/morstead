@@ -7,7 +7,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
     public partial class ContentTemplate
     {
-        ITextFormElementData YamlLogic = new TextFormElementData
+        readonly ITextFormElementData YamlLogic = new TextFormElementData
         {
             Size = FormElementSize.ExtraLarge,
             Label = "Regels Yaml Url",
@@ -18,9 +18,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private string _urlDisplay = "none";
 
-        private string _urlYamlContent => _urlYamlContentNonFormatted.Replace("\n", "<br />");
+        private string UrlYamlContent => _urlYamlContentNonFormatted.Replace("\n", "<br />");
 
-        private string _urlYamlContentNonFormatted = @"<code><pre>Content:
+        private readonly string _urlYamlContentNonFormatted = @"<code><pre>Content:
  - key: berekening.header
    titel: Zorgtoeslag
    ondertitel: Proefberekening
@@ -66,7 +66,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             _urlDisplay = "none";
         }
 
-        ITextFormElementData YamlLogicText = new TextFormElementData
+        readonly ITextFormElementData YamlLogicText = new TextFormElementData
         {
             Size = FormElementSize.ExtraLarge,
             Label = "Regels Yaml Text",
@@ -77,9 +77,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private string _textDisplay = "none";
 
-        private string _urlTextContent => _urlTextContentNonFormatted.Replace("\n", "<br />").Replace(" ", "&nsbp;");
+        private string UrlTextContent => _urlTextContentNonFormatted.Replace("\n", "<br />").Replace(" ", "&nsbp;");
 
-        private string _urlTextContentNonFormatted = @"<code><pre>Content:
+        private readonly string _urlTextContentNonFormatted = @"<code><pre>Content:
  - key: berekening.header
    titel: Zorgtoeslag
    ondertitel: Proefberekening

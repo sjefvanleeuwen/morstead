@@ -2,18 +2,18 @@
 @page "/proefberekening/"
 @using Vs.VoorzieningenEnRegelingen.Core
 <SpacingWrapper>
-    <CalculationHeader Title="@_pageTitle"
-                       SubTitle="@_pageSubTitle"
-                       Number=@_displayQuestionNumber
-                       Subject="@_textSummary" />
-    @if (!string.IsNullOrWhiteSpace(_textTitle) || !string.IsNullOrWhiteSpace(_textDescription))
+    <CalculationHeader Title="@PageTitle"
+                       SubTitle="@PageSubTitle"
+                       Number=@DisplayQuestionNumber
+                       Subject="@TextSummary" />
+    @if (!string.IsNullOrWhiteSpace(TextTitle) || !string.IsNullOrWhiteSpace(TextDescription))
     {
-        <Hint Title="@_textTitle" Content="@_textDescription" />
+        <Hint Title="@TextTitle" Content="@TextDescription" />
     }
 
     <EditForm Model="_formElement">
         <CascadingValue Value="_formElement.Data">
-            @if (_hasRights && _formElement.ShowElement)
+            @if (HasRights && _formElement.ShowElement)
             {
                 @switch (_formElement.Data.InferedType)
                 {
@@ -37,8 +37,8 @@
                         break;
                 }
             }
-            <Pagination PreviousDisabled="@(!_showPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
-                        NextDisabled="@(!_showNextButton)" Next="GetNextStep" NextText="Volgende"
+            <Pagination PreviousDisabled="@(!ShowPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
+                        NextDisabled="@(!ShowNextButton)" Next="GetNextStep" NextText="Volgende"
                         ScreenreaderDescription="pagina" />
         </CascadingValue>
     </EditForm>

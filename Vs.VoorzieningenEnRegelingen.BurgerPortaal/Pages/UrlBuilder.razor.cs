@@ -13,7 +13,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
 
-        ITextFormElementData YamlLogic = new TextFormElementData
+        readonly ITextFormElementData YamlLogic = new TextFormElementData
         {
             Size = FormElementSize.ExtraLarge,
             Label = "Regels Yaml Url",
@@ -21,8 +21,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             TagText = "Verplicht",
             Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/YamlZorgtoeslag5.yaml"
         };
-
-        ITextFormElementData YamlContent = new TextFormElementData
+        readonly ITextFormElementData YamlContent = new TextFormElementData
         {
             Size = FormElementSize.ExtraLarge,
             Label = "Content Yaml Url",

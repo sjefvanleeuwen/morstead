@@ -16,36 +16,36 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
     public partial class Calculation
     {
         [Inject]
-        private ISequenceController _sequenceController { get; set; }
+        private ISequenceController SequenceController { get; set; }
         [Inject]
-        private IContentController _contentController { get; set; }
+        private IContentController ContentController { get; set; }
         [Inject]
-        private NavigationManager _navigationManager { get; set; }
+        private NavigationManager NavigationManager { get; set; }
 
-        private System.Uri _uri => _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
-        private string _ruleYaml => QueryHelpers.ParseQuery(_uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
-        private string _contentYaml => QueryHelpers.ParseQuery(_uri.Query).TryGetValue("content", out var param) ? param.First() : null;
+        private System.Uri Uri => NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        private string RuleYaml => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
+        private string ContentYaml => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("content", out var param) ? param.First() : null;
 
         //the formElement we are showing
         private IFormElementBase _formElement;
 
-        private IStep _lastStep => _sequenceController.LastExecutionResult.Step;
-        private string _semanticKey => _sequenceController.HasRights ? _lastStep.SemanticKey : _lastStep.Break.SemanticKey;
-        private int _displayQuestionNumber => _sequenceController.LastExecutionResult.Questions == null ? 0 : _sequenceController.Sequence.Steps.Count();
-        private string _pageTitle => _contentController.GetText("berekening.header", "titel");
-        private string _pageSubTitle => _contentController.GetText("berekening.header", "ondertitel");
-        private string _textSummary => _contentController.GetText(_semanticKey, FormElementContentType.Question);
-        private string _textTitle => _contentController.GetText(_semanticKey, FormElementContentType.Title);
-        private string _textDescription => _contentController.GetText(_semanticKey, FormElementContentType.Description);
-        private bool _hasRights => _sequenceController.HasRights;
-        private bool _questionAsked => _sequenceController.QuestionIsAsked;
-        private bool _showPreviousButton => _sequenceController.CurrentStep > 1;
-        private bool _showNextButton => _hasRights && _questionAsked;
+        private IStep LastStep => SequenceController.LastExecutionResult.Step;
+        private string SemanticKey => SequenceController.HasRights ? LastStep.SemanticKey : LastStep.Break.SemanticKey;
+        private int DisplayQuestionNumber => SequenceController.LastExecutionResult.Questions == null ? 0 : SequenceController.Sequence.Steps.Count();
+        private string PageTitle => ContentController.GetText("berekening.header", "titel");
+        private string PageSubTitle => ContentController.GetText("berekening.header", "ondertitel");
+        private string TextSummary => ContentController.GetText(SemanticKey, FormElementContentType.Question);
+        private string TextTitle => ContentController.GetText(SemanticKey, FormElementContentType.Title);
+        private string TextDescription => ContentController.GetText(SemanticKey, FormElementContentType.Description);
+        private bool HasRights => SequenceController.HasRights;
+        private bool QuestionAsked => SequenceController.QuestionIsAsked;
+        private bool ShowPreviousButton => SequenceController.CurrentStep > 1;
+        private bool ShowNextButton => HasRights && QuestionAsked;
 
         protected override void OnInitialized()
         {
-            _sequenceController.Sequence.Yaml = _ruleYaml ?? YamlZorgtoeslag5.Body;
-            _contentController.Initialize(_contentYaml ?? YamlZorgtoeslag5Content.Body);
+            SequenceController.Sequence.Yaml = RuleYaml ?? YamlZorgtoeslag5.Body;
+            ContentController.Initialize(ContentYaml ?? YamlZorgtoeslag5Content.Body);
             base.OnInitialized();
             //get the first step
             GetNextStep();
@@ -56,7 +56,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             if (FormIsValid())
             {
                 //increase the request step
-                _sequenceController.IncreaseStep();
+                SequenceController.IncreaseStep();
                 ProcessStep();
             }
             StateHasChanged();
@@ -65,34 +65,34 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private void GetPreviousStep()
         {
             //decrease the request step, can never be lower than 1
-            _sequenceController.DecreaseStep();
+            SequenceController.DecreaseStep();
             ProcessStep();
             StateHasChanged();
         }
 
         private void ProcessStep()
         {
-            _sequenceController.ExecuteStep(GetCurrentParameters());
-            var unresolvedParameters = _contentController.GetUnresolvedParameters(_semanticKey, _sequenceController.LastExecutionResult.Parameters);
-            var parameters = _sequenceController.LastExecutionResult.Parameters;
+            SequenceController.ExecuteStep(GetCurrentParameters());
+            var unresolvedParameters = ContentController.GetUnresolvedParameters(SemanticKey, SequenceController.LastExecutionResult.Parameters);
+            var parameters = SequenceController.LastExecutionResult.Parameters;
             if (unresolvedParameters != null && unresolvedParameters.Any())
             {
-                _sequenceController.FillUnresolvedParameters(ref parameters, unresolvedParameters);
+                SequenceController.FillUnresolvedParameters(ref parameters, unresolvedParameters);
             }
-            _contentController.SetParameters(parameters);
+            ContentController.SetParameters(parameters);
             Display();
         }
 
         private void Display()
         {
             _formElement = new FormElementBase();
-            if (_hasRights)
+            if (HasRights)
             {
-                _formElement = _formElement.GetFormElement(_sequenceController.LastExecutionResult);
-                _formElement.FillDataFromResult(_sequenceController.LastExecutionResult, _contentController);
+                _formElement = _formElement.GetFormElement(SequenceController.LastExecutionResult);
+                _formElement.FillDataFromResult(SequenceController.LastExecutionResult, ContentController);
                 if (_formElement.ShowElement)
                 {
-                    _formElement.Data.Value = _sequenceController.GetSavedValue() ?? _formElement.Data.Value;
+                    _formElement.Data.Value = SequenceController.GetSavedValue() ?? _formElement.Data.Value;
                     ValidateForm(true); //set the IsValid and ErrorText Property unobtrusive
                 }
             }
@@ -101,7 +101,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private bool FormIsValid()
         {
             //always return true if the sequence is before the first step
-            if (_sequenceController.CurrentStep == 0)
+            if (SequenceController.CurrentStep == 0)
             {
                 return true;
             }
@@ -143,7 +143,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                     return GetCurrentNumberParameter();
                 }
                 return new ParametersCollection {
-                    new ClientParameter(_formElement.Data.Name, _formElement.Data.Value, _formElement.Data.InferedType, _semanticKey)
+                    new ClientParameter(_formElement.Data.Name, _formElement.Data.Value, _formElement.Data.InferedType, SemanticKey)
                 };
             }
             return null;
@@ -155,7 +155,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             //get all parameter options
             foreach (var key in (_formElement.Data as IOptionsFormElementData).Options.Keys)
             {
-                result.Add(new ClientParameter(key, key == _formElement.Data.Value ? "ja" : "nee", _formElement.Data.InferedType, _semanticKey));
+                result.Add(new ClientParameter(key, key == _formElement.Data.Value ? "ja" : "nee", _formElement.Data.InferedType, SemanticKey));
             }
 
             return result;
@@ -165,7 +165,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             return new ParametersCollection
             {
-                new ClientParameter(_formElement.Data.Name, _formElement.Data.Value.Replace(',', '.'), _formElement.Data.InferedType, _semanticKey)
+                new ClientParameter(_formElement.Data.Name, _formElement.Data.Value.Replace(',', '.'), _formElement.Data.InferedType, SemanticKey)
             };
         }
     }

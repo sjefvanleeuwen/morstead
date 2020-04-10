@@ -6,7 +6,7 @@
 
     <button class="btn" @onclick="SubmitUrl">Verstuur</button>
     <div id="YamlLogicResult" style="display:@_urlDisplay">
-        <Hint Title="Resultaat van de Regels Yaml Url" Content="@_urlYamlContent" />
+        <Hint Title="Resultaat van de Regels Yaml Url" Content="@UrlYamlContent" />
         <button class="btn" @onclick="HideUrlContentResult">Verberg</button>
     </div>
 
@@ -16,7 +16,7 @@
 
     <button class="btn" @onclick="SubmitText">Verstuur</button>
     <div id="YamlLogicResult" style="display:@_textDisplay">
-        <Hint Title="Resultaat van de Regels Yaml Text" Content="@_urlTextContent" />
+        <Hint Title="Resultaat van de Regels Yaml Text" Content="@UrlTextContent" />
         <button class="btn" @onclick="HideTextContentResult">Verberg</button>
     </div>
 </SpacingWrapper>

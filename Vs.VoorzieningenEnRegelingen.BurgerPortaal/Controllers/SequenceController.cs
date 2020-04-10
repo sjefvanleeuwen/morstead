@@ -22,7 +22,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers
 
         public bool HasRights => !LastExecutionResult?.Parameters?.Any(p => p.Name == "recht" && !(bool)p.Value) ?? true;
 
-        private IServiceController _serviceController;
+        private readonly IServiceController _serviceController;
         private IParseRequest _parseRequest;
         private IParseResult _parseResult;
 
