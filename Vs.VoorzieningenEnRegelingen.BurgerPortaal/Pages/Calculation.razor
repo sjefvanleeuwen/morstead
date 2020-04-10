@@ -11,7 +11,7 @@
         <Hint Title="@TextTitle" Content="@TextDescription" />
     }
 
-    <EditForm Model="_formElement">
+    <EditForm Model="_formElement.Data">
         <CascadingValue Value="_formElement.Data">
             @if (HasRights && _formElement.ShowElement)
             {

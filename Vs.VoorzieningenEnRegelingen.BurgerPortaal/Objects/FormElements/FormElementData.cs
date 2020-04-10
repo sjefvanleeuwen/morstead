@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Cms.Core.Enums;
@@ -12,7 +13,7 @@ using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class FormElementData : IFormElementData
+    public class FormElementData : IFormElementData//, IValidatableObject
     {
         protected string value = string.Empty;
 
@@ -72,5 +73,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             TagText = contentController.GetText(parameterSemanticKey, FormElementContentType.Tag);
             HintText = contentController.GetText(parameterSemanticKey, FormElementContentType.Hint);
         }
+
+        //public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        //{
+        //    IsValid = true;
+        //    ErrorTexts = new List<string>();
+        //}
     }
 }
