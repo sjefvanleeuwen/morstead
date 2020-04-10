@@ -26,7 +26,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private string _urlDisplay = None;
 
-        private string UrlYamlContent => "<code><pre>" + _urlYamlContentNonFormatted.Replace("\n", "<br />") + "</pre></code>";
+        private string UrlYamlContent => "<code><pre>" + _urlYamlContentNonFormatted+ "</pre></code>";
 
         private string _urlYamlContentNonFormatted = string.Empty;
 
@@ -53,7 +53,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private string _textDisplay = None;
 
-        private string UrlTextContent => "<code><pre>" + _textYamlContentNonFormatted.Replace("\n", "<br />") + "</pre></code>";
+        private string UrlTextContent => "<code><pre>" + _textYamlContentNonFormatted + "</pre></code>";
 
         private string _textYamlContentNonFormatted = string.Empty;
         private void SubmitText()
