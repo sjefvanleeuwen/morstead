@@ -11,6 +11,7 @@
    titel: Selecteer uw woonland.
    tekst: Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de Belastingdienst.
    hint: Selecteer ""Anders"" wanneer uw woonland niet in de lijst staat.
+   label: Woonland
  - key: stap.woonsituatie
    vraag: Wat is uw woonsituatie?
    titel: Wat is uw woonsituatie?
