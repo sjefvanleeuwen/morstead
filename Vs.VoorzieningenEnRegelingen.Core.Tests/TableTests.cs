@@ -33,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void CanDetermineTableLookupValueFromQuestion()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlTableTests.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"TableTests.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>

@@ -9,6 +9,7 @@ using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
@@ -45,7 +46,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         protected override void OnInitialized()
         {
             SequenceController.Sequence.Yaml = RuleYaml ?? YamlZorgtoeslag5.Body;
-            ContentController.Initialize(ContentYaml ?? YamlZorgtoeslag5Content.Body);
+            ContentController.Initialize(ContentYaml ?? YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"));
             base.OnInitialized();
             //get the first step
             GetNextStep();

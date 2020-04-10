@@ -1,12 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
-{
-    /// <summary>
-    /// Script used for mocking tests
-    /// </summary>
-    public static class YamlHashExecutionTests
-    {
-        public readonly static string Body = @"# Hash Execution Test for Unit Tests
-stuurinformatie:
+﻿stuurinformatie:
   onderwerp: hash execution unit test
   organisatie: unit test
   type: unit test
@@ -38,6 +30,3 @@ formules:
      formule: formule1_waarde < 0
  - situatie2:
     formule: formule1_waarde > 0
-";
-    }
-}

@@ -1,9 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
-{
-    public class YamlSituationalTests
-    {
-        public readonly static string Body = @"# Situational Evaluation Unit Test
-stuurinformatie:
+﻿stuurinformatie:
   onderwerp: unit test
   organisatie: unit test
   type: unit test
@@ -58,6 +53,3 @@ formules:
      formule: berekening3 * 10
  - flowSituatie2:
      formule: berekening3 * 100
-";
-    }
-}

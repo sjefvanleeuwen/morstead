@@ -1,12 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
-{
-    /// <summary>
-    /// Script used for mocking tests
-    /// </summary>
-    public static class YamlTableTests
-    {
-        public readonly static string Body = @"# Minimal Script for Unit Tests
-stuurinformatie:
+﻿stuurinformatie:
   onderwerp: unit test
   organisatie: unit test
   type: unit test
@@ -69,6 +61,3 @@ tabellen:
       - [ Zweden,              0.8213 ]
       - [ Zwitserland,         0.8000 ]
       - [ Anders,              0      ]
-";
-    }
-}

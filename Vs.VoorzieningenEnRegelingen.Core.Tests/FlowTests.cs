@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
@@ -14,7 +15,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void Flow_Zorgtoeslag_Model_Flow_Deserialization()
         {
-            var parser = new YamlParser(YamlZorgtoeslag.Body, null);
+            var parser = new YamlParser(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"), null);
             var steps = parser.Flow();
             Assert.True(steps.Count() == 3);
             Assert.True((from p in steps where p.Formula == "recht" select p).Single().Situation == "");
@@ -31,7 +32,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void Flow_ZorgToeslag_2019_Scenario1_Condition_Branche_Test()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             var parameters = new ParametersCollection();
             parameters.Add(new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"));
             //  var executionResult = controller.ExecuteWorkflow(parameters);

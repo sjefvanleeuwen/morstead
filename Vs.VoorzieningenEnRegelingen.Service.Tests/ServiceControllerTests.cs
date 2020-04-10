@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
@@ -13,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         public void Service_Parse_Yaml_Successfull()
         {
             ServiceController controller = new ServiceController(null);
-            var s = new ParseRequest() { Config = YamlZorgtoeslag.Body };
+            var s = new ParseRequest() { Config = YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml") };
             var o = Newtonsoft.Json.JsonConvert.SerializeObject(s);
             var result = controller.Parse(s);
             Assert.False(result.IsError);
@@ -33,7 +34,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
             ServiceController controller = new ServiceController(null);
             var executeRequest = new ExecuteRequest()
             {
-                Config = YamlZorgtoeslag.Body,
+                Config = YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"),
                 Parameters = new ParametersCollection() {
                     new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
                 }

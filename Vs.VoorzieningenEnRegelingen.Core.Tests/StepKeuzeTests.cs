@@ -2,6 +2,7 @@
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
@@ -210,7 +211,7 @@ tabellen:
             //prepare yaml definition
             var controller = new YamlScriptController();
             //controller.Parse(_testYaml5);
-            controller.Parse(YamlZorgtoeslag4.Body);
+            controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag4.yaml"));
             //set the callback
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
