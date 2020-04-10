@@ -2,6 +2,7 @@
 using Vs.Core.Diagnostics;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
@@ -74,6 +75,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.True(parameters[2].Name == "recht");
             Assert.True((bool)parameters[2].Value == false);
             Assert.NotNull(recalculate.Stacktrace.FindLast(p => p.IsStopExecution == true));
+        }
+
+        [Fact]
+        public void YamlCanParseSituationalTables()
+        {
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/bijstandsnorm.yaml"));
+            Assert.False(result.IsError);
         }
     }
 }
