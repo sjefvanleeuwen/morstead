@@ -6,7 +6,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.TestData
     {
         public static string Load(string path)
         {
-            return File.ReadAllText($"../../../../Vs.VoorzieningenEnRegelingen.Core.TestData/bin/Debug/netstandard2.0/YamlScripts/{path}");
+            return File.ReadAllText($"../../../../Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/{path}");
         }
     }
 }
