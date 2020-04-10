@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Vs.Core.Diagnostics;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
@@ -80,9 +81,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         [Fact]
         public void YamlCanParseSituationalTables()
         {
-            var controller = new YamlScriptController();
-            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/bijstandsnorm.yaml"));
-            Assert.False(result.IsError);
+            var parser = new YamlParser(YamlTestFileLoader.Load(@"Rijksoverheid/bijstandsnorm.yaml"), null);
+            var tabellen = parser.Tabellen();
+            Assert.True(tabellen.ElementAt(0).IsSituational);
+            Assert.True(tabellen.ElementAt(0).Situations.ElementAt(0).Name == "alleenstaande") ;
         }
     }
 }
