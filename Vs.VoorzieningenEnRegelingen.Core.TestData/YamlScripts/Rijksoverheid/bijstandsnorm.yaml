@@ -1,0 +1,51 @@
+﻿stuurinformatie:
+  onderwerp: bijstandsnorm
+  organisatie: Rijksoverheid
+  type: bijstand
+  domein: inkomen
+  versie: 1.0
+  status: ontwikkel
+  jaar: 2020
+  bron: https://www.rijksoverheid.nl/onderwerpen/bijstand/documenten/publicaties/2019/12/18/uitkeringsbedragen-per-1-januari-2020
+berekening:
+ - stap: woonsituatie
+   keuze:
+   - situatie: alleenstaande
+   - situatie: partner
+ - stap: aowleeftijd
+   situatie: alleenstaande, partner
+   keuze:
+   - situatie: jonger_aow
+   - situatie: ouder_aow
+ - stap: leeftijd partner
+   situatie: partner
+   keuze:
+   - situatie: partner_jonger_aow
+   - situatie: partner_ouder_aow
+ - stap: jonger aow
+   situatie: jonger_aow
+   waarde: leeftijd
+ - stap: jonger aow
+   situatie: partner_jonger_aow
+   waarde: leeftijd_partner
+ - stap: woonkosten
+   keuze:
+   - situatie: woonkosten
+   - situatie: geen_woonkosten
+formules:
+ - standaardpremie:
+   - situatie: alleenstaande
+     formule: 1609
+   - situatie: aanvrager_met_toeslagpartner
+     formule: 3218
+tabellen:
+  - naam: bijstandsnormen
+    situatie: alleenstaande
+    leeftijd, kostendelers, uitkering, vakantietoeslag:
+      - [ 18 tot 21,  0,  247.79, 12.99 ]
+      - [ 21 tot aow, 0,   99.70, 52,62 ]
+      - [ 21 tot aow, 1,  714.08, 37.58 ]
+      - [ 21 tot aow, 2,  618,86, 32.57 ]
+      - [ 21 tot aow, 3,  571.25, 30.07 ]
+      - [ 21 tot aow, 4,  542.70, 28,56 ]
+      - [ 21 tot aow, 5,  523.65, 27.56 ]

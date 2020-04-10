@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Vs.Core.Diagnostics;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
@@ -74,6 +76,15 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             Assert.True(parameters[2].Name == "recht");
             Assert.True((bool)parameters[2].Value == false);
             Assert.NotNull(recalculate.Stacktrace.FindLast(p => p.IsStopExecution == true));
+        }
+
+        [Fact]
+        public void YamlCanParseSituationalTables()
+        {
+            var parser = new YamlParser(YamlTestFileLoader.Load(@"Rijksoverheid/bijstandsnorm.yaml"), null);
+            var tabellen = parser.Tabellen();
+            Assert.True(tabellen.ElementAt(0).IsSituational);
+            Assert.True(tabellen.ElementAt(0).Situations.ElementAt(0).Name == "alleenstaande") ;
         }
     }
 }

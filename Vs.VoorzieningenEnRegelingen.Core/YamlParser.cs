@@ -168,11 +168,21 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                     start: new LineInfo(line: tabel.Start.Line, col: tabel.Start.Column, index: tabel.Start.Index),
                     end: new LineInfo(line: tabel.Start.Line, col: tabel.Start.Column, index: tabel.Start.Index)
                 );
+                var situations = new List<ISituation>();
                 var tableName = ((YamlMappingNode)tabel).ElementAt(0).Value.ToString();
-                var columns1 = ((YamlMappingNode)tabel).ElementAt(1).Key.ToString().Split(',').Select(sValue => sValue.Trim()).ToArray();
+                int j = 1;
+                if (((YamlMappingNode)tabel).ElementAt(1).Key.ToString() == "situatie")
+                {
+                    foreach (var situation in ((YamlMappingNode)tabel).ElementAt(1).Value.ToString().Split(',').Select(x => x.Trim()).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
+                    {
+                        situations.Add(new Situation(situation));
+                    }
+                    j = 2;
+                }
+                var columns1 = ((YamlMappingNode)tabel).ElementAt(j).Key.ToString().Split(',').Select(sValue => sValue.Trim()).ToArray();
                 var rows = new List<Row>();
-                var columnsDebugInfo = DebugInfo.MapDebugInfo(((YamlMappingNode)tabel).ElementAt(1).Key.Start, ((YamlMappingNode)tabel).ElementAt(1).Key.End);
-                foreach (var row in (YamlSequenceNode)(((YamlMappingNode)tabel).ElementAt(1).Value))
+                var columnsDebugInfo = DebugInfo.MapDebugInfo(((YamlMappingNode)tabel).ElementAt(j).Key.Start, ((YamlMappingNode)tabel).ElementAt(j).Key.End);
+                foreach (var row in (YamlSequenceNode)(((YamlMappingNode)tabel).ElementAt(j).Value))
                 {
                     var rowdebugInfo = DebugInfo.MapDebugInfo(row.Start, row.End);
                     var columns = new List<Column>();
@@ -188,7 +198,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 {
                     columnTypes.Add(new ColumnType(columnsDebugInfo, columns1[i]));
                 }
-                tables.Add(new Table(debugInfoTable, tableName, columnTypes, rows));
+                tables.Add(new Table(debugInfoTable, tableName, columnTypes, rows, situations));
             }
             return tables;
         }
