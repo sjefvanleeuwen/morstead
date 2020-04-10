@@ -1,4 +1,6 @@
 ﻿@if (Number != 0)
 {
-    <span class="badge badge--donkerblauw" style="transform: translateY(@(GoUp * -1)px);">@Number</span>
+    <MatChipSet>
+        <MatChip Label="@Number.ToString()"></MatChip>
+    </MatChipSet>
 }

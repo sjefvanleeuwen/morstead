@@ -26,7 +26,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         private string _urlDisplay = None;
 
-        private string UrlYamlContent => "<code><pre>" + _urlYamlContentNonFormatted+ "</pre></code>";
+        private string UrlYamlContent => "<code><pre>" + _urlYamlContentNonFormatted + "</pre></code>";
 
         private string _urlYamlContentNonFormatted = string.Empty;
 

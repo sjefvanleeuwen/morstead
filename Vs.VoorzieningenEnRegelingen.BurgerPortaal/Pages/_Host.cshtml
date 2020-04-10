@@ -13,28 +13,11 @@
     <title>Vs.VoorzieningenEnRegelingen.BurgerPortaal</title>
     <base href="~/" />
 
-    @*<link rel="icon" href="~/uno/components/favicon/ro-favicon-wit-0xffffff.png" />*@
-    <link rel="stylesheet" href="~/uno/core/base.css" />
-    <link rel="stylesheet" href="~/uno/components/collapse/collapse.css" />
-    <link rel="stylesheet" href="~/uno/components/header/header.css" />
-    <link rel="stylesheet" href="~/uno/components/lists/lists.css" />
-    <link rel="stylesheet" href="~/uno/components/list/list-timeline.css" />
-    <link rel="stylesheet" href="~/uno/components/label/label.css" />
-    <link rel="stylesheet" href="~/uno/components/label/badge.css" />
-    <link rel="stylesheet" href="~/uno/components/button/button.css">
-    <link rel="stylesheet" href="~/uno/components/form/form.css">
-    <link rel="stylesheet" href="~/uno/components/form/input.css">
-    <link rel="stylesheet" href="~/uno/components/form/file.css">
-    <link rel="stylesheet" href="~/uno/components/form/checkbox.css">
-    <link rel="stylesheet" href="~/uno/components/form/radio.css">
-    <link rel="stylesheet" href="~/uno/components/pagination/pagination.css">
-    <link rel="stylesheet" href="~/uno/components/hint/hint.css">
-
+    <link rel="stylesheet" href="~/css/reset.css" />
     <link rel="stylesheet" href="~/css/blazor.css" />
-    <link rel="stylesheet" href="~/css/nl_design_overrides.css" />
+    <!-- material -->
+    <link href="_content/MatBlazor/dist/matBlazor.css" rel="stylesheet" />
 
-    <script src="~/uno/vendor/js/Promise.min.js"></script>
-    <script src="~/uno/vendor/js/system.js"></script>
     <script src="_content/BlazorInputFile/inputfile.js"></script>
     <script>
         System.config({
@@ -45,7 +28,8 @@
             }
         });
     </script>
-
+    <!-- material -->
+    <script src="_content/MatBlazor/dist/matBlazor.js"></script>
 </head>
 <body class="theme--large-padding">
     <app>
@@ -62,6 +46,5 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.server.js"></script>
-    <script src="~/js/Uno.Collapsable.interop.js"></script>
 </body>
 </html>

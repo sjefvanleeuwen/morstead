@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorInputFile" Version="0.1.0-preview-00002" />
+    <PackageReference Include="MatBlazor" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>

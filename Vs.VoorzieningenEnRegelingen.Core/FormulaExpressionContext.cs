@@ -161,7 +161,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 e = _context.CompileDynamic(_formula.Functions[0].Expression);
                 var result = e.Evaluate().Infer();
                 Parameter parameter;
-                parameter = new Parameter(_formula.Name, result.Infer(), null , ref _model);
+                parameter = new Parameter(_formula.Name, result.Infer(), null, ref _model);
                 parameter.IsCalculated = true;
                 _parameters.Add(parameter);
                 if (_context.Variables.ContainsKey(parameter.Name))

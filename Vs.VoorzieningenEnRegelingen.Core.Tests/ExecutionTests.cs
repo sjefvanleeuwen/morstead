@@ -1029,7 +1029,7 @@ formules:
             Assert.Equal("drempelinkomen", parameters[2].Name);
             Assert.Equal(20941, (double)parameters[2].Value);
             Assert.Equal("standaardpremie", parameters[3].Name);
-            Assert.Equal(1609,(double)parameters[3].Value);
+            Assert.Equal(1609, (double)parameters[3].Value);
         }
     }
 }

@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Vs.Core.Semantic;
 using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
 
@@ -122,7 +121,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
                     TypeEnum.Double :
                     TypeInference.Infer(value.ToString()).Type;
             }
-                
+
         }
     }
 }
