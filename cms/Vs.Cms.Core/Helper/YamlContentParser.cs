@@ -15,12 +15,12 @@ namespace Vs.Cms.Core.Helper
 
         public static IDictionary<string, object> RenderContentYamlToObject(string yaml)
         {
-            yaml = parseHelper(yaml);
+            yaml = ParseHelper(yaml);
             YamlMappingNode node = Map(yaml);
             return RenderYamlMappingNodeToObject(node);
         }
 
-        private static string parseHelper(string yaml)
+        public static string ParseHelper(string yaml)
         {
             if (yaml.StartsWith("http"))
             {

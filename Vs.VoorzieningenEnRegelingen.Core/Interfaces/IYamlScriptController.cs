@@ -17,6 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Interfaces
         Function GetSituation(string formula, string situation);
         Table GetTable(string name);
         double Lookup(string tableName, string lookupValue, string lookupColumn, string resultColumn, double defaultValue);
+        string CreateYamlContentTemplate();
         ParseResult Parse(string yaml);
     }
 }

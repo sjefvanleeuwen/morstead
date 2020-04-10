@@ -1,12 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Components;
+using Vs.Cms.Core.Helper;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
+using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
     public partial class ContentTemplate
     {
+        [Inject]
+        private IYamlScriptController YamlScriptController { get; set; }
+
+        private const string None = "none";
+        private const string Block = "block";
+
         readonly ITextFormElementData YamlLogic = new TextFormElementData
         {
             Size = FormElementSize.ExtraLarge,
@@ -16,54 +24,22 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/YamlZorgtoeslag5.yaml"
         };
 
-        private string _urlDisplay = "none";
+        private string _urlDisplay = None;
 
-        private string UrlYamlContent => _urlYamlContentNonFormatted.Replace("\n", "<br />");
+        private string UrlYamlContent => "<code><pre>" + _urlYamlContentNonFormatted.Replace("\n", "<br />") + "</pre></code>";
 
-        private readonly string _urlYamlContentNonFormatted = @"<code><pre>Content:
- - key: berekening.header
-   titel: Zorgtoeslag
-   ondertitel: Proefberekening
- - key: stap.woonland
-   vraag: Waar bent u woonachtig?
-   titel: Selecteer uw woonland.
-   tekst: Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de Belastingdienst.
-   hint: Selecteer ""Anders"" wanneer uw woonland niet in de lijst staat.
- - key: stap.woonsituatie
-   vraag: Wat is uw woonsituatie?
-   titel: Wat is uw woonsituatie?
-   tekst: Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de Belastingdienst.
- - key: stap.woonsituatie.keuze.alleenstaande
-   hint: Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft.
-   tekst: Alleenstaande
- - key: stap.woonsituatie.keuze.aanvrager_met_toeslagpartner
-   tekst: Aanvrager met toeslagpartner
- - key: stap.vermogensdrempel.situatie.alleenstaande
-   vraag: Is uw vermogen hoger dan de drempelwaarde?
-   titel: Vermogensdrempel
-   tekst: Wanneer u als alleenstaande meer vermogen heeft dan €114.776,00, overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag.
-     <br />Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst.
- - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.hoger_dan_vermogensdrempel
-   tekst: Ja, mijn vermogen is **hoger** dan €114.776,00
-   hint: De huidige vermogensdrempel voor alleenstaanden is €114.776,00.
- - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.lager_dan_vermogensdrempel
-   tekst: Nee, mijn vermogen is **lager** dan €114.776,00
- - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner
-   vraag: Is uw vermogen hoger dan de drempelwaarde?
-   titel: Vermogensdrempel
-   tekst: Wanneer u samen met een toeslagpartner meer vermogen heeft dan €145.136,00 overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag.
-     <br />Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst.</pre></code>";
+        private string _urlYamlContentNonFormatted = string.Empty;
 
-        private async Task SubmitUrl()
+        private void SubmitUrl()
         {
-            //await OpenPage(pageBase + rules + content);
-            _urlDisplay = "block";
+            var yaml = YamlContentParser.ParseHelper(YamlLogic.Value);
+            _urlYamlContentNonFormatted = GetYamlContentTemplate(yaml);
+            _urlDisplay = Block;
         }
 
-        private async Task HideUrlContentResult()
+        private void HideUrlContentResult()
         {
-            //await OpenPage(pageBase + rules + content);
-            _urlDisplay = "none";
+            _urlDisplay = None;
         }
 
         readonly ITextFormElementData YamlLogicText = new TextFormElementData
@@ -75,58 +51,30 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             Value = "Vul hier de Yaml"
         };
 
-        private string _textDisplay = "none";
+        private string _textDisplay = None;
 
-        private string UrlTextContent => _urlTextContentNonFormatted.Replace("\n", "<br />").Replace(" ", "&nsbp;");
+        private string UrlTextContent => "<code><pre>" + _textYamlContentNonFormatted.Replace("\n", "<br />") + "</pre></code>";
 
-        private readonly string _urlTextContentNonFormatted = @"<code><pre>Content:
- - key: berekening.header
-   titel: Zorgtoeslag
-   ondertitel: Proefberekening
- - key: stap.woonland
-   vraag: Waar bent u woonachtig?
-   titel: Selecteer uw woonland.
-   tekst: Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de Belastingdienst.
-   hint: Selecteer ""Anders"" wanneer uw woonland niet in de lijst staat.
- - key: stap.woonsituatie
-   vraag: Wat is uw woonsituatie?
-   titel: Wat is uw woonsituatie?
-   tekst: Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de Belastingdienst.
- - key: stap.woonsituatie.keuze.alleenstaande
-   hint: Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft.
-   tekst: Alleenstaande
- - key: stap.woonsituatie.keuze.aanvrager_met_toeslagpartner
-   tekst: Aanvrager met toeslagpartner
- - key: stap.vermogensdrempel.situatie.alleenstaande
-   vraag: Is uw vermogen hoger dan de drempelwaarde?
-   titel: Vermogensdrempel
-   tekst: Wanneer u als alleenstaande meer vermogen heeft dan €114.776,00, overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag.
-     <br />Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst.
- - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.hoger_dan_vermogensdrempel
-   tekst: Ja, mijn vermogen is **hoger** dan €114.776,00
-   hint: De huidige vermogensdrempel voor alleenstaanden is €114.776,00.
- - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.lager_dan_vermogensdrempel
-   tekst: Nee, mijn vermogen is **lager** dan €114.776,00
- - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner
-   vraag: Is uw vermogen hoger dan de drempelwaarde?
-   titel: Vermogensdrempel
-   tekst: Wanneer u samen met een toeslagpartner meer vermogen heeft dan €145.136,00 overschrijdt u de vermogensdrempel. U heeft dan geen recht op zorgtoeslag.
-     <br />Indien u niet zeker weet wat uw vermogen is, kijk dan op de website van de Belastingdienst.</pre></code>";
-        private async Task SubmitText()
+        private string _textYamlContentNonFormatted = string.Empty;
+        private void SubmitText()
         {
-            _textDisplay = "block";
-            //await OpenPage(pageBase + rules + content);
+            _textYamlContentNonFormatted = GetYamlContentTemplate(YamlLogicText.Value);
+            _textDisplay = Block;
         }
 
-        private async Task HideTextContentResult()
+        private void HideTextContentResult()
         {
-            _textDisplay = "none";
-            //await OpenPage(pageBase + rules + content);
+            _textDisplay = None;
         }
 
-        private async Task GetYamlContentTemplate()
+        private string GetYamlContentTemplate(string body)
         {
-            //CreateYamlContentTemplate()
+            var result = YamlScriptController.Parse(body);
+            if (result.IsError)
+            {
+                return "Er zit een fout in de Yaml";
+            }
+            return YamlScriptController.CreateYamlContentTemplate();
         }
     }
 }
