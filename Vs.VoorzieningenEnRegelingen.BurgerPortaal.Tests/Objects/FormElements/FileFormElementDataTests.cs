@@ -14,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         public void CheckValidEmptyFromParent()
         {
             var sut = new FileFormElementData();
-            sut.Validate();
+            sut.CustomValidate();
             Assert.Empty(sut.Value);
             Assert.False(sut.IsValid);
             Assert.Equal("Er zijn geen bestanden geupload.", sut.ErrorText);
@@ -29,7 +29,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
                     InitMockFile("Test1").Object
                 }
             };
-            sut.Validate();
+            sut.CustomValidate();
             Assert.Empty(sut.Value);
             Assert.True(sut.IsValid);
         }

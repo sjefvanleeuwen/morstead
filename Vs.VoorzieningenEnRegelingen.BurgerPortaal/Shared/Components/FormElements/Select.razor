@@ -1,12 +1,8 @@
 ﻿@inherits FormElementBase
-<WrapperDefault IsValid="@_data.IsValid">
-    <Label Name="@_data.Name" Text="@_data.Label" TagText="@_data.TagText" />
-    <FormElementHint Name="@_data.Name" Text="@_data.HintText" />
-    <Error Text="@_data.ErrorText" />
-    <select required="@_data.IsRequired" disabled="@_data.IsDisabled" id="@_data.Name" aria-describedby="hint_@_data.Name" class="input__control input__control--select @_data.ElementSize" @bind="@_data.Value">
-        @foreach (var key in _keys)
-        {
-            <option value="@key" selected="@(key == Value)">@_data.Options[key]</option>
-        }
-    </select>
-</WrapperDefault>
+<MatSelect Label="@_data.Label" @bind-Value="@_data.Value" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@_data.HintText">
+    @foreach (var key in _keys)
+    {
+        <MatOptionString Value="@key">@_data.Options[key]</MatOptionString>
+    }
+</MatSelect>
+<ValidationMessage For="@(() => _data.Value)" />

@@ -177,7 +177,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             inputs[2].Change("1949");
             Assert.Equal("1949", (component.Instance.Data as IDateFormElementData).Values["year"]);
             Assert.Equal(new DateTime(1949, 08, 01), (component.Instance.Data as IDateFormElementData).ValueDate);
-            component.Instance.Data.Validate();
+            component.Instance.Data.CustomValidate();
             Assert.Equal(new DateTime(1949, 08, 01), (component.Instance.Data as IDateFormElementData).ValueDate);
         }
 
@@ -209,7 +209,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             inputs[2].Change("love");
             Assert.Equal("love", (component.Instance.Data as IDateFormElementData).Values["year"]);
             Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
-            component.Instance.Data.Validate();
+            component.Instance.Data.CustomValidate();
             Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateFormElementData).ValueDate);
         }
 
@@ -233,7 +233,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("1", (component.Instance.Data as IDateFormElementData).Values["day"]);
             inputs = component.FindAll("input").ToList();
             Assert.Equal("1", inputs[0].Attr("value"));
-            component.Instance.Data.Validate();
+            component.Instance.Data.CustomValidate();
             Assert.Equal(new DateTime(1979, 03, 01), (component.Instance.Data as IDateFormElementData).ValueDate);
         }
 

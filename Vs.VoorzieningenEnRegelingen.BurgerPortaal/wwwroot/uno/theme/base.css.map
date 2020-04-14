@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "base.css",
-	"sources": [
-		"../../../../../../src/theme/base.scss"
-	],
-	"names": [],
-	"mappings": ""
-}

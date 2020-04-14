@@ -10,19 +10,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         public void CheckValidEmpty()
         {
             var sut = new FormElementMultipleValueData();
-            sut.Validate();
+            sut.CustomValidate();
             Assert.True(sut.IsValid);//no values to check
             Assert.Empty(sut.ErrorText);
             sut.Values = new Dictionary<string, string> { { "test", string.Empty } };
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.Equal("Vul een waarde in voor alle waarden.", sut.ErrorText);
             sut.Values = new Dictionary<string, string> { { "test", " " } };
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.Equal("Vul een waarde in voor alle waarden.", sut.ErrorText);
             sut.Values = new Dictionary<string, string> { { "test", "\t" } };
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.Equal("Vul een waarde in voor alle waarden.", sut.ErrorText);
         }
@@ -32,7 +32,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         {
             var sut = new FormElementMultipleValueData();
             sut.Values = new Dictionary<string, string> { { "test", "test" } };
-            sut.Validate();
+            sut.CustomValidate();
             Assert.True(sut.IsValid);
         }
 
@@ -41,10 +41,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         {
             var sut = new FormElementMultipleValueData();
             sut.Values = new Dictionary<string, string> { { "test", string.Empty } };
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.NotEmpty(sut.ErrorText);
-            sut.Validate(true);
+            sut.CustomValidate(true);
             Assert.True(sut.IsValid);
             Assert.Empty(sut.ErrorText);
         }

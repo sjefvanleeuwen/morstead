@@ -1,5 +1,4 @@
 ﻿using Vs.VoorzieningenEnRegelingen.Core.TestData;
-using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests

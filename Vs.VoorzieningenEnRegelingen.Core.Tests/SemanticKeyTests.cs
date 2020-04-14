@@ -2,7 +2,7 @@
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
-using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 using YamlDotNet.Serialization;
 
@@ -14,7 +14,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void CanDiscoverAllSemanticKeysAndBindToParameters()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag5.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"));
 
             Assert.False(result.IsError);
             Assert.True(controller.ContentNodes.Count == 35);
@@ -49,7 +49,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             {
                 argsret = args;
             };
-            var result = controller.Parse(YamlZorgtoeslag5.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"));
             var parameters = new ParametersCollection() {
                 new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
             } as IParametersCollection;
@@ -77,7 +77,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             {
                 argsret = args;
             };
-            var result = controller.Parse(YamlZorgtoeslag5.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"));
             var parameters = new ParametersCollection() { new ClientParameter("woonland", "Anders", TypeInference.InferenceResult.TypeEnum.List, "Dummy") } as IParametersCollection;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             try

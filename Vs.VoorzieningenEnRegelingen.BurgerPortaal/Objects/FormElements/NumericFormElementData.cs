@@ -13,9 +13,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public bool DecimalsOptional { get; set; }
 
-        public override void Validate(bool unobtrusive = false)
+        public override void CustomValidate(bool unobtrusive = false)
         {
-            base.Validate(unobtrusive);
+            base.CustomValidate(unobtrusive);
             if (!IsValid)
             {
                 return;

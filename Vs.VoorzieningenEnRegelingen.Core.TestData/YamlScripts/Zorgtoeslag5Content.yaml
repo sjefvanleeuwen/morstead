@@ -6,6 +6,7 @@
    vraag: Waar bent u woonachtig?
    titel: Selecteer uw woonland.
    tekst: Indien u niet zeker weet wat uw woonland is, kijk dan op de website van de Belastingdienst.
+   label: Woonland
    hint: Selecteer "Anders" wanneer uw woonland niet in de lijst staat.
  - key: stap.woonsituatie
    vraag: Wat is uw woonsituatie?
@@ -13,6 +14,7 @@
    tekst: Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de Belastingdienst.
  - key: stap.woonsituatie.keuze.alleenstaande
    hint: Geef aan of u alleenstaande bent of dat u een toeslagpartner heeft.
+   label: Woonsituatie
    tekst: Alleenstaande
  - key: stap.woonsituatie.keuze.aanvrager_met_toeslagpartner
    tekst: Aanvrager met toeslagpartner 
@@ -24,6 +26,7 @@
  - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.hoger_dan_vermogensdrempel   
    tekst: Ja, mijn vermogen is **hoger** dan €{{toetsingsvermogensdrempel | string.to_double | math.format "N" "nl-NL"}}
    hint: De huidige vermogensdrempel voor alleenstaanden is €{{toetsingsvermogensdrempel | string.to_double | math.format "N" "nl-NL"}}.
+   label: Vermogensdrempel
  - key: stap.vermogensdrempel.situatie.alleenstaande.keuze.lager_dan_vermogensdrempel
    tekst: Nee, mijn vermogen is **lager** dan €{{toetsingsvermogensdrempel | string.to_double | math.format "N" "nl-NL"}}
  - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner
@@ -34,6 +37,7 @@
  - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.hoger_dan_vermogensdrempel   
    tekst: Ja, het gezamenlijk vermogen is **hoger** dan €{{toetsingsvermogensdrempel | string.to_double | math.format "N" "nl-NL"}}
    hint: De huidige vermogensdrempel voor aanvragers met toeslagpartners is €{{toetsingsvermogensdrempel | string.to_double | math.format "N" "nl-NL"}}.
+   label: Vermogensdrempel
  - key: stap.vermogensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.lager_dan_vermogensdrempel   
    tekst: Nee, het gezamenlijk vermogen is **lager** dan €{{toetsingsvermogensdrempel | string.to_double | math.format "N" "nl-NL"}}
  - key: stap.inkomensdrempel.situatie.alleenstaande
@@ -44,6 +48,7 @@
  - key: stap.inkomensdrempel.situatie.alleenstaande.keuze.hoger_dan_inkomensdrempel
    tekst: Ja, mijn inkomen is **hoger** dan €{{toetsingsinkomensdrempel | string.to_double | math.format "N" "nl-NL"}}
    hint: De huidige inkomensdrempel voor alleenstaanden is €{{toetsingsinkomensdrempel | string.to_double | math.format "N" "nl-NL"}} per jaar.
+   label: Inkomensdrempel
  - key: stap.inkomensdrempel.situatie.alleenstaande.keuze.lager_dan_inkomensdrempel
    tekst: Nee, mijn inkomen is **lager** dan €{{toetsingsinkomensdrempel | string.to_double | math.format "N" "nl-NL"}}
  - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner
@@ -54,6 +59,7 @@
  - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.hoger_dan_inkomensdrempel
    tekst: Ja, het gezamenlijk inkomen is **hoger** dan €{{toetsingsinkomensdrempel | string.to_double | math.format "N" "nl-NL"}}
    hint: De huidige inkomensdrempel voor aanvragers met toeslagpartners is €{{toetsingsinkomensdrempel | string.to_double | math.format "N" "nl-NL"}} per jaar
+   label: Inkomensdrempel
  - key: stap.inkomensdrempel.situatie.aanvrager_met_toeslagpartner.keuze.lager_dan_inkomensdrempel   
    tekst: Nee, het gezamenlijk inkomen is **lager** dan €{{toetsingsinkomensdrempel | string.to_double | math.format "N" "nl-NL"}}
  - key: stap.toetsingsinkomen.situatie.alleenstaande
@@ -63,6 +69,7 @@
      <br />Indien u niet zeker weet wat uw inkomen is, kijk dan op de website van de Belastingdienst.
  - key: stap.toetsingsinkomen.situatie.alleenstaande.toetsingsinkomen
    hint: De huidige inkomensdrempel voor alleenstaanden is €{{toetsingsinkomensdrempel | string.to_double | math.format "N" "nl-NL"}} per jaar.
+   label: Toetsingsinkomen
  - key: stap.toetsingsinkomen.situatie.aanvrager_met_toeslagpartner
    vraag: Wat is uw toetsingsinkomen?
    titel: Gezamenlijk toetsingsinkomen
@@ -70,6 +77,7 @@
      <br />Indien u niet zeker weet wat uw gezamenlijk inkomen is, kijk dan op de website van de Belastingdienst.
  - key: stap.toetsingsinkomen.situatie.aanvrager_met_toeslagpartner.toetsingsinkomen
    hint: Vul een getal in. Gebruik een komma (,) in plaats van een punt (.) als scheidingsteken tussen euro's en centen.
+   label: Toetsingsinkomen
  - key: stap.zorgtoeslag.situatie.alleenstaande
    vraag: Maandelijkse zorgtoeslag
    titel: Uw zorgtoeslag is €{{zorgtoeslag | string.to_double | math.format "N" "nl-NL"}} per maand.

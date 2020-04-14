@@ -289,7 +289,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             inputs[5].Change("1980");
             Assert.Equal("1980", (component.Instance.Data as IDateRangeFormElementData).Values[DateRangeType.End + "year"]);
             Assert.Equal(new DateTime(1980, 11, 21), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.End]);
-            component.Instance.Data.Validate();
+            component.Instance.Data.CustomValidate();
             Assert.Equal(new DateTime(1949, 08, 01), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.Start]);
             Assert.Equal(new DateTime(1980, 11, 21), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.End]);
         }
@@ -336,7 +336,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("hart", (component.Instance.Data as IDateRangeFormElementData).Values[DateRangeType.End + "year"]);
             Assert.Equal(new DateTime(1988, 05, 09), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.End]);
 
-            component.Instance.Data.Validate();
+            component.Instance.Data.CustomValidate();
             Assert.Equal(new DateTime(1979, 03, 08), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.Start]);
             Assert.Equal(new DateTime(1988, 05, 09), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.End]);
         }
@@ -361,7 +361,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("1", (component.Instance.Data as IDateRangeFormElementData).Values[DateRangeType.Start + "day"]);
             inputs = component.FindAll("input").ToList();
             Assert.Equal("1", inputs[0].Attr("value"));
-            component.Instance.Data.Validate();
+            component.Instance.Data.CustomValidate();
             Assert.Equal(new DateTime(1979, 03, 01), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.Start]);
 
             Assert.Equal(new DateTime(1988, 05, 21), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.End]);
@@ -370,7 +370,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("9", (component.Instance.Data as IDateRangeFormElementData).Values[DateRangeType.End + "day"]);
             inputs = component.FindAll("input").ToList();
             Assert.Equal("9", inputs[3].Attr("value"));
-            component.Instance.Data.Validate();
+            component.Instance.Data.CustomValidate();
             Assert.Equal(new DateTime(1988, 05, 9), (component.Instance.Data as IDateRangeFormElementData).ValueDates[DateRangeType.End]);
         }
 

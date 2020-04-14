@@ -22,7 +22,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         public void CheckValidWhenEmpty()
         {
             var sut = new DateFormElementData();
-            sut.Validate();
+            sut.CustomValidate();
             Assert.True(sut.IsValid);
         }
 
@@ -325,7 +325,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
                     { "day", string.Empty }
                 }
             };
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
         }
 
@@ -341,7 +341,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
                     { "day", "08" }
                 }
             };
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.Equal("De waarden ingegeven vormen samen geen geldige datum.", sut.ErrorText);
         }
@@ -359,7 +359,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
                 },
                 MinimumAllowedDate = new DateTime(2020, 3, 27)
             };
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.Equal("De datum is kleiner dan de minimaal toegestane datum: '27-3-2020'.", sut.ErrorText);
         }
@@ -377,7 +377,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
                 },
                 MaximumAllowedDate = new DateTime(1944, 3, 11)
             };
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.Equal("De datum is groter dan de maximaal toegestane datum: '11-3-1944'.", sut.ErrorText);
         }

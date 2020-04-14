@@ -21,12 +21,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             Label = "Regels Yaml Url",
             Name = "Rule",
             TagText = "Optioneel",
-            Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/YamlZorgtoeslag5.yaml"
+            Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml"
         };
 
         private string _urlDisplay = None;
 
-        private string UrlYamlContent => "<code><pre>" + _urlYamlContentNonFormatted+ "</pre></code>";
+        private string UrlYamlContent => "<code><pre>" + _urlYamlContentNonFormatted + "</pre></code>";
 
         private string _urlYamlContentNonFormatted = string.Empty;
 

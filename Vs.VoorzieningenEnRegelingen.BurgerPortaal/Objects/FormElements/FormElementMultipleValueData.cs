@@ -26,9 +26,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             return Labels[key].Title;
         }
 
-        public override void Validate(bool unobtrusive = false)
+        public override void CustomValidate(bool unobtrusive = false)
         {
-            base.Validate(unobtrusive);
+            base.CustomValidate(unobtrusive);
 
             var valid = ValidateValuesAreSet();
 

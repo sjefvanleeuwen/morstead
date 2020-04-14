@@ -14,8 +14,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
         [Parameter]
         public string PreviousText { get; set; }
         [Parameter]
-        public string ScreenreaderDescription { get; set; }
-        [Parameter]
         public bool NextDisabled { get; set; }
         [Parameter]
         public bool PreviousDisabled { get; set; }

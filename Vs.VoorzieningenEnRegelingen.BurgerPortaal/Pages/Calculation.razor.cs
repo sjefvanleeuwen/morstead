@@ -10,7 +10,6 @@ using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
-using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
@@ -45,8 +44,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         protected override void OnInitialized()
         {
-            SequenceController.Sequence.Yaml = RuleYaml ?? YamlZorgtoeslag5.Body;
-            ContentController.Initialize(ContentYaml ?? YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"));
+            SequenceController.Sequence.Yaml = RuleYaml ?? YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml");
+            ContentController.Initialize(ContentYaml ?? YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml"));
             base.OnInitialized();
             //get the first step
             GetNextStep();
@@ -117,7 +116,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         /// <returns>Whether or not the form is valid.</returns>
         private bool ValidateForm(bool unobtrusive = false)
         {
-            _formElement?.Data?.Validate(unobtrusive);
+            _formElement?.Data?.CustomValidate(unobtrusive);
             return _formElement?.Data?.IsValid ?? true;
         }
 
