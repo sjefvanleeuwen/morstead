@@ -5,8 +5,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
     public partial class FormElementHint
     {
         [Parameter]
-        public string Name { get; set; }
-        [Parameter]
         public string Text { get; set; }
 
         protected bool _show => !string.IsNullOrWhiteSpace(Text);

@@ -6,3 +6,6 @@
     line-height: 50px;
 }
 
+nav.calc_pagination > ul > li {
+    float: left;
+}

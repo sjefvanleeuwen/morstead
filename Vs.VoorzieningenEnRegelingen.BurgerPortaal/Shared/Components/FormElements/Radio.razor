@@ -6,5 +6,5 @@
         <MatRadioButton Value="@key" TValue="string" Disabled="@_data.IsDisabled">@((MarkupString)_data.Options[key])</MatRadioButton>
     }
 </MatRadioGroup>
-<div>@((MarkupString)_data.HintText)</div>
-<ValidationMessage For="@(() => _data.Value)" />
+<FormElementHint Text="@_data.HintText" />
+<Error><ValidationMessage For="@(() => _data.Value)" /></Error>
