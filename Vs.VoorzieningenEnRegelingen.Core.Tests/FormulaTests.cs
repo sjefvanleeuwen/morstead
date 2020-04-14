@@ -166,6 +166,9 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             eDynamic = context.CompileGeneric<bool>("a AND c");
             result = eDynamic.Evaluate();
             Assert.True(result);
+            eDynamic = context.CompileGeneric<bool>("a AND NOT b");
+            result = eDynamic.Evaluate();
+            Assert.True(result);
         }
 
         [Fact]
