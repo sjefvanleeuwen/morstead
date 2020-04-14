@@ -10,7 +10,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 {
     public class FormElementBase : ComponentBase, IFormElementBase
     {
-        private IFormElementData _data;
+        private IFormElementData _data = new FormElementData(); //used as model, can't be emtpy
 
         [CascadingParameter]
         public IFormElementData CascadedData { get; set; }
