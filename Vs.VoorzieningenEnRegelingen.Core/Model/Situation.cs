@@ -2,11 +2,11 @@
 {
     public class Situation : ISituation
     {
-        public string Name { get; }
+        public string Expression { get; }
 
-        public Situation(string name)
+        public Situation(string expression)
         {
-            Name = name ?? throw new System.ArgumentNullException(nameof(name));
+            Expression = expression ?? throw new System.ArgumentNullException(nameof(expression));
         }
     }
 }

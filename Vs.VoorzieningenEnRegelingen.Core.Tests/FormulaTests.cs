@@ -4,6 +4,7 @@ using System.Globalization;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 using YamlDotNet.Serialization;
@@ -153,13 +154,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         }
 
         [Fact]
-        void Formula_Table_Select_Test()
+        void Formula_Table_Lookup_Test()
         {
             // -naam: woonlandfactoren
             //  woonland, factor:
             //  - [Finland, 0.7161]
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             ExpressionContext context = new ExpressionContext(controller);
             //  Tsjechië,            0.2412 
             context.Variables.Add("woonland", "Tsjechië");
@@ -169,7 +170,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             double result1 = (double)e.Evaluate();
             Assert.True(result1 == 0.2412);
         }
-
 
         public event QuestionDelegate OnQuestion;
 
@@ -183,7 +183,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
                 new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
@@ -203,7 +203,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         {
 
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
                 new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
@@ -254,7 +254,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         void Formula_Can_Discover_Parameters_From_Yaml()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = controller.GetFunctionTree(controller);
             Assert.True(parameters.Count == 9);
@@ -264,7 +264,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         void Formula_Can_Discover_Parameters_And_InferedTypes_From_Yaml()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlWettelijkeRente.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"WettelijkeRente.yaml"));
             Assert.False(result.IsError);
             var parameters = controller.GetFunctionTree(controller);
             Assert.True(parameters.Count == 4);

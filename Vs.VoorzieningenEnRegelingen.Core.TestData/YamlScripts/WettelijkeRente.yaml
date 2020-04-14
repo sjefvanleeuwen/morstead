@@ -1,11 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
-{
-    /// <summary>
-    /// Script used for mocking tests
-    /// </summary>
-    public static class YamlWettelijkeRente
-    {
-        public readonly static string Body = @"stuurinformatie:
+﻿stuurinformatie:
   onderwerp: Wettelijke rente handelstransacties en niet-handelstransacties
   organisatie: De Nederlandsche Bank (DNB)
   type: rente
@@ -60,6 +53,4 @@ tabellen:
   - naam: soort_rente
     omschrijving, soort:
        - [ Wettelijke rente voor handelstransacties, handelstransacties ]
-       - [ Wettelijke rente voor consumententransacties, consumententransacties ]";
-    }
-}
+       - [ Wettelijke rente voor consumententransacties, consumententransacties ]

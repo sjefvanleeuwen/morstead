@@ -1,99 +1,89 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
-{
-    /// <summary>
-    /// Script used for mocking tests
-    /// </summary>
-    public static class YamlZorgtoeslag2
-    {
-        public readonly static string Body = @"# Minimal Script for Unit Tests
-stuurinformatie:
+﻿stuurinformatie:
   onderwerp: zorgtoeslag
   organisatie: belastingdienst
   type: toeslagen
   domein: zorg
-  versie: 2.0
+  versie: 3.0
   status: ontwikkel
   jaar: 2019
   bron: https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_2019_tg0821z91fd.pdf
 berekening:
  - stap: 1
-   omschrijving: woonachtig in Nederland
-   tekst: landrecht
-   formule: binnenland
- - stap: 1
-   situatie: niet(binnenland)
-   omschrijving: woonachtig in een land met recht
-   formule: selecteer(woonland)
+   omschrijving: Waar bent u woonachtig?
+   formule: woonlandfactor
    recht: woonlandfactor > 0
- - stap: 2 
-   omschrijving: bepaal de woonsituatie
-   formule: alleenstaande
+ - stap: 2
+   omschrijving: Wat is uw woonsituatie?
+   formule: standaardpremie
  - stap: 3
-   omschrijving: bepaal of het eigen vermogen groter is dan het maximaal_vermogen
-   formule: niet(maximaal_vermogen)
-   recht: niet(maximaal_vermogen) 
+   situatie: alleenstaande
+   omschrijving: Is uw vermogen hoger dan de drempelwaarde?
+   formule: vermogensdrempel
+   recht: vermogensdrempel = 1
+ - stap: 3
+   situatie: aanvrager_met_toeslagpartner
+   omschrijving: Is uw gezamenlijk vermogen hoger dan de drempelwaarde?
+   formule: vermogensdrempel
+   recht: vermogensdrempel = 1
  - stap: 4
-   omschrijving: bepaal of het inkomen groter is dan het toetsingsinkomen
-   formule: niet(maximaal_toetsingsinkomen)
-   recht: niet(maximaal_toetsingsinkomen)
+   situatie: alleenstaande
+   omschrijving: Is uw toetsingsinkomen hoger dan de inkomensdrempel?
+   formule: inkomensdrempel
+   recht: inkomensdrempel = 1
+ - stap: 4
+   situatie: aanvrager_met_toeslagpartner
+   omschrijving: Is uw gezamenlijk toetsingsinkomen hoger dan de inkomensdrempel?
+   formule: inkomensdrempel
+   recht: inkomensdrempel = 1
  - stap: 5
    situatie: alleenstaande
-   omschrijving: bepaal het eigen vermogen van de alleenstaande
-   formule: eigen_vermogen
-- stap: 5
-   situatie: aanvrager_met_toeslagpartner
-   omschrijving: bepaal het eigen vermogen van de aanvrager_met_toeslagpartner
-   formule: eigen_vermogen
- - stap: 6
-   situatie: alleenstaande
-   omschrijving: bepaal het inkomen van de alleenstaande
+   omschrijving: Wat is uw toetsingsinkomen?
    formule: toetsingsinkomen
- - stap: 6
+   recht: toetsingsinkomen_aanvrager < 29562
+ - stap: 5
    situatie: aanvrager_met_toeslagpartner
-   omschrijving: bepaal het inkomen van de aanvrager_met_toeslagpartner
+   omschrijving: Wat is uw gezamenlijk toetsingsinkomen?
    formule: toetsingsinkomen
- - stap: 7
-   omschrijving: toon de berekende zorgtoeslag
+   recht: toetsingsinkomen_gezamenlijk < 37885
+ - stap: 6
+   omschrijving: Maandelijkse zorgtoeslag
    formule: zorgtoeslag
 formules:
- - maximaal_vermogen:
-   - situatie: wel(alleenstaande)
-     formule: 114776
-   - situatie: niet(alleenstaande)
-     formule: 145136
- - maximaal_toetsingsinkomen:
-   - situatie: wel(alleenstaande)
-     formule: 29562
-   - situatie: niet(alleenstaande)
-     formule: 37885
+ - woonlandfactor:
+     formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
  - standaardpremie:
-   - situatie: wel(alleenstaande)
+   - situatie: alleenstaande
      formule: 1609
-   - situatie: niet(alleenstaande)
+   - situatie: aanvrager_met_toeslagpartner
      formule: 3218
+ - vermogensdrempel:
+   - situatie: hoger_dan_de_vermogensdrempel
+     formule: 0   
+   - situatie: lager_dan_de_vermogensdrempel
+     formule: 1
+ - inkomensdrempel:
+   - situatie: hoger_dan_de_inkomensdrempel
+     formule: 0
+   - situatie: lager_dan_de_inkomensdrempel
+     formule: 1
+ - toetsingsinkomen:
+   - situatie: alleenstaande
+     formule: toetsingsinkomen_aanvrager
+   - situatie: aanvrager_met_toeslagpartner
+     formule: toetsingsinkomen_gezamenlijk
  - drempelinkomen:
      formule: 20941
  - normpremie:
-   - situatie: alleenstaande
+   - situatie: alleenstaande     
      formule: min(percentage(2.005) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 1189)
    - situatie: aanvrager_met_toeslagpartner
      formule: min(percentage(4.315) * drempelinkomen + max(percentage(13.520) * (toetsingsinkomen - drempelinkomen),0), 2314)
- - buitenland:
-     formule: niet(woonland,'Nederland')
- - binnenland:
-     formule: wel(woonland,'Nederland')
  - zorgtoeslag:
-     - situatie: binnenland
-       formule: round((standaardpremie - normpremie) / 12,2)
-     - situatie: buitenland
-       formule: round((standaardpremie - normpremie) * woonlandfactor / 12,2)
- - woonlandfactor:
-     formule: lookup('woonlandfactoren',woonland,'woonland','factor', 0)
+     formule: round((standaardpremie - normpremie) * woonlandfactor / 12,2)
 tabellen:
   - naam: woonlandfactoren
     woonland, factor:
-      - [ Finland,             0.7161 ]
-      - [ Frankrijk,           0.8316 ]
+      - [ Nederland,           1.0    ]
       - [ België,              0.7392 ]
       - [ Bosnië-Herzegovina,  0.0672 ]
       - [ Bulgarije,           0.0735 ]
@@ -133,6 +123,4 @@ tabellen:
       - [ Verenigd Koninkrijk, 0.7741 ]
       - [ Zweden,              0.8213 ]
       - [ Zwitserland,         0.8000 ]
-";
-    }
-}
+      - [ Anders,              0      ]

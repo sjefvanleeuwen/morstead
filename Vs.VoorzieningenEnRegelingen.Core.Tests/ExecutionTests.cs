@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
@@ -73,7 +74,7 @@ formules:
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -101,7 +102,7 @@ formules:
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -129,7 +130,7 @@ formules:
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -158,7 +159,7 @@ formules:
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -187,7 +188,7 @@ formules:
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -204,7 +205,7 @@ formules:
         public void Execution_ZorgToeslag_2019_Scenario1_WithQA_vermogen_aanvrager()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             QuestionArgs argsret = null;
             var isException = false;
@@ -236,7 +237,7 @@ formules:
         public void Execution_ZorgToeslag_2019_Scenario1_WithQA_toetsingsinkomen_aanvrager()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             QuestionArgs argsret = null;
             var isException = false;
@@ -268,7 +269,7 @@ formules:
         public void Execution_ZorgToeslag_2019_Scenario1_WithQA_Woonland()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             QuestionArgs argsret = null;
             var isException = false;
@@ -301,7 +302,7 @@ formules:
         public void Execution_ZorgToeslag_2019_Scenario1_WithQA_Alleenstaande()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             QuestionArgs argsret = null;
             var isException = false;
@@ -344,7 +345,7 @@ formules:
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -375,7 +376,7 @@ formules:
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -406,7 +407,7 @@ formules:
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -433,7 +434,7 @@ formules:
                 Assert.True(args.Parameters[0].Name == "toetsingsinkomen_toeslagpartner");
                 argsret = args;
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -467,7 +468,7 @@ formules:
                 Assert.True(args.Parameters[0].Name == "vermogen_toeslagpartner");
                 argsret = args;
             };
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -498,7 +499,7 @@ formules:
         public void Execution_ZorgToeslag_2019_Without_Initial_Parameters()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             QuestionArgs argsret = null;
             var isException = false;
@@ -533,7 +534,7 @@ formules:
         public void Execution_ZorgToeslag_2019_GetInputParameters()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             // var parameters = controller.GetInputParameters();
         }
 
@@ -547,7 +548,7 @@ formules:
         void Execution_ZorgToeslag_2019_Full_Scenario1()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             bool isException = false;
             var executionResult = null as IExecutionResult;
@@ -630,7 +631,7 @@ formules:
         public void Execution_YamlVermogensgrens_WithQA()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlVermogensgrens.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Vermogensgrens.yaml"));
             Assert.False(result.IsError);
             bool isException = false;
             QuestionArgs argsret = null;
@@ -660,7 +661,7 @@ formules:
         public void HashExecutionTest()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlHashExecutionTests.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"HashExecutionTests.yaml"));
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // Should not be called.
@@ -699,7 +700,7 @@ formules:
         public void FormulaResolvesToCorrectSituationalFunctionV3()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag3.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag3.yaml"));
             Assert.False(result.IsError);
             bool isException = false;
             var executionResult = null as IExecutionResult;
@@ -747,7 +748,7 @@ formules:
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag4.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
@@ -774,7 +775,7 @@ formules:
                 // should not be called.
                 throw new Exception("Questioncallback should not be called.");
             };
-            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag4.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),
@@ -795,7 +796,7 @@ formules:
         public void ResolveToCorrectSituation()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlSituationalTests.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"SituationalTests.yaml"));
             var parameters = new ParametersCollection() as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
@@ -855,7 +856,7 @@ formules:
         public void StepChoiceTest()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlStepVariableAndChoiceTests.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"StepVariableAndChoiceTests.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -935,7 +936,7 @@ formules:
                 Assert.False((bool)args.Parameters[1].Value);
                 Assert.Equal(TypeInference.InferenceResult.TypeEnum.Boolean, args.Parameters[1].Type);
             };
-            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag4.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
@@ -962,7 +963,7 @@ formules:
                 Assert.True((double)args.Parameters[0].Value == 0);
                 Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, args.Parameters[0].Type);
             };
-            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag4.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() {
                 new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"),

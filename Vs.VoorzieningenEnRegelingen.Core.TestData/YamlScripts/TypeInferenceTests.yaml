@@ -1,12 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
-{
-    /// <summary>
-    /// Script used for mocking tests
-    /// </summary>
-    public static class YamlVariableTypeTests
-    {
-        public readonly static string Body = @"# See if all variable types are correctly inferred Unit Tests
-stuurinformatie:
+﻿stuurinformatie:
   onderwerp: See if all variable types are correctly inferred Unit Tests
   organisatie: unit test
   type: unit test
@@ -38,6 +30,3 @@ formules:
      formule: formule1_waarde < 0
  - situatie2:
     formule: formule1_waarde > 0
-";
-    }
-}

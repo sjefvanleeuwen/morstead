@@ -33,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void CanDetermineTableLookupValueFromQuestion()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlTableTests.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"TableTests.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -79,12 +79,13 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         }
 
         [Fact]
-        public void YamlCanParseSituationalTables()
+        public void YamlCanParseAndEvaluateSituationalTables()
         {
-            var parser = new YamlParser(YamlTestFileLoader.Load(@"Rijksoverheid/bijstandsnorm.yaml"), null);
-            var tabellen = parser.Tabellen();
-            Assert.True(tabellen.ElementAt(0).IsSituational);
-            Assert.True(tabellen.ElementAt(0).Situations.ElementAt(0).Name == "alleenstaande");
+            var controller = new YamlScriptController();
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Amsterdam/bijstandsnorm.yaml"));
+            Assert.False(result.IsError);
+            Assert.True(result.Model.Tables.ElementAt(0).IsSituational);
+            Assert.True(result.Model.Tables.ElementAt(0).Situations.ElementAt(0).Expression == "alleenstaande") ;
         }
     }
 }

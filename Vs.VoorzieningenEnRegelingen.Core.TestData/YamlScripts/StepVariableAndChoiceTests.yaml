@@ -1,9 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
-{
-    public class YamlStepVariableAndChoiceTests
-    {
-        public readonly static string Body = @"# Step Variable Unit Test
-stuurinformatie:
+﻿stuurinformatie:
   onderwerp: step variable unit test
   organisatie: unit test
   type: unit test
@@ -37,6 +32,3 @@ tabellen:
     drankje, prijs:
       - [ Apple Bandit Cider (30cl),        0.99 ]
       - [ Savanna Premium Cider Dry (30cl), 1.89 ]
-";
-    }
-}

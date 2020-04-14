@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
@@ -48,7 +49,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void TimePeriodsCanBeReadFromTable()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlWettelijkeRente.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"WettelijkeRente.yaml"));
             IParametersCollection parameters = new ParametersCollection();
             var executionResult = null as IExecutionResult;
             bool isException = false;

@@ -1,4 +1,5 @@
-﻿using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
+﻿using Vs.VoorzieningenEnRegelingen.Core.TestData;
+using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
@@ -9,7 +10,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void Model_Parse_Yaml_To_Model()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.True(controller.GetSituation("standaardpremie", "alleenstaande").Expression == "1609");
             Assert.True(controller.GetSituation("maximaalvermogen", "aanvrager_met_toeslagpartner").Expression == "145136");
         }
@@ -18,7 +19,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void StuurInformatieTest()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var header = controller.GetHeader();
             Assert.True(header.Onderwerp == "zorgtoeslag");
@@ -35,7 +36,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void CanParseChoices()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag4.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag4.yaml"));
             Assert.False(result.IsError);
         }
     }

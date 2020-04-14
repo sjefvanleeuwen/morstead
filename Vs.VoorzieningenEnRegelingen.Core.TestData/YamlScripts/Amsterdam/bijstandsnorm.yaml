@@ -1,0 +1,60 @@
+﻿stuurinformatie:
+  onderwerp: bijstandsnorm
+  organisatie: Gemeente Amsterdam
+  type: bijstand
+  domein: inkomen
+  versie: 1.0
+  status: ontwikkel
+  jaar: 2020
+  bron: https://www.amsterdam.nl/veelgevraagd/?caseid=%7B2001977A-0505-4961-8E0E-609647200737%7D
+berekening:
+ - stap: woonsituatie
+   keuze:
+   - situatie: alleenstaande
+   - situatie: partner
+ - stap: aowleeftijd
+   situatie: alleenstaande, partner
+   keuze:
+   - situatie: jonger_aow
+   - situatie: ouder_aow
+ - stap: leeftijd partner
+   situatie: partner
+   keuze:
+   - situatie: partner_jonger_aow
+   - situatie: partner_ouder_aow
+ - stap: jonger aow
+   situatie: jonger_aow
+   waarde: leeftijd
+ - stap: jonger aow
+   situatie: partner_jonger_aow
+   waarde: leeftijd_partner
+ - stap: woonkosten
+   keuze:
+   - situatie: woonkosten
+   - situatie: geen_woonkosten
+formules:
+ - standaardpremie:
+   - situatie: alleenstaande
+     formule: 1609
+   - situatie: aanvrager_met_toeslagpartner
+     formule: 3218
+tabellen:
+  - naam: bijstandsnormen
+    situatie: alleenstaande
+    leeftijd, woonkosten, maatschappelijke_opvang, kostendelers, uitkering, vakantietoeslag:
+      - [ 18 tot 21,   ja, nee, 0, 246.79, 12.99 ]
+      - [ 21 tot aow,  ja, nee, 0, 999.70, 52.62 ]
+      - [ 21 tot aow,  ja, nee, 1, 714.08, 37.58 ]
+      - [ 21 tot aow,  ja, nee, 2, 618.86, 32.57 ]
+      - [ 21 tot aow,  ja, nee, 3, 571.25, 30.07 ]
+      - [ 21 tot aow,  ja, nee, 4, 542.70, 28.56 ]
+      - [ 21 tot aow,  ja, nee, 5, 523.65, 27.56 ]
+      - [ 18 tot 21,  nee, nee, 0, 246.79, 12.99 ]
+      - [ 21 tot aow, nee, nee, 0, 714.08, 37.58 ]
+      - [ 18 tot 21,  nee,  ja, 0, 246.79, 12.99 ]
+      - [ 21 tot aow, nee,  ja, 0, 856.89, 45.10 ]
+  - naam: bijstandsnormen
+    situatie: partner
+    leeftijd, leeftijd_partner, kinderen, woonkosten, maatschappelijke_opvang, kostendelers, uitkering, vakantietoeslag:
+      - [ 18 tot 21,  18 tot 21, nee,  ja,  ja, 0, 493.58, 25.98 ]
+      - [ 21 tot aow, 18 tot 21,  ja,  ja,  ja, 0, 779.21, 41.01 ]
