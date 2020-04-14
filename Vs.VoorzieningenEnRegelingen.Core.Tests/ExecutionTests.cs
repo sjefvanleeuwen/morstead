@@ -5,7 +5,6 @@ using System.Text;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
-using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
@@ -997,7 +996,7 @@ formules:
                 Assert.True(args.Parameters[0].Name == "hoger_dan_vermogensdrempel");
                 Assert.True(args.Parameters[1].Name == "lager_dan_vermogensdrempel");
             };
-            var result = controller.Parse(YamlZorgtoeslag5.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"));
             Assert.False(result.IsError);
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             try
@@ -1020,7 +1019,7 @@ formules:
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
             } as IParametersCollection;
-            var result = controller.Parse(YamlZorgtoeslag5.Body);
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"));
             Assert.False(result.IsError);
             controller.EvaluateFormulaWithoutQA(ref parameters, new[] { "toetsingsinkomensdrempel", "drempelinkomen", "standaardpremie" });
             Assert.Equal(4, parameters.Count);

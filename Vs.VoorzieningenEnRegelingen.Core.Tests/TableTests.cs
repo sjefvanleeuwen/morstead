@@ -4,7 +4,6 @@ using Vs.Core.Diagnostics;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
-using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
@@ -85,7 +84,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var result = controller.Parse(YamlTestFileLoader.Load(@"Amsterdam/bijstandsnorm.yaml"));
             Assert.False(result.IsError);
             Assert.True(result.Model.Tables.ElementAt(0).IsSituational);
-            Assert.True(result.Model.Tables.ElementAt(0).Situations.ElementAt(0).Expression == "alleenstaande") ;
+            Assert.True(result.Model.Tables.ElementAt(0).Situations.ElementAt(0).Expression == "alleenstaande");
         }
     }
 }

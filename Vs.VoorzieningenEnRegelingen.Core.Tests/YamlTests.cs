@@ -2,7 +2,6 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
-using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;

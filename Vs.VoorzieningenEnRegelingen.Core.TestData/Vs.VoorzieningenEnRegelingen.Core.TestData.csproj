@@ -9,11 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="YamlScripts\Zorgtoeslag5.yaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="YamlScripts\Zorgtoeslag5.yaml" />
+    <None Remove="YamlScripts\_YamlZorgtoeslag5.yaml" />
   </ItemGroup>
 
   <ItemGroup>

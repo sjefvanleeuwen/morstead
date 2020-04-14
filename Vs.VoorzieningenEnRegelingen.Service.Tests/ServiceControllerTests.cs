@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
-using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
 

@@ -1,11 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts
-{
-    /// <summary>
-    /// Script used for mocking tests
-    /// </summary>
-    public static class YamlZorgtoeslag5
-    {
-        public readonly static string Body = @"# Zorgtoeslag for burger site demo
+﻿# Zorgtoeslag for burger site demo
 stuurinformatie:
   onderwerp: zorgtoeslag
   organisatie: belastingdienst
@@ -112,6 +105,4 @@ tabellen:
       - [ Verenigd Koninkrijk, 0.7741 ]
       - [ Zweden,              0.8213 ]
       - [ Zwitserland,         0.8000 ]
-      - [ Anders,              0      ]";
-    }
-}
+      - [ Anders,              0      ]

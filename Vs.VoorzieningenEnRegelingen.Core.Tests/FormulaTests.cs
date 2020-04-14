@@ -5,7 +5,6 @@ using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
-using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 using YamlDotNet.Serialization;
 using static Vs.VoorzieningenEnRegelingen.Core.YamlScriptController;

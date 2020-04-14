@@ -19,7 +19,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             Label = "Regels Yaml Url",
             Name = "Rule",
             TagText = "Verplicht",
-            Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/YamlZorgtoeslag5.yaml"
+            Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml"
         };
         readonly ITextFormElementData YamlContent = new TextFormElementData
         {
@@ -27,7 +27,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             Label = "Content Yaml Url",
             Name = "Content",
             TagText = "Verplicht",
-            Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/YamlZorgtoeslag5Content.yaml"
+            Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml"
         };
 
         private async Task Submit()

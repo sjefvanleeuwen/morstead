@@ -1,4 +1,4 @@
-﻿using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
+﻿using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
@@ -9,7 +9,8 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void ShouldGenerateAValidContentYamlTemplate()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlZorgtoeslag5.Body);
+
+            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"));
             Assert.False(result.IsError);
             var template = controller.CreateYamlContentTemplate();
             Assert.False(string.IsNullOrEmpty(template));
