@@ -4,10 +4,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
     public class FormElementSingleValueData : FormElementData, IFormElementSingleValueDate
     {
-        public override void Validate(bool unobtrusive = false)
+        public override void CustomValidate(bool unobtrusive = false)
         {
-            base.Validate(unobtrusive);
-
+            base.CustomValidate(unobtrusive);
             var valid = ValidateValueIsSet();
 
             if (!unobtrusive)

@@ -13,7 +13,7 @@ using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class FormElementData : IFormElementData//, IValidatableObject
+    public class FormElementData : IFormElementData
     {
         protected string value = string.Empty;
 
@@ -29,6 +29,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public bool IsValid { get; set; } = true;
         public TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
         public CultureInfo Culture { get; set; } = new CultureInfo("nl-NL");
+
         public virtual string Value
         {
             get { return value; }
@@ -51,9 +52,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public IList<string> ErrorTexts = new List<string>();
 
-        public virtual void Validate(bool unobtrusive = false)
+        public virtual void CustomValidate(bool unobtrusive = false)
         {
-            //reset values
             IsValid = true;
             ErrorTexts = new List<string>();
         }
@@ -74,10 +74,15 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             HintText = contentController.GetText(parameterSemanticKey, FormElementContentType.Hint);
         }
 
-        //public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        //{
-        //    IsValid = true;
-        //    ErrorTexts = new List<string>();
-        //}
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!IsValid)
+            {
+                foreach (var errorText in ErrorTexts)
+                {
+                    yield return new ValidationResult(errorText, new[] { "Value" });
+                }
+            }
+        }
     }
 }

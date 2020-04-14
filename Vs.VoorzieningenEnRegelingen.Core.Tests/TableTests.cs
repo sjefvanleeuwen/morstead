@@ -84,7 +84,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             var parser = new YamlParser(YamlTestFileLoader.Load(@"Rijksoverheid/bijstandsnorm.yaml"), null);
             var tabellen = parser.Tabellen();
             Assert.True(tabellen.ElementAt(0).IsSituational);
-            Assert.True(tabellen.ElementAt(0).Situations.ElementAt(0).Name == "alleenstaande") ;
+            Assert.True(tabellen.ElementAt(0).Situations.ElementAt(0).Name == "alleenstaande");
         }
     }
 }

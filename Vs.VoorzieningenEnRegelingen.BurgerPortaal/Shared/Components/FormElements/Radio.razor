@@ -2,18 +2,19 @@
 @{
     var radioNum = 0;
 }
-<WrapperFieldset IsValid="@_data.IsValid">
-    <Legend Text="@_data.Label" TagText="@_data.TagText" />
-    <FormElementHint Name="@_data.Name" Text="@_data.HintText" />
-    <Error Text="@_data.ErrorText" />
-    <div class="@(_isHorizontalRadio ? "input__group-horizontal" : string.Empty)">
-        @foreach (var key in _keys)
-        {
-            radioNum++;
-            <div class="input__group input__group--radio">
-                <input type="radio" name="@_data.Name" id="@_data.Name-radio_@radioNum" class="input__control input__control--radio @_data.ElementSize" checked="@(key.Equals(_data.Value))" @onclick="@(() => Value = key)" @onclick:preventDefault value="@key" />
-                <label class="input__label input__label--radio" for="@_data.Name-radio_@radioNum">@((MarkupString)_data.Options[key])</label>
-            </div>
-        }
-    </div>
-</WrapperFieldset>
+    <WrapperFieldset IsValid="@_data.IsValid">
+        <Legend Text="@_data.Label" TagText="@_data.TagText" />
+        <FormElementHint Name="@_data.Name" Text="@_data.HintText" />
+        <Error Text="@_data.ErrorText" />
+        <div class="@(_isHorizontalRadio ? "input__group-horizontal" : string.Empty)">
+            @foreach (var key in _keys)
+            {
+                radioNum++;
+                <div class="input__group input__group--radio">
+                    <input type="radio" name="@_data.Name" id="@_data.Name-radio_@radioNum" class="input__control input__control--radio @_data.ElementSize" checked="@(key.Equals(_data.Value))" @onclick="@(() => Value = key)" @onclick:preventDefault value="@key" />
+                    <label class="input__label input__label--radio" for="@_data.Name-radio_@radioNum">@((MarkupString)_data.Options[key])</label>
+                </div>
+            }
+        </div>
+        <ValidationMessage For="@(() => _data.Value)" />
+    </WrapperFieldset>

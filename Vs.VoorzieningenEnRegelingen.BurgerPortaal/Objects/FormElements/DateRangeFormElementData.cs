@@ -175,9 +175,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             Values[type + "day"] = day;
         }
 
-        public override void Validate(bool unobtrusive = false)
+        public override void CustomValidate(bool unobtrusive = false)
         {
-            base.Validate();
+            base.CustomValidate();
 
             var errors = new List<string>();
 

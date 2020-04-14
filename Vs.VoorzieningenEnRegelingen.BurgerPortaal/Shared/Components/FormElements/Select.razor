@@ -1,12 +1,8 @@
 ﻿@inherits FormElementBase
-@*Version 2.0 Material*@
-    <WrapperDefault IsValid="@_data.IsValid">
-        <Error Text="@_data.ErrorText" />
-        <MatSelect Label="@_data.Label" @bind-Value="@_data.Value" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@_data.HintText">
-            @foreach (var key in _keys)
-            {
-                <MatOptionString Value="@key">@_data.Options[key]</MatOptionString>
-            }
-        </MatSelect>
-        <ValidationMessage For="@(() => _data.Value)" />
-    </WrapperDefault>
+<MatSelect Label="@_data.Label" @bind-Value="@_data.Value" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@_data.HintText">
+    @foreach (var key in _keys)
+    {
+        <MatOptionString Value="@key">@_data.Options[key]</MatOptionString>
+    }
+</MatSelect>
+<ValidationMessage For="@(() => _data.Value)" />

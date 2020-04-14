@@ -9,19 +9,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         public void CheckValidEmptyFromParent()
         {
             var sut = new TextFormElementData();
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.Equal("Vul een waarde in.", sut.ErrorText);
             sut.Value = string.Empty;
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.Equal("Vul een waarde in.", sut.ErrorText);
             sut.Value = " ";
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.Equal("Vul een waarde in.", sut.ErrorText);
             sut.Value = "\t";
-            sut.Validate();
+            sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.Equal("Vul een waarde in.", sut.ErrorText);
         }
@@ -31,7 +31,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         {
             var sut = new TextFormElementData();
             sut.Value = "test";
-            sut.Validate();
+            sut.CustomValidate();
             Assert.True(sut.IsValid);
             Assert.Empty(sut.ErrorText);
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
@@ -7,7 +8,7 @@ using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces
 {
-    public interface IFormElementData
+    public interface IFormElementData : IValidatableObject
     {
         string ErrorText { get; }
         string HintText { get; set; }
@@ -24,7 +25,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
         EventCallback<string> ValueChanged { get; set; }
         string ElementSize { get; }
 
-        void Validate(bool unobtrusive = false);
+        void CustomValidate(bool unobtrusive = false);
         void FillFromExecutionResult(IExecutionResult result, IContentController contentController);
     }
 }

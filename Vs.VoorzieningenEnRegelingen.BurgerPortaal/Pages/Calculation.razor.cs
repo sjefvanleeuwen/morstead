@@ -116,7 +116,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         /// <returns>Whether or not the form is valid.</returns>
         private bool ValidateForm(bool unobtrusive = false)
         {
-            _formElement?.Data?.Validate(unobtrusive);
+            _formElement?.Data?.CustomValidate(unobtrusive);
             return _formElement?.Data?.IsValid ?? true;
         }
 

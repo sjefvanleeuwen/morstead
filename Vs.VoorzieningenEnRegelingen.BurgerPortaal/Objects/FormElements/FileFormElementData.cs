@@ -20,7 +20,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public IEnumerable<string> AllowedExtensions { get; set; }
         public long MaximumFileSize { get; set; }
 
-        public override void Validate(bool unobtrusive = false)
+        public override void CustomValidate(bool unobtrusive = false)
         {
             if (!Files.Any())
             {

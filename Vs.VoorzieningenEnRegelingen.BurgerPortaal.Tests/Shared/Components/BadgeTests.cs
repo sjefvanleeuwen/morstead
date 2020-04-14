@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Vs.Core.Web.Extensions;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
+﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
