@@ -1,0 +1,40 @@
+﻿stuurinformatie:
+  onderwerp: situational table tests
+  organisatie: unit test
+  type: unit test
+  domein: unit test
+  versie: 1.0
+  status: ontwikkel
+  jaar: 2019
+  bron: unit test
+berekening:
+ - stap: stap_a
+   omschrijving: voer een waarde in.
+   waarde: waarde_a
+ - stap: stap_b
+   omschrijving: voer een waarde in.
+   waarde: waarde_b
+ - stap: stap_c
+   omschrijving: maak een keuze
+   keuze:
+   - situatie: keuze_c1
+   - situatie: keuze_c2
+tabellen:
+  - naam: tabel1
+    situatie: keuze_c1
+    waarde_a, waarde_b, waarde_d:
+      - [ "> 50", "> 50",  25 ]
+      - [ "< 50", "> 50",  30 ]
+      - [ "> 50", "< 50",  35 ]
+  - naam: tabel1
+    situatie: keuze_c2
+    waarde_a, waarde_b, waarde_d, waarde_e:
+      - [ "> 50", "> 50",   5, 11 ]
+      - [ "< 50", "> 50",  10, 12 ]
+      - [ "> 50", "< 50",  15, 13 ]
+    #default, zonder situatie
+  - naam: tabel1
+    waarde_a, waarde_b, waarde_d, waarde_f:
+      - [ "> 50", "> 50",  25, 21 ]
+      - [ "< 50", "> 50",  30, 22 ]
+      - [ "> 50", "< 50",  35, 23 ]
