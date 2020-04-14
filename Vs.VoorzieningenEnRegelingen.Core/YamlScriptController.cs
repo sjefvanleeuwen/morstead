@@ -46,6 +46,61 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return result;
         }
 
+        public Table Match(string tableName, ref IParametersCollection parameters)
+        {
+            int i = 0;
+            int nonSituationalTables = 0;
+            List<Table> matchedTables = new List<Table>();
+            var tables = _model.GetTablesByName(tableName);
+            ISituation currentSituation = null;
+
+            void callback(FormulaExpressionContext sender, QuestionArgs args)
+            {
+                throw new Exception($"{tableName} contains situational expression {currentSituation.Expression} that could not be resolved without answering a question: {args.Parameters[0].Name}. Situational tables should only contain resolveable parameters.");
+            };
+            foreach (var table in _model.GetTablesByName(tableName))
+            {
+                i++;
+                if (!table.IsSituational)
+                {
+                    nonSituationalTables++;
+                    if (nonSituationalTables > 1)
+                        throw new Exception($"found multiple tables found for {tableName} that are non situational. Only one table is allowd to be non situational.");
+                    if (!table.IsSituational && i != tables.Count())
+                        throw new Exception($"Default table {tableName} should be specified after all situational tables.");
+
+                    matchedTables.Add(table);
+                    continue;
+                }
+                // evaluate situations for inclusivity (meaning one of the expressions should evaluate to true.
+                foreach (var situation in table.Situations)
+                {
+                    currentSituation = situation;
+                    var formula = new Formula(table.DebugInfo, "__temp__",new List<Function>() { new Function(table.DebugInfo,situation.Expression) });
+                    var context = new FormulaExpressionContext(ref _model, ref parameters, formula, callback, this);
+                    var result = context.Evaluate();
+                    if (result.Type != TypeEnum.Boolean)
+                    {
+                        throw new Exception($"{tableName} contains situational expression {currentSituation.Expression} and should evaluate to a boolean, instead it resolved to a: {result.TypeAsString}.");
+                    }
+                    if ((bool)result.Value)
+                    {
+                        matchedTables.Add(table);
+                    }
+                }
+            }
+            if (matchedTables.Count == 0)
+            {
+                throw new Exception($"No table matches for {tableName}.");
+            }
+            if (matchedTables.Count > 1 && nonSituationalTables == 0)
+            {
+                throw new Exception($"Ambigous situation evaluation on tables named {tableName}.");
+            }
+
+            return matchedTables[0];
+        }
+
         public string CreateYamlContentTemplate()
         {
             string ret = string.Empty;
