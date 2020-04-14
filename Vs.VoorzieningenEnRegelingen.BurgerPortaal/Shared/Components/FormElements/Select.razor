@@ -1,5 +1,5 @@
 ﻿@inherits FormElementBase
-<MatSelect Label="@HttpUtility.HtmlDecode(_data.Label)" @bind-Value="@_data.Value" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" HelperTextPersistent=true>
+<MatSelect Label="@HttpUtility.HtmlDecode(_data.Label)" @bind-Value="@Value" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" HelperTextPersistent=true>
     @foreach (var key in _keys)
     {
         <MatOptionString Value="@key">@_data.Options[key]</MatOptionString>
