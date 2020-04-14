@@ -17,7 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
             if (Rows.Count == 0) throw new ArgumentNullException(nameof(rows));
             for (int i = 0; i < ColumnTypes.Count; i++)
             {
-                ColumnTypes[i].Index = i;
+                 ColumnTypes[i].Index = i;
                 // evaluate one row for type inference
                 ColumnTypes[i].Type = TypeInference.Infer(Rows[0].Columns[i].Value.ToString()).Type;
             }

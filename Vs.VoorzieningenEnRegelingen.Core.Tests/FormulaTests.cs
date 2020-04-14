@@ -154,7 +154,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         }
 
         [Fact]
-        void Formula_Table_Select_Test()
+        void Formula_Table_Lookup_Test()
         {
             // -naam: woonlandfactoren
             //  woonland, factor:
@@ -170,7 +170,6 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
             double result1 = (double)e.Evaluate();
             Assert.True(result1 == 0.2412);
         }
-
 
         public event QuestionDelegate OnQuestion;
 

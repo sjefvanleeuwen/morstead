@@ -1,6 +1,7 @@
 ﻿namespace Vs.VoorzieningenEnRegelingen.Core.Model
 {
-    public interface ISituation : IExpression
+    public interface IExpression
     {
+        string Expression { get; }
     }
 }
