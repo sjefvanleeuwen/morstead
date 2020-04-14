@@ -1,0 +1,7 @@
+﻿.calc_heading_number {
+    float: left;
+}
+
+.calc_heading_number, .calc_heading_question {
+    line-height: 50px;
+}
