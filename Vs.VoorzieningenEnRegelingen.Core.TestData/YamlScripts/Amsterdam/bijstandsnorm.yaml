@@ -40,19 +40,22 @@ formules:
      formule: 3218
 tabellen:
   - naam: bijstandsnormen
-    situatie: alleenstaande
-    leeftijd, woonkosten, maatschappelijke_opvang, kostendelers, uitkering, vakantietoeslag:
-      - [ 18 tot 21,   ja, nee, 0, 246.79, 12.99 ]
-      - [ 21 tot aow,  ja, nee, 0, 999.70, 52.62 ]
-      - [ 21 tot aow,  ja, nee, 1, 714.08, 37.58 ]
-      - [ 21 tot aow,  ja, nee, 2, 618.86, 32.57 ]
-      - [ 21 tot aow,  ja, nee, 3, 571.25, 30.07 ]
-      - [ 21 tot aow,  ja, nee, 4, 542.70, 28.56 ]
-      - [ 21 tot aow,  ja, nee, 5, 523.65, 27.56 ]
-      - [ 18 tot 21,  nee, nee, 0, 246.79, 12.99 ]
-      - [ 21 tot aow, nee, nee, 0, 714.08, 37.58 ]
-      - [ 18 tot 21,  nee,  ja, 0, 246.79, 12.99 ]
-      - [ 21 tot aow, nee,  ja, 0, 856.89, 45.10 ]
+    situatie: alleenstaande AND woonkosten AND NOT maatschappelijke_opvang
+    leeftijd, kostendelers, uitkering, vakantietoeslag:
+      - [ 18 tot 21,  0, 246.79, 12.99 ]
+      - [ 21 tot aow, 0, 999.70, 52.62 ]
+      - [ 21 tot aow, 1, 714.08, 37.58 ]
+      - [ 21 tot aow, 2, 618.86, 32.57 ]
+      - [ 21 tot aow, 3, 571.25, 30.07 ]
+      - [ 21 tot aow, 4, 542.70, 28.56 ]
+      - [ 21 tot aow, 5, 523.65, 27.56 ]
+  - naam: bijstandsnormen
+    situatie: alleenstaande AND NOT woonkosten
+    leeftijd, kostendelers, maatschappelijke_opvang, uitkering, vakantietoeslag:
+      - [ 18 tot 21,  nee, 0, 246.79, 12.99 ]
+      - [ 21 tot aow, nee, 0, 714.08, 37.58 ]
+      - [ 18 tot 21,   ja, 0, 246.79, 12.99 ]
+      - [ 21 tot aow,  ja, 0, 856.89, 45.10 ]
   - naam: bijstandsnormen
     situatie: partner
     leeftijd, leeftijd_partner, kinderen, woonkosten, maatschappelijke_opvang, kostendelers, uitkering, vakantietoeslag:

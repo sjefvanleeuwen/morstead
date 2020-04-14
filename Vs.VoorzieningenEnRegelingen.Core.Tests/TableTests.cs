@@ -4,6 +4,7 @@ using Vs.Core.Diagnostics;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
+using Vs.VoorzieningenEnRegelingen.Core.TestData.YamlScripts;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
@@ -81,10 +82,12 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         public void YamlCanParseAndEvaluateSituationalTables()
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlTestFileLoader.Load(@"Amsterdam/bijstandsnorm.yaml"));
+            var result = controller.Parse(YamlTestFileLoader.Load(
+                @"UnitTests/SituationalTables/ValidSituations.yaml"));
             Assert.False(result.IsError);
             Assert.True(result.Model.Tables.ElementAt(0).IsSituational);
-            Assert.True(result.Model.Tables.ElementAt(0).Situations.ElementAt(0).Expression == "alleenstaande");
+            Assert.True(result.Model.Tables.ElementAt(0).Situations.ElementAt(0).Expression == "keuze_c1");
+            Assert.True(result.Model.GetTablesByName("tabel1").Count() == 3);
         }
     }
 }

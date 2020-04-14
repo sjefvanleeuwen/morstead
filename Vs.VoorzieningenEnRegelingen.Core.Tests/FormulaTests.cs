@@ -153,6 +153,24 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Tests
         }
 
         [Fact]
+        public void FormulaCanReolsveBooleanEquation()
+        {
+            VariableCollection variables = context.Variables;
+            variables["a"] = true;
+            variables["b"] = false;
+            variables["c"] = true;
+            IGenericExpression<bool> eDynamic = context.CompileGeneric<bool>("a AND b AND c");
+            var result = eDynamic.Evaluate();
+            Assert.False(result);
+            eDynamic = context.CompileGeneric<bool>("a AND c");
+            result = eDynamic.Evaluate();
+            Assert.True(result);
+            eDynamic = context.CompileGeneric<bool>("a AND NOT b");
+            result = eDynamic.Evaluate();
+            Assert.True(result);
+        }
+
+        [Fact]
         void Formula_Table_Lookup_Test()
         {
             // -naam: woonlandfactoren

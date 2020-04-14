@@ -22,5 +22,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core.Model
         {
             Formulas.AddRange(formulas);
         }
+
+        public IEnumerable<Table> GetTablesByName(string name)
+        {
+            return Tables.FindAll(p => p.Name == name);
+        }
     }
 }

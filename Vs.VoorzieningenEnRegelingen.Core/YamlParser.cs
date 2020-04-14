@@ -221,9 +221,19 @@ namespace Vs.VoorzieningenEnRegelingen.Core
         public IEnumerable<Formula> Formulas()
         {
             var formulas = new List<Formula>();
-            foreach (var tabel in (YamlSequenceNode)map.Children[new YamlScalarNode(FormulasAttribute)])
+            YamlSequenceNode formulasNode = null;
+            try
             {
-                foreach (var row in ((YamlMappingNode)tabel).Children)
+                formulasNode = (YamlSequenceNode)map.Children[new YamlScalarNode(FormulasAttribute)];
+            }
+            catch (KeyNotFoundException ex)
+            {
+                // no formulas specified in yaml.
+                return formulas;
+            }
+            foreach (var functionNode in formulasNode)
+            {
+                foreach (var row in ((YamlMappingNode)functionNode).Children)
                 {
                     var variableName = row.Key;
                     var functions = new List<Function>();
