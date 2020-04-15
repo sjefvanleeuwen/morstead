@@ -1,7 +1,7 @@
 ﻿@inherits FormElementBase
     <WrapperDefault IsValid="@_data.IsValid">
         <Label Name="@_data.Name" Text="@_data.Label" TagText="@_data.TagText" />
-        <FormElementHint Name="@_data.Name" Text="@_data.HintText" />
-        <Error Text="@_data.ErrorText" />
+        <FormElementHint Text="@_data.HintText" />
+        <Error>@_data.ErrorText</Error>
         <textarea required="@_data.IsRequired" disabled="@_data.IsDisabled" id="@_data.Name" aria-describedby="hint_@_data.Name" class="input__control input__control--text @_data.ElementSize" @bind="@Value"></textarea>
     </WrapperDefault>

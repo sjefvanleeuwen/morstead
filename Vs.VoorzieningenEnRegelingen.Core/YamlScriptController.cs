@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Vs.Cms.Core.Enums;
+using Vs.Core.Extensions;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
@@ -101,35 +103,44 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             return matchedTables[0];
         }
 
+        const string Key = "key";
+
         public string CreateYamlContentTemplate()
         {
             string ret = string.Empty;
             bool hasPreviousChoice = false;
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Content:");
-            sb.AppendLine(" - key: berekening.header");
-            sb.AppendLine(" - titel: voer een titel in.");
+            sb.AppendLine($" - {Key}: berekening.header");
+            sb.AppendLine($"   {FormElementContentType.Title.GetDescription()}: voer een titel in.");
+            sb.AppendLine($"   {FormElementContentType.SubTitle.GetDescription()}: voer een titel in.");
             foreach (var contentNode in _contentNodes)
             {
-                if (contentNode.Name.StartsWith("formule."))
+                //skip formule
+                if (contentNode.Name.StartsWith("formule.", StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
-                sb.AppendLine($" - key: {contentNode.Name}");
+                sb.AppendLine($" - {Key}: {contentNode.Name}");
                 if (contentNode.Parameter.Type == TypeEnum.Step)
                 {
-                    sb.AppendLine($"   titel: voer een titel in");
-                    sb.AppendLine($"   vraag: voer de vraagstelling in.");
-                    sb.AppendLine($"   tekst: voer een korte uitleg in.");
-                    sb.AppendLine($"   hint: geef een hint voor het onderstaande invoerveld.");
+                    sb.AppendLine($"   {FormElementContentType.Title.GetDescription()}: voer een titel in");
+                    sb.AppendLine($"   {FormElementContentType.Question.GetDescription()}: voer de vraagstelling in.");
+                    sb.AppendLine($"   {FormElementContentType.Description.GetDescription()}: voer een korte uitleg in.");
+                    //add only label and hint if there are no keuzes defined
+                    if (!_contentNodes.Any(n => n.Name.StartsWith($"{contentNode.Name}.keuze", StringComparison.OrdinalIgnoreCase)))
+                    {
+                        sb.AppendLine($"   {FormElementContentType.Label.GetDescription()}: geef een label voor het invoerveld.");
+                        sb.AppendLine($"   {FormElementContentType.Hint.GetDescription()}: geef een hint voor het invoerveld.");
+                    }
                     hasPreviousChoice = false;
                     continue;
                 }
                 if (contentNode.IsBreak)
                 {
-                    sb.AppendLine($"   vraag: Geen Recht");
-                    sb.AppendLine($"   titel: U heeft geen recht");
-                    sb.AppendLine($"   tekst: Met de door u ingevulde gegevens heeft u geen recht.");
+                    sb.AppendLine($"   {FormElementContentType.Question.GetDescription()}: Geen Recht");
+                    sb.AppendLine($"   {FormElementContentType.Title.GetDescription()}: U heeft geen recht");
+                    sb.AppendLine($"   {FormElementContentType.Description.GetDescription()}: Met de door u ingevulde gegevens heeft u geen recht.");
                     hasPreviousChoice = false;
                     continue;
                 }
@@ -137,9 +148,10 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 {
                     if (!hasPreviousChoice)
                     {
-                        sb.AppendLine($"   hint: Voer een hint tekst voor de keuzes in.");
+                        sb.AppendLine($"   {FormElementContentType.Label.GetDescription()}: Voer een label voor de keuzes in.");
+                        sb.AppendLine($"   {FormElementContentType.Hint.GetDescription()}: Voer een hint voor de keuzes in.");
                     }
-                    sb.AppendLine($"   tekst: Voer een tekst voor de keuze in.");
+                    sb.AppendLine($"   {FormElementContentType.Description.GetDescription()}: Voer een tekst voor de keuze in.");
                     hasPreviousChoice = true;
                     continue;
                 }
