@@ -1,4 +1,5 @@
-﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
+﻿using System.Collections.Generic;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
@@ -45,6 +46,28 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private void ValidateNumber()
         {
             FieldNumber.CustomValidate();
+        }
+
+        readonly IFormElementData FieldSelect = new ListFormElementData
+        {
+            Label = "SelectLabel",
+            Name = "SelectName",
+            Value = "SelectValue",
+            HintText = "SelectHint",
+            InferedType = Core.TypeInference.InferenceResult.TypeEnum.List,
+            Options = new Dictionary<string, string>
+            {
+                { "", "MoetLeegZijn" },
+                { "Optie1", "Optie1" },
+                { "Optie2", "Optie2" },
+                { "SelectValue", "Optie3" },
+                { "Optie4", "Optie4" }
+            }
+        };
+
+        private void ValidateSelect()
+        {
+            FieldSelect.CustomValidate();
         }
     }
 }

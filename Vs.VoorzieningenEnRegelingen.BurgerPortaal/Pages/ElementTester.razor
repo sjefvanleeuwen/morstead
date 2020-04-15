@@ -1,24 +1,31 @@
 ﻿@page "/ElementTester/"
-<SpacingWrapper>
-    <EditForm Model="@FieldText">
-        <DataAnnotationsValidator />
-        <CascadingValue Value="@FieldText">
-            <Text />
-        </CascadingValue>
-        <MatButton TrailingIcon="chevron_right" @onclick="ValidateText">Validate</MatButton>
-    </EditForm>
-    <EditForm Model="@FieldTextArea">
-        <DataAnnotationsValidator />
-        <CascadingValue Value="@FieldTextArea">
-            <TextArea />
-        </CascadingValue>
-        <MatButton TrailingIcon="chevron_right" @onclick="ValidateTextArea">Validate</MatButton>
-    </EditForm>
-    <EditForm Model="@FieldNumber">
-        <DataAnnotationsValidator />
-        <CascadingValue Value="@FieldNumber">
-            <Number />
-        </CascadingValue>
-        <MatButton TrailingIcon="chevron_right" @onclick="ValidateNumber">Validate</MatButton>
-    </EditForm>
-</SpacingWrapper>
+    <SpacingWrapper>
+        <EditForm Model="@FieldText">
+            <DataAnnotationsValidator />
+            <CascadingValue Value="@FieldText">
+                <Text />
+            </CascadingValue>
+            <MatButton TrailingIcon="chevron_right" @onclick="ValidateText">Validate</MatButton>
+        </EditForm>
+        <EditForm Model="@FieldTextArea">
+            <DataAnnotationsValidator />
+            <CascadingValue Value="@FieldTextArea">
+                <TextArea />
+            </CascadingValue>
+            <MatButton TrailingIcon="chevron_right" @onclick="ValidateTextArea">Validate</MatButton>
+        </EditForm>
+        <EditForm Model="@FieldNumber">
+            <DataAnnotationsValidator />
+            <CascadingValue Value="@FieldNumber">
+                <Number />
+            </CascadingValue>
+            <MatButton TrailingIcon="chevron_right" @onclick="ValidateNumber">Validate</MatButton>
+        </EditForm>
+        <EditForm Model="@FieldSelect">
+            <DataAnnotationsValidator />
+            <CascadingValue Value="@FieldSelect">
+                <Select />
+            </CascadingValue>
+            <MatButton TrailingIcon="chevron_right" @onclick="ValidateSelect">Validate</MatButton>
+        </EditForm>
+    </SpacingWrapper>
