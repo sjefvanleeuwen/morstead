@@ -1,5 +1,5 @@
 ﻿@page "/ElementTester/"
-<SpacingWrapper>
+<MaterialWrapper>
     <EditForm Model="@FieldText">
         <DataAnnotationsValidator />
         <CascadingValue Value="@FieldText">
@@ -42,4 +42,4 @@
         </CascadingValue>
         <MatButton TrailingIcon="chevron_right" @onclick="ValidateRadioHorizontal">Validate</MatButton>
     </EditForm>
-</SpacingWrapper>
+</MaterialWrapper>

@@ -25,6 +25,7 @@
     <Content Remove="Shared\Components\FormElements\Search.razor" />
     <Content Remove="Shared\Components\FormElements\TextField.razor" />
     <Content Remove="Shared\Components\Header.razor" />
+    <Content Remove="Shared\Components\Spacer.razor" />
     <Content Remove="Shared\Components\Timeline.razor" />
     <Content Remove="Shared\Components\TimelineItem.razor" />
     <Content Remove="Shared\Components\TitleBar.razor" />
