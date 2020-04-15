@@ -16,10 +16,10 @@ namespace Vs.Cms.Core.Tests.Objects
             var sut = new CultureContent();
             sut.AddContent("testKey", FormElementContentType.Title.GetDescription(), "TestTitleContent");
             Assert.Equal("TestTitleContent", sut.GetContent("testKey", FormElementContentType.Title));
-            sut.AddContent("testKey", FormElementContentType.Tag.GetDescription(), "TestTagContent");
+            sut.AddContent("testKey", FormElementContentType.Label.GetDescription(), "TestTagContent");
             //old one should be available
             Assert.Equal("TestTitleContent", sut.GetContent("testKey", FormElementContentType.Title));
-            Assert.Equal("TestTagContent", sut.GetContent("testKey", FormElementContentType.Tag));
+            Assert.Equal("TestTagContent", sut.GetContent("testKey", FormElementContentType.Label));
         }
 
         [Fact]
@@ -44,10 +44,10 @@ namespace Vs.Cms.Core.Tests.Objects
 
             sut.AddContent("testKey", new Dictionary<string, object> {
                 { FormElementContentType.Title.GetDescription(), "TestTitleContent" },
-                { FormElementContentType.Tag.GetDescription(), "TestTagContent" }
+                { FormElementContentType.Label.GetDescription(), "TestTagContent" }
             });
             Assert.Equal("TestTitleContent", sut.GetContent("testKey", FormElementContentType.Title));
-            Assert.Equal("TestTagContent", sut.GetContent("testKey", FormElementContentType.Tag));
+            Assert.Equal("TestTagContent", sut.GetContent("testKey", FormElementContentType.Label));
 
             sut.AddContent("testKey", new Dictionary<string, object> {
                 { FormElementContentType.Title.GetDescription(), "TestTitleContent" },
@@ -56,7 +56,7 @@ namespace Vs.Cms.Core.Tests.Objects
             Assert.Equal("TestTitleContent", sut.GetContent("testKey", FormElementContentType.Title));
             Assert.Equal("TestSummaryContent", sut.GetContent("testKey", FormElementContentType.Question));
             //Tag should not be available
-            Assert.Null(sut.GetContent("testKey", FormElementContentType.Tag));
+            Assert.Null(sut.GetContent("testKey", FormElementContentType.Label));
         }
 
         [Fact]

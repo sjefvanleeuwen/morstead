@@ -14,8 +14,6 @@ namespace Vs.Cms.Core.Enums
         Description,
         [Description("label")]
         Label,
-        [Description("tag")]
-        Tag,
         [Description("hint")]
         Hint
     }

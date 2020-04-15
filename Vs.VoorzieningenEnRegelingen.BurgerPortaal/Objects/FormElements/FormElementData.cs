@@ -20,7 +20,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public string Name { get; set; }
         public string Label { get; set; }
         public FormElementSize Size { get; set; }
-        public string TagText { get; set; }
         public string HintText { get; set; }
         public IEnumerable<string> HintTextList { get; set; }
         public string ErrorText { get => !IsValid ? GetErrorText() : string.Empty; }
@@ -70,7 +69,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             Name = result.QuestionFirstParameter.Name;
             var parameterSemanticKey = result.GetParameterSemanticKey();
             Label = contentController.GetText(parameterSemanticKey, FormElementContentType.Label);
-            TagText = contentController.GetText(parameterSemanticKey, FormElementContentType.Tag);
             HintText = contentController.GetText(parameterSemanticKey, FormElementContentType.Hint);
         }
 

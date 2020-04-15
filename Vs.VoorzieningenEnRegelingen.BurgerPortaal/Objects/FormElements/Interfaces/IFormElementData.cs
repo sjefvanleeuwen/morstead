@@ -18,7 +18,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
         string Label { get; set; }
         string Name { get; set; }
         FormElementSize Size { get; set; }
-        string TagText { get; set; }
         TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
         CultureInfo Culture { get; set; }
         string Value { get; set; }

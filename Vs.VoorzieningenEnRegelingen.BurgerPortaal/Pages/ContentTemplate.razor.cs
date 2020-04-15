@@ -20,7 +20,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             Size = FormElementSize.ExtraLarge,
             Label = "Regels Yaml Url",
             Name = "Rule",
-            TagText = "Optioneel",
             Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml"
         };
 
@@ -47,7 +46,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             Size = FormElementSize.ExtraLarge,
             Label = "Regels Yaml Text",
             Name = "Rule Als Text",
-            TagText = "Optioneel",
             Value = "Vul hier de Yaml"
         };
 
