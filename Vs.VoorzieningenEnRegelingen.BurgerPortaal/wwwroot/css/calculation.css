@@ -6,6 +6,16 @@
     line-height: 50px;
 }
 
-nav.calc_pagination > ul > li {
-    float: left;
+nav.calc_pagination > ul {
+    display: table;
+    width: 100%;
 }
+
+    nav.calc_pagination > ul > li {
+        display: table-cell;
+        line-height: 1em;
+    }
+
+    nav.calc_pagination > ul > li:nth-child(2) {
+        min-width: 100%;
+    }

@@ -17,6 +17,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
         public bool NextDisabled { get; set; }
         [Parameter]
         public bool PreviousDisabled { get; set; }
+        [Parameter]
+        public double Progress { get; set; }
 
         private void InvokeNext()
         {

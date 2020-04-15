@@ -12,39 +12,34 @@
     }
     <EditForm Model="_formElement.Data">
         <DataAnnotationsValidator />
-        <div class="mat-layout-grid">
-            <div class="mat-layout-grid-inner">
-                <div class="mat-layout-grid-cell mat-layout-grid-cell-span-4">
-                    <CascadingValue Value="_formElement.Data">
-                        @if (HasRights && _formElement.ShowElement)
-                        {
-                            @switch (_formElement.Data.InferedType)
-                            {
-                                case TypeInference.InferenceResult.TypeEnum.Double:
-                                    <Number />
-                                    break;
-                                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
-                                    <DateRange />
-                                    break;
-                                case TypeInference.InferenceResult.TypeEnum.DateTime:
-                                    <Date />
-                                    break;
-                                case TypeInference.InferenceResult.TypeEnum.String:
-                                    <text />
-                                    break;
-                                case TypeInference.InferenceResult.TypeEnum.Boolean:
-                                    <Radio />
-                                    break;
-                                case TypeInference.InferenceResult.TypeEnum.List:
-                                    <Select />
-                                    break;
-                            }
-                        }
-                        <Pagination PreviousDisabled="@(!ShowPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
-                                    NextDisabled="@(!ShowNextButton)" Next="GetNextStep" NextText="Volgende" />
-                    </CascadingValue>
-                </div>
-            </div>
-        </div>
+        <CascadingValue Value="_formElement.Data">
+            @if (HasRights && _formElement.ShowElement)
+            {
+                @switch (_formElement.Data.InferedType)
+                {
+                    case TypeInference.InferenceResult.TypeEnum.Double:
+                        <Number />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.TimeSpan:
+                        <DateRange />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.DateTime:
+                        <Date />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.String:
+                        <text />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.Boolean:
+                        <Radio />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.List:
+                        <Select />
+                        break;
+                }
+            }
+            <Pagination PreviousDisabled="@(!ShowPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
+                        NextDisabled="@(!ShowNextButton)" Next="GetNextStep" NextText="Volgende"
+                        Progress="@Progress" />
+        </CascadingValue>
     </EditForm>
 </SpacingWrapper>
