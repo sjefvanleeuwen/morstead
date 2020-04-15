@@ -5,4 +5,4 @@
         <MatOptionString Value="@key">@_data.Options[key]</MatOptionString>
     }
 </MatSelect>
-<ValidationMessage For="@(() => _data.Value)" />
+<Error><ValidationMessage For="@(() => _data.Value)" /></Error>

@@ -5,7 +5,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 {
     public partial class ElementTester
     {
-        readonly ITextFormElementData FieldText = new TextFormElementData
+        readonly IFormElementData FieldText = new TextFormElementData
         {
             Label = "TextLabel",
             Name = "TextName",
@@ -14,7 +14,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             InferedType = Core.TypeInference.InferenceResult.TypeEnum.String
         };
 
-        readonly ITextFormElementData FieldTextArea = new TextFormElementData
+        private void ValidateText()
+        {
+            FieldText.CustomValidate();
+        }
+
+        readonly IFormElementData FieldTextArea = new TextFormElementData
         {
             Label = "TextAreaLabel",
             Name = "TextAreaName",
@@ -22,5 +27,24 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             HintText = "TextAreaHint",
             InferedType = Core.TypeInference.InferenceResult.TypeEnum.String
         };
+
+        private void ValidateTextArea()
+        {
+            FieldTextArea.CustomValidate();
+        }
+
+        readonly IFormElementData FieldNumber = new NumericFormElementData
+        {
+            Label = "NumberLabel",
+            Name = "NumberName",
+            Value = "NumberValue",
+            HintText = "NumberHint",
+            InferedType = Core.TypeInference.InferenceResult.TypeEnum.Double
+        };
+
+        private void ValidateNumber()
+        {
+            FieldNumber.CustomValidate();
+        }
     }
 }
