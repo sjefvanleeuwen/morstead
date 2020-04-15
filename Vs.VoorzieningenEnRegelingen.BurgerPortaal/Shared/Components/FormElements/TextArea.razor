@@ -1,6 +1,3 @@
 ﻿@inherits FormElementBase
-    <WrapperDefault IsValid="@_data.IsValid">
-        <FormElementHint Text="@_data.HintText" />
-        <Error>@_data.ErrorText</Error>
-        <textarea required="@_data.IsRequired" disabled="@_data.IsDisabled" id="@_data.Name" aria-describedby="hint_@_data.Name" class="input__control input__control--text @_data.ElementSize" @bind="@Value"></textarea>
-    </WrapperDefault>
+<MatTextField  Label="@HttpUtility.HtmlDecode(_data.Label)" @bind-Value="@Value" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" HelperTextPersistent="@(string.IsNullOrWhiteSpace(_data.HintText))" />
+<ValidationMessage For="@(() => _data.Value)" />
