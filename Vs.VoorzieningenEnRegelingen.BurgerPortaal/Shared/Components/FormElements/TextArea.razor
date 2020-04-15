@@ -1,3 +1,4 @@
 ﻿@inherits FormElementBase
-<MatTextField  Label="@HttpUtility.HtmlDecode(_data.Label)" @bind-Value="@Value" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" HelperTextPersistent="@(string.IsNullOrWhiteSpace(_data.HintText))" />
+
+<MatTextField Label="@HttpUtility.HtmlDecode(_data.Label)" @bind-Value="@Value" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" HelperTextPersistent="@(string.IsNullOrWhiteSpace(_data.HintText))" TextArea="true" />
 <ValidationMessage For="@(() => _data.Value)" />

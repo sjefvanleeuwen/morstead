@@ -23,3 +23,7 @@
     margin: 10px 0px;
     padding: 20px;
 }
+
+.mdc-text-field--textarea {
+    margin-top: 10px;
+}

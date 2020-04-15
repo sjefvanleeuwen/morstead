@@ -1,0 +1,17 @@
+﻿@page "/ElementTester/"
+<SpacingWrapper>
+    <p>
+        <EditForm Model="@FieldText">
+            <CascadingValue Value="@FieldText">
+                <Text />
+            </CascadingValue>
+        </EditForm>
+    </p>
+    <p>
+        <EditForm Model="@FieldTextArea">
+            <CascadingValue Value="@FieldTextArea">
+                <TextArea />
+            </CascadingValue>
+        </EditForm>
+    </p>
+</SpacingWrapper>
