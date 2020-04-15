@@ -187,11 +187,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
                     !n.Name.ToLower().StartsWith("formule") &&
                     !n.Name.ToLower().EndsWith(".geen_recht") &&
                     n.Name.ToLower() != "end")
-                .Select(n => 
-                    n.Name.ToLower().Contains(".situatie") ? 
-                        n.Name.ToLower().Substring(0, n.Name.IndexOf(".situatie")) : 
+                .Select(n =>
+                    n.Name.ToLower().Contains(".situatie") ?
+                        n.Name.ToLower().Substring(0, n.Name.IndexOf(".situatie")) :
                         n.Name.ToLower()).Distinct().ToList();
-            for (var i = 0; i < contentNodes.Count() ; i++)
+            for (var i = 0; i < contentNodes.Count(); i++)
             {
                 if (SemanticKey.StartsWith(contentNodes.ElementAt(i)))
                 {

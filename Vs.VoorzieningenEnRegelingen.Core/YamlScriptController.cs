@@ -78,7 +78,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 foreach (var situation in table.Situations)
                 {
                     currentSituation = situation;
-                    var formula = new Formula(table.DebugInfo, "__temp__",new List<Function>() { new Function(table.DebugInfo,situation.Expression) });
+                    var formula = new Formula(table.DebugInfo, "__temp__", new List<Function>() { new Function(table.DebugInfo, situation.Expression) });
                     var context = new FormulaExpressionContext(ref _model, ref parameters, formula, callback, this);
                     var result = context.Evaluate();
                     if (result.Type != TypeEnum.Boolean)
