@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
+using System;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Cms.Core.Enums;
@@ -41,6 +42,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private bool QuestionAsked => SequenceController.QuestionIsAsked;
         private bool ShowPreviousButton => SequenceController.CurrentStep > 1;
         private bool ShowNextButton => HasRights && QuestionAsked;
+        private double Progress => CalculateProgress();
 
         protected override void OnInitialized()
         {
@@ -55,7 +57,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             if (FormIsValid())
             {
-                //increase the request step
+                //increase the requ6est step
                 SequenceController.IncreaseStep();
                 ProcessStep();
             }
@@ -167,6 +169,37 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             {
                 new ClientParameter(_formElement.Data.Name, _formElement.Data.Value.Replace(',', '.'), _formElement.Data.InferedType, SemanticKey)
             };
+        }
+
+        private double CalculateProgress()
+        {
+            if (!ShowPreviousButton)
+            {
+                return 0;
+            }
+            if (!ShowNextButton)
+            {
+                return 1;
+            }
+            var contentNodes =
+                SequenceController.LastExecutionResult.ContentNodes.Where(n =>
+                    !n.Name.ToLower().Contains(".keuze") &&
+                    !n.Name.ToLower().StartsWith("formule") &&
+                    !n.Name.ToLower().EndsWith(".geen_recht") &&
+                    n.Name.ToLower() != "end")
+                .Select(n =>
+                    n.Name.ToLower().Contains(".situatie") ?
+                        n.Name.ToLower().Substring(0, n.Name.IndexOf(".situatie")) :
+                        n.Name.ToLower()).Distinct().ToList();
+            for (var i = 0; i < contentNodes.Count(); i++)
+            {
+                if (SemanticKey.StartsWith(contentNodes.ElementAt(i)))
+                {
+                    return (i + 1d) / contentNodes.Count();
+                }
+            }
+
+            return 0;
         }
     }
 }

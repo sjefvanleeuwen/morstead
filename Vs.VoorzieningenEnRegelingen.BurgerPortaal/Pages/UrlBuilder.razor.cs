@@ -18,7 +18,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             Size = FormElementSize.ExtraLarge,
             Label = "Regels Yaml Url",
             Name = "Rule",
-            TagText = "Verplicht",
             Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml"
         };
         readonly ITextFormElementData YamlContent = new TextFormElementData
@@ -26,7 +25,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             Size = FormElementSize.ExtraLarge,
             Label = "Content Yaml Url",
             Name = "Content",
-            TagText = "Verplicht",
             Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml"
         };
 

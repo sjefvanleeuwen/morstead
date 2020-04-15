@@ -1,0 +1,21 @@
+﻿.calc_heading_number {
+    float: left;
+}
+
+.calc_heading_number, .calc_heading_question {
+    line-height: 50px;
+}
+
+nav.calc_pagination > ul {
+    display: table;
+    width: 100%;
+}
+
+    nav.calc_pagination > ul > li {
+        display: table-cell;
+        line-height: 1em;
+    }
+
+    nav.calc_pagination > ul > li:nth-child(2) {
+        min-width: 100%;
+    }

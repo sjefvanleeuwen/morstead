@@ -5,8 +5,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
     public partial class Error
     {
         [Parameter]
-        public string Text { get; set; }
+        public RenderFragment ChildContent { get; set; }
 
-        private bool _show => !string.IsNullOrWhiteSpace(Text);
+        private bool _show => ChildContent != null;
     }
 }

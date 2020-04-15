@@ -20,9 +20,8 @@
     </ul>
 }
 <WrapperDefault IsValid="@_data.IsValid">
-    <Label Name="@_data.Name" Text="@_data.Label" TagText="@_data.TagText" />
-    <FormElementHint Name="@_data.Name" Text="@_data.HintText" />
-    <Error Text="@_data.ErrorText" />
+    <FormElementHint Text="@_data.HintText" />
+    <Error>@_data.ErrorText</Error>
     <label>
         <InputFile type="file" class="input__control--file" multiple="" aria-describedby="input-upload-hint" OnChange="HandleSelection" />
         <span class="btn" role="button">@_data.ButtonText</span>

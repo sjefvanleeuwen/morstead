@@ -8,12 +8,12 @@ namespace Vs.Cms.Core.Enums
         Question,
         [Description("titel")]
         Title,
+        [Description("subtitel")]
+        SubTitle,
         [Description("tekst")]
         Description,
         [Description("label")]
         Label,
-        [Description("tag")]
-        Tag,
         [Description("hint")]
         Hint
     }

@@ -10,7 +10,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
     public partial class Radio
     {
         private IBooleanFormElementData _data => Data as IBooleanFormElementData;
-        private bool _isHorizontalRadio => _data.Options.Count == 2 && _data.Options.All(o => o.Value.Length <= 10);
+        private bool IsHorizontalRadio => _data.Options.Count == 2 && _data.Options.All(o => o.Value.Length <= 10);
         protected IEnumerable<string> _keys => _data.Options.Keys;
 
         public override bool HasInput => true;

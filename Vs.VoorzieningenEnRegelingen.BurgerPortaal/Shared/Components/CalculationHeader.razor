@@ -1,9 +1,11 @@
-﻿<h1><strong>@((MarkupString)Title)</strong></h1>
-<h2>@((MarkupString)SubTitle)</h2>
+﻿<MatH1>@((MarkupString)Title)</MatH1>
+<MatH2>@((MarkupString)SubTitle)</MatH2>
 
-<h3>
-    <Badge Number=@Number />
-    <strong>
+<MatH3>
+    <div class="calc_heading_number">
+        <Badge Number=@Number />
+    </div>
+    <div class="calc_heading_question">
         @((MarkupString)Subject)
-    </strong>
-</h3>
+    </div>
+</MatH3>

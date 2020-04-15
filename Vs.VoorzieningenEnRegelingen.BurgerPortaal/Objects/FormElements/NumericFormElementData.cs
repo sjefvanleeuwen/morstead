@@ -31,6 +31,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
                     {
                         IsValid = false;
                     }
+                    break;
                 }
             }
             if (chars.Where(c => c == ',').Count() > 1)
