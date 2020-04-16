@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NSwag;
+using NSwag.Generation.Processors;
+using System.Reflection;
 
 namespace Vs.Rules.OpenApi
 {
@@ -19,14 +23,47 @@ namespace Vs.Rules.OpenApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddOpenApiDocument(document =>
+            services.AddApiVersioning(options =>
             {
-                document.PostProcess = d =>
-                {
-                    d.Info.Title = "Virtual Society Rules API";
-                    d.Info.Description = "A YAML based Semantic Rule Engine that plays nice with front end integrations.";
-                };
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ApiVersionReader = new UrlSegmentApiVersionReader();
             });
+            services.AddVersionedApiExplorer(options =>
+            {
+                options.GroupNameFormat = "VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
+
+            var doc = new OpenApiDocument();
+            doc.Info.Title = "Virtual Society Rule Engine";
+            doc.Info.License = new NSwag.OpenApiLicense() { Name = "MIT License", Url = "https://github.com/sjefvanleeuwen/virtual-society-urukagina/blob/master/LICENSE" };
+            doc.Info.TermsOfService = "Dot not use in production.";
+            doc.Info.Description = "A Semantic Rule Engine API that plays nice with frontends.";
+            doc.Info.Contact = new NSwag.OpenApiContact() { Url = "https://github.com/sjefvanleeuwen/virtual-society-urukagina/" };
+
+
+            services
+                .AddSwaggerDocument(document =>
+                {
+                    document.DocumentName = "v1";
+                    document.ApiGroupNames = new[] { "1" };
+                    document.PostProcess = d =>
+                    {
+                        d.Info = doc.Info;
+                        d.Info.Version = "1.0.0";
+                    };
+                })
+                .AddSwaggerDocument(document =>
+                {
+                    document.DocumentName = "v2";
+                    document.ApiGroupNames = new[] { "2" };
+                    document.PostProcess = d =>
+                    {
+                        d.Info = doc.Info;
+                        d.Info.Version = "2.0.0";
+                    };
+                });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
