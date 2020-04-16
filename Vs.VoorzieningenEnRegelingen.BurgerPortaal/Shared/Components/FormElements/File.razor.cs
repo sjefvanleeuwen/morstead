@@ -1,4 +1,5 @@
 ﻿using BlazorInputFile;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 {
     public partial class File
     {
-        private IFileFormElementData _data => Data as IFileFormElementData;
+        private IFileFormElementData _data =>
+            Data as IFileFormElementData ??
+                throw new ArgumentException($"The provided data element is not of type {nameof(IFileFormElementData)}");
 
         public override bool HasInput => true;
 

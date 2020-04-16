@@ -109,5 +109,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             FieldRadioHorizontal.CustomValidate();
         }
+
+        readonly IFormElementData FieldDate = new DateFormElementData
+        {
+            Label = "DateLabel",
+            Name = "DatelName",
+            Value = "",
+            HintText = "DateHint",
+            InferedType = Core.TypeInference.InferenceResult.TypeEnum.DateTime
+        };
+
+        private void ValidateDate()
+        {
+            FieldDate.CustomValidate();
+        }
     }
 }

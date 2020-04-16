@@ -46,7 +46,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             Size = FormElementSize.ExtraLarge,
             Label = "Regels Yaml Text",
             Name = "Rule Als Text",
-            Value = "Vul hier de Yaml"
+            Value = "Vul hier de yaml in"
         };
 
         private string _textDisplay = None;

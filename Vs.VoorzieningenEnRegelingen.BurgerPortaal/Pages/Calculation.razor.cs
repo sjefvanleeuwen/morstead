@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
-using Vs.Cms.Core.Enums;
+using Vs.Core.Enums;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;

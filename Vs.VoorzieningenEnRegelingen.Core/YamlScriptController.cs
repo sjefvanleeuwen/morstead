@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Vs.Cms.Core.Enums;
+using Vs.Core.Enums;
 using Vs.Core.Extensions;
 using Vs.VoorzieningenEnRegelingen.Core.Calc;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;

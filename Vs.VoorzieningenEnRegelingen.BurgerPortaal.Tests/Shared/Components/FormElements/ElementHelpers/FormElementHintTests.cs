@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Vs.Core.Web.Extensions;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Dressing;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.ElementHelpers;
 using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements.ElementHelpers
 {
     public class FormElementHintTests : BlazorTestBase
     {

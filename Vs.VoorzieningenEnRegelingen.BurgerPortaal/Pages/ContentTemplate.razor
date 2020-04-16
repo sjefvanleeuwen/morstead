@@ -6,10 +6,10 @@
         </CascadingValue>
     </EditForm>
 
-    <button class="btn" @onclick="SubmitUrl">Verstuur</button>
+    <MatButton @onclick="SubmitUrl">Verstuur</MatButton>
     <div id="YamlLogicResult" style="display:@_urlDisplay">
         <Hint Title="Resultaat van de Regels Yaml Url" Content="@UrlYamlContent" />
-        <button class="btn" @onclick="HideUrlContentResult">Verberg</button>
+        <MatButton @onclick="HideUrlContentResult">Verberg</MatButton>
     </div>
     <EditForm Model="@YamlLogic">
         <CascadingValue Value="@YamlLogicText">
@@ -17,9 +17,9 @@
         </CascadingValue>
     </EditForm>
 
-    <button class="btn" @onclick="SubmitText">Verstuur</button>
+    <MatButton @onclick="SubmitText">Verstuur</MatButton>
     <div id="YamlLogicResult" style="display:@_textDisplay">
         <Hint Title="Resultaat van de Regels Yaml Text" Content="@UrlTextContent" />
-        <button class="btn" @onclick="HideTextContentResult">Verberg</button>
+        <MatButton @onclick="HideTextContentResult">Verberg</MatButton>
     </div>
 </MaterialWrapper>

@@ -1,11 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Testing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Vs.Core.Web.Extensions;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
+﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements

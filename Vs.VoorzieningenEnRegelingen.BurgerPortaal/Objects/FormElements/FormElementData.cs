@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Vs.Cms.Core.Controllers.Interfaces;
-using Vs.Cms.Core.Enums;
+using Vs.Core.Enums;
 using Vs.Core.Extensions;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;

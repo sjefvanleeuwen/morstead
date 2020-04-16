@@ -19,14 +19,12 @@
         }
     </ul>
 }
-<WrapperDefault IsValid="@_data.IsValid">
-    <FormElementHint Text="@_data.HintText" />
-    <Error>@_data.ErrorText</Error>
-    <label>
-        <InputFile type="file" class="input__control--file" multiple="" aria-describedby="input-upload-hint" OnChange="HandleSelection" />
-        <span class="btn" role="button">@_data.ButtonText</span>
-    </label>
-</WrapperDefault>
+<FormElementHint Text="@_data.HintText" />
+<Error>@_data.ErrorText</Error>
+<label>
+    <InputFile type="file" class="input__control--file" multiple="" aria-describedby="input-upload-hint" OnChange="HandleSelection" />
+    <span class="btn" role="button">@_data.ButtonText</span>
+</label>
 <div class="hidden hidden--for-a11y">
     <input type="submit" value="submit">
 </div>

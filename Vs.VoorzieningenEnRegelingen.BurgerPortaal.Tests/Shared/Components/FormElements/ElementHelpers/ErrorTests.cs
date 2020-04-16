@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Dressing;
-using Xunit;
-
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
+﻿namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements.ElementHelpers
 {
     public class ErrorTests : BlazorTestBase
     {
