@@ -9,7 +9,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 {
     public partial class Number
     {
-        private INumericFormElementData _data => Data as INumericFormElementData;
+        private INumericFormElementData _data =>
+            Data as INumericFormElementData ??
+                throw new ArgumentException($"The provided data element is not of type {nameof(INumericFormElementData)}");
 
         public override bool HasInput => true;
 

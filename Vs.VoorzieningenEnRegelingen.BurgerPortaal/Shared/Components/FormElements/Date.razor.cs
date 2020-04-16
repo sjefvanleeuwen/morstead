@@ -1,29 +1,14 @@
-﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
+﻿using System;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
     public partial class Date
     {
-        private IDateFormElementData _data => Data as IDateFormElementData;
+        private IDateFormElementData _data =>
+            Data as IDateFormElementData ?? 
+                throw new ArgumentException($"The provided data element is not of type {nameof(IDateFormElementData)}");
 
         public override bool HasInput => true;
-
-        private string Year
-        {
-            get => _data.GetYear().ToString();
-            set => _data.SetYear(value);
-        }
-
-        private string Month
-        {
-            get => _data.GetMonth().ToString();
-            set => _data.SetMonth(value);
-        }
-
-        private string Day
-        {
-            get => _data.GetDay().ToString();
-            set => _data.SetDay(value);
-        }
     }
 }
