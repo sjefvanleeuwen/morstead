@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Objects.Interfaces;
+using Vs.Core.Enums;
 using Vs.Core.Extensions;
 
 namespace Vs.Cms.Core.Objects

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.WebUtilities;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
-using Vs.Cms.Core.Enums;
+using Vs.Core.Enums;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
@@ -33,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private string SemanticKey => SequenceController.HasRights ? LastStep.SemanticKey : LastStep.Break.SemanticKey;
         private int DisplayQuestionNumber => SequenceController.LastExecutionResult.Questions == null ? 0 : SequenceController.Sequence.Steps.Count();
         private string PageTitle => ContentController.GetText("berekening.header", "titel");
-        private string PageSubTitle => ContentController.GetText("berekening.header", "ondertitel");
+        private string PageSubTitle => ContentController.GetText("berekening.header", FormElementContentType.SubTitle);
         private string TextSummary => ContentController.GetText(SemanticKey, FormElementContentType.Question);
         private string TextTitle => ContentController.GetText(SemanticKey, FormElementContentType.Title);
         private string TextDescription => ContentController.GetText(SemanticKey, FormElementContentType.Description);

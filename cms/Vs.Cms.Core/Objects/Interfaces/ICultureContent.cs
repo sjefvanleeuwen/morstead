@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Vs.Cms.Core.Enums;
+using Vs.Core.Enums;
 
 namespace Vs.Cms.Core.Objects.Interfaces
 {

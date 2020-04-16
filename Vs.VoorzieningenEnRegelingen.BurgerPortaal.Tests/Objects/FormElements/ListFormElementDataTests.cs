@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
-using Vs.Cms.Core.Enums;
+using Vs.Core.Enums;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Model;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Vs.Cms.Core.Controllers;
-using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
+using Vs.Core.Enums;
 using Vs.Core.Extensions;
 using Xunit;
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Vs.Cms.Core.Enums
+namespace Vs.Core.Enums
 {
     public enum FormElementContentType
     {
@@ -8,6 +8,8 @@ namespace Vs.Cms.Core.Enums
         Question,
         [Description("titel")]
         Title,
+        [Description("ondertitel")]
+        SubTitle,
         [Description("tekst")]
         Description,
         [Description("label")]
