@@ -19,6 +19,14 @@ namespace Vs.Rules.OpenApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddOpenApiDocument(document =>
+            {
+                document.PostProcess = d =>
+                {
+                    d.Info.Title = "Virtual Society Rules API";
+                    d.Info.Description = "A YAML based Semantic Rule Engine that plays nice with front end integrations.";
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +47,9 @@ namespace Vs.Rules.OpenApi
             {
                 endpoints.MapControllers();
             });
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
         }
     }
 }
