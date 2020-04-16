@@ -12,6 +12,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.4.1" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dto\v1\" />
+  </ItemGroup>
 
 
 </Project>
