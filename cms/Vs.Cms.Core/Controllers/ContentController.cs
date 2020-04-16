@@ -2,10 +2,10 @@
 using System.Globalization;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
-using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Helper;
 using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
+using Vs.Core.Enums;
 using Vs.Core.Extensions;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;

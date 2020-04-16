@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Vs.Cms.Core.Enums;
 using Vs.Cms.Core.Helper;
 using Vs.Cms.Core.Objects;
 using Vs.Cms.Core.Objects.Interfaces;
 using Vs.Cms.Core.Tests.TestYaml;
+using Vs.Core.Enums;
 using Xunit;
 
 namespace Vs.Cms.Core.Tests.Objects
