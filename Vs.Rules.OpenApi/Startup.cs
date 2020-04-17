@@ -30,7 +30,7 @@ namespace Vs.Rules.OpenApi
             });
             services.AddVersionedApiExplorer(options =>
             {
-                options.GroupNameFormat = "VVV";
+                options.GroupNameFormat = "FF";
                 options.SubstituteApiVersionInUrl = true;
             });
 
@@ -38,29 +38,30 @@ namespace Vs.Rules.OpenApi
             doc.Info.Title = "Virtual Society Rule Engine";
             doc.Info.License = new NSwag.OpenApiLicense() { Name = "MIT License", Url = "https://github.com/sjefvanleeuwen/virtual-society-urukagina/blob/master/LICENSE" };
             doc.Info.TermsOfService = "Dot not use in production.";
-            doc.Info.Description = "A Semantic Rule Engine API that plays nice with frontends.";
+            //doc.Info.Description = "A Semantic Rule Engine API that plays nice with frontends.";
             doc.Info.Contact = new NSwag.OpenApiContact() { Url = "https://github.com/sjefvanleeuwen/virtual-society-urukagina/" };
+            doc.Info.Description = "<img width=128 height=128 src='/img/logo.svg'></img><br/>A Semantic Rule Engine API that plays nice with frontends.</h1>";
 
 
             services
                 .AddSwaggerDocument(document =>
                 {
-                    document.DocumentName = "v1";
-                    document.ApiGroupNames = new[] { "1" };
+                    document.DocumentName = "2020-01-01.1.0";
+                    document.ApiGroupNames = new[] { "2017-05-01.1.0" };
                     document.PostProcess = d =>
                     {
                         d.Info = doc.Info;
-                        d.Info.Version = "1.0.0";
+                        d.Info.Version = "2017-05-01.1.0";
                     };
                 })
                 .AddSwaggerDocument(document =>
                 {
-                    document.DocumentName = "v2";
-                    document.ApiGroupNames = new[] { "2" };
+                    document.DocumentName = "2017-05-01.2.0-RC";
+                    document.ApiGroupNames = new[] { "2017-05-01.2.0-RC" };
                     document.PostProcess = d =>
                     {
                         d.Info = doc.Info;
-                        d.Info.Version = "2.0.0";
+                        d.Info.Version = "2017-05-01.2.0-RC";
                     };
                 });
            
@@ -69,6 +70,7 @@ namespace Vs.Rules.OpenApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseStaticFiles();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

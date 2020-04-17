@@ -7,9 +7,10 @@ namespace Vs.Rules.OpenApi.Controllers
 {
     /// <summary>
     /// Rules API integrates the rule engine and exposes it as OAS3.
+    /// Uses best practices from: https://github.com/RicoSuter/NSwag/wiki/AspNetCoreOpenApiDocumentGenerator
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
-    [ApiVersion("2")]
+    [ApiVersion("2017-05-01.2.0-RC")]
     [Route("api/v{version:apiVersion}/rules")]
     [OpenApiTag("Rules Engine", Description = "This is current stable api version")]
     [ApiController]
@@ -22,7 +23,7 @@ namespace Vs.Rules.OpenApi.Controllers
         [HttpGet]
         public async Task<string> Ping()
         {
-            return "Pong";
+            return "Pong from v2";
         }
 
         /// <summary>
