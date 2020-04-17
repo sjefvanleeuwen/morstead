@@ -5,8 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
-using Vs.Core.Extensions;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
@@ -19,7 +17,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public string Name { get; set; }
         public string Label { get; set; }
-        public FormElementSize Size { get; set; }
         public string HintText { get; set; }
         public IEnumerable<string> HintTextList { get; set; }
         public string ErrorText { get => !IsValid ? GetErrorText() : string.Empty; }
@@ -46,8 +43,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             }
         }
         public virtual EventCallback<string> ValueChanged { get; set; }
-
-        public string ElementSize => Size.GetDescription();
 
         public IList<string> ErrorTexts = new List<string>();
 
