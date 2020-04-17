@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Vs.Rules.OpenApi.Controllers
+namespace Vs.Rules.OpenApi
 {
     public class DefaultController : Controller
     {

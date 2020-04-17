@@ -1,18 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
+using System;
 using System.Threading.Tasks;
 
-namespace Vs.Rules.OpenApi.Controllers
+namespace Vs.Rules.OpenApi.v1.Controllers
 {
     /// <summary>
     /// Rules API integrates the rule engine and exposes it as OAS3.
+    /// Uses best practices from: https://github.com/RicoSuter/NSwag/wiki/AspNetCoreOpenApiDocumentGenerator
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
-    [ApiVersion("1", Deprecated = true)]
+    /// <seealso cref="ControllerBase" />
+    [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/rules")]
-    [OpenApiTag("Rules Engine", Description = "This is a deprecated api version it will be supported until: january 1st 2021")]
+    [OpenApiTag("Rules Engine", Description = "")]
     [ApiController]
-    public class RulesControllerV1 : ControllerBase
+    public class RulesController : ControllerBase
     {
         /// <summary>
         /// Pings the Rules engine
@@ -21,7 +23,7 @@ namespace Vs.Rules.OpenApi.Controllers
         [HttpGet]
         public async Task<string> Ping()
         {
-            return "Pong";
+            return "Pong from v1";
         }
     }
 }

@@ -5,8 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NSwag;
-using NSwag.Generation.Processors;
-using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace Vs.Rules.OpenApi
 {
@@ -22,7 +21,12 @@ namespace Vs.Rules.OpenApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(
+                    options => {
+                        options.JsonSerializerOptions.ReferenceHandling = ReferenceHandling.Preserve;
+                        }
+                    );
             services.AddApiVersioning(options =>
             {
                 options.AssumeDefaultVersionWhenUnspecified = true;
@@ -30,7 +34,6 @@ namespace Vs.Rules.OpenApi
             });
             services.AddVersionedApiExplorer(options =>
             {
-                options.GroupNameFormat = "VVV";
                 options.SubstituteApiVersionInUrl = true;
             });
 
@@ -77,29 +80,46 @@ Feedback might not be accepted and move to another version release in the future
 <h4>Final releases</h4>
 
 Final releases should work in all scenario's. Might issues arise patches might be release using an increment in the minor version.
-
-
 ";
 
             services
                 .AddSwaggerDocument(document =>
                 {
-                    document.DocumentName = "2.0.alpha";
+                    document.DocumentName = "2.0";
                     document.ApiGroupNames = new[] { "2" };
                     document.PostProcess = d =>
                     {
                         d.Info = doc.Info;
-                        d.Info.Version = "2.0.alpha";
+                        d.Info.Version = "2.0";
                     };
                 })
                 .AddSwaggerDocument(document =>
                 {
-                    document.DocumentName = "1.0.release";
+                    document.DocumentName = "2.0-features";
+                    document.ApiGroupNames = new[] { "2.0-beerrun", "2.0-feature2" };
+                    document.PostProcess = d =>
+                    {
+                        d.Info = doc.Info;
+                        d.Info.Version = "2.0-features";
+                        d.Info.Description = @"
+<img width=128 height=128 src='/img/logo.svg'></img><br/>A Semantic Rule Engine API that plays nice with frontends.
+
+<h2>What you need to know about this feature branch</h2>
+
+This feature branche allows you to quickly use new features as they are requested. We will eventually make a major increment version and migrate the features so they place nice together in a next alpha/beta release.
+
+Eventually the seperate features will become obsolete, we allow for a cooldown period so you can upgrade to the new version. You can join us in testing the alpha/beta releases or migrate over once the next major version reaches 
+RC / Release status.";
+                    };
+                })
+                .AddSwaggerDocument(document =>
+                {
+                    document.DocumentName = "1.0-release";
                     document.ApiGroupNames = new[] { "1" };
                     document.PostProcess = d =>
                     {
                         d.Info = doc.Info;
-                        d.Info.Version = "1.0.release";
+                        d.Info.Version = "1.0-release";
                     };
                 });
            
