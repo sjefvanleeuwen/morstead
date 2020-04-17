@@ -5,8 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
-using Vs.Core.Extensions;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
@@ -19,12 +17,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
         public string Name { get; set; }
         public string Label { get; set; }
-        public FormElementSize Size { get; set; }
         public string HintText { get; set; }
         public IEnumerable<string> HintTextList { get; set; }
         public string ErrorText { get => !IsValid ? GetErrorText() : string.Empty; }
         public bool IsDisabled { get; set; } = false;
-        public bool IsRequired { get; set; } = false;
         public bool IsValid { get; set; } = true;
         public TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
         public CultureInfo Culture { get; set; } = new CultureInfo("nl-NL");
@@ -47,15 +43,32 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         }
         public virtual EventCallback<string> ValueChanged { get; set; }
 
-        public string ElementSize => Size.GetDescription();
-
         public IList<string> ErrorTexts = new List<string>();
 
         public virtual void CustomValidate(bool unobtrusive = false)
         {
             IsValid = true;
             ErrorTexts = new List<string>();
+
+            var valid = ValidateValueIsSet();
+
+            if (!unobtrusive)
+            {
+                IsValid = valid;
+            }
         }
+
+        private bool ValidateValueIsSet()
+        {
+            var valid = !string.IsNullOrWhiteSpace(Value);
+            if (!valid)
+            {
+                ErrorTexts.Add("Vul een waarde in.");
+            }
+
+            return valid;
+        }
+
 
         private string GetErrorText()
         {

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Vs.Cms.Core.Helper;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
@@ -17,7 +16,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         readonly ITextFormElementData YamlLogic = new TextFormElementData
         {
-            Size = FormElementSize.ExtraLarge,
             Label = "Regels Yaml Url",
             Name = "Rule",
             Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml"
@@ -43,7 +41,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
 
         readonly ITextFormElementData YamlLogicText = new TextFormElementData
         {
-            Size = FormElementSize.ExtraLarge,
             Label = "Regels Yaml Text",
             Name = "Rule Als Text",
             Value = "Vul hier de yaml in"

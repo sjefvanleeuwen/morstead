@@ -9,7 +9,7 @@ using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class FileFormElementData : FormElementSingleValueData, IFileFormElementData
+    public class FileFormElementData : FormElementData, IFileFormElementData
     {
         private IEnumerable<string> _allowedExtensions;
 

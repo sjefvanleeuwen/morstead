@@ -6,11 +6,12 @@ using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class DateFormElementData : FormElementSingleValueData, IDateFormElementData
+    public class DateFormElementData : FormElementData, IDateFormElementData
     {
         public DateTime MinimumAllowedDate { get; set; } = DateTime.MinValue;
         public DateTime MaximumAllowedDate { get; set; } = DateTime.MaxValue;
         public DateTime? ValueDate { get; set; }
+        public DateTime? ValueUtcDate { get => ValueDate?.ToUniversalTime(); set => ValueDate = value?.ToLocalTime(); }
 
         public override string Value
         {

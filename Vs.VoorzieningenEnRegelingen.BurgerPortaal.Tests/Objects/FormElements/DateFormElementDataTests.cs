@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Xunit;

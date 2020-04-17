@@ -1,33 +1,8 @@
 ﻿@inherits FormElementBase
-<FormElementHint Text="@_data.HintText" />
-<Error>@_data.ErrorText</Error>
-<div class="input__control-group">
-    <div>
-        <div>
-            <label class="input__hint" for="@_data.Name-ds">@_data.GetLabelText("dayStart")</label>
-            <input required="@_data.IsRequired" disabled="@_data.IsDisabled" aria-label="@_data.GetLabelTitle("dayStart")" title="@_data.GetLabelTitle("dayStart")" type="number" min="1" max="31" id="@_data.Name-ds" class="input__control input__control--two-characters input__control--linked input__control--text" @bind="@DayStart">
-        </div>
-        <div>
-            <label class="input__hint" for="@_data.Name-ms">@_data.GetLabelText("monthStart")</label>
-            <input required="@_data.IsRequired" disabled="@_data.IsDisabled" aria-label="@_data.GetLabelTitle("monthStart")" title="@_data.GetLabelTitle("monthStart")" type="number" min="1" max="12" id="@_data.Name-ms" class="input__control input__control--two-characters input__control--linked input__control--text" @bind="@MonthStart">
-        </div>
-        <div>
-            <label class="input__hint" for="@_data.Name-ys">@_data.GetLabelText("yearStart")</label>
-            <input required="@_data.IsRequired" disabled="@_data.IsDisabled" aria-label="@_data.GetLabelTitle("yearStart")" title="@_data.GetLabelTitle("yearStart")" type="number" id="@_data.Name-ys" class="input__control input__control--four-characters input__control--linked input__control--text" @bind="@YearStart">
-        </div>
-    </div>
-    <div>
-        <div>
-            <label class="input__hint" for="@_data.Name-de">@_data.GetLabelText("dayEnd")</label>
-            <input required="@_data.IsRequired" disabled="@_data.IsDisabled" aria-label="@_data.GetLabelTitle("dayEnd")" title="@_data.GetLabelTitle("dayEnd")" type="number" min="1" max="31" id="@_data.Name-de" class="input__control input__control--two-characters input__control--linked input__control--text" @bind="@DayEnd">
-        </div>
-        <div>
-            <label class="input__hint" for="@_data.Name-me">@_data.GetLabelText("monthEnd")</label>
-            <input required="@_data.IsRequired" disabled="@_data.IsDisabled" aria-label="@_data.GetLabelTitle("monthEnd")" title="@_data.GetLabelTitle("monthEnd")" type="number" min="1" max="12" id="@_data.Name-me" class="input__control input__control--two-characters input__control--linked input__control--text" @bind="@MonthEnd">
-        </div>
-        <div>
-            <label class="input__hint" for="@_data.Name-ye">@_data.GetLabelText("yearEnd")</label>
-            <input required="@_data.IsRequired" disabled="@_data.IsDisabled" aria-label="@_data.GetLabelTitle("yearEnd")" title="@_data.GetLabelTitle("yearEnd")" type="number" id="@_data.Name-ye" class="input__control input__control--four-characters input__control--linked input__control--text" @bind="@YearEnd">
-        </div>
-    </div>
+<div class="calc_float">
+    <MatDatePicker Label="@HttpUtility.HtmlDecode(_data.LabelStart)" @bind-Value="@_data.ValueUtcDateStart" Id="@($"{_data.Name}_start")" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" />
 </div>
+<div>
+    <MatDatePicker Label="@HttpUtility.HtmlDecode(_data.LabelEnd)" @bind-Value="@_data.ValueUtcDateEnd" Id="@($"{_data.Name}_end")" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" />
+</div>
+<Error><ValidationMessage For="@(() => _data.Value)" /></Error>

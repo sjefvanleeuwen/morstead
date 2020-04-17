@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class NumericFormElementData : FormElementSingleValueData, INumericFormElementData
+    public class NumericFormElementData : FormElementData, INumericFormElementData
     {
         public int? Decimals { get; set; } = null;
 
@@ -57,7 +56,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         {
             base.FillFromExecutionResult(result, contentController);
 
-            Size = FormElementSize.Large;
             Decimals = 2;
             DecimalsOptional = true;
         }

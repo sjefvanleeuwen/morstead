@@ -14,6 +14,10 @@ namespace Vs.Core.Enums
         Description,
         [Description("label")]
         Label,
+        [Description("labelstart")]
+        LabelStart,
+        [Description("labelend")]
+        LabelEnd,
         [Description("hint")]
         Hint
     }

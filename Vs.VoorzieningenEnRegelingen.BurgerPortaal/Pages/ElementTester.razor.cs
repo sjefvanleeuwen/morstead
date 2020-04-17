@@ -123,5 +123,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         {
             FieldDate.CustomValidate();
         }
+
+        readonly IFormElementData FieldDateRange = new DateRangeFormElementData
+        {
+            Label = "DateLabel",
+            Name = "DatelName",
+            Value = "",
+            HintText = "DateHint",
+            InferedType = Core.TypeInference.InferenceResult.TypeEnum.DateTime,
+            LabelStart = "Startdatum",
+            LabelEnd = "Einddatum"
+        };
+
+        private void ValidateDateRange()
+        {
+            FieldDateRange.CustomValidate();
+        }
     }
 }
