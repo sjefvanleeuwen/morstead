@@ -106,7 +106,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "vendor", "vendor", "{80E2EB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vs.Rules", "Vs.Rules", "{88324C07-A820-4B94-9381-822AD967B277}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Rules.OpenApi", "Vs.Rules.OpenApi\Vs.Rules.OpenApi.csproj", "{2643ED42-27F0-4AA6-B36C-650B183D0699}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.OpenApi", "Vs.Rules.OpenApi\Vs.Rules.OpenApi.csproj", "{2643ED42-27F0-4AA6-B36C-650B183D0699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Answer.OpenApi", "Acme.Answer.OpenApi\Acme.Answer.OpenApi.csproj", "{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -210,6 +212,10 @@ Global
 		{2643ED42-27F0-4AA6-B36C-650B183D0699}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2643ED42-27F0-4AA6-B36C-650B183D0699}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2643ED42-27F0-4AA6-B36C-650B183D0699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -234,6 +240,7 @@ Global
 		{C0A7789C-10DB-4674-AB16-125D4E4D0384} = {97A749EF-A7E5-45A8-B456-1169B34BC63C}
 		{88324C07-A820-4B94-9381-822AD967B277} = {80E2EB35-DA37-45AC-AAFD-4B5A95D702B0}
 		{2643ED42-27F0-4AA6-B36C-650B183D0699} = {88324C07-A820-4B94-9381-822AD967B277}
+		{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7} = {88324C07-A820-4B94-9381-822AD967B277}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
