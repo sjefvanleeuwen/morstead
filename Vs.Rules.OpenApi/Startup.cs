@@ -30,7 +30,7 @@ namespace Vs.Rules.OpenApi
             });
             services.AddVersionedApiExplorer(options =>
             {
-                options.GroupNameFormat = "FF";
+                options.GroupNameFormat = "VVV";
                 options.SubstituteApiVersionInUrl = true;
             });
 
@@ -84,22 +84,22 @@ Final releases should work in all scenario's. Might issues arise patches might b
             services
                 .AddSwaggerDocument(document =>
                 {
-                    document.DocumentName = "2020-01-01.1.0";
-                    document.ApiGroupNames = new[] { "2020-01-01.1.0" };
+                    document.DocumentName = "2.0.alpha";
+                    document.ApiGroupNames = new[] { "2" };
                     document.PostProcess = d =>
                     {
                         d.Info = doc.Info;
-                        d.Info.Version = "2020-01-01.1.0";
+                        d.Info.Version = "2.0.alpha";
                     };
                 })
                 .AddSwaggerDocument(document =>
                 {
-                    document.DocumentName = "2020-04-17.2.0.alpha";
-                    document.ApiGroupNames = new[] { "2020-04-17.2.0.alpha" };
+                    document.DocumentName = "1.0.release";
+                    document.ApiGroupNames = new[] { "1" };
                     document.PostProcess = d =>
                     {
                         d.Info = doc.Info;
-                        d.Info.Version = "2020-04-17.2.0.alpha";
+                        d.Info.Version = "1.0.release";
                     };
                 });
            

@@ -8,7 +8,7 @@ namespace Vs.Rules.OpenApi.Controllers
     /// Rules API integrates the rule engine and exposes it as OAS3.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
-    [ApiVersion("2017-05-01.1.0", Deprecated = true)]
+    [ApiVersion("1", Deprecated = true)]
     [Route("api/v{version:apiVersion}/rules")]
     [OpenApiTag("Rules Engine", Description = "This is a deprecated api version it will be supported until: january 1st 2021")]
     [ApiController]
