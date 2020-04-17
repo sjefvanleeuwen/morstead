@@ -40,8 +40,46 @@ namespace Vs.Rules.OpenApi
             doc.Info.TermsOfService = "Dot not use in production.";
             //doc.Info.Description = "A Semantic Rule Engine API that plays nice with frontends.";
             doc.Info.Contact = new NSwag.OpenApiContact() { Url = "https://github.com/sjefvanleeuwen/virtual-society-urukagina/" };
-            doc.Info.Description = "<img width=128 height=128 src='/img/logo.svg'></img><br/>A Semantic Rule Engine API that plays nice with frontends.</h1>";
+            doc.Info.Description = @"
 
+<img width=128 height=128 src='/img/logo.svg'></img><br/>A Semantic Rule Engine API that plays nice with frontends.
+
+<h2>What you need to know about our API Versioning strategy</h2>
+
+Virtual Society Releases its public API's using versioning.
+
+<h3> Format </h3>
+
+We specify a Full API version with optional minor version as [group version][.major[.minor,0]][-status]
+
+<i>For Example:</i>
+
+2017-05-01.1-alpha
+2018-05-01.1-beta
+2018-05-01.1-rc
+2018-05-01.1-release
+
+<h4>Alpha releases</h4>
+
+Alpha releases are a work in progress, open for feedback and improvements and not guaranteed to work.
+an alpha version can become obsolete or removed at any given time without prior notice.
+
+<h4>Beta releases</h4>
+
+Beta releases are a work in progress, open for feedback and improvements and, though not guaranteed should work in most known scenarios.
+a beta version can become increase its version number without prior notice, but might be published for people who are actively involved with us in a beta program.
+
+<h4>RC (or release candidate) releases</h4>
+
+RC releases are a work in progress, open for feedback and improvements and, should work should work in all known scenarios. The RC will not accept new functionalities.
+Feedback might not be accepted and move to another version release in the future. RC's are publicly announced on the project site as specified in this OpenAPI specification.
+
+<h4>Final releases</h4>
+
+Final releases should work in all scenario's. Might issues arise patches might be release using an increment in the minor version.
+
+
+";
 
             services
                 .AddSwaggerDocument(document =>
