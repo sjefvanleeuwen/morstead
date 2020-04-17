@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces
 {
-    public interface IFileFormElementData : IFormElementSingleValueDate
+    public interface IFileFormElementData : IFormElementData
     {
         IEnumerable<IFileListEntry> Files { get; set; }
         string ButtonText { get; set; }

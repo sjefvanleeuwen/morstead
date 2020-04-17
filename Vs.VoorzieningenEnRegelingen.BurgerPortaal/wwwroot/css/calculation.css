@@ -6,6 +6,11 @@
     line-height: 50px;
 }
 
+.calc_float {
+    float: left;
+    margin-right: 20px;
+}
+
 nav.calc_pagination > ul {
     display: table;
     width: 100%;

@@ -3,140 +3,53 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Enum;
+using Vs.Cms.Core.Controllers.Interfaces;
+using Vs.Core.Enums;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
+using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class DateRangeFormElementData : FormElementMultipleValueData, IDateRangeFormElementData
+    public class DateRangeFormElementData : FormElementData, IDateRangeFormElementData
     {
         public DateTime MinimumAllowedDate { get; set; } = DateTime.MinValue;
         public DateTime MaximumAllowedDate { get; set; } = DateTime.MaxValue;
-        public Dictionary<DateRangeType, DateTime> ValueDates { get; set; }
+        public DateTime? ValueDateStart { get; set; }
+        public DateTime? ValueDateEnd { get; set; }
 
-        public int GetYear(DateRangeType type) => ValueDates[type].Year;
-
-        public void SetYear(DateRangeType type, string value)
-        {
-            //set the actually filled value
-            Values[type + "year"] = value;
-            if (!int.TryParse(value, out int year))
-            {
-                //do nothing, value invalid.
-                return;
-            }
-            if (year < 1 || year > 9999)
-            {
-                //do nothing, value invalid
-                return;
-            }
-            ValueDates[type] = new DateTime(year, GetMonth(type), GetDay(type));
-        }
-
-        public int GetMonth(DateRangeType type) => ValueDates[type].Month;
-
-        public void SetMonth(DateRangeType type, string value)
-        {
-            Values[type + "month"] = value;
-            if (!int.TryParse(value, out int month))
-            {
-                //do nothing, value invalid
-                return;
-            }
-            if (month < 1 || month > 12)
-            {
-                //do nothing, value invalid
-                return;
-            }
-            ValueDates[type] = new DateTime(GetYear(type), month, GetDay(type));
-        }
-
-        public int GetDay(DateRangeType type) => ValueDates[type].Day;
-
-        public void SetDay(DateRangeType type, string value)
-        {
-            Values[type + "day"] = value;
-            if (!int.TryParse(value, out int day))
-            {
-                //do nothing, value invalid
-                return;
-            }
-            if (day < 1 || day > 31)
-            {
-                //do nothing, value invalid
-                return;
-            }
-            DateTime proposedDate;
-            try
-            {
-                proposedDate = new DateTime(GetYear(type), GetMonth(type), day);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                //an invalid day for the month has been entered
-                return;
-            }
-
-            ValueDates[type] = proposedDate;
-        }
+        public string LabelStart { get; set; }
+        public string LabelEnd { get; set; }
 
         public override string Value
         {
-            get => GetDateRange();
+            get => GetDateRangeAsString();
             set => SetDateRange(value);
         }
 
         public DateRangeFormElementData()
         {
-            ValueDates = new Dictionary<DateRangeType, DateTime>
-            {
-                { DateRangeType.Start, DateTime.MinValue },
-                { DateRangeType.End, DateTime.MaxValue }
-            };
-
             System.Threading.Thread.CurrentThread.CurrentCulture = Culture; //nl-NL
-
-            SetDateRange(new TimeRange(DateTime.Today, DateTime.Today).ToString());
+            ValueDateStart = DateTime.Today;
+            ValueDateEnd = DateTime.Today;
         }
 
-        private string GetDateRange()
+        private string GetDateRangeAsString()
         {
-            if (!FieldsContainValidDate())
-            {
-                string startyear = "unknown", startmonth = "unknown", startday = "unknown";
-                if (!Values.ContainsKey(DateRangeType.Start + "year"))
-                {
-                    throw new KeyNotFoundException("The value for startyear has not been set.");
-                }
-                if (!Values.ContainsKey(DateRangeType.Start + "month"))
-                {
-                    throw new KeyNotFoundException("The value for startmonth has not been set.");
-                }
-                if (!Values.ContainsKey(DateRangeType.Start + "day"))
-                {
-                    throw new KeyNotFoundException("The value for startday has not been set.");
-                }
-                string endyear = "unknown", endmonth = "unknown", endday = "unknown";
-                if (!Values.ContainsKey(DateRangeType.End + "year"))
-                {
-                    throw new KeyNotFoundException("The value for endyear has not been set.");
-                }
-                if (!Values.ContainsKey(DateRangeType.End + "month"))
-                {
-                    throw new KeyNotFoundException("The value for endmonth has not been set.");
-                }
-                if (!Values.ContainsKey(DateRangeType.End + "day"))
-                {
-                    throw new KeyNotFoundException("The value for endday has not been set.");
-                }
-                throw new FormatException($"The values defined do not form two valid dates '{startyear}-{startmonth}-{startday}' and '{endyear}-{endmonth}-{endday}'");
-            }
-
-            return new TimeRange(ValueDates[DateRangeType.Start], ValueDates[DateRangeType.End]).ToString();
+            return
+                (ValueDateStart != null && ValueDateEnd != null) ?
+                    new TimeRange(ValueDateStart.Value, ValueDateEnd.Value).ToString() :
+                    string.Empty;
         }
 
         private void SetDateRange(string value)
         {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                ValueDateStart = null;
+                ValueDateEnd = null;
+                return;
+            }
+
             var dateTimeStrings = value.Split('|')[0].Split(" - ").ToList();
             //in case the startdate and enddate are the same
             if (dateTimeStrings.Count == 1)
@@ -145,34 +58,27 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             }
             try
             {
-                SetDate(DateRangeType.Start, dateTimeStrings[0]);
-                SetDate(DateRangeType.End, dateTimeStrings[1]);
+                ValueDateStart = StringToDate(dateTimeStrings[0]);
+                ValueDateEnd = StringToDate(dateTimeStrings[1]);
             }
             catch (Exception ex)
             {
                 throw new ArgumentException($"Unable to process the timerange format  provided '{value}'.", ex);
             }
         }
-        private void SetDate(DateRangeType type, string value)
+
+        private DateTime StringToDate(string value)
         {
             base.value = value;
             if (DateTime.TryParse(value, Culture, DateTimeStyles.None, out DateTime date)
                 || DateTime.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
-                SetValues(type, date.Year.ToString(), date.Month.ToString(), date.Day.ToString());
-                ValueDates[type] = date;
+                return date;
             }
             else
             {
                 throw new ArgumentException($"The date provided could not be parsed as universal or culture: '{Culture.Name}'.");
             }
-        }
-
-        private void SetValues(DateRangeType type, string year, string month, string day)
-        {
-            Values[type + "year"] = year;
-            Values[type + "month"] = month;
-            Values[type + "day"] = day;
         }
 
         public override void CustomValidate(bool unobtrusive = false)
@@ -181,19 +87,23 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 
             var errors = new List<string>();
 
-            if (!FieldsContainValidDate())
-            {
-                errors.Add("De waarden ingegeven vormen samen geen geldige datum range.");
-            }
-            if (ValueDates[DateRangeType.Start] > ValueDates[DateRangeType.End])
+            if (ValueDateStart > ValueDateEnd)
             {
                 errors.Add($"De startdatum is groter dan de einddatum.");
             }
-            if (ValueDates[DateRangeType.Start] < MinimumAllowedDate)
+            if (ValueDateStart < MinimumAllowedDate)
             {
                 errors.Add($"De startdatum is kleiner dan de minimaal toegestane datum: '{MinimumAllowedDate.ToString("d", Culture)}'.");
             }
-            if (ValueDates[DateRangeType.End] > MaximumAllowedDate)
+            if (ValueDateStart > MaximumAllowedDate)
+            {
+                errors.Add($"De startdatum is groter dan de maximaal toegestane datum: '{MaximumAllowedDate.ToString("d", Culture)}'.");
+            }
+            if (ValueDateEnd < MinimumAllowedDate)
+            {
+                errors.Add($"De einddatum is kleiner dan de minimaal toegestane datum: '{MinimumAllowedDate.ToString("d", Culture)}'.");
+            }
+            if (ValueDateEnd > MaximumAllowedDate)
             {
                 errors.Add($"De einddatum is groter dan de maximaal toegestane datum: '{MaximumAllowedDate.ToString("d", Culture)}'.");
             }
@@ -210,27 +120,21 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             }
         }
 
-        private bool FieldsContainValidDate()
+        public override void FillFromExecutionResult(IExecutionResult result, IContentController contentController)
         {
-            try
-            {
-                if (int.Parse(Values[DateRangeType.Start + "year"]) == ValueDates[DateRangeType.Start].Year &&
-                    int.Parse(Values[DateRangeType.Start + "month"]) == ValueDates[DateRangeType.Start].Month &&
-                    int.Parse(Values[DateRangeType.Start + "day"]) == ValueDates[DateRangeType.Start].Day &&
-                    int.Parse(Values[DateRangeType.End + "year"]) == ValueDates[DateRangeType.End].Year &&
-                    int.Parse(Values[DateRangeType.End + "month"]) == ValueDates[DateRangeType.End].Month &&
-                    int.Parse(Values[DateRangeType.End + "day"]) == ValueDates[DateRangeType.End].Day)
-                {
-                    return true;
-                }
-            }
-            catch (FormatException)
-            {
-                //parsing went wrong
-                return false;
-            }
+            base.FillFromExecutionResult(result, contentController);
 
-            return false;
+            var parameterSemanticKey = result.GetParameterSemanticKey();
+            var labelStart = contentController.GetText(parameterSemanticKey, FormElementContentType.LabelStart);
+            if (!string.IsNullOrWhiteSpace(labelStart))
+            {
+                LabelStart = labelStart;
+            }
+            var labelEnd = contentController.GetText(parameterSemanticKey, FormElementContentType.LabelEnd);
+            if (!string.IsNullOrWhiteSpace(labelEnd))
+            {
+                LabelEnd = labelEnd;
+            }
         }
     }
 }

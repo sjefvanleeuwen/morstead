@@ -5,7 +5,7 @@ using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
-    public class OptionsFormElementData : FormElementSingleValueData, IOptionsFormElementData
+    public class OptionsFormElementData : FormElementData, IOptionsFormElementData
     {
         public Dictionary<string, string> Options { get; set; } = new Dictionary<string, string>();
 

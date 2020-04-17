@@ -55,7 +55,26 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         {
             IsValid = true;
             ErrorTexts = new List<string>();
+
+            var valid = ValidateValueIsSet();
+
+            if (!unobtrusive)
+            {
+                IsValid = valid;
+            }
         }
+
+        private bool ValidateValueIsSet()
+        {
+            var valid = !string.IsNullOrWhiteSpace(Value);
+            if (!valid)
+            {
+                ErrorTexts.Add("Vul een waarde in.");
+            }
+
+            return valid;
+        }
+
 
         private string GetErrorText()
         {

@@ -62,4 +62,13 @@
             value: @FieldDate.Value
             <MatButton TrailingIcon="chevron_right" @onclick="ValidateDate">Validate</MatButton>
         </EditForm>
+
+        <EditForm Model="@FieldDateRange">
+            <DataAnnotationsValidator />
+            <CascadingValue Value="@FieldDateRange">
+                <DateRange />
+            </CascadingValue>
+            value: @FieldDateRange.Value
+            <MatButton TrailingIcon="chevron_right" @onclick="ValidateDateRange">Validate</MatButton>
+        </EditForm>
     </MaterialWrapper>
