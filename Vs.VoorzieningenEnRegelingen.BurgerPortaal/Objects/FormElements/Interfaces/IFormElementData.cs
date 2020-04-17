@@ -12,7 +12,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
         string ErrorText { get; }
         string HintText { get; set; }
         bool IsDisabled { get; set; }
-        bool IsRequired { get; set; }
         bool IsValid { get; set; }
         string Label { get; set; }
         string Name { get; set; }

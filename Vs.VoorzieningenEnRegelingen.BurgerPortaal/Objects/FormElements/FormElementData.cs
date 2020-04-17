@@ -21,7 +21,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public IEnumerable<string> HintTextList { get; set; }
         public string ErrorText { get => !IsValid ? GetErrorText() : string.Empty; }
         public bool IsDisabled { get; set; } = false;
-        public bool IsRequired { get; set; } = false;
         public bool IsValid { get; set; } = true;
         public TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
         public CultureInfo Culture { get; set; } = new CultureInfo("nl-NL");
