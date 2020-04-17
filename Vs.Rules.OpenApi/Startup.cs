@@ -85,21 +85,21 @@ Final releases should work in all scenario's. Might issues arise patches might b
                 .AddSwaggerDocument(document =>
                 {
                     document.DocumentName = "2020-01-01.1.0";
-                    document.ApiGroupNames = new[] { "2017-05-01.1.0" };
+                    document.ApiGroupNames = new[] { "2020-01-01.1.0" };
                     document.PostProcess = d =>
                     {
                         d.Info = doc.Info;
-                        d.Info.Version = "2017-05-01.1.0";
+                        d.Info.Version = "2020-01-01.1.0";
                     };
                 })
                 .AddSwaggerDocument(document =>
                 {
-                    document.DocumentName = "2017-05-01.2.0-RC";
-                    document.ApiGroupNames = new[] { "2017-05-01.2.0-RC" };
+                    document.DocumentName = "2020-04-17.2.0.alpha";
+                    document.ApiGroupNames = new[] { "2020-04-17.2.0.alpha" };
                     document.PostProcess = d =>
                     {
                         d.Info = doc.Info;
-                        d.Info.Version = "2017-05-01.2.0-RC";
+                        d.Info.Version = "2020-04-17.2.0.alpha";
                     };
                 });
            
