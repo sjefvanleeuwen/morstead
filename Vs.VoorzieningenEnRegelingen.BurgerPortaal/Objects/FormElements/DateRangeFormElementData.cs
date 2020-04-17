@@ -12,11 +12,13 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
 {
     public class DateRangeFormElementData : FormElementData, IDateRangeFormElementData
     {
+
         public DateTime MinimumAllowedDate { get; set; } = DateTime.MinValue;
         public DateTime MaximumAllowedDate { get; set; } = DateTime.MaxValue;
         public DateTime? ValueDateStart { get; set; }
         public DateTime? ValueDateEnd { get; set; }
-
+        public DateTime? ValueUtcDateStart { get => ValueDateStart?.ToUniversalTime(); set => ValueDateStart = value?.ToLocalTime(); }
+        public DateTime? ValueUtcDateEnd { get => ValueDateEnd?.ToUniversalTime(); set => ValueDateEnd = value?.ToLocalTime(); }
         public string LabelStart { get; set; }
         public string LabelEnd { get; set; }
 

@@ -7,5 +7,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interf
         DateTime MinimumAllowedDate { get; set; }
         DateTime MaximumAllowedDate { get; set; }
         DateTime? ValueDate { get; set; }
+        DateTime? ValueUtcDate { get; set; }
     }
 }
