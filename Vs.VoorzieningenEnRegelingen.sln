@@ -110,6 +110,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.OpenApi", "Vs.Rule
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Answer.OpenApi", "Acme.Answer.OpenApi\Acme.Answer.OpenApi.csproj", "{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Rules.OpenApi.Tests", "Vs.Rules.OpenApi.Tests\Vs.Rules.OpenApi.Tests.csproj", "{080CABD0-0EEE-4354-AC7E-06F07B5BDB8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.IntegrationTesting.OpenApi", "Vs.Core.IntegrationTesting.OpenApi\Vs.Core.IntegrationTesting.OpenApi.csproj", "{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -216,6 +220,14 @@ Global
 		{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{080CABD0-0EEE-4354-AC7E-06F07B5BDB8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{080CABD0-0EEE-4354-AC7E-06F07B5BDB8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{080CABD0-0EEE-4354-AC7E-06F07B5BDB8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{080CABD0-0EEE-4354-AC7E-06F07B5BDB8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -241,6 +253,8 @@ Global
 		{88324C07-A820-4B94-9381-822AD967B277} = {80E2EB35-DA37-45AC-AAFD-4B5A95D702B0}
 		{2643ED42-27F0-4AA6-B36C-650B183D0699} = {88324C07-A820-4B94-9381-822AD967B277}
 		{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7} = {88324C07-A820-4B94-9381-822AD967B277}
+		{080CABD0-0EEE-4354-AC7E-06F07B5BDB8F} = {88324C07-A820-4B94-9381-822AD967B277}
+		{A0EE266A-422E-45B1-A316-7F52B5A6DF6E} = {5C4AF588-9E89-4835-B899-12A16B587546}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
