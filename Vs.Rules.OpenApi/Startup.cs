@@ -25,7 +25,7 @@ namespace Vs.Rules.OpenApi
                 .AddJsonOptions(
                     options => {
                         options.JsonSerializerOptions.ReferenceHandling = ReferenceHandling.Preserve;
-                        }
+                    }
                     );
             services.AddApiVersioning(options =>
             {
@@ -96,7 +96,7 @@ Final releases should work in all scenario's. Might issues arise patches might b
                 .AddSwaggerDocument(document =>
                 {
                     document.DocumentName = "2.0-features";
-                    document.ApiGroupNames = new[] { "2.0-beerrun", "2.0-feature2" };
+                    document.ApiGroupNames = new[] { "2.0-feature1", "2.0-feature2" };
                     document.PostProcess = d =>
                     {
                         d.Info = doc.Info;
@@ -122,7 +122,7 @@ RC / Release status.";
                         d.Info.Version = "1.0-release";
                     };
                 });
-           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
