@@ -1,1 +1,0 @@
-{"version":3,"file":"IListenerReference.js","sourceRoot":"","sources":["../../../../../../../src/core/interfaces/IListenerReference.ts"],"names":[],"mappings":"","sourcesContent":["export interface IListenerReference {\r\n    element:Node;\r\n    listener:EventListenerObject;\r\n}\r\n"]}
