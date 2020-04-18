@@ -2,6 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageId>Vs.Rules.Core</PackageId>
+    <Authors>Sjef van Leeuwen</Authors>
+    <Company>Virtual Society</Company>
+    <Product>Virtual Society Rules Engine</Product>
+    <PackageProjectUrl>https://github.com/sjefvanleeuwen/virtual-society-urukagina</PackageProjectUrl>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/sjefvanleeuwen/virtual-society-urukagina</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>rules, rules-engine, ruleset, decision-making, business-rules, calculations, calculator, bre, business-rules-engine, cui, ci, conversational, conversational-strategies, conversational-platform, conversational-interfaces,</PackageTags>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <NeutralLanguage></NeutralLanguage>
+    <Copyright>Copyright (c) 2020 Sjef van Leeuwen</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +42,13 @@
     <ProjectReference Include="..\core\Vs.Core.Diagnostics\Vs.Core.Diagnostics.csproj" />
     <ProjectReference Include="..\core\Vs.Core\Vs.Core.csproj" />
     <ProjectReference Include="..\graph\Vs.Graph.Core\Vs.Graph.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
