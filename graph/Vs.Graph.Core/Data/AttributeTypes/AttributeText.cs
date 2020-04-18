@@ -6,7 +6,7 @@ using YamlDotNet.Serialization;
 namespace Vs.Graph.Core.Data.AttributeTypes
 {
     [AttributeType("text")]
-    public class AttributeText : IAttributeType, ISerialize
+    public class AttributeText : IAttributeType, IYamlConvertible
     {
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {

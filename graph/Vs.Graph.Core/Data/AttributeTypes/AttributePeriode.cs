@@ -7,7 +7,7 @@ using YamlDotNet.Serialization;
 namespace Vs.Graph.Core.Data.AttributeTypes
 {
     [AttributeType("periode")]
-    public class AttributePeriode : TimeRange, IAttributeType, ISerialize
+    public class AttributePeriode : TimeRange, IAttributeType, IYamlConvertible
     {
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {

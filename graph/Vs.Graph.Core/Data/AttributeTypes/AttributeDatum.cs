@@ -6,7 +6,7 @@ using YamlDotNet.Serialization;
 namespace Vs.Graph.Core.Data.AttributeTypes
 {
     [AttributeType("datum")]
-    public class AttributeDatum : IAttributeType, ISerialize
+    public class AttributeDatum : IAttributeType, IYamlConvertible
     {
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {

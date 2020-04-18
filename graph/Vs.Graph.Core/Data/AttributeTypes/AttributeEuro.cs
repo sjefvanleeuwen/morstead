@@ -6,7 +6,7 @@ using YamlDotNet.Serialization;
 namespace Vs.Graph.Core.Data.AttributeTypes
 {
     [AttributeType("euro")]
-    public class AttributeEuro : IAttributeType, ISerialize
+    public class AttributeEuro : IAttributeType, IYamlConvertible
     {
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {

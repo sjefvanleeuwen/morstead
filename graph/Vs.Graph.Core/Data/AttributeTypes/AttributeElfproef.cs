@@ -6,7 +6,7 @@ using YamlDotNet.Serialization;
 namespace Vs.Graph.Core.Data.AttributeTypes
 {
     [AttributeType("elfproef")]
-    public class AttributeElfproef : IAttributeType, ISerialize
+    public class AttributeElfproef : IAttributeType, IYamlConvertible
     {
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
