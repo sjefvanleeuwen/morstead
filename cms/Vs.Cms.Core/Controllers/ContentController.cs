@@ -7,8 +7,8 @@ using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
 using Vs.Core.Enums;
 using Vs.Core.Extensions;
-using Vs.VoorzieningenEnRegelingen.Core;
-using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
+using Vs.Rules.Core;
+using Vs.Rules.Core.Interfaces;
 
 namespace Vs.Cms.Core.Controllers
 {

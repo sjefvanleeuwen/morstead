@@ -1,5 +1,5 @@
 ﻿using Scriban;
-using Vs.VoorzieningenEnRegelingen.Core.Protogen;
+using Vs.Rules.Core.Protogen;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests

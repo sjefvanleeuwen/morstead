@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Model
+namespace Vs.Rules.Core.Model
 {
     public class Model
     {

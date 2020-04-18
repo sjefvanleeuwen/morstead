@@ -1,6 +1,6 @@
-﻿using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
+﻿using Vs.Rules.Core.Interfaces;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.Rules.Core
 {
     public class ParseResult : IParseResult
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.Rules.Core;
+using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 

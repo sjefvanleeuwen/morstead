@@ -1,4 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.Protogen
+﻿namespace Vs.Rules.Core.Protogen
 {
     public static class Global
     {

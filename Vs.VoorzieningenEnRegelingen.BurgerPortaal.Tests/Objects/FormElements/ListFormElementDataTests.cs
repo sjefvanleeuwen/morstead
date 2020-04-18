@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
+using Vs.Rules.Core.Interfaces;
+using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
-using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements

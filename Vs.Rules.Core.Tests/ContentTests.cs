@@ -1,4 +1,5 @@
-﻿using Vs.VoorzieningenEnRegelingen.Core.TestData;
+﻿using Vs.Rules.Core;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests

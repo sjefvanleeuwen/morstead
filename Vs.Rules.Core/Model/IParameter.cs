@@ -1,7 +1,7 @@
 ﻿using Vs.Core.Semantic;
-using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
+using static Vs.Rules.Core.TypeInference.InferenceResult;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Model
+namespace Vs.Rules.Core.Model
 {
     public interface IParameter : ISemanticKey
     {

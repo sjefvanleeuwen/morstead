@@ -1,4 +1,5 @@
 ﻿using System;
+using Vs.Rules.Core;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Xunit;
 
@@ -44,7 +45,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         public void CheckValidFilled()
         {
             var sut = new FormElementData();
-            sut.InferedType = Core.TypeInference.InferenceResult.TypeEnum.String;
+            sut.InferedType = TypeInference.InferenceResult.TypeEnum.String;
             sut.Value = "test";
             sut.CustomValidate();
             Assert.True(sut.IsValid);
@@ -54,7 +55,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         public void CheckValidUnobtrusive()
         {
             var sut = new FormElementData();
-            sut.InferedType = Core.TypeInference.InferenceResult.TypeEnum.String;
+            sut.InferedType = TypeInference.InferenceResult.TypeEnum.String;
             sut.CustomValidate();
             Assert.False(sut.IsValid);
             Assert.NotEmpty(sut.ErrorText);

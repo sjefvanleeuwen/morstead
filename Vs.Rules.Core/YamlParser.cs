@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Vs.Core.Diagnostics;
-using Vs.VoorzieningenEnRegelingen.Core.Helpers;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.Rules.Core.Helpers;
+using Vs.Rules.Core.Model;
 using YamlDotNet.RepresentationModel;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.Rules.Core
 {
     /// <summary>
     /// Parses YAML's to the internal model for further interpretation.

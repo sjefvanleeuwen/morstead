@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using Vs.Core.Enums;
-using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
+using Vs.Rules.Core.Interfaces;
 
 namespace Vs.Cms.Core.Controllers.Interfaces
 {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.Rules.Core.Model;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces
 {

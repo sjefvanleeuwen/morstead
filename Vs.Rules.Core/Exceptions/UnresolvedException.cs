@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.Rules.Core.Exceptions
 {
     [Serializable]
     public class UnresolvedException : Exception

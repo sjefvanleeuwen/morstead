@@ -2,8 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.Rules.Core;
+using Vs.Rules.Core.Interfaces;
+using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 

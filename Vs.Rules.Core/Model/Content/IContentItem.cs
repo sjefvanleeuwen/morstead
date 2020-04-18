@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Model.Content
+namespace Vs.Rules.Core.Model.Content
 {
     public interface IContentItem
     {

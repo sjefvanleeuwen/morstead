@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Vs.Core.Diagnostics;
 using YamlDotNet.Core;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Helpers
+namespace Vs.Rules.Core.Helpers
 {
     public static class MapDebugHelper
     {

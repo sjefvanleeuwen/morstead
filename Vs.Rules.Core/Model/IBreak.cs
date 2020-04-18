@@ -1,6 +1,6 @@
 ﻿using Vs.Core.Semantic;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Model
+namespace Vs.Rules.Core.Model
 {
     public interface IBreak : ISemanticKey
     {

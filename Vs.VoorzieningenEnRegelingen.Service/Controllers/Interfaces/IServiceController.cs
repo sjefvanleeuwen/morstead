@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
+using Vs.Rules.Core.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces
 {

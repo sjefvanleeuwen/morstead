@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Linq;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.Rules.Core
 {
     public static class StringHelpers
     {

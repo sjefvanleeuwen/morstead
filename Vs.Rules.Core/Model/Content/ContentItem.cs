@@ -7,7 +7,7 @@ using Vs.Core.Serialization;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Model.Content
+namespace Vs.Rules.Core.Model.Content
 {
     public class ContentItem : IContentItem, ISerialize, ISemanticKey
     {

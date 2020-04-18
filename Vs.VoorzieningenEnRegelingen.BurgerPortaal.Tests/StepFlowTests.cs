@@ -1,8 +1,9 @@
 using System.Linq;
+using Vs.Rules.Core;
+using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects;
 using Vs.VoorzieningenEnRegelingen.Core;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
 

@@ -4,12 +4,13 @@ using System;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
+using Vs.Rules.Core;
+using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages

@@ -2,7 +2,7 @@
 using Vs.Core.Diagnostics;
 using Vs.Core.Semantic;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Model
+namespace Vs.Rules.Core.Model
 {
     public class Function : ISemanticKey, IFunction
     {

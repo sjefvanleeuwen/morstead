@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Runtime.Serialization;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.Rules.Core
 {
     public static partial class TypeInference
     {

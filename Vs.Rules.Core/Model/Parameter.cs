@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Vs.Core.Semantic;
-using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
+using static Vs.Rules.Core.TypeInference.InferenceResult;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Model
+namespace Vs.Rules.Core.Model
 {
     public class Parameter : IParameter, ISemanticKey
     {

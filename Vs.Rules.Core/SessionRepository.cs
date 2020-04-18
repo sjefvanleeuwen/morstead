@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using System;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.Rules.Core
 {
     public class SessionRepository
     {

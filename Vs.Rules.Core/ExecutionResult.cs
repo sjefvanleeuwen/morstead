@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.Rules.Core.Interfaces;
+using Vs.Rules.Core.Model;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.Rules.Core
 {
     public class ExecutionResult : IExecutionResult
     {

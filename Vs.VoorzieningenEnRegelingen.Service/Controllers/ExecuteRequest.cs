@@ -1,4 +1,4 @@
-﻿using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
+﻿using Vs.Rules.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Service.Controllers

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.Rules.Core.Model;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.Rules.Core
 {
     public static partial class TypeInference
     {

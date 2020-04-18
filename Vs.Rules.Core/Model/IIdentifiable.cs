@@ -1,4 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.Model
+﻿namespace Vs.Rules.Core.Model
 {
     public interface IIdentifiable
     {

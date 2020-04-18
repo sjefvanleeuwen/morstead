@@ -1,7 +1,7 @@
 ﻿using System;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.Rules.Core.Model;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.Rules.Core
 {
     [Serializable]
     public class StepException : Exception

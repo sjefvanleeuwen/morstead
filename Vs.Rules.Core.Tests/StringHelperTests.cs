@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Vs.Rules.Core;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests

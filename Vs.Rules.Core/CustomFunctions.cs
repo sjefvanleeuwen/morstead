@@ -1,7 +1,7 @@
-﻿using Itenso.TimePeriod;
-using System;
+﻿using System;
+using Itenso.TimePeriod;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Calc
+namespace Vs.Rules.Core
 {
     public static class CustomFunctions
     {

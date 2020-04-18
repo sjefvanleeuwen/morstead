@@ -1,4 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core
+﻿namespace Vs.Rules.Core
 {
     public enum UnresolvedType
     {

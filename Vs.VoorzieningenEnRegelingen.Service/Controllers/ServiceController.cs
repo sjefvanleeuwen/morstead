@@ -4,8 +4,9 @@ using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Net;
-using Vs.VoorzieningenEnRegelingen.Core;
-using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
+using Vs.Rules.Core;
+using Vs.Rules.Core.Exceptions;
+using Vs.Rules.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Service.Controllers

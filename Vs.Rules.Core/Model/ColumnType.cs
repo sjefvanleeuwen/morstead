@@ -1,8 +1,8 @@
 ﻿using System;
 using Vs.Core.Diagnostics;
-using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
+using static Vs.Rules.Core.TypeInference.InferenceResult;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Model
+namespace Vs.Rules.Core.Model
 {
     public class ColumnType
     {

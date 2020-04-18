@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Vs.Core.Serialization;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Model.Content
+namespace Vs.Rules.Core.Model.Content
 {
     public class ContentCollection : List<ContentItem>, IYamlConvertible
     {

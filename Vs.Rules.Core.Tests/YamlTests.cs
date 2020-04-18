@@ -1,6 +1,7 @@
 using System.Data;
 using System.IO;
 using System.Linq;
+using Vs.Rules.Core;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 using YamlDotNet.RepresentationModel;

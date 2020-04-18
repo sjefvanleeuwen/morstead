@@ -1,4 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Core.Interfaces
+﻿namespace Vs.Rules.Core.Interfaces
 {
     public interface IParseResult
     {

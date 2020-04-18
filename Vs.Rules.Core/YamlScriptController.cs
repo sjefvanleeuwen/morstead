@@ -1,17 +1,17 @@
-﻿using Flee.PublicTypes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Flee.PublicTypes;
 using Vs.Core.Enums;
 using Vs.Core.Extensions;
-using Vs.VoorzieningenEnRegelingen.Core.Calc;
-using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
-using static Vs.VoorzieningenEnRegelingen.Core.TypeInference.InferenceResult;
+using Vs.Rules.Core.Exceptions;
+using Vs.Rules.Core.Interfaces;
+using Vs.Rules.Core.Model;
+using static Vs.Rules.Core.TypeInference.InferenceResult;
 
-namespace Vs.VoorzieningenEnRegelingen.Core
+namespace Vs.Rules.Core
 {
 
     public class YamlScriptController : IYamlScriptController

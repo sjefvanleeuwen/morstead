@@ -1,5 +1,6 @@
 ﻿using System;
-using Vs.VoorzieningenEnRegelingen.Core.Model;
+using Vs.Rules.Core;
+using Vs.Rules.Core.Model;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests

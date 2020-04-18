@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Vs.Rules.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers.Interfaces
