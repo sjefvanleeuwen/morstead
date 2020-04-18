@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Tests
 {
-    public class StepWaardeTests
+    public class StepValueTests
     {
         private string _testYaml1 = @"# Zorgtoeslag for burger site demo
 stuurinformatie:
