@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Vs.Core.Diagnostics;
+using Vs.VoorzieningenEnRegelingen.Core.Helpers;
 using Vs.VoorzieningenEnRegelingen.Core.Model;
 using YamlDotNet.RepresentationModel;
 
@@ -93,7 +94,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
             int key = 0;
             foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)])
             {
-                var debugInfoStep = DebugInfo.MapDebugInfo(step.Start, step.End);
+                var debugInfoStep = new DebugInfo().MapDebugInfo(step.Start, step.End);
                 string stepid = "", description = "", formula = "", value = "", situation = "";
                 var @break = null as IBreak;
                 IEnumerable<IChoice> choices = null;
@@ -163,7 +164,7 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 return tables;
             foreach (var tabel in (YamlSequenceNode)map.Children[new YamlScalarNode(TablesAttribute)])
             {
-                var debugInfoTable = DebugInfo.MapDebugInfo(tabel.Start, tabel.End);
+                var debugInfoTable = new DebugInfo().MapDebugInfo(tabel.Start, tabel.End);
                 var debugInfo = new DebugInfo(
                     start: new LineInfo(line: tabel.Start.Line, col: tabel.Start.Column, index: tabel.Start.Index),
                     end: new LineInfo(line: tabel.Start.Line, col: tabel.Start.Column, index: tabel.Start.Index)
@@ -181,14 +182,14 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                 }
                 var columns1 = ((YamlMappingNode)tabel).ElementAt(j).Key.ToString().Split(',').Select(sValue => sValue.Trim()).ToArray();
                 var rows = new List<Row>();
-                var columnsDebugInfo = DebugInfo.MapDebugInfo(((YamlMappingNode)tabel).ElementAt(j).Key.Start, ((YamlMappingNode)tabel).ElementAt(j).Key.End);
+                var columnsDebugInfo = new DebugInfo().MapDebugInfo(((YamlMappingNode)tabel).ElementAt(j).Key.Start, ((YamlMappingNode)tabel).ElementAt(j).Key.End);
                 foreach (var row in (YamlSequenceNode)(((YamlMappingNode)tabel).ElementAt(j).Value))
                 {
-                    var rowdebugInfo = DebugInfo.MapDebugInfo(row.Start, row.End);
+                    var rowdebugInfo = new DebugInfo().MapDebugInfo(row.Start, row.End);
                     var columns = new List<Column>();
                     foreach (var column in (YamlSequenceNode)row)
                     {
-                        var info = DebugInfo.MapDebugInfo(column.Start, column.End);
+                        var info = new DebugInfo().MapDebugInfo(column.Start, column.End);
                         columns.Add(new Column(info, ((YamlScalarNode)column).Value));
                     }
                     rows.Add(new Row(rowdebugInfo, columns));
@@ -243,17 +244,17 @@ namespace Vs.VoorzieningenEnRegelingen.Core
                         {
                             var f = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == FormulaAttribute).Value;
                             var s = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == SituationAttribute).Value;
-                            var function = new Function(DebugInfo.MapDebugInfo(f.Start, f.End), s.ToString(), f.ToString().Replace("'", "\""));
+                            var function = new Function(new DebugInfo().MapDebugInfo(f.Start, f.End), s.ToString(), f.ToString().Replace("'", "\""));
                             functions.Add(function);
                         }
                     }
                     else
                     {
                         var f = ((YamlMappingNode)row.Value).Children.FirstOrDefault(p => p.Key.ToString() == FormulaAttribute).Value;
-                        var function = new Function(DebugInfo.MapDebugInfo(f.Start, f.End), f.ToString().Replace("'", "\""));
+                        var function = new Function(new DebugInfo().MapDebugInfo(f.Start, f.End), f.ToString().Replace("'", "\""));
                         functions.Add(function);
                     }
-                    formulas.Add(new Formula(DebugInfo.MapDebugInfo(variableName.Start, variableName.End), variableName.ToString(), functions));
+                    formulas.Add(new Formula(new DebugInfo().MapDebugInfo(variableName.Start, variableName.End), variableName.ToString(), functions));
                 }
             }
             return formulas;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Vs.Core.Diagnostics;
 using Vs.Core.Serialization;
+using Vs.Graph.Core.Helpers;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -17,7 +18,7 @@ namespace Vs.Graph.Core.Data
             if (o == null)
                 return;
             AddRange(o);
-            DebugInfo = DebugInfo.MapDebugInfo(parser.Current.Start, parser.Current.End);
+            DebugInfo = new DebugInfo().MapDebugInfo(parser.Current.Start, parser.Current.End);
         }
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)

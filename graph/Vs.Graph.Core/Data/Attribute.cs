@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Vs.Core.Diagnostics;
 using Vs.Core.Serialization;
+using Vs.Graph.Core.Helpers;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -36,7 +37,7 @@ namespace Vs.Graph.Core.Data
         {
             var o = (DeserializeTemplate)nestedObjectDeserializer(typeof(DeserializeTemplate));
             Name = o.Name;
-            DebugInfo = DebugInfo.MapDebugInfo(parser.Current.Start, parser.Current.End);
+            DebugInfo = new DebugInfo().MapDebugInfo(parser.Current.Start, parser.Current.End);
             // Convert to correct IAttribute implementation from the serialization template
             var type = typeof(IAttributeType);
             foreach (var item in Assembly.GetAssembly(typeof(AttributeTypeAttribute)).GetTypes()

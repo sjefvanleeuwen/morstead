@@ -1,5 +1,6 @@
 ﻿using System;
 using Vs.Core.Diagnostics;
+using Vs.Graph.Core.Helpers;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -41,7 +42,7 @@ namespace Vs.Graph.Core.Data
             Name = o.Name;
             Constraints = o.Constraints;
             Attributes = o.Attributes;
-            DebugInfo = DebugInfo.MapDebugInfo(parser.Current.Start, parser.Current.End);
+            DebugInfo = new DebugInfo().MapDebugInfo(parser.Current.Start, parser.Current.End);
         }
 
         public void Write(IEmitter emitter, ObjectSerializer nestedObjectSerializer)
