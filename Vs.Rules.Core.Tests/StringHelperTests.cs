@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Globalization;
-using Vs.Rules.Core;
 using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
     public class StringHelperTests
     {

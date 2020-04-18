@@ -1,9 +1,8 @@
 ﻿using System;
-using Vs.Rules.Core;
 using Vs.Rules.Core.Model;
 using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
     public class SessionRepositoryTests
     {

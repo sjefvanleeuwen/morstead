@@ -1,8 +1,7 @@
-﻿using Vs.Rules.Core;
-using Vs.VoorzieningenEnRegelingen.Core.TestData;
+﻿using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
     public class ModelTests
     {

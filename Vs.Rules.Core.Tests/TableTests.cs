@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Vs.Core.Diagnostics;
-using Vs.Rules.Core;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
     public class TableTests
     {

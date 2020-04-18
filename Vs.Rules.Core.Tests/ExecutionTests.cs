@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Vs.Rules.Core;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
     /// <summary>
     /// Unit tests to test the YamlScript Execution Engine.

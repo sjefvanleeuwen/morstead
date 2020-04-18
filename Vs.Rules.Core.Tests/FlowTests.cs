@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Vs.Rules.Core;
 using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
     /// <summary>
     /// Tests simple conditional flow engine

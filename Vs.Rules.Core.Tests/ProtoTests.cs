@@ -2,7 +2,7 @@
 using Vs.Rules.Core.Protogen;
 using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
     public class ProtoTests
     {

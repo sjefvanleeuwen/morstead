@@ -1,7 +1,6 @@
-﻿using Flee.PublicTypes;
-using System;
+﻿using System;
 using System.Globalization;
-using Vs.Rules.Core;
+using Flee.PublicTypes;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
@@ -10,7 +9,7 @@ using Xunit;
 using YamlDotNet.Serialization;
 using static Vs.Rules.Core.YamlScriptController;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
 
     public class FormulaTests

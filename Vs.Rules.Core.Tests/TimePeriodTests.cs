@@ -1,14 +1,13 @@
-﻿using Itenso.TimePeriod;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Vs.Rules.Core;
+using Itenso.TimePeriod;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
     public class TimePeriodTests
     {

@@ -1,13 +1,11 @@
-using System.Data;
 using System.IO;
 using System.Linq;
-using Vs.Rules.Core;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
     /// <summary></summary>
     public class YamlTests

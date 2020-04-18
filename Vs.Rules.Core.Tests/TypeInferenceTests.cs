@@ -1,7 +1,6 @@
-﻿using Vs.Rules.Core;
-using Xunit;
+﻿using Xunit;
 
-namespace Vs.VoorzieningenEnRegelingen.Core.Tests
+namespace Vs.Rules.Core.Tests
 {
     public class TypeInferenceTests
     {
