@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{35C0B2C8-9B11-417A-8C9A-523F452DA31C}"
 	ProjectSection(SolutionItems) = preProject
+		images\icon.png = images\icon.png
 		images\logo.svg = images\logo.svg
 		images\postman.png = images\postman.png
 		images\regeling-configurator.png = images\regeling-configurator.png
@@ -108,11 +109,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vs.Rules", "Vs.Rules", "{88
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.OpenApi", "Vs.Rules.OpenApi\Vs.Rules.OpenApi.csproj", "{2643ED42-27F0-4AA6-B36C-650B183D0699}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Answer.OpenApi", "Acme.Answer.OpenApi\Acme.Answer.OpenApi.csproj", "{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Answer.OpenApi", "Acme.Answer.OpenApi\Acme.Answer.OpenApi.csproj", "{ED9CDCA0-CCAD-41E7-A4B4-6904BBABFCA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Rules.OpenApi.Tests", "Vs.Rules.OpenApi.Tests\Vs.Rules.OpenApi.Tests.csproj", "{080CABD0-0EEE-4354-AC7E-06F07B5BDB8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.OpenApi.Tests", "Vs.Rules.OpenApi.Tests\Vs.Rules.OpenApi.Tests.csproj", "{080CABD0-0EEE-4354-AC7E-06F07B5BDB8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.IntegrationTesting.OpenApi", "Vs.Core.IntegrationTesting.OpenApi\Vs.Core.IntegrationTesting.OpenApi.csproj", "{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.IntegrationTesting.OpenApi", "Vs.Core.IntegrationTesting.OpenApi\Vs.Core.IntegrationTesting.OpenApi.csproj", "{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
