@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.Tests\Vs.VoorzieningenEnRegelingen.Core.Tests.csproj" />
-    <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core\Vs.VoorzieningenEnRegelingen.Core.csproj" />
+    <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core\Vs.Rules.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
