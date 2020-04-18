@@ -7,10 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.7.82" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core\Vs.Rules.Core.csproj" />
+    <PackageReference Include="Vs.Rules.Core" Version="1.0.2-alpha" />
   </ItemGroup>
 
 </Project>
