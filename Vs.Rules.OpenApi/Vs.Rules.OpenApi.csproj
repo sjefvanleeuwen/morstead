@@ -15,6 +15,11 @@
     <PackageReference Include="System.Text.Json" Version="5.0.0-preview.2.20160.6" />
     <PackageReference Include="Vs.Rules.Core" Version="1.0.2-alpha" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\img\logo.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 
 </Project>
