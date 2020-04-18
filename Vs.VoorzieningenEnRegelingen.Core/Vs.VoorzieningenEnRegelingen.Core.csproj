@@ -18,7 +18,7 @@
     <Copyright>Copyright (c) 2020 Sjef van Leeuwen</Copyright>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageVersion>1.0.0-alpha</PackageVersion>
+    <PackageVersion>1.0.1-alpha</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
