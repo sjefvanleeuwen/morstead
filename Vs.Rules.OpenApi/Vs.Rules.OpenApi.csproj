@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.4.2" />
     <PackageReference Include="System.Text.Json" Version="5.0.0-preview.2.20160.6" />
-    <PackageReference Include="Vs.Rules.Core" Version="1.0.1-alpha" />
+    <PackageReference Include="Vs.Rules.Core" Version="1.0.2-alpha" />
   </ItemGroup>
 
 
