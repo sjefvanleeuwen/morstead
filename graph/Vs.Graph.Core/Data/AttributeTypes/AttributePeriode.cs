@@ -1,5 +1,6 @@
 ﻿using Itenso.TimePeriod;
 using System;
+using Vs.Core.Serialization;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 

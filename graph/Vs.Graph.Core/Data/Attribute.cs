@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Vs.Core.Diagnostics;
+using Vs.Core.Serialization;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Vs.Core.Diagnostics;
+using Vs.Core.Serialization;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 

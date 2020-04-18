@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using Vs.Core.Diagnostics;
 using Vs.Core.Semantic;
-using Vs.Graph.Core.Data;
+using Vs.Core.Serialization;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace Vs.VoorzieningenEnRegelingen.Core.Model.Content
 {
-    public class ContentItem : IContentItem, ISerialize, ISemanticKey, Graph.Core.Data.IDebugInfo
+    public class ContentItem : IContentItem, ISerialize, ISemanticKey
     {
         public string SemanticKey { get; set; }
 
