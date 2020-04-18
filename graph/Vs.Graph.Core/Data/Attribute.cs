@@ -9,7 +9,7 @@ using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Data
 {
-    public class Attribute : IAttribute, ISerialize, IDebugInfo
+    public class Attribute : IAttribute, IYamlConvertible, IDebugInfo
     {
         public IAttributeType Type { get; set; }
 

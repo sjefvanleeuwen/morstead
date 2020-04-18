@@ -1,8 +1,9 @@
 ﻿using Vs.Core.Serialization;
+using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Data
 {
-    public interface IEdgeSchema : IIdentifiable, ISerialize
+    public interface IEdgeSchema : IIdentifiable, IYamlConvertible
     {
 
         Constraints Constraints { get; }

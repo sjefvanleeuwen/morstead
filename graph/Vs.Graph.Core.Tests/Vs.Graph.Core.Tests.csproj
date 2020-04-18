@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\core\Vs.Core\Vs.Core.csproj" />
     <ProjectReference Include="..\Vs.DataProvider.MsSqlGraph\Vs.DataProvider.MsSqlGraph.csproj" />
     <ProjectReference Include="..\Vs.Graph.Core\Vs.Graph.Core.csproj" />
   </ItemGroup>

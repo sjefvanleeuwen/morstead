@@ -8,7 +8,7 @@ using YamlDotNet.Serialization;
 
 namespace Vs.Graph.Core.Data
 {
-    public class Attributes : List<Attribute>, ISerialize, IDebugInfo
+    public class Attributes : List<Attribute>, IYamlConvertible, IDebugInfo
     {
         private class DeserializeTemplate : List<Attribute> { }
 
