@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vs.Rules.Core\Vs.Rules.Core.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.TestData\Vs.VoorzieningenEnRegelingen.Core.TestData.csproj" />
-    <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core\Vs.Rules.Core.csproj" />
   </ItemGroup>
 
 </Project>

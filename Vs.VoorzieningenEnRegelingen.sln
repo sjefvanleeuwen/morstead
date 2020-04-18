@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Core", "Vs.VoorzieningenEnRegelingen.Core\Vs.Rules.Core.csproj", "{91455A8C-B5F6-4E39-8314-38ED24EC6F60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Core", "Vs.Rules.Core\Vs.Rules.Core.csproj", "{91455A8C-B5F6-4E39-8314-38ED24EC6F60}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4924015A-0FD1-485E-8D4E-D2B0BFCC3EF4}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,9 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{35C0B2
 		images\regeling-configurator.png = images\regeling-configurator.png
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Core.Tests", "Vs.VoorzieningenEnRegelingen.Core.Tests\Vs.VoorzieningenEnRegelingen.Core.Tests.csproj", "{F808BE58-C22E-47D7-A494-CA1C788832E2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Site", "Vs.VoorzieningenEnRegelingen.Site\Vs.VoorzieningenEnRegelingen.Site.csproj", "{B580B0CD-3027-4FC3-A3EB-06094FC85130}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Core.Tests", "Vs.Rules.Core.Tests\Vs.Rules.Core.Tests.csproj", "{F808BE58-C22E-47D7-A494-CA1C788832E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{903A60DA-7659-421E-9BA8-14FBCC994642}"
 	ProjectSection(SolutionItems) = preProject
@@ -113,6 +111,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.OpenApi.Tests", "V
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.IntegrationTesting.OpenApi", "Vs.Core.IntegrationTesting.OpenApi\Vs.Core.IntegrationTesting.OpenApi.csproj", "{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Site", "Vs.VoorzieningenEnRegelingen.Site\Vs.VoorzieningenEnRegelingen.Site.csproj", "{DA61EC24-E465-460A-A129-28157DFE7E65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,10 +127,6 @@ Global
 		{F808BE58-C22E-47D7-A494-CA1C788832E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F808BE58-C22E-47D7-A494-CA1C788832E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F808BE58-C22E-47D7-A494-CA1C788832E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B580B0CD-3027-4FC3-A3EB-06094FC85130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B580B0CD-3027-4FC3-A3EB-06094FC85130}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B580B0CD-3027-4FC3-A3EB-06094FC85130}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B580B0CD-3027-4FC3-A3EB-06094FC85130}.Release|Any CPU.Build.0 = Release|Any CPU
 		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -223,6 +219,10 @@ Global
 		{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0EE266A-422E-45B1-A316-7F52B5A6DF6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA61EC24-E465-460A-A129-28157DFE7E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA61EC24-E465-460A-A129-28157DFE7E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA61EC24-E465-460A-A129-28157DFE7E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA61EC24-E465-460A-A129-28157DFE7E65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
