@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="CacheCow.Client" Version="3.0.0-alpha" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.22" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.23" />
   </ItemGroup>
 
 </Project>

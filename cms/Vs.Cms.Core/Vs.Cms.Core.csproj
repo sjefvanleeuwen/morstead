@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.30" />
-    <PackageReference Include="Dapper.Contrib" Version="2.0.30" />
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Dapper.Contrib" Version="2.0.35" />
     <PackageReference Include="Markdig" Version="0.18.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-preview.1.20120.4" />
     <PackageReference Include="Scriban" Version="2.1.2" />
