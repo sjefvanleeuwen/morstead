@@ -12,11 +12,13 @@ namespace Vs.Rules.OpenApi.Tests.v1
             Client = new RulesClient(fixture.Client);
         }
 
+        /*
         [Fact]
         async void PingShouldProvidePong()
         {
             var s = await Client.PingAsync();
             Assert.True(s == "Pong from v1");
         }
+        */
     }
 }
