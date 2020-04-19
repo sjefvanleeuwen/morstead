@@ -1,4 +1,4 @@
-﻿namespace Vs.Rules.OpenApi.v2.Dto
+﻿namespace Vs.Rules.OpenApi.v1.Dto
 {
     public class ConfigurationInvalidResponse
     {

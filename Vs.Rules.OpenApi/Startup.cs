@@ -49,58 +49,36 @@ namespace Vs.Rules.OpenApi
 
 <h2>What you need to know about our API Versioning strategy</h2>
 
-Virtual Society Releases its public API's using versioning.
+Virtual Society Releases its public API's using major versioning with feature requests in each version.
 
-<h3> Format </h3>
-
-We specify a Full API version with optional minor version as [group version][.major[.minor,0]][-status]
-
-<i>For Example:</i>
-
-2017-05-01.1-alpha
-2018-05-01.1-beta
-2018-05-01.1-rc
-2018-05-01.1-release
-
-<h4>Alpha releases</h4>
-
-Alpha releases are a work in progress, open for feedback and improvements and not guaranteed to work.
-an alpha version can become obsolete or removed at any given time without prior notice.
-
-<h4>Beta releases</h4>
-
-Beta releases are a work in progress, open for feedback and improvements and, though not guaranteed should work in most known scenarios.
-a beta version can become increase its version number without prior notice, but might be published for people who are actively involved with us in a beta program.
-
-<h4>RC (or release candidate) releases</h4>
-
-RC releases are a work in progress, open for feedback and improvements and, should work should work in all known scenarios. The RC will not accept new functionalities.
-Feedback might not be accepted and move to another version release in the future. RC's are publicly announced on the project site as specified in this OpenAPI specification.
-
-<h4>Final releases</h4>
-
-Final releases should work in all scenario's. Might issues arise patches might be release using an increment in the minor version.
+<ul>
+    <li>A Maximum of 2 Major versions will always be available</li>
+    <li>New feature requests will be maintained in isolated url's for you to try out</li>
+    <li>Feature requests should be considered Beta and will be merged into the Next Major version when tested thoroughly</li>
+    <li>The previous major version will be phased out as soon as the third major version comes online.</li>
+    <li>We will maintain a cooldown period between major version updates so you can upgrade</li>
+</ul>
 ";
 
             services
+                 .AddSwaggerDocument(document =>
+                 {
+                     document.DocumentName = "1.0";
+                     document.ApiGroupNames = new[] { "1" };
+                     document.PostProcess = d =>
+                     {
+                         d.Info = doc.Info;
+                         d.Info.Version = "1.0";
+                     };
+                 })
                 .AddSwaggerDocument(document =>
                 {
-                    document.DocumentName = "2.0";
-                    document.ApiGroupNames = new[] { "2" };
+                    document.DocumentName = "1.0-features";
+                    document.ApiGroupNames = new[] { "1.0-discipl" };
                     document.PostProcess = d =>
                     {
                         d.Info = doc.Info;
-                        d.Info.Version = "2.0";
-                    };
-                })
-                .AddSwaggerDocument(document =>
-                {
-                    document.DocumentName = "2.0-features";
-                    document.ApiGroupNames = new[] { "2.0-feature1", "2.0-feature2" };
-                    document.PostProcess = d =>
-                    {
-                        d.Info = doc.Info;
-                        d.Info.Version = "2.0-features";
+                        d.Info.Version = "1.0-features";
                         d.Info.Description = @"
 <img width=128 height=128 src='/img/logo.svg'></img><br/>A Semantic Rule Engine API that plays nice with frontends.
 
@@ -108,20 +86,12 @@ Final releases should work in all scenario's. Might issues arise patches might b
 
 This feature branche allows you to quickly use new features as they are requested. We will eventually make a major increment version and migrate the features so they place nice together in a next alpha/beta release.
 
-Eventually the seperate features will become obsolete, we allow for a cooldown period so you can upgrade to the new version. You can join us in testing the alpha/beta releases or migrate over once the next major version reaches 
-RC / Release status.";
-                    };
-                })
-                .AddSwaggerDocument(document =>
-                {
-                    document.DocumentName = "1.0-release";
-                    document.ApiGroupNames = new[] { "1" };
-                    document.PostProcess = d =>
-                    {
-                        d.Info = doc.Info;
-                        d.Info.Version = "1.0-release";
+Eventually the separate features will become obsolete, we allow for a cooldown period so you can upgrade to the new version. You can join us in testing the alpha/beta releases or migrate over once the next major version reaches 
+RC / Release status.
+";
                     };
                 });
+
 
         }
 
