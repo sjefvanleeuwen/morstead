@@ -18,6 +18,6 @@ http://localhost:5088
 
 If you like you can change the portnumber as you desire.
 
-You can find our dockerhubn repositroy at:
+You can find our dockerhub repository at:
 
 https://hub.docker.com/orgs/virtualsociety/repositories
