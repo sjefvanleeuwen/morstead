@@ -1,10 +1,10 @@
-﻿# ![logo](../../../images/logo.svg) Virtual Society
+# ![logo](../images/logo.svg) Virtual Society
 
-## Urukagina Rule Engine
+## Rule Engine API
 For local development, you can start up the docker container from docker hub using this command:
 
 ```bash
-docker run -p 5088:80 svanleeuwen/vsrulesopenapi
+docker run -p 5088:80 virtualsociety/vsrulesopenapi
 ```
 
 This will bring up the server on port 5088 localhost. 
@@ -18,6 +18,6 @@ http://localhost:5088
 
 If you like you can change the portnumber as you desire.
 
-You can find our dockerhubn repositroy at:
+You can find our dockerhub repository at:
 
 https://hub.docker.com/orgs/virtualsociety/repositories
