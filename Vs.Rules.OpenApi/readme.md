@@ -1,6 +1,6 @@
-﻿# ![logo](../../../images/logo.svg) Virtual Society
+# ![logo](../images/logo.svg) Virtual Society
 
-## Urukagina Rule Engine
+## Rule Engine API
 For local development, you can start up the docker container from docker hub using this command:
 
 ```bash
