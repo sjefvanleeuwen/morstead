@@ -4,7 +4,7 @@
 For local development, you can start up the docker container from docker hub using this command:
 
 ```bash
-docker run -p 5088:80 svanleeuwen/vsrulesopenapi
+docker run -p 5088:80 virtualsociety/vsrulesopenapi
 ```
 
 This will bring up the server on port 5088 localhost. 
