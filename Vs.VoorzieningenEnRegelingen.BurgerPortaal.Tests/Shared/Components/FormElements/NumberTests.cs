@@ -121,6 +121,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             //var errorContent = cut.Find("p > div");
             //Assert.NotNull(errorContent);
             //Assert.Equal("validation-message", hint.ClassName);
+
+            //check order
+            var top = cut.Find("div");
+            Assert.Equal("input", div.FirstChild().NodeName.ToLower());
+            Assert.Equal("label", div.FirstChild().NextElement().NodeName.ToLower());
+            Assert.Equal("div", div.NextElement().NodeName.ToLower());
+            Assert.Equal("mdc-text-field-helper-line", div.NextElement().ClassName);
+            Assert.Equal("div", div.NextElement().FirstChild().NodeName.ToLower());
+            Assert.Equal("mdc-text-field-helper-text", div.NextElement().FirstChild().ClassName);
+            Assert.Equal("p", div.NextElement().NextElement().NodeName.ToLower());
+            Assert.Equal("mdc-text-field-helper-text mdc-text-field-helper-text--persistent", div.NextElement().NextElement().ClassName);
+            //Assert.Equal("div", div.NextElement().NextElement().FirstChild().NodeName);
+            //Assert.Equal("validation-message", div.NextElement().NextElement().FirstChild().ClassName);
         }
 
         [Fact]
