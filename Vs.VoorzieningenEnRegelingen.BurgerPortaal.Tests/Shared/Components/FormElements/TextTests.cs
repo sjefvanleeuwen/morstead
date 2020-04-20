@@ -1,93 +1,140 @@
-﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
+﻿using AngleSharp.Dom;
+using Bunit;
+using Microsoft.AspNetCore.Components.Forms;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests._Helper.Extensions;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements
 {
     public class TextTests : BlazorTestBase
     {
-        //[Fact]
-        //public void TextEmpty()
-        //{
-        //    var variables = new Dictionary<string, object> { { "Data", new TextFormElementData() } };
-        //    var component = _host.AddComponent<Text>(variables);
-        //    Assert.NotNull(component.Find("input"));
-        //    Assert.False(component.Find("input").IsRequired());
-        //    Assert.False(component.Find("input").IsDisabled());
-        //    Assert.Empty(component.Find("input").Id);
-        //    Assert.Equal("hint_", component.Find("input").Attr("aria-describedby"));
-        //    Assert.Equal("input__control input__control--text ", component.Find("input").Attr("class"));
-        //    Assert.Empty(component.Find("input").Attr("value"));
-        //}
+        [Fact]
+        public void TextEmpty()
+        {
+            var data = new TextFormElementData() as IFormElementData;
+            var cut = RenderComponent<Text>(
+                CascadingValue(data),
+                CascadingValue(new EditContext(data)));
 
-        //[Fact]
-        //public void TextFilled()
-        //{
-        //    var variables = new Dictionary<string, object> {
-        //        {
-        //            "Data", new TextFormElementData() {
-        //                IsRequired = true,
-        //                IsDisabled = true,
-        //                Name = "TheName",
-        //                Size = FormElementSize.Large,
-        //                Value = "123"
-        //            }
-        //        }
-        //    };
+            var inputs = cut.FindAll("input");
+            var labels = cut.FindAll("label");
+            var hints = cut.FindAll(".mdc-text-field-helper-line");
+            var errors = cut.FindAll("div.validation-message");
+            Assert.Single(inputs);
+            var input = inputs[0];
+            Assert.NotNull(input);
+            Assert.Null(input.Id);
+            Assert.Empty(input.Attr("value"));
+            Assert.Null(input.Attr("aria-label"));
+            Assert.False(input.IsDisabled());
+            Assert.Empty(labels);
+            Assert.Empty(hints);
+            Assert.Empty(errors);
+        }
 
-        //    var component = _host.AddComponent<Text>(variables);
-        //    Assert.NotNull(component.Find("input"));
-        //    Assert.True(component.Find("input").IsRequired());
-        //    Assert.True(component.Find("input").IsDisabled());
-        //    Assert.Equal("TheName", component.Find("input").Id);
-        //    Assert.Equal("hint_TheName", component.Find("input").Attr("aria-describedby"));
-        //    Assert.Equal("input__control input__control--text input__control--l", component.Find("input").Attr("class"));
-        //    Assert.Equal("123", component.Find("input").Attr("value"));
-        //}
+        [Fact]
+        public void TextFilled()
+        {
+            var data = new TextFormElementData
+            {
+                IsDisabled = true,
+                Name = "TheName",
+                Value = "TheValue",
+                Label = "TheLabel",
+                HintText = "TheHint"
+            } as IFormElementData;
+            var cut = RenderComponent<Text>(
+                CascadingValue(data),
+                CascadingValue(new EditContext(data)));
 
-        //[Fact]
-        //public void ShouldDoTwoWayBinding()
-        //{
-        //    var variables = new Dictionary<string, object> {
-        //        {
-        //            "Data", new TextFormElementData() {
-        //                Name = "TheName",
-        //                Size = FormElementSize.Large,
-        //                Value = "123"
-        //            }
-        //        }
-        //    };
-        //    var component = _host.AddComponent<Text>(variables);
-        //    Assert.Equal("123", component.Find("input").Attr("value"));
+            var inputs = cut.FindAll("input");
+            var labels = cut.FindAll("label");
+            var hints = cut.FindAll(".mdc-text-field-helper-line > div.mdc-text-field-helper-text");
+            Assert.Single(inputs);
+            var input = inputs[0];
+            Assert.NotNull(input);
+            Assert.Equal("TheName", input.Id);
+            Assert.Equal("TheValue", input.Attr("value"));
+            Assert.NotNull(input.Attr("aria-label"));
+            Assert.True(input.IsDisabled());
+            Assert.Single(labels);
+            Assert.Equal("TheLabel", labels[0].InnerHtml);
+            Assert.Single(hints);
+            Assert.Equal("TheHint", hints[0].InnerHtml);
+        }
 
-        //    var element = component.Find("input");
-        //    element.Change("345");
-        //    Assert.Equal("345", component.Find("input").Attr("value"));
+        [Fact]
+        public void ShouldDoTwoWayBinding()
+        {
+            var data = new TextFormElementData
+            {
+                Value = "TheValue",
+            } as IFormElementData;
+            var cut = RenderComponent<Text>(
+                CascadingValue(data),
+                CascadingValue(new EditContext(data)));
 
-        //    Assert.Equal("345", component.Instance.Value);
-        //}
+            var input = cut.Find("input");
+            Assert.Equal("TheValue", input.Attr("value"));
+            input.Change("TheNewValue");
+            input = cut.Find("input");
+            Assert.Equal("TheNewValue", input.Attr("value"));
+        }
 
-        //[Fact]
-        //public void HasDressingElements()
-        //{
-        //    //make sure elements are rendered
-        //    var variables = new Dictionary<string, object> {
-        //        {
-        //            "Data", new TextFormElementData() {
-        //                Label = "_",
-        //                HintText = "_" ,
-        //                ErrorTexts = new List<string> { "_" },
-        //                IsValid = false
-        //            }
-        //        }
-        //    };
-        //    var component = _host.AddComponent<Text>(variables);
-        //    Assert.NotNull(component.Find("div > input")); //it is contained in a wrapper
-        //    Assert.Single(component.FindAll("div > input")); //only 1 input
-        //    Assert.NotNull(component.Find("div > label")); //label present
-        //    Assert.Equal("span", component.Find("div > label").NextElement().Name); //label followed by a hinttext
-        //    Assert.Equal("div", component.Find("div > label + span").NextElement().Name); //label followed by error
-        //    Assert.Equal("input", component.Find("div > label + span + div").NextElement().Name); //error followed by the one and only input
-        //}
+        [Fact]
+        public void HasCorrectParts()
+        {
+            var data = new TextFormElementData
+            {
+                Label = "_",
+                HintText = "_",
+                Value = ""
+            } as IFormElementData;
+            data.CustomValidate();
+            Validator.TryValidateObject(data, new ValidationContext(data), null);
+            var cut = RenderComponent<Text>(
+                CascadingValue(data),
+                CascadingValue(new EditContext(data)));
+
+            Assert.NotEmpty(data.ErrorText);
+            Assert.False(data.IsValid);
+
+            var div = cut.Find("div");
+            Assert.NotNull(div);
+            var input = cut.Find("div > input");
+            Assert.NotNull(input);
+            var label = cut.Find("div > label");
+            Assert.NotNull(label);
+            Assert.Equal("mdc-floating-label", label.ClassName);
+            var hint = cut.Find("div:nth-of-type(2) > div");
+            Assert.NotNull(hint);
+            Assert.Equal("mdc-text-field-helper-text", hint.ClassName);
+            var ps = cut.FindAll("p");
+            Assert.NotNull(ps);
+            Assert.Single(ps);
+            Assert.Equal("mdc-text-field-helper-text mdc-text-field-helper-text--persistent", ps.First().ClassName);
+            //var errorContent = cut.Find("p > div");
+            //Assert.NotNull(errorContent);
+            //Assert.Equal("validation-message", hint.ClassName);
+
+            //check order
+            var top = cut.Find("div");
+            Assert.Equal("input", div.FirstChild().NodeName.ToLower());
+            Assert.Equal("label", div.FirstChild().NextElement().NodeName.ToLower());
+            Assert.Equal("div", div.NextElement().NodeName.ToLower());
+            Assert.Equal("mdc-text-field-helper-line", div.NextElement().ClassName);
+            Assert.Equal("div", div.NextElement().FirstChild().NodeName.ToLower());
+            Assert.Equal("mdc-text-field-helper-text", div.NextElement().FirstChild().ClassName);
+            Assert.Equal("p", div.NextElement().NextElement().NodeName.ToLower());
+            Assert.Equal("mdc-text-field-helper-text mdc-text-field-helper-text--persistent", div.NextElement().NextElement().ClassName);
+            //Assert.Equal("div", div.NextElement().NextElement().FirstChild().NodeName);
+            //Assert.Equal("validation-message", div.NextElement().NextElement().FirstChild().ClassName);
+        }
 
         [Fact]
         public void ShouldHaveInput()

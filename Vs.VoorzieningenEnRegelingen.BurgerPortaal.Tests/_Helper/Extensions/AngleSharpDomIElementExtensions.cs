@@ -36,6 +36,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests._Helper.Extensions
             return sibling.NextElement();
         }
 
+        public static IElement FirstChild(this INode element)
+        {
+            var children = element.ChildNodes.Where(n => n.NodeName != "#text" && n is IElement);
+            return children.FirstOrDefault() as IElement;
+        }
+
         //public static HtmlNode NextElement(this IElement node, string selector)
         //{
         //    HtmlNode result = null;
