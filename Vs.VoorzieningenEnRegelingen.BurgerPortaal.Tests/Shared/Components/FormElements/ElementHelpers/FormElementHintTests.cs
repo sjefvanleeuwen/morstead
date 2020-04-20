@@ -6,17 +6,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
 {
     public class FormElementHintTests : BlazorTestBase
     {
-        [Fact]
-        public void FormElementHintEmpty()
-        {
-            var component = _host.AddComponent<FormElementHint>();
-            Assert.Empty(component.GetMarkup());
-            var variables = new Dictionary<string, object> {
-                { "Text", " " }
-            };
-            component = _host.AddComponent<FormElementHint>(variables);
-            Assert.Empty(component.GetMarkup());
-        }
+        //[Fact]
+        //public void FormElementHintEmpty()
+        //{
+        //    var component = _host.AddComponent<FormElementHint>();
+        //    Assert.Empty(component.GetMarkup());
+        //    var variables = new Dictionary<string, object> {
+        //        { "Text", " " }
+        //    };
+        //    component = _host.AddComponent<FormElementHint>(variables);
+        //    Assert.Empty(component.GetMarkup());
+        //}
 
         //[Fact]
         //public void FormElementHintExists()

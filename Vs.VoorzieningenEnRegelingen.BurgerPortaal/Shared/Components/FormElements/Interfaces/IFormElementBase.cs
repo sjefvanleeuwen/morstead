@@ -7,12 +7,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 {
     public interface IFormElementBase
     {
-        //Castcaded Data
         [CascadingParameter]
-        public IFormElementData CascadedData { get; set; }
-
-        //Same data but set, needed for testing purposes
-        [Parameter]
         public IFormElementData Data { get; set; }
 
         bool ShowElement { get; }

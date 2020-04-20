@@ -11,21 +11,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 {
     public class FormElementBase : ComponentBase, IFormElementBase
     {
-        private IFormElementData _data = new FormElementData(); //used as model, can't be emtpy
-
         [CascadingParameter]
-        public IFormElementData CascadedData { get; set; }
-
-        /// <summary>
-        /// Needed for testing
-        /// Uses Cascasded Data only if available
-        /// </summary>
-        [Parameter]
-        public IFormElementData Data
-        {
-            get => CascadedData != null ? CascadedData : _data;
-            set => _data = value;
-        }
+        public IFormElementData Data { get; set; }      
 
         [Parameter]
         public virtual string Value { get => Data.Value; set => Data.Value = value; }

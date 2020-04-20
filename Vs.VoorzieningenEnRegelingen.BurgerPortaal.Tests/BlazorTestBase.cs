@@ -1,20 +1,13 @@
-﻿using Microsoft.AspNetCore.Components.Testing;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Bunit;
+using Bunit.Mocking.JSInterop;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests
 {
-    public class BlazorTestBase
+    public class BlazorTestBase : ComponentTestFixture
     {
-        protected TestHost _host;
-
         public BlazorTestBase()
         {
-            var serviceCollection = new ServiceCollection();
-            Initializer.Initialize(serviceCollection);
-            Initializer.Initialize(serviceCollection);
-            serviceCollection.AddLogging();
-
-            _host = new TestHost(serviceCollection);
+            var jsMock = Services.AddMockJsRuntime();
         }
     }
 }

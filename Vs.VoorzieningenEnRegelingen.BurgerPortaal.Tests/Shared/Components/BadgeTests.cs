@@ -5,12 +5,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
 {
     public class BadgeTests : BlazorTestBase
     {
-        [Fact]
-        public void BadgeEmpty()
-        {
-            var component = _host.AddComponent<Badge>();
-            Assert.Null(component.Find("span"));
-        }
+        //[Fact]
+        //public void BadgeEmpty()
+        //{
+        //    var component = _host.AddComponent<Badge>();
+        //    Assert.Null(component.Find("span"));
+        //}
 
         //[Theory]
         //[InlineData(0, false)]
