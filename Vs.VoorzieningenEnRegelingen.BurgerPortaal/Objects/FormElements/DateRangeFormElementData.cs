@@ -97,18 +97,12 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             {
                 errors.Add($"De startdatum is kleiner dan de minimaal toegestane datum: '{MinimumAllowedDate.ToString("d", Culture)}'.");
             }
-            if (ValueDateStart > MaximumAllowedDate)
-            {
-                errors.Add($"De startdatum is groter dan de maximaal toegestane datum: '{MaximumAllowedDate.ToString("d", Culture)}'.");
-            }
-            if (ValueDateEnd < MinimumAllowedDate)
-            {
-                errors.Add($"De einddatum is kleiner dan de minimaal toegestane datum: '{MinimumAllowedDate.ToString("d", Culture)}'.");
-            }
+            //ValueDateStart compared to maximum date is not needed to check; then the enddate would en smaller than the start date
             if (ValueDateEnd > MaximumAllowedDate)
             {
                 errors.Add($"De einddatum is groter dan de maximaal toegestane datum: '{MaximumAllowedDate.ToString("d", Culture)}'.");
             }
+            //ValueDateEnd compared to minimum date is not needed to check; then the enddate would en smaller than the start date
 
             if (!errors.Any())
             {
