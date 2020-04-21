@@ -126,14 +126,14 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
 
             //check order
             var top = cut.Find("div");
-            Assert.Equal("textarea", div.FirstChild().NodeName.ToLower());
-            Assert.Equal("label", div.FirstChild().NextElement().NodeName.ToLower());
-            Assert.Equal("div", div.NextElement().NodeName.ToLower());
-            Assert.Equal("mdc-text-field-helper-line", div.NextElement().ClassName);
-            Assert.Equal("div", div.NextElement().FirstChild().NodeName.ToLower());
-            Assert.Equal("mdc-text-field-helper-text", div.NextElement().FirstChild().ClassName);
-            Assert.Equal("p", div.NextElement().NextElement().NodeName.ToLower());
-            Assert.Equal("mdc-text-field-helper-text mdc-text-field-helper-text--persistent", div.NextElement().NextElement().ClassName);
+            Assert.Equal("textarea", top.FirstChild().NodeName.ToLower());
+            Assert.Equal("label", top.FirstChild().NextElement().NodeName.ToLower());
+            Assert.Equal("div", top.NextElement().NodeName.ToLower());
+            Assert.Equal("mdc-text-field-helper-line", top.NextElement().ClassName);
+            Assert.Equal("div", top.NextElement().FirstChild().NodeName.ToLower());
+            Assert.Equal("mdc-text-field-helper-text", top.NextElement().FirstChild().ClassName);
+            Assert.Equal("p", top.NextElement().NextElement().NodeName.ToLower());
+            Assert.Equal("mdc-text-field-helper-text mdc-text-field-helper-text--persistent", top.NextElement().NextElement().ClassName);
             //Assert.Equal("div", div.NextElement().NextElement().FirstChild().NodeName);
             //Assert.Equal("validation-message", div.NextElement().NextElement().FirstChild().ClassName);
         }
