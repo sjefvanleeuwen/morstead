@@ -273,8 +273,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
 
             Assert.Equal("p", top.NextElement().NextElement().NextElement().NodeName.ToLower());
             Assert.Equal("p", top.NextElement().NextElement().NextElement().NextElement().NodeName.ToLower());
-            //Assert.Equal("div", div.NextElement().NextElement().FirstChild().NodeName);
-            //Assert.Equal("validation-message", div.NextElement().NextElement().FirstChild().ClassName);
+            //Assert.Equal("div", top.NextElement().NextElement().NextElement().NextElement().FirstChild().NodeName);
+            //Assert.Equal("validation-message", top.NextElement().NextElement().NextElement().NextElement().ClassName);
         }
 
         [Fact]

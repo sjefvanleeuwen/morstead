@@ -134,8 +134,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("mdc-text-field-helper-text", top.NextElement().FirstChild().ClassName);
             Assert.Equal("p", top.NextElement().NextElement().NodeName.ToLower());
             Assert.Equal("mdc-text-field-helper-text mdc-text-field-helper-text--persistent", top.NextElement().NextElement().ClassName);
-            //Assert.Equal("div", div.NextElement().NextElement().FirstChild().NodeName);
-            //Assert.Equal("validation-message", div.NextElement().NextElement().FirstChild().ClassName);
+            //Assert.Equal("div", top.NextElement().NextElement().FirstChild().NodeName);
+            //Assert.Equal("validation-message", top.NextElement().NextElement().FirstChild().ClassName);
         }
 
         [Fact]

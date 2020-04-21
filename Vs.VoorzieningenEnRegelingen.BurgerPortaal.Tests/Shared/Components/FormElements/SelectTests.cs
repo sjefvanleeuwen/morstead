@@ -164,33 +164,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             Assert.Equal("li", div.FirstChild().NextElement().FirstChild().FirstChild().NodeName.ToLower());
             Assert.Equal("p", div.NextElement().NodeName.ToLower());
             Assert.Equal("p", div.NextElement().NextElement().NodeName.ToLower());
-            //Assert.Equal("div", div.NextElement().NextElement().FirstChild().NodeName);
-            //Assert.Equal("validation-message", div.NextElement().NextElement().FirstChild().ClassName);
+            //Assert.Equal("div", top.NextElement().NextElement().FirstChild().NodeName);
+            //Assert.Equal("validation-message", top.NextElement().NextElement().FirstChild().ClassName);
         }
-
-
-        //[Fact]
-        //public void HasDressingElements()
-        //{
-        //    //make sure elements are rendered
-        //    var variables = new Dictionary<string, object> {
-        //        {
-        //            "Data", new ListFormElementData() {
-        //                Label = "_",
-        //                HintText = "_",
-        //                ErrorTexts = new List<string> { "_" },
-        //                IsValid = false
-        //            }
-        //        }
-        //    };
-        //    var component = _host.AddComponent<Select>(variables);
-        //    Assert.NotNull(component.Find("div > select")); //it is contained in a wrapper
-        //    Assert.Single(component.FindAll("div > select")); //only 1 input
-        //    Assert.NotNull(component.Find("div > label")); //label present
-        //    Assert.Equal("span", component.Find("div > label").NextElement().Name); //label followed by a hinttext
-        //    Assert.Equal("div", component.Find("div > label + span").NextElement().Name); //label followed by error
-        //    Assert.Equal("select", component.Find("div > label + span + div").NextElement().Name); //error followed by the one and only select
-        //}
 
         [Fact]
         public void ShouldHaveInput()
