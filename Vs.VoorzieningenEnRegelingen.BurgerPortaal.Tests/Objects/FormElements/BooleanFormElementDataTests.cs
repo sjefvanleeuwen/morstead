@@ -1,6 +1,8 @@
 ﻿using Moq;
 using System.Collections.Generic;
 using System.Linq;
+using Vs.Cms.Core.Controllers.Interfaces;
+using Vs.Core.Enums;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
@@ -11,14 +13,16 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
 {
     public class BooleanFormElementDataTests
     {
-        //todo activate after texts have been restored
-        //[Fact]
+        [Fact]
         public void ShouldDefineOptions()
         {
             var moqExecutionResult = InitMoqExecutionResult(1);
+            var moqContentController = new Mock<IContentController>();
+            moqContentController.Setup(m => m.GetText("test1", FormElementContentType.Description, "test1")).Returns("Test1");
+            moqContentController.Setup(m => m.GetText("test2", FormElementContentType.Description, "test2")).Returns("Test2");
 
             var sut = new BooleanFormElementData();
-            //sut.DefineOptions(moqExecutionResult);
+            sut.DefineOptions(moqExecutionResult, moqContentController.Object);
             Assert.Equal(2, sut.Options.Count);
             Assert.Equal("test1", sut.Options.ToList()[0].Key);
             Assert.Equal("Test1", sut.Options.ToList()[0].Value);
@@ -29,15 +33,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
         private IExecutionResult InitMoqExecutionResult(int type)
         {
             var moq = new Mock<IExecutionResult>();
-            var moqParameterCollection = InitMoqParementerCollection(type);
-            moq.Setup(m => m.Questions).Returns(new QuestionArgs(string.Empty, moqParameterCollection));
-            return moq.Object;
-        }
-
-        private IParametersCollection InitMoqParementerCollection(int type)
-        {
-            var moq = new Mock<IParametersCollection>();
-            moq.Setup(m => m.GetAll()).Returns(new List<IParameter> { InitMoqParameter(1), InitMoqParameter(2) });
+            moq.Setup(m => m.QuestionParameters).Returns(new List<IParameter> { InitMoqParameter(1), InitMoqParameter(2) });
+            moq.Setup(m => m.GetParameterSemanticKey("test1")).Returns("test1");
+            moq.Setup(m => m.GetParameterSemanticKey("test2")).Returns("test2");
             return moq.Object;
         }
 
