@@ -5,14 +5,13 @@ using Vs.Rules.Core.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
 {
     public class FormElementBase : ComponentBase, IFormElementBase
     {
         [CascadingParameter]
-        public IFormElementData Data { get; set; }      
+        public IFormElementData Data { get; set; }
 
         [Parameter]
         public virtual string Value { get => Data.Value; set => Data.Value = value; }

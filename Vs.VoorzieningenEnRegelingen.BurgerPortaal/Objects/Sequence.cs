@@ -5,7 +5,6 @@ using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects
 {

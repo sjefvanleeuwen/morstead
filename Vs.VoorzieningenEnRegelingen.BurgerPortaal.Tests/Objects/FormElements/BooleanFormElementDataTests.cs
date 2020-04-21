@@ -5,7 +5,6 @@ using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
-using Vs.VoorzieningenEnRegelingen.Core;
 using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements

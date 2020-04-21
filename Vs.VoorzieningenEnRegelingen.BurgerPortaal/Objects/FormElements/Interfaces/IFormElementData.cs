@@ -4,7 +4,6 @@ using System.Globalization;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces
 {

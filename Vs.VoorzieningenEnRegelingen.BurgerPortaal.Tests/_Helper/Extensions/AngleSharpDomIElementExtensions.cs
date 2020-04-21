@@ -1,5 +1,4 @@
 ﻿using AngleSharp.Dom;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using System.Linq;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests._Helper.Extensions

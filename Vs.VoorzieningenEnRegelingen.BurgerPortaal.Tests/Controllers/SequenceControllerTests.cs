@@ -6,7 +6,6 @@ using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Controllers;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
 using Xunit;
 

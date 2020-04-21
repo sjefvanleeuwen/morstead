@@ -78,7 +78,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             var cut = RenderComponent<TextArea>(
                 CascadingValue(data),
                 CascadingValue(new EditContext(data)));
-            
+
             var textarea = cut.Find("textarea");
             Assert.Equal("TheValue", cut.Instance.Data.Value);
             Assert.Equal("TheValue", textarea.Attr("value"));

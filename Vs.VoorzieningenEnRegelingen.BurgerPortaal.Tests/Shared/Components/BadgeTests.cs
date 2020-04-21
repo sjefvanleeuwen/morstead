@@ -1,7 +1,4 @@
-﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components;
-using Xunit;
-
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
+﻿namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components
 {
     public class BadgeTests : BlazorTestBase
     {

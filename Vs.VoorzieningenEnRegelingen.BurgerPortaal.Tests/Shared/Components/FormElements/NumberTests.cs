@@ -1,13 +1,13 @@
-﻿using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
-using Xunit;
+﻿using AngleSharp.Dom;
 using Bunit;
+using Microsoft.AspNetCore.Components.Forms;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
-using Microsoft.AspNetCore.Components.Forms;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests._Helper.Extensions;
-using System.Linq;
-using AngleSharp.Dom;
-using System.ComponentModel.DataAnnotations;
+using Xunit;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements
 {
@@ -18,9 +18,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var data = new NumericFormElementData() as IFormElementData;
             var cut = RenderComponent<Number>(
-                CascadingValue(data), 
+                CascadingValue(data),
                 CascadingValue(new EditContext(data)));
-            
+
             var inputs = cut.FindAll("input");
             var labels = cut.FindAll("label");
             var hints = cut.FindAll(".mdc-text-field-helper-line");

@@ -1,9 +1,4 @@
-﻿using Fizzler.Systems.HtmlAgilityPack;
-using System.Linq;
-using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages;
-using Xunit;
-
-namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Pages
+﻿namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Pages
 {
     public class CalculationTests : BlazorTestBase
     {
