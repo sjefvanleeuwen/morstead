@@ -80,8 +80,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                 CascadingValue(new EditContext(data)));
 
             var input = cut.Find("input");
+            Assert.Equal("TheValue", cut.Instance.Data.Value);
             Assert.Equal("TheValue", input.Attr("value"));
             input.Change("TheNewValue");
+            Assert.Equal("TheNewValue", cut.Instance.Data.Value);
             input = cut.Find("input");
             Assert.Equal("TheNewValue", input.Attr("value"));
         }

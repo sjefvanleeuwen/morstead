@@ -73,15 +73,17 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
         {
             var data = new NumericFormElementData
             {
-                Value = "123",
+                Value = "123"
             } as IFormElementData;
             var cut = RenderComponent<Number>(
                 CascadingValue(data),
                 CascadingValue(new EditContext(data)));
 
             var input = cut.Find("input");
+            Assert.Equal("123", cut.Instance.Data.Value);
             Assert.Equal("123", input.Attr("value"));
             input.Change("345");
+            Assert.Equal("345", cut.Instance.Data.Value);
             input = cut.Find("input");
             Assert.Equal("345", input.Attr("value"));
         }
