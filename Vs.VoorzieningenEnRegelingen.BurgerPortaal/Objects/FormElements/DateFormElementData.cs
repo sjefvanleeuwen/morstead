@@ -19,11 +19,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             set => SetDate(value);
         }
 
-        public DateFormElementData()
-        {
-            ValueDate = DateTime.Today;
-        }
-
         private string GetDateAsString()
         {
             return ValueDate?.ToString("yyyy-MM-dd") ?? string.Empty;

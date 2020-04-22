@@ -8,18 +8,19 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
     public class DateFormElementDataTests
     {
         [Fact]
-        public void CheckValueIsTodayWhenEmpty()
+        public void CheckValueNullWhenEmpty()
         {
             var sut = new DateFormElementData();
-            Assert.Equal(DateTime.Today, sut.ValueDate);
+            Assert.Null(sut.ValueDate);
+            Assert.Empty(sut.Value);
         }
 
         [Fact]
-        public void CheckValidWhenEmpty()
+        public void CheckInvalidWhenEmpty()
         {
             var sut = new DateFormElementData();
             sut.CustomValidate();
-            Assert.True(sut.IsValid);
+            Assert.False(sut.IsValid);
         }
 
         [Fact]

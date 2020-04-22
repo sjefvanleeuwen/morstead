@@ -31,8 +31,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public DateRangeFormElementData()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = Culture; //nl-NL
-            ValueDateStart = DateTime.Today;
-            ValueDateEnd = DateTime.Today;
         }
 
         private string GetDateRangeAsString()
