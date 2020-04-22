@@ -7,9 +7,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
 {
     public partial class Date
     {
-        [Inject]
-        NavigationManager NavigationManager { get; set; }
-
         private IDateFormElementData _data =>
             Data as IDateFormElementData ??
                 throw new ArgumentException($"The provided data element is not of type {nameof(IDateFormElementData)}");

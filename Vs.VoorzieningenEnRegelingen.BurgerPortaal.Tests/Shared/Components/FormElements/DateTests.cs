@@ -22,6 +22,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             var cut = RenderComponent<Date>(
                 CascadingValue(data),
                 CascadingValue(new EditContext(data)));
+            System.Threading.Thread.CurrentThread.CurrentCulture = data.Culture;
 
             var inputs = cut.FindAll("input");
             var labels = cut.FindAll("label");
@@ -50,10 +51,10 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                 Value = "1979-03-08",
                 Culture = new CultureInfo("nl-NL")
             } as IFormElementData;
+            System.Threading.Thread.CurrentThread.CurrentCulture = data.Culture;
             var cut = RenderComponent<Date>(
                 CascadingValue(data),
                 CascadingValue(new EditContext(data)));
-            System.Threading.Thread.CurrentThread.CurrentCulture = data.Culture;
 
             var inputs = cut.FindAll("input");
             var labels = cut.FindAll("label");
@@ -98,6 +99,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             {
                 Value = "1979-03-08"
             } as IFormElementData;
+            System.Threading.Thread.CurrentThread.CurrentCulture = data.Culture;
             var cut = RenderComponent<Date>(
                 CascadingValue(data),
                 CascadingValue(new EditContext(data)));
@@ -119,6 +121,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                 Label = "TheLabel",
                 HintText = "TheHint"
             } as IFormElementData;
+            System.Threading.Thread.CurrentThread.CurrentCulture = data.Culture;
+            
             data.CustomValidate();
             Validator.TryValidateObject(data, new ValidationContext(data), null);
             var cut = RenderComponent<Date>(
