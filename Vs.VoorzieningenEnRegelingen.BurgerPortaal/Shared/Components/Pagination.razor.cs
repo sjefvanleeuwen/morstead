@@ -14,9 +14,9 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
         [Parameter]
         public string PreviousText { get; set; }
         [Parameter]
-        public bool NextDisabled { get; set; }
+        public bool NextDisabled { get; set; } = true;
         [Parameter]
-        public bool PreviousDisabled { get; set; }
+        public bool PreviousDisabled { get; set; } = true;
         [Parameter]
         public double Progress { get; set; }
 
