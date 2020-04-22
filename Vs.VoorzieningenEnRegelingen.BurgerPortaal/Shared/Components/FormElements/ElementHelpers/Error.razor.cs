@@ -7,6 +7,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-        private bool _show => ChildContent != null;
+        private bool Show => ChildContent != null && !string.IsNullOrWhiteSpace(ChildContent.ToString());
     }
 }
