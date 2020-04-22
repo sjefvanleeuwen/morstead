@@ -1,43 +1,42 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements.ElementHelpers
+﻿using Bunit;
+using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements.ElementHelpers;
+using Xunit;
+
+namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.FormElements.ElementHelpers
 {
     public class FormElementHintTests : BlazorTestBase
     {
-        //[Fact]
-        //public void FormElementHintEmpty()
-        //{
-        //    var component = _host.AddComponent<FormElementHint>();
-        //    Assert.Empty(component.GetMarkup());
-        //    var variables = new Dictionary<string, object> {
-        //        { "Text", " " }
-        //    };
-        //    component = _host.AddComponent<FormElementHint>(variables);
-        //    Assert.Empty(component.GetMarkup());
-        //}
+        [Fact]
+        public void FormElementHintEmpty()
+        {
+            var cut = RenderComponent<FormElementHint>();
+            Assert.Empty(cut.Nodes);
+        }
 
-        //[Fact]
-        //public void FormElementHintExists()
-        //{
-        //    var variables = new Dictionary<string, object> {
-        //        { "Name", "DeNaam" },
-        //        { "Text", "Hint text" }
-        //    };
-        //    var component = _host.AddComponent<FormElementHint>(variables);
-        //    Assert.NotEmpty(component.GetMarkup());
-        //    Assert.NotNull(component.Find("span"));
-        //    Assert.Equal("hint_DeNaam", component.Find("span").Attr("id"));
-        //    Assert.Equal("Hint text", component.Find("span").InnerHtml);
-        //}
+        [Fact]
+        public void FormElementHintExists()
+        {
+            var cut = RenderComponent<FormElementHint>(
+               (nameof(FormElementHint.Text), "The error message"));
+            var message = cut.FindAll("p");
+            Assert.NotNull(message);
+            Assert.Single(message);
+            Assert.Equal("The error message", message[0].InnerHtml);
+        }
 
-        //[Fact]
-        //public void FormElementHintExistsMarkup()
-        //{
-        //    var variables = new Dictionary<string, object> {
-        //        { "Text", "Hint<i> text</i>" }
-        //    };
-        //    var component = _host.AddComponent<FormElementHint>(variables);
-        //    Assert.NotEmpty(component.GetMarkup());
-        //    Assert.NotNull(component.Find("span"));
-        //    Assert.Equal(" text", component.Find("span > i").InnerHtml);
-        //}
+        [Fact]
+        public void FormElementHintExistsMarkup()
+        {
+            var cut = RenderComponent<FormElementHint>(
+                (nameof(FormElementHint.Text), "The e<i>rror m</i>essage"));
+            var message = cut.FindAll("p");
+            Assert.NotNull(message);
+            Assert.Single(message);
+            Assert.Equal("The e<i>rror m</i>essage", message[0].InnerHtml);
+            var innerMessage = cut.FindAll("i");
+            Assert.NotNull(innerMessage);
+            Assert.Single(innerMessage);
+            Assert.Equal("rror m", innerMessage[0].InnerHtml);
+        }
     }
 }
