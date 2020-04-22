@@ -9,5 +9,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components
         [Parameter]
         public string Content { get; set; }
 
+        private bool Show => ShowTitle || ShowContent;
+        private bool ShowTitle => !string.IsNullOrWhiteSpace(Title);
+        private bool ShowContent => !string.IsNullOrWhiteSpace(Content);
     }
 }

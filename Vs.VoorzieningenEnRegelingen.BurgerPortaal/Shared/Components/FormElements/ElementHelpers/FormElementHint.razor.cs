@@ -7,6 +7,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormEleme
         [Parameter]
         public string Text { get; set; }
 
-        protected bool _show => !string.IsNullOrWhiteSpace(Text);
+        protected bool Show => !string.IsNullOrWhiteSpace(Text);
     }
 }

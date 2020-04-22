@@ -1,4 +1,13 @@
-﻿<div class="mat-elevation-z5 tile_space">
-    <MatH4>@((MarkupString)Title)</MatH4>
-    <MatBody1>@((MarkupString)Content)</MatBody1>
-</div>
+﻿@if (Show)
+{
+    <div class="mat-elevation-z5 tile_space">
+        @if (ShowTitle)
+        {
+            <MatH4>@((MarkupString)Title)</MatH4>
+        }
+        @if (ShowContent)
+        {
+            <MatBody1>@((MarkupString)Content)</MatBody1>
+        }
+    </div>
+}
