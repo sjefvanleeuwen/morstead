@@ -18,7 +18,6 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
         public string Name { get; set; }
         public string Label { get; set; }
         public string HintText { get; set; }
-        public IEnumerable<string> HintTextList { get; set; }
         public string ErrorText { get => !IsValid ? GetErrorText() : string.Empty; }
         public bool IsDisabled { get; set; } = false;
         public bool IsValid { get; set; } = true;

@@ -19,6 +19,11 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements
             set => SetDate(value);
         }
 
+        public DateFormElementData()
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = Culture; //nl-NL
+        }
+
         private string GetDateAsString()
         {
             return ValueDate?.ToString("yyyy-MM-dd") ?? string.Empty;
