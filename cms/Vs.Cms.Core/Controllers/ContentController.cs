@@ -19,7 +19,7 @@ namespace Vs.Cms.Core.Controllers
         private readonly ITemplateEngine _templateEngine;
         private CultureInfo _cultureInfo;
 
-        public IParametersCollection _parameters { get; set; }
+        public IParametersCollection Parameters { get; set; }
 
         public ContentController(IRenderStrategy renderStrategy, IContentHandler contentHandler, ITemplateEngine templateEngine)
         {
@@ -53,14 +53,30 @@ namespace Vs.Cms.Core.Controllers
             return _renderStrategy.Render(template.ToString(), GetParametersDictionary());
         }
 
+        public void Initialize(string body)
+        {
+            //todo MPS Rewrite to get this from the body supplied
+            _cultureInfo = new CultureInfo("nl-NL");
+            _contentHandler.SetDefaultCulture(_cultureInfo);
+            var parsedContent = YamlContentParser.RenderContentYamlToObject(body);
+            _contentHandler.TranslateParsedContentToContent(_cultureInfo, parsedContent);
+        }
+
+        public IEnumerable<string> GetUnresolvedParameters(string semanticKey, IParametersCollection parameters)
+        {
+            Parameters = parameters;
+            var texts = GetAllApplicableTexts(semanticKey);
+            return GetUnresolvedParameters(texts);
+        }
+
         private IDictionary<string, object> GetParametersDictionary()
         {
             var result = new Dictionary<string, object>();
-            if (_parameters == null)
+            if (Parameters == null)
             {
                 return result;
             }
-            foreach (var parameter in _parameters)
+            foreach (var parameter in Parameters)
             {
                 if (result.ContainsKey(parameter.Name))
                 {
@@ -88,22 +104,6 @@ namespace Vs.Cms.Core.Controllers
             return result;
         }
 
-        public void Initialize(string body)
-        {
-            //todo MPS Rewrite to get this from the body supplied
-            _cultureInfo = new CultureInfo("nl-NL");
-            _contentHandler.SetDefaultCulture(_cultureInfo);
-            var parsedContent = YamlContentParser.RenderContentYamlToObject(body);
-            _contentHandler.TranslateParsedContentToContent(_cultureInfo, parsedContent);
-        }
-
-        public IEnumerable<string> GetUnresolvedParameters(string semanticKey, IParametersCollection parameters)
-        {
-            _parameters = parameters;
-            var texts = GetAllApplicableTexts(semanticKey);
-            return GetUnresolvedParameters(texts);
-        }
-
         private IEnumerable<string> GetAllApplicableTexts(string semanticKey)
         {
             var cultureContent = _contentHandler.GetDefaultContent();
@@ -118,12 +118,7 @@ namespace Vs.Cms.Core.Controllers
             {
                 needed.AddRange(_templateEngine.GetExpressionNames(text));
             }
-            return needed.Except(_parameters.GetAll().Select(p => p.Name));
-        }
-
-        public void SetParameters(IParametersCollection parameters)
-        {
-            _parameters = parameters;
+            return needed.Except(Parameters?.GetAll()?.Select(p => p.Name) ?? new List<string>());
         }
     }
 }

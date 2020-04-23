@@ -81,7 +81,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             {
                 SequenceController.FillUnresolvedParameters(ref parameters, unresolvedParameters);
             }
-            ContentController.SetParameters(parameters);
+            ContentController.Parameters = parameters;
             Display();
         }
 

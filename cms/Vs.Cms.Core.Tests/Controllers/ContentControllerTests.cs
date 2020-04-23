@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
+using Moq;
 using System.Collections.Generic;
 using System.Globalization;
 using Vs.Cms.Core.Controllers;
@@ -6,6 +7,7 @@ using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
 using Vs.Core.Enums;
 using Vs.Core.Extensions;
+using Vs.Rules.Core.Interfaces;
 using Xunit;
 
 namespace Vs.Cms.Core.Tests.Controllers
@@ -70,67 +72,35 @@ namespace Vs.Cms.Core.Tests.Controllers
             Assert.Equal("result2", text);
         }
 
-        //TODO MPS rewrite tests
+        [Fact]
+        public void ShouldInitialize()
+        {
+            var moqRenderStrategy = InitMoqRenderStrategy();
+            var moqContentHandler = InitMoqContentHandler();
+            var moqTemplateEngine = InitMoqTemplateEngine();
+            var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object, moqTemplateEngine.Object);
+            sut.Initialize("test: test");
+            moqContentHandler.Verify(x => x.SetDefaultCulture(It.IsAny<CultureInfo>()), Times.Once());
+            moqContentHandler.Verify(x => x.TranslateParsedContentToContent(It.IsAny<CultureInfo>(), It.IsAny<IDictionary<string, object>>()), Times.Once());
+        }
 
-        //[Fact]
-        //public void ShouldSetParametersNoTexts()
-        //{
-        //    var moqRenderStrategy = InitMoqRenderStrategy();
-        //    var moqContentHandler = InitMoqContentHandler();
-        //    //make the contenthandler returns no texts
-        //    var moqCultureContent = new Mock<ICultureContent>();
-        //    moqCultureContent.Setup(m => m.GetCompleteContent(It.IsAny<string>())).Returns(new List<object>());
-        //    moqContentHandler.Setup(m => m.GetDefaultContent()).Returns(moqCultureContent.Object);
-        //    var moqTemplateEngine = InitMoqTemplateEngine();
-        //    var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object, moqTemplateEngine.Object);
-        //    sut.SetParameters("semanticKey", moqParameters.Object);
-        //    moqTemplateEngine.Verify(x => x.GetExpressionNames(It.IsAny<string>()), Times.Never);
-        //    moqParameters.Verify(x => x.GetAll(), Times.Once);
-        //    moqYamlScriptController.Verify(x => x.EvaluateFormulaWithoutQA(ref It.Ref<IParametersCollection>.IsAny, It.IsAny<string>()), Times.Never);
-        //}
-
-        //[Fact]
-        //public void ShouldSetParametersNoNeededParameters()
-        //{
-        //    var moqRenderStrategy = InitMoqRenderStrategy();
-        //    var moqContentHandler = InitMoqContentHandler();
-        //    //make the CultureContent returns already knows the needed variables so no call is done
-        //    var moqCultureContent = InitCultureContent();
-        //    var moqTemplateEngine = InitMoqTemplateEngine();
-        //    //no applicabale texts
-        //    var moqParameters = InitMoqParameters();
-        //    moqParameters.Setup(m => m.GetAll()).Returns(new List<IParameter>
-        //    {
-        //        new ClientParameter("world", "Aarde", TypeInference.InferenceResult.TypeEnum.String, "semanticKey"),
-        //        new ClientParameter("name", "Sam", TypeInference.InferenceResult.TypeEnum.String, "semanticKey"),
-        //        new ClientParameter("Sam", "same", TypeInference.InferenceResult.TypeEnum.String, "semanticKey")
-        //    });
-        //    YamlScriptController(moqParameters.Object);
-        //    var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object, moqTemplateEngine.Object);
-        //    sut.SetParameters("semanticKey", moqParameters.Object);
-        //    moqTemplateEngine.Verify(x => x.GetExpressionNames(It.IsAny<string>()), Times.Exactly(3));
-        //    moqParameters.Verify(x => x.GetAll(), Times.Once);
-        //    moqYamlScriptController.Verify(x => x.EvaluateFormulaWithoutQA(ref It.Ref<IParametersCollection>.IsAny, It.IsAny<IEnumerable<string>>()), Times.Never);
-
-        //}
-
-        //[Fact]
-        //public void ShouldSetParameters()
-        //{
-        //    var moqRenderStrategy = InitMoqRenderStrategy();
-        //    var moqContentHandler = InitMoqContentHandler();
-        //    //make the contenthandler returns no 
-        //    var moqCultureContent = InitCultureContent();
-        //    var moqTemplateEngine = InitMoqTemplateEngine();
-        //    //no applicabale texts
-        //    var moqParameters = InitMoqParameters();
-        //    YamlScriptController(moqParameters.Object);
-        //    var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object, moqTemplateEngine.Object);
-        //    sut.SetParameters("semanticKey", moqParameters.Object);
-        //    moqTemplateEngine.Verify(x => x.GetExpressionNames(It.IsAny<string>()), Times.Exactly(3));
-        //    moqParameters.Verify(x => x.GetAll(), Times.Exactly(2));
-        //    moqYamlScriptController.Verify(x => x.EvaluateFormulaWithoutQA(ref It.Ref<IParametersCollection>.IsAny, It.IsAny<IEnumerable<string>>()), Times.Once);
-        //}
+        [Fact]
+        public void ShouldGetUnresolvedParameters()
+        {
+            var moqRenderStrategy = InitMoqRenderStrategy();
+            var moqContentHandler = InitMoqContentHandler();
+            var moqCultureContent = new Mock<ICultureContent>();
+            var moqTemplateEngine = InitMoqTemplateEngine();
+            moqCultureContent.Setup(m => m.GetCompleteContent(It.IsAny<string>())).Returns(new List<string> { "a", "b" });
+            moqContentHandler.Setup(m => m.GetDefaultContent()).Returns(moqCultureContent.Object);
+            
+            var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object, moqTemplateEngine.Object);
+            sut.GetUnresolvedParameters(It.IsAny<string>(), It.IsAny<IParametersCollection>());
+            moqContentHandler.Verify(x => x.GetDefaultContent(), Times.Once());
+            moqCultureContent.Verify(x => x.GetCompleteContent(It.IsAny<string>()), Times.Once());
+            moqTemplateEngine.Verify(x => x.GetExpressionNames("a"), Times.Once());
+            moqTemplateEngine.Verify(x => x.GetExpressionNames("b"), Times.Once());
+        }
 
         private Mock<IRenderStrategy> InitMoqRenderStrategy()
         {
