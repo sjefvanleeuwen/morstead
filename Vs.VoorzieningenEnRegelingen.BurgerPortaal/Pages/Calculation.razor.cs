@@ -197,7 +197,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
             {
                 if (SemanticKey.StartsWith(contentNodes.ElementAt(i)))
                 {
-                    return (i + 1d) / contentNodes.Count();
+                    return ((i + 1d) - 1) / (contentNodes.Count() - 1);
                 }
             }
 
