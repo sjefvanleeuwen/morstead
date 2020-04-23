@@ -23,7 +23,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 
-        private System.Uri Uri => NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        private Uri Uri => NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
         private string RuleYaml => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
         private string ContentYaml => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("content", out var param) ? param.First() : null;
 
@@ -43,6 +43,8 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Pages
         private bool ShowPreviousButton => SequenceController.CurrentStep > 1;
         private bool ShowNextButton => HasRights && QuestionAsked;
         private double Progress => CalculateProgress();
+
+        private bool ShowForm => _formElement.GetType().IsSubclassOf(typeof(FormElementBase));
 
         protected override void OnInitialized()
         {

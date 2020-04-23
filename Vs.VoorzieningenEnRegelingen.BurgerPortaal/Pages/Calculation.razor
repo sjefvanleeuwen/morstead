@@ -7,40 +7,40 @@
                        SubTitle="@PageSubTitle"
                        Number=@DisplayQuestionNumber
                        Subject="@TextSummary" />
-    @if (!string.IsNullOrWhiteSpace(TextTitle) || !string.IsNullOrWhiteSpace(TextDescription))
+    <Hint Title="@TextTitle" Content="@TextDescription" />
+    @if (ShowForm)
     {
-        <Hint Title="@TextTitle" Content="@TextDescription" />
-    }
-    <EditForm Model="_formElement.Data">
-        <DataAnnotationsValidator />
-        <CascadingValue Value="_formElement.Data">
-            @if (HasRights && _formElement.ShowElement)
-            {
-                @switch (_formElement.Data.InferedType)
+        <EditForm Model="_formElement.Data">
+            <DataAnnotationsValidator />
+            <CascadingValue Value="_formElement.Data">
+                @if (HasRights && _formElement.ShowElement)
                 {
-                    case TypeInference.InferenceResult.TypeEnum.Double:
-                        <Number />
-                        break;
-                    case TypeInference.InferenceResult.TypeEnum.TimeSpan:
-                        <DateRange />
-                        break;
-                    case TypeInference.InferenceResult.TypeEnum.DateTime:
-                        <Date />
-                        break;
-                    case TypeInference.InferenceResult.TypeEnum.String:
-                        <text />
-                        break;
-                    case TypeInference.InferenceResult.TypeEnum.Boolean:
-                        <Radio />
-                        break;
-                    case TypeInference.InferenceResult.TypeEnum.List:
-                        <Select />
-                        break;
+                    @switch (_formElement.Data.InferedType)
+                    {
+                        case TypeInference.InferenceResult.TypeEnum.Double:
+                            <Number />
+                            break;
+                        case TypeInference.InferenceResult.TypeEnum.TimeSpan:
+                            <DateRange />
+                            break;
+                        case TypeInference.InferenceResult.TypeEnum.DateTime:
+                            <Date />
+                            break;
+                        case TypeInference.InferenceResult.TypeEnum.String:
+                            <text />
+                            break;
+                        case TypeInference.InferenceResult.TypeEnum.Boolean:
+                            <Radio />
+                            break;
+                        case TypeInference.InferenceResult.TypeEnum.List:
+                            <Select />
+                            break;
+                    }
                 }
-            }
-            <Pagination PreviousDisabled="@(!ShowPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
-                        NextDisabled="@(!ShowNextButton)" Next="GetNextStep" NextText="Volgende"
-                        Progress="@Progress" />
-        </CascadingValue>
-    </EditForm>
+                <Pagination PreviousDisabled="@(!ShowPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
+                            NextDisabled="@(!ShowNextButton)" Next="GetNextStep" NextText="Volgende"
+                            Progress="@Progress" />
+            </CascadingValue>
+        </EditForm>
+    }
 </MaterialWrapper>
