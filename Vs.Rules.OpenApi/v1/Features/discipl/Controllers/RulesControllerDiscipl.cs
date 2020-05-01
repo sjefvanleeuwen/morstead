@@ -4,7 +4,9 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Vs.Rules.Core;
+using Vs.Rules.OpenApi.Helpers;
 using Vs.Rules.OpenApi.v1.Dto;
+using Vs.Rules.OpenApi.v1.Features.discipl.Dto;
 using ParseResult = Vs.Rules.OpenApi.v1.Dto.ParseResult;
 
 namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
@@ -37,8 +39,9 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
         {
             try
             {
+
                 YamlScriptController controller = new YamlScriptController();
-                string yaml = null;
+                string yaml;
                 using (var client = new WebClient())
                 {
                     try
@@ -110,6 +113,69 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
             {
                 return StatusCode(500, exception.Message);
             }
+        }
+
+        /// <summary>
+        /// Executes a yaml rule file from a given uri.
+        /// </summary>
+        /// <param name="yaml">The url pointing to the rule yaml</param>
+        /// <returns>ParesResult</returns>
+        /// <response code="200">Executed</response>
+        /// <response code="400">Yaml rule set contains errors</response>
+        /// <response code="404">Yaml rule uri endpoint does not contain any rules</response>
+        /// <response code="500">Server error</response>
+        [HttpPost("execute-rule")]
+        [ProducesResponseType(typeof(ExecuteRuleYamlFromUriResponse), 200)]
+        [ProducesResponseType(typeof(ExecuteRuleYamlFromUriResponse), 400)]
+        [ProducesResponseType(typeof(ExecuteRuleYamlFromUriResponse), 404)]
+        [ProducesResponseType(typeof(ExecuteRuleYamlFromUriResponse), 500)]
+        public async Task<IActionResult> ExecuteRuleYaml([FromBody] ExecuteRuleYamlFromUriRequest request)
+        {
+            var controller = new YamlScriptController();
+            var response = new ExecuteRuleYamlFromUriResponse();
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+
+            };
+
+            var downloadResult = request.Endpoint.DownloadYaml();
+            var result = controller.Parse(downloadResult.Content);
+
+            // map the parsing result.
+            
+
+            if (result.IsError)
+            {
+                return StatusCode(400, response);
+            }
+            /*
+            var parameters = new ParametersCollection() {
+                new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
+                new ClientParameter("toetsingsinkomen_aanvrager", (double)19000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("vermogen_aanvrager", (double)1000, TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
+                new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
+            } as IParametersCollection;
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+            controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            */
+            return StatusCode(200, new ExecuteRuleYamlFromUriResponse());
+        }
+
+        /// <summary>
+        /// Executes a yaml rule file from a given uri.
+        /// </summary>
+        /// <param name="yaml">The url pointing to the rule yaml</param>
+        /// <returns>ParesResult</returns>
+        /// <response code="200">Executed</response>
+        /// <response code="404">Yaml rule set does not contain any rules</response>
+        /// <response code="500">Server error</response>
+        [HttpPost("execute-rule-from-contents")]
+        [ProducesResponseType(typeof(ExecuteRuleYamlFromContentResponse), 200)]
+        [ProducesResponseType(typeof(ExecuteRuleYamlFromContentResponse), 404)]
+        [ProducesResponseType(typeof(string), 500)]
+        public async Task<IActionResult> ExecuteRuleYamlContents(string yaml)
+        {
+            return StatusCode(200, new ExecuteRuleYamlFromContentResponse());
         }
     }
 }
