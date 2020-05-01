@@ -1,0 +1,47 @@
+﻿@page "/"
+@page "/proefberekening/"
+@using Vs.VoorzieningenEnRegelingen.Core
+@using Vs.Rules.Core
+    <MaterialWrapper>
+        <CalculationHeader Title="@PageTitle"
+                           SubTitle="@PageSubTitle"
+                           Number=@DisplayQuestionNumber
+                           Subject="@TextSummary" />
+        <Hint Title="@TextTitle" Content="@TextDescription" />
+        @if (ShowForm)
+        {
+            <EditForm Model="_formElement.Data">
+                <DataAnnotationsValidator />
+                <CascadingValue Value="_formElement.Data">
+                    @if (HasRights && _formElement.ShowElement)
+                    {
+                        @switch (_formElement.Data.InferedType)
+                        {
+                            case TypeInference.InferenceResult.TypeEnum.Double:
+                                <Number />
+                                break;
+                            case TypeInference.InferenceResult.TypeEnum.TimeSpan:
+                                <DateRange />
+                                break;
+                            case TypeInference.InferenceResult.TypeEnum.DateTime:
+                                <Date />
+                                break;
+                            case TypeInference.InferenceResult.TypeEnum.String:
+                                <text />
+                                break;
+                            case TypeInference.InferenceResult.TypeEnum.Boolean:
+                                <Radio />
+                                break;
+                            case TypeInference.InferenceResult.TypeEnum.List:
+                                <Select />
+                                break;
+                        }
+                    }
+                </CascadingValue>
+
+            </EditForm>
+        }
+        <Pagination PreviousDisabled="@(!ShowPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
+                    NextDisabled="@(!ShowNextButton)" Next="GetNextStep" NextText="Volgende"
+                    Progress="@Progress" />
+    </MaterialWrapper>

@@ -1,0 +1,25 @@
+﻿@if (ShowTitle)
+{
+    <MatH1>@((MarkupString)Title)</MatH1>
+}
+@if (ShowSubtitle)
+{
+    <MatH2>@((MarkupString)SubTitle)</MatH2>
+}
+@if (ShowNumberedItem)
+{
+    <MatH3>
+        @if (ShowNumber)
+        {
+            <div class="calc_heading_number">
+                <Badge Number=@Number />
+            </div>
+        }
+        @if (ShowSubject)
+        {
+            <div class="calc_heading_question">
+                @((MarkupString)Subject)
+            </div>
+        }
+    </MatH3>
+}

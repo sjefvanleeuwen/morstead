@@ -1,0 +1,4 @@
+﻿@inherits FormElementBase
+
+<MatTextField Label="@HttpUtility.HtmlDecode(_data.Label)" @bind-Value="@Value" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" TextArea="true" />
+<Error><ValidationMessage For="@(() => _data.Value)" /></Error>
