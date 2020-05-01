@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Vs.Core.IntegrationTesting.OpenApi\Vs.Core.IntegrationTesting.OpenApi.csproj" />
     <ProjectReference Include="..\Vs.Rules.OpenApi\Vs.Rules.OpenApi.csproj" />
+    <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.TestData\Vs.VoorzieningenEnRegelingen.Core.TestData.csproj" />
   </ItemGroup>
 
 </Project>
