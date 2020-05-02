@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  dev-irma-server:
+    build:
+      context: ./.docker/dev/irma
+    container_name: dev-irma-server
+    ports:
+      - "8088:8088"
+  dev-vs-rules-api:
+    build:
+      context: ./
+    container_name: dev-vs-rules-api
+    ports:
+      - "5088:80"
+networks:
+  default:
+    external:
+      name: virtual-society-dev
