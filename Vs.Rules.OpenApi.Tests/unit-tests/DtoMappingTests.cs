@@ -23,7 +23,8 @@ namespace Vs.Rules.OpenApi.Tests.unit_tests
             Assert.True(apiParameters.Count == 4);
             for (int i = 0; i < parameters.Count; i++) {
                 Assert.True(apiParameters[i].Name == parameters[i].Name);
-                Assert.True((int)apiParameters[i].Type == (int)parameters[i].Type);
+                // Type not used on client as they are infered on the server.
+                //Assert.True((int)apiParameters[i].Type == (int)parameters[i].Type);
                 Assert.True(apiParameters[i].Value == parameters[i].Value);
             }
 
@@ -32,7 +33,8 @@ namespace Vs.Rules.OpenApi.Tests.unit_tests
             for (int i = 0; i < parameters.Count; i++)
             {
                 Assert.True(apiParameters[i].Name == clientParameters[i].Name);
-                Assert.True((int)apiParameters[i].Type == (int)clientParameters[i].Type);
+                // Type not used on client as they are infered on the server.
+                //Assert.True((int)apiParameters[i].Type == (int)clientParameters[i].Type);
                 Assert.True(apiParameters[i].Value == clientParameters[i].Value);
             }
 
