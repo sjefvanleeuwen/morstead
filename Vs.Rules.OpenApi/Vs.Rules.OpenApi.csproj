@@ -27,6 +27,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="v1\Controllers\" />
     <Folder Include="v2\Controllers\" />
   </ItemGroup>
   <ItemGroup>

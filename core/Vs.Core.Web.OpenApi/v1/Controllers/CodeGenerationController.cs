@@ -6,9 +6,8 @@ using NSwag.CodeGeneration.TypeScript;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Vs.Core.Web.OpenApi.Dto.CodeGenerators;
-using Vs.Core.Web.OpenApi.Dto.ProtocolErrors;
-using Vs.Rules.OpenApi.v1.Dto;
+using Vs.Core.Web.OpenApi.v1.Dto.CodeGenerators;
+using Vs.Core.Web.OpenApi.v1.Dto.ProtocolErrors;
 
 namespace Vs.Rules.OpenApi.v2.Controllers
 {
@@ -17,11 +16,11 @@ namespace Vs.Rules.OpenApi.v2.Controllers
     /// Uses best practices from: https://github.com/RicoSuter/NSwag/wiki/AspNetCoreOpenApiDocumentGenerator
     /// </summary>
     /// <seealso cref="ControllerBase" />
-    [ApiVersion("1")]
-    [Route("api/v{version:apiVersion}/rules")]
-    [OpenApiTag("Rules Engine", Description = "This is current api version")]
+    [ApiVersion("1.0-core")]
+    [Route("api/v{version:apiVersion}/core")]
+    [OpenApiTag("Code Generation Controller", Description = "Code Generator for API clients")]
     [ApiController]
-    public class RulesController : ControllerBase
+    public class CodeGenerationController : ControllerBase
     {
         /// <summary>
         /// Generates a typescript client for consuming the API.

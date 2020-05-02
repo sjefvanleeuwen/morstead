@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vs.Core.Web.OpenApi.Dto.ProtocolErrors
+namespace Vs.Core.Web.OpenApi.v1.Dto.ProtocolErrors
 {
     /// <summary>
     /// Error response for endpoints that return an invalid swagger json.

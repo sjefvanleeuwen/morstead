@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vs.Core.Web.OpenApi.Dto.CodeGenerators
+namespace Vs.Core.Web.OpenApi.v1.Dto.CodeGenerators
 {
     public abstract class GenerateCodeClientRequest
     {

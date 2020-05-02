@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vs.Core.Web.OpenApi.Dto.ProtocolErrors
+namespace Vs.Core.Web.OpenApi.v1.Dto.ProtocolErrors
 {
     /// <summary>
     /// Standard resource not found response (404).

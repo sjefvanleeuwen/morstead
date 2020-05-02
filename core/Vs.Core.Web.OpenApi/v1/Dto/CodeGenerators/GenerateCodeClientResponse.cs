@@ -1,4 +1,4 @@
-﻿namespace Vs.Core.Web.OpenApi.Dto.CodeGenerators
+﻿namespace Vs.Core.Web.OpenApi.v1.Dto.CodeGenerators
 {
     /// <summary>
     /// Base response message for code generation to consume the API.

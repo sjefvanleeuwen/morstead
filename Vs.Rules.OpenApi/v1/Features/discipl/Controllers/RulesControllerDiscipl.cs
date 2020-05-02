@@ -15,7 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Metadata;
-using Vs.Core.Web.OpenApi.Dto.ProtocolErrors;
+using Vs.Core.Web.OpenApi.v1.Dto.ProtocolErrors;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.OpenApi.Helpers;
