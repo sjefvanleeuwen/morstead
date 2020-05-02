@@ -14,5 +14,24 @@ namespace Vs.Rules.OpenApi.v1.Dto
         /// The endpoint.
         /// </value>
         public Uri Endpoint { get; set; }
+        /// <summary>
+        /// Message that contains the error.
+        /// </summary>
+        /// <value>
+        /// The message.
+        /// </value>
+        public string Message { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServerError500Response"/> class.
+        /// </summary>
+        public ServerError500Response() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ServerError500Response" /> class.
+        /// </summary>
+        /// <param name="ex">The exception to wrap.</param>
+        public ServerError500Response(Exception ex)
+        {
+            Message = ex.Message;
+        }
     }
 }
