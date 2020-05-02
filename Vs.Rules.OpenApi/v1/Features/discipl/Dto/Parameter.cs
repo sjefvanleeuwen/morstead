@@ -19,12 +19,5 @@
         /// The value.
         /// </value>
         public object Value { get; set; }
-        /// <summary>
-        /// Indicates the type of the parameter for value type casting purposes
-        /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
-        public ParameterType Type { get; set; }
     }
 }
