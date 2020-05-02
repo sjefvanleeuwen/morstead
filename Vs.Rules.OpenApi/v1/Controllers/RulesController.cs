@@ -6,6 +6,8 @@ using NSwag.CodeGeneration.TypeScript;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Vs.Core.Web.OpenApi.Dto.CodeGenerators;
+using Vs.Core.Web.OpenApi.Dto.ProtocolErrors;
 using Vs.Rules.OpenApi.v1.Dto;
 
 namespace Vs.Rules.OpenApi.v2.Controllers

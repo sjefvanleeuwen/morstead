@@ -29,6 +29,9 @@
   <ItemGroup>
     <Folder Include="v2\Controllers\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\core\Vs.Core.Web.OpenApi\Vs.Core.Web.OpenApi.csproj" />
+  </ItemGroup>
 
 
 </Project>
