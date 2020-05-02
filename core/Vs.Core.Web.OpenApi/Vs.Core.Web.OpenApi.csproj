@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageId>Vs.Core.Web.OpenApi</PackageId>
+    <Authors>Sjef van Leeuwen</Authors>
+    <Company>Virtual Society</Company>
+    <Product>Virtual Society Core</Product>
+    <PackageProjectUrl>https://github.com/sjefvanleeuwen/virtual-society-urukagina</PackageProjectUrl>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/sjefvanleeuwen/virtual-society-urukagina</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags></PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <NeutralLanguage></NeutralLanguage>
+    <Copyright>Copyright (c) 2020 Sjef van Leeuwen</Copyright>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageVersion>1.0.0</PackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\images\icon.png" Link="icon.png">
+      <PackagePath></PackagePath>
+      <Pack>True</Pack>
+    </None>
+    <None Include="..\..\LICENSE" Link="LICENSE">
+      <PackagePath></PackagePath>
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
+
+</Project>
