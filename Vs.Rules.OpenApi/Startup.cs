@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NSwag;
 using System.Text.Json.Serialization;
+using Vs.Core.Web.OpenApi.Middleware;
 
 namespace Vs.Rules.OpenApi
 {
@@ -21,21 +22,7 @@ namespace Vs.Rules.OpenApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
-                .AddJsonOptions(
-                    options => {
-                        options.JsonSerializerOptions.ReferenceHandling = ReferenceHandling.Preserve;
-                    }
-                    );
-            services.AddApiVersioning(options =>
-            {
-                options.AssumeDefaultVersionWhenUnspecified = true;
-                options.ApiVersionReader = new UrlSegmentApiVersionReader();
-            });
-            services.AddVersionedApiExplorer(options =>
-            {
-                options.SubstituteApiVersionInUrl = true;
-            });
+            services.AddOpenApiServices();
 
             var doc = new OpenApiDocument();
             doc.Info.Title = "Virtual Society Rule Engine";
@@ -98,25 +85,7 @@ RC / Release status.
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseStaticFiles();
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
+            app.UseOpenApiStrategy(env);
         }
     }
 }
