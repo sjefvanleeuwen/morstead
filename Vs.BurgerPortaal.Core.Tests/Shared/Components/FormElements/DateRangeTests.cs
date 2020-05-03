@@ -107,6 +107,7 @@ namespace Vs.BurgerPortaal.Core.Tests.Shared.Components.FormElements
 
             var inputs = cut.FindAll("input");
             var input1 = inputs[0];
+            //This is an interface test. If you run this test on a server that has a changed format for en-US you will get a fail here.
             Assert.Equal("3/8/1979", input1.Attr("value"));
             var input2 = inputs[2];
             Assert.Equal("5/9/1988", input2.Attr("value"));

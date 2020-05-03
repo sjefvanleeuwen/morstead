@@ -89,6 +89,7 @@ namespace Vs.BurgerPortaal.Core.Tests.Shared.Components.FormElements
                 CascadingValue(new EditContext(data)));
 
             var input = cut.Find("input");
+            //This is an interface test. If you run this test on a server that has a changed format for en-US you will get a fail here.
             Assert.Equal("3/8/1979", input.Attr("value"));
         }
 
