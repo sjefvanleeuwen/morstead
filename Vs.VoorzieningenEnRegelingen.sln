@@ -113,6 +113,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.IntegrationTesting.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Site", "Vs.VoorzieningenEnRegelingen.Site\Vs.VoorzieningenEnRegelingen.Site.csproj", "{DA61EC24-E465-460A-A129-28157DFE7E65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.BurgerPortaal.Server", "Vs.BurgerPortaal.Server\Vs.BurgerPortaal.Server.csproj", "{CAB71EE5-88C8-4202-958B-A637B617F905}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.BurgerPortaal.Core", "Vs.BurgerPortaal.Core\Vs.BurgerPortaal.Core.csproj", "{CDAE33D5-2032-4671-9CAC-5A0CA693D504}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -223,6 +227,14 @@ Global
 		{DA61EC24-E465-460A-A129-28157DFE7E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA61EC24-E465-460A-A129-28157DFE7E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA61EC24-E465-460A-A129-28157DFE7E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB71EE5-88C8-4202-958B-A637B617F905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB71EE5-88C8-4202-958B-A637B617F905}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB71EE5-88C8-4202-958B-A637B617F905}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB71EE5-88C8-4202-958B-A637B617F905}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDAE33D5-2032-4671-9CAC-5A0CA693D504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDAE33D5-2032-4671-9CAC-5A0CA693D504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDAE33D5-2032-4671-9CAC-5A0CA693D504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDAE33D5-2032-4671-9CAC-5A0CA693D504}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

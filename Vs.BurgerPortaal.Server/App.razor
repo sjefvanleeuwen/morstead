@@ -1,0 +1,13 @@
+﻿
+<Router AppAssembly="@typeof(Program).Assembly"
+        @*Reference a compent in an external library to include all routing in this library*@
+        AdditionalAssemblies="new[] { typeof(Vs.BurgerPortaal.Core.Areas.Pages.Calculation).Assembly }">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(Vs.BurgerPortaal.Core.Areas.Shared.MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(Vs.BurgerPortaal.Core.Areas.Shared.MainLayout)">
+            <p>Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
