@@ -1,0 +1,8 @@
+﻿@inherits FormElementBase
+<div class="calc_float">
+    <MatDatePicker Label="@HttpUtility.HtmlDecode(_data.LabelStart)" @bind-Value="@_data.ValueUtcDateStart" Id="@($"{_data.Name}_start")" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" />
+</div>
+<div>
+    <MatDatePicker Label="@HttpUtility.HtmlDecode(_data.LabelEnd)" @bind-Value="@_data.ValueUtcDateEnd" Id="@($"{_data.Name}_end")" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" />
+</div>
+<Error><ValidationMessage For="@(() => _data.Value)" /></Error>

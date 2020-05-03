@@ -32,6 +32,7 @@
     <ProjectReference Include="..\cms\Vs.Cms.Core\Vs.Cms.Core.csproj" />
     <ProjectReference Include="..\core\Vs.Core.Web\Vs.Core.Web.csproj" />
     <ProjectReference Include="..\library\Microsoft.AspNetCore.Components.Testing\Microsoft.AspNetCore.Components.Testing.csproj" />
+    <ProjectReference Include="..\Vs.BurgerPortaal.Core\Vs.BurgerPortaal.Core.csproj" />
     <ProjectReference Include="..\Vs.Rules.Core\Vs.Rules.Core.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.TestData\Vs.VoorzieningenEnRegelingen.Core.TestData.csproj" />
   </ItemGroup>
