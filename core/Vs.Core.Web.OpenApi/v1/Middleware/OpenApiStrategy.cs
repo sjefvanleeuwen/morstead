@@ -33,6 +33,15 @@ namespace Vs.Core.Web.OpenApi.v1.Middleware
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
+
+            app.UseMetricsActiveRequestMiddleware();
+            app.UseMetricsErrorTrackingMiddleware();
+            app.UseMetricsPostAndPutSizeTrackingMiddleware();
+            app.UseMetricsRequestTrackingMiddleware();
+            app.UseMetricsOAuth2TrackingMiddleware();
+            app.UseMetricsApdexTrackingMiddleware();
+
+            app.UseMetricsAllEndpoints();
         }
 
         public static void AddDocument(this IServiceCollection serviceCollection, Action<ApiDocument> configure)
@@ -111,12 +120,27 @@ Virtual Society Releases its public API's using major versioning with feature re
         <li>SwaggerContractErrorResponse</li>
     </ul>
 </ul>
+
+<h2> API Metrics Endpoints</h2>
+
+This API provides three endpoints for metrics. Metric snapshots can be exposed over HTTP in different formats as well as information about the running environment of the application
+
+<ul>
+    <li><a href='/metrics'>/metrics</a> Exposes a metrics snapshot using the configured metrics formatter.</li>
+    <li><a href='/metrics-text'>/metrics-text</a> Exposes a metrics snapshot using the configured text formatter.</li>
+    <li><a href='/env'>/env</a> Exposes environment information about the application e.g. OS, Machine Name, Assembly Name, Assembly Version etc.</i>
+</ul>
 ";
                      document.Title = "Virtual Society Open Api Strategy";
                      document.Version = "1.0-core";
                  });
 
-            services.AddMetrics();
+            var metrics = AppMetrics.CreateDefaultBuilder()
+            .Build();
+
+            services.AddMetrics(metrics);
+            services.AddMetricsTrackingMiddleware();
+            services.AddMetricsEndpoints();
 
         }
     }
