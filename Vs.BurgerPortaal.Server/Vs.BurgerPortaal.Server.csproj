@@ -10,8 +10,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Vs.BurgerPortaal.Core\Vs.BurgerPortaal.Core.csproj" />
-  </ItemGroup>
-
 </Project>
