@@ -6,6 +6,7 @@ using NSwag;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using System;
+using App.Metrics;
 
 namespace Vs.Core.Web.OpenApi.v1.Middleware
 {
@@ -114,6 +115,8 @@ Virtual Society Releases its public API's using major versioning with feature re
                      document.Title = "Virtual Society Open Api Strategy";
                      document.Version = "1.0-core";
                  });
+
+            services.AddMetrics();
 
         }
     }
