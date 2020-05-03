@@ -87,7 +87,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
             var cut = RenderComponent<Date>(
                 CascadingValue(data),
                 CascadingValue(new EditContext(data)));
-            
+
             var input = cut.Find("input");
             Assert.Equal("3/8/1979", input.Attr("value"));
         }
@@ -122,7 +122,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Shared.Components.For
                 HintText = "TheHint"
             } as IFormElementData;
             System.Threading.Thread.CurrentThread.CurrentCulture = data.Culture;
-            
+
             data.CustomValidate();
             Validator.TryValidateObject(data, new ValidationContext(data), null);
             var cut = RenderComponent<Date>(

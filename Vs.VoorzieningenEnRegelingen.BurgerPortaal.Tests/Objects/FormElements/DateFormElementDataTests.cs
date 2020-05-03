@@ -120,7 +120,7 @@ namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.Objects.FormElements
             {
                 Value = "1979-03-08",
                 MinimumAllowedDate = new DateTime(1988, 05, 09)
-                
+
             };
             sut.CustomValidate();
             Assert.False(sut.IsValid);

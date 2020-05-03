@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Net.Http;
+﻿using System;
 using Vs.VoorzieningenEnRegelingen.BurgerPortaal.Objects.FormElements.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.BurgerPortaal.Shared.Components.FormElements
