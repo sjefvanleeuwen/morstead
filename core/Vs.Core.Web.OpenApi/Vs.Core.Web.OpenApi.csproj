@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageId>Vs.Core.Web.OpenApi</PackageId>
+    <Authors>Sjef van Leeuwen</Authors>
+    <Company>Virtual Society</Company>
+    <Product>Virtual Society Core</Product>
+    <PackageProjectUrl>https://github.com/sjefvanleeuwen/virtual-society-urukagina</PackageProjectUrl>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/sjefvanleeuwen/virtual-society-urukagina</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags></PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <NeutralLanguage></NeutralLanguage>
+    <Copyright>Copyright (c) 2020 Sjef van Leeuwen</Copyright>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageVersion>1.0.0</PackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\images\icon.png" Link="icon.png">
+      <PackagePath></PackagePath>
+      <Pack>True</Pack>
+    </None>
+    <None Include="..\..\LICENSE" Link="LICENSE">
+      <PackagePath></PackagePath>
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="App.Metrics" Version="4.0.0-preview1.0.9" />
+    <PackageReference Include="App.Metrics.AspNetCore.Core" Version="4.0.0-preview1.0.9" />
+    <PackageReference Include="App.Metrics.AspNetCore.Endpoints" Version="4.0.0-preview1.0.9" />
+    <PackageReference Include="App.Metrics.AspNetCore.Tracking" Version="4.0.0-preview1.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0-preview.3.20215.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.3" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.4.2" />
+    <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="13.4.2" />
+    <PackageReference Include="NSwag.CodeGeneration.TypeScript" Version="13.4.2" />
+    <PackageReference Include="NSwag.Core" Version="13.4.2" />
+    <PackageReference Include="System.Text.Json" Version="5.0.0-preview.3.20214.6" />
+  </ItemGroup>
+
+</Project>

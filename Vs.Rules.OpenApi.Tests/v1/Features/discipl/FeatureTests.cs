@@ -1,13 +1,13 @@
 ﻿using Vs.Core.IntegrationTesting.OpenApi;
 using Xunit;
 
-namespace Vs.Rules.OpenApi.Tests.v1
+namespace Vs.Rules.OpenApi.Tests.v1.Features.discipl
 {
-    public class IsolationTests : IClassFixture<TestFixture<Startup>>
+    public class FeatureTests : IClassFixture<TestFixture<Startup>>
     {
         private RulesClient Client;
 
-        public IsolationTests(TestFixture<Startup> fixture)
+        public FeatureTests(TestFixture<Startup> fixture)
         {
             Client = new RulesClient(fixture.Client);
         }

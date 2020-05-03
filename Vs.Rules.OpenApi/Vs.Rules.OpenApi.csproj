@@ -10,12 +10,15 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Mapster" Version="5.3.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.4.2" />
-    <PackageReference Include="System.Text.Json" Version="5.0.0-preview.2.20160.6" />
+    <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="13.4.2" />
+    <PackageReference Include="NSwag.CodeGeneration.TypeScript" Version="13.4.2" />
+    <PackageReference Include="System.Text.Json" Version="5.0.0-preview.3.20214.6" />
     <PackageReference Include="Vs.Rules.Core" Version="1.0.2-alpha" />
   </ItemGroup>
   <ItemGroup>
@@ -24,7 +27,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="v1\Controllers\" />
     <Folder Include="v2\Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\core\Vs.Core.Web.OpenApi\Vs.Core.Web.OpenApi.csproj" />
   </ItemGroup>
 
 
