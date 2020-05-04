@@ -42,6 +42,7 @@ namespace Vs.Core.Web.OpenApi.v1.Middleware
             app.UseMetricsApdexTrackingMiddleware();
 
             app.UseMetricsAllEndpoints();
+            app.ConfigureExceptionHandler();
         }
 
         public static void AddDocument(this IServiceCollection serviceCollection, Action<ApiDocument> configure)
