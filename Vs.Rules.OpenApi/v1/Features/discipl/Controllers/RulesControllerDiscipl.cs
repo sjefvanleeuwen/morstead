@@ -1,20 +1,10 @@
 ﻿using Mapster;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using NSwag;
 using NSwag.Annotations;
-using NSwag.AspNetCore;
-using NSwag.CodeGeneration.TypeScript;
-using NSwag.Generation.AspNetCore;
 using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http.Controllers;
-using System.Web.Http.Metadata;
+using System.Web.Http;
 using Vs.Core.Web.OpenApi;
 using Vs.Core.Web.OpenApi.v1.Dto.ProtocolErrors;
 using Vs.Rules.Core;
@@ -22,7 +12,10 @@ using Vs.Rules.Core.Interfaces;
 using Vs.Rules.OpenApi.Helpers;
 using Vs.Rules.OpenApi.v1.Dto;
 using Vs.Rules.OpenApi.v1.Features.discipl.Dto;
+using FromBodyAttribute = Microsoft.AspNetCore.Mvc.FromBodyAttribute;
+using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
 using ParseResult = Vs.Rules.OpenApi.v1.Dto.ParseResult;
+using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
 {
@@ -50,6 +43,7 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(ServerError500Response), 500)]
         [HttpPost("generate-content-template")]
+        [Authorize(Roles = "ux-writer")]
         public async Task<IActionResult> GenerateContentTemplate(Uri url)
         {
             try
@@ -85,10 +79,11 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
         /// <response code="200">Parsed</response>
         /// <response code="404">Yaml rule set could not be found</response>
         /// <response code="500">Server error</response>
-        [HttpPost("validate-rule")]
+        [Microsoft.AspNetCore.Mvc.HttpPost("validate-rule")]
         [ProducesResponseType(typeof(v1.Dto.ParseResult), 200)]
         [ProducesResponseType(typeof(ConfigurationInvalidResponse), 404)]
         [ProducesResponseType(typeof(ServerError500Response), 500)]
+        [Authorize(Roles = "law-analist")]
         public async Task<IActionResult> ValidateRuleYaml(Uri url)
         {
             try
