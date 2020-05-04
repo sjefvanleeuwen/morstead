@@ -34,12 +34,13 @@ namespace Vs.Core.Web.OpenApi.v1.Middleware
             app.UseOpenApi();
             app.UseSwaggerUi3();
 
-            app.UseMetricsActiveRequestMiddleware();
-            app.UseMetricsErrorTrackingMiddleware();
-            app.UseMetricsPostAndPutSizeTrackingMiddleware();
-            app.UseMetricsRequestTrackingMiddleware();
-            app.UseMetricsOAuth2TrackingMiddleware();
-            app.UseMetricsApdexTrackingMiddleware();
+            app.UseMetricsAllMiddleware();
+            //app.UseMetricsActiveRequestMiddleware();
+            //app.UseMetricsErrorTrackingMiddleware();
+            //app.UseMetricsPostAndPutSizeTrackingMiddleware();
+            //app.UseMetricsRequestTrackingMiddleware();
+            //app.UseMetricsOAuth2TrackingMiddleware();
+            //app.UseMetricsApdexTrackingMiddleware();
 
             app.UseMetricsAllEndpoints();
             app.ConfigureExceptionHandler();
