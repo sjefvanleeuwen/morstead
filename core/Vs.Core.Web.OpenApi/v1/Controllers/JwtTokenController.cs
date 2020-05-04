@@ -34,8 +34,8 @@ namespace Vs.Core.Web.OpenApi.v1.Controllers
         {
             ClaimsIdentity claimsIdentity = new ClaimsIdentity();
             foreach (var role in request.Roles)
-            { 
-                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.Name)); 
+            {
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
             }
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateJwtSecurityToken(issuer: request.Issuer,
@@ -70,3 +70,4 @@ namespace Vs.Core.Web.OpenApi.v1.Controllers
 
     }
 }
+
