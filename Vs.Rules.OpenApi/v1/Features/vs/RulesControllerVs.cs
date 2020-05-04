@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Metadata;
+using Vs.Core.Web.OpenApi;
 using Vs.Core.Web.OpenApi.v1.Dto.ProtocolErrors;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
@@ -34,7 +35,7 @@ namespace Vs.Rules.OpenApi.v1.Features.vs.Controllers
     [Route("api/v{version:apiVersion}/rules")]
     [OpenApiTag("Rules Engine", Description = "This is current api with vs implementations")]
     [ApiController]
-    public class RulesControllerVs : ControllerBase
+    public class RulesControllerVs : VsControllerBase
     {
         
     }

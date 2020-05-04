@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Metadata;
+using Vs.Core.Web.OpenApi;
 using Vs.Core.Web.OpenApi.v1.Dto.ProtocolErrors;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
@@ -34,7 +35,7 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
     [Route("api/v{version:apiVersion}/rules")]
     [OpenApiTag("Rules Engine", Description = "This is current api with feature 1 implementation")]
     [ApiController]
-    public class RulesControllerDiscipl : ControllerBase
+    public class RulesControllerDiscipl : VsControllerBase
     {
         /// <summary>
         /// Generates the content template for a given yaml rule file.
