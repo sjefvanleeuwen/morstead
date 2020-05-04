@@ -1,4 +1,6 @@
-﻿Virtual Society Open API strategy uses JWT tokens with public/private key infrastructure (assymetric)
+﻿
+
+Virtual Society Open API strategy uses JWT tokens with public/private key infrastructure (assymetric)
 
 To generate a private key:
 
