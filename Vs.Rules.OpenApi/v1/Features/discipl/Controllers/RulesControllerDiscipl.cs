@@ -54,21 +54,12 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
         {
             try
             {
+                var ret = await Download(url);
+                if (ret.StatusCode != 200)
+                    return ret;
 
+                var yaml = ret.Value.ToString();
                 YamlScriptController controller = new YamlScriptController();
-                string yaml;
-                using (var client = new WebClient())
-                {
-                    try
-                    {
-                        yaml = client.DownloadString(url);
-                    }
-                    catch (WebException ex)
-                    {
-                        return StatusCode(404, ex.Message);
-                    }
-                }
-
                 var result = controller.Parse(yaml);
                 ParseResult parseResult = new ParseResult()
                 {
@@ -102,20 +93,11 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
         {
             try
             {
+                var ret = await Download(url);
+                if (ret.StatusCode != 200)
+                    return ret;
                 YamlScriptController controller = new YamlScriptController();
-                string yaml = null;
-                using (var client = new WebClient())
-                {
-                    try
-                    {
-                        yaml = client.DownloadString(url);
-                    }
-                    catch (WebException ex)
-                    {
-                        return StatusCode(404, ex.Message);
-                    }
-                }
-
+                var yaml = ret.Value.ToString();
                 var result = controller.Parse(yaml);
                 ParseResult parseResult = new ParseResult()
                 {
