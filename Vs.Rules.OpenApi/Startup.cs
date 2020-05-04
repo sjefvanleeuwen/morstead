@@ -51,7 +51,7 @@ Virtual Society Releases its public API's using major versioning with feature re
             {
                 document.Title = doc.Title;
                 document.Name = "1.0-features";
-                document.ApiGroupNames = new[] { "1.0-discipl" };
+                document.ApiGroupNames = new[] { "1.0-discipl","1.0-vs" };
                 document.Version = "1.0-features";
                 document.Description = @"
 <img width=128 height=128 src='/img/logo.svg'></img><br/>A Semantic Rule Engine API that plays nice with frontends.
