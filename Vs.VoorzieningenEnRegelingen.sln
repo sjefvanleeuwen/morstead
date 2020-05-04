@@ -119,9 +119,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.BurgerPortaal.Server", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.BurgerPortaal.Core", "Vs.BurgerPortaal.Core\Vs.BurgerPortaal.Core.csproj", "{CDAE33D5-2032-4671-9CAC-5A0CA693D504}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.BurgerPortaal.WASM", "Vs.BurgerPortaal.WASM\Vs.BurgerPortaal.WASM.csproj", "{B86769B8-78A4-4872-B2F5-D435456C7BCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.BurgerPortaal.WASM", "Vs.BurgerPortaal.WASM\Vs.BurgerPortaal.WASM.csproj", "{B86769B8-78A4-4872-B2F5-D435456C7BCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.BurgerPortaal.Core.Tests", "Vs.BurgerPortaal.Core.Tests\Vs.BurgerPortaal.Core.Tests.csproj", "{37D05D77-F84C-4C30-8334-343DE465BA86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.BurgerPortaal.Core.Tests", "Vs.BurgerPortaal.Core.Tests\Vs.BurgerPortaal.Core.Tests.csproj", "{37D05D77-F84C-4C30-8334-343DE465BA86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Web.OpenApi.Tests", "core\Vs.Core.Web.OpenApi.Tests\Vs.Core.Web.OpenApi.Tests.csproj", "{1F0DB637-3CAA-4954-AD07-190589B94DC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -253,6 +255,10 @@ Global
 		{37D05D77-F84C-4C30-8334-343DE465BA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37D05D77-F84C-4C30-8334-343DE465BA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37D05D77-F84C-4C30-8334-343DE465BA86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F0DB637-3CAA-4954-AD07-190589B94DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F0DB637-3CAA-4954-AD07-190589B94DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F0DB637-3CAA-4954-AD07-190589B94DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F0DB637-3CAA-4954-AD07-190589B94DC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -280,6 +286,7 @@ Global
 		{080CABD0-0EEE-4354-AC7E-06F07B5BDB8F} = {88324C07-A820-4B94-9381-822AD967B277}
 		{A0EE266A-422E-45B1-A316-7F52B5A6DF6E} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{0C23AD5D-61E7-4163-ACEE-EC3E414E278B} = {5C4AF588-9E89-4835-B899-12A16B587546}
+		{1F0DB637-3CAA-4954-AD07-190589B94DC3} = {5C4AF588-9E89-4835-B899-12A16B587546}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
