@@ -22,7 +22,7 @@ namespace Vs.Rules.OpenApi.v2.Controllers
     [Route("api/v{version:apiVersion}/core")]
     [OpenApiTag("Code Generation Controller", Description = "Code Generator for API clients")]
     [ApiController]
-    public class CodeGenerationController : VsControllerBase
+    public class CodeGenerationController : ControllerBase
     {
         /// <summary>
         /// Generates a typescript client for consuming the API.
