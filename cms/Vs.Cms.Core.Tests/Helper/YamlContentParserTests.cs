@@ -13,7 +13,7 @@ namespace Vs.Cms.Core.Tests.Helper
         {
             var root = YamlContentParser.RenderContentYamlToObject(ContentYamlTest1.Body);
             Assert.Single(root);
-            Assert.Equal("Content", root.First().Key);
+            Assert.Equal("content", root.First().Key);
             Assert.Equal(typeof(List<object>), root.First().Value.GetType());
 
             var content = root.First().Value as List<object>;
