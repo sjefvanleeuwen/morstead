@@ -1,6 +1,14 @@
 version: '3.3'
 
 services:
+  dev-db:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    container_name: dev-db
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
   dev-irma-server:
     build:
       context: ./.docker/dev/irma
