@@ -1,4 +1,13 @@
-﻿Content:
+﻿# Zorgtoeslag content for burger site demo
+stuurinformatie:
+  onderwerp: zorgtoeslag
+  organisatie: belastingdienst
+  type: toeslagen
+  domein: zorg
+  versie: 5.0
+  status: ontwikkel
+  jaar: 2019
+content:
  - key: berekening.header
    titel: Zorgtoeslag 2
    ondertitel: Proefberekening

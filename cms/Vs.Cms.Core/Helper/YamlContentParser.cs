@@ -70,7 +70,7 @@ namespace Vs.Cms.Core.Helper
             var result = new Dictionary<string, object>();
             foreach (var item in node.Children)
             {
-                result.Add(item.Key.ToString(), RenderYamlNodeToObject(item.Value));
+                result.Add(item.Key.ToString().ToLower(), RenderYamlNodeToObject(item.Value));
             }
             return result;
         }

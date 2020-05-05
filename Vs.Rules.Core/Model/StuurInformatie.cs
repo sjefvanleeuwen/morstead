@@ -1,4 +1,6 @@
-﻿namespace Vs.Rules.Core.Model
+﻿using System;
+
+namespace Vs.Rules.Core.Model
 {
 
     public class StuurInformatie
@@ -11,6 +13,7 @@
         public string Status { get; internal set; }
         public string Jaar { get; internal set; }
         public string Bron { get; internal set; }
-
+        public Uri ContentYamlUrl { get; internal set; }
+        public Uri RoutingYamlUrl { get; internal set; }
     }
 }
