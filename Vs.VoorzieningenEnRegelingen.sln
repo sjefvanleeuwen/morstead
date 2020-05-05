@@ -73,15 +73,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core", "core\Vs.Core\Vs.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.BurgerPortaal", "Vs.VoorzieningenEnRegelingen.BurgerPortaal\Vs.VoorzieningenEnRegelingen.BurgerPortaal.csproj", "{2EE6C058-473C-40A4-BB03-B9C8391C41CD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "library", "library", "{28C9EFA2-16CB-4C02-942B-892D8EC8DD10}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Tests", "core\Vs.Core.Tests\Vs.Core.Tests.csproj", "{879A048D-51F2-4BCA-99CF-D0D0F411AAEA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Graph.Core.Tests", "graph\Vs.Graph.Core.Tests\Vs.Graph.Core.Tests.csproj", "{142F8B64-A932-489F-9737-1E127810D6CB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.DataProvider.MsSqlGraph.Tests", "graph\Vs.DataProvider.MsSqlGraph.Tests\Vs.DataProvider.MsSqlGraph.Tests.csproj", "{465B8D5D-5A29-4447-96F5-0290F17FD680}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Components.Testing", "library\Microsoft.AspNetCore.Components.Testing\Microsoft.AspNetCore.Components.Testing.csproj", "{35E801B9-7BF0-4639-BCA1-E5952FAFFBF4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests", "Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests\Vs.VoorzieningenEnRegelingen.BurgerPortaal.Tests.csproj", "{AFAA8D8D-5B57-49B1-A718-7029ADE90618}"
 EndProject
@@ -123,7 +119,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.BurgerPortaal.WASM", "Vs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.BurgerPortaal.Core.Tests", "Vs.BurgerPortaal.Core.Tests\Vs.BurgerPortaal.Core.Tests.csproj", "{37D05D77-F84C-4C30-8334-343DE465BA86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Web.OpenApi.Tests", "core\Vs.Core.Web.OpenApi.Tests\Vs.Core.Web.OpenApi.Tests.csproj", "{1F0DB637-3CAA-4954-AD07-190589B94DC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Web.OpenApi.Tests", "core\Vs.Core.Web.OpenApi.Tests\Vs.Core.Web.OpenApi.Tests.csproj", "{1F0DB637-3CAA-4954-AD07-190589B94DC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -183,10 +179,6 @@ Global
 		{465B8D5D-5A29-4447-96F5-0290F17FD680}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{465B8D5D-5A29-4447-96F5-0290F17FD680}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{465B8D5D-5A29-4447-96F5-0290F17FD680}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35E801B9-7BF0-4639-BCA1-E5952FAFFBF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35E801B9-7BF0-4639-BCA1-E5952FAFFBF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35E801B9-7BF0-4639-BCA1-E5952FAFFBF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35E801B9-7BF0-4639-BCA1-E5952FAFFBF4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AFAA8D8D-5B57-49B1-A718-7029ADE90618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFAA8D8D-5B57-49B1-A718-7029ADE90618}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFAA8D8D-5B57-49B1-A718-7029ADE90618}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -275,7 +267,6 @@ Global
 		{879A048D-51F2-4BCA-99CF-D0D0F411AAEA} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{142F8B64-A932-489F-9737-1E127810D6CB} = {4EEA526B-513B-4274-83E9-82847EDCB061}
 		{465B8D5D-5A29-4447-96F5-0290F17FD680} = {4EEA526B-513B-4274-83E9-82847EDCB061}
-		{35E801B9-7BF0-4639-BCA1-E5952FAFFBF4} = {28C9EFA2-16CB-4C02-942B-892D8EC8DD10}
 		{03D26D24-A62C-4735-9756-698B6908E887} = {E3EFC9E8-AF92-4CA2-B6F8-43FEF9555A3E}
 		{5303C029-F6DF-4182-A51B-C21EDDDF19B0} = {E3EFC9E8-AF92-4CA2-B6F8-43FEF9555A3E}
 		{A13575CC-D4D7-4BE2-852C-561522381580} = {5C4AF588-9E89-4835-B899-12A16B587546}
