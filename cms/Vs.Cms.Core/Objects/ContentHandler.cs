@@ -12,7 +12,7 @@ namespace Vs.Cms.Core.Objects
 
         private readonly ICultureContentContainer _cultureContentContainer;
 
-        private const string _content = "Content";
+        private const string _content = "content";
         private const string _key = "key";
 
         public ContentHandler(ICultureContentContainer cultureContentContainer)
