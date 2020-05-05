@@ -31,7 +31,7 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
         private string ContentYamlProvided => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
         private string ContentYamlFromRules => SequenceController.GetParseResult().Model.Header.ContentYamlUrl?.ToString();
         private string ContentYaml => ContentYamlProvided ?? ContentYamlFromRules ?? ContentYamlDefault;
-        private string RoutingYamlDefault => YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml");
+        private string RoutingYamlDefault => YamlTestFileLoader.Load(@"Zorgtoeslag5Routing.yaml");
         private string RoutingYamlProvided => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
         private string RoutingYamlFromRules => SequenceController.GetParseResult().Model.Header.RoutingYamlUrl?.ToString();
         private string RoutingYaml => RoutingYamlProvided ?? RoutingYamlFromRules ?? RoutingYamlDefault;

@@ -1,4 +1,5 @@
-﻿stuurinformatie:
+﻿# Zorgtoeslag content for burger site demo
+stuurinformatie:
   onderwerp: zorgtoeslag
   organisatie: belastingdienst
   type: toeslagen
