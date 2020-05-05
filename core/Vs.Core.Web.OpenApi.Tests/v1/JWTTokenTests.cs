@@ -1,3 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Vs.Core.IntegrationTesting.OpenApi;
 using Vs.Core.Web.OpenApi.Tests.v1.TestData;
 using Xunit;
@@ -16,7 +22,6 @@ namespace Vs.Core.Web.OpenApi.Tests.v1
         [Fact]
         public async void CanCreateSignedTokenViaApi()
         {
-            // sign using an RSA256 Key
             var response = await Client.CreateSignedTokenAsync(new CreateSignedTokenRequest()
             {
                 Authority = "ACME Authority",
@@ -24,15 +29,17 @@ namespace Vs.Core.Web.OpenApi.Tests.v1
                 Subject = "Token for ACME API'S",
                 PrivateKey = JWTTestData.PrivateKeyHS256,
                 Ttl = 86400, // valid for one day
-                Roles = new[] { new Role() { Name = "TNT" }, new Role { Name = "Roadrunner" } }
+                Roles = new[] { new Role { Name = "TNT" }, new Role { Name = "Roadrunner" }, new Role { Name = "dev" } }
             });
         }
 
-
-        //[Fact]
-        public void CanDiscoverRoleCapabilities()
+        [Fact]
+        public async void CanDiscoverRoleCapabilities()
         {
-            Assert.True(true);
+            var response = await Client.AvailableRolesAsync(new AvailableRolesRequest());
+            Assert.True(response.RolesControllers.DistinctRoles.Count > 0);
+            Assert.True(response.RolesControllers.Controllers.Count > 0);
+            // no further asserts because of changing api.
         }
     }
 }
