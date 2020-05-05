@@ -1,4 +1,6 @@
-﻿namespace Vs.Core.Web.OpenApi.v1.Dto.JwtToken
+﻿using System.Collections.Generic;
+
+namespace Vs.Core.Web.OpenApi.v1.Dto.JwtToken
 {
     /// <summary>
     /// Signs a token request using a private key
@@ -46,6 +48,6 @@
         /// <value>
         /// The roles.
         /// </value>
-        public Roles Roles {get;set;}
+        public List<Role> Roles {get;set;}
     }
 }
