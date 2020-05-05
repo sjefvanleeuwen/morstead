@@ -2,23 +2,21 @@
 
 namespace Vs.Core.Web.OpenApi.v1.Dto.JwtToken
 {
-    /// <summary>
-    /// Contains the roles used by a capability.
-    /// </summary>
-    public class RolesCapability
+    public class RolesControllers
     {
         /// <summary>
-        /// Name of the capability (method)
+        /// List of controllers that contain authorization attributes.
         /// </summary>
         /// <value>
-        /// The name.
+        /// The controllers.
         /// </value>
-        public string Name { get; set; }
+        public List<RolesController> Controllers {get;set;}
+
         /// <summary>
-        /// Distinct Roles available to the  capbilitity
+        /// Distinct Roles used by the API.
         /// </summary>
         /// <value>
-        /// The roles.
+        /// The distinct roles.
         /// </value>
         public List<Role> DistinctRoles { get; set; }
     }

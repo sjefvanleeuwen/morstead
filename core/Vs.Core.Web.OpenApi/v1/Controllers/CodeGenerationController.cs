@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NSwag;
 using NSwag.Annotations;
 using NSwag.CodeGeneration.CSharp;
@@ -6,6 +7,7 @@ using NSwag.CodeGeneration.TypeScript;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Vs.Core.Web.OpenApi;
 using Vs.Core.Web.OpenApi.v1.Dto.CodeGenerators;
 using Vs.Core.Web.OpenApi.v1.Dto.ProtocolErrors;
 
@@ -34,6 +36,7 @@ namespace Vs.Rules.OpenApi.v2.Controllers
         [ProducesResponseType(typeof(GenerateTypeScriptClientResponse), 200)]
         [ProducesResponseType(typeof(NotFound404Response), 404)]
         [ProducesResponseType(typeof(ServerError500Response), 500)]
+        [Authorize(Roles = "dev")]
         public async Task<IActionResult> GenerateTypeScriptClient(GenerateTypeScriptClientRequest request)
         {
             try

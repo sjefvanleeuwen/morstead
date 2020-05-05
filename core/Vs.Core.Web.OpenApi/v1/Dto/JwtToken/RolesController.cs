@@ -3,22 +3,25 @@
 namespace Vs.Core.Web.OpenApi.v1.Dto.JwtToken
 {
     /// <summary>
-    /// Contains the roles used by a capability.
+    /// Contains all the roles that are used by this controller.
     /// </summary>
-    public class RolesCapability
+    /// <seealso cref="System.Collections.Generic.IEnumerable{Vs.Core.Web.OpenApi.v1.Dto.JwtToken.RolesCapability}" />
+    public class RolesController
     {
+        public List<RolesCapability> RolesPerCapability { get; set; }
         /// <summary>
-        /// Name of the capability (method)
+        /// Name of the Controller
         /// </summary>
         /// <value>
         /// The name.
         /// </value>
         public string Name { get; set; }
+
         /// <summary>
-        /// Distinct Roles available to the  capbilitity
+        /// Distinct Roles used by this API Controller
         /// </summary>
         /// <value>
-        /// The roles.
+        /// The distinct roles.
         /// </value>
         public List<Role> DistinctRoles { get; set; }
     }

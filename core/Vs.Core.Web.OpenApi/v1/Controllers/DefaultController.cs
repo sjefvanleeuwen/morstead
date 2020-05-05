@@ -2,7 +2,7 @@
 
 namespace Vs.Core.Web.OpenApi.Controllers
 {
-    public class DefaultController : Controller
+    public class DefaultController : ControllerBase
     {
         [Route(""), HttpGet]
         [ApiExplorerSettings(IgnoreApi = true)]

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,35 +68,64 @@ namespace Vs.Core.Web.OpenApi.v1.Controllers
         [ProducesResponseType(typeof(ServerError500Response), 500)]
         public async Task<IActionResult> AvailableRoles(AvailableRolesRequest request)
         {
-            var RolesControllerDictionary = new Dictionary<string, List<string>>();
-            const bool allInherited = true;
-            const string CONTROLLER = "Controller";
-
-            var myAssembly = System.Reflection.Assembly.GetExecutingAssembly();
-
-            // get List of all Controllers with [Authorize] attribute
-            var controllerList = from type in myAssembly.GetTypes()
-                                 where type.Name.Contains(CONTROLLER)
-                                 where !type.IsAbstract
-                                 let attribs = type.GetCustomAttributes(allInherited)
-                                 where attribs.Any(x => x.GetType().Equals(typeof(AuthorizeAttribute)))
-                                 select type;
-            // Loop over all controllers
-            foreach (var controller in controllerList)
-            {   // Find first instance of [Authorize] attribute
-                var attrib = controller.GetCustomAttributes(allInherited).First(x => x.GetType().Equals(typeof(AuthorizeAttribute))) as AuthorizeAttribute;
-                foreach (var role in attrib.Roles.Split(',').AsEnumerable())
-                {   // If there are Roles associated with [Authorize] iterate over them
-                    if (!RolesControllerDictionary.ContainsKey(role))
-                    { RolesControllerDictionary[role] = new List<string>(); }
-                    // Add controller to List of controllers associated with role (removing "controller" from name)
-                    RolesControllerDictionary[role].Add(controller.Name.Replace(CONTROLLER, ""));
-                }
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            List<Type> types = new List<Type>();
+            foreach (var assembly in assemblies)
+            {
+                var typ = assembly.GetTypes();
+                types.AddRange((from Type type in typ where type.IsSubclassOf(typeof(ControllerBase)) select type).ToArray());
             }
-            return StatusCode(200,RolesControllerDictionary);
 
-            //var response = new AvailableRolesResponse();
+            var authMethods = types.SelectMany(x => x.GetMethods())
+            .Where(y => y.GetCustomAttributes().OfType<AuthorizeAttribute>().Any())
+            .ToDictionary(z => z.Name);
 
+            var availableRoles = new AvailableRolesResponse();
+            availableRoles.RolesControllers = new RolesControllers
+            {
+                Controllers = new List<RolesController>(),
+                DistinctRoles = new List<Role>()
+            };
+
+            Type currentController = typeof(bool);
+            RolesController currentRolesController = null;
+            foreach (var authMethod in authMethods)
+            {
+                // controllers are discovered in ordered order.
+                if (authMethod.Value.DeclaringType != currentController)
+                {
+                    currentRolesController = new RolesController
+                    {
+                        RolesPerCapability = new List<RolesCapability>(),
+                        DistinctRoles = new List<Role>(),
+                        Name = authMethod.Value.DeclaringType.Name
+                    };
+                    availableRoles.RolesControllers.Controllers.Add(currentRolesController);
+                }
+
+                dynamic s = authMethod.Value.GetCustomAttribute(typeof(AuthorizeAttribute));
+                //todo get method name from decoration HTTPPOST/HTTPGET. Currently just refelcts the c# method.
+                var rolesPerCapability = new RolesCapability
+                {
+                    Name = authMethod.Value.Name,
+                    //rolesPerCapability.DistinctRoles = new Roles();
+                    DistinctRoles = new List<Role>()
+                };
+
+                foreach (var role in ((string)s.Roles).Split(',').Select(sValue => sValue.Trim()).ToArray())
+                {
+                    rolesPerCapability.DistinctRoles.Add(new Role() { Name = role });
+                    // Add the capabilities roles distinctly to Controller level
+                    if (!currentRolesController.DistinctRoles.Any(p => p.Name == role))
+                        currentRolesController.DistinctRoles.Add(new Role() { Name = role });
+                    if (!availableRoles.RolesControllers.DistinctRoles.Any(p => p.Name == role))
+                        // Add the capabilities roles distinctly to API level
+                        availableRoles.RolesControllers.DistinctRoles.Add(new Role() { Name = role });
+                }
+                currentRolesController.RolesPerCapability.Add(rolesPerCapability);
+            }
+
+            return StatusCode(200,availableRoles);
         }
     }
 }

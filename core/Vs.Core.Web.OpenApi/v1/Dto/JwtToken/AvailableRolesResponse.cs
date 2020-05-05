@@ -5,6 +5,12 @@
     /// </summary>
     public class AvailableRolesResponse
     {
-        public Roles Roles { get; set; }
+        /// <summary>
+        /// Controllers containing authorization roles.
+        /// </summary>
+        /// <value>
+        /// The roles controllers.
+        /// </value>
+        public RolesControllers RolesControllers { get; set; }
     }
 }
