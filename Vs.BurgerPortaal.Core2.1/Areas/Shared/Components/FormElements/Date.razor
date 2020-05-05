@@ -1,3 +1,0 @@
-﻿@inherits FormElementBase
-<MatDatePicker Label="@HttpUtility.HtmlDecode(_data.Label)" @bind-Value="@_data.ValueUtcDate" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" />
-<Error><ValidationMessage For="@(() => _data.Value)" /></Error>
