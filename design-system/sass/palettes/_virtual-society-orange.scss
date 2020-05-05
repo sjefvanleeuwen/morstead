@@ -1,0 +1,30 @@
+﻿// colors created from logo with https://coolors.co/
+
+$color-light: #FFA864; // light orange/brown
+$color-medium: #FF733F; // light orange
+$color-dark: #FF3A1D; // orange
+$mono-light:   #B8B0A5;
+$mono-medium: #6A6960;
+$mono-dark: #33332E;
+$mono-black: #000000;
+$mono-white: #FFFFFF;
+
+$topnav-color: $mono-dark;
+$topnav-fore-color: $mono-light;
+$topnav-hover-color: $mono-light;
+$topnav-hover-fore-color: $color-dark;
+$topnav-active-color: $color-dark;
+$topnav-active-for-color: $mono-light;
+
+// typography theming
+$color-font: $mono-black;
+$color-h1: $color-dark;
+$color-h2: $color-dark;
+$color-h3: $color-dark;
+$color-h4: $color-dark;
+$color-h5: $color-dark;
+$color-h6: $color-dark;
+
+$color-warning: orange;
+$color-success: green;
+$color-error: red;

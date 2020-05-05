@@ -1,0 +1,15 @@
+title: Radio button default
+status: prototype
+context:
+  radios:
+  - id: radioid1
+    name: radioname
+    child_content: radio button 
+  - id: radioid2
+    name: radioname
+    child_content: radio button
+    checked: checked
+  - id: radioid3
+    name: radioname
+    child_content: radio button
+    disabled: disabled

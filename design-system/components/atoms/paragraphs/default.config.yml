@@ -1,0 +1,18 @@
+title: Paragraph
+status: prototype
+context:
+  child_content: This is a default paragraph
+variants:
+  - name: error
+    context:
+        child_content: This is an error paragraph
+        color: red
+  - name: warning
+    context:
+        child_content: This is a warning paragraph
+        color: orange
+  - name: success
+    context:
+        child_content: This is a success paragraph
+        color: green
+

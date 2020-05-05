@@ -1,0 +1,158 @@
+﻿/*!
+ * Blazin by Virtual Society - https://www.virtualsociety.nl
+ * License -MIT License
+ */
+body {
+    font-family: $body-font
+}
+// Modularscale of typography please selkect one of the following algorithms
+// Or specify a fixed ratio
+// $double-octave, $pi, $major-twelfth, $major-eleventh, $major-tenth
+// $octave, $major-seventh, $minor-seventh, $major-sixth, $phi
+// $golden, $minor-sixth, $fifth, $augmented-fourth, $fourth
+// $major-third, $minor-third, $major-second, $minor-second
+
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $header-font;
+    font-style: normal;
+    font-weight: bold;
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+$modularscale: (
+  base: 14px,
+  ratio: 1.0,
+  400px: (
+    ratio: 1.1,
+  ),
+  900px: (
+    base: 14px,
+    ratio: 1.2,
+  ),
+  1200px: (
+    base: 14px,
+    ratio: 1.3,
+  ),
+);
+
+span {
+    @include ms-respond(font-size,1);
+}
+
+h1 {
+    font-weight: 100;
+    @include ms-respond(font-size,6);
+}
+
+h1 {
+    @include ms-respond(line-height,6);
+}
+
+h2 {
+    font-weight: 100;
+    @include ms-respond(font-size,5);
+}
+
+h2 {
+    @include ms-respond(line-height,5);
+}
+
+
+h3 {
+    font-weight: 100;
+    @include ms-respond(font-size,4);
+}
+
+h3 {
+    @include ms-respond(line-height,4);
+}
+
+h4 {
+    font-weight: 100;
+    @include ms-respond(font-size,3);
+}
+
+h4 {
+    @include ms-respond(line-height,3);
+}
+
+
+h5 {
+    font-weight: 100;
+    @include ms-respond(font-size,3);
+}
+
+h5 {
+    @include ms-respond(line-height,3);
+}
+
+h5 .big {
+    @include ms-respond(line-height,4);
+}
+
+
+h6 {
+    font-weight: bold;
+    @include ms-respond(font-size,2);
+}
+
+h6 {
+    font-weight: 100;
+    @include ms-respond(line-height,3);
+}
+
+p {
+    @include ms-respond(font-size,1);
+    @include ms-respond(line-height,3);
+}
+
+.intro p {
+    font-size: 1.25em;
+    line-height: 1.3em;
+}
+
+.main {
+    margin-top: 100px; /* Add a top margin to avoid content overlay */
+}
+
+.content {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.content .intro p {
+    font-size: 1.25em;
+    line-height: 1.3em;
+}
+
+// Theme foreground color and monochromatic styles 
+.color-dark        { color: $color-dark;       }
+.color-medium      { color: $color-medium;     }
+.color-light       { color: $color-light;      }
+.mono-dark         { color: $mono-dark;        }
+.mono-medium       { color: $mono-medium;      }
+.mono-light        { color: $mono-light;       }
+.color-success     { color: $color-success;    }
+.color-waring      { color: $color-warning;    }
+.color-error       { color: $color-error;      }
+
+.mono-black        { color: $mono-black        }
+.mono-white        { color: $mono-white        }
+
+// Theme background color and monochromatic styles
+.color-dark-bk     { background-color: $color-dark;       }
+.color-medium-bk   { background-color: $color-medium;     }
+.color-light-bk    { background-color: $color-light;      }
+.mono-dark-bk      { background-color: $mono-dark;        }
+.mono-medium-bk    { background-color: $mono-medium;      }
+.mono-light-bk     { background-color: $mono-light;       }
+.color-success-bk  { background-color: $color-success;    }
+.color-waring-bk   { background-color: $color-warning;    }
+.color-error-bk    { background-color: $color-error;      }
+
+.mono-black-bk     { background-color: $mono-black        }
+.mono-white-bk     { background-color: $mono-white        }

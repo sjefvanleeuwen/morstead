@@ -1,0 +1,53 @@
+﻿input[type="text"], 
+input[type="email"],
+input[type="password"],
+input[type="file"],
+input[type="date"],
+select,
+textarea {
+    background-color: #fff;
+    border-top: 0 solid #01689b;
+    border-right: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-bottom: 2px solid #01689b;
+    font-size: 20px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    outline: 2px dotted #01689b;
+    outline-offset: -3px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    padding-left: 5px;
+    width: 99%;
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="date"], select {
+    padding: .3333em 0;
+    padding-right: 0px;
+    padding-left: 0px;
+    height: 32px;
+    width: 100%;
+}
+
+input, select, textarea, button, .abonneren a.stayInformedBtn {
+    line-height: normal;
+    padding: .35em 0;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-weight: normal;
+    font-size: 1.125rem;
+    line-height: 1.625;
+}
+

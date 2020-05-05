@@ -1,0 +1,240 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?i56i0');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?i56i0#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?i56i0') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?i56i0') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?i56i0##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.vs {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.vs-mobile {
+  &:before {
+    content: $vs-mobile; 
+  }
+}
+.vs-tablet {
+  &:before {
+    content: $vs-tablet; 
+  }
+}
+.vs-phone {
+  &:before {
+    content: $vs-phone; 
+  }
+}
+.vs-sunrise {
+  &:before {
+    content: $vs-sunrise; 
+  }
+}
+.vs-sun {
+  &:before {
+    content: $vs-sun; 
+  }
+}
+.vs-moon {
+  &:before {
+    content: $vs-moon; 
+  }
+}
+.vs-snowflake {
+  &:before {
+    content: $vs-snowflake; 
+  }
+}
+.vs-cloud-sunny {
+  &:before {
+    content: $vs-cloud-sunny; 
+  }
+}
+.vs-cloud-night {
+  &:before {
+    content: $vs-cloud-night; 
+  }
+}
+.vs-cloud {
+  &:before {
+    content: $vs-cloud; 
+  }
+}
+.vs-lightning {
+  &:before {
+    content: $vs-lightning; 
+  }
+}
+.vs-partially-rain {
+  &:before {
+    content: $vs-partially-rain; 
+  }
+}
+.vs-rain {
+  &:before {
+    content: $vs-rain; 
+  }
+}
+.vs-wind {
+  &:before {
+    content: $vs-wind; 
+  }
+}
+.vs-wind-rain {
+  &:before {
+    content: $vs-wind-rain; 
+  }
+}
+.vs-snow {
+  &:before {
+    content: $vs-snow; 
+  }
+}
+.vs-snow-heavy {
+  &:before {
+    content: $vs-snow-heavy; 
+  }
+}
+.vs-cloudy {
+  &:before {
+    content: $vs-cloudy; 
+  }
+}
+.vs-thermometer {
+  &:before {
+    content: $vs-thermometer; 
+  }
+}
+.vs-compass {
+  &:before {
+    content: $vs-compass; 
+  }
+}
+.vs-celsius {
+  &:before {
+    content: $vs-celsius; 
+  }
+}
+.vs-fahrenheit {
+  &:before {
+    content: $vs-fahrenheit; 
+  }
+}
+.vs-key {
+  &:before {
+    content: $vs-key; 
+  }
+}
+.vs-check {
+  &:before {
+    content: $vs-check; 
+  }
+}
+.vs-close {
+  &:before {
+    content: $vs-close; 
+  }
+}
+.vs-inbox {
+  &:before {
+    content: $vs-inbox; 
+  }
+}
+.vs-calendar {
+  &:before {
+    content: $vs-calendar; 
+  }
+}
+.vs-folder {
+  &:before {
+    content: $vs-folder; 
+  }
+}
+.vs-folder-open {
+  &:before {
+    content: $vs-folder-open; 
+  }
+}
+.vs-globe {
+  &:before {
+    content: $vs-globe; 
+  }
+}
+.vs-menu {
+  &:before {
+    content: $vs-menu; 
+  }
+}
+.vs-table {
+  &:before {
+    content: $vs-table; 
+  }
+}
+.vs-caret-right {
+  &:before {
+    content: $vs-caret-right; 
+  }
+}
+.vs-envelope {
+  &:before {
+    content: $vs-envelope; 
+  }
+}
+.vs-legal {
+  &:before {
+    content: $vs-legal; 
+  }
+}
+.vs-angle-left {
+  &:before {
+    content: $vs-angle-left; 
+  }
+}
+.vs-angle-right {
+  &:before {
+    content: $vs-angle-right; 
+  }
+}
+.vs-angle-up {
+  &:before {
+    content: $vs-angle-up; 
+  }
+}
+.vs-angle-down {
+  &:before {
+    content: $vs-angle-down; 
+  }
+}
+.vs-desktop {
+  &:before {
+    content: $vs-desktop; 
+  }
+}
+.vs-send {
+  &:before {
+    content: $vs-send; 
+  }
+}
+.vs-identity {
+  &:before {
+    content: $vs-identity; 
+  }
+}
+

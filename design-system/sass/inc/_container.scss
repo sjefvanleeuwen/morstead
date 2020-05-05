@@ -1,0 +1,12 @@
+﻿.container, .vs-panel {
+    padding: 0.01em $padding;
+}
+
+.panel, .info {
+    background-color:cadetblue;
+}
+
+.panel {
+    margin-top: $padding;
+    margin-bottom: $padding;
+}

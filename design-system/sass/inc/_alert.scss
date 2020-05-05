@@ -1,0 +1,18 @@
+﻿.alert-box {
+    width: auto;
+    background-color: #fff;
+    padding: 8px 12px;
+    word-wrap: break-word;
+}
+
+.alert-box-success {
+    border-left: 4px solid $color-succes;
+}
+
+.alert-box-warning {
+    border-left: 4px solid $color-warning;
+}
+
+.alert-box-error {
+    border-left: 4px solid $color-error;
+}

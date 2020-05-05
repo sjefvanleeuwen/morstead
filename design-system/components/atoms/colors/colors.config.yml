@@ -1,0 +1,46 @@
+title: Color Palette
+status: prototype
+context:
+  child_content: This is a default paragraph
+  color: mono-black
+  background_color: mono-black-bk
+  onclick: bla
+variants:
+  - name: color-dark
+    context:
+        child_content: This is an error paragraph
+        color: color-dark
+        background_color: color-dark-bk
+  - name: color-medium
+    context:
+        child_content: This is a warning paragraph
+        color: color-medium
+        background_color: color-medium-bk
+  - name: color-light
+    context:
+        child_content: This is a success paragraph
+        color: color-light
+        background_color: color-light-bk
+  - name: mono-dark
+    context:
+        child_content: This is an error paragraph
+        color: mono-dark
+        background_color: mono-dark-bk
+  - name: mono-medium
+    context:
+        child_content: This is a warning paragraph
+        color: mono-medium
+        background_color: mono-medium-bk
+  - name: mono-light
+    context:
+        child_content: This is a success paragraph
+        color: mono-light
+        background_color: mono-light-bk
+  - name: mono-white
+    context:
+        child_content: This is a success paragraph
+        color: mono-white
+        background_color: mono-white-bk
+
+
+
