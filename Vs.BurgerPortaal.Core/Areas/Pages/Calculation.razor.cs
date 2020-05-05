@@ -24,8 +24,17 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
         private NavigationManager NavigationManager { get; set; }
 
         private Uri Uri => NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
-        private string RuleYaml => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
-        private string ContentYaml => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("content", out var param) ? param.First() : null;
+        private string RuleYamlDefault => YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml");
+        private string RuleYamlProvided => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
+        private string RuleYaml => RuleYamlProvided ?? RuleYamlDefault;
+        private string ContentYamlDefault => YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml");
+        private string ContentYamlProvided => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
+        private string ContentYamlFromRules => SequenceController.GetParseResult().Model.Header.ContentYamlUrl?.ToString();
+        private string ContentYaml => ContentYamlProvided ?? ContentYamlFromRules ?? ContentYamlDefault;
+        private string RoutingYamlDefault => YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml");
+        private string RoutingYamlProvided => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
+        private string RoutingYamlFromRules => SequenceController.GetParseResult().Model.Header.RoutingYamlUrl?.ToString();
+        private string RoutingYaml => RoutingYamlProvided ?? RoutingYamlFromRules ?? RoutingYamlDefault;
 
         //the formElement we are showing
         private IFormElementBase _formElement;
@@ -48,8 +57,8 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
 
         protected override void OnInitialized()
         {
-            SequenceController.Sequence.Yaml = RuleYaml ?? YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml");
-            ContentController.Initialize(ContentYaml ?? YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml"));
+            SequenceController.Sequence.Yaml = RuleYaml;
+            ContentController.Initialize(ContentYaml);
             base.OnInitialized();
             //get the first step
             GetNextStep();
