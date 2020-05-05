@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using NSwag;
-using System.Text.Json.Serialization;
+using Vs.Core.Web.OpenApi.v1.Middleware;
 
 namespace Acme.Answer.OpenApi
 {
@@ -21,30 +18,12 @@ namespace Acme.Answer.OpenApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
-                .AddJsonOptions(
-                    options =>
-                    {
-                        options.JsonSerializerOptions.ReferenceHandling = ReferenceHandling.Preserve;
-                    }
-                    );
-            services.AddApiVersioning(options =>
-            {
-                options.AssumeDefaultVersionWhenUnspecified = true;
-                options.ApiVersionReader = new UrlSegmentApiVersionReader();
-            });
-            services.AddVersionedApiExplorer(options =>
-            {
-                options.SubstituteApiVersionInUrl = true;
-            });
+            services.AddOpenApiServices();
 
-            var doc = new OpenApiDocument();
-            doc.Info.Title = "Virtual Society Rule Engine";
-            doc.Info.License = new OpenApiLicense() { Name = "MIT License", Url = "https://github.com/sjefvanleeuwen/virtual-society-urukagina/blob/master/LICENSE" };
-            doc.Info.TermsOfService = "Dot not use in production.";
-            //doc.Info.Description = "A Semantic Rule Engine API that plays nice with frontends.";
-            doc.Info.Contact = new OpenApiContact() { Url = "https://github.com/sjefvanleeuwen/virtual-society-urukagina/" };
-            doc.Info.Description = @"
+            //set up the default document information
+            var doc = new ApiDocument();
+            doc.Title = "Virtual Society Rule Engine";
+            doc.Description = @"
 
 <img width=128 height=128 src='/img/logo.svg'></img><br/>A Semantic Rule Engine API that plays nice with frontends.
 
@@ -83,26 +62,20 @@ Feedback might not be accepted and move to another version release in the future
 Final releases should work in all scenario's. Might issues arise patches might be release using an increment in the minor version.
 ";
 
-            services
-                .AddSwaggerDocument(document =>
-                {
-                    document.DocumentName = "2.0";
-                    document.ApiGroupNames = new[] { "2" };
-                    document.PostProcess = d =>
-                    {
-                        d.Info = doc.Info;
-                        d.Info.Version = "2.0";
-                    };
-                })
-                .AddSwaggerDocument(document =>
-                {
-                    document.DocumentName = "2.0-features";
-                    document.ApiGroupNames = new[] { "2.0-feature1", "2.0-feature2" };
-                    document.PostProcess = d =>
-                    {
-                        d.Info = doc.Info;
-                        d.Info.Version = "2.0-features";
-                        d.Info.Description = @"
+            //add specific versions
+            services.AddDocument(document =>
+            {
+                document.Title = doc.Title;
+                document.Description = doc.Description;
+                document.Name = "2.0";
+                document.ApiGroupNames = new[] { "2" };
+                document.Version = "2.0";
+            });
+
+            services.AddDocument(document =>
+            {
+                document.Title = doc.Title;
+                document.Description = @"
 <img width=128 height=128 src='/img/logo.svg'></img><br/>A Semantic Rule Engine API that plays nice with frontends.
 
 <h2>What you need to know about this feature branch</h2>
@@ -111,43 +84,24 @@ This feature branche allows you to quickly use new features as they are requeste
 
 Eventually the seperate features will become obsolete, we allow for a cooldown period so you can upgrade to the new version. You can join us in testing the alpha/beta releases or migrate over once the next major version reaches 
 RC / Release status.";
-                    };
-                })
-                .AddSwaggerDocument(document =>
-                {
-                    document.DocumentName = "1.0-release";
-                    document.ApiGroupNames = new[] { "1" };
-                    document.PostProcess = d =>
-                    {
-                        d.Info = doc.Info;
-                        d.Info.Version = "1.0-release";
-                    };
-                });
+                document.Name = "2.0-features";
+                document.ApiGroupNames = new[] { "2.0-feature1", "2.0-feature2" };
+                document.Version = "2.0-features";
 
+            });
+
+            services.AddDocument(document =>
+            {
+                document.Name = "1.0-release";
+                document.ApiGroupNames = new[] { "1" };
+                document.Version = "1.0-release";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseStaticFiles();
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
+            app.UseOpenApiStrategy(env);
         }
     }
 }

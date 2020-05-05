@@ -8,7 +8,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.4.2" />
-    <PackageReference Include="System.Text.Json" Version="5.0.0-preview.2.20160.6" />
+    <PackageReference Include="System.Text.Json" Version="5.0.0-preview.3.20214.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +17,10 @@
 
   <ItemGroup>
     <None Include="..\Vs.Rules.OpenApi\wwwroot\img\logo.svg" Link="wwwroot\img\logo.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\core\Vs.Core.Web.OpenApi\Vs.Core.Web.OpenApi.csproj" />
   </ItemGroup>
 
 

@@ -1,8 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
+using Vs.Core.Web.OpenApi;
 
 namespace Acme.Answer.OpenApi.Controllers
 {
-    public class DefaultController : Controller
+    [ApiVersion("0.1")]
+    [Route("api/v{version:apiVersion}/default")]
+    [OpenApiTag("Default API", Description = "")]
+    [ApiController]
+    public class DefaultController : VsControllerBase
     {
         [Route(""), HttpGet]
         [ApiExplorerSettings(IgnoreApi = true)]
