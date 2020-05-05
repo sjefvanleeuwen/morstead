@@ -1,0 +1,13 @@
+﻿<nav class="calc_pagination">
+    <ul>
+        <li>
+            <MatButton Icon="chevron_left" Disabled="@PreviousDisabled" @onclick="InvokePrevious">@PreviousText</MatButton>
+        </li>
+        <li>
+            <MatProgressBar Progress="@Progress"></MatProgressBar>
+        </li>
+        <li>
+            <MatButton TrailingIcon="chevron_right" Disabled="@NextDisabled" @onclick="InvokeNext">@NextText</MatButton>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Shared\Components\FormElements\File.razor.cs" />
+    <Compile Remove="Objects\FormElements\FileFormElementData.cs" />
+    <Compile Remove="Objects\FormElements\Interfaces\IFileFormElementData.cs" />
+    <Compile Remove="Objects\FormElements\Unused.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Shared\Components\FormElements\File.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MatBlazor" Version="2.4.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0-rc1.20223.4" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cms\Vs.Cms.Core\Vs.Cms.Core.csproj" />
+    <ProjectReference Include="..\core\Vs.Core\Vs.Core.csproj" />
+    <ProjectReference Include="..\Vs.Rules.Core\Vs.Rules.Core.csproj" />
+    <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.TestData\Vs.VoorzieningenEnRegelingen.Core.TestData.csproj" />
+  </ItemGroup>
+</Project>

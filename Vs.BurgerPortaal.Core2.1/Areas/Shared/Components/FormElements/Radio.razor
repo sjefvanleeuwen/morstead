@@ -1,0 +1,19 @@
+﻿@inherits FormElementBase
+<MatBody2>@((MarkupString)_data.Label)</MatBody2>
+<MatRadioGroup @bind-Value="@Value" TValue="string" Id="@_data.Name">
+    @foreach (var key in _keys)
+    {
+        if (IsHorizontalRadio)
+        {
+            <MatRadioButton Value="@key" TValue="string" Disabled="@_data.IsDisabled">@((MarkupString)_data.Options[key])</MatRadioButton>
+        }
+        else
+        {
+            <div>
+                <MatRadioButton Value="@key" TValue="string" Disabled="@_data.IsDisabled">@((MarkupString)_data.Options[key])</MatRadioButton>
+            </div>
+        }
+    }
+</MatRadioGroup>
+<FormElementHint Text="@_data.HintText" />
+<Error><ValidationMessage For="@(() => _data.Value)" /></Error>

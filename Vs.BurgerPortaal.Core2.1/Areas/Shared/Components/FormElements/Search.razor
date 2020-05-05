@@ -1,0 +1,17 @@
+﻿@inherits FormElement
+<WrapperDefault IsValid="@IsValid">
+    <Label Name="@Name" Text="@Label" TagText="@TagText" />
+    <FormElementHint Name="@Name" Text="@HintText" />
+    <Error Text="@ErrorText" />
+    <div class="input__control-group">
+        <input required="@IsRequired" disabled="@IsDisabled" type="search" id="@Name" class="input__control input__control--search @ElementSize">
+        @if (_buttonIsIcon)
+        {
+            <button class="btn btn--icon" title="@ButtonText"><i class="icon @ButtonIcon" role="presentation" value="@Value"></i></button>
+        }
+        else
+        {
+            <button class="btn">@ButtonText</button>
+        }
+    </div>
+</WrapperDefault>

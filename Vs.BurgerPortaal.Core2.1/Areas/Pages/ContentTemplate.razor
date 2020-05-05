@@ -1,0 +1,25 @@
+﻿@page "/ContentTemplate/"
+<MaterialWrapper>
+    <EditForm Model="@YamlLogic">
+        <CascadingValue Value="@YamlLogic">
+            <Text />
+        </CascadingValue>
+    </EditForm>
+
+    <MatButton @onclick="SubmitUrl">Verstuur</MatButton>
+    <div id="YamlLogicResult" style="display:@_urlDisplay">
+        <Hint Title="Resultaat van de Regels Yaml Url" Content="@UrlYamlContent" />
+        <MatButton @onclick="HideUrlContentResult">Verberg</MatButton>
+    </div>
+    <EditForm Model="@YamlLogic">
+        <CascadingValue Value="@YamlLogicText">
+            <TextArea />
+        </CascadingValue>
+    </EditForm>
+
+    <MatButton @onclick="SubmitText">Verstuur</MatButton>
+    <div id="YamlLogicResult" style="display:@_textDisplay">
+        <Hint Title="Resultaat van de Regels Yaml Text" Content="@UrlTextContent" />
+        <MatButton @onclick="HideTextContentResult">Verberg</MatButton>
+    </div>
+</MaterialWrapper>
