@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Running;
 
-namespace Vs.VoorzieningenEnRegelingen.Benchmarks
+namespace Vs.Rules.Core.Benchmarks
 {
     class Program
     {
