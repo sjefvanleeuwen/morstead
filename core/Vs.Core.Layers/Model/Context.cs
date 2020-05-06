@@ -1,12 +1,13 @@
 ﻿using Nager.Country;
 using System;
+using Vs.Core.Layers.Model.Interfaces;
 
 namespace Vs.Core.Layers.Model
 {
     /// <summary>
     /// Context of the layer configuration
     /// </summary>
-    public class Context
+    public class Context : IContext
     {
         /// <summary>
         /// Gets or sets endpoint that contains the configuration of this context.

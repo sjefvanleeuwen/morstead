@@ -1,12 +1,13 @@
 ﻿using Semver;
 using System.Collections.Generic;
+using Vs.Core.Layers.Model.Interfaces;
 
 namespace Vs.Core.Layers.Model
 {
     /// <summary>
     /// Contains the layer configuration for Virtual Society Systems
     /// </summary>
-    public class LayerConfiguration
+    public class LayerConfiguration : ILayerConfiguration
     {
         /// <summary>
         /// Gets or sets the semantic version.
@@ -21,6 +22,6 @@ namespace Vs.Core.Layers.Model
         /// <value>
         /// The layers.
         /// </value>
-        public IEnumerable<Layer> Layers {get;set;}
+        public IEnumerable<ILayer> Layers { get; set; }
     }
 }
