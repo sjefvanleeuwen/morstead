@@ -21,7 +21,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void Yaml_Can_Deserialize_Root_Nodes()
         {
-            var map = YamlParser.Map(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
+            var map = YamlRuleParser.Map(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             // Load the stream
             var s = "";
             foreach (var entry in map.Children)
@@ -34,7 +34,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void Yaml_Passes_AttributeNaming_Stuurinformatie()
         {
-            var map = YamlParser.Map(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
+            var map = YamlRuleParser.Map(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             var s = "";
             foreach (var entry in (YamlMappingNode)map.Children[new YamlScalarNode("stuurinformatie")])
             {
@@ -45,7 +45,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void Yaml_Passes_AttributeValues_Stuurinformatie()
         {
-            var map = YamlParser.Map(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
+            var map = YamlRuleParser.Map(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             var s = "";
             var entries = (YamlMappingNode)map.Children[new YamlScalarNode("stuurinformatie")];
             foreach (var entry in entries)
@@ -71,7 +71,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void Yaml_Can_Parse_Formulas()
         {
-            var yamlParser = new YamlParser(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"), null);
+            var yamlParser = new YamlRuleParser(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"), null);
             var functions = yamlParser.Formulas();
             Assert.True(functions.Count() == 11);
             Assert.True(functions.ElementAt(1).Name == "maximaalvermogen");
@@ -81,7 +81,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void Yaml_Can_Deserialize_Tables()
         {
-            var yamlParser = new YamlParser(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"), null);
+            var yamlParser = new YamlRuleParser(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"), null);
             var tabellen = yamlParser.Tabellen();
             Assert.True(tabellen.Count() == 1);
             var tabel = tabellen.Single();

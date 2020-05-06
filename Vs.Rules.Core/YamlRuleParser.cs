@@ -15,7 +15,7 @@ namespace Vs.Rules.Core
     /// For the debug info, the original line/col indexes to the Yaml file are preserved so a debugger script editor 
     /// can be implemented on the parsed model during interpretation.
     /// </summary>
-    public class YamlParser
+    public class YamlRuleParser
     {
         public const string FormulasAttribute = "formules";
         public const string FormulaAttribute = "formule";
@@ -45,7 +45,7 @@ namespace Vs.Rules.Core
         private readonly string _yaml;
         private readonly YamlMappingNode map;
 
-        public YamlParser(string yaml, Dictionary<string, Parameter> parameters)
+        public YamlRuleParser(string yaml, Dictionary<string, Parameter> parameters)
         {
             _parameters = parameters;
             _yaml = yaml;

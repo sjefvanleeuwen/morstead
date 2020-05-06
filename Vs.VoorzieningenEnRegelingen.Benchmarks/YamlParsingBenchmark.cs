@@ -16,28 +16,28 @@ namespace Vs.VoorzieningenEnRegelingen.Benchmarks
         [Benchmark]
         public List<Formula> GetFunctionsSimpleYaml()
         {
-            var parser = new YamlParser(YamlTestFileLoader.Load(@"Simple.yaml"), null);
+            var parser = new YamlRuleParser(YamlTestFileLoader.Load(@"Simple.yaml"), null);
             return parser.Formulas().ToList();
         }
 
         [Benchmark]
         public List<Formula> GetFlowSimpleYaml()
         {
-            var parser = new YamlParser(YamlTestFileLoader.Load(@"Simple.yaml"), null);
+            var parser = new YamlRuleParser(YamlTestFileLoader.Load(@"Simple.yaml"), null);
             return parser.Formulas().ToList();
         }
 
         [Benchmark]
         public List<Table> GetTablesSimpleYaml()
         {
-            var parser = new YamlParser(YamlTestFileLoader.Load(@"Simple.yaml"), null);
+            var parser = new YamlRuleParser(YamlTestFileLoader.Load(@"Simple.yaml"), null);
             return parser.Tabellen().ToList();
         }
 
         [Benchmark]
         public StuurInformatie GetStuurInformatieYaml()
         {
-            var parser = new YamlParser(YamlTestFileLoader.Load(@"Simple.yaml"), null);
+            var parser = new YamlRuleParser(YamlTestFileLoader.Load(@"Simple.yaml"), null);
             return parser.Header();
         }
     }

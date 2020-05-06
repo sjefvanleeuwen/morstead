@@ -14,7 +14,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void Flow_Zorgtoeslag_Model_Flow_Deserialization()
         {
-            var parser = new YamlParser(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"), null);
+            var parser = new YamlRuleParser(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"), null);
             var steps = parser.Flow();
             Assert.True(steps.Count() == 3);
             Assert.True((from p in steps where p.Formula == "recht" select p).Single().Situation == "");
