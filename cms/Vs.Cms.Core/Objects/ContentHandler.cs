@@ -84,7 +84,7 @@ namespace Vs.Cms.Core.Objects
             return _cultureContentContainer.Content[cultureInfo];
         }
 
-        public void TranslateParsedContentToContent(CultureInfo cultureInfo, IDictionary<string, object> parsedContent)
+        public void TranslateParsedYamlToContent(CultureInfo cultureInfo, IDictionary<string, object> parsedContent)
         {
             if (!parsedContent.ContainsKey(_content))
             {

@@ -58,8 +58,8 @@ namespace Vs.Cms.Core.Controllers
             //todo MPS Rewrite to get this from the body supplied
             _cultureInfo = new CultureInfo("nl-NL");
             _contentHandler.SetDefaultCulture(_cultureInfo);
-            var parsedContent = YamlParser.RenderContentYamlToObject(body);
-            _contentHandler.TranslateParsedContentToContent(_cultureInfo, parsedContent);
+            var parsedYaml = YamlParser.RenderContentYamlToObject(body);
+            _contentHandler.TranslateParsedYamlToContent(_cultureInfo, parsedYaml);
         }
 
         public IEnumerable<string> GetUnresolvedParameters(string semanticKey, IParametersCollection parameters)

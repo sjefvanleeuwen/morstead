@@ -81,7 +81,7 @@ namespace Vs.Cms.Core.Tests.Controllers
             var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object, moqTemplateEngine.Object);
             sut.Initialize("test: test");
             moqContentHandler.Verify(x => x.SetDefaultCulture(It.IsAny<CultureInfo>()), Times.Once());
-            moqContentHandler.Verify(x => x.TranslateParsedContentToContent(It.IsAny<CultureInfo>(), It.IsAny<IDictionary<string, object>>()), Times.Once());
+            moqContentHandler.Verify(x => x.TranslateParsedYamlToContent(It.IsAny<CultureInfo>(), It.IsAny<IDictionary<string, object>>()), Times.Once());
         }
 
         [Fact]
