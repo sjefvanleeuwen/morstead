@@ -1,7 +1,7 @@
 ﻿using Moq;
 using System.Collections.Generic;
-using Vs.Rules.Core.Model;
 using Vs.BurgerPortaal.Core.Objects;
+using Vs.Rules.Core.Model;
 using Xunit;
 
 namespace Vs.BurgerPortaal.Core.Tests.Objects

@@ -1,6 +1,6 @@
 ﻿using System;
-using Vs.Rules.Core;
 using Vs.BurgerPortaal.Core.Objects.FormElements;
+using Vs.Rules.Core;
 using Xunit;
 
 namespace Vs.BurgerPortaal.Core.Tests.Objects.FormElements

@@ -1,11 +1,11 @@
 ﻿using Moq;
 using System.Collections.Generic;
 using System.Linq;
+using Vs.BurgerPortaal.Core.Objects.FormElements;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
 using Xunit;
 
 namespace Vs.BurgerPortaal.Core.Tests.Objects.FormElements

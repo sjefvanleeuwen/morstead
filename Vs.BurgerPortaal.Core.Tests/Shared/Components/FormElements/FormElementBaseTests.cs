@@ -1,9 +1,9 @@
 ﻿using Moq;
-using Vs.Rules.Core;
-using Vs.Rules.Core.Interfaces;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
 using Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements;
 using Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements.Interfaces;
+using Vs.BurgerPortaal.Core.Objects.FormElements;
+using Vs.Rules.Core;
+using Vs.Rules.Core.Interfaces;
 using Xunit;
 
 namespace Vs.BurgerPortaal.Core.Tests.Shared.Components.FormElements

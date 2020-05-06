@@ -1,10 +1,10 @@
 ﻿using Moq;
 using System.Collections.Generic;
 using System.Linq;
+using Vs.BurgerPortaal.Core.Objects;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
-using Vs.BurgerPortaal.Core.Objects;
 using Xunit;
 
 namespace Vs.BurgerPortaal.Core.Tests.Objects

@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
-using Moq;
+﻿using Moq;
 using System.Collections.Generic;
 using System.Globalization;
 using Vs.Cms.Core.Controllers;
@@ -93,7 +92,7 @@ namespace Vs.Cms.Core.Tests.Controllers
             var moqTemplateEngine = InitMoqTemplateEngine();
             moqCultureContent.Setup(m => m.GetCompleteContent(It.IsAny<string>())).Returns(new List<string> { "a", "b" });
             moqContentHandler.Setup(m => m.GetDefaultContent()).Returns(moqCultureContent.Object);
-            
+
             var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object, moqTemplateEngine.Object);
             sut.GetUnresolvedParameters(It.IsAny<string>(), It.IsAny<IParametersCollection>());
             moqContentHandler.Verify(x => x.GetDefaultContent(), Times.Once());

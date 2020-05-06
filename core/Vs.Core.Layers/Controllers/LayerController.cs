@@ -79,7 +79,7 @@ namespace Vs.Core.Layers.Controllers
         {
             var result = new List<IContext>();
 
-            foreach (var layerItem in layer) 
+            foreach (var layerItem in layer)
             {
                 if (!(layerItem is IDictionary<string, object> context))
                 {
