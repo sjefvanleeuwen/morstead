@@ -34,8 +34,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test-payloads", "test-paylo
 		doc\test-payloads\zorgtoeslag-2019.yml = doc\test-payloads\zorgtoeslag-2019.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.VoorzieningenEnRegelingen.Benchmarks", "Vs.VoorzieningenEnRegelingen.Benchmarks\Vs.VoorzieningenEnRegelingen.Benchmarks.csproj", "{947FB17C-36B5-498C-83E0-911D66A1C826}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{C27292C1-213D-442D-A011-7A6EE26C1AFE}"
 	ProjectSection(SolutionItems) = preProject
 		data\virtualsociety-urukagina.json = data\virtualsociety-urukagina.json
@@ -117,13 +115,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.BurgerPortaal.Core.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Web.OpenApi.Tests", "core\Vs.Core.Web.OpenApi.Tests\Vs.Core.Web.OpenApi.Tests.csproj", "{1F0DB637-3CAA-4954-AD07-190589B94DC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Layers", "core\Vs.Core.Layers\Vs.Core.Layers.csproj", "{743E8EBC-BD46-467D-BDE1-09C04C20D427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Layers", "core\Vs.Core.Layers\Vs.Core.Layers.csproj", "{743E8EBC-BD46-467D-BDE1-09C04C20D427}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Layers.Tests", "core\Vs.Core.Layers.Tests\Vs.Core.Layers.Tests.csproj", "{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Layers.Tests", "core\Vs.Core.Layers.Tests\Vs.Core.Layers.Tests.csproj", "{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Formats.Yaml", "core\Vs.Core.Formats.Yaml\Vs.Core.Formats.Yaml.csproj", "{CEA0C294-1B71-4FC9-B785-CB8B3D0BEE11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Formats.Yaml", "core\Vs.Core.Formats.Yaml\Vs.Core.Formats.Yaml.csproj", "{CEA0C294-1B71-4FC9-B785-CB8B3D0BEE11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Formats.Yaml.Tests", "core\Vs.Core.Formats.Yaml.Tests\Vs.Core.Formats.Yaml.Tests.csproj", "{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Formats.Yaml.Tests", "core\Vs.Core.Formats.Yaml.Tests\Vs.Core.Formats.Yaml.Tests.csproj", "{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Core.Benchmarks", "Vs.Rules.Core.Benchmarks\Vs.Rules.Core.Benchmarks.csproj", "{B383C48F-F4FA-4277-A25F-72D0677727D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,10 +143,6 @@ Global
 		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{947FB17C-36B5-498C-83E0-911D66A1C826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{947FB17C-36B5-498C-83E0-911D66A1C826}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{947FB17C-36B5-498C-83E0-911D66A1C826}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{947FB17C-36B5-498C-83E0-911D66A1C826}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CF02EDE3-E037-4F87-B6D3-2B016FB45D4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF02EDE3-E037-4F87-B6D3-2B016FB45D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF02EDE3-E037-4F87-B6D3-2B016FB45D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -263,6 +259,10 @@ Global
 		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B383C48F-F4FA-4277-A25F-72D0677727D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B383C48F-F4FA-4277-A25F-72D0677727D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B383C48F-F4FA-4277-A25F-72D0677727D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B383C48F-F4FA-4277-A25F-72D0677727D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
