@@ -1,12 +1,12 @@
-﻿--- Model version
-version: "1.0"
+﻿version: "1.0"
 layers:
-  -- Semantic Rules layer
   rules: 
-    context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml
-  -- UX Content layer
+    - context: https://virtualsociety.nl/zorgtoeslag/v1.0/zorgtoeslag.rule.yaml
   uxcontent:
-    context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml
-  -- Semantic Routing Layer
+    - context: https://virtualsociety.nl/zorgtoeslag/v1.0/zorgtoeslag.uxcontent.nl.yaml
+    - context: https://virtualsociety.nl/zorgtoeslag/v1.0/zorgtoeslag.uxcontent.en.yaml
+      language: en
+    - context: https://virtualsociety.nl/zorgtoeslag/v1.0/zorgtoeslag.uxcontent.ar.yaml
+      language: ar
   routing: 
-    context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Routing.yaml
+    - context: https://virtualsociety.nl/zorgtoeslag/v1.0/zorgtoeslag.routing.yaml
