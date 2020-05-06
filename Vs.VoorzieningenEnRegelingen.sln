@@ -121,6 +121,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Layers", "core\Vs.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Layers.Tests", "core\Vs.Core.Layers.Tests\Vs.Core.Layers.Tests.csproj", "{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Formats.Yaml", "core\Vs.Core.Formats.Yaml\Vs.Core.Formats.Yaml.csproj", "{CEA0C294-1B71-4FC9-B785-CB8B3D0BEE11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Formats.Yaml.Tests", "core\Vs.Core.Formats.Yaml.Tests\Vs.Core.Formats.Yaml.Tests.csproj", "{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -251,6 +255,14 @@ Global
 		{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEA0C294-1B71-4FC9-B785-CB8B3D0BEE11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEA0C294-1B71-4FC9-B785-CB8B3D0BEE11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEA0C294-1B71-4FC9-B785-CB8B3D0BEE11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEA0C294-1B71-4FC9-B785-CB8B3D0BEE11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -280,6 +292,8 @@ Global
 		{1F0DB637-3CAA-4954-AD07-190589B94DC3} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{743E8EBC-BD46-467D-BDE1-09C04C20D427} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086} = {5C4AF588-9E89-4835-B899-12A16B587546}
+		{CEA0C294-1B71-4FC9-B785-CB8B3D0BEE11} = {5C4AF588-9E89-4835-B899-12A16B587546}
+		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B} = {5C4AF588-9E89-4835-B899-12A16B587546}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
