@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Core", "Vs.Rules.Core\Vs.Rules.Core.csproj", "{91455A8C-B5F6-4E39-8314-38ED24EC6F60}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4924015A-0FD1-485E-8D4E-D2B0BFCC3EF4}"
 	ProjectSection(SolutionItems) = preProject
 		.codeclimate.yml = .codeclimate.yml
@@ -19,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{35C0B2
 		images\postman.png = images\postman.png
 		images\regeling-configurator.png = images\regeling-configurator.png
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Core.Tests", "Vs.Rules.Core.Tests\Vs.Rules.Core.Tests.csproj", "{F808BE58-C22E-47D7-A494-CA1C788832E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{903A60DA-7659-421E-9BA8-14FBCC994642}"
 	ProjectSection(SolutionItems) = preProject
@@ -123,7 +119,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Formats.Yaml", "cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Formats.Yaml.Tests", "core\Vs.Core.Formats.Yaml.Tests\Vs.Core.Formats.Yaml.Tests.csproj", "{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Core.Benchmarks", "Vs.Rules.Core.Benchmarks\Vs.Rules.Core.Benchmarks.csproj", "{B383C48F-F4FA-4277-A25F-72D0677727D2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rules", "rules", "{72EB4BA6-3C85-4F2F-B444-59BDBF63BC50}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Core", "rules\Vs.Rules.Core\Vs.Rules.Core.csproj", "{42976C70-03F2-4002-AB3C-F77CCCEAA0DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Core.Benchmarks", "rules\Vs.Rules.Core.Benchmarks\Vs.Rules.Core.Benchmarks.csproj", "{00800DA7-5311-43BD-B9CC-E8B4F830F912}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Core.Tests", "rules\Vs.Rules.Core.Tests\Vs.Rules.Core.Tests.csproj", "{19E6D3C3-F078-4EE2-89C5-3F90FBCF580B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -131,14 +133,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{91455A8C-B5F6-4E39-8314-38ED24EC6F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91455A8C-B5F6-4E39-8314-38ED24EC6F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91455A8C-B5F6-4E39-8314-38ED24EC6F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91455A8C-B5F6-4E39-8314-38ED24EC6F60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F808BE58-C22E-47D7-A494-CA1C788832E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F808BE58-C22E-47D7-A494-CA1C788832E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F808BE58-C22E-47D7-A494-CA1C788832E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F808BE58-C22E-47D7-A494-CA1C788832E2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60E9282A-7AF1-45DB-8C60-711A465F66A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -259,10 +253,18 @@ Global
 		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B383C48F-F4FA-4277-A25F-72D0677727D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B383C48F-F4FA-4277-A25F-72D0677727D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B383C48F-F4FA-4277-A25F-72D0677727D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B383C48F-F4FA-4277-A25F-72D0677727D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42976C70-03F2-4002-AB3C-F77CCCEAA0DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42976C70-03F2-4002-AB3C-F77CCCEAA0DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42976C70-03F2-4002-AB3C-F77CCCEAA0DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42976C70-03F2-4002-AB3C-F77CCCEAA0DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00800DA7-5311-43BD-B9CC-E8B4F830F912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00800DA7-5311-43BD-B9CC-E8B4F830F912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00800DA7-5311-43BD-B9CC-E8B4F830F912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00800DA7-5311-43BD-B9CC-E8B4F830F912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19E6D3C3-F078-4EE2-89C5-3F90FBCF580B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E6D3C3-F078-4EE2-89C5-3F90FBCF580B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E6D3C3-F078-4EE2-89C5-3F90FBCF580B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E6D3C3-F078-4EE2-89C5-3F90FBCF580B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -294,6 +296,9 @@ Global
 		{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{CEA0C294-1B71-4FC9-B785-CB8B3D0BEE11} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{F133EE5B-08A1-4E9B-9F3E-C447F8491E7B} = {5C4AF588-9E89-4835-B899-12A16B587546}
+		{42976C70-03F2-4002-AB3C-F77CCCEAA0DD} = {72EB4BA6-3C85-4F2F-B444-59BDBF63BC50}
+		{00800DA7-5311-43BD-B9CC-E8B4F830F912} = {72EB4BA6-3C85-4F2F-B444-59BDBF63BC50}
+		{19E6D3C3-F078-4EE2-89C5-3F90FBCF580B} = {72EB4BA6-3C85-4F2F-B444-59BDBF63BC50}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}

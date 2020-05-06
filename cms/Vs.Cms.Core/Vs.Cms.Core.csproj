@@ -17,7 +17,7 @@
     <ProjectReference Include="..\..\core\Vs.Core.Formats.Yaml\Vs.Core.Formats.Yaml.csproj" />
     <ProjectReference Include="..\..\core\Vs.Core\Vs.Core.csproj" />
     <ProjectReference Include="..\..\graph\Vs.Graph.Core\Vs.Graph.Core.csproj" />
-    <ProjectReference Include="..\..\Vs.Rules.Core\Vs.Rules.Core.csproj" />
+    <ProjectReference Include="..\..\rules\Vs.Rules.Core\Vs.Rules.Core.csproj" />
   </ItemGroup>
 
 </Project>

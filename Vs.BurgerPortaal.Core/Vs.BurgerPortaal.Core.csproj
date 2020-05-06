@@ -29,7 +29,6 @@
   <ItemGroup>
     <ProjectReference Include="..\cms\Vs.Cms.Core\Vs.Cms.Core.csproj" />
     <ProjectReference Include="..\core\Vs.Core\Vs.Core.csproj" />
-    <ProjectReference Include="..\Vs.Rules.Core\Vs.Rules.Core.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.TestData\Vs.VoorzieningenEnRegelingen.Core.TestData.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Service\Vs.VoorzieningenEnRegelingen.Service.csproj" />
   </ItemGroup>
