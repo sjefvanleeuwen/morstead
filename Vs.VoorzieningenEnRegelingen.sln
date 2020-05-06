@@ -117,6 +117,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.BurgerPortaal.Core.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Web.OpenApi.Tests", "core\Vs.Core.Web.OpenApi.Tests\Vs.Core.Web.OpenApi.Tests.csproj", "{1F0DB637-3CAA-4954-AD07-190589B94DC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Layers", "core\Vs.Core.Layers\Vs.Core.Layers.csproj", "{743E8EBC-BD46-467D-BDE1-09C04C20D427}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -239,6 +241,10 @@ Global
 		{1F0DB637-3CAA-4954-AD07-190589B94DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F0DB637-3CAA-4954-AD07-190589B94DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F0DB637-3CAA-4954-AD07-190589B94DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{743E8EBC-BD46-467D-BDE1-09C04C20D427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{743E8EBC-BD46-467D-BDE1-09C04C20D427}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{743E8EBC-BD46-467D-BDE1-09C04C20D427}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{743E8EBC-BD46-467D-BDE1-09C04C20D427}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -266,6 +272,7 @@ Global
 		{A0EE266A-422E-45B1-A316-7F52B5A6DF6E} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{0C23AD5D-61E7-4163-ACEE-EC3E414E278B} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{1F0DB637-3CAA-4954-AD07-190589B94DC3} = {5C4AF588-9E89-4835-B899-12A16B587546}
+		{743E8EBC-BD46-467D-BDE1-09C04C20D427} = {5C4AF588-9E89-4835-B899-12A16B587546}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}

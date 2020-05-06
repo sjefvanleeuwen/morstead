@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nager.Country" Version="1.0.4" />
+    <PackageReference Include="Semver" Version="2.0.6" />
+    <PackageReference Include="YamlDotNet" Version="8.1.1" />
+  </ItemGroup>
+
+</Project>
