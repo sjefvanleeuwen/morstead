@@ -1,0 +1,12 @@
+﻿--- Model version
+version: "1.0"
+layers:
+  -- Semantic Rules layer
+  rules: 
+    context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml
+  -- UX Content layer
+  uxcontent:
+    context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml
+  -- Semantic Routing Layer
+  routing: 
+    context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Routing.yaml
