@@ -21,6 +21,6 @@ namespace Vs.Core.Layers.Model
         /// <value>
         /// The language.
         /// </value>
-        public LanguageCode Language { get; set; }
+        public LanguageCode? Language { get; set; }
     }
 }
