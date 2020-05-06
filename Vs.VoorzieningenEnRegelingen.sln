@@ -119,6 +119,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Core.Web.OpenApi.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Layers", "core\Vs.Core.Layers\Vs.Core.Layers.csproj", "{743E8EBC-BD46-467D-BDE1-09C04C20D427}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Core.Layers.Tests", "core\Vs.Core.Layers.Tests\Vs.Core.Layers.Tests.csproj", "{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -245,6 +247,10 @@ Global
 		{743E8EBC-BD46-467D-BDE1-09C04C20D427}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{743E8EBC-BD46-467D-BDE1-09C04C20D427}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{743E8EBC-BD46-467D-BDE1-09C04C20D427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -273,6 +279,7 @@ Global
 		{0C23AD5D-61E7-4163-ACEE-EC3E414E278B} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{1F0DB637-3CAA-4954-AD07-190589B94DC3} = {5C4AF588-9E89-4835-B899-12A16B587546}
 		{743E8EBC-BD46-467D-BDE1-09C04C20D427} = {5C4AF588-9E89-4835-B899-12A16B587546}
+		{CE06ADD7-1DB8-4053-B7CA-ACF67E48B086} = {5C4AF588-9E89-4835-B899-12A16B587546}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
