@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Vs.BurgerPortaal.Core.Objects.FormElements;
 using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
-using Vs.Cms.Core.Helper;
+using Vs.Core.Formats.Yaml.Helper;
 using Vs.Rules.Core.Interfaces;
 
 namespace Vs.BurgerPortaal.Core.Areas.Pages
@@ -29,7 +29,7 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
 
         private void SubmitUrl()
         {
-            var yaml = YamlContentParser.ParseHelper(YamlLogic.Value);
+            var yaml = YamlParser.ParseHelper(YamlLogic.Value);
             _urlYamlContentNonFormatted = GetYamlContentTemplate(yaml);
             _urlDisplay = Block;
         }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Vs.Cms.Core.Helper;
 using Vs.Cms.Core.Objects;
 using Vs.Cms.Core.Objects.Interfaces;
 using Vs.Cms.Core.Tests.TestYaml;
 using Vs.Core.Enums;
+using Vs.Core.Formats.Yaml.Helper;
 using Xunit;
 
 namespace Vs.Cms.Core.Tests.Objects
@@ -138,7 +138,7 @@ namespace Vs.Cms.Core.Tests.Objects
             var container = new CultureContentContainer();
             var sut = new ContentHandler(container);
             var dutch = new CultureInfo("nl-NL");
-            sut.TranslateParsedContentToContent(dutch, YamlContentParser.RenderContentYamlToObject(ContentYamlTest1.Body));
+            sut.TranslateParsedContentToContent(dutch, YamlParser.RenderContentYamlToObject(ContentYamlTest1.Body));
             var cultureContent = sut.GetContentByCulture(dutch);
             Assert.Equal("Indien u niet zeker weet wat uw woonsituatie is, kijk dan op de website van de Belastingdienst.",
                 cultureContent.GetContent("stap.woonsituatie", FormElementContentType.Description));
@@ -151,7 +151,7 @@ namespace Vs.Cms.Core.Tests.Objects
             var container = new CultureContentContainer();
             var sut = new ContentHandler(container);
             var dutch = new CultureInfo("nl-NL");
-            sut.TranslateParsedContentToContent(dutch, YamlContentParser.RenderContentYamlToObject(ContentYamlTest2.Body));
+            sut.TranslateParsedContentToContent(dutch, YamlParser.RenderContentYamlToObject(ContentYamlTest2.Body));
             var cultureContent = sut.GetContentByCulture(dutch);
             Assert.Throws<IndexOutOfRangeException>(() => cultureContent.GetContent("stap.woonsituatie.keuze.alleenstaande, multipleKeys", FormElementContentType.Description));
             Assert.Equal("Alleenstaande", cultureContent.GetContent("stap.woonsituatie.keuze.alleenstaande", FormElementContentType.Description));
@@ -165,7 +165,7 @@ namespace Vs.Cms.Core.Tests.Objects
             var container = new CultureContentContainer();
             var sut = new ContentHandler(container);
             var dutch = new CultureInfo("nl-NL");
-            sut.TranslateParsedContentToContent(dutch, YamlContentParser.RenderContentYamlToObject(ContentYamlTest3.Body));
+            sut.TranslateParsedContentToContent(dutch, YamlParser.RenderContentYamlToObject(ContentYamlTest3.Body));
             var cultureContent = sut.GetContentByCulture(dutch);
             Assert.Equal("#Zorgtoeslag", cultureContent.GetContent("berekening.header", "titel"));
             Assert.Equal("##Proefbekrekening", cultureContent.GetContent("berekening.header", "ondertitel"));

@@ -2,11 +2,11 @@
 using System.Globalization;
 using System.Linq;
 using Vs.Cms.Core.Controllers.Interfaces;
-using Vs.Cms.Core.Helper;
 using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
 using Vs.Core.Enums;
 using Vs.Core.Extensions;
+using Vs.Core.Formats.Yaml.Helper;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
 
@@ -58,7 +58,7 @@ namespace Vs.Cms.Core.Controllers
             //todo MPS Rewrite to get this from the body supplied
             _cultureInfo = new CultureInfo("nl-NL");
             _contentHandler.SetDefaultCulture(_cultureInfo);
-            var parsedContent = YamlContentParser.RenderContentYamlToObject(body);
+            var parsedContent = YamlParser.RenderContentYamlToObject(body);
             _contentHandler.TranslateParsedContentToContent(_cultureInfo, parsedContent);
         }
 

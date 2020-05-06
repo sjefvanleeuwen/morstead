@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Vs.Cms.Core.Helper;
 using Vs.Cms.Core.Tests.TestYaml;
+using Vs.Core.Formats.Yaml.Helper;
 using Xunit;
 
 namespace Vs.Cms.Core.Tests.Helper
 {
-    public class YamlContentParserTests
+    public class YamlParserTests
     {
         [Fact]
         public void ShouldRenderContentYamlToObject()
         {
-            var root = YamlContentParser.RenderContentYamlToObject(ContentYamlTest1.Body);
+            var root = YamlParser.RenderContentYamlToObject(ContentYamlTest1.Body);
             Assert.Single(root);
             Assert.Equal("content", root.First().Key);
             Assert.Equal(typeof(List<object>), root.First().Value.GetType());
