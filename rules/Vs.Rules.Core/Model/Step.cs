@@ -5,7 +5,7 @@ namespace Vs.Rules.Core.Model
 {
     public class Step : IStep
     {
-        public Step(DebugInfo debugInfo, int key, string name, string description, string formula, string value, string situation, IBreak @break, IEnumerable<IChoice> choices)
+        public Step(DebugInfo debugInfo, int key, string name, string description, string formula, string value, string situation, IBreak @break, IEnumerable<IChoice> choices, IEnumerable<IEvaluateTable> evaluate)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -27,6 +27,7 @@ namespace Vs.Rules.Core.Model
             Situation = situation;
             Break = @break;
             Choices = choices;
+            EvaluateTables = evaluate;
         }
 
         public int Key { get; }
@@ -45,6 +46,8 @@ namespace Vs.Rules.Core.Model
         /// For example, if someone has rights (recht) to a service.
         /// </summary>
         public IBreak Break { get; }
+
+        public IEnumerable<IEvaluateTable> EvaluateTables { get; }
 
         public bool IsSituational => !string.IsNullOrEmpty(Situation);
 

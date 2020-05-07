@@ -88,6 +88,18 @@ namespace Vs.Rules.Core.Tests
             Assert.True(result.Model.Tables.ElementAt(0).IsSituational);
             Assert.True(result.Model.Tables.ElementAt(0).Situations.ElementAt(0).Expression == "keuze_c1");
             Assert.True(result.Model.GetTablesByName("tabel1").Count() == 3);
+
+            var parameters = new ParametersCollection() {
+                new ClientParameter("waarde_a", "70", TypeInference.InferenceResult.TypeEnum.Double,"Dummy"),
+                new ClientParameter("waarde_b", "40", TypeInference.InferenceResult.TypeEnum.Double,"Dummy"),
+                new ClientParameter("keuze_c1", "ja", TypeInference.InferenceResult.TypeEnum.Boolean,"Dummy"),
+                new ClientParameter("keuze_c2", "nee", TypeInference.InferenceResult.TypeEnum.Boolean,"Dummy")
+            } as IParametersCollection;
+
+            var executionResult = null as IExecutionResult;
+            executionResult = new ExecutionResult(ref parameters);
+            executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+
         }
     }
 }

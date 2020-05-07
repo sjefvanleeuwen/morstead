@@ -17,5 +17,6 @@ namespace Vs.Rules.Core.Model
         string Situation { get; set; }
         string Value { get; }
         IEnumerable<IChoice> Choices { get; }
+        IEnumerable<IEvaluateTable> EvaluateTables {get;}
     }
 }

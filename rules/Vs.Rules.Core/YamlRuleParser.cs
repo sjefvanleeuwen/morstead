@@ -40,6 +40,7 @@ namespace Vs.Rules.Core
         public const string StepSituation = "situatie";
         public const string StepBreak = "recht";
         public const string StepChoice = "keuze";
+        public const string EvaluateTable = "evalueer";
         private static ConcurrentDictionary<string, YamlMappingNode> Maps = new ConcurrentDictionary<string, YamlMappingNode>();
         private readonly Dictionary<string, Parameter> _parameters;
         private readonly string _yaml;
@@ -105,6 +106,7 @@ namespace Vs.Rules.Core
                 var debugInfoStep = new DebugInfo().MapDebugInfo(step.Start, step.End);
                 string stepid = "", description = "", formula = "", value = "", situation = "";
                 var @break = null as IBreak;
+                var evaluateTables = new List<IEvaluateTable>();
                 IEnumerable<IChoice> choices = null;
                 foreach (var stepInfo in ((YamlMappingNode)step).Children)
                 {
@@ -131,11 +133,14 @@ namespace Vs.Rules.Core
                         case StepChoice:
                             choices = GetSituations(stepInfo.Value);
                             break;
+                        case EvaluateTable:
+                            evaluateTables.Add(new EvaluateTable() { Name = stepInfo.Value.ToString() } );
+                            break;
                         default:
                             throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
                     }
                 }
-                steps.Add(new Step(debugInfoStep, key++, stepid, description, formula, value, situation, @break, choices));
+                steps.Add(new Step(debugInfoStep, key++, stepid, description, formula, value, situation, @break, choices, evaluateTables));
             }
             return steps;
         }
