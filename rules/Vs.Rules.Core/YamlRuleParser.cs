@@ -31,8 +31,6 @@ namespace Vs.Rules.Core
         public const string HeaderStatus = "status";
         public const string HeaderYear = "jaar";
         public const string HeaderSource = "bron";
-        public const string ContentYamlUrl = "content";
-        public const string RoutingYamlUrl = "routing";
         public const string Step = "stap";
         public const string StepDescription = "omschrijving";
         public const string StepFormula = "formule";
@@ -83,12 +81,6 @@ namespace Vs.Rules.Core
                         break;
                     case HeaderSource:
                         stuurinformatie.Bron = item.Value.ToString();
-                        break;
-                    case ContentYamlUrl:
-                        stuurinformatie.ContentYamlUrl = new Uri(item.Value.ToString());
-                        break;
-                    case RoutingYamlUrl:
-                        stuurinformatie.RoutingYamlUrl = new Uri(item.Value.ToString());
                         break;
                     default:
                         throw new Exception($"unknown header identifider {item.Key.ToString()}");
