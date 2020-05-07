@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vs.Core.Formats.Yaml\Vs.Core.Formats.Yaml.csproj" />
+    <ProjectReference Include="..\Vs.Core\Vs.Core.csproj" />
   </ItemGroup>
 
 </Project>
