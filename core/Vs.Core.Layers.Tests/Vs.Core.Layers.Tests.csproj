@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Vs.VoorzieningenEnRegelingen.Core.TestData\Vs.VoorzieningenEnRegelingen.Core.TestData.csproj" />
     <ProjectReference Include="..\Vs.Core.Layers\Vs.Core.Layers.csproj" />
   </ItemGroup>
 
