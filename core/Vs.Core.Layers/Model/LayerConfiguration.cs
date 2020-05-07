@@ -1,6 +1,8 @@
 ﻿using Semver;
 using System;
 using System.Collections.Generic;
+using Vs.Core.Diagnostics;
+using Vs.Core.Layers.Helpers;
 using Vs.Core.Layers.Model.Interfaces;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
@@ -10,7 +12,7 @@ namespace Vs.Core.Layers.Model
     /// <summary>
     /// Contains the layer configuration for Virtual Society Systems
     /// </summary>
-    public class LayerConfiguration : ILayerConfiguration, IYamlConvertible
+    public class LayerConfiguration : ILayerConfiguration, IYamlConvertible, Interfaces.IDebugInfo
     {
         /// <summary>
         /// Gets or sets the semantic version.
@@ -26,6 +28,8 @@ namespace Vs.Core.Layers.Model
         /// The layers.
         /// </value>
         public IEnumerable<ILayer> Layers { get; set; }
+        
+        public DebugInfo DebugInfo { get; set; }
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
@@ -34,7 +38,7 @@ namespace Vs.Core.Layers.Model
             {
                 return;
             }
-
+            DebugInfo = new DebugInfo().MapDebugInfo(parser.Current.Start, parser.Current.End);
             Version = o.version;
             var layers = new List<ILayer>();
             foreach (var layer in o.layers)
