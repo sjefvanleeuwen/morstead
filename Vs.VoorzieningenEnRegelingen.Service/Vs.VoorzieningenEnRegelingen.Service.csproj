@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vs.Rules.Core\Vs.Rules.Core.csproj" />
+    <ProjectReference Include="..\rules\Vs.Rules.Core\Vs.Rules.Core.csproj" />
   </ItemGroup>
 
 

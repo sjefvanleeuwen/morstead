@@ -2,12 +2,10 @@
 using BenchmarkDotNet.Engines;
 using System.Collections.Generic;
 using System.Linq;
-using Vs.Rules.Core;
 using Vs.Rules.Core.Model;
-using Vs.VoorzieningenEnRegelingen.Core;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 
-namespace Vs.VoorzieningenEnRegelingen.Benchmarks
+namespace Vs.Rules.Core.Benchmarks
 {
     [SimpleJob(runStrategy: RunStrategy.Monitoring, targetCount: 100)]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]

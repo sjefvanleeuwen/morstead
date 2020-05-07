@@ -7,8 +7,8 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.35" />
     <PackageReference Include="Dapper.Contrib" Version="2.0.35" />
-    <PackageReference Include="Markdig" Version="0.18.3" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-preview.1.20120.4" />
+    <PackageReference Include="Markdig" Version="0.20.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-preview.3.20215.2" />
     <PackageReference Include="Scriban" Version="2.1.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
@@ -17,7 +17,6 @@
     <ProjectReference Include="..\..\core\Vs.Core.Formats.Yaml\Vs.Core.Formats.Yaml.csproj" />
     <ProjectReference Include="..\..\core\Vs.Core\Vs.Core.csproj" />
     <ProjectReference Include="..\..\graph\Vs.Graph.Core\Vs.Graph.Core.csproj" />
-    <ProjectReference Include="..\..\Vs.Rules.Core\Vs.Rules.Core.csproj" />
   </ItemGroup>
 
 </Project>

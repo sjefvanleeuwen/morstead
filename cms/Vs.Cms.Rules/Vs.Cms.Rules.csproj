@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CacheCow.Client" Version="3.0.0-alpha" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.23" />
+    <ProjectReference Include="..\..\rules\Vs.Rules.Core\Vs.Rules.Core.csproj" />
+    <ProjectReference Include="..\Vs.Cms.Core\Vs.Cms.Core.csproj" />
   </ItemGroup>
 
 </Project>
