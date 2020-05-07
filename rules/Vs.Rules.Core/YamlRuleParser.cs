@@ -31,8 +31,6 @@ namespace Vs.Rules.Core
         public const string HeaderStatus = "status";
         public const string HeaderYear = "jaar";
         public const string HeaderSource = "bron";
-        public const string ContentYamlUrl = "content";
-        public const string RoutingYamlUrl = "routing";
         public const string Step = "stap";
         public const string StepDescription = "omschrijving";
         public const string StepFormula = "formule";
@@ -40,6 +38,7 @@ namespace Vs.Rules.Core
         public const string StepSituation = "situatie";
         public const string StepBreak = "recht";
         public const string StepChoice = "keuze";
+        public const string EvaluateTable = "evalueer";
         private static ConcurrentDictionary<string, YamlMappingNode> Maps = new ConcurrentDictionary<string, YamlMappingNode>();
         private readonly Dictionary<string, Parameter> _parameters;
         private readonly string _yaml;
@@ -83,12 +82,6 @@ namespace Vs.Rules.Core
                     case HeaderSource:
                         stuurinformatie.Bron = item.Value.ToString();
                         break;
-                    case ContentYamlUrl:
-                        stuurinformatie.ContentYamlUrl = new Uri(item.Value.ToString());
-                        break;
-                    case RoutingYamlUrl:
-                        stuurinformatie.RoutingYamlUrl = new Uri(item.Value.ToString());
-                        break;
                     default:
                         throw new Exception($"unknown header identifider {item.Key.ToString()}");
                 }
@@ -105,6 +98,7 @@ namespace Vs.Rules.Core
                 var debugInfoStep = new DebugInfo().MapDebugInfo(step.Start, step.End);
                 string stepid = "", description = "", formula = "", value = "", situation = "";
                 var @break = null as IBreak;
+                var evaluateTables = new List<IEvaluateTable>();
                 IEnumerable<IChoice> choices = null;
                 foreach (var stepInfo in ((YamlMappingNode)step).Children)
                 {
@@ -131,11 +125,14 @@ namespace Vs.Rules.Core
                         case StepChoice:
                             choices = GetSituations(stepInfo.Value);
                             break;
+                        case EvaluateTable:
+                            evaluateTables.Add(new EvaluateTable() { Name = stepInfo.Value.ToString() } );
+                            break;
                         default:
                             throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
                     }
                 }
-                steps.Add(new Step(debugInfoStep, key++, stepid, description, formula, value, situation, @break, choices));
+                steps.Add(new Step(debugInfoStep, key++, stepid, description, formula, value, situation, @break, choices, evaluateTables));
             }
             return steps;
         }

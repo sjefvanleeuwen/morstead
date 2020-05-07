@@ -48,6 +48,11 @@ namespace Vs.Rules.Core
             return result;
         }
 
+        public void Evalueer(string tableName)
+        {
+
+        }
+
         public Table Match(string tableName, ref IParametersCollection parameters)
         {
             int i = 0;
@@ -550,6 +555,8 @@ namespace Vs.Rules.Core
             return parameters;
         }
 
+        private IParametersCollection _parameters;
+
         /// <summary>
         /// Execute Workflow
         /// </summary>
@@ -557,6 +564,7 @@ namespace Vs.Rules.Core
         /// <returns></returns>
         public IExecutionResult ExecuteWorkflow(ref IParametersCollection parameters, ref IExecutionResult executionResult)
         {
+            _parameters = parameters;
             executionResult.ContentNodes = _contentNodes;
             if (parameters is null)
             {

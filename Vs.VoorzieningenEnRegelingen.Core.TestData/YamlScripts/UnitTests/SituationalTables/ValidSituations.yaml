@@ -19,6 +19,10 @@ berekening:
    keuze:
    - situatie: keuze_c1
    - situatie: keuze_c2
+   evalueer: tabel1
+formules:
+ - woonlandfactor:
+     formule: evalueer('tabel1')
 tabellen:
   - naam: tabel1
     situatie: keuze_c1
