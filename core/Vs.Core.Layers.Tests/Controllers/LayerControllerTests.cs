@@ -14,9 +14,9 @@ namespace Vs.Core.Layers.Tests.Controllers
             var yaml = YamlTestFileLoader.Load(@"Zorgtoeslag5.layers.yaml");
             var sut = new LayerController();
             sut.Initialize(yaml);
-            Assert.Equal(sut.LayerConfiguration.DebugInfo.Start.Line, sut.LayerConfiguration.DebugInfo.End.Line);
-            Assert.Equal(sut.LayerConfiguration.DebugInfo.Start.Col, sut.LayerConfiguration.DebugInfo.End.Col);
-            Assert.Equal(sut.LayerConfiguration.DebugInfo.Start.Index, sut.LayerConfiguration.DebugInfo.End.Index);
+            Assert.Equal(sut.LayerConfiguration.Start.Line, sut.LayerConfiguration.End.Line);
+            Assert.Equal(sut.LayerConfiguration.Start.Col, sut.LayerConfiguration.End.Col);
+            Assert.Equal(sut.LayerConfiguration.Start.Index, sut.LayerConfiguration.End.Index);
             Assert.Equal("1.0", sut.LayerConfiguration.Version);
             Assert.Equal(3, sut.LayerConfiguration.Layers.ToList().Count());
             Assert.Single(sut.LayerConfiguration.Layers.ElementAt(0).Contexts);

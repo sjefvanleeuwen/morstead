@@ -11,7 +11,7 @@ namespace Vs.Core.Layers.Model
     /// <summary>
     /// Context of the layer configuration
     /// </summary>
-    public class Context : IContext, IYamlConvertible, Interfaces.IDebugInfo
+    public class Context : IContext, IYamlConvertible, IDebugInfo
     {
         /// <summary>
         /// Gets or sets endpoint that contains the configuration of this context.
@@ -28,7 +28,11 @@ namespace Vs.Core.Layers.Model
         /// </value>
         public LanguageCode? Language { get; set; }
         
-        public DebugInfo DebugInfo { get; set; }
+        private DebugInfo DebugInfo { get; set; }
+
+        public LineInfo End => DebugInfo.Start;
+
+        public LineInfo Start => DebugInfo.End;
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {

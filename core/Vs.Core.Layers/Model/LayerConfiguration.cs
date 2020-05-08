@@ -12,7 +12,7 @@ namespace Vs.Core.Layers.Model
     /// <summary>
     /// Contains the layer configuration for Virtual Society Systems
     /// </summary>
-    public class LayerConfiguration : ILayerConfiguration, IYamlConvertible, Interfaces.IDebugInfo
+    public class LayerConfiguration : ILayerConfiguration, IYamlConvertible, IDebugInfo
     {
         /// <summary>
         /// Gets or sets the semantic version.
@@ -29,7 +29,11 @@ namespace Vs.Core.Layers.Model
         /// </value>
         public IEnumerable<ILayer> Layers { get; set; }
         
-        public DebugInfo DebugInfo { get; set; }
+        private DebugInfo DebugInfo { get; set; }
+
+        public LineInfo End => DebugInfo.End;
+
+        public LineInfo Start => DebugInfo.Start;
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)
         {
