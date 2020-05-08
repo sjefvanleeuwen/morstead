@@ -16,6 +16,7 @@ namespace Vs.BurgerPortaal.Core
             services.AddScoped<ISequence, Sequence>();
             services.AddScoped<IContentController, ContentController>();
             VoorzieningenEnRegelingen.Service.Initializer.Initialize(services);
+            Vs.Core.Layers.Initializer.Initialize(services);
             Cms.Core.Initializer.Initialize(services);
             Rules.Core.Initializer.Initialize(services);
         }

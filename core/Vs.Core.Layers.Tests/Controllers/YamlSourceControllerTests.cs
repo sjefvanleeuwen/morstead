@@ -150,7 +150,7 @@ namespace Vs.Core.Layers.Tests.Controllers
         }
 
         [Fact]
-        public void ShouldOnlyAddFilterWhenValueProvidedWhenSettingYamlLayerUrl()
+        public void ShouldThowExceptionWhenFilterRequestedDoesNotExist()
         {
             var moqLayerController = new Mock<ILayerController>();
             moqLayerController.Setup(m => m.LayerConfiguration).Returns(new LayerConfiguration
@@ -173,7 +173,34 @@ namespace Vs.Core.Layers.Tests.Controllers
             });
             var sut = new YamlSourceController(moqLayerController.Object);
             sut.SetYaml(YamlType.Layer, "dummy");
-            Assert.Throws<LayersYamlException>(() => sut.GetYaml(YamlType.Rules));
+            Assert.Throws<LayersYamlException>(() => sut.GetYaml(YamlType.Rules, new Dictionary<string, object> { { "Language", LanguageCode.NL } }));
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenFilterRequestedIsOfWrongType()
+        {
+            var moqLayerController = new Mock<ILayerController>();
+            moqLayerController.Setup(m => m.LayerConfiguration).Returns(new LayerConfiguration
+            {
+                Layers = new List<Layer>
+                {
+                    new Layer
+                    {
+                        Name = "rules",
+                        Contexts = new List<Context>
+                        {
+                            new Context
+                            {
+                                Endpoint = new Uri("http://testurlyaml"),
+                                Language = LanguageCode.RU
+                            }
+                        }
+                    }
+                }
+            });
+            var sut = new YamlSourceController(moqLayerController.Object);
+            sut.SetYaml(YamlType.Layer, "dummy");
+            Assert.Throws<LayersYamlException>(() => sut.GetYaml(YamlType.Rules, new Dictionary<string, object> { { "Language", "RU" } }));
         }
 
         [Fact]

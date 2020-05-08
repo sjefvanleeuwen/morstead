@@ -7,7 +7,7 @@ using Vs.Core.Layers.Exceptions;
 
 namespace Vs.Core.Layers.Controllers
 {
-    public class YamlSourceController
+    public class YamlSourceController : IYamlSourceController
     {
         private readonly IList<YamlInformation> _yamlInformations = new List<YamlInformation>();
 
@@ -33,7 +33,7 @@ namespace Vs.Core.Layers.Controllers
             try
             {
                 var uri = new Uri(yamlUri);
-               
+
                 AttachYamlInformation(new YamlInformation
                 {
                     YamlType = yamlType,
@@ -81,13 +81,13 @@ namespace Vs.Core.Layers.Controllers
         {
             _layerController.Initialize(yaml);
             var layerConfiguration = _layerController.LayerConfiguration;
-            foreach(var layer in layerConfiguration.Layers)
+            foreach (var layer in layerConfiguration.Layers)
             {
                 if (!Enum.TryParse(layer.Name, true, out YamlType yamlType))
                 {
                     throw new LayersYamlException($"The provided type '{layer.Name}' is unknown.");
                 }
-                foreach(var context in layer.Contexts)
+                foreach (var context in layer.Contexts)
                 {
                     AttachYamlInformation(new YamlInformation
                     {
@@ -105,9 +105,19 @@ namespace Vs.Core.Layers.Controllers
         {
             string result = null;
 
-            var candidates = _yamlInformations.Where(y =>
-                y.YamlType == yamlType &&
-                y.MatchesFilter(filter));
+            var candidates = _yamlInformations.Where(y => y.YamlType == yamlType);
+            if (filter != null)
+            {
+                candidates = candidates.Where(y => y.MatchesFilter(filter));
+            }
+            else
+            {
+                var candidatesWithoutFilter = candidates.Where(y => y.Filter == null);
+                if (candidatesWithoutFilter.Any())
+                {
+                    candidates = candidatesWithoutFilter;
+                }
+            }
 
             if (candidates.Any())
             {
@@ -144,14 +154,14 @@ namespace Vs.Core.Layers.Controllers
                     return true;
                 }
 
-                foreach(var filterValue in filterValues)
+                foreach (var filterValue in filterValues)
                 {
                     if (Filter == null || !Filter.ContainsKey(filterValue.Key) || (!Filter[filterValue.Key]?.Equals(filterValue.Value) ?? false))
                     {
                         return false;
                     }
                 }
-                
+
                 return true;
             }
         }

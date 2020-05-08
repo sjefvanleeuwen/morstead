@@ -2,13 +2,14 @@
 using Vs.Core.Layers.Controllers;
 using Vs.Core.Layers.Controllers.Interfaces;
 
-namespace Vs.Cms.Core
+namespace Vs.Core.Layers
 {
     public static class Initializer
     {
         public static void Initialize(IServiceCollection services)
         {
-            services.AddSingleton<ILayerController, LayerController>();
+            services.AddScoped<ILayerController, LayerController>();
+            services.AddScoped<IYamlSourceController, YamlSourceController>();
         }
     }
 }

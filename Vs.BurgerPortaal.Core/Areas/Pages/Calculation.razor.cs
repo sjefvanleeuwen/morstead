@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.Linq;
 using Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements;
@@ -8,6 +7,9 @@ using Vs.BurgerPortaal.Core.Controllers.Interfaces;
 using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
+using Vs.Core.Layers.Controllers.Interfaces;
+using Vs.Core.Layers.Enums;
+using Vs.Core.Layers.Helpers;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
@@ -21,17 +23,14 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
         [Inject]
         private IContentController ContentController { get; set; }
         [Inject]
+        private IYamlSourceController YamlSourceController { get; set; }
+        [Inject]
         private NavigationManager NavigationManager { get; set; }
 
         private Uri Uri => NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
-        private string RuleYamlDefault => YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml");
-        private string RuleYamlProvided => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
-        private string RuleYaml => RuleYamlProvided ?? RuleYamlDefault;
-        private string ContentYamlDefault => YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml");
-        private string ContentYamlProvided => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
-        private string ContentYaml => ContentYamlProvided ?? ContentYamlDefault;
-        private string RoutingYamlDefault => YamlTestFileLoader.Load(@"Zorgtoeslag5Routing.yaml");
-        private string RoutingYamlProvided => QueryHelpers.ParseQuery(Uri.Query).TryGetValue("rules", out var param) ? param.First() : null;
+
+        private string RuleYaml => YamlSourceController.GetYaml(YamlType.Rules);
+        private string ContentYaml => YamlSourceController.GetYaml(YamlType.Uxcontent);
 
         //the formElement we are showing
         private IFormElementBase _formElement;
@@ -54,11 +53,22 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
 
         protected override void OnInitialized()
         {
+            InitialiseYamls();
             SequenceController.Sequence.Yaml = RuleYaml;
             ContentController.Initialize(ContentYaml);
             base.OnInitialized();
             //get the first step
             GetNextStep();
+        }
+
+        private void InitialiseYamls()
+        {
+            YamlSourceHelper.SetDefaultYaml(YamlSourceController,
+                YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"),
+                YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml"),
+                YamlTestFileLoader.Load(@"Zorgtoeslag5Routing.yaml")
+            );
+            YamlSourceHelper.SetAllYamlFromUri(YamlSourceController, Uri);
         }
 
         private void GetNextStep()
