@@ -7,6 +7,6 @@ stuurinformatie:
   versie: 5.0
   status: ontwikkel
   jaar: 2019
-parameter:
+parameters:
  - waarde: woonland
-   url: woonlandfactor
+   locatie: woonlandfactor

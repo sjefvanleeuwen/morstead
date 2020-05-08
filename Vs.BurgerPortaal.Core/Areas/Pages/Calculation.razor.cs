@@ -63,12 +63,14 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
 
         private void InitialiseYamls()
         {
+            YamlSourceHelper.SetAllYamlFromUri(YamlSourceController, Uri);
+            //this type of setting will override whatever is provided via url, so it will only set if there is nothing set yet.
             YamlSourceHelper.SetDefaultYaml(YamlSourceController,
+                null,
                 YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"),
                 YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml"),
                 YamlTestFileLoader.Load(@"Zorgtoeslag5Routing.yaml")
-            );
-            YamlSourceHelper.SetAllYamlFromUri(YamlSourceController, Uri);
+            ); ;
         }
 
         private void GetNextStep()
