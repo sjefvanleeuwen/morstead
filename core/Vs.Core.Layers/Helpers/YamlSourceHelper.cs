@@ -8,16 +8,26 @@ namespace Vs.Core.Layers.Helpers
 {
     public static class YamlSourceHelper
     {
-        public static void SetDefaultYaml(IYamlSourceController yamlSourceController, string ruleYaml, string contentYaml = null, string routingYaml = null)
+        public static void SetDefaultYaml(IYamlSourceController yamlSourceController, string layerYaml = null, string ruleYaml = null, string contentYaml = null, string routingYaml = null)
         {
-            yamlSourceController.SetYaml(YamlType.Rules, ruleYaml);
-            if (contentYaml != null)
+            SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, ruleYaml, YamlType.Rules);
+            SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, contentYaml, YamlType.Uxcontent);
+            SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, routingYaml, YamlType.Routing);
+            SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, layerYaml, YamlType.Layer);
+        }
+
+        private static void SetDefaultIfProvidedAndNothingSetYet(IYamlSourceController yamlSourceController, string yaml, YamlType type)
+        {
+            if (yaml != null)
             {
-                yamlSourceController.SetYaml(YamlType.Uxcontent, contentYaml);
-            }
-            if (routingYaml != null)
-            {
-                yamlSourceController.SetYaml(YamlType.Routing, routingYaml);
+                try
+                {
+                    yamlSourceController.GetYaml(type);
+                }
+                catch
+                {
+                    yamlSourceController.SetYaml(type, yaml);
+                }
             }
         }
 
@@ -44,6 +54,5 @@ namespace Vs.Core.Layers.Helpers
                 yamlSourceController.SetYaml(YamlType.Layer, paramLayers);
             }
         }
-
     }
 }

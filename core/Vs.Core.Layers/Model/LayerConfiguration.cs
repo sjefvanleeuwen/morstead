@@ -70,7 +70,6 @@ namespace Vs.Core.Layers.Model
 
             public TransformTemplate()
             {
-
             }
 
             public TransformTemplate(ILayerConfiguration local)
