@@ -23,10 +23,10 @@ namespace OrleansClient
         private async void ExecuteRule()
         {
             // example of calling grains from the initialized client
-            var friend = this._client.GetGrain<IRuleWorker>(0);
+            var ruleWorker = this._client.GetGrain<IRuleWorker>(0);
             ParametersCollection parameters = new ParametersCollection();
 
-            var response = await friend.Execute(Zorgtoeslag.Body, parameters);
+            var response = await ruleWorker.Execute(Zorgtoeslag.Body, parameters);
             var result = JsonConvert.SerializeObject(response);
 
             Console.WriteLine($"{result}");
