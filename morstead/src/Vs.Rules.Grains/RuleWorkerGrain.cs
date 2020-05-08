@@ -13,10 +13,14 @@ namespace Vs.Rules.Grains
     {
         public async Task<IExecutionResult> Execute(string yaml, IParametersCollection parameters)
         {
+            IExecutionResult executionResult = null;
             var controller = new YamlScriptController();
-            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) => { };
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                executionResult.Questions = args;
+            };
             var result = controller.Parse(yaml);
-            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+            executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             try
             {
                 controller.ExecuteWorkflow(ref parameters, ref executionResult);
