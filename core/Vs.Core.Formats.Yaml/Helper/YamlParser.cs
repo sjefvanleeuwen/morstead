@@ -7,11 +7,12 @@ using YamlDotNet.RepresentationModel;
 
 namespace Vs.Core.Formats.Yaml.Helper
 {
+    //TODO Refactor with IYamlConvertible
     public static class YamlParser
     {
         static readonly ConcurrentDictionary<string, string> UrlContentCache = new ConcurrentDictionary<string, string>();
 
-        public static IDictionary<string, object> RenderContentYamlToObject(string yaml)
+        public static IDictionary<string, object> RenderYamlToObject(string yaml)
         {
             yaml = ParseHelper(yaml);
             YamlMappingNode node = Map(yaml);

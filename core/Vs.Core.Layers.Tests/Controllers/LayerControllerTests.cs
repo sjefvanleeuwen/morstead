@@ -12,7 +12,8 @@ namespace Vs.Core.Layers.Tests.Controllers
         public void ShouldInitialize()
         {
             var yaml = YamlTestFileLoader.Load(@"Zorgtoeslag5.layers.yaml");
-            var sut = new LayerController(yaml);
+            var sut = new LayerController();
+            sut.Initialize(yaml);
             Assert.Equal(sut.LayerConfiguration.DebugInfo.Start.Line, sut.LayerConfiguration.DebugInfo.End.Line);
             Assert.Equal(sut.LayerConfiguration.DebugInfo.Start.Col, sut.LayerConfiguration.DebugInfo.End.Col);
             Assert.Equal(sut.LayerConfiguration.DebugInfo.Start.Index, sut.LayerConfiguration.DebugInfo.End.Index);

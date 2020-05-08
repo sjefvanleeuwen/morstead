@@ -27,6 +27,7 @@ namespace Vs.Core.Layers.Model
         /// The language.
         /// </value>
         public LanguageCode? Language { get; set; }
+        
         public DebugInfo DebugInfo { get; set; }
 
         public void Read(IParser parser, Type expectedType, ObjectDeserializer nestedObjectDeserializer)

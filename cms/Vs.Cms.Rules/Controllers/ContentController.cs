@@ -58,7 +58,7 @@ namespace Vs.Cms.Core.Controllers
             //todo MPS Rewrite to get this from the body supplied
             _cultureInfo = new CultureInfo("nl-NL");
             _contentHandler.SetDefaultCulture(_cultureInfo);
-            var parsedYaml = YamlParser.RenderContentYamlToObject(body);
+            var parsedYaml = YamlParser.RenderYamlToObject(body);
             _contentHandler.TranslateParsedYamlToContent(_cultureInfo, parsedYaml);
         }
 

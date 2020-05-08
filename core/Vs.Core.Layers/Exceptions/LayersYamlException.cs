@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Vs.Core.Layers.Exceptions
 {
     [Serializable]
-    internal class LayersYamlException : Exception
+    public class LayersYamlException : Exception
     {
         public LayersYamlException()
         {
