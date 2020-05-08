@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Rules.OrleansTests", "Vs.Rules.OrleansTests\Vs.Rules.OrleansTests.csproj", "{814A084E-DC46-467E-AE7E-A79B7163BA9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{C8097F83-2D0E-4FFD-AEAE-AA075141289C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8097F83-2D0E-4FFD-AEAE-AA075141289C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8097F83-2D0E-4FFD-AEAE-AA075141289C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{814A084E-DC46-467E-AE7E-A79B7163BA9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{814A084E-DC46-467E-AE7E-A79B7163BA9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{814A084E-DC46-467E-AE7E-A79B7163BA9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{814A084E-DC46-467E-AE7E-A79B7163BA9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
