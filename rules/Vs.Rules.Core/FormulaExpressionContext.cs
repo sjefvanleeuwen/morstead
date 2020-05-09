@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Flee.PublicTypes;
 using Vs.Rules.Core.Exceptions;
+using Vs.Rules.Core.Financial;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using static Vs.Rules.Core.YamlScriptController;
@@ -55,6 +56,13 @@ namespace Vs.Rules.Core
             _context.Imports.AddType(typeof(Math));
             // Allow the expression to use all static overload public methods our CustomFunctions class
             _context.Imports.AddType(typeof(CustomFunctions));
+            // Financial formulas
+            _context.Imports.AddType(typeof(BankingFormulas));
+            _context.Imports.AddType(typeof(CorporateFormulas));
+            _context.Imports.AddType(typeof(FinancialFormulas));
+            _context.Imports.AddType(typeof(FinancialMarketsFormulas));
+            _context.Imports.AddType(typeof(GeneralFinanceFormulas));
+            _context.Imports.AddType(typeof(StocksBondsFormulas));
             // this will visit ResolveVariableType
             _context.Variables.ResolveVariableType += ResolveVariableType;
             // this will visit ResolveVariableValue
