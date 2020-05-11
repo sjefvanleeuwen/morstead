@@ -22,5 +22,17 @@ namespace Acme.Answer.OpenApi.v2.Controllers
             // uitkeringsgrechtigde.definitieveberekening.maart.2020
             return new AnswerPayload();
         }
+    
+        [HttpPost("woonland")]
+        public async Task<AnswerPayload> CountryDutch(QuestionPayload payload)
+        {
+            return new AnswerPayload();//"Nederland"
+        }
+
+        [HttpPost("heimat")]
+        public async Task<AnswerPayload> CountryGerman(QuestionPayload payload)
+        {
+            return new AnswerPayload();//"Duitsland"
+        }
     }
 }
