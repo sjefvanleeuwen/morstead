@@ -45,6 +45,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\core\Vs.Core\Vs.Core.csproj" />
+    <ProjectReference Include="..\..\Vs.Rules.Routing\Vs.Rules.Routing.csproj" />
   </ItemGroup>
 
   <ItemGroup>

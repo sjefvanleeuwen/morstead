@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Itenso.TimePeriod;
+using Moq;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
+using Vs.Rules.Routing.Controllers.Interfaces;
+using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
@@ -12,7 +15,7 @@ namespace Vs.Rules.Core.Tests
     public class TimePeriodTests
     {
         [Fact]
-        public void TimePeriod_Can_Serialize()
+        public void TimePeriodCanSerialize()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-NL");
             var range = new Itenso.TimePeriod.TimeRange();
@@ -47,7 +50,7 @@ namespace Vs.Rules.Core.Tests
         [Trait("Category", "Unfinished")]
         public void TimePeriodsCanBeReadFromTable()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"WettelijkeRente.yaml"));
             IParametersCollection parameters = new ParametersCollection();
             var executionResult = null as IExecutionResult;
@@ -113,6 +116,13 @@ namespace Vs.Rules.Core.Tests
             }
             Assert.True(isException);
             */
+        }
+
+        private IRoutingController InitMoqRoutingController()
+        {
+            var moqRoutingController = new Mock<IRoutingController>();
+            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
+            return moqRoutingController.Object;
         }
     }
 }

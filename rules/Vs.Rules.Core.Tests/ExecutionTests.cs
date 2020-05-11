@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
+using Vs.Rules.Routing.Controllers.Interfaces;
+using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
@@ -22,7 +25,7 @@ namespace Vs.Rules.Core.Tests
         public void Execution_Should_Stop(string rechtValue, bool rechtAssertionResult,
             bool isStopExecutionAssertResult, bool? executionAssertResult)
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -68,7 +71,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -96,7 +99,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1a()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -124,7 +127,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1b()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -153,7 +156,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1c()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -182,7 +185,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1d()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -204,7 +207,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1_WithQA_vermogen_aanvrager()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             QuestionArgs argsret = null;
@@ -236,7 +239,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1_WithQA_toetsingsinkomen_aanvrager()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             QuestionArgs argsret = null;
@@ -268,7 +271,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1_WithQA_Woonland()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             QuestionArgs argsret = null;
@@ -301,7 +304,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario1_WithQA_Alleenstaande()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             QuestionArgs argsret = null;
@@ -339,7 +342,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario2()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -370,7 +373,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario2a()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -401,7 +404,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario2b()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -426,7 +429,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario2_WithQA_toetsingsinkomen_toeslagpartner()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             QuestionArgs argsret = null;
             var isException = false;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -460,7 +463,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Scenario2_WithQA_vermogen_toeslagpartner()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             QuestionArgs argsret = null;
             var isException = false;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -498,7 +501,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_Without_Initial_Parameters()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             QuestionArgs argsret = null;
@@ -533,7 +536,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_2019_GetInputParameters()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             // var parameters = controller.GetInputParameters();
         }
@@ -547,7 +550,7 @@ formules:
         [Fact]
         void Execution_ZorgToeslag_2019_Full_Scenario1()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             bool isException = false;
@@ -630,7 +633,7 @@ formules:
         [Fact]
         public void Execution_YamlVermogensgrens_WithQA()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Vermogensgrens.yaml"));
             Assert.False(result.IsError);
             bool isException = false;
@@ -660,7 +663,7 @@ formules:
         [Fact]
         public void HashExecutionTest()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"HashExecutionTests.yaml"));
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
@@ -699,7 +702,7 @@ formules:
         [Fact]
         public void FormulaResolvesToCorrectSituationalFunctionV3()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag3.yaml"));
             Assert.False(result.IsError);
             bool isException = false;
@@ -742,7 +745,7 @@ formules:
         public void FormulaResolvesToCorrectSituationalFunctionV4_1()
         {
             //based on version 4 of the yaml
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -769,7 +772,7 @@ formules:
         public void FormulaResolvesToCorrectSituationalFunctionV4_2()
         {
             //based on version 4 of the yaml
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -795,7 +798,7 @@ formules:
         [Fact]
         public void ResolveToCorrectSituation()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"SituationalTests.yaml"));
             var parameters = new ParametersCollection() as IParametersCollection;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -855,7 +858,7 @@ formules:
         [Fact]
         public void StepChoiceTest()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"StepVariableAndChoiceTests.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() as IParametersCollection;
@@ -925,7 +928,7 @@ formules:
         public void QuestionCallbackRequestsBooleansFromChoice()
         {
             //based on version 4 of the yaml
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 Assert.Equal(2, args.Parameters.Count);
@@ -955,7 +958,7 @@ formules:
         public void QuestionCallBackCorrectWithValue()
         {
             //based on version 4 of the yaml
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 Assert.Equal(1, args.Parameters.Count);
@@ -987,7 +990,7 @@ formules:
         [Fact]
         public void Execution_ZorgToeslag_Step_Flow_Resolves_Inclusive_Gate()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
                 new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy")
@@ -1016,7 +1019,7 @@ formules:
         [Fact]
         public void ShouldEvaluateFormulaWithoutQA()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
             } as IParametersCollection;
@@ -1031,6 +1034,13 @@ formules:
             Assert.Equal(20941, (double)parameters[2].Value);
             Assert.Equal("standaardpremie", parameters[3].Name);
             Assert.Equal(1609, (double)parameters[3].Value);
+        }
+
+        private IRoutingController InitMoqRoutingController()
+        {
+            var moqRoutingController = new Mock<IRoutingController>();
+            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
+            return moqRoutingController.Object;
         }
     }
 }

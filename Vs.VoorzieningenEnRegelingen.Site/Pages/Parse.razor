@@ -29,7 +29,8 @@
 
     private void HandleValidSubmit()
     {
-        YamlScriptController c = new YamlScriptController();
+        //TODO use IRoutingController
+        YamlScriptController c = new YamlScriptController(null);
         result = c.Parse(yaml);
         Console.WriteLine("OnValidSubmit");
     }

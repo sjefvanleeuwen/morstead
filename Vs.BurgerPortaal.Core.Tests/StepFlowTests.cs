@@ -1,8 +1,12 @@
+using Microsoft.Extensions.Logging;
+using Moq;
 using System.Linq;
 using Vs.BurgerPortaal.Core.Controllers;
 using Vs.BurgerPortaal.Core.Objects;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Model;
+using Vs.Rules.Routing.Controllers.Interfaces;
+using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
 
@@ -13,7 +17,7 @@ namespace Vs.BurgerPortaal.Core.Tests
         [Fact]
         public void CanDoTwoStepsAndOneBack()
         {
-            var serviceController = new ServiceController(null);
+            var serviceController = new ServiceController(InitMoqLogger(), new YamlScriptController(InitMoqRoutingController()));
             var sequence = new Sequence()
             {
                 Yaml = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml"
@@ -53,7 +57,7 @@ namespace Vs.BurgerPortaal.Core.Tests
         public void CanDoThreeStepsAndTwoBackAnd1forward()
         {
             //step sequence: 1-2-3-2-1-2
-            var serviceController = new ServiceController(null);
+            var serviceController = new ServiceController(InitMoqLogger(), new YamlScriptController(InitMoqRoutingController()));
             var sequence = new Sequence()
             {
                 Yaml = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml"
@@ -375,6 +379,19 @@ namespace Vs.BurgerPortaal.Core.Tests
             Assert.Equal(TypeInference.InferenceResult.TypeEnum.Double, var3.Type);
             Assert.Equal(800, (double)var3.Value);
             Assert.Equal("800", var3.ValueAsString.ToLower());
+        }
+
+        private ILogger<ServiceController> InitMoqLogger()
+        {
+            var moqLogger = new Mock<ILogger<ServiceController>>();
+            return moqLogger.Object;
+        }
+
+        private IRoutingController InitMoqRoutingController()
+        {
+            var moqRoutingController = new Mock<IRoutingController>();
+            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
+            return moqRoutingController.Object;
         }
     }
 }

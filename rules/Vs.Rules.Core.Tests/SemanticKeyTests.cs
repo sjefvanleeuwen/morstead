@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Moq;
+using System.Collections.Generic;
 using System.Linq;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
+using Vs.Rules.Routing.Controllers.Interfaces;
+using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 using YamlDotNet.Serialization;
@@ -14,7 +17,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void CanDiscoverAllSemanticKeysAndBindToParameters()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"));
 
             Assert.False(result.IsError);
@@ -45,7 +48,7 @@ namespace Vs.Rules.Core.Tests
         public void GetContentNodesFromExecutionResult()
         {
             QuestionArgs argsret = null;
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 argsret = args;
@@ -73,7 +76,7 @@ namespace Vs.Rules.Core.Tests
         public void ExecutionResultHasCorrectSemanticKeyOnGeenRecht()
         {
             QuestionArgs argsret = null;
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 argsret = args;
@@ -91,6 +94,13 @@ namespace Vs.Rules.Core.Tests
             Assert.Equal("stap.woonland", executionResult.Step.SemanticKey);
             Assert.Equal("stap.woonland.geen_recht", executionResult.Step.Break.SemanticKey);
             Assert.True(executionResult?.Parameters?.Any(p => p.Name == "recht" && !(bool)p.Value));
+        }
+
+        private IRoutingController InitMoqRoutingController()
+        {
+            var moqRoutingController = new Mock<IRoutingController>();
+            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
+            return moqRoutingController.Object;
         }
     }
 }

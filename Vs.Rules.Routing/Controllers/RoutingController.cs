@@ -1,14 +1,16 @@
 ﻿using Vs.Core.Formats.Yaml.Helper;
 using Vs.Core.Layers.Controllers.Interfaces;
 using Vs.Core.Layers.Enums;
+using Vs.Rules.Routing.Controllers.Interfaces;
 using Vs.Rules.Routing.Model;
+using Vs.Rules.Routing.Model.Interfaces;
 using YamlDotNet.Serialization;
 
 namespace Vs.Rules.Routing.Controllers
 {
-    public class RoutingController
+    public class RoutingController : IRoutingController
     {
-        public RoutingConfiguration RoutingConfiguration { get; set; }
+        public IRoutingConfiguration RoutingConfiguration { get; set; }
 
         private readonly IYamlSourceController _yamlSourceController;
 
@@ -22,7 +24,7 @@ namespace Vs.Rules.Routing.Controllers
             }
             catch
             {
-                
+
             }
             if (routerYaml != null)
             {

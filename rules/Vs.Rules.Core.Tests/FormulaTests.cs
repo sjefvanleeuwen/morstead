@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Globalization;
 using Flee.PublicTypes;
+using Moq;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
+using Vs.Rules.Routing.Controllers.Interfaces;
+using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 using YamlDotNet.Serialization;
@@ -176,7 +179,7 @@ namespace Vs.Rules.Core.Tests
             // -naam: woonlandfactoren
             //  woonland, factor:
             //  - [Finland, 0.7161]
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             ExpressionContext context = new ExpressionContext(controller);
             //  Tsjechië,            0.2412 
@@ -193,8 +196,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         void Formula_Can_Execute_FormulaExpressionContext()
         {
-
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 // should not be called.
@@ -219,7 +221,7 @@ namespace Vs.Rules.Core.Tests
         void Formula_Can_Execute_FormulaExpressionContext_UsingQuestionAnswer()
         {
 
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             var parameters = new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy"),
@@ -270,7 +272,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         void Formula_Can_Discover_Parameters_From_Yaml()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var parameters = controller.GetFunctionTree(controller);
@@ -280,11 +282,18 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         void Formula_Can_Discover_Parameters_And_InferedTypes_From_Yaml()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"WettelijkeRente.yaml"));
             Assert.False(result.IsError);
             var parameters = controller.GetFunctionTree(controller);
             Assert.True(parameters.Count == 4);
+        }
+
+        private IRoutingController InitMoqRoutingController()
+        {
+            var moqRoutingController = new Mock<IRoutingController>();
+            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
+            return moqRoutingController.Object;
         }
     }
 }

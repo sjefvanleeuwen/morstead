@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Moq;
+using System.Collections.Generic;
 using System.Linq;
 using Vs.Core.Diagnostics;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
+using Vs.Rules.Routing.Controllers.Interfaces;
+using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
@@ -32,7 +35,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void CanDetermineTableLookupValueFromQuestion()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"TableTests.yaml"));
             Assert.False(result.IsError);
             var parameters = new ParametersCollection() as IParametersCollection;
@@ -81,7 +84,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void YamlCanParseAndEvaluateSituationalTables()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(
                 @"UnitTests/SituationalTables/ValidSituations.yaml"));
             Assert.False(result.IsError);
@@ -100,6 +103,13 @@ namespace Vs.Rules.Core.Tests
             executionResult = new ExecutionResult(ref parameters);
             executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
 
+        }
+
+        private IRoutingController InitMoqRoutingController()
+        {
+            var moqRoutingController = new Mock<IRoutingController>();
+            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
+            return moqRoutingController.Object;
         }
     }
 }

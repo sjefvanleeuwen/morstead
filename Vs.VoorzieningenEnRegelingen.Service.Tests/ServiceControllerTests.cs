@@ -1,7 +1,10 @@
+using Microsoft.Extensions.Logging;
+using Moq;
 using Newtonsoft.Json;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Model;
-using Vs.VoorzieningenEnRegelingen.Core;
+using Vs.Rules.Routing.Controllers.Interfaces;
+using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
@@ -13,9 +16,8 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         [Fact]
         public void Service_Parse_Yaml_Successfull()
         {
-            ServiceController controller = new ServiceController(null);
+            ServiceController controller = new ServiceController(InitMoqLogger(), new YamlScriptController(InitMoqRoutingController()));
             var s = new ParseRequest() { Config = YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml") };
-            var o = Newtonsoft.Json.JsonConvert.SerializeObject(s);
             var result = controller.Parse(s);
             Assert.False(result.IsError);
         }
@@ -23,7 +25,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         [Fact]
         public void Service_Parse_Yaml_Unsuccessfull()
         {
-            ServiceController controller = new ServiceController(null);
+            ServiceController controller = new ServiceController(InitMoqLogger(), new YamlScriptController(InitMoqRoutingController()));
             var result = controller.Parse(new ParseRequest() { Config = "--- Garbage In ---" });
             Assert.True(result.IsError);
         }
@@ -31,7 +33,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         [Fact]
         public void Service_Execute_Zorgtoeslag_From_Url()
         {
-            ServiceController controller = new ServiceController(null);
+            ServiceController controller = new ServiceController(InitMoqLogger(), new YamlScriptController(InitMoqRoutingController()));
             var executeRequest = new ExecuteRequest()
             {
                 Config = YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"),
@@ -44,6 +46,19 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
             var result = controller.Execute(executeRequest);
             Assert.True(result.Questions.Parameters.Count == 1);
             Assert.True(result.Questions.Parameters[0].Name == "woonland");
+        }
+
+        private ILogger<ServiceController> InitMoqLogger()
+        {
+            var moqLogger = new Mock<ILogger<ServiceController>>();
+            return moqLogger.Object;
+        }
+
+        private IRoutingController InitMoqRoutingController()
+        {
+            var moqRoutingController = new Mock<IRoutingController>();
+            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
+            return moqRoutingController.Object;
         }
     }
 }

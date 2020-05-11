@@ -1,4 +1,7 @@
-﻿using Vs.VoorzieningenEnRegelingen.Core.TestData;
+﻿using Moq;
+using Vs.Rules.Routing.Controllers.Interfaces;
+using Vs.Rules.Routing.Model.Interfaces;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
 namespace Vs.Rules.Core.Tests
@@ -8,7 +11,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void Model_Parse_Yaml_To_Model()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.True(controller.GetSituation("standaardpremie", "alleenstaande").Expression == "1609");
             Assert.True(controller.GetSituation("maximaalvermogen", "aanvrager_met_toeslagpartner").Expression == "145136");
@@ -17,7 +20,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void StuurInformatieTest()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             Assert.False(result.IsError);
             var header = controller.GetHeader();
@@ -34,9 +37,16 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void CanParseChoices()
         {
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag4.yaml"));
             Assert.False(result.IsError);
+        }
+
+        private IRoutingController InitMoqRoutingController()
+        {
+            var moqRoutingController = new Mock<IRoutingController>();
+            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
+            return moqRoutingController.Object;
         }
     }
 }

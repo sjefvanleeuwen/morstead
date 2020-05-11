@@ -16,10 +16,12 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
     public class ServiceController : ControllerBase, IServiceController
     {
         private readonly ILogger<ServiceController> _logger;
+        private readonly IYamlScriptController _yamlScriptController;
 
-        public ServiceController(ILogger<ServiceController> logger)
+        public ServiceController(ILogger<ServiceController> logger, IYamlScriptController yamlScriptController)
         {
             _logger = logger;
+            _yamlScriptController = yamlScriptController;
         }
 
         static ConcurrentDictionary<string, string> UrlContentCache = new ConcurrentDictionary<string, string>();
@@ -48,8 +50,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
                 throw new ArgumentNullException(nameof(parseRequest));
             }
             parseRequest.Config = parseHelper(parseRequest.Config);
-            var controller = new YamlScriptController();
-            return controller.Parse(parseRequest.Config);
+            return _yamlScriptController.Parse(parseRequest.Config);
         }
 
         [HttpPost("execute")]
@@ -66,20 +67,19 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             var parameters = executeRequest.Parameters;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
             executeRequest.Config = parseHelper(executeRequest.Config);
-            var controller = new YamlScriptController();
-            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            _yamlScriptController.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 executionResult.Questions = args;
             };
 
-            var result = controller.Parse(executeRequest.Config);
+            var result = _yamlScriptController.Parse(executeRequest.Config);
             if (result.IsError)
             {
                 return executionResult;
             }
             try
             {
-                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+                _yamlScriptController.ExecuteWorkflow(ref parameters, ref executionResult);
             }
             catch (UnresolvedException)
             {
@@ -106,18 +106,17 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             var parameters = evaluateFormulaWithoutQARequest.Parameters;
             evaluateFormulaWithoutQARequest.Config = parseHelper(evaluateFormulaWithoutQARequest.Config);
 
-            var controller = new YamlScriptController();
-            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            _yamlScriptController.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
             };
 
-            var result = controller.Parse(evaluateFormulaWithoutQARequest.Config);
+            var result = _yamlScriptController.Parse(evaluateFormulaWithoutQARequest.Config);
             if (result.IsError)
             {
             }
             try
             {
-                controller.EvaluateFormulaWithoutQA(ref parameters, evaluateFormulaWithoutQARequest.UnresolvedParameters);
+                _yamlScriptController.EvaluateFormulaWithoutQA(ref parameters, evaluateFormulaWithoutQARequest.UnresolvedParameters);
             }
             catch (UnresolvedException)
             {

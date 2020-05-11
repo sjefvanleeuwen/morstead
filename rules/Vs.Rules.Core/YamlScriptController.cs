@@ -9,6 +9,7 @@ using Vs.Core.Extensions;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
+using Vs.Rules.Routing.Controllers.Interfaces;
 using static Vs.Rules.Core.TypeInference.InferenceResult;
 
 namespace Vs.Rules.Core
@@ -30,9 +31,11 @@ namespace Vs.Rules.Core
         /// otherwise it will possibly interfere with script syntax)
         /// </summary>
         private static readonly CultureInfo _numberCulture = CultureInfo.InvariantCulture;
+        private readonly IRoutingController _routingController;
 
-        public YamlScriptController()
+        public YamlScriptController(IRoutingController routingController)
         {
+            _routingController = routingController;
         }
 
         public QuestionDelegate QuestionCallback { get; set; }

@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using Moq;
+using System.Linq;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
+using Vs.Rules.Routing.Controllers.Interfaces;
+using Vs.Rules.Routing.Model.Interfaces;
 using Xunit;
 
 namespace Vs.Rules.Core.Tests
@@ -29,26 +32,23 @@ formules:
         [Fact]
         public void ShouldAcceptWaarde()
         {
-            //List<ParametersCollection> parameters = new List<ParametersCollection>();
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var parseResult = controller.Parse(_testYaml1);
             Assert.False(parseResult.IsError);
         }
 
-
+        [Fact]
         public void ShouldStillReadDescription()
         {
-            //List<ParametersCollection> parameters = new List<ParametersCollection>();
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             var parseResult = controller.Parse(_testYaml1);
-            //Assert.Single(parseResult.Model.Steps);
+            Assert.Single(parseResult.Model.Steps);
             var stepToTest = parseResult.Model.Steps.First();
-            // Assert.Equal("toetsingsinkomen", stepToTest.Name);
-            // Assert.Equal("toetsingsinkomen", stepToTest.Description);
-            //Assert.NotNull(parseResult.Model.Formulas.FirstOrDefault(f => f.Name == "autofunc_toetsingsinkomen"));
+            Assert.Equal("toetsingsinkomen", stepToTest.Name);
+            Assert.Equal("toetsingsinkomen", stepToTest.Description);
         }
 
-
+        [Fact]
         public void ShouldAskForValue()
         {
             var isException = false;
@@ -58,7 +58,7 @@ formules:
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
 
             //prepare yaml definition
-            var controller = new YamlScriptController();
+            var controller = new YamlScriptController(InitMoqRoutingController());
             //controller.Parse(_testYaml5);
             controller.Parse(_testYaml1);
             //set the callback
@@ -76,12 +76,19 @@ formules:
                 isException = true;
             }
 
-            //Assert.True(isException);
-            //Assert.Empty(executionResult.Parameters);
-            //Assert.Single(executionResult.Questions.Parameters);
-            //Assert.Equal("toetsingsinkomen", executionResult.Questions.Parameters[0].Name);
-            //Assert.Single(executionResult.Stacktrace);
-            //Assert.Equal("toetsingsinkomen", executionResult.Stacktrace.First().Step.Description);
+            Assert.True(isException);
+            Assert.Empty(executionResult.Parameters);
+            Assert.Single(executionResult.Questions.Parameters);
+            Assert.Equal("toetsingsinkomen", executionResult.Questions.Parameters[0].Name);
+            Assert.Single(executionResult.Stacktrace);
+            Assert.Equal("toetsingsinkomen", executionResult.Stacktrace.First().Step.Description);
+        }
+
+        private IRoutingController InitMoqRoutingController()
+        {
+            var moqRoutingController = new Mock<IRoutingController>();
+            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
+            return moqRoutingController.Object;
         }
     }
 }
