@@ -10,21 +10,39 @@ namespace Vs.Rules.Routing.Controllers
 {
     public class RoutingController : IRoutingController
     {
-        public IRoutingConfiguration RoutingConfiguration { get; set; }
+        private IRoutingConfiguration routingConfiguration;
+        private bool routingConfigurationSet;
+        public IRoutingConfiguration RoutingConfiguration
+        {
+            get
+            {
+                if (!routingConfigurationSet)
+                {
+                    Initialize();
+                }
+                return routingConfiguration;
+            }
+        }
 
         private readonly IYamlSourceController _yamlSourceController;
 
         public RoutingController(IYamlSourceController yamlSourceController)
         {
             _yamlSourceController = yamlSourceController;
-            string routerYaml = null;
-            try
-            {
-                routerYaml = _yamlSourceController.GetYaml(YamlType.Routing);
-            }
-            catch
-            {
+        }
 
+        public void Initialize(string routerYaml = null)
+        {
+            if (routerYaml == null)
+            {
+                try
+                {
+                    routerYaml = _yamlSourceController.GetYaml(YamlType.Routing);
+                }
+                catch
+                {
+
+                }
             }
             if (routerYaml != null)
             {
@@ -32,8 +50,14 @@ namespace Vs.Rules.Routing.Controllers
                 routerYaml = YamlParser.ParseHelper(routerYaml);
 
                 var deserializer = new DeserializerBuilder().Build();
-                RoutingConfiguration = deserializer.Deserialize<RoutingConfiguration>(routerYaml);
+                routingConfiguration = deserializer.Deserialize<RoutingConfiguration>(routerYaml);
             }
+            routingConfigurationSet = true;
+        }
+
+        public string GetParameterValue(string missingParameterName)
+        {
+            return "Nederland";
         }
     }
 }

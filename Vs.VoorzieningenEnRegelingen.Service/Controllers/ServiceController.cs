@@ -7,6 +7,7 @@ using System.Net;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
+using Vs.Rules.Core.Model;
 using Vs.Rules.Routing.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
 
@@ -87,14 +88,36 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             catch (UnresolvedException)
             {
                 //a paramater is yet unresolved
-                ResolveQuestionFromRouting(ref executionResult);
+                ResolveQuestionFromRouting(ref executionResult, ref executeRequest);
             }
             return executionResult;
         }
 
-        private void ResolveQuestionFromRouting(ref IExecutionResult executionResult)
+        private void ResolveQuestionFromRouting(ref IExecutionResult executionResult, ref IExecuteRequest executeRequest)
         {
-            var missingParameter = executionResult.QuestionFirstParameter;
+            var missingParameterName = executionResult.QuestionFirstParameter?.Name;
+            if (MissingParameterHasRouting(missingParameterName))
+            {
+                var value = _routingController.GetParameterValue(missingParameterName);
+                if (value == null)
+                {
+                    return;
+                }
+                //var parameter = new RoutingParameter(missingParameterName, value);
+                var parameter = new ClientParameter(missingParameterName, value, TypeInference.InferenceResult.TypeEnum.Unknown, missingParameterName);
+                executeRequest.Parameters.Add(parameter);
+                executionResult = Execute(executeRequest);
+            }
+        }
+
+        private bool MissingParameterHasRouting(string missingParameterName)
+        {
+            if (_routingController?.RoutingConfiguration == null)
+            {
+                return false;
+            }
+
+            return _routingController.RoutingConfiguration.Parameters.Any(p => p.Name == missingParameterName);
         }
 
         [HttpPost("EvaluateFormulaWithoutQA")]

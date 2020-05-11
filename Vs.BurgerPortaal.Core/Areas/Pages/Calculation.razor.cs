@@ -70,7 +70,7 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
                 YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"),
                 YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml"),
                 YamlTestFileLoader.Load(@"Zorgtoeslag5Routing.yaml")
-            ); ;
+            );
         }
 
         private void GetNextStep()
