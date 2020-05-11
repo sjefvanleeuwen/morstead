@@ -7,6 +7,7 @@ using System.Net;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
+using Vs.Rules.Routing.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
@@ -17,11 +18,13 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
     {
         private readonly ILogger<ServiceController> _logger;
         private readonly IYamlScriptController _yamlScriptController;
+        private readonly IRoutingController _routingController;
 
-        public ServiceController(ILogger<ServiceController> logger, IYamlScriptController yamlScriptController)
+        public ServiceController(ILogger<ServiceController> logger, IYamlScriptController yamlScriptController, IRoutingController routingController)
         {
             _logger = logger;
             _yamlScriptController = yamlScriptController;
+            _routingController = routingController;
         }
 
         static ConcurrentDictionary<string, string> UrlContentCache = new ConcurrentDictionary<string, string>();
@@ -83,8 +86,15 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             }
             catch (UnresolvedException)
             {
+                //a paramater is yet unresolved
+                ResolveQuestionFromRouting(ref executionResult);
             }
             return executionResult;
+        }
+
+        private void ResolveQuestionFromRouting(ref IExecutionResult executionResult)
+        {
+            var missingParameter = executionResult.QuestionFirstParameter;
         }
 
         [HttpPost("EvaluateFormulaWithoutQA")]

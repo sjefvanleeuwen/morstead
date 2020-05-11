@@ -1,9 +1,6 @@
-﻿using Moq;
-using System;
+﻿using System;
 using System.Linq;
 using Vs.Rules.Core.Model;
-using Vs.Rules.Routing.Controllers.Interfaces;
-using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
@@ -33,7 +30,7 @@ namespace Vs.Rules.Core.Tests
         [Fact]
         public void Flow_ZorgToeslag_2019_Scenario1_Condition_Branche_Test()
         {
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             var result = controller.Parse(YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"));
             var parameters = new ParametersCollection();
             parameters.Add(new ClientParameter("woonland", "Nederland", TypeInference.InferenceResult.TypeEnum.List, "Dummy"));
@@ -62,13 +59,6 @@ namespace Vs.Rules.Core.Tests
             Assert.True(ex.Step.Value == "value");
             Assert.True(ex.Step.Situation == "situation");
             Assert.True(ex.Step.Break.Expression == "break");
-        }
-
-        private IRoutingController InitMoqRoutingController()
-        {
-            var moqRoutingController = new Mock<IRoutingController>();
-            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
-            return moqRoutingController.Object;
         }
     }
 }

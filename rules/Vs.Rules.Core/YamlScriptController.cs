@@ -9,7 +9,6 @@ using Vs.Core.Extensions;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
-using Vs.Rules.Routing.Controllers.Interfaces;
 using static Vs.Rules.Core.TypeInference.InferenceResult;
 
 namespace Vs.Rules.Core
@@ -31,11 +30,9 @@ namespace Vs.Rules.Core
         /// otherwise it will possibly interfere with script syntax)
         /// </summary>
         private static readonly CultureInfo _numberCulture = CultureInfo.InvariantCulture;
-        private readonly IRoutingController _routingController;
 
-        public YamlScriptController(IRoutingController routingController)
+        public YamlScriptController()
         {
-            _routingController = routingController;
         }
 
         public QuestionDelegate QuestionCallback { get; set; }
@@ -258,7 +255,6 @@ namespace Vs.Rules.Core
             {
                 YamlRuleParser parser = new YamlRuleParser(yaml, null);
                 _model = new Model.Model(parser.Header(), parser.Formulas().ToList(), parser.Tabellen().ToList(), parser.Flow().ToList());
-                //_model.AddFormulas(parser.GetFormulasFromBooleanSteps(_model.Steps));
                 List<string> inclusiveSituations = null;
                 foreach (var step in _model.Steps)
                 {

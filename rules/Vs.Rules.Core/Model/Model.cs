@@ -18,11 +18,6 @@ namespace Vs.Rules.Core.Model
             Steps = steps ?? throw new ArgumentNullException(nameof(steps));
         }
 
-        public void AddFormulas(IEnumerable<Formula> formulas)
-        {
-            Formulas.AddRange(formulas);
-        }
-
         public IEnumerable<Table> GetTablesByName(string name)
         {
             return Tables.FindAll(p => p.Name == name);

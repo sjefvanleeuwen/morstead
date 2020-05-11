@@ -1,11 +1,8 @@
-﻿using Moq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
-using Vs.Rules.Routing.Controllers.Interfaces;
-using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
@@ -122,7 +119,7 @@ tabellen:
         public void ShouldAcceptKeuze()
         {
             //List<ParametersCollection> parameters = new List<ParametersCollection>();
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             var parseResult = controller.Parse(_testYaml1);
             Assert.False(parseResult.IsError);
         }
@@ -131,7 +128,7 @@ tabellen:
         public void ShouldStillReadDescription()
         {
             //List<ParametersCollection> parameters = new List<ParametersCollection>();
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             var parseResult = controller.Parse(_testYaml1);
             Assert.Single(parseResult.Model.Steps);
             var stepToTest = parseResult.Model.Steps.First();
@@ -143,7 +140,7 @@ tabellen:
         public void ShouldNotNeedDescription()
         {
             //List<ParametersCollection> parameters = new List<ParametersCollection>();
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             var parseResult = controller.Parse(_testYaml2);
 
             Assert.Single(parseResult.Model.Steps);
@@ -156,7 +153,7 @@ tabellen:
         public void ShouldHaveTwoChoices()
         {
             //List<ParametersCollection> parameters = new List<ParametersCollection>();
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             var parseResult = controller.Parse(_testYaml2);
 
             Assert.Single(parseResult.Model.Steps);
@@ -176,7 +173,7 @@ tabellen:
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
 
             //prepare yaml definition
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             controller.Parse(_testYaml4);
             //set the callback
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -212,7 +209,7 @@ tabellen:
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
 
             //prepare yaml definition
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             //controller.Parse(_testYaml5);
             controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag4.yaml"));
             //set the callback
@@ -249,7 +246,7 @@ tabellen:
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
 
             //prepare yaml definition
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             controller.Parse(_testYaml2);
             //set the callback
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -289,7 +286,7 @@ tabellen:
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
 
             //prepare yaml definition
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             controller.Parse(_testYaml2);
             //set the callback
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -333,7 +330,7 @@ tabellen:
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
 
             //prepare yaml definition
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             controller.Parse(_testYaml2);
             //set the callback
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
@@ -361,13 +358,6 @@ tabellen:
             Assert.Null(executionResult.Questions);
             Assert.Single(executionResult.Stacktrace);
             Assert.Equal("Test A of B", executionResult.Stacktrace.First().Step.Description);
-        }
-
-        private IRoutingController InitMoqRoutingController()
-        {
-            var moqRoutingController = new Mock<IRoutingController>();
-            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
-            return moqRoutingController.Object;
         }
     }
 }

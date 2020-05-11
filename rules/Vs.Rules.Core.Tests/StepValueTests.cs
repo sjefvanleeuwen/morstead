@@ -1,9 +1,6 @@
-﻿using Moq;
-using System.Linq;
+﻿using System.Linq;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
-using Vs.Rules.Routing.Controllers.Interfaces;
-using Vs.Rules.Routing.Model.Interfaces;
 using Xunit;
 
 namespace Vs.Rules.Core.Tests
@@ -32,7 +29,7 @@ formules:
         [Fact]
         public void ShouldAcceptWaarde()
         {
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             var parseResult = controller.Parse(_testYaml1);
             Assert.False(parseResult.IsError);
         }
@@ -40,7 +37,7 @@ formules:
         [Fact]
         public void ShouldStillReadDescription()
         {
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             var parseResult = controller.Parse(_testYaml1);
             Assert.Single(parseResult.Model.Steps);
             var stepToTest = parseResult.Model.Steps.First();
@@ -58,7 +55,7 @@ formules:
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
 
             //prepare yaml definition
-            var controller = new YamlScriptController(InitMoqRoutingController());
+            var controller = new YamlScriptController();
             //controller.Parse(_testYaml5);
             controller.Parse(_testYaml1);
             //set the callback
@@ -82,13 +79,6 @@ formules:
             Assert.Equal("toetsingsinkomen", executionResult.Questions.Parameters[0].Name);
             Assert.Single(executionResult.Stacktrace);
             Assert.Equal("toetsingsinkomen", executionResult.Stacktrace.First().Step.Description);
-        }
-
-        private IRoutingController InitMoqRoutingController()
-        {
-            var moqRoutingController = new Mock<IRoutingController>();
-            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
-            return moqRoutingController.Object;
         }
     }
 }

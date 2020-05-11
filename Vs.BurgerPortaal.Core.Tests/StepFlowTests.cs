@@ -17,7 +17,7 @@ namespace Vs.BurgerPortaal.Core.Tests
         [Fact]
         public void CanDoTwoStepsAndOneBack()
         {
-            var serviceController = new ServiceController(InitMoqLogger(), new YamlScriptController(InitMoqRoutingController()));
+            var serviceController = new ServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
             var sequence = new Sequence()
             {
                 Yaml = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml"
@@ -57,7 +57,7 @@ namespace Vs.BurgerPortaal.Core.Tests
         public void CanDoThreeStepsAndTwoBackAnd1forward()
         {
             //step sequence: 1-2-3-2-1-2
-            var serviceController = new ServiceController(InitMoqLogger(), new YamlScriptController(InitMoqRoutingController()));
+            var serviceController = new ServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
             var sequence = new Sequence()
             {
                 Yaml = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml"
