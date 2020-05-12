@@ -1,4 +1,5 @@
-﻿using Vs.Rules.Routing.Model.Interfaces;
+﻿using System.Threading.Tasks;
+using Vs.Rules.Routing.Model.Interfaces;
 
 namespace Vs.Rules.Routing.Controllers.Interfaces
 {
@@ -6,6 +7,6 @@ namespace Vs.Rules.Routing.Controllers.Interfaces
     {
         IRoutingConfiguration RoutingConfiguration { get; }
         void Initialize(string routingYaml = null);
-        string GetParameterValue(string missingParameterName);
+        Task<string> GetParameterValue(string missingParameterName);
     }
 }

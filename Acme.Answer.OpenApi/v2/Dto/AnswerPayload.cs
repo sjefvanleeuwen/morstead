@@ -4,22 +4,18 @@ namespace Acme.Answer.OpenApi.v2.Controllers
 {
     public class AnswerPayload
     {
-        IEnumerable<IParameter> Parameters { get; set; }
+        public IEnumerable<Parameter> Parameters { get; set; }
 
         public class Parameter : IParameter
         {
-            public object Value { get; set; }
-            public string SemanticKey { get; set; }
+            public string Name { get; set; }
+            public string Value { get; set; }
         }
 
-        public interface IParameter : ISemanticKey
+        public interface IParameter
         {
-            object Value { get; set; }
-        }
-
-        public interface ISemanticKey
-        {
-            string SemanticKey { get; set; }
+            string Name { get; set; }
+            string Value { get; set; }
         }
     }
 }

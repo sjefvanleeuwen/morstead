@@ -8,5 +8,9 @@ stuurinformatie:
   status: ontwikkel
   jaar: 2019
 parameters:
- - waarde: woonland
+ - waarde: alleenstaande
+   locatie: woonlandfactor
+ - waarde: aanvrager_met_toeslagpartner
+   locatie: woonlandfactor
+ - waarde: toetsingsinkomen
    locatie: woonlandfactor

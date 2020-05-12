@@ -4,6 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
@@ -95,18 +96,27 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
 
         private void ResolveQuestionFromRouting(ref IExecutionResult executionResult, ref IExecuteRequest executeRequest)
         {
-            var missingParameterName = executionResult.QuestionFirstParameter?.Name;
-            if (MissingParameterHasRouting(missingParameterName))
+            try
             {
-                var value = _routingController.GetParameterValue(missingParameterName);
-                if (value == null)
+                var missingParameterNames = executionResult.Questions?.Parameters.Select(p => p.Name);
+                foreach (string missingParameterName in missingParameterNames)
                 {
-                    return;
+                    if (MissingParameterHasRouting(missingParameterName))
+                    {
+                        var value = Task.Run(async () => await _routingController.GetParameterValue(missingParameterName)).Result;
+                        if (value == null)
+                        {
+                            continue;
+                        }
+                        var parameter = new ClientParameter(missingParameterName, value, TypeInference.InferenceResult.TypeEnum.Unknown, missingParameterName);
+                        executeRequest.Parameters.Add(parameter);
+                        executionResult = Execute(executeRequest);
+                    }
                 }
-                //var parameter = new RoutingParameter(missingParameterName, value);
-                var parameter = new ClientParameter(missingParameterName, value, TypeInference.InferenceResult.TypeEnum.Unknown, missingParameterName);
-                executeRequest.Parameters.Add(parameter);
-                executionResult = Execute(executeRequest);
+            }
+            catch
+            {
+                return;
             }
         }
 

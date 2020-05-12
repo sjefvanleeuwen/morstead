@@ -1,4 +1,6 @@
-﻿using Vs.Core.Formats.Yaml.Helper;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Vs.Core.Formats.Yaml.Helper;
 using Vs.Core.Layers.Controllers.Interfaces;
 using Vs.Core.Layers.Enums;
 using Vs.Rules.Routing.Controllers.Interfaces;
@@ -55,9 +57,23 @@ namespace Vs.Rules.Routing.Controllers
             routingConfigurationSet = true;
         }
 
-        public string GetParameterValue(string missingParameterName)
+        public async Task<string> GetParameterValue(string missingParameterName)
         {
-            return "Nederland";
+            var api = new ApiCalls.ACMEApiAnswerClient(new System.Net.Http.HttpClient(), "https://localhost:44322");
+            try
+            {
+                var result = await api.GetByParameterNameAsync(missingParameterName);
+                var value = result?.Parameters?.First()?.Value;
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    return null;
+                }
+                return value;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
