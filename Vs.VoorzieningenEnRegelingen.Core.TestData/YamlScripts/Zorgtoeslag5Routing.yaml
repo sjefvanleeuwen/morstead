@@ -9,8 +9,8 @@ stuurinformatie:
   jaar: 2019
 parameters:
  - waarde: alleenstaande
-   locatie: woonlandfactor
+   locatie: "https://localhost:44322"
  - waarde: aanvrager_met_toeslagpartner
-   locatie: woonlandfactor
+   locatie: "https://localhost:44322"
  - waarde: toetsingsinkomen
-   locatie: woonlandfactor
+   locatie: "https://localhost:44322"

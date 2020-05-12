@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Vs.Core.Formats.Yaml.Helper;
 using Vs.Core.Layers.Controllers.Interfaces;
@@ -59,7 +60,13 @@ namespace Vs.Rules.Routing.Controllers
 
         public async Task<string> GetParameterValue(string missingParameterName)
         {
-            var api = new ApiCalls.ACMEApiAnswerClient(new System.Net.Http.HttpClient(), "https://localhost:44322");
+            var url = RoutingConfiguration.Parameters.FirstOrDefault()?.Location;
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                return null;
+            }
+            
+            var api = new ApiCalls.ACMEApiAnswerClient(new System.Net.Http.HttpClient(), url);
             try
             {
                 var result = await api.GetByParameterNameAsync(missingParameterName);
