@@ -40,20 +40,6 @@ namespace Vs.Rules.Core.Model
             }
 
             _value = value.Infer();
-            if (type == TypeEnum.Unknown)
-            {
-                Type = GetTypeFromValue(_value);
-            }
-        }
-
-        private TypeEnum GetTypeFromValue(object value)
-        {
-            //TODO inference for other types needed
-            if (value is bool)
-                return TypeEnum.Boolean;
-            if (value is double)
-                return TypeEnum.Double;
-            return TypeEnum.String;
         }
 
         [JsonIgnore()]

@@ -98,9 +98,12 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
         {
             try
             {
-                var missingParameterNames = executionResult.Questions?.Parameters.Select(p => p.Name);
-                foreach (string missingParameterName in missingParameterNames)
+                var missingParameters = executionResult.Questions?.Parameters;
+                var type = executionResult.Questions?.Parameters.Select(p => p.Type);
+                foreach (var missingParameter in missingParameters)
                 {
+                    var missingParameterName = missingParameter.Name;
+                    var missingParameterType = missingParameter.Type;
                     if (MissingParameterHasRouting(missingParameterName))
                     {
                         var value = Task.Run(async () => await _routingController.GetParameterValue(missingParameterName)).Result;
@@ -108,7 +111,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
                         {
                             continue;
                         }
-                        var parameter = new ClientParameter(missingParameterName, value, TypeInference.InferenceResult.TypeEnum.Unknown, missingParameterName);
+                        var parameter = new ClientParameter(missingParameterName, value, missingParameterType, missingParameterName);
                         executeRequest.Parameters.Add(parameter);
                         executionResult = Execute(executeRequest);
                     }
