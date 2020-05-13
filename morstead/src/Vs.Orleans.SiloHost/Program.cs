@@ -27,7 +27,8 @@ namespace Vs.Orleans.SiloHost
                         .Configure<EndpointOptions>(options => options.AdvertisedIPAddress = IPAddress.Loopback)
                         .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
                         // note! volatile storage for morstead development purposes
-                        .AddMemoryGrainStorage(name: "ArchiveStorage");
+                        .AddMemoryGrainStorage(name: "ArchiveStorage")
+                        .AddMemoryGrainStorage(name: "session-store");
                         //.AddMemoryGrainStorage(name: "profileStore");
                     /*
                     .AddAzureBlobGrainStorage(
