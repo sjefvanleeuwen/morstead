@@ -39,6 +39,7 @@ namespace Vs.Rules.Core.Model
                 throw new ArgumentNullException(nameof(value));
             }
 
+            //TODO no inference needed, the correct type is provided
             _value = value.Infer();
         }
 
