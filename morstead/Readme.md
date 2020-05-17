@@ -43,8 +43,46 @@ Om de silo te starten:
 dotnet run --project src\Vs.Orleans.SiloHost
 ```
 
-
-To start the client (you will have to use a different command window)
+Om de client te starten (u moet een ander opdrachtvenster gebruiken)
 ```
 dotnet run --project src\Vs.Rules.OrleansTestClient\
 ```
+
+## Morstead Annotatie Systeem
+
+***(under construction)***
+
+Om morstead te kunnen modeleren in de solution architectuur is er een notatiesysteem opgesteld:
+
+## Stateless worker grains
+
+
+### Stateless Grain
+
+Stateless Worker grains bieden een eenvoudige manier om een automatisch beheerde pool van 
+grain activaties te creëren die automatisch opschaalt op basis van de werkelijke belasting.
+
+<img src="./doc/images/grain-worker.svg" width="96"></img>
+
+### Stateless Grain (re-entrant)
+
+Stateless betekent overigens niet dat een workergrain een status kan hebben en uitsluitend
+is beperkt tot het uitvoeren van functies. Net als elk ander type grain kan deze een gewenste
+status bewaren in het geheugen (re-entrant) (maar persisteert de staat niet op een medium voor langdurig gebruik)
+Er is echter geen eenvoudig mechanisme om de de status bij te houden en verschillende
+activeringen te coördineren.
+
+<img src="./doc/images/grain-worker-re-entrant.svg" width="96"></img>
+
+### Statefull Grain
+<img src="./doc/images/grain-statefull.svg" width="96"></img>
+
+### Observer Grain
+<img src="./doc/images/grain-observer.svg" width="96"></img>
+
+Als onderdeel van een silo overzicht en verbindingen tussen grains, anoteren we observer patterns middels
+marble diagrams om verder obervable state te visualiseren.
+
+
+
+
