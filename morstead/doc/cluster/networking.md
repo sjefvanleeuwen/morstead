@@ -54,8 +54,8 @@ Om het permanente profiel te bewerken, moeten we een editor installeren. Tiny Co
 wordt geleverd met TCE (Tiny Core Extensions). Deze bibliotheek bevat de `nano` editor. Deze extensie moet eerst toegevoegd worden zodat vervolgens het profiel bewerkt kan worden:
 
 ```
-docker@boot2docker:~$ sudo tce -wi nano
-docker@boot2docker:~$ sudo nano /var/lib/boot2docker/profile
+docker@boot2docker:~$ tce-load -wi -l nano
+docker@boot2docker:~$ nano /var/lib/boot2docker/profile
 ```
 
 #### Script for Profile 
@@ -103,6 +103,11 @@ data node2: 192.168.0.4
 #### Data node 1 profile script
 
 ```
+docker@boot2docker:~$ tce-load -wi -l nano
+docker@boot2docker:~$ nano /var/lib/boot2docker/profile
+```
+
+```
 #========================================================
 #!/bin/sh
 # kill dhcp client for eth1
@@ -118,6 +123,11 @@ sudo echo nameserver 192.168.0.254 >> /etc/resolv.conf
 ```
 
 #### Data node 2 profile script
+
+```
+docker@boot2docker:~$ tce-load -wi -l nano
+docker@boot2docker:~$ nano /var/lib/boot2docker/profile
+```
 
 ```
 #========================================================
