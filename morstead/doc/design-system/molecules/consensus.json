@@ -1,0 +1,19 @@
+{
+  "nodes": [
+    
+    {"id": "zorgtoeslag publicatie", "group": "grain-statefull.svg", "type": "publicatie"},
+    {"id": "henk"                  , "group": "grain-statefull.svg"},
+    {"id": "joost"                 , "group": "grain-statefull.svg"},    
+    {"id": "ingrid"                , "group": "grain-statefull.svg"},
+    {"id": "consensus"             , "group": "grain-observer.svg"},    
+    {"id": "publicering"           , "group": "grain-worker-re-entrant.svg"}
+  ],
+  "links": [
+    {"source": "henk",       "target": "zorgtoeslag publicatie",         "predicate": "reviewt",   "curvature": 0, "rotation": 0, "value": 1},
+    {"source": "joost",        "target": "zorgtoeslag publicatie",      "predicate": "beheert", "curvature": 0, "rotation": 0, "value": 1},
+    {"source": "ingrid",     "target": "zorgtoeslag publicatie",         "predicate": "akkordeert",     "curvature": 0, "rotation": 0, "value": 1},
+    {"source": "zorgtoeslag publicatie",     "target": "consensus",         "predicate": "informeert",     "curvature": 0, "rotation": 0, "value": 1},
+    {"source": "consensus",     "target": "publicering",         "predicate": "informeert",     "curvature": 0, "rotation": 0, "value": 1},
+    {"source": "publicering",     "target": "zorgtoeslag publicatie",         "predicate": "bevraagd",     "curvature": 0, "rotation": 0, "value": 1}
+  ]
+}

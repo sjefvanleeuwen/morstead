@@ -1,0 +1,96 @@
+<head>
+  <style> body { margin: 0; } </style>
+  <script src="//unpkg.com/three"></script>
+  <script src="//unpkg.com/three-spritetext"></script>
+  <script src="//unpkg.com/3d-force-graph"></script>
+  <!--<script src="../../dist/3d-force-graph.js"></script>-->
+</head>
+
+<body style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;color:white;background-color:white;">
+  <div id="3d-graph" style="background-color: antiquewhite;"></div>
+  <script type="module">
+    import { UnrealBloomPass } from '//unpkg.com/three/examples/jsm/postprocessing/UnrealBloomPass.js';
+    const highlightNodes = new Set();
+    const highlightLinks = new Set();
+    let hoverNode = null;
+
+    const elem = document.getElementById('3d-graph');
+    const Graph = ForceGraph3D()
+      (elem)
+        .backgroundColor('#000000')
+        
+        .jsonUrl(location.search.replace('?', ''))
+        .nodeThreeObject(({ group }) => {
+        // use a sphere as a drag handle
+        const obj = new THREE.Mesh(
+          new THREE.SphereGeometry(6),
+          new THREE.MeshBasicMaterial({ depthWrite: false, transparent: true, opacity: 0 })
+        );
+
+        // add img sprite as child
+        const imgTexture = new THREE.TextureLoader().load(`../images/${group}`);
+        const material = new THREE.SpriteMaterial({ map: imgTexture });
+        const sprite = new THREE.Sprite(material);
+        sprite.scale.set(6, 6);
+        obj.add(sprite);
+
+        return obj;})
+        //.linkedRenderObjsProps(props=>props.backgroundColor='white')
+        .nodeLabel('id')
+        .linkDirectionalArrowLength(4)
+        .linkDirectionalArrowRelPos(0)
+        .linkDirectionalParticleColor(() => 'aaaaff')
+        .linkDirectionalParticles(2)
+
+        .nodeAutoColorBy('group')
+        .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
+        .onNodeClick(node => {
+          // Aim at node from outside it
+          const distance = 40;
+          const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+          Graph.cameraPosition(
+            { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+            node, // lookAt ({ x, y, z })
+            3000  // ms transition duration
+          );
+        })
+        .linkDirectionalParticles("value")
+        .linkCurvature('curvature')
+        .linkCurveRotation('rotation')
+        .linkDirectionalParticleSpeed(d => d.value * 0.015)
+        .linkDirectionalParticleWidth(1)
+        .linkThreeObjectExtend(true)
+        .linkThreeObject(link => {
+          // extend link with text sprite
+          const sprite = new SpriteText(`${link.source} > ${link.predicate}`); // > ${link.target}`
+          sprite.textHeight = 2.0;
+          sprite.color = "gold";
+          return sprite;
+        })
+        
+        .linkPositionUpdate((sprite, { start, end }) => {
+          const middlePos = Object.assign(...['x', 'y', 'z'].map(c => ({
+            [c]: start[c] + (end[c] - start[c]) /3.5 // calc middle point
+          })));
+
+          // Position sprite
+          Object.assign(sprite.position, middlePos);
+        });  
+
+
+function updateHighlight() {
+      // trigger update of highlighted objects in scene
+      Graph
+        .nodeColor(Graph.nodeColor())
+        .linkWidth(Graph.linkWidth())
+        .linkDirectionalParticles(Graph.linkDirectionalParticles());
+    }
+            // Spread nodes a little wider
+    Graph.d3Force('charge').strength(-220);
+    const bloomPass = new UnrealBloomPass();
+    bloomPass.strength = 0.8;
+    bloomPass.radius = 1;
+    bloomPass.threshold = 0.1;
+   // Graph.postProcessingComposer().addPass(bloomPass);
+  </script>
+</body>
