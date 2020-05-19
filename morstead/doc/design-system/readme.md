@@ -9,7 +9,7 @@
 - [2. Atomic Design](#2-atomic-design)
     - [2.1. Atoms](#21-atoms)
     - [2.2. Molecules](#22-molecules)
-        - [2.2.1. Consensus](#221-consensus)
+        - [2.2.1. Consensus publication](#221-consensus-publication)
     - [2.3. Organisms](#23-organisms)
 
 <!-- /TOC -->
@@ -24,17 +24,17 @@ Om morstead te kunnen modeleren in de solution architectuur is er een notatiesys
 ## 1.1. Stateless Grain
 
 Stateless Worker grains bieden een eenvoudige manier om een automatisch beheerde pool van 
-grain activaties te cre�ren die automatisch opschaalt op basis van de werkelijke belasting.
+grain activaties te creeren die automatisch opschaalt op basis van de werkelijke belasting.
 
 <img src="../images/grain-worker.svg" width="96"></img>
 
 ## 1.2. Stateless Grain (re-entrant)
 
-Stateless betekent overigens niet dat een workergrain een status kan hebben en uitsluitend
+Stateless betekent overigens niet dat een worker grain een status kan hebben en uitsluitend
 is beperkt tot het uitvoeren van functies. Net als elk ander type grain kan deze een gewenste
 status bewaren in het geheugen (re-entrant) (maar persisteert de staat niet op een medium voor langdurig gebruik)
 Er is echter geen eenvoudig mechanisme om de de status bij te houden en verschillende
-activeringen te co�rdineren.
+activeringen te coördineren.
 
 <img src="../images/grain-worker-re-entrant.svg" width="96"></img>
 
@@ -50,7 +50,7 @@ activeringen te co�rdineren.
 
 ## 2.2. Molecules
 
-### 2.2.1. Consensus
+### 2.2.1. Consensus publication
 
 [Flow](./molecules/notation.html?consensus.json)
 

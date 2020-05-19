@@ -5,7 +5,9 @@
   <script src="//unpkg.com/3d-force-graph"></script>
   <!--<script src="../../dist/3d-force-graph.js"></script>-->
 </head>
-
+<script>
+  let bla;
+</script>
 <body style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;color:white;background-color:white;">
   <div id="3d-graph" style="background-color: antiquewhite;"></div>
   <script type="module">
@@ -13,12 +15,11 @@
     const highlightNodes = new Set();
     const highlightLinks = new Set();
     let hoverNode = null;
-
+    
     const elem = document.getElementById('3d-graph');
-    const Graph = ForceGraph3D()
+    let Graph = ForceGraph3D()
       (elem)
         .backgroundColor('#000000')
-        
         .jsonUrl(location.search.replace('?', ''))
         .nodeThreeObject(({ group }) => {
         // use a sphere as a drag handle
@@ -26,22 +27,20 @@
           new THREE.SphereGeometry(6),
           new THREE.MeshBasicMaterial({ depthWrite: false, transparent: true, opacity: 0 })
         );
-
         // add img sprite as child
         const imgTexture = new THREE.TextureLoader().load(`../images/${group}`);
         const material = new THREE.SpriteMaterial({ map: imgTexture });
         const sprite = new THREE.Sprite(material);
-        sprite.scale.set(6, 6);
+        sprite.scale.set(14, 14);
         obj.add(sprite);
-
         return obj;})
         //.linkedRenderObjsProps(props=>props.backgroundColor='white')
         .nodeLabel('id')
-        .linkDirectionalArrowLength(4)
-        .linkDirectionalArrowRelPos(0)
-        .linkDirectionalParticleColor(() => 'aaaaff')
+        .linkDirectionalArrowLength(6)
+        .linkDirectionalArrowColor(() => 'red')
+        .linkDirectionalArrowRelPos(1)
+        .linkDirectionalParticleColor(() => 'white')
         .linkDirectionalParticles(2)
-
         .nodeAutoColorBy('group')
         .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
         .onNodeClick(node => {
@@ -58,16 +57,19 @@
         .linkCurvature('curvature')
         .linkCurveRotation('rotation')
         .linkDirectionalParticleSpeed(d => d.value * 0.015)
-        .linkDirectionalParticleWidth(1)
+        .linkDirectionalParticleWidth(2)
         .linkThreeObjectExtend(true)
         .linkThreeObject(link => {
           // extend link with text sprite
-          const sprite = new SpriteText(`${link.source} > ${link.predicate}`); // > ${link.target}`
-          sprite.textHeight = 2.0;
-          sprite.color = "gold";
+          bla=Graph.graphData();
+          
+          const sprite = new SpriteText(` ${Graph.graphData().nodes.find(p=>p.id == link.source).type}:${link.source} ${link.predicate} ${link.target}`); // > ${link.target}`
+          sprite.textHeight = 4;
+          sprite.radius = 5;
+          sprite.color = "#ffffff";
+          sprite.fontFace = "ms sans serif";
           return sprite;
         })
-        
         .linkPositionUpdate((sprite, { start, end }) => {
           const middlePos = Object.assign(...['x', 'y', 'z'].map(c => ({
             [c]: start[c] + (end[c] - start[c]) /3.5 // calc middle point
@@ -77,7 +79,6 @@
           Object.assign(sprite.position, middlePos);
         });  
 
-
 function updateHighlight() {
       // trigger update of highlighted objects in scene
       Graph
@@ -86,11 +87,13 @@ function updateHighlight() {
         .linkDirectionalParticles(Graph.linkDirectionalParticles());
     }
             // Spread nodes a little wider
-    Graph.d3Force('charge').strength(-220);
+    Graph.d3Force('charge').strength(-1000);
     const bloomPass = new UnrealBloomPass();
     bloomPass.strength = 0.8;
     bloomPass.radius = 1;
     bloomPass.threshold = 0.1;
    // Graph.postProcessingComposer().addPass(bloomPass);
+  // bla=Graph;
   </script>
+
 </body>
