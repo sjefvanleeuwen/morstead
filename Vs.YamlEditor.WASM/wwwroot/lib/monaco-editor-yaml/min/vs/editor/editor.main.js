@@ -2350,7 +2350,6 @@ async function loadYamlWhenMonacoKnown() {
  * https://github.com/kpdecker/monaco-yaml/blob/master/LICENSE.md
  *-----------------------------------------------------------------------------*/
   console.log("Waiting on monaco...");
-
   var monacoDefined = false;
   while (!monacoDefined) {
     try {

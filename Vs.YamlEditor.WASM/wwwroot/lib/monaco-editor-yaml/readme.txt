@@ -82,6 +82,33 @@ Build the release
 
 The folder ~/monaco-editor/release has been created
 
-In here you will now find the languages in /min/vs/language
+You need to copy the min and min-maps folders from the release and add them into this library.
 
-!!!!VICTORY!!!!
+Replace loading the YAML with this (wait till monaco is defined).
+
+async function loadYamlWhenMonacoKnown() {
+/*!-----------------------------------------------------------------------------
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * monaco-yaml version: 2.4.0(73189a1ab44fa1d7449d4fd595d1ecb5e95b7d66)
+ * Released under the MIT license
+ * https://github.com/kpdecker/monaco-yaml/blob/master/LICENSE.md
+ *-----------------------------------------------------------------------------*/
+  console.log("Waiting on monaco...");
+  var monacoDefined = false;
+  while (!monacoDefined) {
+    try {
+      monaco;
+      monacoDefined = true;
+      console.log("manaco loaded!");
+    } catch (e) {
+      //wait 0.1 second
+      console.log("waiting...");
+    }
+    await wait(100);
+  }
+  !function(e){if("ob...
+  define("vs/editor/e...
+  //# sourceMappingURL=../../../min-maps/vs/editor/editor.main.js.map
+}
+
+loadYamlWhenMonacoKnown();
