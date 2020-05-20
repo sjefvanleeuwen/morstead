@@ -137,7 +137,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vs.YamlEditor", "Vs.YamlEdi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.YamlEditor.Server", "Vs.YamlEditor.Server\Vs.YamlEditor.Server.csproj", "{64FC5C59-42DC-45F6-97CB-F5F1EC8BF384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.YamlEditor.WASM", "Vs.YamlEditor.WASM\Vs.YamlEditor.WASM.csproj", "{884A6088-C7A2-492C-91BF-3AD140A68A1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.YamlEditor.WASM", "Vs.YamlEditor.WASM\Vs.YamlEditor.WASM.csproj", "{884A6088-C7A2-492C-91BF-3AD140A68A1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
