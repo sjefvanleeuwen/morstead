@@ -1,9 +1,9 @@
 ﻿using BlazorMonaco;
 using BlazorMonaco.Bridge;
 
-namespace Vs.YamlEditor.WASM.Pages
+namespace Vs.YamlEditor.Components.Pages
 {
-    public partial class Index
+    public partial class Editor
     {
         private StandaloneEditorConstructionOptions GetConstructionOptions(MonacoEditor editor)
         {
@@ -11,7 +11,7 @@ namespace Vs.YamlEditor.WASM.Pages
             {
                 AutomaticLayout = true,
                 Language = "yaml",
-                Value = @"# Zorgtoeslag for burger site demo
+                Value = @"# zorgtoeslag for burger site demo
 stuurinformatie:
   onderwerp: zorgtoeslag
   organisatie: belastingdienst
@@ -78,47 +78,47 @@ formules:
 tabellen:
   - naam: woonlandfactoren
     woonland, factor:
-      - [ Nederland,           1.0    ]
-      - [ België,              0.7392 ]
-      - [ Bosnië-Herzegovina,  0.0672 ]
-      - [ Bulgarije,           0.0735 ]
-      - [ Cyprus,              0.1363 ]
-      - [ Denemarken,          0.9951 ]
-      - [ Duitsland,           0.8701 ]
-      - [ Estland,             0.2262 ]
-      - [ Finland,             0.7161 ]
-      - [ Frankrijk,           0.8316 ]
-      - [ Griekenland,         0.2490 ]
-      - [ Hongarije,           0.1381 ]
-      - [ Ierland,             0.8667 ]
-      - [ IJsland,             0.9802 ]
-      - [ Italië,              0.5470 ]
-      - [ Kaapverdië,          0.0177 ]
-      - [ Kroatië,             0.1674 ]
-      - [ Letland,             0.0672 ]
-      - [ Liechtenstein,       0.9720 ]
-      - [ Litouwen,            0.2399 ]
-      - [ Luxemburg,           0.7358 ]
-      - [ Macedonië,           0.0565 ]
-      - [ Malta,               0.3574 ]
-      - [ Marokko,             0.0193 ]
-      - [ Montenegro,          0.0821 ]
-      - [ Noorwegen,           1.3729 ]
-      - [ Oostenrijk,          0.6632 ]
-      - [ Polen,               0.1691 ]
-      - [ Portugal,            0.2616 ]
-      - [ Roemenië,            0.0814 ]
-      - [ Servië,              0.0714 ]
-      - [ Slovenië,            0.3377 ]
-      - [ Slowakije,           0.2405 ]
-      - [ Spanje,              0.4001 ]
-      - [ Tsjechië,            0.2412 ]
-      - [ Tunesië,             0.0292 ]
-      - [ Turkije,             0.0874 ]
-      - [ Verenigd Koninkrijk, 0.7741 ]
-      - [ Zweden,              0.8213 ]
-      - [ Zwitserland,         0.8000 ]
-      - [ Anders,              0      ]"
+      - [ nederland,           1.0    ]
+      - [ belgië,              0.7392 ]
+      - [ bosnië-herzegovina,  0.0672 ]
+      - [ bulgarije,           0.0735 ]
+      - [ cyprus,              0.1363 ]
+      - [ denemarken,          0.9951 ]
+      - [ duitsland,           0.8701 ]
+      - [ estland,             0.2262 ]
+      - [ finland,             0.7161 ]
+      - [ frankrijk,           0.8316 ]
+      - [ griekenland,         0.2490 ]
+      - [ hongarije,           0.1381 ]
+      - [ ierland,             0.8667 ]
+      - [ ijsland,             0.9802 ]
+      - [ italië,              0.5470 ]
+      - [ kaapverdië,          0.0177 ]
+      - [ kroatië,             0.1674 ]
+      - [ letland,             0.0672 ]
+      - [ liechtenstein,       0.9720 ]
+      - [ litouwen,            0.2399 ]
+      - [ luxemburg,           0.7358 ]
+      - [ macedonië,           0.0565 ]
+      - [ malta,               0.3574 ]
+      - [ marokko,             0.0193 ]
+      - [ montenegro,          0.0821 ]
+      - [ noorwegen,           1.3729 ]
+      - [ oostenrijk,          0.6632 ]
+      - [ polen,               0.1691 ]
+      - [ portugal,            0.2616 ]
+      - [ roemenië,            0.0814 ]
+      - [ servië,              0.0714 ]
+      - [ slovenië,            0.3377 ]
+      - [ slowakije,           0.2405 ]
+      - [ spanje,              0.4001 ]
+      - [ tsjechië,            0.2412 ]
+      - [ tunesië,             0.0292 ]
+      - [ turkije,             0.0874 ]
+      - [ verenigd koninkrijk, 0.7741 ]
+      - [ zweden,              0.8213 ]
+      - [ zwitserland,         0.8000 ]
+      - [ anders,              0      ]"
             };
         }
     }
