@@ -135,7 +135,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Routing.Tests", "V
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vs.YamlEditor", "Vs.YamlEditor", "{9B27CEDE-1F5E-4194-912A-0518F95AC712}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.YamlEditor.Server", "Vs.YamlEditor.Server\Vs.YamlEditor.Server.csproj", "{64FC5C59-42DC-45F6-97CB-F5F1EC8BF384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.YamlEditor.Server", "Vs.YamlEditor.Server\Vs.YamlEditor.Server.csproj", "{64FC5C59-42DC-45F6-97CB-F5F1EC8BF384}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.YamlEditor.WASM", "Vs.YamlEditor.WASM\Vs.YamlEditor.WASM.csproj", "{884A6088-C7A2-492C-91BF-3AD140A68A1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -291,6 +293,10 @@ Global
 		{64FC5C59-42DC-45F6-97CB-F5F1EC8BF384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64FC5C59-42DC-45F6-97CB-F5F1EC8BF384}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64FC5C59-42DC-45F6-97CB-F5F1EC8BF384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{884A6088-C7A2-492C-91BF-3AD140A68A1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{884A6088-C7A2-492C-91BF-3AD140A68A1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{884A6088-C7A2-492C-91BF-3AD140A68A1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{884A6088-C7A2-492C-91BF-3AD140A68A1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -330,6 +336,7 @@ Global
 		{7C61E563-CC2D-4EB6-A6D2-B8A89DD6A946} = {72EB4BA6-3C85-4F2F-B444-59BDBF63BC50}
 		{9B27CEDE-1F5E-4194-912A-0518F95AC712} = {80E2EB35-DA37-45AC-AAFD-4B5A95D702B0}
 		{64FC5C59-42DC-45F6-97CB-F5F1EC8BF384} = {9B27CEDE-1F5E-4194-912A-0518F95AC712}
+		{884A6088-C7A2-492C-91BF-3AD140A68A1A} = {9B27CEDE-1F5E-4194-912A-0518F95AC712}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
