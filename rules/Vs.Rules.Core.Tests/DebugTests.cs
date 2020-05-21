@@ -14,17 +14,18 @@ namespace Vs.Rules.Core.Tests
         }
 
         [Theory]
-        [InlineData("HeaderIncomplete.yaml")]
-        [InlineData("FlowNoDefinition.yaml")]
-        [InlineData("StepUnknownProperty.yaml")]
-        [InlineData("FlowEmptyDefinition.yaml")]
-        [InlineData("FlowAmbiguousInputs.yaml")]
-        [InlineData("HeaderIncomplete.yaml")]
-        [InlineData("HeaderEmptyDefinition.yaml")]
+        [InlineData("HeaderIncomplete")]
+        [InlineData("FlowNoDefinition")]
+        [InlineData("StepUnknownProperty")]
+        [InlineData("FlowEmptyDefinition")]
+        [InlineData("FlowAmbiguousInputs")]
+        [InlineData("HeaderIncomplete")]
+        [InlineData("HeaderUnknownProperty")]
+        [InlineData("HeaderEmptyDefinition")]
         public async void ShouldReturnDebugInformation(string yamlFile)
         {
             var controller = new YamlScriptController();
-            var result = controller.Parse(YamlTestFileLoader.Load($"Malformed/{yamlFile}"));
+            var result = controller.Parse(YamlTestFileLoader.Load($"Malformed/{yamlFile}.yaml"));
             Assert.True(result.IsError);
             Assert.NotNull(result.DebugInfo);
             Output.WriteLine(result.Message);

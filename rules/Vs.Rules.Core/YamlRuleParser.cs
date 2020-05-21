@@ -112,7 +112,7 @@ namespace Vs.Rules.Core
                         notSet.Remove(HeaderSource);
                         break;
                     default:
-                        throw new Exception($"unknown header identifier {item.Key.ToString()}");
+                        throw new FlowFormattingException($"unknown property in {HeaderAttribute} definition: '{item.Key.ToString()}:'", new DebugInfo().MapDebugInfo(item.Key.Start, item.Key.End));
                 }
             }
             // check if all items are set.
