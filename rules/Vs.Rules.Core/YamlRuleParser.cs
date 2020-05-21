@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Vs.Core.Diagnostics;
+using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Helpers;
 using Vs.Rules.Core.Model;
+using YamlDotNet.Core;
 using YamlDotNet.RepresentationModel;
 
 namespace Vs.Rules.Core
@@ -54,38 +56,65 @@ namespace Vs.Rules.Core
         public StuurInformatie Header()
         {
             var stuurinformatie = new StuurInformatie();
+            var node = map.Children.Where(p => p.Key.ToString() == HeaderAttribute).First();
+            stuurinformatie.DebugInfo.MapDebugInfo(node.Key.Start, node.Key.End);
+            var notSet = new List<string>()
+            {
+                HeaderSubject,HeaderOrganization,HeaderType,HeaderDomain,HeaderVersion,HeaderStatus,HeaderYear,HeaderSource
+            };
             foreach (var item in ((YamlMappingNode)map.Children[new YamlScalarNode(HeaderAttribute)]).Children)
             {
                 switch (item.Key.ToString())
                 {
                     case HeaderSubject:
                         stuurinformatie.Onderwerp = item.Value.ToString();
+                        notSet.Remove(HeaderSubject);
                         break;
                     case HeaderOrganization:
                         stuurinformatie.Organisatie = item.Value.ToString();
+                        notSet.Remove(HeaderOrganization);
                         break;
                     case HeaderType:
                         stuurinformatie.Type = item.Value.ToString();
+                        notSet.Remove(HeaderType);
                         break;
                     case HeaderDomain:
                         stuurinformatie.Domein = item.Value.ToString();
+                        notSet.Remove(HeaderDomain);
                         break;
                     case HeaderVersion:
                         stuurinformatie.Versie = item.Value.ToString();
+                        notSet.Remove(HeaderVersion);
                         break;
                     case HeaderStatus:
                         stuurinformatie.Status = item.Value.ToString();
+                        notSet.Remove(HeaderStatus);
                         break;
                     case HeaderYear:
                         stuurinformatie.Jaar = item.Value.ToString();
+                        notSet.Remove(HeaderYear);
                         break;
                     case HeaderSource:
                         stuurinformatie.Bron = item.Value.ToString();
+                        notSet.Remove(HeaderSource);
                         break;
                     default:
                         throw new Exception($"unknown header identifider {item.Key.ToString()}");
                 }
             }
+            // check if all items are set.
+            /*
+            var check = stuurinformatie.GetType().GetProperties()
+                .Where(pi => pi.PropertyType == typeof(string) &&
+                string.IsNullOrEmpty((string)pi.GetValue(stuurinformatie)))
+                .Select(p => p.Name)
+            */
+            if (notSet.Any())
+            {
+                var s = string.Join(", ", notSet);
+                throw new HeaderFormattingException($"{HeaderAttribute} expects {s} fields to be set.", new DebugInfo().MapDebugInfo(node.Key.Start,node.Key.End));
+            }
+
             return stuurinformatie;
         }
 
@@ -93,6 +122,21 @@ namespace Vs.Rules.Core
         {
             var steps = new List<Step>();
             int key = 0;
+            var node = map.Children.Where(p => p.Key.ToString() == FlowAttribute);
+            if (node.Count() == 0)
+            {
+                throw new FlowFormattingException($"'{FlowAttribute}:' section is undefined.", new DebugInfo().MapDebugInfo(new Mark(), new Mark()));
+            }
+            var debugInfo = new DebugInfo().MapDebugInfo(node.ElementAt(0).Key.Start, node.ElementAt(0).Key.End);
+            YamlSequenceNode seq;
+            try
+            {
+                seq = (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)];
+            }
+            catch (Exception)
+            {
+                throw new FlowFormattingException($"'{FlowAttribute}:' section expects at least 1 ' - {Step}:' sequence", debugInfo);
+            }
             foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)])
             {
                 var debugInfoStep = new DebugInfo().MapDebugInfo(step.Start, step.End);
@@ -132,6 +176,8 @@ namespace Vs.Rules.Core
                             throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
                     }
                 }
+                if (!string.IsNullOrEmpty(value) && choices != null)
+                    throw new FlowFormattingException($"'- {Step}: {stepid}' section specifies '{StepValue}:' and '{StepChoice}:' but only 1 can be defined at a time.", debugInfo);
                 steps.Add(new Step(debugInfoStep, key++, stepid, description, formula, value, situation, @break, choices, evaluateTables));
             }
             return steps;
