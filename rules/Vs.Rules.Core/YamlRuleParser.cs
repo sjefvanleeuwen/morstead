@@ -194,7 +194,7 @@ namespace Vs.Rules.Core
                     throw new FlowFormattingException($"'- {Step}: {stepid}' should define a '{StepDescription}:' property", debugInfo);
                 */
                 if (!string.IsNullOrEmpty(value) && choices != null)
-                    throw new FlowFormattingException($"'- {Step}: {stepid}' section specifies '{StepValue}:' and '{StepChoice}:' but only 1 can be defined at a time.", debugInfo);
+                    throw new FlowFormattingException($"Within section '{FlowAttribute}:', '- {Step}: {stepid}' section specifies '{StepValue}:' and '{StepChoice}:' but only 1 can be defined at a time.", debugInfo);
                 steps.Add(new Step(debugInfoStep, key++, stepid, description, formula, value, situation, @break, choices, evaluateTables));
             }
             return steps;
