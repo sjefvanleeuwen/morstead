@@ -18,6 +18,8 @@ namespace Vs.Rules.Core.Tests
         [InlineData("FlowNoDefinition.yaml")]
         [InlineData("FlowEmptyDefinition.yaml")]
         [InlineData("FlowAmbiguousInputs.yaml")]
+        [InlineData("HeaderIncomplete.yaml")]
+        [InlineData("HeaderEmptyDefinition.yaml")]
         public async void ShouldReturnDebugInformation(string yamlFile)
         {
             var controller = new YamlScriptController();

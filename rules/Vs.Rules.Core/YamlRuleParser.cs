@@ -56,13 +56,27 @@ namespace Vs.Rules.Core
         public StuurInformatie Header()
         {
             var stuurinformatie = new StuurInformatie();
-            var node = map.Children.Where(p => p.Key.ToString() == HeaderAttribute).First();
-            stuurinformatie.DebugInfo.MapDebugInfo(node.Key.Start, node.Key.End);
+            var node = map.Children.Where(p => p.Key.ToString() == HeaderAttribute);
             var notSet = new List<string>()
             {
                 HeaderSubject,HeaderOrganization,HeaderType,HeaderDomain,HeaderVersion,HeaderStatus,HeaderYear,HeaderSource
             };
-            foreach (var item in ((YamlMappingNode)map.Children[new YamlScalarNode(HeaderAttribute)]).Children)
+            if (node.Count() == 0)
+            {
+                throw new FlowFormattingException($"'{HeaderAttribute}:' section is undefined.", new DebugInfo().MapDebugInfo(new Mark(), new Mark()));
+            }
+            var debugInfo = new DebugInfo().MapDebugInfo(node.ElementAt(0).Key.Start, node.ElementAt(0).Key.End);
+            YamlMappingNode seq;
+            try
+            {
+                seq = ((YamlMappingNode)map.Children[new YamlScalarNode(HeaderAttribute)]);
+            }
+            catch (Exception)
+            {
+                throw new FlowFormattingException($"'{HeaderAttribute}:' is empty and expects the following mandatory properties {string.Join(',', notSet)}", debugInfo);
+            }
+
+            foreach (var item in seq.Children)
             {
                 switch (item.Key.ToString())
                 {
@@ -99,7 +113,7 @@ namespace Vs.Rules.Core
                         notSet.Remove(HeaderSource);
                         break;
                     default:
-                        throw new Exception($"unknown header identifider {item.Key.ToString()}");
+                        throw new Exception($"unknown header identifier {item.Key.ToString()}");
                 }
             }
             // check if all items are set.
@@ -112,7 +126,7 @@ namespace Vs.Rules.Core
             if (notSet.Any())
             {
                 var s = string.Join(", ", notSet);
-                throw new HeaderFormattingException($"{HeaderAttribute} expects {s} fields to be set.", new DebugInfo().MapDebugInfo(node.Key.Start,node.Key.End));
+                throw new HeaderFormattingException($"{HeaderAttribute} expects {s} fields to be set.", new DebugInfo().MapDebugInfo(node.ElementAt(0).Key.Start,node.ElementAt(0).Key.End));
             }
 
             return stuurinformatie;
