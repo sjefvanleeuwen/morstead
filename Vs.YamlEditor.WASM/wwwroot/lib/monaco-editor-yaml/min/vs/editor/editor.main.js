@@ -2355,7 +2355,7 @@ async function loadYamlWhenMonacoKnown() {
     try {
       monaco;
       monacoDefined = true;
-      console.log("manaco loaded!");
+      console.log("monaco loaded!");
     } catch (e) {
       //wait 0.1 second
       console.log("waiting...");
