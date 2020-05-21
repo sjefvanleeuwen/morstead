@@ -14,11 +14,6 @@ namespace Vs.Rules.Core.Tests
         public async void ShouldReturnDebugInformation(string yamlFile)
         {
             var controller = new YamlScriptController();
-            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
-            {
-                // should not be called.
-                throw new Exception("Questioncallback should not be called.");
-            };
             var result = controller.Parse(YamlTestFileLoader.Load($"Malformed/{yamlFile}"));
             Assert.True(result.IsError);
             Assert.NotNull(result.DebugInfo);
