@@ -18,7 +18,7 @@ namespace Vs.Rules.Core.Tests
         [InlineData("FlowNoDefinition")]
         [InlineData("StepUnknownProperty")]
         [InlineData("FlowEmptyDefinition")]
-        [InlineData("FlowAmbiguousInputs")]
+        [InlineData("StepAmbiguousInputs")]
         [InlineData("HeaderIncomplete")]
         [InlineData("HeaderUnknownProperty")]
         [InlineData("HeaderEmptyDefinition")]

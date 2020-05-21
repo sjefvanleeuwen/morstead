@@ -186,7 +186,7 @@ namespace Vs.Rules.Core
                             evaluateTables.Add(new EvaluateTable() { Name = stepInfo.Value.ToString() } );
                             break;
                         default:
-                            throw new FlowFormattingException($"unknown property in step definition: '{stepInfo.Key.ToString()}:'",new DebugInfo().MapDebugInfo(stepInfo.Key.Start, stepInfo.Key.End));
+                            throw new StepFormattingException($"unknown property in step definition: '{stepInfo.Key.ToString()}:'",new DebugInfo().MapDebugInfo(stepInfo.Key.Start, stepInfo.Key.End));
                     }
                 }
                 /* not mandatory 
@@ -194,7 +194,7 @@ namespace Vs.Rules.Core
                     throw new FlowFormattingException($"'- {Step}: {stepid}' should define a '{StepDescription}:' property", debugInfo);
                 */
                 if (!string.IsNullOrEmpty(value) && choices != null)
-                    throw new FlowFormattingException($"Within section '{FlowAttribute}:', '- {Step}: {stepid}' section specifies '{StepValue}:' and '{StepChoice}:' but only 1 can be defined at a time.", debugInfo);
+                    throw new StepFormattingException($"Within section '{FlowAttribute}:', '- {Step}: {stepid}' section specifies '{StepValue}:' and '{StepChoice}:' but only 1 can be defined at a time.", debugInfo);
                 steps.Add(new Step(debugInfoStep, key++, stepid, description, formula, value, situation, @break, choices, evaluateTables));
             }
             return steps;
@@ -208,7 +208,7 @@ namespace Vs.Rules.Core
                 var choiceInfoItems = ((YamlMappingNode)choiceInfo).Children;
                 if (choiceInfoItems.Count != 1)
                 {
-                    throw new Exception($"multiple step choice identifiders found; {choiceInfoItems.Count}");
+                    throw new StepFormattingException($"multiple step choice identifiders found; {choiceInfoItems.Count}", new DebugInfo().MapDebugInfo(node.Start,node.End));
                 }
                 var choiceInfoItem = choiceInfoItems.First();
                 switch (choiceInfoItem.Key.ToString())
@@ -217,7 +217,7 @@ namespace Vs.Rules.Core
                         result.Add(new Choice() { Situation = choiceInfoItem.Value.ToString() });
                         break;
                     default:
-                        throw new Exception($"unknown step choice identifider {choiceInfoItem.Key.ToString()}");
+                        throw new StepFormattingException($"unknown step choice identifider {choiceInfoItem.Key.ToString()}",new DebugInfo().MapDebugInfo(choiceInfoItem.Key.Start, choiceInfoItem.Key.End));
                 }
             }
             return result;
