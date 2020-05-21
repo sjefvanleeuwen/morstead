@@ -1,10 +1,18 @@
 ﻿using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Vs.Rules.Core.Tests
 {
     public class DebugTests
     {
+        public ITestOutputHelper Output { get; }
+
+        public DebugTests(ITestOutputHelper output)
+        {
+            Output = output;
+        }
+
         [Theory]
         [InlineData("HeaderIncomplete.yaml")]
         [InlineData("FlowNoDefinition.yaml")]
@@ -16,6 +24,7 @@ namespace Vs.Rules.Core.Tests
             var result = controller.Parse(YamlTestFileLoader.Load($"Malformed/{yamlFile}"));
             Assert.True(result.IsError);
             Assert.NotNull(result.DebugInfo);
+            Output.WriteLine(result.Message);
         }
     }
 }
