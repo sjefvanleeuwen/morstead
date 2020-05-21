@@ -339,6 +339,16 @@ namespace Vs.Rules.Core
                     }
                 }
             }
+            catch (FormattingException ex)
+            {
+                var result = new ParseResult
+                {
+                    DebugInfo = ex.DebugInfo,
+                    IsError = true,
+                    Message = ex.Message
+                };
+                return result;
+            }
             catch (Exception ex)
             {
                 var result = new ParseResult
