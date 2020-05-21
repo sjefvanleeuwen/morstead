@@ -343,7 +343,17 @@ namespace Vs.Rules.Core
             {
                 var result = new ParseResult
                 {
-                    DebugInfo = ex.DebugInfo,
+                    Exceptions = new FormattingExceptionCollection(ex.Message, new List<FormattingException>() { ex }),
+                    IsError = true,
+                    Message = ex.Message
+                };
+                return result;
+            }
+            catch (FormattingExceptionCollection ex)
+            {
+                var result = new ParseResult
+                {
+                    Exceptions = ex,
                     IsError = true,
                     Message = ex.Message
                 };

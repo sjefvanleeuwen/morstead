@@ -55,13 +55,19 @@ namespace Vs.Rules.Core
             {
                 HeaderAttribute, FormulasAttribute, TablesAttribute, FlowAttribute
             };
+            // FormattingExceptionCollection formattingExceptions = new FormattingExceptionCollection();
+            List<FormattingException> exceptions = new List<FormattingException>();
             foreach (var child in map.Children)
             {
                 if (!rootElements.Contains(child.Key.ToString()))
                 {
-                    throw new RootFormattingException($"Unexpected root property '{child.Key}:'",
-                        new DebugInfo().MapDebugInfo(child.Key.Start, child.Key.End));
+                    exceptions.Add(new RootFormattingException($"Unexpected root property '{child.Key}:'",
+                        new DebugInfo().MapDebugInfo(child.Key.Start, child.Key.End)));
                 }
+            }
+            if (exceptions.Any())
+            {
+                throw new FormattingExceptionCollection("Your Yaml contains multiple exceptions.", exceptions);
             }
         }
 
