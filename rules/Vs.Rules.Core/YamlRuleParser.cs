@@ -51,6 +51,18 @@ namespace Vs.Rules.Core
             _parameters = parameters;
             _yaml = yaml;
             map = Map(_yaml);
+            var rootElements = new List<string>()
+            {
+                HeaderAttribute, FormulasAttribute, TablesAttribute, FlowAttribute
+            };
+            foreach (var child in map.Children)
+            {
+                if (!rootElements.Contains(child.Key.ToString()))
+                {
+                    throw new RootFormattingException($"Unexpected root property '{child.Key}:'",
+                        new DebugInfo().MapDebugInfo(child.Key.Start, child.Key.End));
+                }
+            }
         }
 
         public StuurInformatie Header()

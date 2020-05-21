@@ -22,6 +22,7 @@ namespace Vs.Rules.Core.Tests
         [InlineData("HeaderIncomplete")]
         [InlineData("HeaderUnknownProperty")]
         [InlineData("HeaderEmptyDefinition")]
+        [InlineData("RootUnknownDefinitions")]
         public async void ShouldReturnDebugInformation(string yamlFile)
         {
             var controller = new YamlScriptController();
