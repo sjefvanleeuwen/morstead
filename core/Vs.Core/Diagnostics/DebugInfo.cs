@@ -14,5 +14,10 @@ namespace Vs.Core.Diagnostics
 
         public LineInfo Start { get; }
         public LineInfo End { get; }
+
+        public override string ToString()
+        {
+            return $"(Line: {Start.Line}, Col: {Start.Col}, Idx: {Start.Index}) - (Line: {End.Line}, Col: {End.Col}, Idx: {End.Index})";
+        }
     }
 }
