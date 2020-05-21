@@ -75,7 +75,6 @@ namespace Vs.Rules.Core
             {
                 throw new FlowFormattingException($"'{HeaderAttribute}:' is empty and expects the following mandatory properties {string.Join(',', notSet)}", debugInfo);
             }
-
             foreach (var item in seq.Children)
             {
                 switch (item.Key.ToString())
@@ -187,9 +186,13 @@ namespace Vs.Rules.Core
                             evaluateTables.Add(new EvaluateTable() { Name = stepInfo.Value.ToString() } );
                             break;
                         default:
-                            throw new Exception($"unknown step identifider {stepInfo.Key.ToString()}");
+                            throw new FlowFormattingException($"unknown property in step definition: '{stepInfo.Key.ToString()}:'",new DebugInfo().MapDebugInfo(stepInfo.Key.Start, stepInfo.Key.End));
                     }
                 }
+                /* not mandatory 
+                if (string.IsNullOrEmpty(description))
+                    throw new FlowFormattingException($"'- {Step}: {stepid}' should define a '{StepDescription}:' property", debugInfo);
+                */
                 if (!string.IsNullOrEmpty(value) && choices != null)
                     throw new FlowFormattingException($"'- {Step}: {stepid}' section specifies '{StepValue}:' and '{StepChoice}:' but only 1 can be defined at a time.", debugInfo);
                 steps.Add(new Step(debugInfoStep, key++, stepid, description, formula, value, situation, @break, choices, evaluateTables));
@@ -237,7 +240,7 @@ namespace Vs.Rules.Core
                 var situations = new List<ISituation>();
                 var tableName = ((YamlMappingNode)tabel).ElementAt(0).Value.ToString();
                 int j = 1;
-                if (((YamlMappingNode)tabel).ElementAt(1).Key.ToString() == "situatie")
+                if (((YamlMappingNode)tabel).ElementAt(1).Key.ToString() == SituationAttribute)
                 {
                     foreach (var situation in ((YamlMappingNode)tabel).ElementAt(1).Value.ToString().Split(',').Select(x => x.Trim()).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
                     {

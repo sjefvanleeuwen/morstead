@@ -16,6 +16,7 @@ namespace Vs.Rules.Core.Tests
         [Theory]
         [InlineData("HeaderIncomplete.yaml")]
         [InlineData("FlowNoDefinition.yaml")]
+        [InlineData("StepUnknownProperty.yaml")]
         [InlineData("FlowEmptyDefinition.yaml")]
         [InlineData("FlowAmbiguousInputs.yaml")]
         [InlineData("HeaderIncomplete.yaml")]
