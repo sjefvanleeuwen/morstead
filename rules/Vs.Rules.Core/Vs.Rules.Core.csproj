@@ -15,10 +15,10 @@
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <NeutralLanguage></NeutralLanguage>
-    <Copyright>Copyright (c) 2020 Sjef van Leeuwen</Copyright>
+    <Copyright>Copyright (c) 2020 Virtual Society</Copyright>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageVersion>1.0.2-alpha</PackageVersion>
+    <PackageVersion>1.0.3-alpha</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
