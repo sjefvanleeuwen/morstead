@@ -50,7 +50,15 @@ namespace Vs.Rules.Core
         {
             _parameters = parameters;
             _yaml = yaml;
-            map = Map(_yaml);
+            try
+            {
+                map = Map(_yaml);
+            }
+            catch (Exception ex)
+            {
+                throw new FormattingExceptionCollection("Invalid Yaml File", new List<FormattingException>() { new RootFormattingException("Invalid Yaml File",
+                        DebugInfo.Default)});
+            }
             var rootElements = new List<string>()
             {
                 HeaderAttribute, FormulasAttribute, TablesAttribute, FlowAttribute
@@ -322,6 +330,10 @@ namespace Vs.Rules.Core
             {
                 foreach (var row in ((YamlMappingNode)functionNode).Children)
                 {
+                    if (string.IsNullOrEmpty(row.Value.ToString()))
+                    {
+                        throw new FlowFormattingException($"'{FormulaAttribute}:' '- {row.Key}:' section is undefined.", new DebugInfo().MapDebugInfo(row.Key.Start, row.Key.End));
+                    }
                     var variableName = row.Key;
                     var functions = new List<Function>();
                     if (row.Value.GetType() == typeof(YamlSequenceNode))
