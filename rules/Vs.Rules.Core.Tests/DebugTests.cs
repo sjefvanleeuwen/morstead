@@ -21,6 +21,9 @@ namespace Vs.Rules.Core.Tests
         [InlineData("HeaderIncomplete")]
         [InlineData("HeaderUnknownProperty")]
         [InlineData("HeaderEmptyDefinition")]
+        [InlineData("YamlGarbage1")]
+        [InlineData("YamlGarbage2")]
+        [InlineData("YamlMalformed1")]
         public async void ShouldReturnDebugInformation(string yamlFile)
         {
             var controller = new YamlScriptController();
