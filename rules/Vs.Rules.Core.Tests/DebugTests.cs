@@ -30,7 +30,7 @@ namespace Vs.Rules.Core.Tests
             Assert.NotNull(result.Message);
             Assert.True(result.Exceptions.Exceptions.Count == 1);
             Assert.NotNull(result.Exceptions.Exceptions[0].DebugInfo);
-            Output.WriteLine(result.Message);
+            Output.WriteLine($"message: {result.Message} {result.Exceptions.Exceptions[0].DebugInfo}");
         }
 
         [Theory]
