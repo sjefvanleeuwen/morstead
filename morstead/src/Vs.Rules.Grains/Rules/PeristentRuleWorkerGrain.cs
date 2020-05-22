@@ -11,20 +11,23 @@ namespace Vs.Rules.Grains.Rules
 {
     public class PersistentRuleWorkerGrain : Grain, IPersistentRuleWorker
     {
-        private readonly IPersistentState<ExecutionResult> _profile;
+        private IPersistentState<ParametersCollection> _parameters;
 
         public PersistentRuleWorkerGrain(
             [PersistentState("rule-state", "session-store")]
-            IPersistentState<Model> model)
+            IPersistentState<ParametersCollection> parameters)
         {
-            //_profile = profile;
+            _parameters = parameters;
         }
 
-        public async Task<IExecutionResult> Execute(string yaml, IParametersCollection parameters)
+        public async Task<ExecutionResult> Execute(string yaml, IParametersCollection parameters)
         {
-            await _profile.ReadStateAsync();
+            await _parameters.ReadStateAsync();
+            var state = _parameters.State as IParametersCollection;
 
-            IExecutionResult executionResult = _profile.State;
+
+            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
+
             var controller = new YamlScriptController();
             controller.QuestionCallback = (sender, args) =>
             {
@@ -34,15 +37,19 @@ namespace Vs.Rules.Grains.Rules
             executionResult = new ExecutionResult(ref parameters);
             try
             {
-                controller.ExecuteWorkflow(ref parameters, ref executionResult);
+                controller.ExecuteWorkflow(ref state, ref executionResult);
             }
             catch (UnresolvedException) { }
-            _profile.State = executionResult as ExecutionResult;
-            await _profile.WriteStateAsync();
-            return executionResult;
+            _parameters.State = executionResult.Parameters as ParametersCollection;
+            await _parameters.WriteStateAsync();
+            return executionResult as ExecutionResult;
         }
 
-        public Task<ExecutionResult> GetState() => Task.FromResult(_profile.State);
+        public async Task<IParametersCollection> GetState() 
+        {
+            await _parameters.ReadStateAsync();
+            return _parameters.State as IParametersCollection; 
+        }
 
         public async Task<Model> Parse(string yaml)
         {
