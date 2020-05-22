@@ -19,6 +19,8 @@ namespace Vs.Core.Diagnostics
             End = end;
         }
 
+        public static DebugInfo Default { get { return new DebugInfo(new LineInfo(0, 0, 0), new LineInfo(0, 0, 0)); } }
+
         public DebugInfo() { }
         /// <summary>
         /// Gets the starting point of the item to debug.
