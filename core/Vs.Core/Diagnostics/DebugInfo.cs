@@ -2,8 +2,17 @@
 
 namespace Vs.Core.Diagnostics
 {
+    /// <summary>
+    /// Debugging information for code/script locations.
+    /// </summary>
+    /// <seealso cref="Vs.Core.Diagnostics.IDebugInfo" />
     public class DebugInfo : IDebugInfo
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DebugInfo"/> class.
+        /// </summary>
+        /// <param name="start">The start of script line information.</param>
+        /// <param name="end">The end of script line information.</param>
         public DebugInfo(LineInfo start, LineInfo end)
         {
             Start = start;
