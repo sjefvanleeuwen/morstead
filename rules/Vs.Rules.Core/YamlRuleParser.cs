@@ -3,10 +3,12 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Vs.Core.Diagnostics;
 using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Helpers;
 using Vs.Rules.Core.Model;
+using Vs.Rules.Core.Properties;
 using YamlDotNet.Core;
 using YamlDotNet.RepresentationModel;
 
@@ -19,28 +21,6 @@ namespace Vs.Rules.Core
     /// </summary>
     public class YamlRuleParser
     {
-        public const string FormulasAttribute = "formules";
-        public const string FormulaAttribute = "formule";
-        public const string SituationAttribute = "situatie";
-        public const string TablesAttribute = "tabellen";
-        public const string FlowAttribute = "berekening";
-        public const string HeaderAttribute = "stuurinformatie";
-        public const string HeaderSubject = "onderwerp";
-        public const string HeaderOrganization = "organisatie";
-        public const string HeaderType = "type";
-        public const string HeaderDomain = "domein";
-        public const string HeaderVersion = "versie";
-        public const string HeaderStatus = "status";
-        public const string HeaderYear = "jaar";
-        public const string HeaderSource = "bron";
-        public const string Step = "stap";
-        public const string StepDescription = "omschrijving";
-        public const string StepFormula = "formule";
-        public const string StepValue = "waarde";
-        public const string StepSituation = "situatie";
-        public const string StepBreak = "recht";
-        public const string StepChoice = "keuze";
-        public const string EvaluateTable = "evalueer";
         private static ConcurrentDictionary<string, YamlMappingNode> Maps = new ConcurrentDictionary<string, YamlMappingNode>();
         private readonly Dictionary<string, Parameter> _parameters;
         private readonly string _yaml;
@@ -59,9 +39,10 @@ namespace Vs.Rules.Core
                 throw new FormattingExceptionCollection("Invalid Yaml File", new List<FormattingException>() { new RootFormattingException("Invalid Yaml File",
                         DebugInfo.Default)});
             }
+
             var rootElements = new List<string>()
             {
-                HeaderAttribute, FormulasAttribute, TablesAttribute, FlowAttribute
+                keywords.header, keywords.formulas, keywords.tables, keywords.flow
             };
             // FormattingExceptionCollection formattingExceptions = new FormattingExceptionCollection();
             List<FormattingException> exceptions = new List<FormattingException>();
@@ -82,63 +63,66 @@ namespace Vs.Rules.Core
         public StuurInformatie Header()
         {
             var stuurinformatie = new StuurInformatie();
-            var node = map.Children.Where(p => p.Key.ToString() == HeaderAttribute);
+            var node = map.Children.Where(p => p.Key.ToString() == keywords.header);
             var notSet = new List<string>()
             {
-                HeaderSubject,HeaderOrganization,HeaderType,HeaderDomain,HeaderVersion,HeaderStatus,HeaderYear,HeaderSource
+                keywords.header_subject,keywords.header_organization,keywords.header_type,keywords.header_domain,keywords.header_version,keywords.header_status,keywords.header_period,keywords.header_source
             };
             if (node.Count() == 0)
             {
-                throw new FlowFormattingException($"'{HeaderAttribute}:' section is undefined.", new DebugInfo().MapDebugInfo(new Mark(), new Mark()));
+                throw new FlowFormattingException($"'{keywords.header}:' section is undefined.", new DebugInfo().MapDebugInfo(new Mark(), new Mark()));
             }
             var debugInfo = new DebugInfo().MapDebugInfo(node.ElementAt(0).Key.Start, node.ElementAt(0).Key.End);
             YamlMappingNode seq;
             try
             {
-                seq = ((YamlMappingNode)map.Children[new YamlScalarNode(HeaderAttribute)]);
+                seq = ((YamlMappingNode)map.Children[new YamlScalarNode(keywords.header)]);
             }
             catch (Exception)
             {
-                throw new FlowFormattingException($"'{HeaderAttribute}:' is empty and expects the following mandatory properties {string.Join(',', notSet)}", debugInfo);
+                throw new FlowFormattingException($"'{keywords.header}:' is empty and expects the following mandatory properties {string.Join(',', notSet)}", debugInfo);
             }
             foreach (var item in seq.Children)
             {
-                switch (item.Key.ToString())
+                var named = typeof(keywords).GetProperties(BindingFlags.NonPublic | BindingFlags.Static)
+                    .Where(p => p.Name.StartsWith("header_") && keywords.ResourceManager.GetString(p.Name) == item.Key.ToString())
+                    .Select(p => p.Name).SingleOrDefault();
+                switch (named)
                 {
-                    case HeaderSubject:
+                    case nameof(keywords.header_subject):
                         stuurinformatie.Onderwerp = item.Value.ToString();
-                        notSet.Remove(HeaderSubject);
+                        notSet.Remove(keywords.header_subject);
                         break;
-                    case HeaderOrganization:
+                    case nameof(keywords.header_organization):
                         stuurinformatie.Organisatie = item.Value.ToString();
-                        notSet.Remove(HeaderOrganization);
+                        notSet.Remove(keywords.header_organization);
                         break;
-                    case HeaderType:
+                    case nameof(keywords.header_type):
                         stuurinformatie.Type = item.Value.ToString();
-                        notSet.Remove(HeaderType);
+                        notSet.Remove(keywords.header_type);
                         break;
-                    case HeaderDomain:
+                    case nameof(keywords.header_domain):
                         stuurinformatie.Domein = item.Value.ToString();
-                        notSet.Remove(HeaderDomain);
+                        notSet.Remove(keywords.header_domain);
                         break;
-                    case HeaderVersion:
+                    case nameof(keywords.header_version):
                         stuurinformatie.Versie = item.Value.ToString();
-                        notSet.Remove(HeaderVersion);
+                        notSet.Remove(keywords.header_version);
                         break;
-                    case HeaderStatus:
+                    case nameof(keywords.header_status):
                         stuurinformatie.Status = item.Value.ToString();
-                        notSet.Remove(HeaderStatus);
+                        notSet.Remove(keywords.header_status);
                         break;
-                    case HeaderYear:
+                    case nameof(keywords.header_period):
                         stuurinformatie.Jaar = item.Value.ToString();
-                        notSet.Remove(HeaderYear);
+                        notSet.Remove(keywords.header_period);
                         break;
-                    case HeaderSource:
+                    case nameof(keywords.header_source):
                         stuurinformatie.Bron = item.Value.ToString();
-                        notSet.Remove(HeaderSource);
+                        notSet.Remove(keywords.header_source);
                         break;
                     default:
-                        throw new FlowFormattingException($"unknown property in {HeaderAttribute} definition: '{item.Key.ToString()}:'", new DebugInfo().MapDebugInfo(item.Key.Start, item.Key.End));
+                        throw new FlowFormattingException($"unknown property in {keywords.header} definition: '{item.Key.ToString()}:'", new DebugInfo().MapDebugInfo(item.Key.Start, item.Key.End));
                 }
             }
             // check if all items are set.
@@ -151,7 +135,7 @@ namespace Vs.Rules.Core
             if (notSet.Any())
             {
                 var s = string.Join(", ", notSet);
-                throw new HeaderFormattingException($"{HeaderAttribute} expects {s} fields to be set.", new DebugInfo().MapDebugInfo(node.ElementAt(0).Key.Start,node.ElementAt(0).Key.End));
+                throw new HeaderFormattingException($"{keywords.header} expects {s} fields to be set.", new DebugInfo().MapDebugInfo(node.ElementAt(0).Key.Start,node.ElementAt(0).Key.End));
             }
 
             return stuurinformatie;
@@ -161,22 +145,22 @@ namespace Vs.Rules.Core
         {
             var steps = new List<Step>();
             int key = 0;
-            var node = map.Children.Where(p => p.Key.ToString() == FlowAttribute);
+            var node = map.Children.Where(p => p.Key.ToString() == keywords.flow);
             if (node.Count() == 0)
             {
-                throw new FlowFormattingException($"'{FlowAttribute}:' section is undefined.", new DebugInfo().MapDebugInfo(new Mark(), new Mark()));
+                throw new FlowFormattingException($"'{keywords.flow}:' section is undefined.", new DebugInfo().MapDebugInfo(new Mark(), new Mark()));
             }
             var debugInfo = new DebugInfo().MapDebugInfo(node.ElementAt(0).Key.Start, node.ElementAt(0).Key.End);
             YamlSequenceNode seq;
             try
             {
-                seq = (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)];
+                seq = (YamlSequenceNode)map.Children[new YamlScalarNode(keywords.flow)];
             }
             catch (Exception)
             {
-                throw new FlowFormattingException($"'{FlowAttribute}:' section expects at least 1 ' - {Step}:' sequence", debugInfo);
+                throw new FlowFormattingException($"'{keywords.flow}:' section expects at least 1 ' - {keywords.step_}:' sequence", debugInfo);
             }
-            foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(FlowAttribute)])
+            foreach (var step in (YamlSequenceNode)map.Children[new YamlScalarNode(keywords.flow)])
             {
                 var debugInfoStep = new DebugInfo().MapDebugInfo(step.Start, step.End);
                 string stepid = "", description = "", formula = "", value = "", situation = "";
@@ -185,30 +169,33 @@ namespace Vs.Rules.Core
                 IEnumerable<IChoice> choices = null;
                 foreach (var stepInfo in ((YamlMappingNode)step).Children)
                 {
-                    switch (stepInfo.Key.ToString())
+                    var named = typeof(keywords).GetProperties(BindingFlags.NonPublic | BindingFlags.Static)
+                        .Where(p => p.Name.StartsWith("step_") && keywords.ResourceManager.GetString(p.Name) == stepInfo.Key.ToString())
+                        .Select(p => p.Name).SingleOrDefault();
+                    switch (named)
                     {
-                        case Step:
+                        case nameof(keywords.step_):
                             stepid = stepInfo.Value.ToString();
                             break;
-                        case StepDescription:
+                        case nameof(keywords.step_description):
                             description = stepInfo.Value.ToString();
                             break;
-                        case StepFormula:
+                        case nameof(keywords.step_formula):
                             formula = stepInfo.Value.ToString();
                             break;
-                        case StepValue:
+                        case nameof(keywords.step_value):
                             value = stepInfo.Value.ToString();
                             break;
-                        case StepSituation:
+                        case nameof(keywords.step_situation):
                             situation = stepInfo.Value.ToString();
                             break;
-                        case StepBreak:
+                        case nameof(keywords.step_break):
                             @break = new Break() { Expression = stepInfo.Value.ToString() };
                             break;
-                        case StepChoice:
+                        case nameof(keywords.step_choice):
                             choices = GetSituations(stepInfo.Value);
                             break;
-                        case EvaluateTable:
+                        case nameof(keywords.step_evaluate):
                             evaluateTables.Add(new EvaluateTable() { Name = stepInfo.Value.ToString() } );
                             break;
                         default:
@@ -220,7 +207,7 @@ namespace Vs.Rules.Core
                     throw new FlowFormattingException($"'- {Step}: {stepid}' should define a '{StepDescription}:' property", debugInfo);
                 */
                 if (!string.IsNullOrEmpty(value) && choices != null)
-                    throw new StepFormattingException($"Within section '{FlowAttribute}:', '- {Step}: {stepid}' section specifies '{StepValue}:' and '{StepChoice}:' but only 1 can be defined at a time.", debugInfo);
+                    throw new StepFormattingException($"Within section '{keywords.flow}:', '- {keywords.step_}: {stepid}' section specifies '{keywords.step_value}:' and '{keywords.step_choice}:' but only 1 can be defined at a time.", debugInfo);
                 steps.Add(new Step(debugInfoStep, key++, stepid, description, formula, value, situation, @break, choices, evaluateTables));
             }
             return steps;
@@ -237,9 +224,12 @@ namespace Vs.Rules.Core
                     throw new StepFormattingException($"multiple step choice identifiders found; {choiceInfoItems.Count}", new DebugInfo().MapDebugInfo(node.Start,node.End));
                 }
                 var choiceInfoItem = choiceInfoItems.First();
-                switch (choiceInfoItem.Key.ToString())
+                var named = typeof(keywords).GetProperties(BindingFlags.NonPublic | BindingFlags.Static)
+    .Where(p => p.Name.StartsWith("choice_") && keywords.ResourceManager.GetString(p.Name) == choiceInfoItem.Key.ToString())
+    .Select(p => p.Name).SingleOrDefault();
+                switch (named)
                 {
-                    case SituationAttribute:
+                    case nameof(keywords.choice_situation):
                         result.Add(new Choice() { Situation = choiceInfoItem.Value.ToString() });
                         break;
                     default:
@@ -252,11 +242,11 @@ namespace Vs.Rules.Core
         public IEnumerable<Table> Tabellen()
         {
             var tables = new List<Table>();
-            if (!map.Children.ContainsKey(new YamlScalarNode(TablesAttribute)))
+            if (!map.Children.ContainsKey(new YamlScalarNode(keywords.tables)))
                 return tables;
-            if (((YamlNode)map.Children[new YamlScalarNode(TablesAttribute)]).ToString() == string.Empty)
+            if (((YamlNode)map.Children[new YamlScalarNode(keywords.tables)]).ToString() == string.Empty)
                 return tables;
-            foreach (var tabel in (YamlSequenceNode)map.Children[new YamlScalarNode(TablesAttribute)])
+            foreach (var tabel in (YamlSequenceNode)map.Children[new YamlScalarNode(keywords.tables)])
             {
                 var debugInfoTable = new DebugInfo().MapDebugInfo(tabel.Start, tabel.End);
                 var debugInfo = new DebugInfo(
@@ -266,7 +256,7 @@ namespace Vs.Rules.Core
                 var situations = new List<ISituation>();
                 var tableName = ((YamlMappingNode)tabel).ElementAt(0).Value.ToString();
                 int j = 1;
-                if (((YamlMappingNode)tabel).ElementAt(1).Key.ToString() == SituationAttribute)
+                if (((YamlMappingNode)tabel).ElementAt(1).Key.ToString() == keywords.situation)
                 {
                     foreach (var situation in ((YamlMappingNode)tabel).ElementAt(1).Value.ToString().Split(',').Select(x => x.Trim()).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray())
                     {
@@ -319,7 +309,7 @@ namespace Vs.Rules.Core
             YamlSequenceNode formulasNode = null;
             try
             {
-                formulasNode = (YamlSequenceNode)map.Children[new YamlScalarNode(FormulasAttribute)];
+                formulasNode = (YamlSequenceNode)map.Children[new YamlScalarNode(keywords.formulas)];
             }
             catch (KeyNotFoundException ex)
             {
@@ -332,7 +322,7 @@ namespace Vs.Rules.Core
                 {
                     if (string.IsNullOrEmpty(row.Value.ToString()))
                     {
-                        throw new FlowFormattingException($"'{FormulaAttribute}:' '- {row.Key}:' section is undefined.", new DebugInfo().MapDebugInfo(row.Key.Start, row.Key.End));
+                        throw new FlowFormattingException($"'{keywords.formula}:' '- {row.Key}:' section is undefined.", new DebugInfo().MapDebugInfo(row.Key.Start, row.Key.End));
                     }
                     var variableName = row.Key;
                     var functions = new List<Function>();
@@ -340,15 +330,15 @@ namespace Vs.Rules.Core
                     {
                         foreach (var situation in ((YamlSequenceNode)row.Value).Children)
                         {
-                            var f = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == FormulaAttribute).Value;
-                            var s = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == SituationAttribute).Value;
+                            var f = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == keywords.formula).Value;
+                            var s = ((YamlMappingNode)situation).Children.FirstOrDefault(p => p.Key.ToString() == keywords.situation).Value;
                             var function = new Function(new DebugInfo().MapDebugInfo(f.Start, f.End), s.ToString(), f.ToString().Replace("'", "\""));
                             functions.Add(function);
                         }
                     }
                     else
                     {
-                        var f = ((YamlMappingNode)row.Value).Children.FirstOrDefault(p => p.Key.ToString() == FormulaAttribute).Value;
+                        var f = ((YamlMappingNode)row.Value).Children.FirstOrDefault(p => p.Key.ToString() == keywords.formula).Value;
                         var function = new Function(new DebugInfo().MapDebugInfo(f.Start, f.End), f.ToString().Replace("'", "\""));
                         functions.Add(function);
                     }
