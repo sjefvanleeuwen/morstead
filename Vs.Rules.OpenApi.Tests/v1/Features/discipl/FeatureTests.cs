@@ -1,4 +1,6 @@
 ﻿using Vs.Core.IntegrationTesting.OpenApi;
+using Vs.Rules.OpenApi.v1.Features.discipl.Controllers;
+using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
 namespace Vs.Rules.OpenApi.Tests.v1.Features.discipl
@@ -12,13 +14,39 @@ namespace Vs.Rules.OpenApi.Tests.v1.Features.discipl
             Client = new RulesClient(fixture.Client);
         }
 
-        /*
         [Fact]
-        async void PingShouldProvidePong()
+        public async void CanExecuteRuleYamlFromContentsUT()
         {
-            var s = await Client.PingAsync();
-            Assert.True(s == "Pong from v1");
+            RulesControllerDiscipl controller = new RulesControllerDiscipl();
+            var result = await controller.ExecuteRuleYamlContents(new OpenApi.v1.Features.discipl.Dto.ExecuteRuleYamlFromContentRequest()
+            {
+                Yaml = YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml")
+            });
         }
-        */
+
+        [Fact]
+        public async void ShouldProvideDebugInformationUT()
+        {
+            RulesControllerDiscipl controller = new RulesControllerDiscipl();
+            var result = await controller.ExecuteRuleYamlContents(new OpenApi.v1.Features.discipl.Dto.ExecuteRuleYamlFromContentRequest()
+            {
+                Yaml = YamlTestFileLoader.Load(@"Malformed/HeaderUnknownProperty.yaml")
+            });
+            var value = ((Vs.Rules.OpenApi.v1.Features.discipl.Dto.ExecuteRuleYamlResponse)((Microsoft.AspNetCore.Mvc.ObjectResult)result).Value);
+            Assert.NotEmpty(value.ParseResult.FormattingExceptions);
+            Assert.NotNull(value.ParseResult.FormattingExceptions[0].DebugInfo);
+            Assert.NotNull(value.ParseResult.FormattingExceptions[0].Message);
+        }
+
+        [Fact]
+        public async void CanExecuteRuleYamlFromContents()
+        {
+            /*
+            var result = await Client.ExecuteRuleYamlContentsAsync(new ExecuteRuleYamlFromContentRequest()
+            {
+                Yaml = YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml")
+            });
+            */
+        }
     }
 }
