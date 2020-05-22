@@ -9,7 +9,7 @@ using Vs.Rules.Grains.Interfaces;
 
 namespace Vs.Rules.Grains
 {
-    [StatelessWorker]
+    [StatelessWorker][Reentrant]
     public class RuleWorkerGrain : Grain, IRuleWorker
     {
         public async Task<IExecutionResult> Execute(string yaml, IParametersCollection parameters)
