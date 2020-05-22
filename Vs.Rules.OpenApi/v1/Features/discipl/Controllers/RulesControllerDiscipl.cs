@@ -59,10 +59,9 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
                 var result = controller.Parse(yaml);
                 ParseResult parseResult = new ParseResult()
                 {
-                    IsError = result.IsError,
-                    Message = result.Message
+
                 };
-                if (parseResult.IsError)
+                if (result.IsError)
                     return StatusCode(400, parseResult);
 
                 return StatusCode(200, controller.CreateYamlContentTemplate());
@@ -98,8 +97,6 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
                 var result = controller.Parse(yaml);
                 ParseResult parseResult = new ParseResult()
                 {
-                    IsError = result.IsError,
-                    Message = result.Message
                 };
                 return StatusCode(200, parseResult);
             }
@@ -153,7 +150,7 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
 
             if (executionResult.IsError)
             {
-                response.ExecutionResult = ExecuteRuleYamlResultTypes.Ok;
+                response.ExecutionStatus = ExecuteRuleYamlResultTypes.SyntaxError;
                 return StatusCode(400, response);
             }
             response.ServerParameters = executionResult.Parameters.Adapt<IEnumerable<ServerParameter>>();
@@ -189,6 +186,10 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
             var result = controller.Parse(request.Yaml);
             if (result.IsError)
             {
+                response.ParseResult = new ParseResult();
+                response.ParseResult.FormattingExceptions = result.Exceptions.Exceptions.Adapt<List<Dto.Exceptions.FormattingException>>();
+                response.ExecutionStatus = ExecuteRuleYamlResultTypes.SyntaxError;
+               
                 return StatusCode(400, response);
             }
             executionResult = new ExecutionResult(ref parameters);
@@ -201,7 +202,7 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
             }
             if (executionResult.IsError)
             {
-                response.ExecutionResult = ExecuteRuleYamlResultTypes.Ok;
+                response.ExecutionStatus = ExecuteRuleYamlResultTypes.Ok;
                 return StatusCode(400, response);
             }
             response.ServerParameters = executionResult.Parameters.Adapt<IEnumerable<ServerParameter>>();
