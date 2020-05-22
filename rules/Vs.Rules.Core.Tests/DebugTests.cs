@@ -14,6 +14,7 @@ namespace Vs.Rules.Core.Tests
         }
 
         [Theory]
+        [InlineData("FormulaEmptyDefinition")]
         [InlineData("FlowNoDefinition")]
         [InlineData("StepUnknownProperty")]
         [InlineData("FlowEmptyDefinition")]
