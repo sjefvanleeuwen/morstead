@@ -14,7 +14,7 @@ namespace Vs.Rules.OpenApi.Tests.v1.Features.discipl
             Client = new RulesClient(fixture.Client);
         }
 
-        [Fact]
+       // [Fact]
         public async void CanExecuteRuleYamlFromContentsUT()
         {
             RulesControllerDiscipl controller = new RulesControllerDiscipl();
