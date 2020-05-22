@@ -4,11 +4,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Flee.PublicTypes;
+using Vs.Core.Diagnostics;
 using Vs.Core.Enums;
 using Vs.Core.Extensions;
 using Vs.Rules.Core.Exceptions;
+using Vs.Rules.Core.Helpers;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
+using YamlDotNet.Core;
 using static Vs.Rules.Core.TypeInference.InferenceResult;
 
 namespace Vs.Rules.Core
@@ -359,12 +362,13 @@ namespace Vs.Rules.Core
                 };
                 return result;
             }
-            catch (Exception ex)
+            catch (YamlException ex)
             {
                 var result = new ParseResult
                 {
                     IsError = true,
-                    Message = ex.Message
+                    Message = ex.Message,
+                    Exceptions = new FormattingExceptionCollection(ex.Message, new List<FormattingException>() { new FormattingException(ex.Message, new DebugInfo().MapDebugInfo(ex.Start,ex.End)) })
                 };
                 return result;
             }
