@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Model;
+using Vs.Rules.Network.Semantic.Entities;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
