@@ -2,28 +2,10 @@
 using NMemory.Tables;
 using System.Collections.Generic;
 using Vs.Core.Diagnostics;
-using Vs.Rules.Core.Model;
+using Vs.Rules.Network.Semantic.Entities;
 
 namespace Vs.Rules.Network.Semantic
 {
-    public class ChoiceEntity : Choice, IChoice
-    {
-        public int Pk { get; set; }
-    }
-
-    public class StepEntity
-    {
-        public int Pk { get; set; }
-
-        public int Key { get; set; }
-
-        public string Name { get; set; }
-
-        public string Situation { get; set; }
-
-        public string SemanticKey { get; set; }
-
-    }
 
     public class RuleDatabase : Database
     {
