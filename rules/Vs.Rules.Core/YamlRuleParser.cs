@@ -85,7 +85,7 @@ namespace Vs.Rules.Core
             foreach (var item in seq.Children)
             {
                 var named = typeof(keywords).GetProperties(BindingFlags.NonPublic | BindingFlags.Static)
-                    .Where(p => p.Name.StartsWith("header_") && keywords.ResourceManager.GetString(p.Name) == item.Key.ToString())
+                    .Where(p => p.Name.StartsWith("header_") && keywords.ResourceManager.GetString(p.Name, keywords.Culture) == item.Key.ToString())
                     .Select(p => p.Name).SingleOrDefault();
                 switch (named)
                 {
@@ -170,7 +170,7 @@ namespace Vs.Rules.Core
                 foreach (var stepInfo in ((YamlMappingNode)step).Children)
                 {
                     var named = typeof(keywords).GetProperties(BindingFlags.NonPublic | BindingFlags.Static)
-                        .Where(p => p.Name.StartsWith("step_") && keywords.ResourceManager.GetString(p.Name) == stepInfo.Key.ToString())
+                        .Where(p => p.Name.StartsWith("step_") && keywords.ResourceManager.GetString(p.Name,keywords.Culture) == stepInfo.Key.ToString())
                         .Select(p => p.Name).SingleOrDefault();
                     switch (named)
                     {
@@ -225,7 +225,7 @@ namespace Vs.Rules.Core
                 }
                 var choiceInfoItem = choiceInfoItems.First();
                 var named = typeof(keywords).GetProperties(BindingFlags.NonPublic | BindingFlags.Static)
-    .Where(p => p.Name.StartsWith("choice_") && keywords.ResourceManager.GetString(p.Name) == choiceInfoItem.Key.ToString())
+    .Where(p => p.Name.StartsWith("choice_") && keywords.ResourceManager.GetString(p.Name, keywords.Culture) == choiceInfoItem.Key.ToString())
     .Select(p => p.Name).SingleOrDefault();
                 switch (named)
                 {
