@@ -1,0 +1,23 @@
+﻿header:
+  subject: hoogte vermogen
+  organization: unit test
+  type: unit test
+  domain: unit test
+  version: 1.0
+  status: ontwikkel
+  period: 2019
+  source: unit test
+flow:
+ - step: 1
+   description: Is uw vermogen meer dan 50000 euro?
+   formula: boven_vermogensgrens
+ - step: 2
+   description: U heeft geen recht
+   situation: boven_vermogensgrens
+   formula: recht
+formulas:
+ - boven_vermogensgrens:
+    formula: keuze_boven_vermogensgrens
+ - recht: 
+   - situatie: boven_vermogensgrens
+     formula: false
