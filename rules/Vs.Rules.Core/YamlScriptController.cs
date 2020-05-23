@@ -20,6 +20,12 @@ namespace Vs.Rules.Core
 
     public class YamlScriptController : IYamlScriptController
     {
+        static YamlScriptController()
+        {
+            Globalization.SetFormattingExceptionResourceCulture(new CultureInfo("nl-NL"));
+            Globalization.SetKeywordResourceCulture(new CultureInfo("nl-NL"));
+        }
+
         private readonly string Ok = "OK";
         private Model.Model _model;
         private ExpressionContext localContext;
