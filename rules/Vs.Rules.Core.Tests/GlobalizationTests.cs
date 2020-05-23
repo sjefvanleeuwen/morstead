@@ -2,6 +2,7 @@
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 namespace Vs.Rules.Core.Tests
 {
     /// <summary>
