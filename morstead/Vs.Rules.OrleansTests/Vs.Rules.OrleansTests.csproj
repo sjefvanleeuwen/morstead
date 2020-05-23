@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\publications\Vs.Publications.Grains\Vs.Publications.Grains.csproj" />
     <ProjectReference Include="..\src\Vs.Rules.Grains.Interfaces\Vs.Rules.Grains.Interfaces.csproj" />
     <ProjectReference Include="..\src\Vs.Rules.Grains\Vs.Rules.Grains.csproj" />
   </ItemGroup>

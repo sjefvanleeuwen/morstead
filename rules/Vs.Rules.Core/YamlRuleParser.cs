@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartFormat;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -68,9 +69,12 @@ namespace Vs.Rules.Core
             {
                 keywords.header_subject,keywords.header_organization,keywords.header_type,keywords.header_domain,keywords.header_version,keywords.header_status,keywords.header_period,keywords.header_source
             };
+            var fields = string.Join(',', notSet);
             if (node.Count() == 0)
             {
-                throw new FlowFormattingException($"'{keywords.header}:' section is undefined.", new DebugInfo().MapDebugInfo(new Mark(), new Mark()));
+                throw new HeaderFormattingException(
+                    Smart.Format(ex_format.header_section_undefined, new {keywords.header}), 
+                    new DebugInfo().MapDebugInfo(new Mark(), new Mark()));
             }
             var debugInfo = new DebugInfo().MapDebugInfo(node.ElementAt(0).Key.Start, node.ElementAt(0).Key.End);
             YamlMappingNode seq;
@@ -80,12 +84,13 @@ namespace Vs.Rules.Core
             }
             catch (Exception)
             {
-                throw new FlowFormattingException($"'{keywords.header}:' is empty and expects the following mandatory properties {string.Join(',', notSet)}", debugInfo);
+                throw new HeaderFormattingException(
+                    Smart.Format(ex_format.header_section_empty, new {keywords.header, fields}), debugInfo);
             }
             foreach (var item in seq.Children)
             {
                 var named = typeof(keywords).GetProperties(BindingFlags.NonPublic | BindingFlags.Static)
-                    .Where(p => p.Name.StartsWith("header_") && keywords.ResourceManager.GetString(p.Name, keywords.Culture) == item.Key.ToString())
+                    .Where(p => p.Name.StartsWith("header_") && keywords.ResourceManager.GetString(p.Name,keywords.Culture) == item.Key.ToString())
                     .Select(p => p.Name).SingleOrDefault();
                 switch (named)
                 {
@@ -122,7 +127,10 @@ namespace Vs.Rules.Core
                         notSet.Remove(keywords.header_source);
                         break;
                     default:
-                        throw new FlowFormattingException($"unknown property in {keywords.header} definition: '{item.Key.ToString()}:'", new DebugInfo().MapDebugInfo(item.Key.Start, item.Key.End));
+                        var field = item.Key.ToString();
+                        throw new HeaderFormattingException(
+                            Smart.Format(ex_format.header_field_unknown, new {keywords.header, field, fields}), 
+                            new DebugInfo().MapDebugInfo(item.Key.Start, item.Key.End));
                 }
             }
             // check if all items are set.
@@ -134,8 +142,10 @@ namespace Vs.Rules.Core
             */
             if (notSet.Any())
             {
-                var s = string.Join(", ", notSet);
-                throw new HeaderFormattingException($"{keywords.header} expects {s} fields to be set.", new DebugInfo().MapDebugInfo(node.ElementAt(0).Key.Start,node.ElementAt(0).Key.End));
+                fields = string.Join(", ", notSet);
+                throw new HeaderFormattingException(
+                    Smart.Format(ex_format.header_fields_missing,new {keywords.header, fields}),
+                    new DebugInfo().MapDebugInfo(node.ElementAt(0).Key.Start,node.ElementAt(0).Key.End));
             }
 
             return stuurinformatie;
