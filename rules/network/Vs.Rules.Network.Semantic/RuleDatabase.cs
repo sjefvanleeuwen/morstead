@@ -1,7 +1,6 @@
 ﻿using NMemory;
+using NMemory.Indexes;
 using NMemory.Tables;
-using System.Collections.Generic;
-using Vs.Core.Diagnostics;
 using Vs.Rules.Network.Semantic.Entities;
 
 namespace Vs.Rules.Network.Semantic
@@ -16,7 +15,8 @@ namespace Vs.Rules.Network.Semantic
         {
             var choiceTable = Tables.Create(p => p.Pk, new IdentitySpecification<ChoiceEntity>(x => x.Pk, 1, 1));
             var stepTable = Tables.Create(p => p.Pk, new IdentitySpecification<StepEntity>(x => x.Pk, 1, 1));
-            // new RedBlackTreeIndexFactory<Person>(), p => p.GroupId);
+            var choiceIndex = choiceTable.CreateIndex(new RedBlackTreeIndexFactory(),  p => p.PkStep);
+            Tables.CreateRelation(stepTable.PrimaryKeyIndex, choiceIndex, x => x, x => x);
             Choices = choiceTable;
             Steps = stepTable;
         }
