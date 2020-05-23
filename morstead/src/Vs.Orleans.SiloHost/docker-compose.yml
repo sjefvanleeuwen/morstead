@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  vsorleans:
+    image: vsorleans
+    build:
+      context: .
+      dockerfile: Dockerfile
