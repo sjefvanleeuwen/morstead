@@ -16,5 +16,13 @@ namespace Vs.Rules.Core
         {
             keywords.Culture = cultureInfo;
         }
+        /// <summary>
+        /// Sets the formatting exception resource culture. Please set this only once when the engine is instantiated.
+        /// </summary>
+        /// <param name="cultureInfo">The culture information.</param>
+        public static void SetFormattingExceptionResourceCulture(CultureInfo cultureInfo)
+        {
+            ex_format.Culture = cultureInfo;
+        }
     }
 }
