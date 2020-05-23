@@ -16,6 +16,8 @@ namespace Vs.Rules.Core.Tests
         {
             Globalization.SetKeywordResourceCulture(new CultureInfo(culture));
             YamlRuleParser parser = new YamlRuleParser(YamlTestFileLoader.Load($"Globalization/rule.{culture}.yaml"), null);
+            Assert.NotEmpty(parser.Flow());
+            Assert.NotNull(parser.Header());
         }
     }
 }
