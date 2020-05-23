@@ -1,11 +1,6 @@
-﻿using Orleans;
-using System.Net.Mime;
-using System.Threading.Tasks;
-
-namespace Vs.Publications.Grains.Interfaces
+﻿namespace Vs.Publications.Grains.Interfaces
 {
-    public interface IPublicationGrain : IGrainWithStringKey
+    public interface IPublicationGrain
     {
-        Task Create(ContentType contentType, object Content);
     }
 }
