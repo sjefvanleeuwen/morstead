@@ -1,12 +1,14 @@
 ﻿using Itenso.TimePeriod;
 using System.Net.Mime;
+using System.Text;
 
 namespace Vs.Publications.Grains.Interfaces.StateModel
 {
     public class PublicationState
     {
-        public object Content { get; set; }
+        public byte[] Content { get; set; }
         public ContentType ContentType {get;set;}
         public long ContentLength { get; set; }
+        public Encoding Encoding { get; set; }
     }
 }
