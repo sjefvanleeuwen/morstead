@@ -1,40 +1,48 @@
 ﻿using Mapster;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using Vs.Rules.Core;
 using Vs.Rules.Core.Model;
 using Vs.Rules.Network.Semantic.Entities;
-using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
 namespace Vs.Rules.Network.Semantic.Tests
 {
     public class IndexingTests
     {
-        [Fact]
-        public void ShouldIndexModel()
+        private Model _model;
+        private RuleDatabase _db;
+
+        public IndexingTests()
         {
-            var controller = new YamlScriptController();
-            var result = controller.Parse(YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"));
-            Assert.False(result.IsError);
+            _model = TestHelpers.GetDefaultTestModel();
+            _db = new RuleDatabase();
 
-            RuleDatabase db = new RuleDatabase();
-
-            foreach (var step in result.Model.Steps)
+            foreach (var step in _model.Steps)
             {
-                db.Steps.Insert(step.Adapt<StepEntity>());
+                _db.Steps.Insert(step.Adapt<StepEntity>());
                 if (step.Choices == null)
                     continue;
                 foreach (var choice in step.Choices)
                 {
-                    db.Choices.Insert(choice.Adapt<ChoiceEntity>());
+                    var entity = choice.Adapt<ChoiceEntity>();
+                    entity.PkStep = _db.Steps.Last().Pk;
+                    _db.Choices.Insert(entity);
                 }
             }
-
-            Assert.NotEmpty(db.Steps);
-            Assert.NotEmpty(db.Choices);
         }
- 
+
+        [Fact]
+        public void ShouldContainEntities()
+        {
+            Assert.NotEmpty(_db.Steps);
+            Assert.NotEmpty(_db.Choices);
+        }
+
+        [Fact]
+        public void FindRelationShipBetweenStepAndChoices()
+        {
+            var query = from p in _db.Choices join g in _db.Steps on p.PkStep equals g.Pk select new { Situation = p.Situation, Step = g.Name };
+            // there should be six relationships of choices found that connect to the steps.
+            Assert.Equal(6, query.Count());
+        }
     }
 }
