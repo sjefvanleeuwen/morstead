@@ -42,6 +42,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0-preview.3.20215.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Scriban" Version="2.1.2" />
+    <PackageReference Include="SmartFormat.NET" Version="2.5.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
@@ -67,6 +68,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\ex_format.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ex_format.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\keywords.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -75,6 +81,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Properties\ex_format.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ex_format.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\keywords.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>keywords.Designer.cs</LastGenOutput>
