@@ -30,7 +30,7 @@ namespace Vs.Rules.OpenApi.Tests.v1.Features.discipl
             RulesControllerDiscipl controller = new RulesControllerDiscipl();
             var result = await controller.ExecuteRuleYamlContents(new OpenApi.v1.Features.discipl.Dto.ExecuteRuleYamlFromContentRequest()
             {
-                Yaml = YamlTestFileLoader.Load(@"Malformed/HeaderUnknownProperty.yaml")
+                Yaml = YamlTestFileLoader.Load(@"Malformed/nl-NL/HeaderUnknownProperty.yaml")
             });
             var value = ((Vs.Rules.OpenApi.v1.Features.discipl.Dto.ExecuteRuleYamlResponse)((Microsoft.AspNetCore.Mvc.ObjectResult)result).Value);
             Assert.NotEmpty(value.ParseResult.FormattingExceptions);
