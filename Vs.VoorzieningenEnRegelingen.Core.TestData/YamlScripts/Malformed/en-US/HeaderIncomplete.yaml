@@ -1,0 +1,7 @@
+﻿# Zorgtoeslag for burger site demo
+header:
+  subject: zorgtoeslag
+  organization: belastingdienst
+flow:
+ - step: 1
+   value: a
