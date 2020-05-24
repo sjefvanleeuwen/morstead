@@ -1,6 +1,8 @@
-﻿.editor {
-    min-height: 800px !important;
-    max-height: 800px !important;
-    height: 800px !important;
+﻿html, body, app {
+    height: 100%;
+}
+
+.editor {
+    height: 100%;
     width: 100%;
 }
