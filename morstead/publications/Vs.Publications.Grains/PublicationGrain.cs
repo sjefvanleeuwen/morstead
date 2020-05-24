@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Vs.Publications.Grains.Interfaces;
 using Vs.Publications.Grains.Interfaces.StateModel;
+using EasyCompressor;
 
 namespace Vs.Publications.Grains
 {
@@ -25,8 +26,12 @@ namespace Vs.Publications.Grains
                 // should create only once, todo: implement version.
                 throw new NotImplementedException();
             }
-            Publication.State.Content = contents;
+
+            LZ4Compressor comp = new LZ4Compressor("", K4os.Compression.LZ4.LZ4Level.L12_MAX);
+            Publication.State.Content = comp.Compress(contents);
             Publication.State.ContentLength = contents.Length;
+            Publication.State.CompressionType = CompressionType.LZ4;
+            Publication.State.ContentCompressedLength = Publication.State.Content.Length;
             Publication.State.ContentType = contentType;
             Publication.State.Encoding = encoding;
             await Publication.WriteStateAsync();

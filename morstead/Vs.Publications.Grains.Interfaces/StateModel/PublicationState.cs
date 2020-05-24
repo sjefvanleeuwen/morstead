@@ -10,5 +10,7 @@ namespace Vs.Publications.Grains.Interfaces.StateModel
         public ContentType ContentType {get;set;}
         public long ContentLength { get; set; }
         public Encoding Encoding { get; set; }
+        public CompressionType CompressionType { get; set; }
+        public int ContentCompressedLength { get; set; }
     }
 }
