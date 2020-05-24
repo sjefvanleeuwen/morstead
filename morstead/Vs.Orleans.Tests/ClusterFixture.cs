@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Vs.Rules.OrleansTests
+namespace Vs.Orleans.Tests
 {
     public class ClusterFixture : IDisposable
     {
@@ -15,13 +15,13 @@ namespace Vs.Rules.OrleansTests
             builder.AddSiloBuilderConfigurator<TestSiloConfigurator>();
 
             //this.Cluster.
-            this.Cluster = builder.Build();
-            this.Cluster.Deploy();
+            Cluster = builder.Build();
+            Cluster.Deploy();
         }
 
         public void Dispose()
         {
-            this.Cluster.StopAllSilos();
+            Cluster.StopAllSilos();
         }
 
         public TestCluster Cluster { get; private set; }
