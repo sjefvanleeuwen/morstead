@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Yaml Editor</title>
+    <title>Yaml Editor (WebAssembly)</title>
     <base href="/" />
     <!--Reset CSS-->
     <link href="_content/Vs.YamlEditor.Components/css/reset.css" rel="stylesheet" />
     <!--/Reset CSS-->
-    <link href="css/app.css" rel="stylesheet" />
+    <link href="_content/Vs.YamlEditor.Components/css/app.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <!--BlazorMonaco-->
@@ -28,9 +28,11 @@
         <a class="dismiss">🗙</a>
     </div>
     <!--BlazorMonaco-->
+    <!--BlazorMonaco Yaml-->
     <script src="_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs/loader.js"></script>
     <script>require.config({ paths: { 'vs': '_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs' } });</script>
     <script src="_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs/editor/editor.main.js"></script>
+    <!--/BlazorMonaco Yaml-->
     <script src="_content/BlazorMonaco/jsInterop.js"></script>
     <!--/BlazorMonaco-->
     <script src="_framework/blazor.webassembly.js"></script>
