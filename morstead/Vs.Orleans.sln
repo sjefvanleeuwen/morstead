@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.OrleansTests", "Vs.Rules.OrleansTests\Vs.Rules.OrleansTests.csproj", "{814A084E-DC46-467E-AE7E-A79B7163BA9B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Compiler", "src\Vs.Rules.Compiler\Vs.Rules.Compiler.csproj", "{B07A5A33-4C4B-4F53-B310-84CA0A8AB058}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Compiler.Tests", "src\Vs.Rules.Compiler.Tests\Vs.Rules.Compiler.Tests.csproj", "{BD65D148-3FF1-4741-B2A2-064D7A960954}"
@@ -28,9 +26,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{0A85C8EF-7AB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "publications", "publications", "{16D52082-4521-4E94-B5B3-E5DA12354803}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Publications.Grains", "publications\Vs.Publications.Grains\Vs.Publications.Grains.csproj", "{9B7D3E25-7D70-4ABC-B779-46BE552C88DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Publications.Grains", "publications\Vs.Publications.Grains\Vs.Publications.Grains.csproj", "{9B7D3E25-7D70-4ABC-B779-46BE552C88DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Publications.Grains.Interfaces", "Vs.Publications.Grains.Interfaces\Vs.Publications.Grains.Interfaces.csproj", "{51BFA280-4186-46C2-8922-861939EE9032}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Publications.Grains.Interfaces", "Vs.Publications.Grains.Interfaces\Vs.Publications.Grains.Interfaces.csproj", "{51BFA280-4186-46C2-8922-861939EE9032}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rules", "rules", "{34642445-5174-4CEA-81CA-59C3EFDFC182}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "primitives", "primitives", "{62756CFA-6711-42C5-B2AE-BF4D3ECD0AAE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "time-series", "time-series", "{7647B2DA-D652-4685-A22C-92669161F349}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Orleans.Primitives.Time", "primitives\time-series\Vs.Orleans.Primitives.Time\Vs.Orleans.Primitives.Time.csproj", "{200140AF-92E1-4831-AD65-7353F5A9B689}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Orleans.Primitives.Time.Interfaces", "primitives\time-series\Vs.Orleans.Primitives.Time.Interfaces\Vs.Orleans.Primitives.Time.Interfaces.csproj", "{9C137A13-6194-4CA8-927C-7A298BF047DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Orleans.Tests", "Vs.Orleans.Tests\Vs.Orleans.Tests.csproj", "{EE13B810-AEBF-4B28-A0A7-3455D11480CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,10 +64,6 @@ Global
 		{C8097F83-2D0E-4FFD-AEAE-AA075141289C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8097F83-2D0E-4FFD-AEAE-AA075141289C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8097F83-2D0E-4FFD-AEAE-AA075141289C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{814A084E-DC46-467E-AE7E-A79B7163BA9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{814A084E-DC46-467E-AE7E-A79B7163BA9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{814A084E-DC46-467E-AE7E-A79B7163BA9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{814A084E-DC46-467E-AE7E-A79B7163BA9B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B07A5A33-4C4B-4F53-B310-84CA0A8AB058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B07A5A33-4C4B-4F53-B310-84CA0A8AB058}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B07A5A33-4C4B-4F53-B310-84CA0A8AB058}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,13 +80,33 @@ Global
 		{51BFA280-4186-46C2-8922-861939EE9032}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51BFA280-4186-46C2-8922-861939EE9032}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51BFA280-4186-46C2-8922-861939EE9032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{200140AF-92E1-4831-AD65-7353F5A9B689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{200140AF-92E1-4831-AD65-7353F5A9B689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{200140AF-92E1-4831-AD65-7353F5A9B689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{200140AF-92E1-4831-AD65-7353F5A9B689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C137A13-6194-4CA8-927C-7A298BF047DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C137A13-6194-4CA8-927C-7A298BF047DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C137A13-6194-4CA8-927C-7A298BF047DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C137A13-6194-4CA8-927C-7A298BF047DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE13B810-AEBF-4B28-A0A7-3455D11480CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE13B810-AEBF-4B28-A0A7-3455D11480CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE13B810-AEBF-4B28-A0A7-3455D11480CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE13B810-AEBF-4B28-A0A7-3455D11480CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{18DFEAE0-0000-4EFF-825F-2150B0C509F8} = {34642445-5174-4CEA-81CA-59C3EFDFC182}
+		{1977C291-BE23-415A-8305-9E6F7B23203D} = {34642445-5174-4CEA-81CA-59C3EFDFC182}
+		{C8097F83-2D0E-4FFD-AEAE-AA075141289C} = {34642445-5174-4CEA-81CA-59C3EFDFC182}
+		{B07A5A33-4C4B-4F53-B310-84CA0A8AB058} = {34642445-5174-4CEA-81CA-59C3EFDFC182}
+		{BD65D148-3FF1-4741-B2A2-064D7A960954} = {34642445-5174-4CEA-81CA-59C3EFDFC182}
 		{9B7D3E25-7D70-4ABC-B779-46BE552C88DB} = {16D52082-4521-4E94-B5B3-E5DA12354803}
 		{51BFA280-4186-46C2-8922-861939EE9032} = {16D52082-4521-4E94-B5B3-E5DA12354803}
+		{7647B2DA-D652-4685-A22C-92669161F349} = {62756CFA-6711-42C5-B2AE-BF4D3ECD0AAE}
+		{200140AF-92E1-4831-AD65-7353F5A9B689} = {7647B2DA-D652-4685-A22C-92669161F349}
+		{9C137A13-6194-4CA8-927C-7A298BF047DC} = {7647B2DA-D652-4685-A22C-92669161F349}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {770CE15D-FCF4-4F37-BBC3-B62DEEFFB973}
