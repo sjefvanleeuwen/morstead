@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EasyCompressor.LZ4" Version="1.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.1.6" PrivateAssets="all">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Vs.Rules.Core" Version="1.0.2-alpha" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Vs.Publications.Grains.Interfaces\Vs.Publications.Grains.Interfaces.csproj" />
+  </ItemGroup>
+</Project>

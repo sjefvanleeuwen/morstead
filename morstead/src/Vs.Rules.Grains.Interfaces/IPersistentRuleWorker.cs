@@ -7,8 +7,8 @@ namespace Vs.Rules.Grains.Interfaces
 {
     public interface IPersistentRuleWorker : Orleans.IGrainWithStringKey
     {
-        Task<IExecutionResult> Execute(string yaml, IParametersCollection parameters);
+        Task<ExecutionResult> Execute(string yaml, IParametersCollection parameters);
         Task<Model> Parse(string yaml);
-        Task<ExecutionResult> GetState();
+        Task<IParametersCollection> GetState();
     }
 }

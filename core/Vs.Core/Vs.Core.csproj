@@ -19,7 +19,7 @@
     <Copyright>Copyright (c) 2020 Sjef van Leeuwen</Copyright>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.3-alpha</PackageVersion>
   </PropertyGroup>
 <ItemGroup>
     <None Include="..\..\LICENSE">

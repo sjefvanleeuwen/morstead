@@ -1,0 +1,7 @@
+﻿# Zorgtoeslag for burger site demo
+stuurinformatie:
+  onderwerp: zorgtoeslag
+  organisatie: belastingdienst
+berekening:
+ - stap: 1
+   waarde: a

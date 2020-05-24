@@ -1,0 +1,16 @@
+﻿stuurinformatie:
+  onderwerp: unit test
+  organisatie: unit test
+  type: unit test
+  domein: unit test
+  versie: 1.0
+  status: ontwikkel
+  jaar: 2019
+  bron: unit test
+berekening:
+ - stap: 1
+   omschrijving: unit test
+   formule: a
+formules:
+ - a:
+

@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag;
 using NSwag.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Vs.Core.Web.OpenApi;
 using Vs.Core.Web.OpenApi.v1.Dto.ProtocolErrors;
 using Vs.Rules.Core;
+using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.OpenApi.Helpers;
 using Vs.Rules.OpenApi.v1.Dto;
@@ -57,10 +59,9 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
                 var result = controller.Parse(yaml);
                 ParseResult parseResult = new ParseResult()
                 {
-                    IsError = result.IsError,
-                    Message = result.Message
+
                 };
-                if (parseResult.IsError)
+                if (result.IsError)
                     return StatusCode(400, parseResult);
 
                 return StatusCode(200, controller.CreateYamlContentTemplate());
@@ -96,8 +97,6 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
                 var result = controller.Parse(yaml);
                 ParseResult parseResult = new ParseResult()
                 {
-                    IsError = result.IsError,
-                    Message = result.Message
                 };
                 return StatusCode(200, parseResult);
             }
@@ -123,30 +122,38 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
         [ProducesResponseType(typeof(ServerError500Response), 500)]
         public async Task<IActionResult> ExecuteRuleYaml([FromBody] ExecuteRuleYamlFromUriRequest request)
         {
-            return StatusCode(500, new ServerError500Response(new NotImplementedException()));
-
             var controller = new YamlScriptController();
             var response = new ExecuteRuleYamlFromUriResponse();
             var parameters = request.ClientParameters.Adapt<IParametersCollection>();
+            IExecutionResult executionResult = null;
             controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
-
+                executionResult.Questions = args;
             };
 
             var downloadResult = request.Endpoint.DownloadYaml();
             var result = controller.Parse(downloadResult.Content);
-
-            // map the parsing result.
-            
 
             if (result.IsError)
             {
                 return StatusCode(400, response);
             }
 ;
-            var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
-            controller.ExecuteWorkflow(ref parameters, ref executionResult);
-            
+            executionResult = new ExecutionResult(ref parameters);
+            try
+            {
+                executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException)
+            {
+            }
+
+            if (executionResult.IsError)
+            {
+                response.ExecutionStatus = ExecuteRuleYamlResultTypes.SyntaxError;
+                return StatusCode(400, response);
+            }
+            response.ServerParameters = executionResult.Parameters.Adapt<IEnumerable<ServerParameter>>();
             return StatusCode(200, new ExecuteRuleYamlFromUriResponse());
         }
 
@@ -161,12 +168,45 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
         /// <response code="500">Server error</response>
         [HttpPost("execute-rule-from-contents")]
         [ProducesResponseType(typeof(ExecuteRuleYamlFromContentResponse), 200)]
-        [ProducesResponseType(typeof(ExecuteRuleYamlFromUriResponse), 400)]
+        [ProducesResponseType(typeof(ExecuteRuleYamlFromContentResponse), 400)]
         [ProducesResponseType(typeof(ExecuteRuleYamlFromContentResponse), 404)]
         [ProducesResponseType(typeof(ServerError500Response), 500)]
-        public async Task<IActionResult> ExecuteRuleYamlContents(string yaml)
+        public async Task<IActionResult> ExecuteRuleYamlContents([FromBody] ExecuteRuleYamlFromContentRequest request)
         {
-            return StatusCode(500, new ServerError500Response(new NotImplementedException()));
+            if (String.IsNullOrEmpty(request.Yaml))
+                return StatusCode(400, null);
+            var controller = new YamlScriptController();
+            var response = new ExecuteRuleYamlFromContentResponse();
+            var parameters = request.ClientParameters.Adapt<IParametersCollection>();
+            IExecutionResult executionResult = null;
+            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            {
+                executionResult.Questions = args;
+            };
+            var result = controller.Parse(request.Yaml);
+            if (result.IsError)
+            {
+                response.ParseResult = new ParseResult();
+                response.ParseResult.FormattingExceptions = result.Exceptions.Exceptions.Adapt<List<Dto.Exceptions.FormattingException>>();
+                response.ExecutionStatus = ExecuteRuleYamlResultTypes.SyntaxError;
+               
+                return StatusCode(400, response);
+            }
+            executionResult = new ExecutionResult(ref parameters);
+            try
+            {
+                executionResult = controller.ExecuteWorkflow(ref parameters, ref executionResult);
+            }
+            catch (UnresolvedException)
+            {
+            }
+            if (executionResult.IsError)
+            {
+                response.ExecutionStatus = ExecuteRuleYamlResultTypes.Ok;
+                return StatusCode(400, response);
+            }
+            response.ServerParameters = executionResult.Parameters.Adapt<IEnumerable<ServerParameter>>();
+            return StatusCode(200, new ExecuteRuleYamlFromContentResponse());
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json.Converters;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using Vs.Rules.OpenApi.v1.Dto;
 
 namespace Vs.Rules.OpenApi.v1.Features.discipl.Dto
 {
@@ -9,38 +8,27 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Dto
     /// </summary>
     public abstract class ExecuteRuleYamlResponse
     {
+        /// <summary>
+        /// Gets the parameters calculated by the server, which the client can use.
+        /// </summary>
+        /// <value>
+        /// The server parameters.
+        /// </value>
         public IEnumerable<ServerParameter> ServerParameters { get; set; }
-
-        public ExecuteRuleYamlResultTypes ExecutionResult { get; set; }
-    }
-
-    /// <summary>
-    /// Returns all the state needed to process a yaml from uri execution result on the client.
-    /// </summary>
-    /// <seealso cref="Vs.Rules.OpenApi.v1.Features.discipl.Dto.ExecuteRuleYamlResponse" />
-    public class ExecuteRuleYamlFromUriResponse : ExecuteRuleYamlResponse
-    {
-
-    }
-
-    /// <summary>
-    /// Returns all the state needed to process a yaml passed as contents from execution result on the client.
-    /// </summary>
-    /// <seealso cref="Vs.Rules.OpenApi.v1.Features.discipl.Dto.ExecuteRuleYamlResponse" />
-    public class ExecuteRuleYamlFromContentResponse : ExecuteRuleYamlResponse
-    {
-
-    }
-
-    /// <summary>
-    /// Possible Execution result types for Yaml Rule Execution
-    /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
-    public enum ExecuteRuleYamlResultTypes
-    {
-        Ok,
-        NotFound,
-        SyntaxError,
+        /// <summary>
+        /// Shows the execution status of the rule.
+        /// </summary>
+        /// <value>
+        /// The execution status.
+        /// </value>
+        public ExecuteRuleYamlResultTypes ExecutionStatus { get; set; }
+        /// <summary>
+        /// Gets the parsed yaml result (before execution) these results contain debug information if needed.
+        /// </summary>
+        /// <value>
+        /// The parse result.
+        /// </value>
+        public ParseResult ParseResult { get; set; }
     }
 }
 

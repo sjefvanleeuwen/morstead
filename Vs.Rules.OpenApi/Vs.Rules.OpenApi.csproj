@@ -19,7 +19,6 @@
     <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="13.4.2" />
     <PackageReference Include="NSwag.CodeGeneration.TypeScript" Version="13.4.2" />
     <PackageReference Include="System.Text.Json" Version="5.0.0-preview.3.20214.6" />
-    <PackageReference Include="Vs.Rules.Core" Version="1.0.2-alpha" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="wwwroot\img\logo.svg">
@@ -32,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\core\Vs.Core.Web.OpenApi\Vs.Core.Web.OpenApi.csproj" />
+    <ProjectReference Include="..\rules\Vs.Rules.Core\Vs.Rules.Core.csproj" />
   </ItemGroup>
 
 

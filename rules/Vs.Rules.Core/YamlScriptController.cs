@@ -4,11 +4,15 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Flee.PublicTypes;
+using Vs.Core.Diagnostics;
 using Vs.Core.Enums;
 using Vs.Core.Extensions;
 using Vs.Rules.Core.Exceptions;
+using Vs.Rules.Core.Helpers;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
+using Vs.Rules.Core.Properties;
+using YamlDotNet.Core;
 using static Vs.Rules.Core.TypeInference.InferenceResult;
 
 namespace Vs.Rules.Core
@@ -16,6 +20,12 @@ namespace Vs.Rules.Core
 
     public class YamlScriptController : IYamlScriptController
     {
+        static YamlScriptController()
+        {
+            Globalization.SetFormattingExceptionResourceCulture(new CultureInfo("nl-NL"));
+            Globalization.SetKeywordResourceCulture(new CultureInfo("nl-NL"));
+        }
+
         private readonly string Ok = "OK";
         private Model.Model _model;
         private ExpressionContext localContext;
@@ -217,7 +227,7 @@ namespace Vs.Rules.Core
             {
                 // Get Questions for function
                 var parameters = GetFunctionTree(this, function.Expression);
-                var nodeName = string.Join('.', new[] { YamlRuleParser.StepFormula, YamlRuleParser.SituationAttribute, situation, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
+                var nodeName = string.Join('.', new[] { keywords.step_formula, keywords.situation, situation, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
                 // Get Boolean Question for situation (if not previously asked)
                 if (function.IsSituational && items.Find(p => p.Name == nodeName) == null /* distinct */)
                 {
@@ -231,7 +241,7 @@ namespace Vs.Rules.Core
                 {
                     if (_model.Formulas.Find(p => p.Name == parameter.Name) == null)
                     {
-                        parameter.SemanticKey = string.Join('.', new[] { YamlRuleParser.FormulaAttribute, parameter.Name, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
+                        parameter.SemanticKey = string.Join('.', new[] { keywords.formula, parameter.Name, function.Situation, name }.Where(s => !string.IsNullOrEmpty(s)));
                         // not a formula name, so it resolves to a question, add it to the list
                         var contentNode = new ContentNode(parameter.SemanticKey) { IsSituational = function.IsSituational, Situation = function.Situation, Parameter = parameter };
                         contentNode.Situation = function.Situation;
@@ -266,7 +276,7 @@ namespace Vs.Rules.Core
                             .ToList();
                         foreach (var inclusiveSituation in inclusiveSituations)
                         {
-                            var contentNodeStep = new ContentNode($"{YamlRuleParser.Step}.{step.Name}.{YamlRuleParser.StepSituation}.{inclusiveSituation}") { Parameter = new Parameter(step.Name, false, TypeEnum.Step, ref _model) };
+                            var contentNodeStep = new ContentNode($"{keywords.step_}.{step.Name}.{keywords.step_situation}.{inclusiveSituation}") { Parameter = new Parameter(step.Name, false, TypeEnum.Step, ref _model) };
                             contentNodeStep.Parameter.SemanticKey = contentNodeStep.Name;
                             contentNodeStep.Situation = inclusiveSituation;
                             _contentNodes.Add(contentNodeStep);
@@ -276,7 +286,7 @@ namespace Vs.Rules.Core
                             {
                                 foreach (var choice in step.Choices)
                                 {
-                                    var contentNode = new ContentNode($"{YamlRuleParser.Step}.{step.Name}.{YamlRuleParser.StepSituation}.{inclusiveSituation}.{YamlRuleParser.StepChoice}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
+                                    var contentNode = new ContentNode($"{keywords.step_}.{step.Name}.{keywords.situation}.{inclusiveSituation}.{keywords.step_choice}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
                                     contentNode.Parameter.SemanticKey = contentNode.Name;
                                     contentNode.Situation = inclusiveSituation;
                                     _contentNodes.Add(contentNode);
@@ -285,7 +295,7 @@ namespace Vs.Rules.Core
 
                             if (!string.IsNullOrEmpty(step.Value))
                             {
-                                var contentNode = new ContentNode($"{YamlRuleParser.Step}.{step.Name}.{YamlRuleParser.StepSituation}.{inclusiveSituation}.{step.Value}");
+                                var contentNode = new ContentNode($"{keywords.step_}.{step.Name}.{keywords.step_situation}.{inclusiveSituation}.{step.Value}");
                                 contentNode.Parameter = new Parameter(step.Name, null, TypeEnum.Double, ref _model);
                                 contentNode.Parameter.SemanticKey = contentNode.Name;
                                 contentNodeStep.Situation = inclusiveSituation;
@@ -296,7 +306,7 @@ namespace Vs.Rules.Core
 
                             if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
                             {
-                                ContentNode node = new ContentNode($"{YamlRuleParser.Step}.{step.Name}.{YamlRuleParser.StepSituation}.{inclusiveSituation}.geen_recht") { IsBreak = true, IsSituational = step.IsSituational, Situation = inclusiveSituation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
+                                ContentNode node = new ContentNode($"{keywords.step_}.{step.Name}.{keywords.step_situation}.{inclusiveSituation}.geen_recht") { IsBreak = true, IsSituational = step.IsSituational, Situation = inclusiveSituation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
                                 step.Break.SemanticKey = node.Name;
                                 node.Parameter.SemanticKey = node.Name;
                                 contentNodeStep.Situation = inclusiveSituation;
@@ -306,7 +316,7 @@ namespace Vs.Rules.Core
                     }
                     else
                     {
-                        var contentNodeStep = new ContentNode($"{YamlRuleParser.Step}.{step.Name}") { Parameter = new Parameter(step.Name, false, TypeEnum.Step, ref _model) };
+                        var contentNodeStep = new ContentNode($"{keywords.step_}.{step.Name}") { Parameter = new Parameter(step.Name, false, TypeEnum.Step, ref _model) };
                         contentNodeStep.Parameter.SemanticKey = contentNodeStep.Name;
                         _contentNodes.Add(contentNodeStep);
                         step.SemanticKey = contentNodeStep.Name;
@@ -315,14 +325,14 @@ namespace Vs.Rules.Core
                         {
                             foreach (var choice in step.Choices)
                             {
-                                var contentNode = new ContentNode($"{YamlRuleParser.Step}.{step.Name}.{YamlRuleParser.StepChoice}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
+                                var contentNode = new ContentNode($"{keywords.step_}.{step.Name}.{keywords.step_choice}.{choice.Situation}") { Parameter = new Parameter(choice.Situation, false, TypeEnum.Boolean, ref _model) };
                                 contentNode.Parameter.SemanticKey = contentNode.Name;
                                 _contentNodes.Add(contentNode);
                             }
                         }
                         if (!string.IsNullOrEmpty(step.Value))
                         {
-                            var contentNode = new ContentNode($"{YamlRuleParser.Step}.{step.Name}.{YamlRuleParser.StepValue}.{step.Value}");
+                            var contentNode = new ContentNode($"{keywords.step_}.{step.Name}.{keywords.step_value}.{step.Value}");
                             contentNode.Parameter = new Parameter(step.Name, null, TypeEnum.Double, ref _model);
                             contentNode.Parameter.SemanticKey = contentNode.Name;
                             _contentNodes.Add(contentNode);
@@ -331,7 +341,7 @@ namespace Vs.Rules.Core
 
                         if (step.Break != null && !string.IsNullOrEmpty(step.Break.Expression))
                         {
-                            step.Break.SemanticKey = string.Join('.', new[] { YamlRuleParser.Step, step.Name, "geen_recht" }.Where(s => !string.IsNullOrEmpty(s)));
+                            step.Break.SemanticKey = string.Join('.', new[] { keywords.step_, step.Name, "geen_recht" }.Where(s => !string.IsNullOrEmpty(s)));
                             ContentNode node = new ContentNode(step.Break.SemanticKey) { IsBreak = true, IsSituational = step.IsSituational, Situation = step.Situation, Parameter = new Parameter(name: "recht", value: null, type: TypeEnum.Boolean, model: ref _model) };
                             node.Parameter.SemanticKey = step.Break.SemanticKey;
                             _contentNodes.Add(node);
@@ -339,12 +349,33 @@ namespace Vs.Rules.Core
                     }
                 }
             }
-            catch (Exception ex)
+            catch (FormattingException ex)
+            {
+                var result = new ParseResult
+                {
+                    Exceptions = new FormattingExceptionCollection(ex.Message, new List<FormattingException>() { ex }),
+                    IsError = true,
+                    Message = ex.Message
+                };
+                return result;
+            }
+            catch (FormattingExceptionCollection ex)
+            {
+                var result = new ParseResult
+                {
+                    Exceptions = ex,
+                    IsError = true,
+                    Message = ex.Message
+                };
+                return result;
+            }
+            catch (YamlException ex)
             {
                 var result = new ParseResult
                 {
                     IsError = true,
-                    Message = ex.Message
+                    Message = ex.Message,
+                    Exceptions = new FormattingExceptionCollection(ex.Message, new List<FormattingException>() { new FormattingException(ex.Message, new DebugInfo().MapDebugInfo(ex.Start,ex.End)) })
                 };
                 return result;
             }

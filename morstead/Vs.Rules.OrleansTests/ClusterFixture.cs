@@ -32,7 +32,8 @@ namespace Vs.Rules.OrleansTests
             public void Configure(ISiloBuilder hostBuilder)
             {
                 hostBuilder
-                    .AddMemoryGrainStorage(name: "session-store");
+                    .AddMemoryGrainStorage(name: "session-store")
+                    .AddMemoryGrainStorage(name: "publication-store");
                 //.AddFaultInjectionMemoryStorage("SlowMemoryStore", options => options.NumStorageGrains = 10, faultyOptions => faultyOptions.Latency = TimeSpan.FromMilliseconds(15));
             }
         }

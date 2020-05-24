@@ -7,16 +7,17 @@ using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using Vs.Rules.Grains.Interfaces;
 
-namespace Vs.Rules.Grains
+namespace Vs.Rules.Grains.Rules
 {
     [StatelessWorker]
+    [Reentrant]
     public class RuleWorkerGrain : Grain, IRuleWorker
     {
         public async Task<IExecutionResult> Execute(string yaml, IParametersCollection parameters)
         {
             IExecutionResult executionResult = null;
             var controller = new YamlScriptController();
-            controller.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
+            controller.QuestionCallback = (sender, args) =>
             {
                 executionResult.Questions = args;
             };

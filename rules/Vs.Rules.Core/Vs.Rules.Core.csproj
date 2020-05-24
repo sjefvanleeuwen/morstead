@@ -15,16 +15,23 @@
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <NeutralLanguage></NeutralLanguage>
-    <Copyright>Copyright (c) 2020 Sjef van Leeuwen</Copyright>
+    <Copyright>Copyright (c) 2020 Virtual Society</Copyright>
     <PackageIcon>icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageVersion>1.0.2-alpha</PackageVersion>
+    <PackageVersion>1.0.3-alpha2</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningLevel>1</WarningLevel>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <PackageReference Include="Flee" Version="1.2.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
@@ -35,6 +42,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0-preview.3.20215.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Scriban" Version="2.1.2" />
+    <PackageReference Include="SmartFormat.NET" Version="2.5.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
@@ -57,5 +65,29 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\ex_format.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ex_format.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\keywords.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>keywords.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\ex_format.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ex_format.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\keywords.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>keywords.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
