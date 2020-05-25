@@ -1,4 +1,4 @@
-namespace Vs.Rules.OrleansTests
+namespace Vs.OrleansTests.rules
 {
     public static class Zorgtoeslag
     {
