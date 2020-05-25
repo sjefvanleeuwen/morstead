@@ -6,13 +6,28 @@
         </p>
         <p>
             <MatTextField @bind-Value="Url" Label="Url" />
-            <MatButton Raised="true" @onclick="LoadUrl">Laden</MatButton>
+            <div class="buttonwrapper">
+                <MatButton Raised="true" @onclick="LoadUrl">Laden</MatButton>
+            </div>
         </p>
     </div>
     <div class="content">
-        <MonacoEditor @ref="_editor" Id="id" ConstructionOptions="EditorConstructionOptions" CssClass="editor" />
+        <MonacoEditor @ref="MonacoEditor" Id="id" ConstructionOptions="EditorConstructionOptions" CssClass="editor" />
     </div>
     <div class="submit">
-        Here will be the submit functionality
+        <p>Selecteer het type Yaml</p>
+        <p>
+            <MatRadioGroup @bind-Value="@TypeOfContent" TValue="string">
+                @{
+                    foreach (var type in _types.Keys)
+                    {
+                        <MatRadioButton Value="@(type)" Disabled="@(!GetEnabledForType(type))" TValue="string"><span class="@(GetStyleForType(type))">@type</span></MatRadioButton>
+                    }
+                }
+            </MatRadioGroup>
+            <div class="buttonwrapper">
+                <MatButton @onclick="SubmitPage" Raised="true">Check inhoud</MatButton>
+            </div>
+        </p>
     </div>
 </section>

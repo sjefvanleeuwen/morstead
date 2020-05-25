@@ -1,6 +1,8 @@
 ﻿using BlazorMonaco;
 using BlazorMonaco.Bridge;
+using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 
 namespace Vs.YamlEditor.Components.Pages
 {
@@ -8,8 +10,39 @@ namespace Vs.YamlEditor.Components.Pages
     {
         private string Url { get; set; } = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml";
         private string Value { get; set; }
+        private string TypeOfContent { get; set; }
+        private readonly IDictionary<string, bool> _types = new Dictionary<string, bool> {
+            { "Rule", true },
+            { "Content", true },
+            { "Routing", true },
+            { "Layer", false }
+        };
 
-        private MonacoEditor _editor { get; set; }
+        private MonacoEditor MonacoEditor { get; set; }
+
+        private StandaloneEditorConstructionOptions EditorConstructionOptions(MonacoEditor editor)
+        {
+            return new StandaloneEditorConstructionOptions
+            {
+                AutomaticLayout = true,
+                Language = "yaml"
+            };
+        }
+
+        private bool GetEnabledForType(string type)
+        {
+            return _types.ContainsKey(type) && _types[type];
+        } 
+
+        private string GetStyleForType(string type)
+        {
+            if (GetEnabledForType(type))
+            {
+                return string.Empty;
+            }
+
+            return "disabled";
+        }
 
         private async void LoadUrl()
         {
@@ -25,16 +58,17 @@ namespace Vs.YamlEditor.Components.Pages
                 }
             }
 
-            await _editor.SetValue(Value);
+            await MonacoEditor.SetValue(Value);
         }
 
-        private StandaloneEditorConstructionOptions EditorConstructionOptions(MonacoEditor editor)
+        private void SubmitPage()
         {
-            return new StandaloneEditorConstructionOptions
+            if (string.IsNullOrWhiteSpace(TypeOfContent))
             {
-                AutomaticLayout = true,
-                Language = "yaml"
-            };
+                return;
+            }
+
+            //handle submit
         }
     }
 }

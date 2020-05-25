@@ -32,3 +32,12 @@ div.submit {
     flex: 0 1 auto;
     /* fixes the footer: min-height: 60px; */
 }
+
+span.disabled {
+    opacity: 0.5;
+}
+
+div.buttonwrapper {
+    display: inline-block;
+    margin: 0px 15px;
+}
