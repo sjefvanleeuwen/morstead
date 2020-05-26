@@ -31,7 +31,7 @@ namespace Vs.YamlEditor.Components.Pages
         private bool GetEnabledForType(string type)
         {
             return _types.ContainsKey(type) && _types[type];
-        } 
+        }
 
         private string GetStyleForType(string type)
         {
@@ -72,11 +72,14 @@ namespace Vs.YamlEditor.Components.Pages
 
         private async void TestError()
         {
-            var a = await _monacoEditor.GetVisibleRanges();
-            var textModel = await MonacoEditor.CreateModel("test");
+            var range = new Range { StartLineNumber = 25, StartColumn = 1, EndLineNumber = 60, EndColumn = 126 };
+            var options = new { InlineClassName = "redDecoration" };
+            await _monacoEditor.SetDeltaDecoration(range, options);
+        }
 
-            await _monacoEditor.SetSelection(new Range { StartLineNumber = 25, StartColumn = 1, EndLineNumber = 60, EndColumn = 126 });
-            var b = await _monacoEditor.GetOptions();
+        private async void RemoveError()
+        {
+            await _monacoEditor.ResetDeltaDecorations();
         }
     }
 }
