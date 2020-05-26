@@ -21,7 +21,7 @@ namespace Vs.Orleans.Primitives.Time
         {
             throw new System.NotImplementedException();
         }
-
+        /*
         /// <summary>
         /// To start a reminder, use the Grain.RegisterOrUpdateReminder method, which returns an
         /// IGrainReminder object
@@ -53,6 +53,6 @@ namespace Vs.Orleans.Primitives.Time
         {
 
         }
-
+        */
     }
 }
