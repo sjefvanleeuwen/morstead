@@ -12,7 +12,7 @@
         </p>
     </div>
     <div class="content">
-        <MonacoEditor @ref="MonacoEditor" Id="id" ConstructionOptions="EditorConstructionOptions" CssClass="editor" />
+        <MonacoEditor @ref="_monacoEditor" Id="monacoEditor" ConstructionOptions="EditorConstructionOptions" CssClass="editor" />
     </div>
     <div class="submit">
         <p>Selecteer het type Yaml</p>
@@ -28,6 +28,10 @@
             <div class="buttonwrapper">
                 <MatButton @onclick="SubmitPage" Raised="true">Check inhoud</MatButton>
             </div>
+            <div class="buttonwrapper">
+                <MatButton @onclick="TestError" Raised="true">TestFoutmeldng</MatButton>
+            </div>
+            
         </p>
     </div>
 </section>

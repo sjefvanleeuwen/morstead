@@ -2,7 +2,6 @@
 using BlazorMonaco.Bridge;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading;
 
 namespace Vs.YamlEditor.Components.Pages
 {
@@ -18,7 +17,7 @@ namespace Vs.YamlEditor.Components.Pages
             { "Layer", false }
         };
 
-        private MonacoEditor MonacoEditor { get; set; }
+        private MonacoEditor _monacoEditor { get; set; }
 
         private StandaloneEditorConstructionOptions EditorConstructionOptions(MonacoEditor editor)
         {
@@ -58,7 +57,7 @@ namespace Vs.YamlEditor.Components.Pages
                 }
             }
 
-            await MonacoEditor.SetValue(Value);
+            await _monacoEditor.SetValue(Value);
         }
 
         private void SubmitPage()
@@ -69,6 +68,15 @@ namespace Vs.YamlEditor.Components.Pages
             }
 
             //handle submit
+        }
+
+        private async void TestError()
+        {
+            var a = await _monacoEditor.GetVisibleRanges();
+            var textModel = await MonacoEditor.CreateModel("test");
+
+            await _monacoEditor.SetSelection(new Range { StartLineNumber = 25, StartColumn = 1, EndLineNumber = 60, EndColumn = 126 });
+            var b = await _monacoEditor.GetOptions();
         }
     }
 }

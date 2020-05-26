@@ -3,3 +3,11 @@
     width: 100%;
     overflow: hidden;
 }
+
+.redDecoration {
+    color: red !important;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+    font-style: oblique;
+}
