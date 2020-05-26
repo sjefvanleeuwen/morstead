@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Acme.Answer.OpenApi.v2.Controllers
+namespace Acme.Answer.OpenApi.v1.Dto
 {
-    public class QuestionPayload
+    public class QuestionResponse
     {
-        IEnumerable<Parameter> Parameters { get; set; }
+        public IEnumerable<Parameter> Parameters { get; set; }
 
         public class Parameter
         {
