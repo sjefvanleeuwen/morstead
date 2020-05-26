@@ -1,8 +1,5 @@
-﻿html, body, app {
-    height: 100%;
-}
-
-.editor {
+﻿.editor {
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
