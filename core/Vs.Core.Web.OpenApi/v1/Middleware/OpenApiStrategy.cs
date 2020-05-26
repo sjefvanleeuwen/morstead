@@ -7,11 +7,33 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using System;
 using App.Metrics;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace Vs.Core.Web.OpenApi.v1.Middleware
 {
     public static class ConfigureOpenApi
     {
+        public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        /*ValidIssuer = configuration["Jwt:Issuer"],
+                        ValidAudience = configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))*/
+                    };
+                });
+        }
+
         public static void UseOpenApiStrategy(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseStaticFiles();
@@ -25,7 +47,7 @@ namespace Vs.Core.Web.OpenApi.v1.Middleware
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
