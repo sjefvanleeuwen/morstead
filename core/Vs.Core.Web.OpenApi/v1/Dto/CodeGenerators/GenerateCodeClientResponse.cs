@@ -13,4 +13,15 @@
         /// </value>
         public string ClientCode { get; set; }
     }
+
+    public abstract class GenerateCodeServerResponse
+    {
+        /// <summary>
+        /// Generated client code.
+        /// </summary>
+        /// <value>
+        /// The client code.
+        /// </value>
+        public string ServerCode { get; set; }
+    }
 }
