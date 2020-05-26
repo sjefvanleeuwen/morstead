@@ -1,24 +1,24 @@
-﻿using Acme.Answer.OpenApi.v2.Controllers;
+﻿using Acme.Answer.OpenApi.v1.Dto;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Vs.Core.Web.OpenApi.v1.Dto.ProtocolErrors;
-using static Acme.Answer.OpenApi.v2.Controllers.AnswerPayload;
+using static Acme.Answer.OpenApi.v1.Dto.AnswerResponse;
 
-namespace Acme.Answer.OpenApi.v2.Features.Feature1
+namespace Acme.Answer.OpenApi.v1.Features.Feature1
 {
     /// <summary>
     /// Rules API integrates the rule engine and exposes it as OAS3.
     /// Uses best practices from: https://github.com/RicoSuter/NSwag/wiki/AspNetCoreOpenApiDocumentGenerator
     /// </summary>
     /// <seealso cref="ControllerBase" />
-    [ApiVersion("2.0-feature1")]
+    [ApiVersion("1.0-feature1")]
     [Route("api/v{version:apiVersion}/qa")]
-    [OpenApiTag("Answer API", Description = "This is current api")]
+    [OpenApiTag("Answer API", Description = "This is current api feature branche")]
     [ApiController]
-    public class AnswerController : Controllers.AnswerController
+    public class AnswerController : ControllerBase
     {
         /// <summary>
         /// Retrieves the toetsingsinkomen
@@ -27,7 +27,7 @@ namespace Acme.Answer.OpenApi.v2.Features.Feature1
         /// <response code="200">Parameter provided</response>
         /// <response code="400">Invalid request</response>
         /// <response code="500">Server error</response>
-        [ProducesResponseType(typeof(AnswerPayload), 200)]
+        [ProducesResponseType(typeof(AnswerResponse), 200)]
         [ProducesResponseType(typeof(string), 400)]
         [ProducesResponseType(typeof(ServerError500Response), 500)]
         [HttpPost("get-value-for-parameter")]
@@ -40,7 +40,7 @@ namespace Acme.Answer.OpenApi.v2.Features.Feature1
         {
             try
             {
-                AnswerPayload result = null;
+                AnswerResponse result = null;
                 switch (parameterName)
                 {
                     case "alleenstaande":
@@ -63,7 +63,7 @@ namespace Acme.Answer.OpenApi.v2.Features.Feature1
             }
         }
 
-        private async Task<AnswerPayload> GetLivingSituation(string type)
+        private async Task<AnswerResponse> GetLivingSituation(string type)
         {
             string value = null;
             switch (type)
@@ -77,7 +77,7 @@ namespace Acme.Answer.OpenApi.v2.Features.Feature1
                 default:
                     throw new Exception($"Unspecified livingsituation requested: '{type}'");
             }
-            var answerPayload = new AnswerPayload
+            var answerPayload = new AnswerResponse
             {
                 Parameters = new List<Parameter> {
                     new Parameter
@@ -90,9 +90,9 @@ namespace Acme.Answer.OpenApi.v2.Features.Feature1
             return answerPayload;
         }
 
-        private async Task<AnswerPayload> GetAssessmentIncome()
+        private async Task<AnswerResponse> GetAssessmentIncome()
         {
-            var answerPayload = new AnswerPayload
+            var answerPayload = new AnswerResponse
             {
                 Parameters = new List<Parameter>
                     {

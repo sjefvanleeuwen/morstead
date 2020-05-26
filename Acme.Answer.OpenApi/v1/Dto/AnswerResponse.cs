@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Acme.Answer.OpenApi.v2.Controllers
+namespace Acme.Answer.OpenApi.v1.Dto
 {
-    public class AnswerPayload
+    public class AnswerResponse
     {
         public IEnumerable<Parameter> Parameters { get; set; }
 

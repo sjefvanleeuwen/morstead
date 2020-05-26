@@ -6,4 +6,8 @@
     public class GenerateCSharpClientResponse : GenerateCodeClientResponse
     {
     }
+
+    public class GenerateCSharpServerResponse : GenerateCodeServerResponse
+    {
+    }
 }

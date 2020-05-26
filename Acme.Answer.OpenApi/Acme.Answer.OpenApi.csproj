@@ -12,11 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\Vs.Rules.OpenApi\wwwroot\img\logo.svg" Link="wwwroot\img\logo.svg" />
+    <None Include="wwwroot\img\logo.svg" />
   </ItemGroup>
 
   <ItemGroup>

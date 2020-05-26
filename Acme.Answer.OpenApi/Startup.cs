@@ -18,6 +18,7 @@ namespace Acme.Answer.OpenApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddJwt(Configuration);
             services.AddOpenApiServices();
 
             //set up the default document information
@@ -61,7 +62,7 @@ Feedback might not be accepted and move to another version release in the future
 
 Final releases should work in all scenario's. Might issues arise patches might be release using an increment in the minor version.
 ";
-
+            /*
             //add specific versions
             services.AddDocument(document =>
             {
@@ -71,7 +72,7 @@ Final releases should work in all scenario's. Might issues arise patches might b
                 document.ApiGroupNames = new[] { "2" };
                 document.Version = "2.0";
             });
-
+            */
             services.AddDocument(document =>
             {
                 document.Title = doc.Title;
@@ -84,18 +85,20 @@ This feature branche allows you to quickly use new features as they are requeste
 
 Eventually the seperate features will become obsolete, we allow for a cooldown period so you can upgrade to the new version. You can join us in testing the alpha/beta releases or migrate over once the next major version reaches 
 RC / Release status.";
-                document.Name = "2.0-features";
-                document.ApiGroupNames = new[] { "2.0-feature1", "2.0-feature2" };
-                document.Version = "2.0-features";
+                document.Name = "1.0-features";
+                document.ApiGroupNames = new[] { "1.0-feature1" };
+                document.Version = "1.0-features";
 
             });
 
+            /*
             services.AddDocument(document =>
             {
                 document.Name = "1.0-release";
                 document.ApiGroupNames = new[] { "1" };
                 document.Version = "1.0-release";
             });
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
