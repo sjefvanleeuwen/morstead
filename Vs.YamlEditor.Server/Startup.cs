@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Vs.YamlEditor.Components;
 
 namespace Vs.YamlEditor.Server
 {
@@ -21,6 +22,7 @@ namespace Vs.YamlEditor.Server
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            Initializer.Initialize(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
