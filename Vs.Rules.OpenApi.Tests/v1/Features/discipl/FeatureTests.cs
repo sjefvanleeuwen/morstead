@@ -28,11 +28,11 @@ namespace Vs.Rules.OpenApi.Tests.v1.Features.discipl
         public async void ShouldProvideDebugInformationUT()
         {
             RulesControllerDiscipl controller = new RulesControllerDiscipl();
-            var result = await controller.ExecuteRuleYamlContents(new OpenApi.v1.Features.discipl.Dto.ExecuteRuleYamlFromContentRequest()
+            var result = await controller.DebugRuleYamlContents(new OpenApi.v1.Features.discipl.Dto.DebugRuleYamlFromContentRequest()
             {
                 Yaml = YamlTestFileLoader.Load(@"Malformed/nl-NL/HeaderUnknownProperty.yaml")
             });
-            var value = ((Vs.Rules.OpenApi.v1.Features.discipl.Dto.ExecuteRuleYamlResponse)((Microsoft.AspNetCore.Mvc.ObjectResult)result).Value);
+            var value = ((Vs.Rules.OpenApi.v1.Features.discipl.Dto.DebugRuleYamlFromContentResponse)((Microsoft.AspNetCore.Mvc.ObjectResult)result).Value);
             Assert.NotEmpty(value.ParseResult.FormattingExceptions);
             Assert.NotNull(value.ParseResult.FormattingExceptions[0].DebugInfo);
             Assert.NotNull(value.ParseResult.FormattingExceptions[0].Message);
