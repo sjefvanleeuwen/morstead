@@ -151,8 +151,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Network.Semantic",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Network.Semantic.Tests", "rules\network\Vs.Rules.Network.Semantic.Tests\Vs.Rules.Network.Semantic.Tests.csproj", "{F89C463A-1FAC-4CDD-AA1A-2CA6B0B4989A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMonaco", "BlazorMonaco\BlazorMonaco\BlazorMonaco.csproj", "{98981AA5-90B7-4B87-8DB5-CE031C85D979}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -323,10 +321,6 @@ Global
 		{F89C463A-1FAC-4CDD-AA1A-2CA6B0B4989A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F89C463A-1FAC-4CDD-AA1A-2CA6B0B4989A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F89C463A-1FAC-4CDD-AA1A-2CA6B0B4989A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98981AA5-90B7-4B87-8DB5-CE031C85D979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98981AA5-90B7-4B87-8DB5-CE031C85D979}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98981AA5-90B7-4B87-8DB5-CE031C85D979}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98981AA5-90B7-4B87-8DB5-CE031C85D979}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -379,7 +373,6 @@ Global
 		{A2614CE2-568F-472B-B3E7-89141AF5BE62} = {72EB4BA6-3C85-4F2F-B444-59BDBF63BC50}
 		{8A70951E-9E77-40CA-9F1C-09CC2922D653} = {A2614CE2-568F-472B-B3E7-89141AF5BE62}
 		{F89C463A-1FAC-4CDD-AA1A-2CA6B0B4989A} = {A2614CE2-568F-472B-B3E7-89141AF5BE62}
-		{98981AA5-90B7-4B87-8DB5-CE031C85D979} = {9B27CEDE-1F5E-4194-912A-0518F95AC712}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
