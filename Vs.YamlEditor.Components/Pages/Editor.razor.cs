@@ -1,7 +1,10 @@
 ﻿using BlazorMonaco;
 using BlazorMonaco.Bridge;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Net.Http;
 
 namespace Vs.YamlEditor.Components.Pages
 {
@@ -45,15 +48,24 @@ namespace Vs.YamlEditor.Components.Pages
 
         private async void LoadUrl()
         {
-            using (WebClient client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    Value = client.DownloadString(Url);
+                    var response = await client.GetAsync(Url);
+                    using (var stream = await response.Content.ReadAsStreamAsync())
+                    {
+                        using (var reader = new StreamReader(stream))
+                        {
+                            Value = reader.ReadToEnd();
+                        }
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    Value = "Laden mislukt. Klopt de url?";
+                    Value = @$"Laden mislukt. Klopt de url?
+Details:
+{ex}";
                 }
             }
 
@@ -72,14 +84,16 @@ namespace Vs.YamlEditor.Components.Pages
 
         private async void TestError()
         {
-            var range = new Range { StartLineNumber = 25, StartColumn = 1, EndLineNumber = 60, EndColumn = 126 };
+            var range = new BlazorMonaco.Bridge.Range { StartLineNumber = 25, StartColumn = 1, EndLineNumber = 60, EndColumn = 126 };
             var options = new { InlineClassName = "redDecoration" };
-            await _monacoEditor.SetDeltaDecoration(range, options);
+            //to enable after BlazorMonaco Update
+            //await _monacoEditor.SetDeltaDecoration(range, options);
         }
 
         private async void RemoveError()
         {
-            await _monacoEditor.ResetDeltaDecorations();
+            //to enable after BlazorMonaco Update
+            //await _monacoEditor.ResetDeltaDecorations();
         }
     }
 }
