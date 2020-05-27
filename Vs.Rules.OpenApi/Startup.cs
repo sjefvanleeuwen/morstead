@@ -18,7 +18,7 @@ namespace Vs.Rules.OpenApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOpenApiServices();
+
 
             var doc = new ApiDocument();
             doc.Title = "Virtual Society Rule Engine";
@@ -41,17 +41,8 @@ Virtual Society Releases its public API's using major versioning with feature re
             services.AddDocument(document =>
             {
                 document.Title = doc.Title;
-                document.Description = doc.Description;
-                document.Name = "1.0";
-                document.ApiGroupNames = new[] { "1" };
-                document.Version = "1.0";
-            });
-
-            services.AddDocument(document =>
-            {
-                document.Title = doc.Title;
                 document.Name = "1.0-features";
-                document.ApiGroupNames = new[] { "1.0-discipl","1.0-vs" };
+                document.ApiGroupNames = new[] { "1.0-discipl" };
                 document.Version = "1.0-features";
                 document.Description = @"
 <img width=128 height=128 src='/img/logo.svg'></img><br/>A Semantic Rule Engine API that plays nice with frontends.
@@ -64,6 +55,8 @@ Eventually the separate features will become obsolete, we allow for a cooldown p
 RC / Release status.
 ";
             });
+
+            services.AddOpenApiServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

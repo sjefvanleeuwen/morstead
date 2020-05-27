@@ -107,6 +107,33 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
         }
 
         /// <summary>
+        /// Debugs a yaml rule by passing its content.
+        /// </summary>
+        /// <returns>ParesResult</returns>
+        /// <response code="200">Debug information received.</response>
+        /// <response code="404">The yaml rule set does not contain any errors.</response>
+        /// <response code="500">Server error</response>
+        [HttpPost("debug-rule-from-contents")]
+        [ProducesResponseType(typeof(DebugRuleYamlFromContentResponse), 200)]
+        [ProducesResponseType(typeof(DebugRuleYamlFromContentResponse), 404)]
+        [ProducesResponseType(typeof(ServerError500Response), 500)]
+        public async Task<IActionResult> DebugRuleYamlContents([FromBody] DebugRuleYamlFromContentRequest request)
+        {
+            var response = new DebugRuleYamlFromContentResponse();
+            var controller = new YamlScriptController();
+            var result = controller.Parse(request.Yaml);
+            if (result.IsError)
+            {
+                response.ParseResult = new ParseResult();
+                response.ParseResult.FormattingExceptions = result.Exceptions.Exceptions.Adapt<List<Dto.Exceptions.FormattingException>>();
+                response.ExecutionStatus = ExecuteRuleYamlResultTypes.SyntaxError;
+                return StatusCode(200, response);
+            }
+            // No Errors found.
+            return StatusCode(404, response);
+        }
+
+        /// <summary>
         /// Executes a yaml rule file from a given uri.
         /// </summary>
         /// <param name="yaml">The url pointing to the rule yaml</param>
@@ -158,7 +185,7 @@ namespace Vs.Rules.OpenApi.v1.Features.discipl.Controllers
         }
 
         /// <summary>
-        /// Executes a yaml rule file from a given uri.
+        /// Executes a yaml rule using its content.
         /// </summary>
         /// <param name="yaml">The url pointing to the rule yaml</param>
         /// <returns>ParesResult</returns>
