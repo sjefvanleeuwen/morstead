@@ -74,12 +74,14 @@ namespace Vs.YamlEditor.Components.Pages
         {
             var range = new Range { StartLineNumber = 25, StartColumn = 1, EndLineNumber = 60, EndColumn = 126 };
             var options = new { InlineClassName = "redDecoration" };
-            await _monacoEditor.SetDeltaDecoration(range, options);
+            //to enable after BlazorMonaco Update
+            //await _monacoEditor.SetDeltaDecoration(range, options);
         }
 
         private async void RemoveError()
         {
-            await _monacoEditor.ResetDeltaDecorations();
+            //to enable after BlazorMonaco Update
+            //await _monacoEditor.ResetDeltaDecorations();
         }
     }
 }
