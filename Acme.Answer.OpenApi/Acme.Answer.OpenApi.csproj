@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.4.2" />
     <PackageReference Include="System.Text.Json" Version="5.0.0-preview.3.20214.6" />
+    <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
