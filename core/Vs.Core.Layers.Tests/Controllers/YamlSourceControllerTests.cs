@@ -92,7 +92,7 @@ namespace Vs.Core.Layers.Tests.Controllers
             });
 
             var sut = new YamlSourceController(moqLayerController.Object);
-            
+
             sut.SetYaml(YamlType.Layer, "dummy");
             Assert.Equal("http://testurlyaml/", sut.GetYaml(YamlType.Rules));
 

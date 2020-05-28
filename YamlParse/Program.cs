@@ -1,12 +1,11 @@
 ﻿using CommandLine;
-using System;
 
 namespace YamlParse
 {
     class OptionsMutuallyExclusive
     {
         //define commands in set(group) named web
-        [Option('c',"content",Required=true, SetName = "mode",HelpText="For parsing content yaml files")]
+        [Option('c', "content", Required = true, SetName = "mode", HelpText = "For parsing content yaml files")]
         public bool UseContentParser { get; set; }
         [Option('r', "rule", Required = true, SetName = "mode", HelpText = "For parsing rule yaml files")]
         public bool UseRuleParser { get; set; }
@@ -21,7 +20,7 @@ namespace YamlParse
     {
         static void Main(string[] args)
         {
-        
+
         }
     }
 }

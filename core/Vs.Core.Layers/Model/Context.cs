@@ -27,7 +27,7 @@ namespace Vs.Core.Layers.Model
         /// The language.
         /// </value>
         public LanguageCode? Language { get; set; }
-        
+
         private DebugInfo DebugInfo { get; set; }
 
         public LineInfo End => DebugInfo.Start;

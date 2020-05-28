@@ -28,7 +28,7 @@ namespace Vs.Core.Layers.Model
         /// The layers.
         /// </value>
         public IEnumerable<ILayer> Layers { get; set; }
-        
+
         private DebugInfo DebugInfo { get; set; }
 
         public LineInfo End => DebugInfo.End;
@@ -75,7 +75,7 @@ namespace Vs.Core.Layers.Model
             public TransformTemplate(ILayerConfiguration local)
             {
                 version = local.Version.ToString();
-                foreach(var layer in local.Layers)
+                foreach (var layer in local.Layers)
                 {
                     layers.Add(layer.Name, (IEnumerable<Context>)layer.Contexts);
                 }
