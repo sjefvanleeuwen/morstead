@@ -148,15 +148,12 @@ Details:
                 GlyphMarginClassName = "editorErrorGlyph",
                 GlyphMarginHoverMessage = new MarkdownString { Value = $"**{title}**\r\n\r\n{message}" }
             };
-            //TODO to enable after BlazorMonaco Update
             MonacoController.SetDeltaDecorations(range, options);
-            //MonacoController.SetHoverText(range, title, message);
         }
 
         private void ResetErrors()
         {
             MonacoController.ResetDeltaDecorations();
-            //MonacoController.ResetHoverTexts();
         }
     }
 }
