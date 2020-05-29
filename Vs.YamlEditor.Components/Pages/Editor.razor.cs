@@ -129,13 +129,13 @@ Details:
             var isWholeLine = false;
 
             range.StartLineNumber = Math.Max(range.StartLineNumber, 1);
-            range.StartColumn = Math.Max(range.StartLineNumber, 1);
-            range.EndLineNumber = Math.Max(range.StartLineNumber, 2);
+            range.StartColumn = Math.Max(range.StartColumn, 1);
+            range.EndLineNumber = Math.Max(range.EndLineNumber, 1);
             if (range.EndColumn == 0)
             {
                 range.EndColumn = range.StartColumn;
                 var content = await _monacoEditor.GetValue();
-                range.EndColumn = (content.Split("\n").FirstOrDefault()?.Trim().Length ?? 0) + 1;
+                range.EndColumn = (content.Split("\n").ElementAt(range.EndLineNumber)?.Trim().Length ?? 0) + 1;
                 isWholeLine = true;
             }
 
@@ -144,9 +144,9 @@ Details:
                 InlineClassName = "editorError",
                 InlineClassNameAffectsLetterSpacing = false,
                 ClassName = "editorError",
-                HoverMessage = new MarkdownString { Value = message },
+                HoverMessage = new MarkdownString { Value = $"**{title}**\r\n\r\n{message}" },
                 GlyphMarginClassName = "editorErrorGlyph",
-                GlyphMarginHoverMessage = new MarkdownString { Value = message }
+                GlyphMarginHoverMessage = new MarkdownString { Value = $"**{title}**\r\n\r\n{message}" }
             };
             //TODO to enable after BlazorMonaco Update
             MonacoController.SetDeltaDecorations(range, options);
