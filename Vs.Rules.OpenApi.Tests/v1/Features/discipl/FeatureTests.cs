@@ -1,5 +1,7 @@
-﻿using Vs.Core.IntegrationTesting.OpenApi;
+﻿using Microsoft.AspNetCore.Mvc;
+using Vs.Core.IntegrationTesting.OpenApi;
 using Vs.Rules.OpenApi.v1.Features.discipl.Controllers;
+using Vs.Rules.OpenApi.v1.Features.discipl.Dto;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 using Xunit;
 
@@ -12,6 +14,19 @@ namespace Vs.Rules.OpenApi.Tests.v1.Features.discipl
         public FeatureTests(TestFixture<Startup> fixture)
         {
             Client = new RulesClient(fixture.Client);
+        }
+
+        [Fact]
+        public async void CorrectlyHandlesADebugSessionWithoutDebugExceptions()
+        {
+            RulesControllerDiscipl controller = new RulesControllerDiscipl();
+            var result = await controller.DebugRuleYamlContents(new OpenApi.v1.Features.discipl.Dto.DebugRuleYamlFromContentRequest()
+            {
+                Yaml = YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml")
+            });
+            Assert.Equal(404, ((ObjectResult)result).StatusCode);
+            Assert.Equal(ExecuteRuleYamlResultTypes.Ok, 
+                ((Vs.Rules.OpenApi.v1.Features.discipl.Dto.DebugRuleYamlFromContentResponse)((ObjectResult)result).Value).ExecutionStatus);
         }
 
        // [Fact]
