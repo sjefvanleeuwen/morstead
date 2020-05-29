@@ -113,6 +113,7 @@ Details:
         private void RemoveError()
         {
             MonacoController.ResetDeltaDecorations();
+            MonacoController.ResetHoverTexts();
         }
     }
 }

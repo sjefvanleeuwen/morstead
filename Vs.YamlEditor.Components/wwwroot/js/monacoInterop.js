@@ -1,5 +1,7 @@
+var hoverTextProviders = [];
+
 setHoverText = function (language, range, title, content) {
-  window.monaco.languages.registerHoverProvider(language, {
+  provider = window.monaco.languages.registerHoverProvider(language, {
     provideHover: function (model, position) {
       if (
         (position.lineNumber < range.startLineNumber) ||
@@ -16,4 +18,9 @@ setHoverText = function (language, range, title, content) {
     }
   }
   );
+  hoverTextProviders.push(provider);
+}
+
+resetHoverTexts = function () {
+  hoverTextProviders.forEach(prov => prov.dispose());
 }

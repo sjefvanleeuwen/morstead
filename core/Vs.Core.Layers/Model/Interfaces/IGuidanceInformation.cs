@@ -1,8 +1,5 @@
 ﻿using Semver;
-using System;
 using Vs.Core.Diagnostics;
-using YamlDotNet.Core;
-using YamlDotNet.Serialization;
 
 namespace Vs.Core.Layers.Model.Interfaces
 {

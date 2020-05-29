@@ -11,5 +11,6 @@ namespace Vs.YamlEditor.Components.Controllers.Interfaces
         void ResetDeltaDecorations();
         void SetDeltaDecorations(Range range, object options);
         void SetHoverText(Range range, string title, string content);
+        void ResetHoverTexts();
     }
 }

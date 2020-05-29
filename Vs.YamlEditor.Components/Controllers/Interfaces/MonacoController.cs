@@ -45,5 +45,10 @@ namespace Vs.YamlEditor.Components.Controllers
             }
             await _jsRuntime.InvokeVoidAsync("setHoverText", Language, range, title, content);
         }
+
+        public async void ResetHoverTexts()
+        {
+            await _jsRuntime.InvokeVoidAsync("resetHoverTexts");
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Vs.Core.Formats.Yaml.Helper;
 using Vs.Core.Layers.Controllers.Interfaces;
@@ -65,7 +64,7 @@ namespace Vs.Rules.Routing.Controllers
             {
                 return null;
             }
-            
+
             var api = new ApiCalls.ACMEApiAnswerClient(new System.Net.Http.HttpClient(), url);
             try
             {
