@@ -4,10 +4,13 @@
     overflow: hidden;
 }
 
-.redDecoration {
+.editorError {
     color: red !important;
-    cursor: pointer;
-    text-decoration: underline;
-    font-weight: bold;
-    font-style: oblique;
+    background: #f2d9d8;
+    cursor: help;
+}
+
+.editorErrorGlyph {
+    background: red;
+    cursor: help;
 }
