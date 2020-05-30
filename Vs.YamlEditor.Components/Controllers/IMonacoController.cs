@@ -9,6 +9,7 @@ namespace Vs.YamlEditor.Components.Controllers.Interfaces
         MonacoEditor MonacoEditor { get; set; }
 
         void ResetDeltaDecorations();
-        void SetDeltaDecorations(Range range, DecorationOptions options);
+        void SetDeltaDecorations(Range range, ModelDecorationOptions options);
+        void SetDeltaDecorations(ModelDeltaDecoration[] deltaDecorations);
     }
 }

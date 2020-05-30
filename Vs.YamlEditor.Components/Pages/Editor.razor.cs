@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Vs.YamlEditor.Components.Controllers.ApiCalls;
 using Vs.YamlEditor.Components.Controllers.Interfaces;
 
@@ -109,6 +110,7 @@ Details:
 
             var response = await client.DebugRuleYamlContentsAsync(new DebugRuleYamlFromContentRequest { Yaml = await _monacoEditor.GetValue() });
             ResetErrors();
+            var deltaDecorations = new List<ModelDeltaDecoration>();
             foreach (var exception in response.ParseResult.FormattingExceptions)
             {
                 var message = exception.Message;
@@ -119,12 +121,15 @@ Details:
                     EndLineNumber = exception.DebugInfo.End.Line,
                     EndColumn = exception.DebugInfo.End.Col
                 };
-                
-                SetError(range, "Error", message);
+
+                deltaDecorations.Add(await BuildDeltaDecoration(range, message));
             }
+
+            MonacoController.SetDeltaDecorations(deltaDecorations.ToArray());
         }
 
-        private async void SetError(BlazorMonaco.Bridge.Range range, string title, string message )
+
+        private async Task<ModelDeltaDecoration> BuildDeltaDecoration(BlazorMonaco.Bridge.Range range, string message )
         {
             var isWholeLine = false;
 
@@ -135,20 +140,22 @@ Details:
             {
                 range.EndColumn = range.StartColumn;
                 var content = await _monacoEditor.GetValue();
-                range.EndColumn = (content.Split("\n").ElementAt(range.EndLineNumber)?.Trim().Length ?? 0) + 1;
+                var contentLines = content.Split("\n");
+                range.EndColumn = (contentLines.ElementAt(Math.Min(contentLines.Length - 1, range.EndLineNumber - 1))?.Trim().Length ?? 0) + 1;
                 isWholeLine = true;
             }
 
-            var options = new DecorationOptions {
+            var options = new ModelDecorationOptions {
                 IsWholeLine = isWholeLine,
                 InlineClassName = "editorError",
                 InlineClassNameAffectsLetterSpacing = false,
                 ClassName = "editorError",
-                HoverMessage = new MarkdownString { Value = $"**{title}**\r\n\r\n{message}" },
+                HoverMessage = new MarkdownString[] { new MarkdownString { Value = $"**Error**\r\n\r\n{message}" } },
                 GlyphMarginClassName = "editorErrorGlyph",
-                GlyphMarginHoverMessage = new MarkdownString { Value = $"**{title}**\r\n\r\n{message}" }
+                GlyphMarginHoverMessage = new MarkdownString[] { new MarkdownString { Value = $"**Error**\r\n\r\n{message}" } }
             };
-            MonacoController.SetDeltaDecorations(range, options);
+
+            return new ModelDeltaDecoration { Range = range, Options = options };
         }
 
         private void ResetErrors()
