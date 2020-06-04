@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Vs.YamlEditor.Components.Controllers.ApiCalls;
 using Vs.YamlEditor.Components.Controllers.Interfaces;
@@ -22,9 +23,12 @@ namespace Vs.YamlEditor.Components.Pages
         public IMonacoController MonacoController { get; set; }
 
         private string Url { get; set; } = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml";
-        private readonly string _language = "yaml";
         private string Value { get; set; }
         private string TypeOfContent { get; set; }
+        private CancellationTokenSource TokenSource { get; set; }
+
+        private readonly string _language = "yaml";
+        private TimeSpan _submitWait = TimeSpan.FromMilliseconds(5000);
 
         private readonly IDictionary<string, bool> _types = new Dictionary<string, bool> {
             { "Rule", true },
@@ -94,6 +98,24 @@ Details:
             }
 
             await _monacoEditor.SetValue(Value);
+        }
+
+        private void StartSubmitCountdown()
+        {
+            if (TokenSource != null)
+            {
+                TokenSource.Cancel();
+            }
+            TokenSource = new CancellationTokenSource();
+            var ct = TokenSource.Token;
+            //var task = Task.Run(() => SubmitPage(), tokenSource.Token);
+            var task = Task.Run(() =>
+                {
+                    Thread.Sleep(_submitWait);
+                    ct.ThrowIfCancellationRequested();
+                    SubmitPage();
+                }
+                , TokenSource.Token);
         }
 
         private async void SubmitPage()

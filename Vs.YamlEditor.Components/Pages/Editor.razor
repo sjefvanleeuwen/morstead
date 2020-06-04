@@ -12,7 +12,7 @@
         </p>
     </div>
     <div class="content">
-        <MonacoEditor @ref="_monacoEditor" Id="monacoEditor" ConstructionOptions="EditorConstructionOptions" CssClass="editor" OnDidPaste="ResetErrors" />
+        <MonacoEditor @ref="_monacoEditor" Id="monacoEditor" ConstructionOptions="EditorConstructionOptions" OnKeyUp="StartSubmitCountdown" CssClass="editor" OnDidPaste="ResetErrors" />
     </div>
     <div class="submit">
         <p>Selecteer het type Yaml</p>
