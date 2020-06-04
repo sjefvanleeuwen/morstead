@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Orleans;
 using Vs.Rules.Grains.Interfaces;
 
 namespace Vs.Rules.Grains
@@ -7,7 +8,7 @@ namespace Vs.Rules.Grains
     /// <summary>
     /// Orleans grain implementation class HelloGrain.
     /// </summary>
-    public class HelloGrain : Orleans.Grain, IHello
+    public class HelloGrain : Grain, IHello
     {
         private readonly ILogger logger;
 

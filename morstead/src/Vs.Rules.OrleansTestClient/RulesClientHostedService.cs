@@ -1,10 +1,12 @@
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Orleans;
 using Orleans.Runtime;
+using Vs.Orleans.Primitives.Time.Interfaces;
 using Vs.Rules.Core;
 using Vs.Rules.Grains.Interfaces;
 using Vs.Rules.OrleansTestClient;
@@ -36,7 +38,10 @@ namespace OrleansClient
         {
             // example of calling Virtual Society rule engine.
             ExecuteRule();
-
+            var reminder = _client.GetGrain<IReminderGrain>("reminderservice");
+            await reminder.Start();
+            //var email = _client.GetGrain<IEmailSenderGrain>(Guid.NewGuid());
+            //await email.SendEmail("bla", new[] { "bla" }, "topic", "content");
             // example of calling grains from the initialized client
             var friend = this._client.GetGrain<IHello>(0);
             var response = await friend.SayHello("Good morning, my friend!");
