@@ -108,7 +108,6 @@ Details:
             }
             TokenSource = new CancellationTokenSource();
             var ct = TokenSource.Token;
-            //var task = Task.Run(() => SubmitPage(), tokenSource.Token);
             var task = Task.Run(() =>
                 {
                     Thread.Sleep(_submitWait);
@@ -130,10 +129,26 @@ Details:
                 BaseUrl = "https://localhost:44391/"
             };
 
-            var response = await client.DebugRuleYamlContentsAsync(new DebugRuleYamlFromContentRequest { Yaml = await _monacoEditor.GetValue() });
+            //DebugRuleYamlFromContentResponse response = null;
+            IEnumerable<FormattingException> formattingExceptions = new List<FormattingException>();
+            try
+            {
+                var response = await client.DebugRuleYamlContentsAsync(new DebugRuleYamlFromContentRequest { Yaml = await _monacoEditor.GetValue() });
+                formattingExceptions = response.ParseResult.FormattingExceptions;
+            }
+            catch (ApiException ex)
+            {
+                if (ex.StatusCode != 404)
+                {
+                    throw ex;
+                }
+                ResetErrors();
+                return;
+            }
+
             ResetErrors();
             var deltaDecorations = new List<ModelDeltaDecoration>();
-            foreach (var exception in response.ParseResult.FormattingExceptions)
+            foreach (var exception in formattingExceptions)
             {
                 var message = exception.Message;
                 var range = new BlazorMonaco.Bridge.Range()
