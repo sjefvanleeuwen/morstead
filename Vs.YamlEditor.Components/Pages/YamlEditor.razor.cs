@@ -14,7 +14,7 @@ using Vs.YamlEditor.Components.Controllers.Interfaces;
 
 namespace Vs.YamlEditor.Components.Pages
 {
-    public partial class Editor
+    public partial class YamlEditor
     {
         [Inject]
         public IJSRuntime JsRuntime { get; set; }
