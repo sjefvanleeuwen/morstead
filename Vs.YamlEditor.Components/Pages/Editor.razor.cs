@@ -1,7 +1,4 @@
-﻿using BlazorMonaco;
-using BlazorMonaco.Bridge;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+﻿using BlazorMonaco.Bridge;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,24 +7,16 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Vs.YamlEditor.Components.Controllers.ApiCalls;
-using Vs.YamlEditor.Components.Controllers.Interfaces;
 
 namespace Vs.YamlEditor.Components.Pages
 {
-    public partial class YamlEditor
+    public partial class Editor
     {
-        [Inject]
-        public IJSRuntime JsRuntime { get; set; }
-
-        [Inject]
-        public IMonacoController MonacoController { get; set; }
-
         private string Url { get; set; } = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml";
         private string Value { get; set; }
         private string TypeOfContent { get; set; }
         private CancellationTokenSource TokenSource { get; set; }
 
-        private readonly string _language = "yaml";
         private TimeSpan _submitWait = TimeSpan.FromMilliseconds(5000);
 
         private readonly IDictionary<string, bool> _types = new Dictionary<string, bool> {
@@ -37,27 +26,7 @@ namespace Vs.YamlEditor.Components.Pages
             { "Layer", false }
         };
 
-        private MonacoEditor _monacoEditor { get; set; }
-
-        protected override void OnAfterRender(bool firstRender)
-        {
-            if (firstRender)
-            {
-                MonacoController.Language = _language;
-                MonacoController.MonacoEditor = _monacoEditor;
-            }
-            base.OnAfterRender(firstRender);
-        }
-
-        private StandaloneEditorConstructionOptions EditorConstructionOptions(MonacoEditor editor)
-        {
-            return new StandaloneEditorConstructionOptions
-            {
-                AutomaticLayout = true,
-                Language = _language,
-                GlyphMargin = true
-            };
-        }
+        private Shared.YamlEditor _yamlEditor { get; set; }
 
         private bool GetEnabledForType(string type)
         {
@@ -97,7 +66,7 @@ Details:
                 }
             }
 
-            await _monacoEditor.SetValue(Value);
+            await _yamlEditor.SetValue(Value);
         }
 
         private void StartSubmitCountdown()
@@ -109,12 +78,12 @@ Details:
             TokenSource = new CancellationTokenSource();
             var ct = TokenSource.Token;
             var task = Task.Run(() =>
-                {
-                    Thread.Sleep(_submitWait);
-                    ct.ThrowIfCancellationRequested();
-                    SubmitPage();
-                }
-                , TokenSource.Token);
+            {
+                Thread.Sleep(_submitWait);
+                ct.ThrowIfCancellationRequested();
+                SubmitPage();
+            },
+            TokenSource.Token);
         }
 
         private async void SubmitPage()
@@ -133,7 +102,7 @@ Details:
             IEnumerable<FormattingException> formattingExceptions = new List<FormattingException>();
             try
             {
-                var response = await client.DebugRuleYamlContentsAsync(new DebugRuleYamlFromContentRequest { Yaml = await _monacoEditor.GetValue() });
+                var response = await client.DebugRuleYamlContentsAsync(new DebugRuleYamlFromContentRequest { Yaml = await _yamlEditor.GetValue() });
                 formattingExceptions = response.ParseResult.FormattingExceptions;
             }
             catch (ApiException ex)
@@ -142,11 +111,17 @@ Details:
                 {
                     throw ex;
                 }
-                ResetErrors();
+                await _yamlEditor.ResetDeltaDecorations();
                 return;
             }
 
-            ResetErrors();
+            await SetDeltaDecorationsFromExceptions(formattingExceptions);
+        }
+
+        private async Task SetDeltaDecorationsFromExceptions(IEnumerable<FormattingException> formattingExceptions)
+        {
+            await _yamlEditor.ResetDeltaDecorations();
+
             var deltaDecorations = new List<ModelDeltaDecoration>();
             foreach (var exception in formattingExceptions)
             {
@@ -162,11 +137,10 @@ Details:
                 deltaDecorations.Add(await BuildDeltaDecoration(range, message));
             }
 
-            MonacoController.SetDeltaDecorations(deltaDecorations.ToArray());
+            await _yamlEditor.SetDeltaDecoration(deltaDecorations);
         }
 
-
-        private async Task<ModelDeltaDecoration> BuildDeltaDecoration(BlazorMonaco.Bridge.Range range, string message )
+        private async Task<ModelDeltaDecoration> BuildDeltaDecoration(BlazorMonaco.Bridge.Range range, string message)
         {
             var isWholeLine = false;
 
@@ -176,13 +150,14 @@ Details:
             if (range.EndColumn == 0)
             {
                 range.EndColumn = range.StartColumn;
-                var content = await _monacoEditor.GetValue();
+                var content = await _yamlEditor.GetValue();
                 var contentLines = content.Split("\n");
                 range.EndColumn = (contentLines.ElementAt(Math.Min(contentLines.Length - 1, range.EndLineNumber - 1))?.Trim().Length ?? 0) + 1;
                 isWholeLine = true;
             }
 
-            var options = new ModelDecorationOptions {
+            var options = new ModelDecorationOptions
+            {
                 IsWholeLine = isWholeLine,
                 InlineClassName = "editorError",
                 InlineClassNameAffectsLetterSpacing = false,
@@ -193,11 +168,6 @@ Details:
             };
 
             return new ModelDeltaDecoration { Range = range, Options = options };
-        }
-
-        private void ResetErrors()
-        {
-            MonacoController.ResetDeltaDecorations();
         }
     }
 }

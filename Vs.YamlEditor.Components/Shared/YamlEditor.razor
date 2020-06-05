@@ -1,0 +1,2 @@
+﻿@page "/YamlEditor"
+<MonacoEditor @ref="_monacoEditor" Id="monacoEditor" ConstructionOptions="@EditorConstructionOptions" OnKeyUp="@OnKeyUp" CssClass="@CssClass" OnDidPaste="@ResetDeltaDecorations" />
