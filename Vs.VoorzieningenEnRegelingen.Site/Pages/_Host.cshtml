@@ -38,6 +38,13 @@
     <link href="~/css/split.css" rel="stylesheet" />
     <!-- Tree -->
     <link href="~/css/tree.css" rel="stylesheet" />
+    <!-- MatBlazor -->
+    <script src="_content/MatBlazor/dist/matBlazor.js"></script>
+    <link href="_content/MatBlazor/dist/matBlazor.css" rel="stylesheet" />
+    <!--BlazorMonaco-->
+    <link href="_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs/editor/editor.main.css" rel="stylesheet" />
+        <!--Custom part-->
+        <link href="_content/Vs.YamlEditor.Components/css/editor.css" rel="stylesheet" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed text-sm">
     <!-- Site wrapper -->
@@ -57,7 +64,6 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-
 
     <script src="_framework/blazor.server.js"></script>
     <script src="~/js/ace/ace.js"></script>
@@ -96,5 +102,12 @@
     <script src="~/js/toastr.interop.js"></script>
     <!-- Tree interop -->
     <script src="~/js/tree.interop.js"></script>
+
+    <!--BlazorMonaco-->
+        <!--BlazorMonaco Yaml-->
+        <script src="_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs/loader.js"></script>
+        <script>require.config({ paths: { 'vs': '_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs' } });</script>
+        <script src="_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs/editor/editor.main.js"></script>
+    <script src="_content/BlazorMonaco/jsInterop.js"></script>
 </body>
 </html>

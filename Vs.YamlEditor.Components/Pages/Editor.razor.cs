@@ -56,10 +56,5 @@ Details:
 
             await ValidationController.YamlEditor.SetValue(Value);
         }
-
-        public void StartSubmitCountdown()
-        {
-            ValidationController.StartSubmitCountdown();
-        }
     }
 }
