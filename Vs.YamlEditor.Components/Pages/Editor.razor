@@ -12,21 +12,21 @@
         </p>
     </div>
     <div class="content">
-        <MonacoEditor @ref="_monacoEditor" Id="monacoEditor" ConstructionOptions="EditorConstructionOptions" OnKeyUp="StartSubmitCountdown" CssClass="editor" OnDidPaste="ResetErrors" />
+        <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="ValidationController.StartSubmitCountdown" CssClass="editor" />
     </div>
     <div class="submit">
         <p>Selecteer het type Yaml</p>
         <p>
-            <MatRadioGroup @bind-Value="@TypeOfContent" TValue="string">
+            <MatRadioGroup @bind-Value="@(ValidationController.TypeOfContent)" TValue="string">
                 @{
-                    foreach (var type in _types.Keys)
+                    foreach (var type in ValidationController.Types.Keys)
                     {
-                        <MatRadioButton Value="@(type)" Disabled="@(!GetEnabledForType(type))" TValue="string"><span class="@(GetStyleForType(type))">@type</span></MatRadioButton>
+                        <MatRadioButton Value="@(type)" Disabled="@(!ValidationController.GetEnabledForType(type))" TValue="string"><span class="@(GetStyleForType(type))">@type</span></MatRadioButton>
                     }
                 }
             </MatRadioGroup>
             <div class="buttonwrapper">
-                <MatButton @onclick="SubmitPage" Raised="true">Check inhoud</MatButton>
+                <MatButton @onclick="ValidationController.SubmitPage" Raised="true">Check inhoud</MatButton>
             </div>
         </p>
     </div>

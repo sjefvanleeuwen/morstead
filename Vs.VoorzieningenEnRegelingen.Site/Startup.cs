@@ -113,6 +113,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site
             //https://github.com/rebus-org/Rebus.ServiceProvider
             services.AddSingleton(typeof(Redbus.Interfaces.IEventBus), typeof(Redbus.EventBus));
             services.AddWorkflow();
+
+            YamlEditor.Components.Initializer.Initialize(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

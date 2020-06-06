@@ -1,5 +1,6 @@
 ﻿using BlazorMonaco;
 using BlazorMonaco.Bridge;
+using System.Threading.Tasks;
 
 namespace Vs.YamlEditor.Components.Controllers.Interfaces
 {
@@ -8,8 +9,8 @@ namespace Vs.YamlEditor.Components.Controllers.Interfaces
         string Language { get; set; }
         MonacoEditor MonacoEditor { get; set; }
 
-        void ResetDeltaDecorations();
-        void SetDeltaDecorations(Range range, ModelDecorationOptions options);
-        void SetDeltaDecorations(ModelDeltaDecoration[] deltaDecorations);
+        Task ResetDeltaDecorations();
+        Task SetDeltaDecorations(Range range, ModelDecorationOptions options);
+        Task SetDeltaDecorations(ModelDeltaDecoration[] deltaDecorations);
     }
 }
