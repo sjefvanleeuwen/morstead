@@ -32,5 +32,10 @@ namespace Vs.Rules.Grains.Content
             Content.WriteStateAsync();
             return Task.CompletedTask;
         }
+
+        public async Task<string> GetContentId()
+        {
+            return Content.State.ContentId;
+        }
     }
 }

@@ -6,6 +6,7 @@ namespace Vs.Rules.Grains.User
 {
     public interface IUserContent : IGrainWithStringKey
     {
+        Task<string> GetContentId();
         Task<IUserAccountPersistentGrain> GetOwner();
         Task SetOwner(IUserAccountPersistentGrain account);
         Task ContentSaved(SubscriptionCallback callback);
