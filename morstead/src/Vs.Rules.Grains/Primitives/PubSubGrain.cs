@@ -51,7 +51,6 @@ namespace Vs.Rules.Grains.Primitives
                 var subscriber = GrainFactory.GetGrain(item.Value.Interface, item.Key);
                 MethodInfo theMethod = item.Value.Interface.GetMethod(item.Value.GrainCallbackMethod);
                 theMethod.Invoke(subscriber, new[] { callback });
-                await ((IPublish)subscriber).Notify(topic);
             }
         }
 
