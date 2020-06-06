@@ -28,9 +28,11 @@ namespace Vs.Orleans.SiloHost
                         .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
                         // note! volatile storage for morstead development purposes
                         .UseInMemoryReminderService()
+                        .AddMemoryGrainStorage(name: "account-store")
+                        .AddMemoryGrainStorage(name: "pub-sub-store")
                         .AddMemoryGrainStorage(name: "ArchiveStorage")
                         .AddMemoryGrainStorage(name: "session-store")
-                        .AddMemoryGrainStorage(name: "publication-store");
+                        .AddMemoryGrainStorage(name: "content-store");
                     //.AddMemoryGrainStorage(name: "profileStore");
                     /*
                     .AddAzureBlobGrainStorage(
