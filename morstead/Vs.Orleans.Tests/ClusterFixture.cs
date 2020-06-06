@@ -1,9 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Orleans.Hosting;
+﻿using Orleans.Hosting;
 using Orleans.TestingHost;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Vs.Orleans.Tests
 {
@@ -33,9 +30,12 @@ namespace Vs.Orleans.Tests
             {
                 hostBuilder
                     .UseInMemoryReminderService()
-                    .AddMemoryGrainStorage(name: "session-store")
-                    .AddMemoryGrainStorage(name: "publication-store");
-                     
+                        .UseInMemoryReminderService()
+                        .AddMemoryGrainStorage(name: "account-store")
+                        .AddMemoryGrainStorage(name: "pub-sub-store")
+                        .AddMemoryGrainStorage(name: "ArchiveStorage")
+                        .AddMemoryGrainStorage(name: "session-store")
+                        .AddMemoryGrainStorage(name: "content-store");
                 //.AddFaultInjectionMemoryStorage("SlowMemoryStore", options => options.NumStorageGrains = 10, faultyOptions => faultyOptions.Latency = TimeSpan.FromMilliseconds(15));
             }
         }
