@@ -22,7 +22,7 @@ namespace Vs.Orleans.Tests.Primitives
         }
 
         [Fact]
-        public async Task ShouldInitializePubSub()
+        public async Task PubSubShouldSetARelationshipBetweenContentAndUser()
         {
             var contentDid = new Did("mstd:content").ToString();
             //var pubSubDid = new Did("mstd:pubsub").ToString();
@@ -54,6 +54,7 @@ namespace Vs.Orleans.Tests.Primitives
                 });
             // Create Some Content
             await content.Save(new ContentType("text/html"), Encoding.UTF8,"Hello World!");
+            Assert.Equal(contentDid, userContent.GetContentId().Result);
         }
     }
 }
