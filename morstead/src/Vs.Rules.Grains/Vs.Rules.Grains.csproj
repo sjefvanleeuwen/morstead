@@ -4,6 +4,7 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="EasyCompressor.LZ4" Version="1.2.1" />
     <PackageReference Include="FastMember" Version="1.5.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.3" />
     <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.1.6" />
