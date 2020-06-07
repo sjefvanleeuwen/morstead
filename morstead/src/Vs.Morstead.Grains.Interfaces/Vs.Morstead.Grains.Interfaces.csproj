@@ -8,6 +8,7 @@
     <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.2.0" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Vs.Did" Version="1.0.0-alpha" />
     <PackageReference Include="Vs.Rules.Core" Version="1.0.2-alpha" />
   </ItemGroup>
 </Project>
