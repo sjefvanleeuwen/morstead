@@ -15,7 +15,8 @@ namespace Vs.Morstead.Tests
                     .AddMemoryGrainStorage(name: "pub-sub-store")
                     .AddMemoryGrainStorage(name: "ArchiveStorage")
                     .AddMemoryGrainStorage(name: "session-store")
-                    .AddMemoryGrainStorage(name: "content-store");
+                    .AddMemoryGrainStorage(name: "content-store")
+                    .AddMemoryGrainStorage(name: "dir-store");
             //.AddFaultInjectionMemoryStorage("SlowMemoryStore", options => options.NumStorageGrains = 10, faultyOptions => faultyOptions.Latency = TimeSpan.FromMilliseconds(15));
         }
     }
