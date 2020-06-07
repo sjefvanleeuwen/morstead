@@ -32,7 +32,8 @@ namespace Vs.Morstead.SiloHost
                         .AddMemoryGrainStorage(name: "pub-sub-store")
                         .AddMemoryGrainStorage(name: "ArchiveStorage")
                         .AddMemoryGrainStorage(name: "session-store")
-                        .AddMemoryGrainStorage(name: "content-store");
+                        .AddMemoryGrainStorage(name: "content-store")
+                        .AddMemoryGrainStorage(name: "dir-store");
                     //.AddMemoryGrainStorage(name: "profileStore");
                     /*
                     .AddAzureBlobGrainStorage(
