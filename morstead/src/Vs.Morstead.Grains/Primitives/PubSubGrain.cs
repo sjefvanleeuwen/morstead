@@ -38,6 +38,8 @@ namespace Vs.Morstead.Grains.Primitives
 
         public async Task Notify(string topic)
         {
+            if (_pubsub.State.Subscriptions is null)
+                return;
             if (_pubsub.State.Subscriptions.Count == 0)
                 return;
             var callback = new SubscriptionCallback()
