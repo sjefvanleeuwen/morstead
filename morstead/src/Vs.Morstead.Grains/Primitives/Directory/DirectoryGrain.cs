@@ -1,7 +1,6 @@
 ﻿using Orleans;
 using Orleans.Runtime;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Vs.Morstead.Grains.Interfaces.Primitives.Directory;
 
@@ -11,7 +10,7 @@ namespace Vs.Morstead.Grains.Primitives.Directory
     {
         private IPersistentState<DirectoryState> _root;
 
-        public DirectoryGrain([PersistentState("pub-sub", "pub-sub-store")]
+        public DirectoryGrain([PersistentState("directory", "dir-store")]
             IPersistentState<DirectoryState> root)
         {
             _root = root;
