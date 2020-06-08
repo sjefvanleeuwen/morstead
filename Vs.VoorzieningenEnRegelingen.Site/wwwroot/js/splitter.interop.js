@@ -1,9 +1,11 @@
-﻿function split() {
+﻿function split(useYamlEditor = false) {
   $(window).resize(function () {
     var window_height = $(window).height(),
       header_height = $(".main-header").height();
     $("#splitcontainer").css("height", window_height - header_height - 17);
-    blazorMonacoYamlInstance.invokeMethodAsync('Layout');
+    if (useYamlEditor) {
+      blazorMonacoYamlInstance.invokeMethodAsync('Layout');
+    }
   });
   $(window).resize();
   var splitobj = Split(["#left-half", "#right-half"], {
