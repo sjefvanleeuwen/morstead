@@ -3,7 +3,7 @@
     var window_height = $(window).height(),
       header_height = $(".main-header").height();
     $("#splitcontainer").css("height", window_height - header_height - 17);
-    DotNet.invokeMethodAsync('Vs.VoorzieningenEnRegelingen.Site', 'Layout');
+    blazorMonacoYamlInstance.invokeMethodAsync('Layout');
   });
   $(window).resize();
   var splitobj = Split(["#left-half", "#right-half"], {

@@ -8,8 +8,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
     public partial class FormContentEditor
     {
-        private static ValidationController _validationController;
-        private static ValidationController ValidationController
+        private ValidationController _validationController;
+        private ValidationController ValidationController
         {
             get
             {
@@ -31,11 +31,12 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             if (firstRender)
             {
+                await JSRuntime.InvokeAsync<object>("initBlazorMonacoYamlCallbacks", new object[] { DotNetObjectReference.Create(this) }).ConfigureAwait(false);
                 await JSRuntime.InvokeAsync<object>("split").ConfigureAwait(false);
             }
         }
 
-        private static string GetStyleForType(string type)
+        private string GetStyleForType(string type)
         {
             if (ValidationController.GetEnabledForType(type))
             {
@@ -45,8 +46,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             return "disabled";
         }
 
-        [JSInvokable("Layout")]
-        public static Task Layout()
+        [JSInvokable]
+        public Task Layout()
         {
             return ValidationController.YamlEditor.Layout();
         }
