@@ -8,8 +8,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
     public partial class FormContentEditor
     {
-        private ValidationController _validationController;
-        private ValidationController ValidationController
+        private static ValidationController _validationController;
+        private static ValidationController ValidationController
         {
             get
             {
@@ -31,12 +31,11 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             if (firstRender)
             {
-                await JSRuntime.InvokeAsync<object>("split", new object[] { });
-                await JSRuntime.InvokeAsync<object>("initializeTree", new object[] { });
+                await JSRuntime.InvokeAsync<object>("split").ConfigureAwait(false);
             }
         }
 
-        private string GetStyleForType(string type)
+        private static string GetStyleForType(string type)
         {
             if (ValidationController.GetEnabledForType(type))
             {
@@ -44,6 +43,12 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
 
             return "disabled";
+        }
+
+        [JSInvokable("Layout")]
+        public static Task Layout()
+        {
+            return ValidationController.YamlEditor.Layout();
         }
     }
 }
