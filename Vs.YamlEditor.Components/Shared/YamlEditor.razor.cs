@@ -21,6 +21,7 @@ namespace Vs.YamlEditor.Components.Shared
         [Inject]
         public IMonacoController MonacoController { get; set; }
 
+
         private MonacoEditor _monacoEditor { get; set; }
 
         private const string _language = "yaml";
@@ -63,6 +64,11 @@ namespace Vs.YamlEditor.Components.Shared
         public async Task<string> GetValue()
         {
             return await _monacoEditor.GetValue();
+        }
+
+        public async Task Layout()
+        {
+            await _monacoEditor.Layout();
         }
     }
 }
