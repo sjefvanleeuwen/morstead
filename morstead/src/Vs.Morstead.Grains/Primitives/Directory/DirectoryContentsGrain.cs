@@ -47,9 +47,14 @@ namespace Vs.Morstead.Grains.Primitives.Directory
                 item.Created = DateTime.Now;
             }
 
-            if (item.Created is null)
+            if (item.Modified is null)
             {
                 item.Modified = item.Created;
+            }
+
+            if (item.Modified < item.Created)
+            {
+                throw new Exception("Content Modified date can not be set earlier than its Created date.");
             }
 
             _contents.State.Items.Add(item.GrainId, item);
