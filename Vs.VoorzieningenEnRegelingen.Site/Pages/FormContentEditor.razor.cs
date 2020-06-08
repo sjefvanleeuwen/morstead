@@ -31,8 +31,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             if (firstRender)
             {
-               //await JSRuntime.InvokeAsync<object>("initBlazorMonacoYamlCallbacks", new object[] { DotNetObjectReference.Create(this) }).ConfigureAwait(false);
-                await JSRuntime.InvokeAsync<object>("split",new object[] { DotNetObjectReference.Create(this), "layoutYamlEditor" }).ConfigureAwait(false);
+                await JSRuntime.InvokeAsync<object>("split",new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
             }
         }
 
@@ -46,7 +45,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             return "disabled";
         }
 
-        [JSInvokable("layoutYamlEditor")]
+        [JSInvokable("InvokeLayout")]
         public Task Layout()
         {
             return ValidationController.YamlEditor.Layout();
