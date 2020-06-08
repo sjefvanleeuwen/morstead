@@ -1,6 +1,7 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
-namespace Vs.Morstead.Grains.Interfaces.Security.User
+namespace Vs.Morstead.Grains.Interfaces.User
 {
     public class UserAccountState
     {
@@ -8,5 +9,7 @@ namespace Vs.Morstead.Grains.Interfaces.Security.User
         public string Name { get; set; }
         public string NickName { get; set; }
         public string Email { get; set; }
+        // External profile picture URL, such as: https://www.gravatar.com/avatar/HASH
+        public Uri Picture { get; set; }
     }
 }
