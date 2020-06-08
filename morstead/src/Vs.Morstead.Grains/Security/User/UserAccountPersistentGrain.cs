@@ -2,9 +2,9 @@
 using Orleans.Runtime;
 using System.Globalization;
 using System.Threading.Tasks;
-using Vs.Morstead.Grains.Interfaces.User;
+using Vs.Morstead.Grains.Interfaces.Security.User;
 
-namespace Vs.Morstead.Grains.User
+namespace Vs.Morstead.Grains.Security.User
 {
     public class UserAccountPersistentGrain : Grain, IUserAccountPersistentGrain
     {

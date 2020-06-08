@@ -2,7 +2,7 @@
 using Orleans.Runtime;
 using System.Threading.Tasks;
 using Vs.Morstead.Grains.Interfaces.Primitives.PubSub;
-using Vs.Morstead.Grains.Interfaces.User;
+using Vs.Morstead.Grains.Interfaces.Security.User;
 using Vs.Rules.Grains.Interfaces.Content;
 
 namespace Vs.Morstead.Grains.Content

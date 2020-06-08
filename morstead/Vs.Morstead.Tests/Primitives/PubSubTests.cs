@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using VirtualSociety.VirtualSocietyDid;
 using Vs.Morstead.Grains.Interfaces.Content;
 using Vs.Morstead.Grains.Interfaces.Primitives.PubSub;
-using Vs.Morstead.Grains.Interfaces.User;
+using Vs.Morstead.Grains.Interfaces.Security.User;
 using Xunit;
 
 namespace Vs.Morstead.Tests.Primitives

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Vs.Morstead.Grains.Interfaces.User
+namespace Vs.Morstead.Grains.Interfaces.Security.User
 {
     public class UserAccountState
     {

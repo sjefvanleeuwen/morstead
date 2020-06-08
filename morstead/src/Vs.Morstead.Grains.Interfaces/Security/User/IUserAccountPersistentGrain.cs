@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Threading.Tasks;
 
-namespace Vs.Morstead.Grains.Interfaces.User
+namespace Vs.Morstead.Grains.Interfaces.Security.User
 {
     public interface IUserAccountPersistentGrain : IGrainWithStringKey
     {
