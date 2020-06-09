@@ -1,4 +1,4 @@
-﻿<center>
+﻿<div align="center">
 
 ![Last commit](https://img.shields.io/github/last-commit/sjefvanleeuwen/virtual-society-urukagina)
 [![Build Status](https://leeuwens.visualstudio.com/Urukagina/_apis/build/status/sjefvanleeuwen.virtual-society-urukagina?branchName=master)](https://leeuwens.visualstudio.com/Urukagina/_build/latest?definitionId=1&branchName=master)
@@ -8,19 +8,19 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/sjefvanleeuwen)
 [![OpenAPI](https://img.shields.io/badge/openapi-oas%203.0-green)](https://regelingenservice.azurewebsites.net/swagger)
 <br/><br/>
-</center>
+</div>
 
-<center>
+<div align="center" style="align:center">
 <img src="./src/images/virtual-society-centered.svg" width=300>
-</center>
+</div>
 <br/><br/>
-<center>
+<div align="center">
 <img src="./src/morstead/doc/images/morstead.svg" width=300>
-</center>
+</div>
 <br/><br/>
-<center>
+<div align="center">
 
 Documentatie onder revisie, zie hier de oude [documentatie](./readme_old.md)
-</center>
+</div>
 <!-- TOC depthfrom:1 orderedlist:true -->
 <!-- /TOC -->
