@@ -6,7 +6,7 @@ using Vs.YamlEditor.Components.Controllers;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
-    public partial class FormContentEditor
+    public partial class YamlContentEditor
     {
         private ValidationController _validationController;
         private ValidationController ValidationController
