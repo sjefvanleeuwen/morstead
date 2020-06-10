@@ -48,6 +48,7 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\data\NewFolder\" />
     <Folder Include="wwwroot\plugins\split\" />
   </ItemGroup>
