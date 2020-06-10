@@ -60,18 +60,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         public async Task Save()
         {
-            var content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
-
-            var yamlFileInfo = new YamlFileInfo
-            {
-                Name = Name.Trim(),
-                Content = content
-            };
-            if (YamlFileInfos.Any(y => y.Name == Name))
-            {
-                //name already exists
+            var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name);
+            if (yamlFileInfo == null) {
+                yamlFileInfo = new YamlFileInfo();
+                YamlFileInfos.Add(yamlFileInfo);
             }
-            YamlFileInfos.Add(yamlFileInfo);
+            yamlFileInfo.Name = Name.Trim();
+            yamlFileInfo.Content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
         }
     }
 }
