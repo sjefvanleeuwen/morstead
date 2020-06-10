@@ -2,10 +2,10 @@
 @attribute [Authorize]
 <!-- Main content -->
 <div id="splitcontainer" class="clear-fix row no-gutters" style="background-color: black;">
-    <div id="left-half" class="left-half_tree">
+    <div id="left-half" class="left-half_contenteditor">
         <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="@(ValidationController.StartSubmitCountdown)" CssClass="editor" />
     </div>
-    <div id="right-half" class="right-half_tree">
+    <div id="right-half" class="right-half_contenteditor">
         <div class="submit">
             <p>Selecteer het type Yaml</p>
             <p>

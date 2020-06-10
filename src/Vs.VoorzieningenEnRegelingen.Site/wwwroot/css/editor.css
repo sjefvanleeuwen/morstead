@@ -119,7 +119,7 @@ right connector from last child*/
         }
 
 /* Pattern styles */
-.left-half_tree {
+.left-half_contenteditor {
     background-color: #f1f1f1;
     float: left;
     width: 50%;
@@ -128,8 +128,8 @@ right connector from last child*/
     overflow: auto;
 }
 
-.right-half_tree {
-    background-color: #b6701e;
+.right-half_contenteditor {
+    background-color: #f1f1f1;
     float: left;
     width: 50%;
     height: 100%;
