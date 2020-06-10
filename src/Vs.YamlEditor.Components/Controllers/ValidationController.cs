@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Vs.Core.Extensions;
+using Vs.Core.Layers.Enums;
 using Vs.YamlEditor.Components.Controllers.ApiCalls;
 
 namespace Vs.YamlEditor.Components.Controllers
@@ -17,12 +19,29 @@ namespace Vs.YamlEditor.Components.Controllers
 
         private readonly TimeSpan _submitWait = TimeSpan.FromMilliseconds(5000);
 
-        public readonly IDictionary<string, bool> Types = new Dictionary<string, bool> {
-            { "Rule", true },
-            { "Content", false },
-            { "Routing", false },
-            { "Layer", false }
-        };
+        private IDictionary<string, bool> _types;
+
+        public IDictionary<string, bool> Types => GetTypeDefinitions();
+        
+        private IDictionary<string, bool> GetTypeDefinitions() 
+        {
+            if (_types != null)
+            {
+                return _types;
+            }
+
+            _types = new Dictionary<string, bool>();
+
+            var availableValidation = new List<YamlType> { YamlType.Rules };
+
+            foreach (var yamlType in (YamlType[])Enum.GetValues(typeof(YamlType)))
+            {
+                _types.Add(yamlType.GetDescription(), availableValidation.Contains(yamlType));
+            }
+            return _types;
+        }
+
+        public IDictionary<string, bool> EnabledTypes => GetTypeDefinitions().Where(t => t.Value).ToDictionary(t => t.Key, t => t.Value);
 
         public bool GetEnabledForType(string type)
         {

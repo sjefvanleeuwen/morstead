@@ -1,16 +1,22 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
+using Vs.VoorzieningenEnRegelingen.Site.Shared.Components;
 using Vs.YamlEditor.Components.Controllers;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
     public partial class YamlContentEditor
     {
+        [Parameter]
+        public INode BaseNode { get; set; }
+
+        [Inject]
+        protected IJSRuntime JSRuntime { get; set; }
+
         private ValidationController _validationController;
         private ValidationController ValidationController
         {
@@ -24,11 +30,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
-        [Parameter]
-        public INode BaseNode { get; set; }
-
-        [Inject]
-        protected IJSRuntime JSRuntime { get; set; }
+        private IEnumerable<string> EnabledTypes => ValidationController.EnabledTypes?.Keys ?? new List<string>();
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -38,21 +40,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
-        private string GetStyleForType(string type)
-        {
-            if (ValidationController.GetEnabledForType(type))
-            {
-                return string.Empty;
-            }
-
-            return "disabled";
-        }
-
         [JSInvokable("InvokeLayout")]
         public Task Layout()
         {
             return ValidationController.YamlEditor.Layout();
         }
+
+        private YamlTypeSelector YamlTypeSelector { get; set; }
 
         private string Name { get; set; }
 
