@@ -3,6 +3,7 @@ using Microsoft.JSInterop;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Vs.Core.Layers.Enums;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
 using Vs.VoorzieningenEnRegelingen.Site.Shared.Components;
 using Vs.YamlEditor.Components.Controllers;
@@ -30,7 +31,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
-        private IEnumerable<string> EnabledTypes => ValidationController.EnabledTypes?.Keys ?? new List<string>();
+        private IEnumerable<YamlType> DisabledTypes => ValidationController.DisabledTypes?.Keys ?? new List<YamlType>();
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

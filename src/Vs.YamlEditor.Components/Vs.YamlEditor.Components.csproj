@@ -19,4 +19,9 @@
     <ProjectReference Include="..\core\Vs.Core.Layers\Vs.Core.Layers.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Objects\" />
+  </ItemGroup>
+
 </Project>

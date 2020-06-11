@@ -4,7 +4,7 @@
             foreach (var type in GetTypeDefinitions())
             {
                 <div class="yamltypeWrapper">
-                    <MatRadioButton Value="@(type.Key)" Disabled="@(!type.Value)" TValue="string"><span class="@(GetStyleForType(type.Value))">@type.Key</span></MatRadioButton>
+                    <MatRadioButton Value="@GetDescription(type.Key)" Disabled="@(!type.Value)" TValue="string"><span class="@(GetStyleForType(type.Value))">@type.Key</span></MatRadioButton>
                 </div>
             }
         }

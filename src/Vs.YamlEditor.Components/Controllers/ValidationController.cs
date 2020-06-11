@@ -19,31 +19,31 @@ namespace Vs.YamlEditor.Components.Controllers
 
         private readonly TimeSpan _submitWait = TimeSpan.FromMilliseconds(5000);
 
-        private IDictionary<string, bool> _types;
+        private IDictionary<YamlType, bool> _typesDefinitions;
 
-        public IDictionary<string, bool> Types => GetTypeDefinitions();
+        public IDictionary<YamlType, bool> Types => GetTypeDefinitions();
         
-        private IDictionary<string, bool> GetTypeDefinitions() 
+        private IDictionary<YamlType, bool> GetTypeDefinitions() 
         {
-            if (_types != null)
+            if (_typesDefinitions != null)
             {
-                return _types;
+                return _typesDefinitions;
             }
 
-            _types = new Dictionary<string, bool>();
+            _typesDefinitions = new Dictionary<YamlType, bool>();
 
             var availableValidation = new List<YamlType> { YamlType.Rules };
 
             foreach (var yamlType in (YamlType[])Enum.GetValues(typeof(YamlType)))
             {
-                _types.Add(yamlType.GetDescription(), availableValidation.Contains(yamlType));
+                _typesDefinitions.Add(yamlType, availableValidation.Contains(yamlType));
             }
-            return _types;
+            return _typesDefinitions;
         }
 
-        public IDictionary<string, bool> EnabledTypes => GetTypeDefinitions().Where(t => t.Value).ToDictionary(t => t.Key, t => t.Value);
+        public IDictionary<YamlType, bool> DisabledTypes => GetTypeDefinitions().Where(t => !t.Value).ToDictionary(t => t.Key, t => t.Value);
 
-        public bool GetEnabledForType(string type)
+        public bool GetEnabledForType(YamlType type)
         {
             return Types.ContainsKey(type) && Types[type];
         }

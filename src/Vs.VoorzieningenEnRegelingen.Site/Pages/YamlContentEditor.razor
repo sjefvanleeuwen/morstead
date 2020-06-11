@@ -4,12 +4,12 @@
     <div id="left-half" class="left-half_contenteditor wrapperOccupy">
         <MatTextField @bind-Value="Name" Label="Naam" Raised="true" /><MatButton @onclick="Save" Raised="true">Opslaan</MatButton>
         <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="@(ValidationController.StartSubmitCountdown)" CssClass="editor" />
-
+        <YamlTypeSelector @ref="YamlTypeSelector" />
     </div>
     <div id="right-half" class="right-half_contenteditor wrapper">
         <div class="submit">
             <MatH5>Selecteer het type Yaml</MatH5>
-            <YamlTypeSelector @ref="YamlTypeSelector" EnabledTypes="EnabledTypes" />
+            <YamlTypeSelector @ref="YamlTypeSelector" DisabledTypes="DisabledTypes" />
             <MatButton @onclick="ValidationController.SubmitPage" Raised="true">Check inhoud</MatButton>
             <MatH5>Opgeslagen Yamls</MatH5>
             @foreach(var yamlFileInfo in YamlFileInfos)

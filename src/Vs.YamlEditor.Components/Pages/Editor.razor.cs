@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
+using Vs.Core.Extensions;
+using Vs.Core.Layers.Enums;
 using Vs.YamlEditor.Components.Controllers;
 
 namespace Vs.YamlEditor.Components.Pages
@@ -21,7 +23,7 @@ namespace Vs.YamlEditor.Components.Pages
             }
         }
 
-        private string GetStyleForType(string type)
+        private string GetStyleForType(YamlType type)
         {
             if (ValidationController.GetEnabledForType(type))
             {
@@ -29,6 +31,11 @@ namespace Vs.YamlEditor.Components.Pages
             }
 
             return "disabled";
+        }
+
+        private string GetDescription(YamlType yamlType)
+        {
+            return yamlType.GetDescription();
         }
 
         private async void LoadUrl()
