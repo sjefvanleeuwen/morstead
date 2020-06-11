@@ -6,12 +6,12 @@
             {
                 if (HorizontalDirection)
                 {
-                    <MatRadioButton Value="@GetDescription(type.Key)" Disabled="@(!type.Value)" TValue="string"><span class="@(GetStyleForType(type.Value))">@type.Key</span></MatRadioButton>
+                    <MatRadioButton Value="@GetDescription(type.Key)" Disabled="@(!type.Value)" TValue="string"><span class="@GetStyleForType(type.Value)">@GetDescription(type.Key)</span></MatRadioButton>
                 }
                 else
                 {
                     <div class="yamltypeWrapper">
-                        <MatRadioButton Value="@GetDescription(type.Key)" Disabled="@(!type.Value)" TValue="string"><span class="@(GetStyleForType(type.Value))">@type.Key</span></MatRadioButton>
+                        <MatRadioButton Value="@GetDescription(type.Key)" Disabled="@(!type.Value)" TValue="string"><span class="@GetStyleForType(type.Value)">@GetDescription(type.Key)</span></MatRadioButton>
                     </div>
                 }
             }
