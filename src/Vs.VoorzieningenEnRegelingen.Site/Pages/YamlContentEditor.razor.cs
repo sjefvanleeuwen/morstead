@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -73,6 +74,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 yamlFileInfo = new YamlFileInfo();
                 YamlFileInfos.Add(yamlFileInfo);
             }
+            yamlFileInfo.Id = Guid.NewGuid();
             yamlFileInfo.Name = Name.Trim();
             yamlFileInfo.Content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
             yamlFileInfo.Type = YamlSaveTypeSelector.SelectedValue;
