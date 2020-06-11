@@ -56,7 +56,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         public async Task Save()
         {
             var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name);
-            if (yamlFileInfo == null) {
+            if (yamlFileInfo == null)
+            {
                 yamlFileInfo = new YamlFileInfo();
                 YamlFileInfos.Add(yamlFileInfo);
             }

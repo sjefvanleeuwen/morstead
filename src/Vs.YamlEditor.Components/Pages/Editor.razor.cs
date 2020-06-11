@@ -12,7 +12,8 @@ namespace Vs.YamlEditor.Components.Pages
         private string Url { get; set; } = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml";
         private string Value { get; set; }
         private ValidationController _validationController;
-        private ValidationController ValidationController {
+        private ValidationController ValidationController
+        {
             get
             {
                 if (_validationController == null)

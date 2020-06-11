@@ -28,7 +28,7 @@ namespace Vs.YamlEditor.Components.Controllers
             {
                 throw new NullReferenceException("MonacoEditor has not been set");
             }
-            
+
             DeltaDecorationIds = await MonacoEditor.DeltaDecorations(DeltaDecorationIds ?? new string[] { }, deltaDecorations);
         }
 

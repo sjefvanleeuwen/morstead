@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Vs.Core.Extensions;
 using Vs.Core.Layers.Enums;
 using Vs.YamlEditor.Components.Controllers.ApiCalls;
 
@@ -22,8 +21,8 @@ namespace Vs.YamlEditor.Components.Controllers
         private IDictionary<YamlType, bool> _typesDefinitions;
 
         public IDictionary<YamlType, bool> Types => GetTypeDefinitions();
-        
-        private IDictionary<YamlType, bool> GetTypeDefinitions() 
+
+        private IDictionary<YamlType, bool> GetTypeDefinitions()
         {
             if (_typesDefinitions != null)
             {
