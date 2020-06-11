@@ -17,7 +17,7 @@
     <div class="submit">
         <p>Selecteer het type Yaml</p>
         <p>
-            <MatRadioGroup @bind-Value="@(ValidationController.TypeOfContent)" TValue="string">
+            <MatRadioGroup @bind-Value="SelectedValue" TValue="string">
                 @{
                     foreach (var type in ValidationController.Types.Keys)
                     {

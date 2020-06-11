@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Vs.Core.Layers.Enums;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
-using Vs.VoorzieningenEnRegelingen.Site.Shared.Components;
 using Vs.YamlEditor.Components.Controllers;
+using Vs.YamlEditor.Components.Shared;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
@@ -19,6 +19,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         protected IJSRuntime JSRuntime { get; set; }
 
         private ValidationController _validationController;
+        private YamlTypeSelector yamlValidateTypeSelector;
+
         private ValidationController ValidationController
         {
             get
@@ -47,7 +49,17 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             return ValidationController.YamlEditor.Layout();
         }
 
-        private YamlTypeSelector YamlTypeSelector { get; set; }
+        private YamlTypeSelector YamlValidateTypeSelector
+        {
+            get => yamlValidateTypeSelector;
+            set
+            {
+                ValidationController.YamlTypeSelector = value;
+                yamlValidateTypeSelector = value;
+            }
+        }
+
+        private YamlTypeSelector YamlSaveTypeSelector { get; set; }
 
         private string Name { get; set; }
 
