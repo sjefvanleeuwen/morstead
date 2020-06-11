@@ -1,11 +1,19 @@
 ﻿<div class="radioGroupWrapper">
     <MatRadioGroup @bind-Value="@SelectedValue" TValue="string">
         @{
+
             foreach (var type in GetTypeDefinitions())
             {
-                <div class="yamltypeWrapper">
+                if (HorizontalDirection)
+                {
                     <MatRadioButton Value="@GetDescription(type.Key)" Disabled="@(!type.Value)" TValue="string"><span class="@(GetStyleForType(type.Value))">@type.Key</span></MatRadioButton>
-                </div>
+                }
+                else
+                {
+                    <div class="yamltypeWrapper">
+                        <MatRadioButton Value="@GetDescription(type.Key)" Disabled="@(!type.Value)" TValue="string"><span class="@(GetStyleForType(type.Value))">@type.Key</span></MatRadioButton>
+                    </div>
+                }
             }
         }
     </MatRadioGroup>

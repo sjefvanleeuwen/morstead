@@ -12,6 +12,9 @@ namespace Vs.YamlEditor.Components.Shared
         [Parameter]
         public IEnumerable<YamlType> DisabledTypes { get; set; } = new List<YamlType>();
 
+        [Parameter]
+        public bool HorizontalDirection { get; set; }
+
         public string SelectedValue { get; set; } = string.Empty;
 
         private IDictionary<YamlType, bool> _types;
