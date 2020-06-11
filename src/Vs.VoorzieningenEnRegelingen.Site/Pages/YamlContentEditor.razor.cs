@@ -75,6 +75,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
             yamlFileInfo.Name = Name.Trim();
             yamlFileInfo.Content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
+            yamlFileInfo.Type = YamlSaveTypeSelector.SelectedValue;
         }
     }
 }
