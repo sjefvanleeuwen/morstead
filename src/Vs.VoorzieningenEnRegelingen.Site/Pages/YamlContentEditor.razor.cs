@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ using Vs.Core.Layers.Enums;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
 using Vs.VoorzieningenEnRegelingen.Site.Shared.Components;
 using Vs.YamlEditor.Components.Controllers;
+using Vs.YamlEditor.Components.Shared;
+using YamlDotNet.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
@@ -19,6 +22,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         protected IJSRuntime JSRuntime { get; set; }
 
         private ValidationController _validationController;
+        private YamlTypeSelector _yamlValidateTypeSelector;
+
         private ValidationController ValidationController
         {
             get
@@ -47,7 +52,17 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             return ValidationController.YamlEditor.Layout();
         }
 
-        private YamlTypeSelector YamlTypeSelector { get; set; }
+        private YamlTypeSelector YamlValidateTypeSelector
+        {
+            get => _yamlValidateTypeSelector;
+            set
+            {
+                ValidationController.YamlTypeSelector = value;
+                _yamlValidateTypeSelector = value;
+            }
+        }
+
+        private YamlTypeSelector YamlSaveTypeSelector { get; set; }
 
         private string Name { get; set; }
 
@@ -55,14 +70,31 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         public async Task Save()
         {
-            var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name);
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                OpenNotification("Geen naam ingevuld");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(YamlSaveTypeSelector.SelectedValue))
+            {
+                OpenNotification("Geen type document geselecteerd");
+                return;
+            }
+            var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name && y.Type == YamlSaveTypeSelector.SelectedValue);
             if (yamlFileInfo == null)
             {
                 yamlFileInfo = new YamlFileInfo();
                 YamlFileInfos.Add(yamlFileInfo);
             }
+            yamlFileInfo.Id = Guid.NewGuid();
             yamlFileInfo.Name = Name.Trim();
             yamlFileInfo.Content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
+            yamlFileInfo.Type = YamlSaveTypeSelector.SelectedValue;
+        }
+
+        private void OpenNotification(string message)
+        {
+            JSRuntime.InvokeAsync<object>("notify", new object[] { message });
         }
     }
 }

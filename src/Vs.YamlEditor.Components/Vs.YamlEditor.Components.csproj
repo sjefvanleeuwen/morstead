@@ -5,6 +5,13 @@
     <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Objects\**" />
+    <Content Remove="Objects\**" />
+    <EmbeddedResource Remove="Objects\**" />
+    <None Remove="Objects\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="BlazorMonaco" Version="1.3.0" />
@@ -17,11 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\core\Vs.Core.Layers\Vs.Core.Layers.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Objects\" />
   </ItemGroup>
 
 </Project>

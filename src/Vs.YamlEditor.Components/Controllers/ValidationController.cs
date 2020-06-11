@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Vs.Core.Layers.Enums;
 using Vs.YamlEditor.Components.Controllers.ApiCalls;
+using Vs.YamlEditor.Components.Shared;
 
 namespace Vs.YamlEditor.Components.Controllers
 {
@@ -14,7 +15,7 @@ namespace Vs.YamlEditor.Components.Controllers
     {
         private CancellationTokenSource TokenSource { get; set; }
         public Shared.YamlEditor YamlEditor { get; set; }
-        public string TypeOfContent { get; set; }
+        public YamlTypeSelector YamlTypeSelector { get; set; } = new YamlTypeSelector();
 
         private readonly TimeSpan _submitWait = TimeSpan.FromMilliseconds(5000);
 
@@ -66,7 +67,8 @@ namespace Vs.YamlEditor.Components.Controllers
 
         public async void SubmitPage()
         {
-            if (string.IsNullOrWhiteSpace(TypeOfContent))
+            //TODO Select the validation based on yamltype
+            if (string.IsNullOrWhiteSpace(YamlTypeSelector.SelectedValue))
             {
                 return;
             }
@@ -76,8 +78,7 @@ namespace Vs.YamlEditor.Components.Controllers
                 BaseUrl = "https://localhost:44391/"
             };
 
-            //DebugRuleYamlFromContentResponse response = null;
-            IEnumerable<FormattingException> formattingExceptions = new List<FormattingException>();
+            IEnumerable<FormattingException> formattingExceptions;
             try
             {
                 var response = await client.DebugRuleYamlContentsAsync(new DebugRuleYamlFromContentRequest { Yaml = await YamlEditor.GetValue() });
@@ -98,6 +99,10 @@ namespace Vs.YamlEditor.Components.Controllers
 
         public async Task SetDeltaDecorationsFromExceptions(IEnumerable<FormattingException> formattingExceptions)
         {
+            if (formattingExceptions == null)
+            {
+                return;
+            }
             await YamlEditor.ResetDeltaDecorations();
 
             var deltaDecorations = new List<ModelDeltaDecoration>();

@@ -1,21 +1,31 @@
 ﻿@page "/YamlContentEditor"
 @attribute [Authorize]
 <div id="splitcontainer" class="clear-fix row no-gutters" style="background-color: black;">
-    <div id="left-half" class="left-half_contenteditor wrapperOccupy">
-        <MatTextField @bind-Value="Name" Label="Naam" Raised="true" /><MatButton @onclick="Save" Raised="true">Opslaan</MatButton>
-        <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="@(ValidationController.StartSubmitCountdown)" CssClass="editor" />
-        <YamlTypeSelector @ref="YamlTypeSelector" />
+    <div id="left-half" class="left-half_contenteditor splitter-half_wrapper">
+        <div class="left-half_header">
+            <div>
+                <MatTextField @bind-Value="Name" Label="Naam" Raised="true" /><MatButton @onclick="Save" Raised="true">Opslaan</MatButton>
+            </div>
+            <div>
+                <YamlTypeSelector @ref="YamlSaveTypeSelector" HorizontalDirection="true" />
+            </div>
+        </div>
+        <div class="left-half_bottom">
+            <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="@(ValidationController.StartSubmitCountdown)" CssClass="editor" />
+        </div>
     </div>
-    <div id="right-half" class="right-half_contenteditor wrapper">
+    <div id="right-half" class="right-half_contenteditor splitter-half_wrapper">
         <div class="submit">
             <MatH5>Selecteer het type Yaml</MatH5>
-            <YamlTypeSelector @ref="YamlTypeSelector" DisabledTypes="DisabledTypes" />
+            <YamlTypeSelector @ref="YamlValidateTypeSelector" DisabledTypes="DisabledTypes" />
             <MatButton @onclick="ValidationController.SubmitPage" Raised="true">Check inhoud</MatButton>
             <MatH5>Opgeslagen Yamls</MatH5>
-            @foreach(var yamlFileInfo in YamlFileInfos)
+            @foreach (var yamlFileInfo in YamlFileInfos)
             {
-                <div>@yamlFileInfo.Name</div>
+                <div>@yamlFileInfo.Name - @yamlFileInfo.Type</div>
             }
         </div>
     </div>
 </div>
+
+

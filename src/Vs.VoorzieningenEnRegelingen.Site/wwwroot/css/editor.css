@@ -2,10 +2,26 @@
     background-color: #f1f1f1;
     float: left;
     width: 50%;
-    height: 100%;
     display: block;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
+
+    .left-half_contenteditor .left-half_header {
+        height: auto;
+        display: flex;
+        flex-direction: row;
+    }
+
+        .left-half_contenteditor .left-half_header > div:nth-child(2) {
+            width: auto;
+            flex: 1;
+        }
+
+    .left-half_contenteditor .left-half_bottom {
+        flex: 1;
+    }
 
 .right-half_contenteditor {
     background-color: #f1f1f1;
@@ -18,7 +34,7 @@
     width: 100%;
 }
 
-.wrapper {
+.splitter-half_wrapper {
     padding: 15px;
 }
 

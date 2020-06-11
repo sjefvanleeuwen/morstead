@@ -5,14 +5,17 @@ using System.Linq;
 using Vs.Core.Extensions;
 using Vs.Core.Layers.Enums;
 
-namespace Vs.VoorzieningenEnRegelingen.Site.Shared.Components
+namespace Vs.YamlEditor.Components.Shared
 {
     public partial class YamlTypeSelector
     {
         [Parameter]
         public IEnumerable<YamlType> DisabledTypes { get; set; } = new List<YamlType>();
 
-        public string SelectedValue { get; set; }
+        [Parameter]
+        public bool HorizontalDirection { get; set; }
+
+        public string SelectedValue { get; set; } = string.Empty;
 
         private IDictionary<YamlType, bool> _types;
 
