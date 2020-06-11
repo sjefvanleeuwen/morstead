@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Vs.Core.Extensions;
 using Vs.Core.Layers.Enums;
+using Vs.YamlEditor.Components.Controllers.ApiCalls;
 
 namespace Vs.YamlEditor.Components.Shared
 {
@@ -14,6 +15,9 @@ namespace Vs.YamlEditor.Components.Shared
 
         [Parameter]
         public bool HorizontalDirection { get; set; }
+
+        [Parameter]
+        public string Name { get; set; }
 
         public string SelectedValue { get; set; } = string.Empty;
 
