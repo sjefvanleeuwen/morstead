@@ -18,6 +18,11 @@ namespace Vs.Morstead.Grains.Security.User
             _account = parameters;
         }
 
+        public Task<UserAccountState> GetUserAccountInfo()
+        {
+            return Task.FromResult(_account.State);
+        }
+
         public async Task RegisterUser(UserAccountState userAccount)
         {
             if (_account.State.Equals(null))

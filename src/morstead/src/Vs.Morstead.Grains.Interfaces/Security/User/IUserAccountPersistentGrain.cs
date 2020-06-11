@@ -9,5 +9,7 @@ namespace Vs.Morstead.Grains.Interfaces.Security.User
     {
         Task RegisterUser(UserAccountState userAccount);
         Task SetLocale(CultureInfo cultureInfo);
+        Task<UserAccountState> GetUserAccountInfo();
+
     }
 }
