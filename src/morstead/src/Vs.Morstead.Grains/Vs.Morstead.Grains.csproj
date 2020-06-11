@@ -17,4 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Vs.Morstead.Grains.Interfaces\Vs.Morstead.Grains.Interfaces.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bpm\Tasks\" />
+  </ItemGroup>
 </Project>

@@ -1,0 +1,60 @@
+﻿using Orleans;
+using Orleans.Runtime;
+using System;
+using System.Threading.Tasks;
+using Vs.Morstead.Grains.Interfaces.Bpm;
+
+namespace Vs.Morstead.Grains.Bpm
+{
+    public class BpmProcessGrain : Grain, IBpmProcessGrain
+    {
+        public BpmProcessGrain([PersistentState("bpm-process", "bpm-process-store")]
+         IPersistentState<BpmProcessState> _process)
+        {
+            Process = _process;
+        }
+
+        public IPersistentState<BpmProcessState> Process { get; }
+
+        public async Task PauseProcess()
+        {
+            if (Process.State.Status != BpmProcessExecutionTypes.Started)
+                throw new Exception($"Current bpm process has the status {Process.State.Status}. Only processes that are in state {BpmProcessExecutionTypes.Started} can be paused.");
+            Process.State.Status = BpmProcessExecutionTypes.Paused;
+            await Process.WriteStateAsync();
+        }
+
+        public async Task LoadProcess(string bpmn)
+        {
+            if (Process.State.Status != BpmProcessExecutionTypes.Uninitialized)
+                throw new Exception($"Current bpm process has the status {Process.State.Status}. Only processes that are in state {BpmProcessExecutionTypes.Uninitialized} can be loaded.");
+            Process.State.Bpmn = bpmn;
+            Process.State.Status = BpmProcessExecutionTypes.Initialized;
+            await Process.WriteStateAsync();
+        }
+
+        public async Task StopProcess()
+        {
+            if (Process.State.Status != BpmProcessExecutionTypes.Started &&
+                Process.State.Status != BpmProcessExecutionTypes.Paused)
+                throw new Exception($"Current bpm process has the status {Process.State.Status}. Only processes that are in states {BpmProcessExecutionTypes.Started} or  {BpmProcessExecutionTypes.Paused} can be stopped.");
+            Process.State.Status = BpmProcessExecutionTypes.Stopped;
+            await Process.WriteStateAsync();
+        }
+
+        public async Task StartProcess()
+        {
+            if (Process.State.Status != BpmProcessExecutionTypes.Initialized &&
+                Process.State.Status != BpmProcessExecutionTypes.Stopped &&
+                Process.State.Status != BpmProcessExecutionTypes.Paused)
+                throw new Exception($"Current bpm process has the status {Process.State.Status}. Only processes that are in states {BpmProcessExecutionTypes.Initialized} or {BpmProcessExecutionTypes.Stopped} or {BpmProcessExecutionTypes.Paused} can be started.");
+            Process.State.Status = BpmProcessExecutionTypes.Started;
+            await Process.WriteStateAsync();
+        }
+
+        public Task<BpmProcessExecutionTypes> GetProcessStatus()
+        {
+            return Task.FromResult(Process.State.Status);
+        }
+    }
+}
