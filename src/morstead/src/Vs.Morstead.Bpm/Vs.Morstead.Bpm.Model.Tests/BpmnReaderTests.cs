@@ -1,11 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 using Vs.Morstead.Bpm.TestData;
 using Xunit;
 using Xunit.Abstractions;
@@ -17,9 +13,12 @@ namespace Vs.Morstead.Bpm.Model.Tests
         public BpmnReaderTests(ITestOutputHelper output)
         {
             Output = output;
+            process = new BpmnProcess(TestFileLoader.Load(@"Bpmn20/simple-task.bpmn"));
         }
 
         public ITestOutputHelper Output { get; }
+
+        private BpmnProcess process;
 
         [Fact]
         public void CanReadSomeSimpleTasks()
@@ -50,6 +49,31 @@ namespace Vs.Morstead.Bpm.Model.Tests
                 step = outgoing;
             }
             Output.WriteLine($"process end event: {endEvent}.");
+        }
+
+        [Fact]
+        public void CanReadProcessInfo()
+        {
+            Assert.Equal("Process_090fe9b2-1216-4737-abe9-16f42a3a18aa", process.Id);
+            Assert.Equal("StartEvent_1", process.StartEvent.Id);
+            Assert.Equal("Flow_1lx2iho", process.StartEvent.Outgoing);
+            Assert.Equal("Event_0m6k39u", process.EndEvent.Id);
+            Assert.Equal("Flow_1jjq12z", process.EndEvent.Incoming);
+        }
+
+        [Fact]
+        public void CanGetProcessFlow()
+        {
+            var task = process.SequenceFlow.Next();
+            Assert.Equal("Activity_1ch68uj", task.Id);
+            Assert.Equal("task 1", task.Name);
+            Assert.Equal("Flow_1lx2iho", task.Incoming);
+            Assert.Equal("Flow_1fntof2", task.Outgoing);
+            task = process.SequenceFlow.Next();
+            Assert.Equal("Activity_1ietc9u", task.Id);
+            Assert.Equal("task 2", task.Name);
+            Assert.Equal("Flow_1fntof2", task.Incoming);
+            Assert.Equal("Flow_1jjq12z", task.Outgoing);
         }
     }
 }
