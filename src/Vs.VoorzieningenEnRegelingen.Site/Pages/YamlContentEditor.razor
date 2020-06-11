@@ -9,6 +9,23 @@
             <div>
                 <YamlTypeSelector @ref="YamlSaveTypeSelector" HorizontalDirection="true" />
             </div>
+            
+            <Dialog2 @ref="ddd" />
+            <MatButton OnClick="Dod">asd</MatButton>
+
+            @code {
+                public Dialog2 ddd = new Dialog2();
+                public void Dod()
+                {
+                    ddd.OpenDialog();
+                }
+            }
+
+           
+            <Dialog Title="_dialogData.Title" CloseText="_dialogData.CloseText" ShowOkButton="_dialogData.ShowOkButton" OkText="_dialogData.OkText" OkAction="_dialogData.OkAction">
+                _dialogData.Content
+            </Dialog>
+
         </div>
         <div class="left-half_bottom">
             <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="@(ValidationController.StartSubmitCountdown)" CssClass="editor" />
@@ -27,3 +44,5 @@
         </div>
     </div>
 </div>
+
+

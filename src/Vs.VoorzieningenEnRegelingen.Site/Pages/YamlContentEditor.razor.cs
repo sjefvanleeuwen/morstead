@@ -6,8 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Vs.Core.Layers.Enums;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
+using Vs.VoorzieningenEnRegelingen.Site.Shared.Components;
 using Vs.YamlEditor.Components.Controllers;
 using Vs.YamlEditor.Components.Shared;
+using YamlDotNet.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
@@ -20,7 +22,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         protected IJSRuntime JSRuntime { get; set; }
 
         private ValidationController _validationController;
-        private YamlTypeSelector yamlValidateTypeSelector;
+        private YamlTypeSelector _yamlValidateTypeSelector;
+        private Dialog _dialog = new Dialog();
+        private DialogData _dialogData = new DialogData();
 
         private ValidationController ValidationController
         {
@@ -52,11 +56,11 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private YamlTypeSelector YamlValidateTypeSelector
         {
-            get => yamlValidateTypeSelector;
+            get => _yamlValidateTypeSelector;
             set
             {
                 ValidationController.YamlTypeSelector = value;
-                yamlValidateTypeSelector = value;
+                _yamlValidateTypeSelector = value;
             }
         }
 
@@ -68,7 +72,17 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         public async Task Save()
         {
-            var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name);
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                OpenNotification("Geen naam", "Geen naam ingevuld");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(YamlSaveTypeSelector.SelectedValue))
+            {
+                OpenNotification("Geen type", "Geen type document geselecteerd");
+                return;
+            }
+            var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name && y.Type == YamlSaveTypeSelector.SelectedValue);
             if (yamlFileInfo == null)
             {
                 yamlFileInfo = new YamlFileInfo();
@@ -78,6 +92,18 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             yamlFileInfo.Name = Name.Trim();
             yamlFileInfo.Content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
             yamlFileInfo.Type = YamlSaveTypeSelector.SelectedValue;
+        }
+
+        private void OpenNotification(string title, string message)
+        {
+            _dialogData = new DialogData
+            {
+                ShowOkButton = false,
+                Title = title,
+                Content = new MarkupString(message),
+                CloseText = "Sluiten"
+            };
+             _dialog.OpenDialog();
         }
     }
 }

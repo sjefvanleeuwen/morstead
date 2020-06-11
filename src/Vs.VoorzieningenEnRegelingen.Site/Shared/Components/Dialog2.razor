@@ -1,0 +1,19 @@
+﻿<ol>
+    <li>
+        @*<MatTextField Label="What's your name?" @bind-Value="@name"></MatTextField>*@
+    </li>
+    <li>
+        <MatButton OnClick="@OpenDialog" Raised="true">Pick one</MatButton>
+    </li>
+</ol>
+<MatDialog @bind-IsOpen="@dialogIsOpen">
+    <MatDialogTitle>Hi @name</MatDialogTitle>
+    <MatDialogContent>
+        <p>What's your favorite animal?</p>
+        <MatTextField @bind-Value="@dialogAnimal"></MatTextField>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { dialogIsOpen = false; })">No Thanks</MatButton>
+        <MatButton OnClick="@OkClick">OK</MatButton>
+    </MatDialogActions>
+</MatDialog>
