@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" camunda:diagramRelationId="b3d8e7d4-42fe-4f5e-bff4-2e052398a638">
+  <bpmn:process id="Process_090fe9b2-1216-4737-abe9-16f42a3a18aa" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1lx2iho</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0m6k39u">
+      <bpmn:incoming>Flow_1jjq12z</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1lx2iho" sourceRef="StartEvent_1" targetRef="Activity_1ch68uj"/>
+    <bpmn:task id="Activity_1ch68uj" name="task 1">
+      <bpmn:documentation>This simple task calls a certian grain.</bpmn:documentation>
+      <bpmn:incoming>Flow_1lx2iho</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fntof2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Activity_1ietc9u" name="task 2">
+      <bpmn:incoming>Flow_1fntof2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jjq12z</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1fntof2" sourceRef="Activity_1ch68uj" targetRef="Activity_1ietc9u"/>
+    <bpmn:sequenceFlow id="Flow_1jjq12z" sourceRef="Activity_1ietc9u" targetRef="Event_0m6k39u"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_090fe9b2-1216-4737-abe9-16f42a3a18aa">
+      <bpmndi:BPMNEdge id="Flow_1lx2iho_di" bpmnElement="Flow_1lx2iho">
+        <di:waypoint x="186" y="118"/>
+        <di:waypoint x="250" y="118"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fntof2_di" bpmnElement="Flow_1fntof2">
+        <di:waypoint x="350" y="118"/>
+        <di:waypoint x="410" y="118"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jjq12z_di" bpmnElement="Flow_1jjq12z">
+        <di:waypoint x="510" y="118"/>
+        <di:waypoint x="572" y="118"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="100" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zzlr73_di" bpmnElement="Activity_1ch68uj">
+        <dc:Bounds x="250" y="78" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ietc9u_di" bpmnElement="Activity_1ietc9u">
+        <dc:Bounds x="410" y="78" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0m6k39u_di" bpmnElement="Event_0m6k39u">
+        <dc:Bounds x="572" y="100" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
