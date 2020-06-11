@@ -1,0 +1,32 @@
+﻿.left-half_contenteditor {
+    background-color: #f1f1f1;
+    float: left;
+    width: 50%;
+    height: 100%;
+    display: block;
+    overflow: auto;
+}
+
+.right-half_contenteditor {
+    background-color: #f1f1f1;
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.yamltypeWrapper {
+    width: 100%;
+}
+
+.wrapper {
+    padding: 15px;
+}
+
+.wrapperFull {
+    padding: 0;
+    margin: 0;
+}
+
+.radioGroupWrapper {
+    padding: 0px 0px 10px 0px;
+}

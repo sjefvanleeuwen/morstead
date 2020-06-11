@@ -21,7 +21,7 @@
                 @{
                     foreach (var type in ValidationController.Types.Keys)
                     {
-                        <MatRadioButton Value="@(type)" Disabled="@(!ValidationController.GetEnabledForType(type))" TValue="string"><span class="@(GetStyleForType(type))">@type</span></MatRadioButton>
+                        <MatRadioButton Value="@GetDescription(type)" Disabled="@(!ValidationController.GetEnabledForType(type))" TValue="string"><span class="@(GetStyleForType(type))">@type</span></MatRadioButton>
                     }
                 }
             </MatRadioGroup>

@@ -42,10 +42,12 @@ namespace Acme.Answer.OpenApi.v1.Features.Feature1
             AnswerTemporalResponse response = new AnswerTemporalResponse();
             var parameters = new List<TemporalParameter>();
             Random r = new Random(42);
-            for (int m = 1; m < DateTime.Now.Month;m++) {
-                parameters.Add(new TemporalParameter() { 
-                    Name = request.ParameterName, 
-                    Value= Math.Round((r.NextDouble() * (1635.20 - 600) + 600),2).ToString(CultureInfo.InvariantCulture), 
+            for (int m = 1; m < DateTime.Now.Month; m++)
+            {
+                parameters.Add(new TemporalParameter()
+                {
+                    Name = request.ParameterName,
+                    Value = Math.Round((r.NextDouble() * (1635.20 - 600) + 600), 2).ToString(CultureInfo.InvariantCulture),
                     TimeRange = new Itenso.TimePeriod.TimeRange(new DateTime(DateTime.Now.Year, m, 20))
                     .Adapt<TimeRange>()
                 });
