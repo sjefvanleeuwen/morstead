@@ -19,7 +19,15 @@ namespace Vs.YamlEditor.Components.Shared
         [Parameter]
         public string Name { get; set; }
 
-        public string SelectedValue { get; set; } = string.Empty;
+        private string _selectedValue = string.Empty;
+
+        public string SelectedValue { 
+            get => _selectedValue;
+            set {
+                _selectedValue = value;
+                StateHasChanged();
+            }
+        }
 
         private IDictionary<YamlType, bool> _types;
 

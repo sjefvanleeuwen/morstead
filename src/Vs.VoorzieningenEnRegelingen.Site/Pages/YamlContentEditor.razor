@@ -28,10 +28,7 @@
             <YamlTypeSelector @ref="YamlValidateTypeSelector" DisabledTypes="DisabledTypes" Name="ValidateRuleType" />
             <button type="button" class="btn btn-primary" @onclick="ValidationController.SubmitPage">Check inhoud</button>
             <h4>Opgeslagen Yamls</h4>
-            @foreach (var yamlFileInfo in YamlFileInfos)
-            {
-                <div>@yamlFileInfo.Name - @yamlFileInfo.Type</div>
-            }
+            <Table Grid="YamFileInfoGrid" />
         </div>
     </div>
 </div>

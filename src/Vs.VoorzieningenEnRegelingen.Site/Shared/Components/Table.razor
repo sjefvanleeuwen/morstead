@@ -1,0 +1,32 @@
+﻿@{ 
+    var counter = 0;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            @foreach (var columnName in ColumnNames)
+            {
+                <th scope="col">@columnName</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Grid.Rows)
+        {
+            counter++;
+        <tr @key="@((row.DisplayItems?.FirstOrDefault(d => d.Name == "Id")?.Value) ?? string.Empty)">
+            <th scope="row">@counter</th>
+            @foreach (var columnName in ColumnNames)
+            {
+                <td>@(row.GetValueFor(columnName))</td>
+            }
+            @foreach (var tableAction in row.TableActions)
+            {
+        <td><a class="nav-link" data-toggle="tab" href="#panel23" role="tab" @onclick="tableAction.Action"><i class="fa @tableAction.IconName pr-xl-2 pr-md-0 pr-2"></i></a></td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>
