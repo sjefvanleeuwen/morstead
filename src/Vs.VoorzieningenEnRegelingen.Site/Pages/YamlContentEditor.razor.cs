@@ -23,8 +23,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private ValidationController _validationController;
         private YamlTypeSelector _yamlValidateTypeSelector;
-        private Dialog _dialog = new Dialog();
-        private DialogData _dialogData = new DialogData();
 
         private ValidationController ValidationController
         {
@@ -74,12 +72,12 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                OpenNotification("Geen naam", "Geen naam ingevuld");
+                OpenNotification("Geen naam ingevuld");
                 return;
             }
             if (string.IsNullOrWhiteSpace(YamlSaveTypeSelector.SelectedValue))
             {
-                OpenNotification("Geen type", "Geen type document geselecteerd");
+                OpenNotification("Geen type document geselecteerd");
                 return;
             }
             var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name && y.Type == YamlSaveTypeSelector.SelectedValue);
@@ -94,16 +92,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             yamlFileInfo.Type = YamlSaveTypeSelector.SelectedValue;
         }
 
-        private void OpenNotification(string title, string message)
+        private void OpenNotification(string message)
         {
-            _dialogData = new DialogData
-            {
-                ShowOkButton = false,
-                Title = title,
-                Content = new MarkupString(message),
-                CloseText = "Sluiten"
-            };
-             _dialog.OpenDialog();
+            JSRuntime.InvokeAsync<object>("notify", new object[] { message });
         }
     }
 }
