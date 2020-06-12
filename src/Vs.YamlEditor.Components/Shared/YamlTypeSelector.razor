@@ -1,20 +1,13 @@
-﻿<div class="radioGroupWrapper">
-    <MatRadioGroup @bind-Value="@SelectedValue" TValue="string">
-        @{
-
-            foreach (var type in GetTypeDefinitions())
-            {
-                if (HorizontalDirection)
-                {
-                    <MatRadioButton Value="@GetDescription(type.Key)" Disabled="@(!type.Value)" TValue="string"><span class="@GetStyleForType(type.Value)">@GetDescription(type.Key)</span></MatRadioButton>
-                }
-                else
-                {
-                    <div class="yamltypeWrapper">
-                        <MatRadioButton Value="@GetDescription(type.Key)" Disabled="@(!type.Value)" TValue="string"><span class="@GetStyleForType(type.Value)">@GetDescription(type.Key)</span></MatRadioButton>
-                    </div>
-                }
-            }
-        }
-    </MatRadioGroup>
+﻿@{
+    var counter = 0;
+}
+<div class="radioGroupWrapper">
+    @foreach (var type in GetTypeDefinitions())
+    {
+        counter++;
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="@(Name)_@counter" disabled="@(!type.Value)" checked="@(GetDescription(type.Key) == SelectedValue)" name="@Name" @onclick="@(() => SelectedValue = type.Value ? GetDescription(type.Key) : SelectedValue)">
+            <label class="custom-control-label @GetStyleForType(type.Value)" for="@(Name)_@counter">@(GetDescription(type.Key))</label>
+        </div>
+    }
 </div>

@@ -2,12 +2,20 @@
 @attribute [Authorize]
 <div id="splitcontainer" class="clear-fix row no-gutters" style="background-color: black;">
     <div id="left-half" class="left-half_contenteditor splitter-half_wrapper">
-        <div class="left-half_header">
+        <div class="left-half_header sm-12">
             <div>
-                <MatTextField @bind-Value="Name" Label="Naam" Raised="true" /><MatButton @onclick="Save" Raised="true">Opslaan</MatButton>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Naam</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Naam" aria-describedby="Naam" @bind="Name">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-primary" @onclick="Save">Opslaan</button>
+                    </div>
+                </div>                
             </div>
             <div>
-                <YamlTypeSelector @ref="YamlSaveTypeSelector" HorizontalDirection="true" />
+                <YamlTypeSelector @ref="YamlSaveTypeSelector" HorizontalDirection="true" Name="SaveRuleType" />
             </div>
         </div>
         <div class="left-half_bottom">
@@ -16,14 +24,11 @@
     </div>
     <div id="right-half" class="right-half_contenteditor splitter-half_wrapper">
         <div class="submit">
-            <MatH5>Selecteer het type Yaml</MatH5>
-            <YamlTypeSelector @ref="YamlValidateTypeSelector" DisabledTypes="DisabledTypes" />
-            <MatButton @onclick="ValidationController.SubmitPage" Raised="true">Check inhoud</MatButton>
-            <MatH5>Opgeslagen Yamls</MatH5>
-            @foreach (var yamlFileInfo in YamlFileInfos)
-            {
-                <div>@yamlFileInfo.Name - @yamlFileInfo.Type</div>
-            }
+            <h4>Selecteer het type Yaml</h4>
+            <YamlTypeSelector @ref="YamlValidateTypeSelector" DisabledTypes="DisabledTypes" Name="ValidateRuleType" />
+            <button type="button" class="btn btn-primary" @onclick="ValidationController.SubmitPage">Check inhoud</button>
+            <h4>Opgeslagen Yamls</h4>
+            <Table Grid="YamFileInfoGrid" />
         </div>
     </div>
 </div>

@@ -1,5 +1,9 @@
 /// <reference path="../plugins/toastr/toastr.min.js" />
 
+toastr.options = {
+  "positionClass": "toast-bottom-right"
+}
+
 function notify(text)
 {
     toastr.info(text)

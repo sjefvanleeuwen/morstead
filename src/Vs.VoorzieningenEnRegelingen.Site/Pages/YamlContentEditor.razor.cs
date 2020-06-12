@@ -6,10 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Vs.Core.Layers.Enums;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
-using Vs.VoorzieningenEnRegelingen.Site.Shared.Components;
+using Vs.VoorzieningenEnRegelingen.Site.Model.Tables;
 using Vs.YamlEditor.Components.Controllers;
 using Vs.YamlEditor.Components.Shared;
-using YamlDotNet.Core;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
@@ -36,22 +35,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
-        private IEnumerable<YamlType> DisabledTypes => ValidationController.DisabledTypes?.Keys ?? new List<YamlType>();
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                await JSRuntime.InvokeAsync<object>("split", new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
-            }
-        }
-
-        [JSInvokable("InvokeLayout")]
-        public Task Layout()
-        {
-            return ValidationController.YamlEditor.Layout();
-        }
-
         private YamlTypeSelector YamlValidateTypeSelector
         {
             get => _yamlValidateTypeSelector;
@@ -67,6 +50,46 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         private string Name { get; set; }
 
         private IList<YamlFileInfo> YamlFileInfos { get; set; } = new List<YamlFileInfo>();
+
+        private Grid YamFileInfoGrid
+        {
+            get
+            {
+                var rows = new List<Row>();
+                foreach (var yamlFileInfo in YamlFileInfos)
+                {
+                    rows.Add(new Row()
+                    {
+                        DisplayItems = new List<DisplayItem>
+                        {
+                            { new DisplayItem { Name = "Id", Value = yamlFileInfo.Id.ToString(), Display = false } },
+                            { new DisplayItem { Name = "Name", Value = yamlFileInfo.Name, Display = true } },
+                            { new DisplayItem { Name = "Type", Value = yamlFileInfo.Type, Display = true } }
+                        },
+                        TableActions = new List<TableAction> {
+                            { new TableAction { Action = new Action (async () => await Load(yamlFileInfo.Id).ConfigureAwait(false)), IconName = "fa-edit" } }
+                        }
+                    });
+                }
+                return new Grid { Rows = rows };
+            }
+        }
+
+        private IEnumerable<YamlType> DisabledTypes => ValidationController.DisabledTypes?.Keys ?? new List<YamlType>();
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await JSRuntime.InvokeAsync<object>("split", new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
+            }
+        }
+
+        [JSInvokable("InvokeLayout")]
+        public Task Layout()
+        {
+            return ValidationController.YamlEditor.Layout();
+        }
 
         public async Task Save()
         {
@@ -92,9 +115,18 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             yamlFileInfo.Type = YamlSaveTypeSelector.SelectedValue;
         }
 
-        private void OpenNotification(string message)
+        public async Task Load(Guid id)
         {
-            JSRuntime.InvokeAsync<object>("notify", new object[] { message });
+            var yamlFileInfo = YamlFileInfos?.FirstOrDefault(y => y.Id == id);
+            Name = yamlFileInfo.Name;
+            YamlSaveTypeSelector.SelectedValue = yamlFileInfo.Type;
+            await ValidationController.YamlEditor.SetValue(yamlFileInfo?.Content ?? string.Empty).ConfigureAwait(false);
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }
+
+        private async void OpenNotification(string message)
+        {
+            await JSRuntime.InvokeAsync<object>("notify", new object[] { message }).ConfigureAwait(false);
         }
     }
 }
