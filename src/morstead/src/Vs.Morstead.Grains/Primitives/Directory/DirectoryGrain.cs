@@ -36,5 +36,10 @@ namespace Vs.Morstead.Grains.Primitives.Directory
         {
             return Task.FromResult(_root.State.GetDir(path.Split("/", StringSplitOptions.RemoveEmptyEntries)));
         }
+
+        public Task<bool> DirectoryExists(string path)
+        {
+            return Task.FromResult(_root.State.DirExists(path.Split("/", StringSplitOptions.RemoveEmptyEntries)));
+        }
     }
 }

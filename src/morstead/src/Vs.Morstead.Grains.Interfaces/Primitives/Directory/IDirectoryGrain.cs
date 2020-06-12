@@ -7,5 +7,6 @@ namespace Vs.Morstead.Grains.Interfaces.Primitives.Directory
     {
         Task<DirectoryItem> CreateDirectory(string path);
         Task<DirectoryItem> GetDirectory(string path);
+        Task<bool> DirectoryExists(string path);
     }
 }

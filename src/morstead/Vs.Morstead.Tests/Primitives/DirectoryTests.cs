@@ -43,6 +43,7 @@ namespace Vs.Morstead.Tests.Primitives
             stopwatch.Start();
             var did = new Did("mstd:dir").ToString();
             var dir = cluster.GrainFactory.GetGrain<IDirectoryGrain>(did);
+            Assert.False(await dir.DirectoryExists("//test1/test2/test3"));
             var dir1 = await dir.CreateDirectory("//test1/test2/test3");
             Assert.StartsWith("did:vsoc:mstd:dir", dir1.ItemsGrainId);
             var dir2 = await dir.GetDirectory("//test1/test2//test3");

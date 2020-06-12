@@ -27,6 +27,18 @@ namespace Vs.Morstead.Grains.Interfaces.Primitives.Directory
             return s.Value;
         }
 
+        public bool DirExists(string[] path)
+        {
+            var s = Dir;
+            for (int i = 0; i < path.Length; i++)
+            {
+                if (!s.ContainsKey(path[i]))
+                    return false;
+                s = s[path[i]];
+            }
+            return true;
+        }
+
         private bool createDir(string[] path)
         {
             var s = Dir;
