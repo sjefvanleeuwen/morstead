@@ -26,11 +26,11 @@ namespace Vs.Morstead.Bpm.Model
             return _current;
         }
 
-        public ITask Next()
+        public IBpmnTask Next()
         {
             _current = _process["bpmn:sequenceFlow"].Single(p => p.Value<string>("@id") == _currentFlowId);
             var target = _current["@targetRef"].Value<string>();
-            var task = new Task(_process, target);
+            var task = new BpmnTask(_process, target);
             _currentFlowId = task.Outgoing;
             return task;
         }

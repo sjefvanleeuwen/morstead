@@ -8,6 +8,9 @@ namespace Vs.Morstead.Bpm.Model.Tasks
     public class ExecutionListener
     {
         public string DelegateExpression { get; set; }
+        public string DelegateInterface => DelegateExpression.Split('.')[0];
+        public string DelegateMethod => DelegateExpression.Split('.')[1];
+
         public EventTypes EventType { get; set; }
 
         public Dictionary<string, string> OutputParameters { get; set; }
@@ -29,7 +32,7 @@ namespace Vs.Morstead.Bpm.Model.Tasks
                         OutputParameters = new Dictionary<string, string>();
                         foreach (var item in io["camunda:outputParameter"].Children())
                         {
-                            var name = item["@name"].Value<string>();
+                            var name = item["@name"].Value<string>().ToLower();
                             var value = item["#text"].Value<string>();
                             OutputParameters.Add(name, value);
                         }
