@@ -10,7 +10,7 @@ namespace Vs.Morstead.Bpm.Model
         private readonly JToken _process;
         private readonly StartEvent _startEvent;
         private readonly EndEvent _endEvent;
-        private string _currentStepId;
+        private string _currentFlowId;
         private JToken _current;
 
         public SequenceFlow(JToken process, StartEvent startEvent, EndEvent endEvent)
@@ -18,7 +18,7 @@ namespace Vs.Morstead.Bpm.Model
             _process = process;
             _startEvent = startEvent;
             _endEvent = endEvent;
-            _currentStepId = _startEvent.Outgoing;
+            _currentFlowId = _startEvent.Outgoing;
         }
 
         public JToken Current()
@@ -28,10 +28,10 @@ namespace Vs.Morstead.Bpm.Model
 
         public ITask Next()
         {
-            _current = _process["bpmn:sequenceFlow"].Single(p => p.Value<string>("@id") == _currentStepId);
+            _current = _process["bpmn:sequenceFlow"].Single(p => p.Value<string>("@id") == _currentFlowId);
             var target = _current["@targetRef"].Value<string>();
             var task = new Task(_process, target);
-            _currentStepId = task.Outgoing;
+            _currentFlowId = task.Outgoing;
             return task;
         }
     }
