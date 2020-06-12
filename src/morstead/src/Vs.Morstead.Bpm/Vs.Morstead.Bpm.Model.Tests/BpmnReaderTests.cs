@@ -43,8 +43,40 @@ namespace Vs.Morstead.Bpm.Model.Tests
                 var task = process["bpmn:task"].Where(p => p.Value<string>("@id") == target).Single();
                 var doc2 = task["@name"].Value<string>();
                 var incoming = task["bpmn:incoming"].Value<string>();
+
                 Assert.Equal(step, incoming);
                 var outgoing = task["bpmn:outgoing"].Value<string>();
+
+                // execution listener
+                var ext = task["bpmn:extensionElements"];
+                if (ext != null)
+                {
+                    var listener = ext["camunda:executionListener"];
+                    if (listener != null)
+                    {
+                        var exp = listener["@delegateExpression"].Value<string>();
+                        // triggered at start of task or end.
+                        var evtType = listener["@event"].Value<string>();
+                        var io = ext["camunda:inputOutput"];
+                        if (io  != null)
+                        {
+                            var parameters = new System.Collections.Generic.Dictionary<string, string>();
+                            foreach (var item in io["camunda:outputParameter"].Children())
+                            {
+                                var name = item["@name"].Value<string>();
+                                var value = item["#text"].Value<string>();
+                                parameters.Add(name, value);
+
+                            }
+                            Assert.Equal(4, parameters.Count);
+                            Assert.Equal("UnitTestFrom@UnitTest.com", parameters["From"]);
+                            Assert.Equal("UnitTestTo@UnitTest.com", parameters["To"]);
+                            Assert.Equal("This a Test Email Topic", parameters["Topic"]);
+                            Assert.Equal("This is the body of the email message", parameters["Content"]);
+                        }
+                    }
+                }
+                
                 Output.WriteLine($"step executing task {target}: '{doc2}'. Next step {outgoing}.");
                 step = outgoing;
             }
@@ -66,9 +98,10 @@ namespace Vs.Morstead.Bpm.Model.Tests
         {
             var task = process.SequenceFlow.Next();
             Assert.Equal("Activity_1ch68uj", task.Id);
-            Assert.Equal("task 1", task.Name);
+            Assert.Equal("Send Email", task.Name);
             Assert.Equal("Flow_1lx2iho", task.Incoming);
             Assert.Equal("Flow_1fntof2", task.Outgoing);
+
             task = process.SequenceFlow.Next();
             Assert.Equal("Activity_1ietc9u", task.Id);
             Assert.Equal("task 2", task.Name);
