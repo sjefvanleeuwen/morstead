@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Vs.Core.Layers.Enums;
+using Vs.ProfessionalPortal.Morstead.Client.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Tables;
 using Vs.YamlEditor.Components.Controllers;
@@ -18,7 +19,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         public INode BaseNode { get; set; }
 
         [Inject]
-        protected IJSRuntime JSRuntime { get; set; }
+        public IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected IYamlStorageController YamlStorageController { get; set; }
 
         private ValidationController _validationController;
         private YamlTypeSelector _yamlValidateTypeSelector;
@@ -81,6 +85,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             if (firstRender)
             {
+                InitYamlFileInfos();
                 await JSRuntime.InvokeAsync<object>("split", new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
             }
         }
@@ -90,12 +95,24 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             return ValidationController.YamlEditor.Layout();
         }
+        
+        public async void InitYamlFileInfos()
+        {
+            var fileList = await YamlStorageController.GetYamlFiles().ConfigureAwait(false);
+        }
 
         public async Task Save()
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
                 OpenNotification("Geen naam ingevuld");
+                return;
+            }
+             
+            var chars = Vs.Core.Extensions.StringExtensions.GetInvalidFileNameCharacters(Name);
+            if (chars.Any())
+            {
+                OpenNotification("De naam bevat illegale tekens voor bestandsnamen");
                 return;
             }
             if (string.IsNullOrWhiteSpace(YamlSaveTypeSelector.SelectedValue))
@@ -113,6 +130,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             yamlFileInfo.Name = Name.Trim();
             yamlFileInfo.Content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
             yamlFileInfo.Type = YamlSaveTypeSelector.SelectedValue;
+
+            WriteFile(yamlFileInfo);
+        }
+
+        private async void WriteFile(YamlFileInfo yamlFileInfo)
+        {
+            YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, yamlFileInfo.Content);
         }
 
         public async Task Load(Guid id)

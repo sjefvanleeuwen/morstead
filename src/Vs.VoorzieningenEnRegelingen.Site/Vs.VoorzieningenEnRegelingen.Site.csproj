@@ -49,6 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\core\Vs.Core\Vs.Core.csproj" />
     <ProjectReference Include="..\professional-portal\Vs.ProfessionalPortal.Morstead.Client\Vs.ProfessionalPortal.Morstead.Client.csproj" />
     <ProjectReference Include="..\rules\Vs.Rules.Core\Vs.Rules.Core.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.TestData\Vs.VoorzieningenEnRegelingen.Core.TestData.csproj" />

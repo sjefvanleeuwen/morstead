@@ -7,19 +7,31 @@ using System.Threading.Tasks;
 
 namespace Vs.ProfessionalPortal.Morstead.Client
 {
-    public static class ProgramExtension
+    public static class OrleansConnectionProvider
     {
-        public  static async Task<IClusterClient> StartClient()
+        private static IClusterClient _client;
+
+        public static IClusterClient Client {
+            get
+            {
+                if (_client == null)
+                {
+                    StartClient();
+                }
+                return _client;
+            }
+        }
+
+        public static async void StartClient()
         {
             var attempt = 0;
             var attemptsBeforeFailing = 10;
-            IClusterClient client;
 
             while (true)
             {
                 try
                 {
-                    client = new ClientBuilder()
+                    _client = new ClientBuilder()
                         // Clustering information 
                         .Configure<ClusterOptions>(options =>
                         {
@@ -29,7 +41,7 @@ namespace Vs.ProfessionalPortal.Morstead.Client
                          // Clustering provider
                          .UseLocalhostClustering()
                          .Build();
-                    await client.Connect();
+                    await Client.Connect();
                     break;
                 }
                 catch (SiloUnavailableException ex)
@@ -55,8 +67,6 @@ namespace Vs.ProfessionalPortal.Morstead.Client
                     await Task.Delay(TimeSpan.FromSeconds(3));
                 }
             }
-
-            return client;
         }
     }
 }
