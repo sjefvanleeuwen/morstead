@@ -2,10 +2,12 @@
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Vs.Core.Layers.Enums;
 using Vs.ProfessionalPortal.Morstead.Client.Controllers.Interfaces;
+using Vs.ProfessionalPortal.Morstead.Client.Models;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Tables;
 using Vs.YamlEditor.Components.Controllers;
@@ -98,7 +100,26 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         
         public async void InitYamlFileInfos()
         {
+            await YamlStorageController.WriteYamlFile("Content", "Naam 1", "Content 1").ConfigureAwait(false);
+            await YamlStorageController.WriteYamlFile("Layer", "Naam 2", "Layer 1").ConfigureAwait(false);
+            await YamlStorageController.WriteYamlFile("Rule", "The One Rule", "The Rule to rule all Rules").ConfigureAwait(false);
             var fileList = await YamlStorageController.GetYamlFiles().ConfigureAwait(false);
+            await AddFileListToYamlFileInfos(fileList).ConfigureAwait(false);
+        }
+
+        private async Task AddFileListToYamlFileInfos(IEnumerable<FileInformation> fileList)
+        {
+            foreach (var file in fileList)
+            {
+                YamlFileInfos.Add(new YamlFileInfo
+                {
+                    Id = Guid.NewGuid(),
+                    Name = file.FileName,
+                    Type = file.Directory,
+                    Content = file.Content
+                });
+            }
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         public async Task Save()
@@ -120,6 +141,12 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 OpenNotification("Geen type document geselecteerd");
                 return;
             }
+            var content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
+            if (string.IsNullOrEmpty(content))
+            {
+                OpenNotification("Er is geen inhoud in het bestand");
+                return;
+            }
             var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name && y.Type == YamlSaveTypeSelector.SelectedValue);
             if (yamlFileInfo == null)
             {
@@ -128,7 +155,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
             yamlFileInfo.Id = Guid.NewGuid();
             yamlFileInfo.Name = Name.Trim();
-            yamlFileInfo.Content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
+            yamlFileInfo.Content = content;
             yamlFileInfo.Type = YamlSaveTypeSelector.SelectedValue;
 
             WriteFile(yamlFileInfo);
@@ -136,7 +163,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private async void WriteFile(YamlFileInfo yamlFileInfo)
         {
-            YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, yamlFileInfo.Content);
+            await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, yamlFileInfo.Content).ConfigureAwait(false);
         }
 
         public async Task Load(Guid id)
