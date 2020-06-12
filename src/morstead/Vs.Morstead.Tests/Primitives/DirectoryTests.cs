@@ -1,6 +1,7 @@
 ﻿using EasyCompressor;
 using Microsoft.AspNetCore.Connections;
 using Orleans.TestingHost;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -49,26 +50,49 @@ namespace Vs.Morstead.Tests.Primitives
             Assert.StartsWith("did:vsoc:mstd:dir", dir1.ItemsGrainId);
             var dir2 = await dir.GetDirectory("//test1/test2//test3");
             Assert.Equal(dir1.ItemsGrainId, dir2.ItemsGrainId);
-            // Add an item to dir2
-            var contents = cluster.GrainFactory.GetGrain<IDirectoryContentsGrain>(dir2.ItemsGrainId);
-            var contentDid = new Did("mstd:pub").ToString();
-            var content = cluster.GrainFactory.GetGrain<IContentPersistentGrain>(contentDid);
-            await content.Save(new System.Net.Mime.ContentType("text/html"), Encoding.UTF8, "Unit Test, Hello World");
-            await contents.AddItem(new DirectoryContentsItem()
+            // Add multiple content items to directory (file contents + directory meta information/created/modified)
+            var dirContents = cluster.GrainFactory.GetGrain<IDirectoryContentsGrain>(dir2.ItemsGrainId);
+            for (int i = 0; i < 5; i++)
             {
-                GrainId = contentDid,
-                Interface = typeof(IContentPersistentGrain)
-            });
+                var contentDid = new Did("mstd:pub").ToString();
+                var content = cluster.GrainFactory.GetGrain<IContentPersistentGrain>(contentDid);
+                // pointer to content for this directory.
+                await dirContents.AddItem(new DirectoryContentsItem()
+                {
+                    MetaData = Newtonsoft.Json.JsonConvert.SerializeObject(new { FileName = $"file-{i}.txt" }),
+                    GrainId = contentDid,
+                    Interface = typeof(IContentPersistentGrain)
+                });
+                await content.Save(new System.Net.Mime.ContentType("text/html"), Encoding.UTF8, "Unit Test, Hello World");
+            }
+            // read the directory again, check if there's equal number of entries and change the file contents
+            dirContents = cluster.GrainFactory.GetGrain<IDirectoryContentsGrain>(dir2.ItemsGrainId);
+            var list = await dirContents.ListItems();
+            Assert.NotEmpty(list.Items);
+            Assert.Equal(5, list.Items.Count);
+            for (int i = 0; i < 5; i++)
+            {
+                var content = cluster.GrainFactory.GetGrain<IContentPersistentGrain>(list.Items.ElementAt(i).Value.GrainId);
+                var content2state = await content.Load();
+                var contentsDocument = content2state.Encoding.GetString(content2state.Content);
+                Assert.Equal(Newtonsoft.Json.JsonConvert.SerializeObject(new { FileName = $"file-{i}.txt" }), list.Items.ElementAt(i).Value.MetaData);
+                Assert.Equal("Unit Test, Hello World", contentsDocument);
+                await content.Save(content2state.ContentType, content2state.Encoding, content2state.Encoding.GetBytes($"{contentsDocument} {i}"));
+            }
+            // read the directory again, and check if all content items have different file contents and the modified date differs from the created date.
+            dirContents = cluster.GrainFactory.GetGrain<IDirectoryContentsGrain>(dir2.ItemsGrainId);
+            list = await dirContents.ListItems();
+            for (int i = 0; i < 5; i++)
+            {
+                //TODO: Update directory modified datetime.
+                //Assert.NotEqual<long>(list.Items.ElementAt(i).Value.Created.Value.Ticks, list.Items.ElementAt(i).Value.Modified.Value.Ticks);
+                var content = cluster.GrainFactory.GetGrain<IContentPersistentGrain>(list.Items.ElementAt(i).Value.GrainId);
+                var content2state = await content.Load();
+                var contentsDocument = content2state.Encoding.GetString(content2state.Content);
+                Assert.Equal(Newtonsoft.Json.JsonConvert.SerializeObject(new { FileName = $"file-{i}.txt" }), list.Items.ElementAt(i).Value.MetaData);
+                Assert.Equal($"Unit Test, Hello World {i}", contentsDocument);
+            }
 
-            var contents2 = cluster.GrainFactory.GetGrain<IDirectoryContentsGrain>(dir2.ItemsGrainId);
-            var list = await contents2.ListItems();
-            Assert.Single(list.Items);
-            Assert.Equal(list.Items.ElementAt(0).Value.GrainId, contentDid);
-            // tested in another unit test, but to be thorough
-            var content2 = cluster.GrainFactory.GetGrain<IContentPersistentGrain>(contentDid);
-            var content2state = await content2.Load();
-            var contentsDocument = content2state.Encoding.GetString(content2state.Content);
-            Assert.Equal("Unit Test, Hello World", contentsDocument);
             stopwatch.Stop();
         }
     }
