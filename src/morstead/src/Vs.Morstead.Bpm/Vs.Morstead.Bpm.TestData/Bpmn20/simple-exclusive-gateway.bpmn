@@ -25,10 +25,10 @@
       <bpmn:outgoing>Flow_1xh2ixp</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="Flow_0gzbcgc" name="A=1" sourceRef="Gateway_1d2x0fd" targetRef="Activity_B">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">A=1</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">a=1</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1fg2zon" name="A=2" sourceRef="Gateway_1d2x0fd" targetRef="Activity_C">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">A=2</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">a=2</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="EndEvent" name="End Event">
       <bpmn:incoming>Flow_0q2t3vv</bpmn:incoming>
@@ -52,24 +52,17 @@ Note: No External Delegates are used</bpmn:text>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="simple-exclusive-gateway">
-      <bpmndi:BPMNShape id="TextAnnotation_1kj6hku_di" bpmnElement="TextAnnotation_1kj6hku">
-        <dc:Bounds x="150" y="80" width="330" height="124" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1yhsk2x_di" bpmnElement="Flow_1yhsk2x">
-        <di:waypoint x="215" y="277" />
-        <di:waypoint x="290" y="277" />
+      <bpmndi:BPMNEdge id="Flow_1xh2ixp_di" bpmnElement="Flow_1xh2ixp">
+        <di:waypoint x="660" y="360" />
+        <di:waypoint x="730" y="360" />
+        <di:waypoint x="730" y="277" />
+        <di:waypoint x="802" y="277" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0hzr3el_di" bpmnElement="Flow_0hzr3el">
-        <di:waypoint x="390" y="277" />
-        <di:waypoint x="465" y="277" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0gzbcgc_di" bpmnElement="Flow_0gzbcgc">
-        <di:waypoint x="490" y="252" />
-        <di:waypoint x="490" y="190" />
-        <di:waypoint x="560" y="190" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="496" y="218" width="19" height="14" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="Flow_0q2t3vv_di" bpmnElement="Flow_0q2t3vv">
+        <di:waypoint x="660" y="190" />
+        <di:waypoint x="730" y="190" />
+        <di:waypoint x="730" y="277" />
+        <di:waypoint x="802" y="277" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1fg2zon_di" bpmnElement="Flow_1fg2zon">
         <di:waypoint x="490" y="302" />
@@ -79,17 +72,21 @@ Note: No External Delegates are used</bpmn:text>
           <dc:Bounds x="496" y="328" width="19" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0q2t3vv_di" bpmnElement="Flow_0q2t3vv">
-        <di:waypoint x="660" y="190" />
-        <di:waypoint x="730" y="190" />
-        <di:waypoint x="730" y="277" />
-        <di:waypoint x="802" y="277" />
+      <bpmndi:BPMNEdge id="Flow_0gzbcgc_di" bpmnElement="Flow_0gzbcgc">
+        <di:waypoint x="490" y="252" />
+        <di:waypoint x="490" y="190" />
+        <di:waypoint x="560" y="190" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="496" y="218" width="19" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1xh2ixp_di" bpmnElement="Flow_1xh2ixp">
-        <di:waypoint x="660" y="360" />
-        <di:waypoint x="730" y="360" />
-        <di:waypoint x="730" y="277" />
-        <di:waypoint x="802" y="277" />
+      <bpmndi:BPMNEdge id="Flow_0hzr3el_di" bpmnElement="Flow_0hzr3el">
+        <di:waypoint x="390" y="277" />
+        <di:waypoint x="465" y="277" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yhsk2x_di" bpmnElement="Flow_1yhsk2x">
+        <di:waypoint x="215" y="277" />
+        <di:waypoint x="290" y="277" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent">
         <dc:Bounds x="179" y="259" width="36" height="36" />
@@ -117,6 +114,9 @@ Note: No External Delegates are used</bpmn:text>
         <bpmndi:BPMNLabel>
           <dc:Bounds x="564" y="167" width="13" height="14" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1kj6hku_di" bpmnElement="TextAnnotation_1kj6hku">
+        <dc:Bounds x="150" y="80" width="330" height="124" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
