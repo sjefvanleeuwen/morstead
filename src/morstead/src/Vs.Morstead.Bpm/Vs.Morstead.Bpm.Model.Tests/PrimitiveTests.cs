@@ -58,7 +58,7 @@ namespace Vs.Morstead.Bpm.Model.Tests
             var process = bpmn["bpmn:definitions"]["bpmn:process"];
             var factory = new FlowTargetFactory(process, "Activity_A");
             Assert.Equal("bpmn:task", factory.Target);
-            var bpmnTask = new BpmnTask(factory.Token);
+            var bpmnTask = new BpmnTask(factory.Token, new ExpressionContext());
             factory = new FlowTargetFactory(process, "Gateway_1d2x0fd");
             Assert.Equal("bpmn:exclusiveGateway", factory.Target);
         }
