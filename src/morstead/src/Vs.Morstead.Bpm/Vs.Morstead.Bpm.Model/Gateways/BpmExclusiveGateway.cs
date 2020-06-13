@@ -48,15 +48,6 @@ namespace Vs.Morstead.Bpm.Model.Gateways
                 default:
                     throw new Exception("Element 'bpm:incoming' expected a string or an array.");
             }
-            /*
-            foreach (var flowId in Outputs)
-            {
-                process["bpmn:sequenceflow"].Where(p => p.Value<string>("@id") == flowId).Single();
-                // read evaluation.
-
-
-            }
-            */
         }
     }
 }
