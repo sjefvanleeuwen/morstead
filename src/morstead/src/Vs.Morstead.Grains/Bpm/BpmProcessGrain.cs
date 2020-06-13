@@ -55,7 +55,7 @@ namespace Vs.Morstead.Grains.Bpm
                 throw new Exception($"Current bpm process has the status {Process.State.Status}. Only processes that are in states {BpmProcessExecutionTypes.Initialized} or {BpmProcessExecutionTypes.Stopped} or {BpmProcessExecutionTypes.Paused} can be started.");
 
             _process = new BpmnProcess(Process.State.Bpmn);
-            var sequenceFlow = _process.SequenceFlow.Next();
+            var sequenceFlow = _process.SequenceFlow.Next() as BpmnTask;
             Process.State.Status = BpmProcessExecutionTypes.Started;
             await Process.WriteStateAsync();
             if (sequenceFlow.ExecutionListeners != null);
