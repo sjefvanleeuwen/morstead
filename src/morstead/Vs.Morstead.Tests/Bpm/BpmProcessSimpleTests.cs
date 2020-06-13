@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using VirtualSociety.VirtualSocietyDid;
 using Vs.Morstead.Bpm.Model;
+using Vs.Morstead.Bpm.Model.Tasks;
 using Vs.Morstead.Grains.Interfaces.Bpm;
 using Xunit;
 
@@ -43,7 +44,7 @@ namespace Vs.Morstead.Tests.Bpm
         public void CanInstantiateGrainAndMethodFromDelegateExpression()
         {
             var process = new BpmnProcess(TestFileLoader.Load(@"Bpmn20/simple-task.bpmn"));
-            var task = process.SequenceFlow.Next();
+            var task = process.SequenceFlow.Next() as BpmnTask;
             var listener = task.ExecutionListeners[0];
             var l = typeof(IBpmProcessGrain).Assembly.DefinedTypes.First(p => p.Name == listener.DelegateInterface).AsType();
             var m = l.GetMethod(listener.DelegateMethod);
