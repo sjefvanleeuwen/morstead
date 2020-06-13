@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Vs.Morstead.Bpm.Model.Events;
 
 namespace Vs.Morstead.Bpm.Model.Tasks
@@ -30,11 +31,24 @@ namespace Vs.Morstead.Bpm.Model.Tasks
                     if (io != null)
                     {
                         OutputParameters = new Dictionary<string, string>();
-                        foreach (var item in io["camunda:outputParameter"].Children())
+                        string name, value;
+                        switch (io["camunda:outputParameter"].Type)
                         {
-                            var name = item["@name"].Value<string>().ToLower();
-                            var value = item["#text"].Value<string>();
-                            OutputParameters.Add(name, value);
+                            case JTokenType.Object:
+                                name = io["camunda:outputParameter"]["@name"].Value<string>().ToLower();
+                                value = io["camunda:outputParameter"]["#text"].Value<string>();
+                                OutputParameters.Add(name, value);
+                                break;
+                            case JTokenType.Array:
+                                foreach (var item in io["camunda:outputParameter"].Children())
+                                {
+                                    name = item["@name"].Value<string>().ToLower();
+                                    value = item["#text"].Value<string>();
+                                    OutputParameters.Add(name, value);
+                                }
+                                break;
+                            default:
+                                throw new Exception("Element 'camunda:outputParameter' expected a single item or an array.");
                         }
                     }
                 }
