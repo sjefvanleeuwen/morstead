@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Flee.PublicTypes;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Vs.Morstead.Bpm.Model.Tasks
 
         public Dictionary<string, string> OutputParameters { get; set; }
 
-        public ExecutionListener(JToken task)
+        public ExecutionListener(JToken task, ExpressionContext context)
         {
             var ext = task["bpmn:extensionElements"];
             if (ext != null)
@@ -38,6 +39,16 @@ namespace Vs.Morstead.Bpm.Model.Tasks
                                 name = io["camunda:outputParameter"]["@name"].Value<string>().ToLower();
                                 value = io["camunda:outputParameter"]["#text"].Value<string>();
                                 OutputParameters.Add(name, value);
+                                // Todo Infer, reuse inference from vs.core (rules)?
+                                // Todo Infer, reuse inference from vs.core (rules)?
+                                try
+                                {
+                                    context.Variables.Add(name, double.Parse(value));
+                                }
+                                catch (Exception ex)
+                                {
+                                    context.Variables.Add(name, value);
+                                }
                                 break;
                             case JTokenType.Array:
                                 foreach (var item in io["camunda:outputParameter"].Children())
@@ -45,6 +56,15 @@ namespace Vs.Morstead.Bpm.Model.Tasks
                                     name = item["@name"].Value<string>().ToLower();
                                     value = item["#text"].Value<string>();
                                     OutputParameters.Add(name, value);
+                                    // Todo Infer, reuse inference from vs.core (rules)?
+                                    try
+                                    {
+                                        context.Variables.Add(name, double.Parse(value));
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        context.Variables.Add(name, value);
+                                    }
                                 }
                                 break;
                             default:
