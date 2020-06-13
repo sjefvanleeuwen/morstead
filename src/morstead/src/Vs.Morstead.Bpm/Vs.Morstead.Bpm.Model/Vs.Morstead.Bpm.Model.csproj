@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vs.Morstead.Bpm.Core\Vs.Morstead.Bpm.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Schemas\BPMN20-flattened.xsd">
       <SubType>Designer</SubType>
     </None>
