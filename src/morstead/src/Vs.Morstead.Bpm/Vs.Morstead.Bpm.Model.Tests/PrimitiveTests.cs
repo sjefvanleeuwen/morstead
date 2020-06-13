@@ -48,5 +48,18 @@ namespace Vs.Morstead.Bpm.Model.Tests
             result = eDynamic.Evaluate();
             Assert.False(result);
         }
+
+        [Fact]
+        public void CanDetermineFlowTargetTypeThroughFactory()
+        {
+            var doc = XDocument.Parse(TestFileLoader.Load(@"Bpmn20/simple-exclusive-gateway.bpmn"));
+            string json = JsonConvert.SerializeXNode(doc);
+            JObject bpmn = JObject.Parse(json);
+            var process = bpmn["bpmn:definitions"]["bpmn:process"];
+            var factory = new FlowTargetFactory(process, "Activity_A");
+            Assert.Equal("bpmn:task", factory.Target);
+            factory = new FlowTargetFactory(process, "Gateway_1d2x0fd");
+            Assert.Equal("bpmn:exclusiveGateway", factory.Target);
+        }
     }
 }
