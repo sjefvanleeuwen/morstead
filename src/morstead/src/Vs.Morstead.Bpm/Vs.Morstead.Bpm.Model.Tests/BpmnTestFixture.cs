@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using Vs.Morstead.Bpm.Core;
 using Vs.Morstead.Bpm.TestData;
 
 namespace Vs.Morstead.Bpm.Model.Tests
@@ -6,6 +8,7 @@ namespace Vs.Morstead.Bpm.Model.Tests
     public class BpmnTestFixture : IDisposable
     {
         public BpmnProcess Process { get; private set; }
+        public ServiceProvider ServiceProvider { get; }
 
         public void LoadBpmn(string path)
         {
@@ -14,7 +17,7 @@ namespace Vs.Morstead.Bpm.Model.Tests
 
         public BpmnTestFixture()
         {
-
+        
         }
         public void Dispose()
         {

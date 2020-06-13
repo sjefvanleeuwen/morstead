@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Xml.Linq;
+using Vs.Morstead.Bpm.Model.Tasks;
 using Vs.Morstead.Bpm.TestData;
 using Xunit;
 using Xunit.Abstractions;
@@ -96,17 +97,17 @@ namespace Vs.Morstead.Bpm.Model.Tests
         [Fact]
         public void CanGetProcessFlow()
         {
-            var task = process.SequenceFlow.Next();
+            var task = process.SequenceFlow.Next() as BpmnTask;
             Assert.Equal("Activity_1ch68uj", task.Id);
             Assert.Equal("Send Email", task.Name);
-            Assert.Equal("Flow_1lx2iho", task.Incoming);
-            Assert.Equal("Flow_1fntof2", task.Outgoing);
+            Assert.Equal("Flow_1lx2iho", task.Incoming[0]);
+            Assert.Equal("Flow_1fntof2", task.Outgoing[0]);
 
-            task = process.SequenceFlow.Next();
+            task = process.SequenceFlow.Next() as BpmnTask;
             Assert.Equal("Activity_1ietc9u", task.Id);
             Assert.Equal("task 2", task.Name);
-            Assert.Equal("Flow_1fntof2", task.Incoming);
-            Assert.Equal("Flow_1jjq12z", task.Outgoing);
+            Assert.Equal("Flow_1fntof2", task.Incoming[0]);
+            Assert.Equal("Flow_1jjq12z", task.Outgoing[0]);
         }
     }
 }

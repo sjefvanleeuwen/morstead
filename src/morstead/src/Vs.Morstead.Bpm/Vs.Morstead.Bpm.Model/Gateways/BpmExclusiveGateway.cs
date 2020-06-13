@@ -1,35 +1,32 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using Vs.Morstead.Bpm.Core;
+using Vs.Morstead.Bpm.Model.Tasks;
 
 namespace Vs.Morstead.Bpm.Model.Gateways
 {
-    public class BpmExclusiveGateway
+    public class BpmExclusiveGateway : ITarget
     {
         public string Id { get; set; }
-        public List<string> Inputs { get; set; }
-        public List<string> Outputs { get; set; }
 
-        public BpmExclusiveGateway(JToken process, string id)
+
+        public IBpmnProcessEngine Engine { get; set; }
+
+        public string Name => throw new NotImplementedException();
+
+        public List<string> Incoming { get; set; }
+        public List<string> Outgoing { get; set; }
+
+        public BpmExclusiveGateway(JToken gateway)
         {
-            var o = process["bpmn:exclusiveGateway"];
-            switch (o.Type)
-            {
-                case JTokenType.Object:
-                    if (id != o["@id"].Value<string>())
-                        throw new Exception($"The BPM process could not find a bpmn:exlusiveGateway with id {id}.");
-                    break;
-                case JTokenType.Array:
-                    throw new NotImplementedException();
-            }
-                //.Where(p => p.Value<string>("@id") == id).Single();
-            Id = id;
-            Inputs = new List<string>();
-            Outputs = new List<string>();
-            switch (o["bpmn:incoming"].Type)
+            Id = gateway["@id"].Value<string>();
+            Incoming = new List<string>();
+            Outgoing = new List<string>();
+            switch (gateway["bpmn:incoming"].Type)
             {
                 case JTokenType.String:
-                    Inputs.Add((string)o["bpmn:incoming"]);
+                    Incoming.Add((string)gateway["bpmn:incoming"]);
                     break;
                 case JTokenType.Array:
                     throw new NotImplementedException();
@@ -37,20 +34,29 @@ namespace Vs.Morstead.Bpm.Model.Gateways
                     throw new Exception("Element 'bpm:incoming' expected a string or an array.");
             }
 
-            switch (o["bpmn:outgoing"].Type)
+            switch (gateway["bpmn:outgoing"].Type)
             {
                 case JTokenType.String:
-                    Inputs.Add((string)o["bpmn:outgoing"]);
+                    Outgoing.Add((string)gateway["bpmn:outgoing"]);
                     break;
                 case JTokenType.Array:
-                    foreach (var item in o["bpmn:outgoing"].Children())
+                    foreach (var item in gateway["bpmn:outgoing"].Children())
                     {
-                        Outputs.Add((string)item);
+                        Outgoing.Add((string)item);
                     }
                     break;
                 default:
                     throw new Exception("Element 'bpm:incoming' expected a string or an array.");
             }
+            /*
+            foreach (var flowId in Outputs)
+            {
+                process["bpmn:sequenceflow"].Where(p => p.Value<string>("@id") == flowId).Single();
+                // read evaluation.
+
+
+            }
+            */
         }
     }
 }
