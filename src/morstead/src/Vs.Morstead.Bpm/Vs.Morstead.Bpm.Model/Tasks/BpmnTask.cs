@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Flee.PublicTypes;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,14 +16,14 @@ namespace Vs.Morstead.Bpm.Model.Tasks
         public List<string> Incoming { get; set; }
         public List<string> Outgoing { get; set; }
 
-        public BpmnTask(JToken bpmnTask)
+        public BpmnTask(JToken bpmnTask, ExpressionContext context)
         {
             this.o = bpmnTask;
             Incoming = new List<string> { o["bpmn:incoming"].Value<string>() };
             Outgoing = new List<string> { o["bpmn:outgoing"].Value<string>() };
             ExecutionListeners = new List<ExecutionListener>();
             // TODO: implement multiple execution listeners. (Sequential?) Ordered by Start End Event Type?
-            var listener = new ExecutionListener(o);
+            var listener = new ExecutionListener(o, context);
             if (!string.IsNullOrEmpty(listener.DelegateExpression))
             {
                 ExecutionListeners.Add(listener);
