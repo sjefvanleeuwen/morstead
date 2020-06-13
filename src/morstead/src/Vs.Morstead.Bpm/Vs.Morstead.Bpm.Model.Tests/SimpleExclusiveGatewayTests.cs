@@ -1,3 +1,5 @@
+using Vs.Morstead.Bpm.Core;
+using Vs.Morstead.Bpm.Model.Gateways;
 using Vs.Morstead.Bpm.Model.Tasks;
 using Xunit;
 using Xunit.Abstractions;
@@ -40,21 +42,29 @@ namespace Vs.Morstead.Bpm.Model.Tests
             Assert.Equal("Flee", task.ExecutionListeners[0].DelegateInterface);
             Assert.Equal("Calc", task.ExecutionListeners[0].DelegateMethod);
             Assert.Equal("1", task.ExecutionListeners[0].OutputParameters["a"]);
+            Assert.Contains(_fixture.Process.Context.Variables, p => p.Key == "a");
+            Assert.Equal(1,(double)_fixture.Process.Context.Variables["a"]);
         }
 
         [Fact, Order(3)] public void FlowExpectsAnExclusiveGateway()
         {
-            var task = _fixture.Process.SequenceFlow.Next();
+            var task = _fixture.Process.SequenceFlow.Next() as BpmExclusiveGateway;
+            Assert.NotEmpty(task.Outgoing);
+            Assert.NotEmpty(task.Incoming);
+            Assert.Single(task.Incoming);
+            Assert.Equal(2, task.Outgoing.Count);
         }
 
         [Fact, Order(4)] public void ChoosesTaskB()
         {
-
+            var task = _fixture.Process.SequenceFlow.Next() as BpmnTask;
+            Assert.Equal("B", task.Name);
         }
 
         [Fact, Order(5)] public void ArrivesAtEndEvent()
         {
-
+            var task = _fixture.Process.SequenceFlow.Next() as BpmnTask;
+            Assert.Null(task); // reached end event.
         }
     }
 }
