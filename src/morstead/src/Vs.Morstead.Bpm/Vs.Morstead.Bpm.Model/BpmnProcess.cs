@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
-using Vs.Morstead.Bpm.Core;
 using Vs.Morstead.Bpm.Model.Events;
 
 namespace Vs.Morstead.Bpm.Model
