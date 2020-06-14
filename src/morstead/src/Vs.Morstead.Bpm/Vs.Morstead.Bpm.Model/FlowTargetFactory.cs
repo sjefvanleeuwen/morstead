@@ -16,6 +16,7 @@ namespace Vs.Morstead.Bpm.Model
         {
             foreach (var target in targets)
             {
+                if (process[target] == null) continue;
                 foreach (var item in process[target])
                 {
                     switch (item.Type)
