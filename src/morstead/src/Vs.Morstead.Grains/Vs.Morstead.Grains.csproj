@@ -15,8 +15,6 @@
     <PackageReference Include="Vs.Rules.Core" Version="1.0.2-alpha" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vs.Morstead.Bpm\Vs.Morstead.Bpm.Core\Vs.Morstead.Bpm.Core.csproj" />
-    <ProjectReference Include="..\Vs.Morstead.Bpm\Vs.Morstead.Bpm.Model\Vs.Morstead.Bpm.Model.csproj" />
     <ProjectReference Include="..\Vs.Morstead.Grains.Interfaces\Vs.Morstead.Grains.Interfaces.csproj" />
   </ItemGroup>
   <ItemGroup>
