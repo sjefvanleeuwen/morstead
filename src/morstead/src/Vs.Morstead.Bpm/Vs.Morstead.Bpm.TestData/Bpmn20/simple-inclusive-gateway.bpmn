@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_17s9gox" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.0.0">
+  <bpmn:process id="SimpleInclusiveGateway" name="Simple Inclusive Gateway" isExecutable="true">
+    <bpmn:startEvent id="StartEvent">
+      <bpmn:outgoing>ToSetVariables</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="TaskB" name="Task B">
+      <bpmn:incoming>ToTaskB</bpmn:incoming>
+      <bpmn:outgoing>TaskBToJoin</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent">
+      <bpmn:incoming>ToEnd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:inclusiveGateway id="Fork" name="Fork">
+      <bpmn:incoming>ToFork</bpmn:incoming>
+      <bpmn:outgoing>ToTaskA</bpmn:outgoing>
+      <bpmn:outgoing>ToTaskB</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="ToTaskA" name="${a==true)" sourceRef="Fork" targetRef="TaskA">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${a==true)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="ToTaskB" name="${b==true)" sourceRef="Fork" targetRef="TaskB">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${b==true)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:inclusiveGateway id="Join" name="Join&#10;&#10;">
+      <bpmn:incoming>TaskAToJoin</bpmn:incoming>
+      <bpmn:incoming>TaskBToJoin</bpmn:incoming>
+      <bpmn:outgoing>JoinToTaskC</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="TaskAToJoin" sourceRef="TaskA" targetRef="Join" />
+    <bpmn:sequenceFlow id="TaskBToJoin" sourceRef="TaskB" targetRef="Join" />
+    <bpmn:task id="TaskA" name="Task A">
+      <bpmn:incoming>ToTaskA</bpmn:incoming>
+      <bpmn:outgoing>TaskAToJoin</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="TaskSetVariables" name="Set Veriables">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="a">true</camunda:outputParameter>
+          <camunda:outputParameter name="b">true</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>ToSetVariables</bpmn:incoming>
+      <bpmn:outgoing>ToFork</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="ToSetVariables" sourceRef="StartEvent" targetRef="TaskSetVariables" />
+    <bpmn:sequenceFlow id="ToFork" sourceRef="TaskSetVariables" targetRef="Fork" />
+    <bpmn:task id="TaskC" name="Task C">
+      <bpmn:incoming>JoinToTaskC</bpmn:incoming>
+      <bpmn:outgoing>ToEnd</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="JoinToTaskC" sourceRef="Join" targetRef="TaskC" />
+    <bpmn:sequenceFlow id="ToEnd" sourceRef="TaskC" targetRef="EndEvent" />
+    <bpmn:textAnnotation id="TextAnnotation_0wa5gbx">
+      <bpmn:text>In this inclusive gateway example both variable a and b are set to true. This will result in a fork to task a and b on the flow connections. After task a and b have finished they will be joined into task c.</bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="SimpleInclusiveGateway">
+      <bpmndi:BPMNEdge id="Flow_1amly9q_di" bpmnElement="ToEnd">
+        <di:waypoint x="820" y="280" />
+        <di:waypoint x="872" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17np8u5_di" bpmnElement="JoinToTaskC">
+        <di:waypoint x="675" y="280" />
+        <di:waypoint x="720" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1aygy9m_di" bpmnElement="ToFork">
+        <di:waypoint x="340" y="280" />
+        <di:waypoint x="385" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00npt3s_di" bpmnElement="ToSetVariables">
+        <di:waypoint x="198" y="280" />
+        <di:waypoint x="240" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nsoi50_di" bpmnElement="TaskBToJoin">
+        <di:waypoint x="580" y="360" />
+        <di:waypoint x="650" y="360" />
+        <di:waypoint x="650" y="305" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09nl6rw_di" bpmnElement="TaskAToJoin">
+        <di:waypoint x="580" y="200" />
+        <di:waypoint x="650" y="200" />
+        <di:waypoint x="650" y="255" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1j5tsoc_di" bpmnElement="ToTaskB">
+        <di:waypoint x="410" y="305" />
+        <di:waypoint x="410" y="360" />
+        <di:waypoint x="480" y="360" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="414" y="343" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1121xa9_di" bpmnElement="ToTaskA">
+        <di:waypoint x="410" y="255" />
+        <di:waypoint x="410" y="200" />
+        <di:waypoint x="480" y="200" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="414" y="183" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent">
+        <dc:Bounds x="162" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pddxg7_di" bpmnElement="TaskB">
+        <dc:Bounds x="480" y="320" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ncpy5h_di" bpmnElement="EndEvent">
+        <dc:Bounds x="872" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1c9mqpg_di" bpmnElement="Fork">
+        <dc:Bounds x="385" y="255" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="438" y="273" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_158mix9_di" bpmnElement="Join">
+        <dc:Bounds x="625" y="255" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="599" y="270" width="21" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qxxe89_di" bpmnElement="TaskA">
+        <dc:Bounds x="480" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ln29q8_di" bpmnElement="TaskSetVariables">
+        <dc:Bounds x="240" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0na2isw_di" bpmnElement="TaskC">
+        <dc:Bounds x="720" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0wa5gbx_di" bpmnElement="TextAnnotation_0wa5gbx">
+        <dc:Bounds x="160" y="80" width="300" height="68" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
