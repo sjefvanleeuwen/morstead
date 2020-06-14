@@ -6,7 +6,7 @@ namespace Vs.Morstead.Bpm.Model
 {
     public class FlowTargetFactory
     {
-        private static string[] targets => "bpmn:task,bpmn:exclusiveGateway".Split(',');
+        private static string[] targets => "bpmn:task,bpmn:exclusiveGateway,bpmn:inclusiveGateway".Split(',');
 
         public string Target { get; set; }
 
