@@ -15,8 +15,6 @@ namespace Vs.Morstead.Bpm.Model.Tasks
 
         public EventTypes EventType { get; set; }
 
-        public Dictionary<string, string> OutputParameters { get; set; }
-
         public ExecutionListener(JToken task, ExpressionContext context)
         {
             var ext = task["bpmn:extensionElements"];
@@ -28,49 +26,6 @@ namespace Vs.Morstead.Bpm.Model.Tasks
                     DelegateExpression = listener["@delegateExpression"].Value<string>();
                     // triggered at start of task or end.
                     EventType = (EventTypes)Enum.Parse(typeof(EventTypes), listener["@event"].Value<string>());
-                    var io = ext["camunda:inputOutput"];
-                    if (io != null)
-                    {
-                        OutputParameters = new Dictionary<string, string>();
-                        string name, value;
-                        switch (io["camunda:outputParameter"].Type)
-                        {
-                            case JTokenType.Object:
-                                name = io["camunda:outputParameter"]["@name"].Value<string>().ToLower();
-                                value = io["camunda:outputParameter"]["#text"].Value<string>();
-                                OutputParameters.Add(name, value);
-                                // Todo Infer, reuse inference from vs.core (rules)?
-                                // Todo Infer, reuse inference from vs.core (rules)?
-                                try
-                                {
-                                    context.Variables.Add(name, double.Parse(value));
-                                }
-                                catch (Exception ex)
-                                {
-                                    context.Variables.Add(name, value);
-                                }
-                                break;
-                            case JTokenType.Array:
-                                foreach (var item in io["camunda:outputParameter"].Children())
-                                {
-                                    name = item["@name"].Value<string>().ToLower();
-                                    value = item["#text"].Value<string>();
-                                    OutputParameters.Add(name, value);
-                                    // Todo Infer, reuse inference from vs.core (rules)?
-                                    try
-                                    {
-                                        context.Variables.Add(name, double.Parse(value));
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        context.Variables.Add(name, value);
-                                    }
-                                }
-                                break;
-                            default:
-                                throw new Exception("Element 'camunda:outputParameter' expected a single item or an array.");
-                        }
-                    }
                 }
             }
         }

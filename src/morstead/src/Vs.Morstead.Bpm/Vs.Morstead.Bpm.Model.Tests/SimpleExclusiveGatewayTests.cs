@@ -41,7 +41,7 @@ namespace Vs.Morstead.Bpm.Model.Tests
             var task = _fixture.Process.SequenceFlow.GetCurrentTarget() as BpmnTask;
             Assert.Equal("Flee", task.ExecutionListeners[0].DelegateInterface);
             Assert.Equal("Calc", task.ExecutionListeners[0].DelegateMethod);
-            Assert.Equal("1", task.ExecutionListeners[0].OutputParameters["a"]);
+            Assert.Equal("1", task.OutputParameters["a"]);
             Assert.Contains(_fixture.Process.Context.Variables, p => p.Key == "a");
             Assert.Equal(1,(double)_fixture.Process.Context.Variables["a"]);
         }
