@@ -10,8 +10,6 @@ namespace Vs.Morstead.Bpm.Model.Gateways
     {
         public string Id { get; set; }
 
-        public IBpmnProcessEngine Engine { get; set; }
-
         public string Name => throw new NotImplementedException();
 
         public List<string> Incoming { get; set; }
