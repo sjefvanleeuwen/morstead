@@ -73,6 +73,9 @@ namespace Vs.Morstead.Bpm.Model
                 case "bpmn:exclusiveGateway":
                     _currentTarget = new BpmExclusiveGateway(factory.Token);
                     break;
+                case "bpmn:inclusiveGateway":
+                    _currentTarget = new BpmInclusiveGateway(factory.Token);
+                    break;
             }
             _currentFlowId = _currentTarget.Outgoing[0]; // TODO: support multiple outgoing.
             return _currentTarget;
