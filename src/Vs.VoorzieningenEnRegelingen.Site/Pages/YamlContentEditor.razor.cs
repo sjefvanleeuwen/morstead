@@ -88,7 +88,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             if (firstRender)
             {
                 InitYamlFileInfos();
-                await JSRuntime.InvokeAsync<object>("split", new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
+                await JSRuntime.InvokeAsync<object>("splitYamlContentEditor", new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
             }
         }
 
