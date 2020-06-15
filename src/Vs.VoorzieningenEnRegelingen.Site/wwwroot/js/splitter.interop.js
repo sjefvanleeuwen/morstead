@@ -13,7 +13,7 @@
         },
         gutterStyle: function (dimension, gutterSize) { return { 'flex-basis': gutterSize + 'px' } },
         sizes: [80, 20],
-        minSize: 150,
+        minSize: 300,
         gutterSize: 6,
         cursor: 'col-resize'
     });
