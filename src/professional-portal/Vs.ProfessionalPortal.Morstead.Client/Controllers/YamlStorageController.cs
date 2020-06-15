@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using VirtualSociety.VirtualSocietyDid;
@@ -14,7 +12,6 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
     public class YamlStorageController : IYamlStorageController
     {
         private string Did { get; set; } = new Did("mstd:dir").ToString();
-        private string DidPub { get; set; } = new Did("mstd:pub").ToString();
 
         public async Task<IEnumerable<FileInformation>> GetYamlFiles()
         {
@@ -37,10 +34,11 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
                 foreach(var item in contents.Items)
                 {
                     var fileName = item.Value.MetaData;
-                    var contentState = await OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(item.Value.GrainId).Load();
-                    var content = contentState.Encoding.GetString(contentState.Content);
+                    var contentGrain = await OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(item.Value.GrainId).Load();
+                    var content = contentGrain.Encoding.GetString(contentGrain.Content);
                     result.Add(new FileInformation
                     {
+                        Id = item.Value.GrainId,
                         Directory = directory,
                         FileName = fileName,
                         Content = content
@@ -50,7 +48,7 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
             return result;
         }
 
-        public async Task WriteYamlFile(string directoryName, string fileName, string content)
+        public async Task<string> WriteYamlFile(string directoryName, string fileName, string content, string contentId = null)
         {
             //directory
             var directoryGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryGrain>(Did);
@@ -60,16 +58,27 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
             }
             var dir = await directoryGrain.GetDirectory(directoryName);
             //content
-            var contentGrain = OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(DidPub);
-            await contentGrain.Save(new System.Net.Mime.ContentType("text/yaml"), Encoding.UTF8, content);
-            //write the content
-            var contentsGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryContentsGrain>(dir.ItemsGrainId);
-            await contentsGrain.AddItem(new DirectoryContentsItem()
+            var addItem = false;
+            if (contentId == null)
             {
-                MetaData = fileName,
-                GrainId = DidPub,
-                Interface = typeof(IContentPersistentGrain)
-            });
+                addItem = true;
+                contentId = new Did("mstd:pub").ToString();
+            }
+            var contentGrain = OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(contentId);
+            await contentGrain.Save(new System.Net.Mime.ContentType("text/yaml"), Encoding.UTF8, content);
+            //add the content to the directory
+            if (addItem)
+            {
+                var directoryContentsGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryContentsGrain>(dir.ItemsGrainId);
+                await directoryContentsGrain.AddItem(new DirectoryContentsItem()
+                {
+                    MetaData = fileName,
+                    GrainId = contentId,
+                    Interface = typeof(IContentPersistentGrain)
+                });
+            }
+
+            return contentId;
         }
 
     }

@@ -88,7 +88,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             if (firstRender)
             {
                 InitYamlFileInfos();
-                await JSRuntime.InvokeAsync<object>("split", new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
+                await JSRuntime.InvokeAsync<object>("splitYamlContentEditor", new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
             }
         }
 
@@ -103,6 +103,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await YamlStorageController.WriteYamlFile("Content", "Naam 1", "Content 1").ConfigureAwait(false);
             await YamlStorageController.WriteYamlFile("Layer", "Naam 2", "Layer 1").ConfigureAwait(false);
             await YamlStorageController.WriteYamlFile("Rule", "The One Rule", "The Rule to rule all Rules").ConfigureAwait(false);
+            var contentId = await YamlStorageController.WriteYamlFile("Rule", "The Second Rule", "A second rule to rule them all and in the darkness bind them.").ConfigureAwait(false);
+            await YamlStorageController.WriteYamlFile("Rule", "The Second Rule", "A second rule to rule them all and in the darkness bind them. revised", contentId).ConfigureAwait(false);
             var fileList = await YamlStorageController.GetYamlFiles().ConfigureAwait(false);
             await AddFileListToYamlFileInfos(fileList).ConfigureAwait(false);
         }
@@ -113,7 +115,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             {
                 YamlFileInfos.Add(new YamlFileInfo
                 {
-                    Id = Guid.NewGuid(),
+                    Id = file.Id,
                     Name = file.FileName,
                     Type = file.Directory,
                     Content = file.Content
@@ -153,20 +155,20 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 yamlFileInfo = new YamlFileInfo();
                 YamlFileInfos.Add(yamlFileInfo);
             }
-            yamlFileInfo.Id = Guid.NewGuid();
             yamlFileInfo.Name = Name.Trim();
             yamlFileInfo.Content = content;
             yamlFileInfo.Type = YamlSaveTypeSelector.SelectedValue;
 
-            WriteFile(yamlFileInfo);
+            yamlFileInfo.Id = await WriteFile(yamlFileInfo).ConfigureAwait(false);
         }
 
-        private async void WriteFile(YamlFileInfo yamlFileInfo)
+        private async Task<string> WriteFile(YamlFileInfo yamlFileInfo)
         {
-            await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, yamlFileInfo.Content).ConfigureAwait(false);
+            var contentId = await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, yamlFileInfo.Content, yamlFileInfo.Id).ConfigureAwait(false);
+            return contentId;
         }
 
-        public async Task Load(Guid id)
+        public async Task Load(string id)
         {
             var yamlFileInfo = YamlFileInfos?.FirstOrDefault(y => y.Id == id);
             Name = yamlFileInfo.Name;

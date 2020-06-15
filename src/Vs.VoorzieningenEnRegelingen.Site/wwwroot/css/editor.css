@@ -1,7 +1,6 @@
 ﻿.left-half_contenteditor {
     background-color: #f1f1f1;
     float: left;
-    width: 50%;
     display: block;
     overflow: auto;
     display: flex;
@@ -26,7 +25,6 @@
 .right-half_contenteditor {
     background-color: #f1f1f1;
     float: left;
-    width: 50%;
     height: 100%;
 }
 
