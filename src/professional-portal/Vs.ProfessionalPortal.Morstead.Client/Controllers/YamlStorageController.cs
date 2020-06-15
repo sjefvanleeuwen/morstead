@@ -34,10 +34,11 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
                 foreach(var item in contents.Items)
                 {
                     var fileName = item.Value.MetaData;
-                    var contentState = await OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(item.Value.GrainId).Load();
-                    var content = contentState.Encoding.GetString(contentState.Content);
+                    var contentGrain = await OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(item.Value.GrainId).Load();
+                    var content = contentGrain.Encoding.GetString(contentGrain.Content);
                     result.Add(new FileInformation
                     {
+                        Id = item.Value.GrainId,
                         Directory = directory,
                         FileName = fileName,
                         Content = content
@@ -47,7 +48,7 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
             return result;
         }
 
-        public async Task WriteYamlFile(string directoryName, string fileName, string content)
+        public async Task<string> WriteYamlFile(string directoryName, string fileName, string content, string contentId = null)
         {
             //directory
             var directoryGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryGrain>(Did);
@@ -57,17 +58,27 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
             }
             var dir = await directoryGrain.GetDirectory(directoryName);
             //content
-            var contentId = new Did("mstd:pub").ToString();
+            var addItem = false;
+            if (contentId == null)
+            {
+                addItem = true;
+                contentId = new Did("mstd:pub").ToString();
+            }
             var contentGrain = OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(contentId);
             await contentGrain.Save(new System.Net.Mime.ContentType("text/yaml"), Encoding.UTF8, content);
-            //write the content
-            var contentsGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryContentsGrain>(dir.ItemsGrainId);
-            await contentsGrain.AddItem(new DirectoryContentsItem()
+            //add the content to the directory
+            if (addItem)
             {
-                MetaData = fileName,
-                GrainId = contentId,
-                Interface = typeof(IContentPersistentGrain)
-            });
+                var directoryContentsGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryContentsGrain>(dir.ItemsGrainId);
+                await directoryContentsGrain.AddItem(new DirectoryContentsItem()
+                {
+                    MetaData = fileName,
+                    GrainId = contentId,
+                    Interface = typeof(IContentPersistentGrain)
+                });
+            }
+
+            return contentId;
         }
 
     }

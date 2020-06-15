@@ -8,6 +8,6 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers.Interfaces
     {
         Task<IEnumerable<FileInformation>> GetYamlFiles();
 
-        Task WriteYamlFile(string directoryName, string fileName, string content);
+        Task<string> WriteYamlFile(string directoryName, string fileName, string content, string contentId = null);
     }
 }
