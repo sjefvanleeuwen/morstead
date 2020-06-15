@@ -1,8 +1,12 @@
+using System;
+using System.Configuration;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
@@ -12,8 +16,16 @@ namespace Vs.Morstead.SiloHost
 {
     public class Program
     {
+
+
         public static Task Main(string[] args)
         {
+
+
+            var Configuration = new ConfigurationBuilder()
+               .AddYamlFile("config.yaml")
+
+               .Build();
             return new HostBuilder()
                 .UseOrleans(builder =>
                 {
@@ -28,26 +40,15 @@ namespace Vs.Morstead.SiloHost
                         .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
                         // note! volatile storage for morstead development purposes
                         .UseInMemoryReminderService()
-                        .AddMemoryGrainStorage(name: "account-store")
-                        .AddMemoryGrainStorage(name: "pub-sub-store")
-                        .AddMemoryGrainStorage(name: "ArchiveStorage")
-                        .AddMemoryGrainStorage(name: "session-store")
-                        .AddMemoryGrainStorage(name: "content-store")
-                        .AddMemoryGrainStorage(name: "bpm-process-store")
-                        .AddMemoryGrainStorage(name: "dir-store");
-                    //.AddMemoryGrainStorage(name: "profileStore");
-                    /*
-                    .AddAzureBlobGrainStorage(
-                        name: "profileStore",
-                        configureOptions: options =>
-                        {
-                            // Use JSON for serializing the state in storage
-                            options.UseJson = true;
+                        .MorsteadGrainStorage(options => { options.Name = "account-store"; }, Configuration)
+                        .MorsteadGrainStorage(options => { options.Name = "pub-sub-store"; }, Configuration)
+                        .MorsteadGrainStorage(options => { options.Name = "ArchiveStorage"; }, Configuration)
+                        .MorsteadGrainStorage(options => { options.Name = "session-store"; }, Configuration)
+                        .MorsteadGrainStorage(options => { options.Name = "content-store"; }, Configuration)
+                        .MorsteadGrainStorage(options => { options.Name = "bpm-process-store"; }, Configuration)
+                        .MorsteadGrainStorage(options => { options.Name = "dir-store"; }, Configuration);
 
-                            // Configure the storage connection key
-                            options.ConnectionString = "DefaultEndpointsProtocol=https;AccountName=data1;AccountKey=SOMETHING1";
-                        });*/
-
+                    //.AddMemoryGrainStorage(name: "dir-store");
                 })
                 .ConfigureServices(services =>
                 {
