@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using VirtualSociety.VirtualSocietyDid;
@@ -14,7 +12,6 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
     public class YamlStorageController : IYamlStorageController
     {
         private string Did { get; set; } = new Did("mstd:dir").ToString();
-        private string DidPub { get; set; } = new Did("mstd:pub").ToString();
 
         public async Task<IEnumerable<FileInformation>> GetYamlFiles()
         {
@@ -60,14 +57,15 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
             }
             var dir = await directoryGrain.GetDirectory(directoryName);
             //content
-            var contentGrain = OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(DidPub);
+            var contentId = new Did("mstd:pub").ToString();
+            var contentGrain = OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(contentId);
             await contentGrain.Save(new System.Net.Mime.ContentType("text/yaml"), Encoding.UTF8, content);
             //write the content
             var contentsGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryContentsGrain>(dir.ItemsGrainId);
             await contentsGrain.AddItem(new DirectoryContentsItem()
             {
                 MetaData = fileName,
-                GrainId = DidPub,
+                GrainId = contentId,
                 Interface = typeof(IContentPersistentGrain)
             });
         }

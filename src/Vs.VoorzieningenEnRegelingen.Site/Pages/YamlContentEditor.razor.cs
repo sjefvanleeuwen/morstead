@@ -103,6 +103,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await YamlStorageController.WriteYamlFile("Content", "Naam 1", "Content 1").ConfigureAwait(false);
             await YamlStorageController.WriteYamlFile("Layer", "Naam 2", "Layer 1").ConfigureAwait(false);
             await YamlStorageController.WriteYamlFile("Rule", "The One Rule", "The Rule to rule all Rules").ConfigureAwait(false);
+            await YamlStorageController.WriteYamlFile("Rule", "The Second Rule", "A second rule to rule them all and in the darkness bind them.").ConfigureAwait(false);
             var fileList = await YamlStorageController.GetYamlFiles().ConfigureAwait(false);
             await AddFileListToYamlFileInfos(fileList).ConfigureAwait(false);
         }
