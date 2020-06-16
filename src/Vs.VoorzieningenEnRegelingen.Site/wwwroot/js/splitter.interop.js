@@ -19,7 +19,7 @@
   });
 }
 
-//menu hanburger resize will do callback to redraw the yamllayouteditor
+//menu hamburger resize will do callback to redraw the yamllayouteditor
 
 let OnResizeCallBackMethodName;
 let OnResizeCallBackReference;
