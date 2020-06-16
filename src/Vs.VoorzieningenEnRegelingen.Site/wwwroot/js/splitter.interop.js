@@ -19,12 +19,45 @@
   });
 }
 
+let OnResizeCallBackMethodName;
+let OnResizeCallBackReference;
+
+var delayInMilliseconds = 310;
+
+var $div = $("body");
+var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        if (mutation.attributeName === "class") {
+            var attributeValue = $(mutation.target).prop(mutation.attributeName);
+            console.log("Class attribute changed to:", attributeValue);
+            setTimeout(function () {
+                if (OnResizeCallBackReference && OnResizeCallBackMethodName) {
+                    console.log("callback done.")
+                    OnResizeCallBackReference.invokeMethodAsync(OnResizeCallBackMethodName);
+                }
+            }, delayInMilliseconds);
+        }
+    });
+});
+observer.observe($div[0], {
+    attributes: true
+});
+
+console.log("splitter.js loaded");
+$("body").on('event', function () {
+    if (OnResizeCallBackReference && OnResizeCallBackMethodName) OnResizeCallBackReference.invokeMethodAsync(OnResizeCallBackMethodName);
+    console.log("body class changed")
+});
+
+
 function splitYamlContentEditor(dotNetReference, onResizeCallBackMethodName) {
+    OnResizeCallBackMethodName = onResizeCallBackMethodName;
+    OnResizeCallBackReference = dotNetReference;
   $(window).resize(function () {
     var window_height = $(window).height(),
       header_height = $(".main-header").height();
     $("#splitcontainer").css("height", window_height - header_height - 17);
-    if (dotNetReference && onResizeCallBackMethodName) dotNetReference.invokeMethodAsync(onResizeCallBackMethodName);
+      if (dotNetReference && onResizeCallBackMethodName) OnResizeCallBackReference.invokeMethodAsync(onResizeCallBackMethodName);
   });
   $(window).resize();
   var minSize = 310;
