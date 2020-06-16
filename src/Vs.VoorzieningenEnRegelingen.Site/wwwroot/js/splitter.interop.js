@@ -19,6 +19,8 @@
   });
 }
 
+//menu hanburger resize will do callback to redraw the yamllayouteditor
+
 let OnResizeCallBackMethodName;
 let OnResizeCallBackReference;
 
@@ -29,10 +31,8 @@ var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
         if (mutation.attributeName === "class") {
             var attributeValue = $(mutation.target).prop(mutation.attributeName);
-            console.log("Class attribute changed to:", attributeValue);
             setTimeout(function () {
                 if (OnResizeCallBackReference && OnResizeCallBackMethodName) {
-                    console.log("callback done.")
                     OnResizeCallBackReference.invokeMethodAsync(OnResizeCallBackMethodName);
                 }
             }, delayInMilliseconds);
@@ -43,10 +43,8 @@ observer.observe($div[0], {
     attributes: true
 });
 
-console.log("splitter.js loaded");
 $("body").on('event', function () {
     if (OnResizeCallBackReference && OnResizeCallBackMethodName) OnResizeCallBackReference.invokeMethodAsync(OnResizeCallBackMethodName);
-    console.log("body class changed")
 });
 
 
