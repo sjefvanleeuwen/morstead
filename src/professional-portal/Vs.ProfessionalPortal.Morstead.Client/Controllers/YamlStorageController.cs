@@ -11,7 +11,9 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
 {
     public class YamlStorageController : IYamlStorageController
     {
-        private string Did { get; set; } = new Did("mstd:dir").ToString();
+        private static string GlobalDid = "did:vsoc:mstd:dir:UtF0tMaRjUqzW4PjMjtr8g";
+
+        private string Did { get; set; } = GlobalDid; // new Did("mstd:dir").ToString();
 
         public async Task<IEnumerable<FileInformation>> GetYamlFiles()
         {
