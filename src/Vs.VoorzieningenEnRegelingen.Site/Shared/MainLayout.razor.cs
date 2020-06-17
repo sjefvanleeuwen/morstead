@@ -14,12 +14,17 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Shared
     {
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
+
         [Inject]
         public AuthenticationStateProvider AuthenticationStateProvider  { get; set; }
+
         [Inject]
         public IEventBus Bus  { get; set; }
 
         SubscriptionToken token;
+
+        private static Timer aTimer;
+        private static long count;
 
         protected override Task OnAfterRenderAsync(bool firstRender)
         {
@@ -39,16 +44,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Shared
             return base.OnAfterRenderAsync(firstRender);
         }
 
-        private static System.Timers.Timer aTimer;
-        private static long count;
-
         private void SetTimer()
         {
 
             if (aTimer != null)
                 return;
             // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(10000);
+            aTimer = new Timer(10000);
             // Hook up the Elapsed event for the timer.
             aTimer.Elapsed += OnTimedEvent;
             // aTimer.AutoReset = true;

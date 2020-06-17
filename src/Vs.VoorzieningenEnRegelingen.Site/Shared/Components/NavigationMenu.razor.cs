@@ -1,18 +1,22 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.Site.Model;
+using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Shared.Components
 {
     public partial class NavigationMenu
     {
-        [Parameter]
-        public IEnumerable<MenuItem> Menu { get; set; } = new List<MenuItem>();
+        [Inject]
+        public IMenu Menu { get; set; }
 
-        public void BuildMenu(IEnumerable<MenuItem> menu)
+        protected override void OnInitialized()
         {
-            Menu = menu;
-            this.StateHasChanged();
+            Menu.OnChange += StateHasChanged;
+            base.OnInitialized();
+        }
+
+        public void Dispose()
+        {
+            Menu.OnChange -= StateHasChanged;
         }
     }
 }

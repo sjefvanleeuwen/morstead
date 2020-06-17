@@ -93,12 +93,32 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
+        protected override void SetMenu()
+        {
+            var menuItems = new List<IMenuItem>
+                {
+                    new MenuItem { Link = "/", Name = "Home" },
+                    new MenuItem { Name = "Editor", SubMenuItems =
+                        new List<MenuItem> {
+                            new MenuItem { Link = "/", Name = "Nieuw" },
+                            new MenuItem { Link = "/", Name = "Ophalen"},
+                            new MenuItem { IsDivider = true },
+                            new MenuItem { Link = "/", Name = "Opslaan"},
+                            new MenuItem { Link = "/", Name = "Opslaan als..."}
+                        }
+                    },
+                    new MenuItem { Link = "/About", Name = "Over"}
+                };
+            Menu.SetMenuItems(menuItems);
+        }
+
+
         [JSInvokable("InvokeLayout")]
         public Task Layout()
         {
             return ValidationController.YamlEditor.Layout();
         }
-        
+
         public async void InitYamlFileInfos()
         {
             //await YamlStorageController.WriteYamlFile("Content", "Naam 1", "Content 1").ConfigureAwait(false);
@@ -132,7 +152,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 OpenNotification("Geen naam ingevuld");
                 return;
             }
-             
+
             var chars = Vs.Core.Extensions.StringExtensions.GetInvalidFileNameCharacters(Name);
             if (chars.Any())
             {
