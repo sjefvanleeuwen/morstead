@@ -1,4 +1,4 @@
-﻿namespace Vs.Morstead.SiloHost
+﻿namespace Vs.Morstead.Orleans.Configuration
 {
     public class MorsteadStorageConfiguration
     {

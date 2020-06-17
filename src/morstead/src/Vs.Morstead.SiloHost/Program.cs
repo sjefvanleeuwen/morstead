@@ -11,6 +11,7 @@ using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using Vs.Morstead.Grains;
+using Vs.Morstead.Orleans.Configuration;
 
 namespace Vs.Morstead.SiloHost
 {
