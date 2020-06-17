@@ -1,6 +1,9 @@
 ﻿using Orleans;
 using Orleans.Runtime;
+using System;
 using System.Net.Mime;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using Vs.Morstead.Grains.Interfaces.Content;
@@ -25,13 +28,20 @@ namespace Vs.Morstead.Grains.Content
             return base.OnActivateAsync();
         }
 
-        public async Task Save(ContentType contentType, Encoding encoding, string contents)
+
+        public Task<string> GetContentAsString()
         {
-            await Save(contentType, encoding, encoding.GetBytes(contents));
+            return Task.FromResult(Content.State.GetEncoding().GetString(Content.State.Content));
         }
 
-        public async Task Save(ContentType contentType, Encoding encoding, byte[] contents)
+        public async Task Save(string contentType, EncodingType encodingType, string contents)
         {
+            await Save(contentType, encodingType, Content.State.GetEncoding().GetBytes(contents));
+        }
+
+        public async Task Save(string contentType, EncodingType encoding, byte[] contents)
+        {
+            
             var compression = GrainFactory.GetGrain<ICompressionWorkerGrain>(0);
             Content.State.Content = await compression.Compress(CompressionType.LZ4, contents);
             Content.State.CompressionType = CompressionType.LZ4;
@@ -46,7 +56,7 @@ namespace Vs.Morstead.Grains.Content
         public async Task<ContentState> Load()
         {
             var compression = GrainFactory.GetGrain<ICompressionWorkerGrain>(0);
-            await Content.ReadStateAsync();
+            //await Content.ReadStateAsync();
             Content.State.Content = await compression.Decompress(
                 Content.State.CompressionType, Content.State.Content);
             return Content.State;
