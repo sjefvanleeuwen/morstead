@@ -5,6 +5,9 @@ html, body {
     height: 100%;
     padding-top: 24px;
 }
+.brand-text {
+    font-family: "LEMON MILK";
+}
 #swipeBarContainer {
     background-color: #444444;
 }
