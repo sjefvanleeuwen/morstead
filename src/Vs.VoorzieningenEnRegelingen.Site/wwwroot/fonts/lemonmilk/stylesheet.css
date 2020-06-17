@@ -1,0 +1,104 @@
+@font-face {
+    font-family: 'LEMON MILK';
+    src: url('LEMONMILK-Light.eot');
+    src: url('LEMONMILK-Light.eot?#iefix') format('embedded-opentype'),
+        url('LEMONMILK-Light.woff2') format('woff2'),
+        url('LEMONMILK-Light.woff') format('woff'),
+        url('LEMONMILK-Light.ttf') format('truetype'),
+        url('LEMONMILK-Light.svg#LEMONMILK-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LEMON MILK';
+    src: url('LEMONMILK-Regular.eot');
+    src: url('LEMONMILK-Regular.eot?#iefix') format('embedded-opentype'),
+        url('LEMONMILK-Regular.woff2') format('woff2'),
+        url('LEMONMILK-Regular.woff') format('woff'),
+        url('LEMONMILK-Regular.ttf') format('truetype'),
+        url('LEMONMILK-Regular.svg#LEMONMILK-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LEMON MILK';
+    src: url('LEMONMILK-Medium.eot');
+    src: url('LEMONMILK-Medium.eot?#iefix') format('embedded-opentype'),
+        url('LEMONMILK-Medium.woff2') format('woff2'),
+        url('LEMONMILK-Medium.woff') format('woff'),
+        url('LEMONMILK-Medium.ttf') format('truetype'),
+        url('LEMONMILK-Medium.svg#LEMONMILK-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LEMON MILK';
+    src: url('LEMONMILK-BoldItalic.eot');
+    src: url('LEMONMILK-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('LEMONMILK-BoldItalic.woff2') format('woff2'),
+        url('LEMONMILK-BoldItalic.woff') format('woff'),
+        url('LEMONMILK-BoldItalic.ttf') format('truetype'),
+        url('LEMONMILK-BoldItalic.svg#LEMONMILK-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LEMON MILK';
+    src: url('LEMONMILK-Bold.eot');
+    src: url('LEMONMILK-Bold.eot?#iefix') format('embedded-opentype'),
+        url('LEMONMILK-Bold.woff2') format('woff2'),
+        url('LEMONMILK-Bold.woff') format('woff'),
+        url('LEMONMILK-Bold.ttf') format('truetype'),
+        url('LEMONMILK-Bold.svg#LEMONMILK-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LEMON MILK';
+    src: url('LEMONMILK-LightItalic.eot');
+    src: url('LEMONMILK-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('LEMONMILK-LightItalic.woff2') format('woff2'),
+        url('LEMONMILK-LightItalic.woff') format('woff'),
+        url('LEMONMILK-LightItalic.ttf') format('truetype'),
+        url('LEMONMILK-LightItalic.svg#LEMONMILK-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LEMON MILK';
+    src: url('LEMONMILK-RegularItalic.eot');
+    src: url('LEMONMILK-RegularItalic.eot?#iefix') format('embedded-opentype'),
+        url('LEMONMILK-RegularItalic.woff2') format('woff2'),
+        url('LEMONMILK-RegularItalic.woff') format('woff'),
+        url('LEMONMILK-RegularItalic.ttf') format('truetype'),
+        url('LEMONMILK-RegularItalic.svg#LEMONMILK-RegularItalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LEMON MILK';
+    src: url('LEMONMILK-MediumItalic.eot');
+    src: url('LEMONMILK-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('LEMONMILK-MediumItalic.woff2') format('woff2'),
+        url('LEMONMILK-MediumItalic.woff') format('woff'),
+        url('LEMONMILK-MediumItalic.ttf') format('truetype'),
+        url('LEMONMILK-MediumItalic.svg#LEMONMILK-MediumItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
