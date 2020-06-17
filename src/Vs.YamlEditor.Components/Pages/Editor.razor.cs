@@ -12,7 +12,9 @@ namespace Vs.YamlEditor.Components.Pages
         private string Url { get; set; } = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml";
         private string Value { get; set; }
 
+        
         private ValidationController _validationController;
+        private string _selectedValue;
 
         private ValidationController ValidationController
         {
@@ -26,7 +28,7 @@ namespace Vs.YamlEditor.Components.Pages
             }
         }
 
-        private string SelectedValue { get => ValidationController.YamlTypeSelector.SelectedValue; set => ValidationController.YamlTypeSelector.SelectedValue = value; }
+        private string SelectedValue { get => _selectedValue; set { _selectedValue = value; ValidationController.SelectedValue = value; } }
 
         private string GetStyleForType(YamlType type)
         {

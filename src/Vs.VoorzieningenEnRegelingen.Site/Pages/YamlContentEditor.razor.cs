@@ -28,7 +28,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         protected IYamlStorageController YamlStorageController { get; set; }
 
         private ValidationController _validationController;
-        private YamlTypeSelector _yamlValidateTypeSelector;
 
         private ValidationController ValidationController
         {
@@ -42,17 +41,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
-        private YamlTypeSelector YamlValidateTypeSelector
-        {
-            get => _yamlValidateTypeSelector;
-            set
-            {
-                ValidationController.YamlTypeSelector = value;
-                _yamlValidateTypeSelector = value;
-            }
-        }
+        private string _selectedValue;
 
-        private YamlTypeSelector YamlSaveTypeSelector { get; set; }
+        private string SelectedValue { get => _selectedValue; set { _selectedValue = value; ValidationController.SelectedValue = value; } }
 
         private string Name { get; set; }
 
@@ -112,7 +103,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             Menu.SetMenuItems(menuItems);
         }
 
-
         [JSInvokable("InvokeLayout")]
         public Task Layout()
         {
@@ -121,11 +111,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         public async void InitYamlFileInfos()
         {
-            //await YamlStorageController.WriteYamlFile("Content", "Naam 1", "Content 1").ConfigureAwait(false);
-            //await YamlStorageController.WriteYamlFile("Layer", "Naam 2", "Layer 1").ConfigureAwait(false);
-            //await YamlStorageController.WriteYamlFile("Rule", "The One Rule", "The Rule to rule all Rules").ConfigureAwait(false);
-            //var contentId = await YamlStorageController.WriteYamlFile("Rule", "The Second Rule", "A second rule to rule them all and in the darkness bind them.").ConfigureAwait(false);
-            //await YamlStorageController.WriteYamlFile("Rule", "The Second Rule", "A second rule to rule them all and in the darkness bind them. revised", contentId).ConfigureAwait(false);
             var fileList = await YamlStorageController.GetYamlFiles().ConfigureAwait(false);
             await AddFileListToYamlFileInfos(fileList).ConfigureAwait(false);
         }
@@ -159,7 +144,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 OpenNotification("De naam bevat illegale tekens voor bestandsnamen");
                 return;
             }
-            if (string.IsNullOrWhiteSpace(YamlSaveTypeSelector.SelectedValue))
+            if (string.IsNullOrWhiteSpace(SelectedValue))
             {
                 OpenNotification("Geen type document geselecteerd");
                 return;
@@ -170,7 +155,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 OpenNotification("Er is geen inhoud in het bestand");
                 return;
             }
-            var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name && y.Type == YamlSaveTypeSelector.SelectedValue);
+            var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name && y.Type == SelectedValue);
             if (yamlFileInfo == null)
             {
                 yamlFileInfo = new YamlFileInfo();
@@ -178,9 +163,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
             yamlFileInfo.Name = Name.Trim();
             yamlFileInfo.Content = content;
-            yamlFileInfo.Type = YamlSaveTypeSelector.SelectedValue;
+            yamlFileInfo.Type = SelectedValue;
 
             yamlFileInfo.Id = await WriteFile(yamlFileInfo).ConfigureAwait(false);
+            OpenNotification("Inhoud succesvol opgeslagen.");
         }
 
         private async Task<string> WriteFile(YamlFileInfo yamlFileInfo)
@@ -193,7 +179,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             var yamlFileInfo = YamlFileInfos?.FirstOrDefault(y => y.Id == id);
             Name = yamlFileInfo.Name;
-            YamlSaveTypeSelector.SelectedValue = yamlFileInfo.Type;
+            SelectedValue = yamlFileInfo.Type;
             await ValidationController.YamlEditor.SetValue(yamlFileInfo?.Content ?? string.Empty).ConfigureAwait(false);
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Vs.Core.Extensions;
 using Vs.Core.Layers.Enums;
 using Vs.YamlEditor.Components.Controllers.ApiCalls;
-using Vs.YamlEditor.Components.Shared;
 
 namespace Vs.YamlEditor.Components.Controllers
 {
@@ -15,7 +15,8 @@ namespace Vs.YamlEditor.Components.Controllers
     {
         private CancellationTokenSource TokenSource { get; set; }
         public Shared.YamlEditor YamlEditor { get; set; }
-        public YamlTypeSelector YamlTypeSelector { get; set; } = new YamlTypeSelector();
+
+        public string SelectedValue { get; set; }
 
         private readonly TimeSpan _submitWait = TimeSpan.FromMilliseconds(5000);
 
@@ -67,12 +68,19 @@ namespace Vs.YamlEditor.Components.Controllers
 
         public async void SubmitPage()
         {
-            //TODO Select the validation based on yamltype
-            if (string.IsNullOrWhiteSpace(YamlTypeSelector.SelectedValue))
+            if (string.IsNullOrWhiteSpace(SelectedValue))
             {
                 return;
             }
 
+            if (SelectedValue == YamlType.Rules.GetDescription())
+            {
+                await RuleValidation();
+            }
+        }
+
+        private async Task RuleValidation()
+        {
             var client = new RulesControllerDisciplClient(new HttpClient())
             {
                 BaseUrl = "https://localhost:44391/"

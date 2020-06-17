@@ -4,20 +4,6 @@
 <div id="splitcontainer" class="clear-fix row no-gutters splitter-content-editor">
     <div id="left-half_contenteditor" class="left-half_contenteditor splitter-half_wrapper">
         <div class="left-half_header sm-12">
-            <div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Naam</span>
-                    </div>
-                    <input type="text" class="form-control" aria-label="Naam" aria-describedby="Naam" @bind="Name">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-primary" @onclick="Save">Opslaan</button>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <YamlTypeSelector @ref="YamlSaveTypeSelector" HorizontalDirection="true" Name="SaveRuleType" />
-            </div>
         </div>
         <div class="left-half_bottom">
             <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="@(ValidationController.StartSubmitCountdown)" CssClass="editor" />
@@ -25,9 +11,6 @@
     </div>
     <div id="right-half_contenteditor" class="right-half_contenteditor splitter-half_wrapper">
         <div class="submit">
-            <h4>Selecteer het type Yaml</h4>
-            <YamlTypeSelector @ref="YamlValidateTypeSelector" DisabledTypes="DisabledTypes" Name="ValidateRuleType" />
-            <button type="button" class="btn btn-primary" @onclick="ValidationController.SubmitPage">Check inhoud</button>
             <h4>Opgeslagen Yamls</h4>
             <Table Grid="YamFileInfoGrid" />
         </div>
