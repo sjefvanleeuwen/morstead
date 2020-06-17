@@ -5,19 +5,12 @@
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Content\ContentTests.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Content\ContentTests.cs" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.0-preview-20200519-01" />
     <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.2.0" />
     <PackageReference Include="Microsoft.Orleans.TestingHost" Version="3.2.0" />
     <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.0.1" />
     <PackageReference Include="Vs.Did" Version="1.0.0-alpha" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.2">
@@ -33,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\src\Vs.Morstead.Grains.Interfaces\Vs.Morstead.Grains.Interfaces.csproj" />
     <ProjectReference Include="..\src\Vs.Morstead.Grains\Vs.Morstead.Grains.csproj" />
+    <ProjectReference Include="..\Vs.Morstead.Orleans.Configuration\Vs.Morstead.Orleans.Configuration.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,12 @@
 ﻿using Orleans.TestingHost;
 using System;
-using System.Linq;
 using VirtualSociety.VirtualSocietyDid;
 using Vs.Morstead.Grains.Interfaces.Bpm;
 using Xunit;
 
 namespace Vs.Morstead.Tests.Bpm
 {
+    [CollectionDefinition("BpmTests", DisableParallelization = true)]
     public class BpmProcessSimpleTests : IClassFixture<ClusterFixture>
     {
         private readonly TestCluster cluster;
