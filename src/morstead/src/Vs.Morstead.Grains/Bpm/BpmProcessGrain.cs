@@ -54,7 +54,7 @@ namespace Vs.Morstead.Grains.Bpm
 
             //_process = new BpmnProcess(Process.State.Bpmn);
             //var sequenceFlow = _process.SequenceFlow.Next() as BpmnTask;
-            //Process.State.Status = BpmProcessExecutionTypes.Started;
+            Process.State.Status = BpmProcessExecutionTypes.Started;
             //await Process.WriteStateAsync();
             //if (sequenceFlow.ExecutionListeners != null);
             //ExecuteDelegate(sequenceFlow.ExecutionListeners[0]);
