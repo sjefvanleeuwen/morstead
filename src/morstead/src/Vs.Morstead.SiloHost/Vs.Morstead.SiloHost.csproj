@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -24,6 +24,7 @@
     <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Vs.Morstead.Orleans.Configuration\Vs.Morstead.Orleans.Configuration.csproj" />
     <ProjectReference Include="..\Vs.Morstead.Grains\Vs.Morstead.Grains.csproj" />
     <ProjectReference Include="..\Vs.Morstead.Grains.Interfaces\Vs.Morstead.Grains.Interfaces.csproj" />
   </ItemGroup>

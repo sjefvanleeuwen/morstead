@@ -37,7 +37,7 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
                 {
                     var fileName = item.Value.MetaData;
                     var contentGrain = await OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(item.Value.GrainId).Load();
-                    var content = contentGrain.Encoding.GetString(contentGrain.Content);
+                    var content = contentGrain.ContentAs<string>();
                     result.Add(new FileInformation
                     {
                         Id = item.Value.GrainId,
@@ -67,7 +67,7 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
                 contentId = new Did("mstd:pub").ToString();
             }
             var contentGrain = OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(contentId);
-            await contentGrain.Save(new System.Net.Mime.ContentType("text/yaml"), Encoding.UTF8, content);
+            await contentGrain.Save("text/yaml", EncodingType.UTF8, content);
             //add the content to the directory
             if (addItem)
             {

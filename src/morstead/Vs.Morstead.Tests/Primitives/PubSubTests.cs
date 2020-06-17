@@ -1,7 +1,5 @@
 ﻿using Orleans;
 using Orleans.TestingHost;
-using System.Net.Mime;
-using System.Text;
 using System.Threading.Tasks;
 using VirtualSociety.VirtualSocietyDid;
 using Vs.Morstead.Grains.Interfaces.Content;
@@ -12,6 +10,7 @@ using Xunit;
 
 namespace Vs.Morstead.Tests.Primitives
 {
+    [CollectionDefinition("PubSubTests", DisableParallelization = true)]
     public class PubSubTests : IClassFixture<ClusterFixture>
     {
         private readonly TestCluster cluster;
@@ -51,7 +50,7 @@ namespace Vs.Morstead.Tests.Primitives
                     GrainCallbackMethod = nameof(userContent.ContentSaved)
                 });
             // Create Some Content
-            await content.Save(new ContentType("text/html"), Encoding.UTF8, "Hello World!");
+            await content.Save("text/html", EncodingType.UTF8, "Hello World!");
             Assert.Equal(contentDid, userContent.GetContentId().Result);
         }
     }

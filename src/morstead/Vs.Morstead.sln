@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Morstead.Tests", "Vs.Mor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grains", "Grains", "{984A5D78-1F40-4A8C-A233-D6487EB1567F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Morstead.Orleans.Configuration", "Vs.Morstead.Orleans.Configuration\Vs.Morstead.Orleans.Configuration.csproj", "{83C905E8-9315-48F4-9084-030063585B1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{EE13B810-AEBF-4B28-A0A7-3455D11480CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE13B810-AEBF-4B28-A0A7-3455D11480CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE13B810-AEBF-4B28-A0A7-3455D11480CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C905E8-9315-48F4-9084-030063585B1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C905E8-9315-48F4-9084-030063585B1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C905E8-9315-48F4-9084-030063585B1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C905E8-9315-48F4-9084-030063585B1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
