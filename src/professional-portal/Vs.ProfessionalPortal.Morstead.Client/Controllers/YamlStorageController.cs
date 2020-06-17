@@ -26,26 +26,26 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
             var directoryGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryGrain>(Did);
             foreach (var directory in directories)
             {
-                if (!await directoryGrain.DirectoryExists(directory))
-                {
-                    continue;
-                }
-                var dir = await directoryGrain.GetDirectory(directory);
-                var contentsGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryContentsGrain>(dir.ItemsGrainId);
-                var contents = await contentsGrain.ListItems();
-                foreach(var item in contents.Items)
-                {
-                    var fileName = item.Value.MetaData;
-                    var contentGrain = await OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(item.Value.GrainId).Load();
-                    var content = contentGrain.Encoding.GetString(contentGrain.Content);
-                    result.Add(new FileInformation
-                    {
-                        Id = item.Value.GrainId,
-                        Directory = directory,
-                        FileName = fileName,
-                        Content = content
-                    }) ;
-                }
+                //if (!await directoryGrain.DirectoryExists(directory))
+                //{
+                //    continue;
+                //}
+                //var dir = await directoryGrain.GetDirectory(directory);
+                //var contentsGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryContentsGrain>(dir.ItemsGrainId);
+                //var contents = await contentsGrain.ListItems();
+                //foreach(var item in contents.Items)
+                //{
+                //    var fileName = item.Value.MetaData;
+                //    var contentGrain = await OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(item.Value.GrainId).Load();
+                //    var content = contentGrain.Encoding.GetString(contentGrain.Content);
+                //    result.Add(new FileInformation
+                //    {
+                //        Id = item.Value.GrainId,
+                //        Directory = directory,
+                //        FileName = fileName,
+                //        Content = content
+                //    }) ;
+                //}
             }
             return result;
         }

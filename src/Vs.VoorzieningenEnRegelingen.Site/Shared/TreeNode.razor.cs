@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
+using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Shared
 {

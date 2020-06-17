@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Vs.VoorzieningenEnRegelingen.Site.Model
+namespace Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces
 {
     public interface INode
     {

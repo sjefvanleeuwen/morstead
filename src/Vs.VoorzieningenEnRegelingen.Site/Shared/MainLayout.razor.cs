@@ -19,7 +19,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Shared
         [Inject]
         public IEventBus Bus  { get; set; }
 
-SubscriptionToken token;
+        SubscriptionToken token;
 
         protected override Task OnAfterRenderAsync(bool firstRender)
         {

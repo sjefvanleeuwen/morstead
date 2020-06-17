@@ -151,7 +151,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Network.Semantic",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Rules.Network.Semantic.Tests", "rules\network\Vs.Rules.Network.Semantic.Tests\Vs.Rules.Network.Semantic.Tests.csproj", "{F89C463A-1FAC-4CDD-AA1A-2CA6B0B4989A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.ProfessionalPortal.Morstead.Client", "professional-portal\Vs.ProfessionalPortal.Morstead.Client\Vs.ProfessionalPortal.Morstead.Client.csproj", "{A29F4E84-292A-4902-8503-0F9F004A5140}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.ProfessionalPortal.Morstead.Client", "professional-portal\Vs.ProfessionalPortal.Morstead.Client\Vs.ProfessionalPortal.Morstead.Client.csproj", "{A29F4E84-292A-4902-8503-0F9F004A5140}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "morstead", "morstead", "{FD31F7EA-0FE6-4EA5-B49B-ED199BE316F9}"
 EndProject

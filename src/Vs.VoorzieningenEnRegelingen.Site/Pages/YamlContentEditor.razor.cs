@@ -9,6 +9,7 @@ using Vs.Core.Layers.Enums;
 using Vs.ProfessionalPortal.Morstead.Client.Controllers.Interfaces;
 using Vs.ProfessionalPortal.Morstead.Client.Models;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
+using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Tables;
 using Vs.YamlEditor.Components.Controllers;
 using Vs.YamlEditor.Components.Shared;

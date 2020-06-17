@@ -1,0 +1,25 @@
+﻿@if (Content != null)
+{
+    if (Content.IsDivider)
+    {
+        <li class="dropdown-divider"></li>
+    }
+    else if (Content.SubMenuItems != null)
+    {
+        <li class="dropdown nav-item">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">@Content.Name<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                @foreach (var item in Content.SubMenuItems)
+                {
+                    <NavigationMenuItem Content="@item" />
+                }
+            </ul>
+        </li>
+    }
+    else if (!string.IsNullOrWhiteSpace(Content.Name))
+    {
+        <li class="nav-item">
+            <a href="@Content.Link" class="nav-link">@Content.Name</a>
+        </li>
+    }
+}
