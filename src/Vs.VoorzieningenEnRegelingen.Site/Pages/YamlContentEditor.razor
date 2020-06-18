@@ -4,6 +4,16 @@
 <div id="splitcontainer" class="clear-fix row no-gutters splitter-content-editor">
     <div id="left-half_contenteditor" class="left-half_contenteditor splitter-half_wrapper">
         <div class="left-half_header sm-12">
+            @if (ShowHeaderInfo)
+            {
+                foreach (var info in HeaderInfo)
+                {
+                    if (!string.IsNullOrWhiteSpace(info.Value))
+                    {
+                        <div>@info.Key: @info.Value</div>
+                    }
+                }
+            }
         </div>
         <div class="left-half_bottom">
             <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="@(ValidationController.StartSubmitCountdown)" CssClass="editor" />
@@ -16,8 +26,6 @@
         </div>
     </div>
 </div>
-<Modal Id="newYaml">
+<Modal Id="newYamlModal" Cancel="Annuleren" Ok="Ok" OnOk="ValidateNewYaml" Title="Selecteer het type Yaml document voor het nieuwe document.">
     <YamlTypeSelector @ref="_yamlTypeSelector" Name="ValidateRuleType" />
 </Modal>
-
-

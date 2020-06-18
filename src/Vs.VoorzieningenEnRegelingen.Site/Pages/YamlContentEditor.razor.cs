@@ -43,8 +43,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private string _selectedValue;
 
-        private string SelectedValue { get => _selectedValue; set { _selectedValue = value; ValidationController.SelectedValue = value; } }
-
+        private string SelectedValue { get => _selectedValue; set { _selectedValue = value; ValidationController.SelectedValue = value; HeaderInfo["YamlType"] = SelectedValue;  } }
+        private bool ShowHeaderInfo => HeaderInfo.Any(h => string.IsNullOrWhiteSpace(h.Value));
+        private IDictionary<string, string> HeaderInfo = new Dictionary<string, string> { { "YamlType", "" }, { "Naam", "" } };
+        
         private string Name { get; set; }
 
         private IList<YamlFileInfo> YamlFileInfos { get; set; } = new List<YamlFileInfo>();
@@ -89,7 +91,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                     new MenuItem { Link = "/", Name = "Home" },
                     new MenuItem { Name = "Editor", SubMenuItems =
                         new List<MenuItem> {
-                            new MenuItem { Link = "#", Name = "Nieuw", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#newYaml" } } },
+                            new MenuItem { Link = "#", Name = "Nieuw", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#newYamlModal" } } },
                             new MenuItem { Link = "/", Name = "Ophalen"},
                             new MenuItem { IsDivider = true },
                             new MenuItem { Link = "/", Name = "Opslaan"},
@@ -187,6 +189,21 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await JSRuntime.InvokeAsync<object>("notify", new object[] { message }).ConfigureAwait(false);
         }
 
-        //private AddNew
+        private async Task ValidateNewYaml()
+        {
+            if (!string.IsNullOrWhiteSpace(_yamlTypeSelector.SelectedValue))
+            {
+                SelectedValue = _yamlTypeSelector.SelectedValue;
+                ValidationController.YamlEditor.SetValue("");
+                await ToggleModal("newYamlModal");
+                return;
+            }
+            OpenNotification("Selecteer een type Yaml.");
+        }
+
+        private async Task ToggleModal(string id)
+        {
+            await JSRuntime.InvokeAsync<object>("toggleModal", id).ConfigureAwait(false);
+        }
     }
 }
