@@ -29,9 +29,9 @@ namespace Vs.Morstead.Grains.Content
         }
 
 
-        public Task<string> GetContentAsString()
+        public async Task<string> GetContentAsString()
         {
-            return Task.FromResult(Content.State.GetEncoding().GetString(Content.State.Content));
+            return Content.State.GetEncoding().GetString(Content.State.Content);
         }
 
         public async Task Save(string contentType, EncodingType encodingType, string contents)
@@ -56,7 +56,7 @@ namespace Vs.Morstead.Grains.Content
         public async Task<ContentState> Load()
         {
             var compression = GrainFactory.GetGrain<ICompressionWorkerGrain>(0);
-            //await Content.ReadStateAsync();
+            await Content.ReadStateAsync();
             Content.State.Content = await compression.Decompress(
                 Content.State.CompressionType, Content.State.Content);
             return Content.State;
