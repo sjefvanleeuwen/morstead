@@ -10,7 +10,7 @@
                 {
                     if (!string.IsNullOrWhiteSpace(info.Value))
                     {
-                        <div>@info.Key: @info.Value</div>
+                        <div class="col-sm-3">@info.Key: <strong>@info.Value</strong></div>
                     }
                 }
             }
@@ -29,3 +29,12 @@
 <Modal Id="newYamlModal" Cancel="Annuleren" Ok="Ok" OnOk="ValidateNewYaml" Title="Selecteer het type Yaml document voor het nieuwe document.">
     <YamlTypeSelector @ref="_yamlTypeSelector" Name="ValidateRuleType" />
 </Modal>
+<Modal Id="saveAsYamlModal" Cancel="Annuleren" Ok="Opslaan" OnOk="SaveAsYaml" Title="Vul de naam in van het document.">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Naam</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Naam" aria-describedby="Naam" @bind="Name">
+    </div>
+</Modal>
+

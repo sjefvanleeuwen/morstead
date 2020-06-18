@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces
@@ -9,6 +9,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces
         string Link { get; set; }
         string Name { get; set; }
         IDictionary<string, object> HtmlAttributes { get; set; }
-        System.Collections.Generic.IEnumerable<IMenuItem> SubMenuItems { get; set; }
+        Action OnClick { get; set; }
+        IEnumerable<IMenuItem> SubMenuItems { get; set; }
     }
 }

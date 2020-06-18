@@ -26,6 +26,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         protected IYamlStorageController YamlStorageController { get; set; }
 
         private ValidationController _validationController;
+        private string _name;
+        private string _selectedValue;
 
         private YamlTypeSelector _yamlTypeSelector { get; set; }
 
@@ -41,13 +43,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
-        private string _selectedValue;
+        private string SelectedValue { get => _selectedValue; set { _selectedValue = value; ValidationController.SelectedValue = value; HeaderInfo["YamlType"] = SelectedValue; } }
 
-        private string SelectedValue { get => _selectedValue; set { _selectedValue = value; ValidationController.SelectedValue = value; HeaderInfo["YamlType"] = SelectedValue;  } }
-        private bool ShowHeaderInfo => HeaderInfo.Any(h => string.IsNullOrWhiteSpace(h.Value));
-        private IDictionary<string, string> HeaderInfo = new Dictionary<string, string> { { "YamlType", "" }, { "Naam", "" } };
+        private bool ShowHeaderInfo => HeaderInfo.Any(h => !string.IsNullOrWhiteSpace(h.Value));
+
+        private IDictionary<string, string> HeaderInfo = new Dictionary<string, string> { { "YamlType", string.Empty }, { "Naam", string.Empty } };
         
-        private string Name { get; set; }
+        private string Name { get => _name; set { _name = value; HeaderInfo["Naam"] = value; } }
 
         private IList<YamlFileInfo> YamlFileInfos { get; set; } = new List<YamlFileInfo>();
 
@@ -92,10 +94,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                     new MenuItem { Name = "Editor", SubMenuItems =
                         new List<MenuItem> {
                             new MenuItem { Link = "#", Name = "Nieuw", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#newYamlModal" } } },
-                            new MenuItem { Link = "/", Name = "Ophalen"},
                             new MenuItem { IsDivider = true },
-                            new MenuItem { Link = "/", Name = "Opslaan"},
-                            new MenuItem { Link = "/", Name = "Opslaan als..."}
+                            new MenuItem { Link = "#", Name = "Opslaan", OnClick = TrySave },
+                            new MenuItem { Link = "#", Name = "Opslaan als...", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#saveAsYamlModal" } } }
                         }
                     },
                     new MenuItem { Link = "/About", Name = "Over"}
@@ -130,45 +131,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
-        public async Task Save()
-        {
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                OpenNotification("Geen naam ingevuld");
-                return;
-            }
-
-            var chars = Vs.Core.Extensions.StringExtensions.GetInvalidFileNameCharacters(Name);
-            if (chars.Any())
-            {
-                OpenNotification("De naam bevat illegale tekens voor bestandsnamen");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(SelectedValue))
-            {
-                OpenNotification("Geen type document geselecteerd");
-                return;
-            }
-            var content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
-            if (string.IsNullOrEmpty(content))
-            {
-                OpenNotification("Er is geen inhoud in het bestand");
-                return;
-            }
-            var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name && y.Type == SelectedValue);
-            if (yamlFileInfo == null)
-            {
-                yamlFileInfo = new YamlFileInfo();
-                YamlFileInfos.Add(yamlFileInfo);
-            }
-            yamlFileInfo.Name = Name.Trim();
-            yamlFileInfo.Content = content;
-            yamlFileInfo.Type = SelectedValue;
-
-            yamlFileInfo.Id = await WriteFile(yamlFileInfo).ConfigureAwait(false);
-            OpenNotification("Inhoud succesvol opgeslagen.");
-        }
-
         private async Task<string> WriteFile(YamlFileInfo yamlFileInfo)
         {
             var contentId = await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, yamlFileInfo.Content, yamlFileInfo.Id).ConfigureAwait(false);
@@ -194,16 +156,91 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             if (!string.IsNullOrWhiteSpace(_yamlTypeSelector.SelectedValue))
             {
                 SelectedValue = _yamlTypeSelector.SelectedValue;
-                ValidationController.YamlEditor.SetValue("");
-                await ToggleModal("newYamlModal");
+                Name = string.Empty;
+                await ValidationController.YamlEditor.SetValue("").ConfigureAwait(false);
+                await ToggleModal("newYamlModal").ConfigureAwait(false);
                 return;
             }
             OpenNotification("Selecteer een type Yaml.");
         }
 
+        public async void TrySave()
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                 await ToggleModal("saveAsYamlModal").ConfigureAwait(false);
+            }
+            else
+            {
+                await Save().ConfigureAwait(false);
+            }
+        }
+
+        public async Task Save()
+        {
+            if (!NameFilledCheck())
+            {
+                return;
+            }
+
+            var chars = Vs.Core.Extensions.StringExtensions.GetInvalidFileNameCharacters(Name);
+            if (chars.Any())
+            {
+                OpenNotification("De naam bevat illegale tekens voor bestandsnamen");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(SelectedValue))
+            {
+                OpenNotification("Geen type document geselecteerd");
+                return;
+            }
+
+            var content = await ValidationController.YamlEditor.GetValue().ConfigureAwait(false);
+            if (string.IsNullOrEmpty(content))
+            {
+                OpenNotification("Er is geen inhoud in het bestand");
+                return;
+            }
+
+            var yamlFileInfo = YamlFileInfos.FirstOrDefault(y => y.Name == Name && y.Type == SelectedValue);
+            if (yamlFileInfo == null)
+            {
+                yamlFileInfo = new YamlFileInfo();
+                YamlFileInfos.Add(yamlFileInfo);
+            }
+            yamlFileInfo.Name = Name.Trim();
+            yamlFileInfo.Content = content;
+            yamlFileInfo.Type = SelectedValue;
+
+            yamlFileInfo.Id = await WriteFile(yamlFileInfo).ConfigureAwait(false);
+            OpenNotification("Inhoud succesvol opgeslagen.");
+        }
+
+        private async Task SaveAsYaml()
+        {
+            if (!NameFilledCheck())
+            {
+                return;
+            }
+            await Save().ConfigureAwait(false);
+            await ToggleModal("saveAsYamlModal").ConfigureAwait(false);
+        }
+
         private async Task ToggleModal(string id)
         {
             await JSRuntime.InvokeAsync<object>("toggleModal", id).ConfigureAwait(false);
+        }
+
+        //checks
+        private bool NameFilledCheck()
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                OpenNotification("Er is geen naam ingevuld voor de Yaml.");
+                return false;
+            }
+            return true;
         }
     }
 }
