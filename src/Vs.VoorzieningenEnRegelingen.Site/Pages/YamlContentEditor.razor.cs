@@ -2,10 +2,8 @@
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Vs.Core.Layers.Enums;
 using Vs.ProfessionalPortal.Morstead.Client.Controllers.Interfaces;
 using Vs.ProfessionalPortal.Morstead.Client.Models;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
@@ -28,6 +26,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         protected IYamlStorageController YamlStorageController { get; set; }
 
         private ValidationController _validationController;
+
+        private YamlTypeSelector _yamlTypeSelector { get; set; }
 
         private ValidationController ValidationController
         {
@@ -73,8 +73,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
-        private IEnumerable<YamlType> DisabledTypes => ValidationController.DisabledTypes?.Keys ?? new List<YamlType>();
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -91,7 +89,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                     new MenuItem { Link = "/", Name = "Home" },
                     new MenuItem { Name = "Editor", SubMenuItems =
                         new List<MenuItem> {
-                            new MenuItem { Link = "/", Name = "Nieuw" },
+                            new MenuItem { Link = "#", Name = "Nieuw", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#newYaml" } } },
                             new MenuItem { Link = "/", Name = "Ophalen"},
                             new MenuItem { IsDivider = true },
                             new MenuItem { Link = "/", Name = "Opslaan"},
@@ -188,5 +186,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             await JSRuntime.InvokeAsync<object>("notify", new object[] { message }).ConfigureAwait(false);
         }
+
+        //private AddNew
     }
 }

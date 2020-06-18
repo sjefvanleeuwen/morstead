@@ -19,7 +19,7 @@
     else if (!string.IsNullOrWhiteSpace(Content.Name))
     {
         <li class="nav-item">
-            <a href="@Content.Link" class="nav-link">@Content.Name</a>
+            <a href="@Content.Link" class="nav-link" @attributes="Content.HtmlAttributes">@Content.Name</a> 
         </li>
     }
 }

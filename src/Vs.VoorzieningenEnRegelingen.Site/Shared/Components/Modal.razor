@@ -1,5 +1,4 @@
-﻿@inject IJSRuntime JSRuntime
-<div class="modal fade" id="@Id">
+﻿<div class="modal fade" id="@Id">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -21,21 +20,3 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-@code {
-    [Parameter] public string Cancel { get; set; }
-    [Parameter] public string Ok { get; set; }
-    [Parameter] public string Id { get; set; }
-    [Parameter] public string Title { get; set; }
-    [Parameter] public RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    public EventCallback<MouseEventArgs> OnCancel { get; set; }
-    [Parameter]
-    public EventCallback<MouseEventArgs> OnOk { get; set; }
-
-    public void Close()
-    {
-        JSRuntime.InvokeAsync<object>("closeModal", new object[] { Id });
-    }
-
-}

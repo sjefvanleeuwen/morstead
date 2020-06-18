@@ -42,8 +42,6 @@ namespace Vs.YamlEditor.Components.Controllers
             return _typesDefinitions;
         }
 
-        public IDictionary<YamlType, bool> DisabledTypes => GetTypeDefinitions().Where(t => !t.Value).ToDictionary(t => t.Key, t => t.Value);
-
         public bool GetEnabledForType(YamlType type)
         {
             return Types.ContainsKey(type) && Types[type];
