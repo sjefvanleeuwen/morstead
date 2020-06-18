@@ -16,8 +16,16 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
     public partial class YamlContentEditor
     {
+        #region variables
+
+        #region parameters
+
         [Parameter]
         public INode BaseNode { get; set; }
+
+        #endregion
+
+        #region injectors
 
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
@@ -25,11 +33,23 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         [Inject]
         protected IYamlStorageController YamlStorageController { get; set; }
 
+        #endregion
+
+        #region backing fields 
+
         private ValidationController _validationController;
         private string _name;
         private string _selectedValue;
 
+        #endregion
+
+        #region references
+
         private YamlTypeSelector _yamlTypeSelector { get; set; }
+
+        #endregion
+
+        #region properties
 
         private ValidationController ValidationController
         {
@@ -42,15 +62,15 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 return _validationController;
             }
         }
-
+        
         private string SelectedValue { get => _selectedValue; set { _selectedValue = value; ValidationController.SelectedValue = value; HeaderInfo["YamlType"] = SelectedValue; } }
+
+        private string Name { get => _name; set { _name = value; HeaderInfo["Naam"] = value; } }
 
         private bool ShowHeaderInfo => HeaderInfo.Any(h => !string.IsNullOrWhiteSpace(h.Value));
 
         private IDictionary<string, string> HeaderInfo = new Dictionary<string, string> { { "YamlType", string.Empty }, { "Naam", string.Empty } };
         
-        private string Name { get => _name; set { _name = value; HeaderInfo["Naam"] = value; } }
-
         private IList<YamlFileInfo> YamlFileInfos { get; set; } = new List<YamlFileInfo>();
 
         private Grid YamFileInfoGrid
@@ -77,6 +97,12 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
+        #endregion
+
+        #endregion
+
+        #region methods
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -85,6 +111,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 await JSRuntime.InvokeAsync<object>("splitYamlContentEditor", new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
             }
         }
+
+        #region overrides
 
         protected override void SetMenu()
         {
@@ -104,11 +132,19 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             Menu.SetMenuItems(menuItems);
         }
 
+        #endregion
+
+        #region invocables
+
         [JSInvokable("InvokeLayout")]
         public Task Layout()
         {
             return ValidationController.YamlEditor.Layout();
         }
+
+        #endregion
+
+        #region state methods
 
         public async void InitYamlFileInfos()
         {
@@ -145,6 +181,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await ValidationController.YamlEditor.SetValue(yamlFileInfo?.Content ?? string.Empty).ConfigureAwait(false);
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
+
+        #endregion
+
+        #region interactive methods
 
         private async void OpenNotification(string message)
         {
@@ -242,5 +282,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
             return true;
         }
+
+        #endregion
+
+        #endregion
     }
 }
