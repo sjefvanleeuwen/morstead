@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -21,12 +22,14 @@ namespace Vs.Morstead.SiloHost
 
         public static Task Main(string[] args)
         {
+            var builder = new ConfigurationBuilder();
+            if (File.Exists("config.yaml"))
+            {
+                builder.AddYamlFile("config.yaml");
+                // uses in memory providers if not found, and thus connection strings are not read.
+            }
+            var Configuration = builder.Build();
 
-
-            var Configuration = new ConfigurationBuilder()
-               .AddYamlFile("config.yaml")
-
-               .Build();
             return new HostBuilder()
                 .UseOrleans(builder =>
                 {

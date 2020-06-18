@@ -10,6 +10,12 @@ namespace Vs.Morstead.Orleans.Configuration
         {
             var config = new MorsteadStorageConfiguration();
             configure(config);
+            var connectionString = configuration["MorsteadStorage:ConnectionString"];
+            if (connectionString is null)
+            {
+                builder.AddMemoryGrainStorage(config.Name);
+                return builder;
+            }
 
             builder.AddAzureBlobGrainStorage(
                 name: config.Name,
