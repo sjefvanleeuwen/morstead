@@ -38,7 +38,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Shared
                     JSRuntime.InvokeAsync<object>("console.log", new object[] { $"Timer event #{s.Payload}" });
                     JSRuntime.InvokeAsync<object>("notify", new object[] { $"Timer event #{s.Payload}" });
                 });
-                SetTimer();
+                // SetTimer();
 
             }
             return base.OnAfterRenderAsync(firstRender);
