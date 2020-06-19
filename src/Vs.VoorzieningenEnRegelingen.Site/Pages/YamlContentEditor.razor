@@ -2,9 +2,9 @@
 @page "/YamlContentEditor"
 @attribute [Authorize]
 <div id="splitcontainer" class="clear-fix row no-gutters splitter-content-editor">
-    <div id="left-half_contenteditor" class="left-half_contenteditor splitter-half_wrapper">
+    <div id="left-half_contenteditor" class="left-half_contenteditor splitter-half_wrapper" style="padding-left:0px;padding-right:0px;background-color:white">
         <div class="left-half_header sm-12">
-            @if (ShowHeaderInfo)
+            @*@if (ShowHeaderInfo)
             {
                 foreach (var info in HeaderInfo)
                 {
@@ -13,15 +13,15 @@
                         <div class="col-sm-3">@info.Key: <strong>@info.Value</strong></div>
                     }
                 }
-            }
+            }*@
         </div>
         <div class="left-half_bottom">
             <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="@(ValidationController.StartSubmitCountdown)" CssClass="editor" />
         </div>
     </div>
-    <div id="right-half_contenteditor" class="right-half_contenteditor splitter-half_wrapper">
+    <div id="right-half_contenteditor" class="right-half_contenteditor splitter-half_wrapper" style="overflow:auto;padding:0px">
         <div class="submit">
-            <h4>Opgeslagen Yamls</h4>
+            Bestanden
             <Table Grid="YamFileInfoGrid" />
         </div>
     </div>
@@ -29,7 +29,8 @@
 <Modal Id="newYamlModal" Cancel="Annuleren" Ok="Ok" OnOk="ValidateNewYaml" Title="Selecteer het type Yaml document voor het nieuwe document.">
     <YamlTypeSelector @ref="_yamlTypeSelector" Name="ValidateRuleType" />
 </Modal>
-<Modal Id="saveAsYamlModal" Cancel="Annuleren" Ok="Opslaan" OnOk="SaveAsYaml" Title="Vul de naam in van het document.">
+<Modal Id="saveAsYamlModal" Cancel="Annuleren" Ok="Opslaan" OnOk="SaveAsYaml" Title="Bestand opslaan">
+    Vul de naam in van het document
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Naam</span>
