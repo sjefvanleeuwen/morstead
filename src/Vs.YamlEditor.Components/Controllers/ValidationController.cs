@@ -18,7 +18,7 @@ namespace Vs.YamlEditor.Components.Controllers
 
         public string SelectedValue { get; set; }
 
-        private readonly TimeSpan _submitWait = TimeSpan.FromMilliseconds(5000);
+        private readonly TimeSpan _submitWait = TimeSpan.FromMilliseconds(2000);
 
         private IDictionary<YamlType, bool> _typesDefinitions;
 
