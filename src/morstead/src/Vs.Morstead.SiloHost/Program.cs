@@ -44,13 +44,20 @@ namespace Vs.Morstead.SiloHost
                         .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
                         // note! volatile storage for morstead development purposes
                         .UseInMemoryReminderService()
-                        .MorsteadGrainStorage(options => { options.Name = "account-store"; }, Configuration)
-                        .MorsteadGrainStorage(options => { options.Name = "pub-sub-store"; }, Configuration)
-                        .MorsteadGrainStorage(options => { options.Name = "ArchiveStorage"; }, Configuration)
-                        .MorsteadGrainStorage(options => { options.Name = "session-store"; }, Configuration)
-                        .MorsteadGrainStorage(options => { options.Name = "content-store"; }, Configuration)
-                        .MorsteadGrainStorage(options => { options.Name = "bpm-process-store"; }, Configuration)
-                        .MorsteadGrainStorage(options => { options.Name = "dir-store"; }, Configuration);
+                        //.MorsteadGrainStorage(options => { options.Name = "account-store"; }, Configuration)
+                        //.MorsteadGrainStorage(options => { options.Name = "pub-sub-store"; }, Configuration)
+                        //.MorsteadGrainStorage(options => { options.Name = "ArchiveStorage"; }, Configuration)
+                        //.MorsteadGrainStorage(options => { options.Name = "session-store"; }, Configuration)
+                        //.MorsteadGrainStorage(options => { options.Name = "content-store"; }, Configuration)
+                        //.MorsteadGrainStorage(options => { options.Name = "bpm-process-store"; }, Configuration)
+                        //.MorsteadGrainStorage(options => { options.Name = "dir-store"; }, Configuration);
+                        .AddMorsteadGrainStorage(name: "account-store")
+                        .AddMorsteadGrainStorage(name: "pub-sub-store")
+                        .AddMorsteadGrainStorage(name: "ArchiveStorage")
+                        .AddMorsteadGrainStorage(name: "session-store")
+                        .AddMorsteadGrainStorage(name: "content-store")
+                        .AddMorsteadGrainStorage(name: "bpm-process-store")
+                        .AddMorsteadGrainStorage(name: "dir-store");
 
                     //.AddMemoryGrainStorage(name: "dir-store");
                 })
