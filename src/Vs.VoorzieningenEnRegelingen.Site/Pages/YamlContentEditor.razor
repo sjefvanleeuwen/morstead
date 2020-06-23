@@ -2,9 +2,9 @@
 @page "/YamlContentEditor"
 @attribute [Authorize]
 <div id="splitcontainer" class="clear-fix row no-gutters splitter-content-editor">
-    <div id="left-half_contenteditor" class="left-half_contenteditor splitter-half_wrapper" style="padding-left:0px;padding-right:0px;background-color:white">
+    <div id="left-half_contenteditor" class="left-half_contenteditor">
         <div class="left-half_header sm-12">
-            @*@if (ShowHeaderInfo)
+            @if (ShowHeaderInfo)
             {
                 foreach (var info in HeaderInfo)
                 {
@@ -13,13 +13,17 @@
                         <div class="col-sm-3">@info.Key: <strong>@info.Value</strong></div>
                     }
                 }
-            }*@
+            }
+            else
+            {
+                <div class="col-sm-12">&nbsp;</div>
+            }
         </div>
         <div class="left-half_bottom">
             <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="@(ValidationController.StartSubmitCountdown)" CssClass="editor" />
         </div>
     </div>
-    <div id="right-half_contenteditor" class="right-half_contenteditor splitter-half_wrapper" style="overflow:auto;padding:0px">
+    <div id="right-half_contenteditor" class="right-half_contenteditor">
         <div class="submit">
             Bestanden
             <Table Grid="YamFileInfoGrid" />

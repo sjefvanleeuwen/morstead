@@ -1,16 +1,18 @@
 ﻿.left-half_contenteditor {
-    background-color: #f1f1f1;
+    background-color: white;
     float: left;
     display: block;
     overflow: auto;
     display: flex;
     flex-direction: column;
+    padding: 0px 0px 15px 0px;
 }
 
     .left-half_contenteditor .left-half_header {
         height: auto;
         display: flex;
         flex-direction: row;
+        padding: 7.5px 0px 7.5px 75.5px;
     }
 
         .left-half_contenteditor .left-half_header > div:nth-child(2) {
@@ -26,10 +28,7 @@
     background-color: #f1f1f1;
     float: left;
     height: 100%;
-}
-
-.splitter-half_wrapper {
-    padding: 15px;
+    overflow: auto
 }
 
 .wrapperFull {
