@@ -7,16 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\**" />
     <Compile Remove="Data\**" />
     <Compile Remove="Shared\FormContentEditor\**" />
-    <Content Remove="Controllers\**" />
     <Content Remove="Data\**" />
     <Content Remove="Shared\FormContentEditor\**" />
-    <EmbeddedResource Remove="Controllers\**" />
     <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="Shared\FormContentEditor\**" />
-    <None Remove="Controllers\**" />
     <None Remove="Data\**" />
     <None Remove="Shared\FormContentEditor\**" />
   </ItemGroup>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Vs.ProfessionalPortal.Morstead.Client.Controllers.Interfaces;
 using Vs.ProfessionalPortal.Morstead.Client.Models;
+using Vs.VoorzieningenEnRegelingen.Site.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Tables;
@@ -29,6 +30,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
+
+        [Inject]
+        protected IEditorTabController EditorTabController { get; set; }
 
         [Inject]
         protected IYamlStorageController YamlStorageController { get; set; }
