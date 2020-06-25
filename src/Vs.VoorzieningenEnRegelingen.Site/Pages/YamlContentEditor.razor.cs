@@ -160,25 +160,26 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 {
                     Id = file.Id,
                     Name = file.FileName,
-                    Type = file.Directory,
-                    Content = file.Content
+                    Type = file.Directory
                 });
             }
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
-        private async Task<string> WriteFile(YamlFileInfo yamlFileInfo)
+        private async Task<string> WriteFile(YamlFileInfo yamlFileInfo, string content)
         {
-            var contentId = await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, yamlFileInfo.Content, yamlFileInfo.Id).ConfigureAwait(false);
+            var contentId = await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, content, yamlFileInfo.Id).ConfigureAwait(false);
             return contentId;
         }
 
         public async Task Load(string id)
         {
             var yamlFileInfo = YamlFileInfos?.FirstOrDefault(y => y.Id == id);
+            
             Name = yamlFileInfo.Name;
             SelectedValue = yamlFileInfo.Type;
-            await ValidationController.YamlEditor.SetValue(yamlFileInfo?.Content ?? string.Empty).ConfigureAwait(false);
+            var content = await YamlStorageController.GetYamlFileContent(yamlFileInfo.Id).ConfigureAwait(false);
+            await ValidationController.YamlEditor.SetValue(content).ConfigureAwait(false);
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
@@ -250,10 +251,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 YamlFileInfos.Add(yamlFileInfo);
             }
             yamlFileInfo.Name = Name.Trim();
-            yamlFileInfo.Content = content;
             yamlFileInfo.Type = SelectedValue;
 
-            yamlFileInfo.Id = await WriteFile(yamlFileInfo).ConfigureAwait(false);
+            yamlFileInfo.Id = await WriteFile(yamlFileInfo, content).ConfigureAwait(false);
             OpenNotification("Inhoud succesvol opgeslagen.");
         }
 

@@ -19,6 +19,12 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
             return await GetFiles(new List<string> { "Rule", "Content", "Layer", "Routing" });
         }
 
+        public async Task<string> GetYamlFileContent(string contentId)
+        {
+            var contentGrain = await OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(contentId).Load();
+            return contentGrain?.ContentAs<string>() ?? string.Empty;
+        }
+
         private async Task<IEnumerable<FileInformation>> GetFiles(IEnumerable<string> directories)
         {
             var result = new List<FileInformation>();
@@ -41,8 +47,7 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
                     {
                         Id = item.Value.GrainId,
                         Directory = directory,
-                        FileName = fileName,
-                        Content = content
+                        FileName = fileName
                     });
                 }
             }
@@ -81,6 +86,5 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
 
             return contentId;
         }
-
     }
 }
