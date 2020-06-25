@@ -11,6 +11,7 @@ using Vs.VoorzieningenEnRegelingen.Site.Model;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Tables;
 using Vs.YamlEditor.Components.Controllers;
+using Vs.YamlEditor.Components.Controllers.Interfaces;
 using Vs.YamlEditor.Components.Shared;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Pages
@@ -37,11 +38,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         [Inject]
         protected IYamlStorageController YamlStorageController { get; set; }
 
+        [Inject]
+        protected IValidationController ValidationController { get; set; }
+
         #endregion
 
         #region backing fields 
 
-        private ValidationController _validationController;
         private string _name;
         private string _selectedValue;
 
@@ -54,18 +57,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         #endregion
 
         #region properties
-
-        private ValidationController ValidationController
-        {
-            get
-            {
-                if (_validationController == null)
-                {
-                    _validationController = new ValidationController();
-                }
-                return _validationController;
-            }
-        }
         
         private string SelectedValue { get => _selectedValue; set { _selectedValue = value; ValidationController.SelectedValue = value; HeaderInfo["YamlType"] = SelectedValue; } }
 

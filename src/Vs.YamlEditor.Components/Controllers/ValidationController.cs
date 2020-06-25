@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using Vs.Core.Extensions;
 using Vs.Core.Layers.Enums;
 using Vs.YamlEditor.Components.Controllers.ApiCalls;
+using Vs.YamlEditor.Components.Controllers.Interfaces;
 
 namespace Vs.YamlEditor.Components.Controllers
 {
-    public class ValidationController
+    public class ValidationController : IValidationController
     {
         private CancellationTokenSource TokenSource { get; set; }
         public Shared.YamlEditor YamlEditor { get; set; }

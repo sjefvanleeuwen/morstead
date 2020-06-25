@@ -9,6 +9,7 @@ namespace Vs.YamlEditor.Components
         public static void Initialize(IServiceCollection services)
         {
             services.AddTransient<IMonacoController, MonacoController>();
+            services.AddScoped<IValidationController, ValidationController>();
         }
     }
 }
