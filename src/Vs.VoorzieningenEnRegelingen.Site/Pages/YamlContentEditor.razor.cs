@@ -305,8 +305,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             yamlFileInfo.Type = editorTabInfo.Type;
 
             yamlFileInfo.ContentId = await WriteFile(yamlFileInfo, content).ConfigureAwait(false);
-            OpenNotification("Inhoud succesvol opgeslagen.");
             
+            OpenNotification("Inhoud succesvol opgeslagen.");
+
+            editorTabInfo.ContentId = yamlFileInfo.ContentId;
             editorTabInfo.IsSaved = true;
             editorTabInfo.OriginalContent = editorTabInfo.Content;
             //update the tab name
