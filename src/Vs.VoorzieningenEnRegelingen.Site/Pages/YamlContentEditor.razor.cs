@@ -164,7 +164,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.ContentId = contentId;
             editorTabInfo.Name = savedYamlInfo.Name;
             editorTabInfo.Type = savedYamlInfo.Type;
-            editorTabInfo.Content = await YamlStorageController.GetYamlFileContent(editorTabInfo.ContentId).ConfigureAwait(false);
+            editorTabInfo.OriginalContent = await YamlStorageController.GetYamlFileContent(editorTabInfo.ContentId).ConfigureAwait(false);
+            editorTabInfo.Content = editorTabInfo.OriginalContent;
             //add the tab if it didnt already exist
             EditorTabController.AddTab(editorTabInfo);
             //create the YamlFileEditor in the interface
@@ -181,11 +182,31 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             Layout();
         }
 
-        private async void StartSubmitCountdown(int tabId)
+        private async void ContentModification(int tabId)
         {
-            var info = EditorTabController.GetTabByTabId(tabId);
-            var type = info.Type;
-            var yaml = await info.YamlEditor.GetValue().ConfigureAwait(false);
+            var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
+            editorTabInfo.IsSaved = false;
+            //get yaml now so it doesn't have to be retrieved multiple times
+            var yaml = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
+
+            StartValidationSubmitCountdown(editorTabInfo, yaml);
+            TrackContentChanged(editorTabInfo, yaml);
+        }
+
+        private async void TrackContentChanged(IEditorTabInfo editorTabInfo, string yaml)
+        {
+            var hasChangesBefore = editorTabInfo.HasChanges;
+            editorTabInfo.Content = yaml;
+            var hasChangesAfter = editorTabInfo.HasChanges;
+            if (hasChangesAfter != hasChangesBefore)
+            {
+                await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+            }
+        }
+
+        private async void StartValidationSubmitCountdown(IEditorTabInfo editorTabInfo, string yaml)
+        {
+            var type = editorTabInfo.Type;
             await ValidationController.StartSubmitCountdown(type, yaml).ConfigureAwait(false);
         }
 
@@ -284,6 +305,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
             yamlFileInfo.ContentId = await WriteFile(yamlFileInfo, content).ConfigureAwait(false);
             OpenNotification("Inhoud succesvol opgeslagen.");
+            editorTabInfo.IsSaved = true;
         }
 
         private async Task ToggleModal(string modalId)

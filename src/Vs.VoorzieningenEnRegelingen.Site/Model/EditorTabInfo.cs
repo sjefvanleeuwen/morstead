@@ -7,7 +7,12 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model
         public int TabId { get; set; }
         public bool IsOpen { get; set; }
         public bool IsActive { get; set; }
-        public string DisplayName => Name ?? "<i>No Name</i>";
+        public bool HasChanges => Content != OriginalContent;
+        public bool IsSaved { get; set; }
+        public string DisplayName =>
+            (string.IsNullOrWhiteSpace(Name) ? "<i>Nieuw</i>" : Name) +
+            (HasChanges && !IsSaved ? "*" : string.Empty);
+        public string OriginalContent { get; set; }
         public string Content { get; set; }
         public string EditorId => "monacoEditor" + TabId;
         public string TabName => "Tab" + TabId;

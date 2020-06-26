@@ -14,11 +14,11 @@
         flex: 1;
     }
 
-        #left-half_contenteditor  {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
+#left-half_contenteditor {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 
     #left-half_contenteditor .left-half_header {
         padding: 7.5px 0px 7.5px 75.5px;

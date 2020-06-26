@@ -24,7 +24,7 @@
                             <div>Type: <strong>@editorTabInfo.Value.Type</strong></div>
                         </div>
                         <div class="left-half_bottom">
-                            <YamlEditor @ref="editorTabInfo.Value.YamlEditor" Id="@(editorTabInfo.Value.EditorId)" Value="@editorTabInfo.Value.Content" OnKeyUp="@(e => StartSubmitCountdown(editorTabInfo.Key))" CssClass="editor" />
+                            <YamlEditor @ref="editorTabInfo.Value.YamlEditor" Id="@(editorTabInfo.Value.EditorId)" Value="@editorTabInfo.Value.Content" OnKeyUp="@(e => ContentModification(editorTabInfo.Key))" CssClass="editor" />
                         </div>
                     </div>
                 }
