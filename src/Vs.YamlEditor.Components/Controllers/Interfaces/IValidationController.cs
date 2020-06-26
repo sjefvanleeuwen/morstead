@@ -8,14 +8,9 @@ namespace Vs.YamlEditor.Components.Controllers.Interfaces
 {
     public interface IValidationController
     {
-        string SelectedValue { get; set; }
         IDictionary<YamlType, bool> Types { get; }
-        Shared.YamlEditor YamlEditor { get; set; }
-
-        Task<ModelDeltaDecoration> BuildDeltaDecoration(Range range, string message);
         bool GetEnabledForType(YamlType type);
-        Task SetDeltaDecorationsFromExceptions(IEnumerable<FormattingException> formattingExceptions);
-        void StartSubmitCountdown();
-        void SubmitPage();
+        Task<IEnumerable<FormattingException>> StartSubmitCountdown(string type, string yaml);
+        Task<IEnumerable<FormattingException>> SubmitPage(string type, string yaml);
     }
 }

@@ -1,24 +1,62 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Vs.VoorzieningenEnRegelingen.Site.Controllers.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Site.Model;
+using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Controllers
 {
     public class EditorTabController : IEditorTabController
     {
-        public IDictionary<int, YamlFileInfo> YamlFileInfos { get; set; } = new Dictionary<int, YamlFileInfo>();
+        public IDictionary<int, IEditorTabInfo> EditorTabInfos { get; set; } = new Dictionary<int, IEditorTabInfo>();
 
-        public int AddTab(YamlFileInfo yamlFileInfo)
+        /// <summary>
+        /// Throws an error if it doesnt exist
+        /// </summary>
+        /// <param name="tabId"></param>
+        /// <returns></returns>
+        public IEditorTabInfo GetTabByTabId(int tabId)
         {
-            var tabId = (YamlFileInfos.Keys?.Max() ?? 0) + 1;
-            YamlFileInfos[tabId] = yamlFileInfo;
-            return tabId;
+            if (!EditorTabInfos.ContainsKey(tabId))
+            {
+                throw new IndexOutOfRangeException("The id of the tab provided is unknown.");
+            }
+
+            return EditorTabInfos[tabId];
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="contentId"></param>
+        /// <returns>null if not found</returns>
+        public IEditorTabInfo GetTabByContentId(string contentId)
+        {
+            foreach (var editorTabInfo in EditorTabInfos)
+            {
+                if (editorTabInfo.Value.ContentId == contentId)
+                {
+                    return EditorTabInfos[editorTabInfo.Key];
+                }
+            }
+
+            return null;
+        }
+
+        public void AddTab(IEditorTabInfo editorTabInfo)
+        {
+            if (editorTabInfo == null)
+            {
+                throw new ArgumentNullException("Can't add no info to a tab.");
+            }
+            editorTabInfo.TabId = editorTabInfo.TabId > 0 ? editorTabInfo.TabId  :
+                (EditorTabInfos.Keys.Any() ? EditorTabInfos.Keys.Max() : 0) + 1;
+            EditorTabInfos[editorTabInfo.TabId] = editorTabInfo;
         }
 
         public bool RemoveTab(int tabId)
         {
-            return YamlFileInfos.Remove(tabId);
+            return EditorTabInfos.Remove(tabId);
         }
     }
 }

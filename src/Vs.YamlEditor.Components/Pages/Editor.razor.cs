@@ -28,7 +28,8 @@ namespace Vs.YamlEditor.Components.Pages
             }
         }
 
-        private string SelectedValue { get => _selectedValue; set { _selectedValue = value; ValidationController.SelectedValue = value; } }
+        //Todo Fix this
+        private string SelectedValue { get => _selectedValue; set { _selectedValue = value; /*ValidationController.SelectedValue = value;*/ } }
 
         private string GetStyleForType(YamlType type)
         {
@@ -67,8 +68,8 @@ Details:
 {ex}";
                 }
             }
-
-            await ValidationController.YamlEditor.SetValue(Value);
+            //TODO fix this
+            //await ValidationController.YamlEditor.SetValue(Value);
         }
     }
 }

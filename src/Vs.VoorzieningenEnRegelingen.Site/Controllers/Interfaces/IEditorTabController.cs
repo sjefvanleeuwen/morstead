@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
-using Vs.VoorzieningenEnRegelingen.Site.Model;
+using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Controllers.Interfaces
 {
     public interface IEditorTabController
     {
-        IDictionary<int, YamlFileInfo> YamlFileInfos { get; set; }
+        IDictionary<int, IEditorTabInfo> EditorTabInfos { get; set; }
 
-        int AddTab(YamlFileInfo yamlFileInfo);
+        IEditorTabInfo GetTabByTabId(int tabId);
+
+        IEditorTabInfo GetTabByContentId(string contentId);
+
+        void AddTab(IEditorTabInfo editorTabInfo);
 
         bool RemoveTab(int tabId);
     }

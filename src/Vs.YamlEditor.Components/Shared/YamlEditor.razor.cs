@@ -16,6 +16,8 @@ namespace Vs.YamlEditor.Components.Shared
         [Parameter]
         public string CssClass { get; set; }
         [Parameter]
+        public string Value { get; set; }
+        [Parameter]
         public EventCallback<KeyboardEvent> OnKeyUp { get; set; }
 
         [Inject]
@@ -42,7 +44,8 @@ namespace Vs.YamlEditor.Components.Shared
             {
                 AutomaticLayout = true,
                 Language = _language,
-                GlyphMargin = true
+                GlyphMargin = true,
+                Value = Value
             };
         }
 

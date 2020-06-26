@@ -3,25 +3,22 @@
 @attribute [Authorize]
 <div id="splitcontainer" class="clear-fix row no-gutters splitter-content-editor">
     <div id="left-half_contenteditor" class="left-half_contenteditor">
-        <div class="left-half_header sm-12">
-            @if (ShowHeaderInfo)
-            {
-                foreach (var info in HeaderInfo)
-                {
-                    if (!string.IsNullOrWhiteSpace(info.Value))
+        @foreach (var editorTabInfo in EditorTabController.EditorTabInfos)
+        {
+            <YamlEditor @ref="editorTabInfo.Value.YamlEditor" Id="@(editorTabInfo.Value.EditorId)" Value="@editorTabInfo.Value.Content" OnKeyUp="@(e => StartSubmitCountdown(editorTabInfo.Key))" CssClass="editor" />
+            <div @key="editorTabInfo.Key">
+                <div class="left-half_header sm-12">
+                    <div class="col-sm-3">Type: <strong>@editorTabInfo.Value.Type</strong></div>
+                    @if (!string.IsNullOrWhiteSpace(editorTabInfo.Value.Name))
                     {
-                        <div class="col-sm-3">@info.Key: <strong>@info.Value</strong></div>
+                        <div class="col-sm-3">Naam: <strong>@editorTabInfo.Value.Name</strong></div>
                     }
-                }
-            }
-            else
-            {
-                <div class="col-sm-12">&nbsp;</div>
-            }
-        </div>
-        <div class="left-half_bottom">
-            <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="@(ValidationController.StartSubmitCountdown)" CssClass="editor" />
-        </div>
+                </div>
+                <div class="left-half_bottom">
+
+                </div>
+            </div>
+        }
     </div>
     <div id="right-half_contenteditor" class="right-half_contenteditor">
         <div class="submit">
@@ -30,7 +27,7 @@
         </div>
     </div>
 </div>
-<Modal Id="newYamlModal" Cancel="Annuleren" Ok="Ok" OnOk="ValidateNewYaml" Title="Selecteer het type Yaml document voor het nieuwe document.">
+<Modal Id="newYamlModal" Cancel="Annuleren" Ok="Ok" OnOk="AddNewYaml" Title="Selecteer het type Yaml document voor het nieuwe document.">
     <YamlTypeSelector @ref="_yamlTypeSelector" Name="ValidateRuleType" />
 </Modal>
 <Modal Id="saveAsYamlModal" Cancel="Annuleren" Ok="Opslaan" OnOk="SaveAsYaml" Title="Bestand opslaan">
@@ -39,7 +36,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Naam</span>
         </div>
-        <input type="text" class="form-control" aria-label="Naam" aria-describedby="Naam" @bind="Name">
+        <input type="text" class="form-control" aria-label="Naam" aria-describedby="Naam" @bind="SaveAsName">
     </div>
 </Modal>
 
