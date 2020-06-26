@@ -3,7 +3,6 @@ using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Vs.ProfessionalPortal.Morstead.Client.Controllers.Interfaces;
 using Vs.ProfessionalPortal.Morstead.Client.Models;
@@ -12,6 +11,7 @@ using Vs.VoorzieningenEnRegelingen.Site.Model;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Tables;
 using Vs.YamlEditor.Components.Controllers.Interfaces;
+using Vs.YamlEditor.Components.Helpers;
 using Vs.YamlEditor.Components.Shared;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Pages
@@ -208,7 +208,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         private async void StartValidationSubmitCountdown(IEditorTabInfo editorTabInfo, string yaml)
         {
             var type = editorTabInfo.Type;
-            await ValidationController.StartSubmitCountdown(type, yaml).ConfigureAwait(false);
+            var formattingExceptions = await ValidationController.StartSubmitCountdown(type, yaml).ConfigureAwait(false);
+            await DeltaDecorationHelper.SetDeltaDecorationsFromExceptions(editorTabInfo.YamlEditor, formattingExceptions).ConfigureAwait(false);
         }
 
         private async void OpenNotification(string message)

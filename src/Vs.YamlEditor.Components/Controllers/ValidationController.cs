@@ -1,7 +1,5 @@
-﻿using BlazorMonaco.Bridge;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -54,7 +52,7 @@ namespace Vs.YamlEditor.Components.Controllers
             }
             TokenSource = new CancellationTokenSource();
             var ct = TokenSource.Token;
-            var task = Task.Run(() =>
+            await Task.Run(() =>
             {
                 Thread.Sleep(_submitWait);
                 ct.ThrowIfCancellationRequested();
@@ -71,7 +69,7 @@ namespace Vs.YamlEditor.Components.Controllers
 
         public async Task<IEnumerable<FormattingException>> SubmitPage(string type, string yaml)
         {
-            if (type == YamlType.Rules.GetDescription())
+            if (yaml == null || type == YamlType.Rules.GetDescription())
             {
                 return await RuleValidation(yaml);
             }
