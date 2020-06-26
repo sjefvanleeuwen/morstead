@@ -8,11 +8,8 @@
             <YamlEditor @ref="editorTabInfo.Value.YamlEditor" Id="@(editorTabInfo.Value.EditorId)" Value="@editorTabInfo.Value.Content" OnKeyUp="@(e => StartSubmitCountdown(editorTabInfo.Key))" CssClass="editor" />
             <div @key="editorTabInfo.Key">
                 <div class="left-half_header sm-12">
-                    <div class="col-sm-3">Type: <strong>@editorTabInfo.Value.Type</strong></div>
-                    @if (!string.IsNullOrWhiteSpace(editorTabInfo.Value.Name))
-                    {
-                        <div class="col-sm-3">Naam: <strong>@editorTabInfo.Value.Name</strong></div>
-                    }
+                    <div class="col-sm-6">Naam: <strong>@editorTabInfo.Value.Name</strong></div>
+                    <div class="col-sm-6">Type: <strong>@editorTabInfo.Value.Type</strong></div>
                 </div>
                 <div class="left-half_bottom">
 
