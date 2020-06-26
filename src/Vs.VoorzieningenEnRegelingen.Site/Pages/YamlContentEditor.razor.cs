@@ -256,7 +256,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         public async Task SaveAsYaml()
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
-            if (!NameFilledCheck(editorTabInfo))
+            if (!NameFilledCheck(SaveAsName))
             {
                 return;
             }
@@ -271,12 +271,12 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private async Task Save()
         {
-            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
-            if (!NameFilledCheck(editorTabInfo))
+            if (!NameFilledCheck())
             {
                 return;
             }
 
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
             if (!NameIsValid(editorTabInfo.Name))
             {
                 return;
@@ -319,9 +319,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         }
 
         //checks
-        private bool NameFilledCheck(IEditorTabInfo editorTabInfo)
+        private bool NameFilledCheck(string name = null)
         {
-            if (string.IsNullOrWhiteSpace(editorTabInfo.Name))
+            var nameToCheck = name ?? EditorTabController.GetTabByTabId(ActiveTab).Name;
+            if (string.IsNullOrWhiteSpace(nameToCheck))
             {
                 OpenNotification("Er is geen naam ingevuld voor de Yaml.");
                 return false;
