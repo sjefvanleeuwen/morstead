@@ -200,6 +200,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             var hasChangesAfter = editorTabInfo.HasChanges;
             if (hasChangesAfter != hasChangesBefore)
             {
+                //update the tab name
                 await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
             }
         }
@@ -305,7 +306,11 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
             yamlFileInfo.ContentId = await WriteFile(yamlFileInfo, content).ConfigureAwait(false);
             OpenNotification("Inhoud succesvol opgeslagen.");
+            
             editorTabInfo.IsSaved = true;
+            editorTabInfo.OriginalContent = editorTabInfo.Content;
+            //update the tab name
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false); 
         }
 
         private async Task ToggleModal(string modalId)
