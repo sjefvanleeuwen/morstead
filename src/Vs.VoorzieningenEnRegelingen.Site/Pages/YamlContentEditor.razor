@@ -2,24 +2,37 @@
 @page "/YamlContentEditor"
 @attribute [Authorize]
 <div id="splitcontainer" class="clear-fix row no-gutters splitter-content-editor">
-    <div id="left-half_contenteditor" class="left-half_contenteditor">
-        @foreach (var editorTabInfo in EditorTabController.EditorTabInfos)
-        {
-            <YamlEditor @ref="editorTabInfo.Value.YamlEditor" Id="@(editorTabInfo.Value.EditorId)" Value="@editorTabInfo.Value.Content" OnKeyUp="@(e => StartSubmitCountdown(editorTabInfo.Key))" CssClass="editor" />
-            <div @key="editorTabInfo.Key">
-                <div class="left-half_header sm-12">
-                    <div class="col-sm-6">Naam: <strong>@editorTabInfo.Value.Name</strong></div>
-                    <div class="col-sm-6">Type: <strong>@editorTabInfo.Value.Type</strong></div>
-                </div>
-                <div class="left-half_bottom">
+    <div id="left-half_contenteditor" style="display: flex; flex-direction: column;">
 
-                </div>
+        @if (EditorTabController.EditorTabInfos.Any())
+        {
+            <ul class="nav nav-tabs">
+                @foreach (var editorTabInfo in EditorTabController.EditorTabInfos)
+                {
+                    <li class="nav-item" @key="@editorTabInfo.Key">
+                        <a class="nav-link@(editorTabInfo.Value.IsActive ? " active" : string.Empty)" data-toggle="tab" href="#@editorTabInfo.Value.TabName" @onclick="(e => SwitchToTab(editorTabInfo.Key))">@((MarkupString)editorTabInfo.Value.DisplayName)</a>
+                    </li>
+                }
+            </ul>
+            <div class="tab-content">
+                @foreach (var editorTabInfo in EditorTabController.EditorTabInfos)
+                {
+                    <div @key="@editorTabInfo.Value.TabName" id="@editorTabInfo.Value.TabName" class="tab-pane @(editorTabInfo.Value.IsActive ? " active" : string.Empty)">
+
+                        <div class="left-half_header sm-12">
+                            <div>Naam: <strong>@editorTabInfo.Value.Name</strong></div>
+                            <div>Type: <strong>@editorTabInfo.Value.Type</strong></div>
+                        </div>
+                        <div class="left-half_bottom">
+                            <YamlEditor @ref="editorTabInfo.Value.YamlEditor" Id="@(editorTabInfo.Value.EditorId)" Value="@editorTabInfo.Value.Content" OnKeyUp="@(e => StartSubmitCountdown(editorTabInfo.Key))" CssClass="editor" />
+                        </div>
+                    </div>
+                }
             </div>
         }
     </div>
-    <div id="right-half_contenteditor" class="right-half_contenteditor">
+    <div id="right-half_contenteditor">
         <div class="submit">
-            Bestanden
             <Table Grid="YamFileInfoGrid" />
         </div>
     </div>

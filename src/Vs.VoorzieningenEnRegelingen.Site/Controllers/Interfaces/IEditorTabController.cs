@@ -13,6 +13,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Controllers.Interfaces
 
         void AddTab(IEditorTabInfo editorTabInfo);
 
+        void Activate(int tabId);
+
         bool RemoveTab(int tabId);
     }
 }

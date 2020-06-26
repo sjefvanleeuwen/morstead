@@ -44,7 +44,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         #region properties
 
-        public int ActiveTab { get; set; }
+        public int ActiveTab => EditorTabController.EditorTabInfos.Values?.FirstOrDefault(e => e.IsActive)?.TabId ?? 0;
 
         public string SaveAsName { get; set; }
 
@@ -167,7 +167,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.Content = await YamlStorageController.GetYamlFileContent(editorTabInfo.ContentId).ConfigureAwait(false);
             //add the tab if it didnt already exist
             EditorTabController.AddTab(editorTabInfo);
-            ActiveTab = editorTabInfo.TabId;
             //create the YamlFileEditor in the interface
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
@@ -175,6 +174,12 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         #endregion
 
         #region interactive methods
+
+        private void SwitchToTab(int tabId)
+        {
+            EditorTabController.Activate(tabId);
+            Layout();
+        }
 
         private async void StartSubmitCountdown(int tabId)
         {
@@ -208,7 +213,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             };
 
             EditorTabController.AddTab(editorTabInfo);
-            ActiveTab = editorTabInfo.TabId;
             //create the YamlFileEditor in the interface
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
             await ToggleModal("newYamlModal").ConfigureAwait(false);

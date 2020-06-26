@@ -1,30 +1,53 @@
-﻿.left-half_contenteditor {
+﻿#left-half_contenteditor {
     background-color: white;
     float: left;
-    display: block;
     overflow: auto;
+    padding: 5px 0px 15px 0px;
     display: flex;
     flex-direction: column;
-    padding: 0px 0px 15px 0px;
 }
 
-    .left-half_contenteditor .left-half_header {
-        height: auto;
+
+    #left-half_contenteditor > .tab-content, #left-half_contenteditor .tab-pane.active {
         display: flex;
-        flex-direction: row;
-        padding: 7.5px 0px 7.5px 75.5px;
-    }
-
-        .left-half_contenteditor .left-half_header > div:nth-child(2) {
-            width: auto;
-            flex: 1;
-        }
-
-    .left-half_contenteditor .left-half_bottom {
+        flex-direction: column;
         flex: 1;
     }
 
-.right-half_contenteditor {
+        #left-half_contenteditor  {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+    #left-half_contenteditor .left-half_header {
+        padding: 7.5px 0px 7.5px 75.5px;
+        height: auto;
+    }
+
+        #left-half_contenteditor .left-half_header > div {
+            float: left;
+            white-space: nowrap;
+            padding-left: 15px;
+        }
+
+    #left-half_contenteditor ul.nav-tabs > li > a {
+        font-weight: bold;
+        color: grey;
+    }
+
+        #left-half_contenteditor ul.nav-tabs > li > a.active {
+            font-weight: bold;
+            color: black;
+        }
+
+    #left-half_contenteditor .tab-content .tab-pane .left-half_bottom {
+        flex: 1;
+        overflow: auto;
+        height: auto;
+    }
+
+#right-half_contenteditor {
     background-color: #f1f1f1;
     float: left;
     height: 100%;
