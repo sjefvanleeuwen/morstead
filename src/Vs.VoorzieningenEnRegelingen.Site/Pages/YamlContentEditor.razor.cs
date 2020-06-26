@@ -170,10 +170,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             ActiveTab = editorTabInfo.TabId;
             //create the YamlFileEditor in the interface
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
-            //TODO Fix This
-            //Thread.Sleep(5000);
-            //await editorTabInfo.YamlEditor.SetValue(editorTabInfo.Content).ConfigureAwait(false);
-            //await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         #endregion
