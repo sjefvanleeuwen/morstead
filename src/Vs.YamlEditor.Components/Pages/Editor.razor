@@ -12,13 +12,12 @@
         </p>
     </div>
     <div class="content">
-        @* TODO Fix this
-            <YamlEditor @ref="ValidationController.YamlEditor" Id="monacoEditor" OnKeyUp="ValidationController.StartSubmitCountdown" CssClass="editor" />*@
+        <YamlEditor @ref="YamlEditor" Id="monacoEditor" Value="@Value" OnKeyUp="StartSubmitCountdown" CssClass="editor" />
     </div>
     <div class="submit">
         <p>Selecteer het type Yaml</p>
         <p>
-            <MatRadioGroup @bind-Value="SelectedValue" TValue="string">
+            <MatRadioGroup @bind-Value="Type" TValue="string">
                 @{
                     foreach (var type in ValidationController.Types.Keys)
                     {
@@ -27,9 +26,7 @@
                 }
             </MatRadioGroup>
             <div class="buttonwrapper">
-                @*
-                    //TODO Fix this
-                    <MatButton @onclick="ValidationController.SubmitPage" Raised="true">Check inhoud</MatButton>*@
+                <MatButton @onclick="SubmitPage" Raised="true">Check inhoud</MatButton>
             </div>
         </p>
     </div>

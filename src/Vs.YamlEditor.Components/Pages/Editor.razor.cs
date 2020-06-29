@@ -1,35 +1,24 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.IO;
 using System.Net.Http;
 using Vs.Core.Extensions;
 using Vs.Core.Layers.Enums;
-using Vs.YamlEditor.Components.Controllers;
+using Vs.YamlEditor.Components.Controllers.Interfaces;
+using Vs.YamlEditor.Components.Helpers;
 
 namespace Vs.YamlEditor.Components.Pages
 {
     public partial class Editor
     {
-        private string Url { get; set; } = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml";
+        [Inject]
+        public IValidationController ValidationController { get; set; }
+
+        private string Url { get; set; } = "https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/YamlZorgtoeslag5.yaml";
         private string Value { get; set; }
+        private string Type { get; set; }
 
-        
-        private ValidationController _validationController;
-        private string _selectedValue;
-
-        private ValidationController ValidationController
-        {
-            get
-            {
-                if (_validationController == null)
-                {
-                    _validationController = new ValidationController();
-                }
-                return _validationController;
-            }
-        }
-
-        //Todo Fix this
-        private string SelectedValue { get => _selectedValue; set { _selectedValue = value; /*ValidationController.SelectedValue = value;*/ } }
+        Shared.YamlEditor YamlEditor { get; set; }       
 
         private string GetStyleForType(YamlType type)
         {
@@ -68,8 +57,21 @@ Details:
 {ex}";
                 }
             }
-            //TODO fix this
-            //await ValidationController.YamlEditor.SetValue(Value);
+            await YamlEditor.SetValue(Value);
+        }
+
+        public async void StartSubmitCountdown()
+        {
+            var yaml = await YamlEditor.GetValue();
+            var formattingExceptions = await ValidationController.StartSubmitCountdown(Type, yaml);
+            await DeltaDecorationHelper.SetDeltaDecorationsFromExceptions(YamlEditor, formattingExceptions).ConfigureAwait(false);
+        }
+
+        public async void SubmitPage()
+        {
+            var yaml = await YamlEditor.GetValue();
+            var formattingExceptions = await ValidationController.SubmitPage(Type, yaml);
+            await DeltaDecorationHelper.SetDeltaDecorationsFromExceptions(YamlEditor, formattingExceptions).ConfigureAwait(false);
         }
     }
 }
