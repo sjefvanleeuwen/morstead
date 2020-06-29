@@ -18,7 +18,7 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
         {
             Label = "Regels Yaml Url",
             Name = "Rule",
-            Value = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml"
+            Value = "https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml"
         };
 
         private string _urlDisplay = None;

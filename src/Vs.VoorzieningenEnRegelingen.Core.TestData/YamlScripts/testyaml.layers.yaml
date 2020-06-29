@@ -1,12 +1,12 @@
 ﻿version: "1.0"
 layers:
   rules: 
-    - context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml
+    - context: https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5.yaml
   uxcontent:
-    - context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml
-    - context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml
+    - context: https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml
+    - context: https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml
       language: en
-    - context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml
+    - context: https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Content.yaml
       language: ar
   routing: 
-    - context: https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Routing.yaml
+    - context: https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/Vs.VoorzieningenEnRegelingen.Core.TestData/YamlScripts/Zorgtoeslag5Routing.yaml

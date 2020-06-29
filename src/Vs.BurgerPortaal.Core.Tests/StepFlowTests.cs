@@ -20,7 +20,7 @@ namespace Vs.BurgerPortaal.Core.Tests
             var serviceController = new ServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
             var sequence = new Sequence()
             {
-                Yaml = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml"
+                Yaml = "https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/doc/test-payloads/zorgtoeslag-2019.yml"
             };
             var sequenceController = new SequenceController(serviceController, sequence);
 
@@ -60,7 +60,7 @@ namespace Vs.BurgerPortaal.Core.Tests
             var serviceController = new ServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
             var sequence = new Sequence()
             {
-                Yaml = "https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml"
+                Yaml = "https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/doc/test-payloads/zorgtoeslag-2019.yml"
             };
             var sequenceController = new SequenceController(serviceController, sequence);
 

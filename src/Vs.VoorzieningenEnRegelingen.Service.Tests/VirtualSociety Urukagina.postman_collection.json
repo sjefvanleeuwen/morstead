@@ -54,7 +54,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\"}",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/doc/test-payloads/zorgtoeslag-2019.yml\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,7 +88,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"}]}",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"}]}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -122,7 +122,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"},{\"Name\":\"toetsingsinkomen_aanvrager\",\"Value\":\"19000\"}]}",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"},{\"Name\":\"toetsingsinkomen_aanvrager\",\"Value\":\"19000\"}]}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -156,7 +156,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"},{\"Name\":\"toetsingsinkomen_aanvrager\",\"Value\":\"19000\"},{\"Name\":\"toetsingsinkomen_toeslagpartner\",\"Value\":\"0\"}]}",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"},{\"Name\":\"toetsingsinkomen_aanvrager\",\"Value\":\"19000\"},{\"Name\":\"toetsingsinkomen_toeslagpartner\",\"Value\":\"0\"}]}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -190,7 +190,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/virtual-society-urukagina/master/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"},{\"Name\":\"toetsingsinkomen_aanvrager\",\"Value\":\"19000\"},{\"Name\":\"toetsingsinkomen_toeslagpartner\",\"Value\":\"0\"},{\"Name\":\"woonland\",\"Value\":\"Nederland\"}]}",
+					"raw": "{\"Config\":\"https://raw.githubusercontent.com/sjefvanleeuwen/morstead/master/src/doc/test-payloads/zorgtoeslag-2019.yml\",\"Parameters\":[{\"Name\":\"alleenstaande\",\"Value\":\"ja\"},{\"Name\":\"toetsingsinkomen_aanvrager\",\"Value\":\"19000\"},{\"Name\":\"toetsingsinkomen_toeslagpartner\",\"Value\":\"0\"},{\"Name\":\"woonland\",\"Value\":\"Nederland\"}]}",
 					"options": {
 						"raw": {
 							"language": "json"
