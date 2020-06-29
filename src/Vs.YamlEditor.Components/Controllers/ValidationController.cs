@@ -43,6 +43,12 @@ namespace Vs.YamlEditor.Components.Controllers
             return Types.ContainsKey(type) && Types[type];
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="yaml"></param>
+        /// <returns>An (empty) list of all formatexceptions or null in case of a non-result</returns>
         public async Task<IEnumerable<FormattingException>> StartSubmitCountdown(string type, string yaml)
         {
             Task<IEnumerable<FormattingException>> result = null;
@@ -52,13 +58,20 @@ namespace Vs.YamlEditor.Components.Controllers
             }
             TokenSource = new CancellationTokenSource();
             var ct = TokenSource.Token;
-            await Task.Run(() =>
+            try
             {
-                Thread.Sleep(_submitWait);
-                ct.ThrowIfCancellationRequested();
-                result = SubmitPage(type, yaml);
-            },
-            TokenSource.Token);
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(_submitWait);
+                    ct.ThrowIfCancellationRequested();
+                    result = SubmitPage(type, yaml);
+                },
+                TokenSource.Token);
+            }
+            catch {
+                
+            }
+
             if (result == null)
             {
                 return null;
@@ -97,7 +110,7 @@ namespace Vs.YamlEditor.Components.Controllers
                     throw ex;
                 }
 
-                return null;
+                return new List<FormattingException>();
             }
         }
     }
