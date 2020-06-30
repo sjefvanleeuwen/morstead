@@ -126,60 +126,20 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         #endregion
 
-        #region state methods
-
-        public async void InitEditorTabInfos()
-        {
-            var fileList = await YamlStorageController.GetYamlFiles().ConfigureAwait(false);
-            await AddFileListToEditorTabInfos(fileList).ConfigureAwait(false);
-        }
-
-        private async Task AddFileListToEditorTabInfos(IEnumerable<FileInformation> fileList)
-        {
-            foreach (var file in fileList)
-            {
-                SavedYamls.Add(new YamlFileInfo
-                {
-                    ContentId = file.Id,
-                    Name = file.FileName,
-                    Type = file.Directory
-                });
-            }
-            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
-        }
-
-        private async Task<string> WriteFile(IYamlFileInfo yamlFileInfo, string content)
-        {
-            var contentId = await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, content, yamlFileInfo.ContentId).ConfigureAwait(false);
-            return contentId;
-        }
-
-        public async Task Load(string contentId)
-        {
-            //get how it is saved
-            var savedYamlInfo = SavedYamls?.FirstOrDefault(y => y.ContentId == contentId);
-            //get the correct EditorTabInfo if it already exists
-            var editorTabInfo = EditorTabController.GetTabByContentId(contentId) ?? new EditorTabInfo();
-            //assign the correct values from the load
-            editorTabInfo.ContentId = contentId;
-            editorTabInfo.Name = savedYamlInfo.Name;
-            editorTabInfo.Type = savedYamlInfo.Type;
-            editorTabInfo.OriginalContent = await YamlStorageController.GetYamlFileContent(editorTabInfo.ContentId).ConfigureAwait(false);
-            editorTabInfo.Content = editorTabInfo.OriginalContent;
-            //add the tab if it didnt already exist
-            EditorTabController.AddTab(editorTabInfo);
-            //create the YamlFileEditor in the interface
-            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
-        }
-
-        #endregion
-
         #region interactive methods
 
         private void SwitchToTab(int tabId)
         {
             EditorTabController.Activate(tabId);
             Layout();
+        }
+
+        private void CloseTab(int tabId)
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
+            editorTabInfo.IsOpen = false;
+            //draw all tabs again
+            StateHasChanged();
         }
 
         private async void ContentModification(int tabId)
@@ -217,7 +177,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await JSRuntime.InvokeAsync<object>("notify", new object[] { message }).ConfigureAwait(false);
         }
 
-        private async Task AddNewYaml()
+        private async Task AddNewTab()
         {
             if (string.IsNullOrWhiteSpace(_yamlTypeSelector.SelectedValue))
             {
@@ -241,7 +201,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await ToggleModal("newYamlModal").ConfigureAwait(false);
         }
 
-        public async void TrySave()
+        private async void TrySave()
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
             if (string.IsNullOrWhiteSpace(editorTabInfo.Name))
@@ -254,7 +214,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
-        public async Task SaveAsYaml()
+        private async Task SaveAsYaml()
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
             if (!NameFilledCheck(SaveAsName))
@@ -268,6 +228,55 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 await Save().ConfigureAwait(false);
                 await ToggleModal("saveAsYamlModal").ConfigureAwait(false);
             }
+        }
+
+        #endregion
+
+        #region private methods
+
+        private async void InitEditorTabInfos()
+        {
+            var fileList = await YamlStorageController.GetYamlFiles().ConfigureAwait(false);
+            await AddFileListToEditorTabInfos(fileList).ConfigureAwait(false);
+        }
+
+        private async Task AddFileListToEditorTabInfos(IEnumerable<FileInformation> fileList)
+        {
+            foreach (var file in fileList)
+            {
+                SavedYamls.Add(new YamlFileInfo
+                {
+                    ContentId = file.Id,
+                    Name = file.FileName,
+                    Type = file.Directory
+                });
+            }
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }
+
+        private async Task<string> WriteFile(IYamlFileInfo yamlFileInfo, string content)
+        {
+            var contentId = await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, content, yamlFileInfo.ContentId).ConfigureAwait(false);
+            return contentId;
+        }
+
+        public async Task Load(string contentId)
+        {
+            //get how it is saved
+            var savedYamlInfo = SavedYamls?.FirstOrDefault(y => y.ContentId == contentId);
+            //get the correct EditorTabInfo if it already exists
+            var editorTabInfo = EditorTabController.GetTabByContentId(contentId) ?? new EditorTabInfo();
+            //assign the correct values from the load
+            editorTabInfo.IsOpen = true;
+            editorTabInfo.ContentId = contentId;
+            editorTabInfo.Name = savedYamlInfo.Name;
+            editorTabInfo.Type = savedYamlInfo.Type;
+            editorTabInfo.OriginalContent = await YamlStorageController.GetYamlFileContent(editorTabInfo.ContentId).ConfigureAwait(false);
+            editorTabInfo.Content = editorTabInfo.OriginalContent;
+            //add the tab if it didnt already exist
+            EditorTabController.AddTab(editorTabInfo);
+            //create the YamlFileEditor in the interface
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         private async Task Save()

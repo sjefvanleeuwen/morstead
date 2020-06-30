@@ -4,29 +4,38 @@
 <div id="splitcontainer" class="clear-fix row no-gutters splitter-content-editor">
     <div id="left-half_contenteditor" style="display: flex; flex-direction: column;">
 
-        @if (EditorTabController.EditorTabInfos.Any())
+        @if (EditorTabController.EditorTabInfos.Values.Any(e => e.IsOpen))
         {
+            var keys = EditorTabController.EditorTabInfos.Keys;
             <ul class="nav nav-tabs">
-                @foreach (var editorTabInfo in EditorTabController.EditorTabInfos)
+                @foreach (var key in keys)
                 {
-                    <li class="nav-item" @key="@editorTabInfo.Key">
-                        <a class="nav-link@(editorTabInfo.Value.IsActive ? " active" : string.Empty)" data-toggle="tab" href="#@editorTabInfo.Value.TabName" @onclick="(e => SwitchToTab(editorTabInfo.Key))">@((MarkupString)editorTabInfo.Value.DisplayName)</a>
-                    </li>
+                    var editorTabInfo = EditorTabController.EditorTabInfos[key];
+                    if (editorTabInfo.IsOpen)
+                    {
+                        <li class="nav-item" @key="@key">
+                            <a class="nav-link@(editorTabInfo.IsActive ? " active" : string.Empty)" data-toggle="tab" href="#@editorTabInfo.TabName" @onclick="(() => SwitchToTab(key))">@((MarkupString)editorTabInfo.DisplayName) <i class="fa fa-close" @onclick="(() => CloseTab(key))" @onclick:stopPropagation>X</i></a>
+                        </li>
+                    }
                 }
             </ul>
             <div class="tab-content">
-                @foreach (var editorTabInfo in EditorTabController.EditorTabInfos)
+                @foreach (var key in keys)
                 {
-                    <div @key="@editorTabInfo.Value.TabName" id="@editorTabInfo.Value.TabName" class="tab-pane @(editorTabInfo.Value.IsActive ? " active" : string.Empty)">
+                    var editorTabInfo = EditorTabController.EditorTabInfos[key];
+                    if (editorTabInfo.IsOpen)
+                    {
+                        <div @key="@editorTabInfo.TabName" id="@editorTabInfo.TabName" class="tab-pane @(editorTabInfo.IsActive ? " active" : string.Empty)">
 
-                        <div class="left-half_header sm-12">
-                            <div>Naam: <strong>@editorTabInfo.Value.Name</strong></div>
-                            <div>Type: <strong>@editorTabInfo.Value.Type</strong></div>
+                            <div class="left-half_header sm-12">
+                                <div>Naam: <strong>@editorTabInfo.Name</strong></div>
+                                <div>Type: <strong>@editorTabInfo.Type</strong></div>
+                            </div>
+                            <div class="left-half_bottom">
+                                <YamlEditor @ref="editorTabInfo.YamlEditor" Id="@(editorTabInfo.EditorId)" Value="@editorTabInfo.Content" OnKeyUp="@(e => ContentModification(key))" CssClass="editor" />
+                            </div>
                         </div>
-                        <div class="left-half_bottom">
-                            <YamlEditor @ref="editorTabInfo.Value.YamlEditor" Id="@(editorTabInfo.Value.EditorId)" Value="@editorTabInfo.Value.Content" OnKeyUp="@(e => ContentModification(editorTabInfo.Key))" CssClass="editor" />
-                        </div>
-                    </div>
+                    }
                 }
             </div>
         }
@@ -37,7 +46,7 @@
         </div>
     </div>
 </div>
-<Modal Id="newYamlModal" Cancel="Annuleren" Ok="Ok" OnOk="AddNewYaml" Title="Selecteer het type Yaml document voor het nieuwe document.">
+<Modal Id="newYamlModal" Cancel="Annuleren" Ok="Ok" OnOk="AddNewTab" Title="Selecteer het type Yaml document voor het nieuwe document.">
     <YamlTypeSelector @ref="_yamlTypeSelector" Name="ValidateRuleType" />
 </Modal>
 <Modal Id="saveAsYamlModal" Cancel="Annuleren" Ok="Opslaan" OnOk="SaveAsYaml" Title="Bestand opslaan">
