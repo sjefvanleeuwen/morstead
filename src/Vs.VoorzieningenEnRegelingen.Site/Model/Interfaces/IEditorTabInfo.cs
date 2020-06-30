@@ -4,7 +4,7 @@
     {
         int TabId { get; set; }
         int OrderNr { get; set; }
-        bool IsOpen { get; set; }
+        bool IsVisible { get; set; }
         bool IsActive { get; set; }
         public bool HasChanges { get; }
         public bool IsSaved { get; set; }

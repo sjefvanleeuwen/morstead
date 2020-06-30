@@ -6,7 +6,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model
     {
         public int TabId { get; set; }
         public int OrderNr { get; set; }
-        public bool IsOpen { get; set; }
+        public bool IsVisible { get; set; }
         public bool IsActive { get; set; }
         public bool HasChanges => Content != OriginalContent;
         public bool IsSaved { get; set; }

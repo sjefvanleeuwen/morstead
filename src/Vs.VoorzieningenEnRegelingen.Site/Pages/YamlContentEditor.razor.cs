@@ -44,6 +44,17 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         #region properties
 
+        public bool ShowTabs => EditorTabController.EditorTabInfos.Values.Any(e => e.IsVisible);
+
+        public IEnumerable<int> keysVisibleTabs => EditorTabController.EditorTabInfos
+                                                    .Where(e => e.Value.IsVisible)
+                                                    .OrderBy(e => e.Value.OrderNr)
+                                                    .Select(e => e.Key);
+
+        public IEnumerable<int> keysAllTabs => EditorTabController.EditorTabInfos
+                                                    .OrderBy(e => e.Value.OrderNr)
+                                                    .Select(e => e.Key);
+
         public int ActiveTab => EditorTabController.EditorTabInfos.Values?.FirstOrDefault(e => e.IsActive)?.TabId ?? 0;
 
         public string SaveAsName { get; set; }
@@ -137,7 +148,50 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         private void CloseTab(int tabId)
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
-            editorTabInfo.IsOpen = false;
+            editorTabInfo.IsVisible = false;
+
+            //draw all tabs again
+            StateHasChanged();
+        }
+
+        private void MoveTabLeft(int tabId)
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
+            var currentOrderNr = editorTabInfo.OrderNr;
+
+            var openTabsToLeft = EditorTabController.EditorTabInfos?.Where(e => e.Value.IsVisible && e.Value.OrderNr < currentOrderNr);
+            if (!openTabsToLeft.Any())
+            {
+                return;
+            }
+            
+            var leftOrderNr = openTabsToLeft.Max(e => e.Value.OrderNr);
+
+            //switch order numbers;
+            EditorTabController.EditorTabInfos.Where(e => e.Value.OrderNr == leftOrderNr).First().Value.OrderNr = currentOrderNr;
+            editorTabInfo.OrderNr = leftOrderNr;
+
+            //draw all tabs again
+            StateHasChanged();
+        }
+        
+        private void MoveTabRight(int tabId)
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
+            var currentOrderNr = editorTabInfo.OrderNr;
+
+            var openTabsToRight = EditorTabController.EditorTabInfos?.Where(e => e.Value.IsVisible && e.Value.OrderNr > currentOrderNr);
+            if (!openTabsToRight.Any())
+            {
+                return;
+            }
+
+            var rightOrderNr = openTabsToRight.Min(e => e.Value.OrderNr);
+
+            //switch order numbers;
+            EditorTabController.EditorTabInfos.Where(e => e.Value.OrderNr == rightOrderNr).First().Value.OrderNr = currentOrderNr;
+            editorTabInfo.OrderNr = rightOrderNr;
+
             //draw all tabs again
             StateHasChanged();
         }
@@ -190,7 +244,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 OrderNr = EditorTabController.GetNextOrderNr(),
                 Content = string.Empty,
                 ContentId = null,
-                IsOpen = true,
+                IsVisible = true,
                 Name = string.Empty,
                 Type = _yamlTypeSelector.SelectedValue,
                 YamlEditor = null 
@@ -268,8 +322,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             //get the correct EditorTabInfo if it already exists
             var editorTabInfo = EditorTabController.GetTabByContentId(contentId) ?? new EditorTabInfo();
             //assign the correct values from the load
-            editorTabInfo.OrderNr = editorTabInfo.IsOpen ? editorTabInfo.OrderNr : EditorTabController.GetNextOrderNr();
-            editorTabInfo.IsOpen = true;
+            editorTabInfo.OrderNr = editorTabInfo.IsVisible ? editorTabInfo.OrderNr : EditorTabController.GetNextOrderNr();
+            editorTabInfo.IsVisible = true;
             editorTabInfo.ContentId = contentId;
             editorTabInfo.Name = savedYamlInfo.Name;
             editorTabInfo.Type = savedYamlInfo.Type;

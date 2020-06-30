@@ -4,41 +4,44 @@
 <div id="splitcontainer" class="clear-fix row no-gutters splitter-content-editor">
     <div id="left-half_contenteditor" style="display: flex; flex-direction: column;">
 
-        @if (EditorTabController.EditorTabInfos.Values.Any(e => e.IsOpen))
+        @if (ShowTabs)
         {
-            var keys = EditorTabController.EditorTabInfos.OrderBy(e => e.Value.OrderNr).Select(e => e.Key);
             <ul class="nav nav-tabs">
-                @foreach (var key in keys)
+                @foreach (var key in keysVisibleTabs)
                 {
                     var editorTabInfo = EditorTabController.EditorTabInfos[key];
-                    if (editorTabInfo.IsOpen)
-                    {
-                        <li class="nav-item" @key="@key">
-                            <a class="nav-link@(editorTabInfo.IsActive ? " active" : string.Empty)" data-toggle="tab" href="#@editorTabInfo.TabName" @onclick="(() => SwitchToTab(key))">
-                                @((MarkupString)editorTabInfo.DisplayName)
-                                <i class="fa fa-check" @onclick="(() => CloseTab(key))" @onclick:stopPropagation></i>
-                            </a>
-                        </li>
-                    }
+
+                    <li class="nav-item" @key="@key">
+                        <a class="nav-link@(editorTabInfo.IsActive ? " active" : string.Empty)" data-toggle="tab" href="#@editorTabInfo.TabName" @onclick="(() => SwitchToTab(key))">
+                            @if (key != keysVisibleTabs.First()) //do not show left if it is the first tab
+                            {
+                                <i class="fa fa-chevron-left fa-small" @onclick="(() => MoveTabLeft(key))" @onclick:stopPropagation></i>
+                            }
+                            @((MarkupString)editorTabInfo.DisplayName)
+                            @if (key != keysVisibleTabs.Last()) //do not show right if it is the last tab
+                            {
+                                <i class="fa fa-chevron-right fa-small" @onclick="(() => MoveTabRight(key))" @onclick:stopPropagation></i>
+                            }
+                            <i class="fa fa-check" @onclick="(() => CloseTab(key))" @onclick:stopPropagation></i>
+                        </a>
+                    </li>
                 }
             </ul>
             <div class="tab-content">
-                @foreach (var key in keys)
+                @foreach (var key in keysAllTabs) //do this for all keys so the content is not removed/rendered again
                 {
                     var editorTabInfo = EditorTabController.EditorTabInfos[key];
-                    if (editorTabInfo.IsOpen)
-                    {
-                        <div @key="@editorTabInfo.TabName" id="@editorTabInfo.TabName" class="tab-pane @(editorTabInfo.IsActive ? " active" : string.Empty)">
 
-                            <div class="left-half_header sm-12">
-                                <div>Naam: <strong>@editorTabInfo.Name</strong></div>
-                                <div>Type: <strong>@editorTabInfo.Type</strong></div>
-                            </div>
-                            <div class="left-half_bottom">
-                                <YamlEditor @ref="editorTabInfo.YamlEditor" Id="@(editorTabInfo.EditorId)" Value="@editorTabInfo.Content" OnKeyUp="@(e => ContentModification(key))" CssClass="editor" />
-                            </div>
+                    <div @key="@editorTabInfo.TabName" id="@editorTabInfo.TabName" class="tab-pane @(editorTabInfo.IsActive ? " active" : string.Empty)">
+
+                        <div class="left-half_header sm-12">
+                            <div>Naam: <strong>@editorTabInfo.Name</strong></div>
+                            <div>Type: <strong>@editorTabInfo.Type</strong></div>
                         </div>
-                    }
+                        <div class="left-half_bottom">
+                            <YamlEditor @ref="editorTabInfo.YamlEditor" Id="@(editorTabInfo.EditorId)" Value="@editorTabInfo.Content" OnKeyUp="@(e => ContentModification(key))" CssClass="editor" />
+                        </div>
+                    </div>
                 }
             </div>
         }
