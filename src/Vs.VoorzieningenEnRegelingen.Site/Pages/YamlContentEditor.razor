@@ -14,7 +14,10 @@
                     if (editorTabInfo.IsOpen)
                     {
                         <li class="nav-item" @key="@key">
-                            <a class="nav-link@(editorTabInfo.IsActive ? " active" : string.Empty)" data-toggle="tab" href="#@editorTabInfo.TabName" @onclick="(() => SwitchToTab(key))">@((MarkupString)editorTabInfo.DisplayName) <i class="fa fa-close" @onclick="(() => CloseTab(key))" @onclick:stopPropagation>X</i></a>
+                            <a class="nav-link@(editorTabInfo.IsActive ? " active" : string.Empty)" data-toggle="tab" href="#@editorTabInfo.TabName" @onclick="(() => SwitchToTab(key))">
+                                @((MarkupString)editorTabInfo.DisplayName)
+                                <i class="fa fa-check" @onclick="(() => CloseTab(key))" @onclick:stopPropagation></i>
+                            </a>
                         </li>
                     }
                 }
