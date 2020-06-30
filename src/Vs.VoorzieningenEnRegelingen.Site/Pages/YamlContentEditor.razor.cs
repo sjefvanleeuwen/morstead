@@ -77,7 +77,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                             { new DisplayItem { Name = "Type", Value = savedYamlInfo.Type, Display = true } }
                         },
                         TableActions = new List<TableAction> {
-                            { new TableAction { Action = new Action (async () => await Load(savedYamlInfo.ContentId).ConfigureAwait(false)), IconName = "fa-edit" } }
+                            { new TableAction { Action = new Action (async () => await Load(savedYamlInfo.ContentId).ConfigureAwait(false)), IconName = "fa-edit" } },
+                            { new TableAction { Action = new Action (async () => await Compare(savedYamlInfo.ContentId).ConfigureAwait(false)), IconName = /*"fa-exchange"*/ "fa-check" } }
                         }
                     });
                 }
@@ -333,6 +334,12 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             EditorTabController.AddTab(editorTabInfo);
             //create the YamlFileEditor in the interface
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }
+
+        public async Task Compare(string contentId)
+        {
+            //TODO add the compare content to the second split screen
+            var compareContent = await YamlStorageController.GetYamlFileContent(contentId).ConfigureAwait(false);
         }
 
         private async Task Save()
