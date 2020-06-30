@@ -3,6 +3,7 @@
     public interface IEditorTabInfo : IYamlFileInfo
     {
         int TabId { get; set; }
+        int OrderNr { get; set; }
         bool IsOpen { get; set; }
         bool IsActive { get; set; }
         public bool HasChanges { get; }

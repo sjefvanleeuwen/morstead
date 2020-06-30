@@ -6,7 +6,7 @@
 
         @if (EditorTabController.EditorTabInfos.Values.Any(e => e.IsOpen))
         {
-            var keys = EditorTabController.EditorTabInfos.Keys;
+            var keys = EditorTabController.EditorTabInfos.OrderBy(e => e.Value.OrderNr).Select(e => e.Key);
             <ul class="nav nav-tabs">
                 @foreach (var key in keys)
                 {

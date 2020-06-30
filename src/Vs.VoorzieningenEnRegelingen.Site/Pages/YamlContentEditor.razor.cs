@@ -187,6 +187,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
             var editorTabInfo = new EditorTabInfo
             {
+                OrderNr = EditorTabController.GetNextOrderNr(),
                 Content = string.Empty,
                 ContentId = null,
                 IsOpen = true,
@@ -267,6 +268,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             //get the correct EditorTabInfo if it already exists
             var editorTabInfo = EditorTabController.GetTabByContentId(contentId) ?? new EditorTabInfo();
             //assign the correct values from the load
+            editorTabInfo.OrderNr = editorTabInfo.IsOpen ? editorTabInfo.OrderNr : EditorTabController.GetNextOrderNr();
             editorTabInfo.IsOpen = true;
             editorTabInfo.ContentId = contentId;
             editorTabInfo.Name = savedYamlInfo.Name;

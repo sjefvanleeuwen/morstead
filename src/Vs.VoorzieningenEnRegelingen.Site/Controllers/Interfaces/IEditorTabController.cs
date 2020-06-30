@@ -16,5 +16,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Controllers.Interfaces
         void Activate(int tabId);
 
         bool RemoveTab(int tabId);
+        
+        int GetNextOrderNr();
     }
 }

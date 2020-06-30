@@ -5,6 +5,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model
     public class EditorTabInfo : YamlFileInfo, IEditorTabInfo
     {
         public int TabId { get; set; }
+        public int OrderNr { get; set; }
         public bool IsOpen { get; set; }
         public bool IsActive { get; set; }
         public bool HasChanges => Content != OriginalContent;

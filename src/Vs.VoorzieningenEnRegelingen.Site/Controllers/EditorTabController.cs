@@ -65,5 +65,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Controllers
         {
             return EditorTabInfos.Remove(tabId);
         }
+
+        public int GetNextOrderNr()
+        {
+            return (EditorTabInfos?.Max(e => e.Value?.OrderNr) ?? 0) + 1;
+        }
     }
 }
