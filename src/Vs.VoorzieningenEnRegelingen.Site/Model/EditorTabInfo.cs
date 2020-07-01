@@ -9,6 +9,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model
         public bool IsVisible { get; set; }
         public bool IsActive { get; set; }
         public bool HasChanges => Content != OriginalContent;
+        public bool HasErrors { get; set; }
         public bool IsSaved { get; set; }
         public string DisplayName =>
             (string.IsNullOrWhiteSpace(Name) ? "<i>Nieuw</i>" : Name) +

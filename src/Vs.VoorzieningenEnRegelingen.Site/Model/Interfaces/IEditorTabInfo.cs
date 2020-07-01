@@ -6,8 +6,9 @@
         int OrderNr { get; set; }
         bool IsVisible { get; set; }
         bool IsActive { get; set; }
-        public bool HasChanges { get; }
-        public bool IsSaved { get; set; }
+        bool HasChanges { get; }
+        bool HasErrors { get; set; }
+        bool IsSaved { get; set; }
         string DisplayName { get; }
         string OriginalContent { get; set; }
         string Content { get; set; }

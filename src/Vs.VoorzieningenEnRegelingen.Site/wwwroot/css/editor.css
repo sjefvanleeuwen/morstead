@@ -21,9 +21,21 @@
 }
 
     #left-half_contenteditor .left-half_header {
-        padding: 7.5px 0px 7.5px 75.5px;
+        padding: 7.5px 0px;
         height: auto;
     }
+
+        #left-half_contenteditor .left-half_header .error-indicator {
+            padding: 10.5px ;
+            margin-right: 47px;
+        }
+
+            #left-half_contenteditor .left-half_header .error-indicator.on {
+                background-color: red;
+                border-radius: 50%;
+            }
+
+
 
         #left-half_contenteditor .left-half_header > div {
             float: left;
