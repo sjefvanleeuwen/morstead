@@ -58,7 +58,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Controllers
         public void Activate(int tabId)
         {
             EditorTabInfos.Values.ToList().ForEach(e => e.IsActive = false);
-            EditorTabInfos[tabId].IsActive = true;
+            if (tabId > 0)
+            {
+                EditorTabInfos[tabId].IsActive = true;
+            }
         }
 
         public bool RemoveTab(int tabId)

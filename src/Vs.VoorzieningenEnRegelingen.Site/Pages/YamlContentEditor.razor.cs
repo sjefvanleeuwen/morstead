@@ -150,6 +150,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             editorTabInfo.IsVisible = false;
+            //set the next one visible
+            var newActiveTab = GetTabToRight(tabId);
+            if (newActiveTab == null)
+            {
+                newActiveTab = GetTabToLeft(tabId);
+            }
+            EditorTabController.Activate(newActiveTab?.TabId ?? 0);
 
             //draw all tabs again
             StateHasChanged();
@@ -160,37 +167,33 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             var currentOrderNr = editorTabInfo.OrderNr;
 
-            var openTabsToLeft = EditorTabController.EditorTabInfos?.Where(e => e.Value.IsVisible && e.Value.OrderNr < currentOrderNr);
-            if (!openTabsToLeft.Any())
+            var tabToLeft = GetTabToLeft(tabId);
+            if (tabToLeft == null)
             {
                 return;
             }
-            
-            var leftOrderNr = openTabsToLeft.Max(e => e.Value.OrderNr);
-
             //switch order numbers;
-            EditorTabController.EditorTabInfos.Where(e => e.Value.OrderNr == leftOrderNr).First().Value.OrderNr = currentOrderNr;
+            var leftOrderNr = tabToLeft.OrderNr;
+            tabToLeft.OrderNr = currentOrderNr;
             editorTabInfo.OrderNr = leftOrderNr;
 
             //draw all tabs again
             StateHasChanged();
         }
-        
+
         private void MoveTabRight(int tabId)
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             var currentOrderNr = editorTabInfo.OrderNr;
 
-            var openTabsToRight = EditorTabController.EditorTabInfos?.Where(e => e.Value.IsVisible && e.Value.OrderNr > currentOrderNr);
-            if (!openTabsToRight.Any())
+            var tabToRight = GetTabToRight(tabId);
+            if (tabToRight == null)
             {
                 return;
             }
-
-            var rightOrderNr = openTabsToRight.Min(e => e.Value.OrderNr);
-
             //switch order numbers;
-            EditorTabController.EditorTabInfos.Where(e => e.Value.OrderNr == rightOrderNr).First().Value.OrderNr = currentOrderNr;
+            var rightOrderNr = tabToRight.OrderNr;
+            tabToRight.OrderNr = currentOrderNr;
             editorTabInfo.OrderNr = rightOrderNr;
 
             //draw all tabs again
@@ -289,6 +292,40 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         #endregion
 
         #region private methods
+
+        private IEditorTabInfo GetTabToLeft(int tabId)
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
+            var currentOrderNr = editorTabInfo.OrderNr;
+
+            var openTabsToLeft = EditorTabController.EditorTabInfos?.Where(e => e.Value.IsVisible && e.Value.OrderNr < currentOrderNr);
+            if (!openTabsToLeft.Any())
+            {
+                return null;
+            }
+
+            var leftOrderNr = openTabsToLeft.Max(e => e.Value.OrderNr);
+
+            //switch order numbers;
+            return EditorTabController.EditorTabInfos.Where(e => e.Value.OrderNr == leftOrderNr).First().Value;
+        }
+
+        private IEditorTabInfo GetTabToRight(int tabId)
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
+            var currentOrderNr = editorTabInfo.OrderNr;
+
+            var openTabsToRight = EditorTabController.EditorTabInfos?.Where(e => e.Value.IsVisible && e.Value.OrderNr > currentOrderNr);
+            if (!openTabsToRight.Any())
+            {
+                return null;
+            }
+
+            var rightOrderNr = openTabsToRight.Min(e => e.Value.OrderNr);
+
+            //switch order numbers;
+            return EditorTabController.EditorTabInfos.Where(e => e.Value.OrderNr == rightOrderNr).First().Value;
+        }
 
         private async void InitEditorTabInfos()
         {
