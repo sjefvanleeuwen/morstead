@@ -228,6 +228,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             var type = editorTabInfo.Type;
             var formattingExceptions = await ValidationController.StartSubmitCountdown(type, yaml).ConfigureAwait(false);
             await DeltaDecorationHelper.SetDeltaDecorationsFromExceptions(editorTabInfo.YamlEditor, formattingExceptions).ConfigureAwait(false);
+            editorTabInfo.HasErrors = formattingExceptions?.Any() ?? false;
         }
 
         private async void OpenNotification(string message)
