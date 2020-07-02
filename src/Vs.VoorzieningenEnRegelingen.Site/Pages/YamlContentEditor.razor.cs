@@ -105,19 +105,27 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         protected override void SetMenu()
         {
+            var editorMenuItems =
+                new List<MenuItem> {
+                    new MenuItem { Link = "#", Name = "Nieuw", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#newYamlModal" } } }
+                };
+
+            if (ActiveTab > 0)
+            {
+                editorMenuItems.Add(new MenuItem { IsDivider = true });
+                editorMenuItems.Add(new MenuItem { Link = "#", Name = "Opslaan", OnClick = TrySave });
+                editorMenuItems.Add(new MenuItem { Link = "#", Name = "Opslaan als...", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#saveAsYamlModal" } } });
+            }
+
             var menuItems = new List<IMenuItem>
                 {
                     new MenuItem { Link = "/", Name = "Home" },
                     new MenuItem { Name = "Editor", SubMenuItems =
-                        new List<MenuItem> {
-                            new MenuItem { Link = "#", Name = "Nieuw", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#newYamlModal" } } },
-                            new MenuItem { IsDivider = true },
-                            new MenuItem { Link = "#", Name = "Opslaan", OnClick = TrySave },
-                            new MenuItem { Link = "#", Name = "Opslaan als...", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#saveAsYamlModal" } } }
-                        }
+                        editorMenuItems
                     },
                     new MenuItem { Link = "/About", Name = "Over"}
                 };
+
             Menu.SetMenuItems(menuItems);
         }
 
@@ -146,7 +154,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             Layout();
         }
 
-        private void CloseTab(int tabId)
+        private async void CloseTab(int tabId)
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             editorTabInfo.IsVisible = false;
@@ -158,8 +166,14 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
             EditorTabController.Activate(newActiveTab?.TabId ?? 0);
 
-            //draw all tabs again
-            StateHasChanged();
+            //possibly reset the Menu
+            if (ActiveTab == 0)
+            {
+                SetMenu();
+            }
+
+            //draw all tabs & menu again
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         private void MoveTabLeft(int tabId)
@@ -239,6 +253,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private async Task AddNewTab()
         {
+            var currentTab = ActiveTab;
+
             if (string.IsNullOrWhiteSpace(_yamlTypeSelector.SelectedValue))
             {
                 OpenNotification("Selecteer een type Yaml.");
@@ -253,10 +269,16 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 IsVisible = true,
                 Name = string.Empty,
                 Type = _yamlTypeSelector.SelectedValue,
-                YamlEditor = null 
+                YamlEditor = null
             };
 
             EditorTabController.AddTab(editorTabInfo);
+            
+            if (currentTab == 0)
+            {
+                SetMenu();
+            }
+
             //create the YamlFileEditor in the interface
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
             await ToggleModal("newYamlModal").ConfigureAwait(false);
@@ -357,6 +379,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         public async Task Load(string contentId)
         {
+            var currentTab = ActiveTab;
+
             //get how it is saved
             var savedYamlInfo = SavedYamls?.FirstOrDefault(y => y.ContentId == contentId);
             //get the correct EditorTabInfo if it already exists
@@ -369,6 +393,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.Type = savedYamlInfo.Type;
             editorTabInfo.OriginalContent = await YamlStorageController.GetYamlFileContent(editorTabInfo.ContentId).ConfigureAwait(false);
             editorTabInfo.Content = editorTabInfo.OriginalContent;
+            
             //remove all errors if there were set
             editorTabInfo.HasErrors = false;
             if (editorTabInfo.YamlEditor != null)
@@ -376,8 +401,16 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 await editorTabInfo.YamlEditor.ResetDeltaDecorations().ConfigureAwait(false);
                 await editorTabInfo.YamlEditor.SetValue(editorTabInfo.Content).ConfigureAwait(false);
             }
+            
             //add the tab if it didnt already exist
             EditorTabController.AddTab(editorTabInfo);
+            
+            //possibly reset the Menu
+            if (currentTab == 0)
+            {
+                SetMenu();
+            }
+
             //create the YamlFileEditor in the interface
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
@@ -424,14 +457,14 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             yamlFileInfo.Type = editorTabInfo.Type;
 
             yamlFileInfo.ContentId = await WriteFile(yamlFileInfo, content).ConfigureAwait(false);
-            
+
             OpenNotification("Inhoud succesvol opgeslagen.");
 
             editorTabInfo.ContentId = yamlFileInfo.ContentId;
             editorTabInfo.IsSaved = true;
             editorTabInfo.OriginalContent = editorTabInfo.Content;
             //update the tab name
-            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false); 
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         private async Task ToggleModal(string modalId)

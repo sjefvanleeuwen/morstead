@@ -10,13 +10,18 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Shared.Components
 
         protected override void OnInitialized()
         {
-            Menu.OnChange += StateHasChanged;
+            Menu.OnChange += GlobalStageChanged;
             base.OnInitialized();
         }
 
         public void Dispose()
         {
-            Menu.OnChange -= StateHasChanged;
+            Menu.OnChange -= GlobalStageChanged;
+        }
+
+        public async void GlobalStageChanged()
+        {
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
     }
 }
