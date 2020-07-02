@@ -369,6 +369,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.Type = savedYamlInfo.Type;
             editorTabInfo.OriginalContent = await YamlStorageController.GetYamlFileContent(editorTabInfo.ContentId).ConfigureAwait(false);
             editorTabInfo.Content = editorTabInfo.OriginalContent;
+            //remove all errors if there were set
+            editorTabInfo.HasErrors = false;
+            if (editorTabInfo.YamlEditor != null)
+            {
+                await editorTabInfo.YamlEditor.ResetDeltaDecorations().ConfigureAwait(false);
+                await editorTabInfo.YamlEditor.SetValue(editorTabInfo.Content).ConfigureAwait(false);
+            }
             //add the tab if it didnt already exist
             EditorTabController.AddTab(editorTabInfo);
             //create the YamlFileEditor in the interface
