@@ -25,16 +25,20 @@
         height: auto;
     }
 
-        #left-half_contenteditor .left-half_header .error-indicator {
-            padding: 10.5px ;
-            margin-right: 47px;
+        #left-half_contenteditor .left-half_header .editorErrorGlyphWrapper {
+            padding: 0px;
+            margin: 0px;
+            width: 68px;
+            height: 19px;
         }
 
-            #left-half_contenteditor .left-half_header .error-indicator.on {
-                background-color: red;
-                border-radius: 50%;
+            #left-half_contenteditor .left-half_header .editorErrorGlyphWrapper > i {
+                display: none;
             }
 
+            #left-half_contenteditor .left-half_header .editorErrorGlyphWrapper.on > i{
+                display: inline;
+            }
 
 
         #left-half_contenteditor .left-half_header > div {

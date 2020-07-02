@@ -35,7 +35,7 @@
                     <div @key="@editorTabInfo.TabName" id="@editorTabInfo.TabName" class="tab-pane @(editorTabInfo.IsActive ? " active" : string.Empty)">
 
                         <div class="left-half_header sm-12">
-                            <div class="error-indicator @(editorTabInfo.HasErrors ? "on" : "off")"></div>
+                            <div class="editorErrorGlyphWrapper @(editorTabInfo.HasErrors ? "on" : "off")"><i class="editorErrorGlyph fa fa-exclamation-circle"></i></div>
                             <div>Naam: <strong>@editorTabInfo.Name</strong></div>
                             <div>Type: <strong>@editorTabInfo.Type</strong></div>
                         </div>

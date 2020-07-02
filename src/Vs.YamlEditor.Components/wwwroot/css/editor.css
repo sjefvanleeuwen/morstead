@@ -11,6 +11,8 @@
 }
 
 .editorErrorGlyph {
-    background: red;
+    color: red;
+    font-size: 19px;
+    margin-left: 5px;
     cursor: help;
 }

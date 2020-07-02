@@ -58,7 +58,7 @@ namespace Vs.YamlEditor.Components.Helpers
                 InlineClassNameAffectsLetterSpacing = false,
                 ClassName = "editorError",
                 HoverMessage = new MarkdownString[] { new MarkdownString { Value = $"**Error**\r\n\r\n{message}" } },
-                GlyphMarginClassName = "editorErrorGlyph",
+                GlyphMarginClassName = "editorErrorGlyph fa fa-exclamation-circle",
                 GlyphMarginHoverMessage = new MarkdownString[] { new MarkdownString { Value = $"**Error**\r\n\r\n{message}" } }
             };
 
