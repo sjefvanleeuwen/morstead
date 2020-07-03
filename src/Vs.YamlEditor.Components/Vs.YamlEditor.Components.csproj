@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\core\Vs.Core.Layers\Vs.Core.Layers.csproj" />
+    <ProjectReference Include="..\temp\BlazorMonaco\BlazorMonaco.csproj" />
   </ItemGroup>
 
 </Project>
