@@ -14,6 +14,10 @@
         string Content { get; set; }
         string EditorId { get; }
         string TabName { get; }
+        bool IsCompareMode { get; }
+        IYamlFileInfo CompareInfo { get; set; }
+        string CompareContent { get; set; }
         YamlEditor.Components.Shared.YamlEditor YamlEditor { get; set; }
+        YamlEditor.Components.Shared.YamlDiffEditor YamlDiffEditor { get; set; }
     }
 }

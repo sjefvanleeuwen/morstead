@@ -35,7 +35,7 @@ namespace Vs.YamlEditor.Components.Shared
                 MonacoController.Language = _language;
                 MonacoController.MonacoEditor = _monacoEditor;
             }
-            base.OnAfterRenderAsync(firstRender);
+            base.OnAfterRender(firstRender);
         }
 
         private StandaloneEditorConstructionOptions EditorConstructionOptions(MonacoEditor editor)

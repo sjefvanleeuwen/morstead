@@ -158,6 +158,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             editorTabInfo.IsVisible = false;
+
+            CloseCompare(tabId);
+
             //set the next one visible
             var newActiveTab = GetTabToRight(tabId);
             if (newActiveTab == null)
@@ -173,6 +176,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
 
             //draw all tabs & menu again
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }
+
+        private async void CloseCompare(int tabId)
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
+            editorTabInfo.CompareInfo = null;
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
@@ -377,7 +387,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             return contentId;
         }
 
-        public async Task Load(string contentId)
+        private async Task Load(string contentId)
         {
             var currentTab = ActiveTab;
 
@@ -415,10 +425,28 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
-        public async Task Compare(string contentId)
+        private async Task Compare(string contentId)
         {
-            //TODO add the compare content to the second split screen
-            var compareContent = await YamlStorageController.GetYamlFileContent(contentId).ConfigureAwait(false);
+            var compareInfo = SavedYamls.FirstOrDefault(s => s.ContentId == contentId);
+            if (compareInfo == null)
+            {
+                return;
+            }
+
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
+            editorTabInfo.HasErrors = false; //do not remember errors
+            editorTabInfo.CompareInfo = compareInfo;
+
+            editorTabInfo.Content = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
+            editorTabInfo.CompareContent = await YamlStorageController.GetYamlFileContent(contentId).ConfigureAwait(false);
+            
+            //set the value if it is already initiated; otherwise the content is not drawn again (no update detected in Blazor)
+            if (editorTabInfo.YamlDiffEditor != null)
+            {
+                await editorTabInfo.YamlDiffEditor.SetOriginalValue(editorTabInfo.CompareContent).ConfigureAwait(false);
+            }
+
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         private async Task Save()

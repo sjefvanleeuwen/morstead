@@ -1,4 +1,5 @@
 ﻿using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
+using Vs.YamlEditor.Components.Shared;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Model
 {
@@ -11,13 +12,17 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model
         public bool HasChanges => Content != OriginalContent;
         public bool HasErrors { get; set; }
         public bool IsSaved { get; set; }
-        public string DisplayName =>
-            (string.IsNullOrWhiteSpace(Name) ? "<i>Nieuw</i>" : Name) +
-            (HasChanges && !IsSaved ? "*" : string.Empty);
+        public string DisplayName => (string.IsNullOrWhiteSpace(Name) ? "<i>Nieuw</i>" : Name) +
+            (HasChanges && !IsSaved ? "*" : string.Empty) +
+            (IsCompareMode ? " <i class=\"fa fa-exchange\"></i> " + " <i class=\"fa fa-check\"></i> " + CompareInfo.Name : string.Empty);
         public string OriginalContent { get; set; }
         public string Content { get; set; }
         public string EditorId => "monacoEditor" + TabId;
         public string TabName => "Tab" + TabId;
+        public bool IsCompareMode => CompareInfo?.ContentId != null;
+        public IYamlFileInfo CompareInfo { get; set; }
+        public string CompareContent { get; set; }
         public YamlEditor.Components.Shared.YamlEditor YamlEditor { get; set; }
+        public YamlDiffEditor YamlDiffEditor { get; set; }
     }
 }
