@@ -159,7 +159,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             editorTabInfo.IsVisible = false;
 
-            CloseCompare(tabId);
+            CloseDiff(tabId);
 
             //set the next one visible
             var newActiveTab = GetTabToRight(tabId);
@@ -179,10 +179,11 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
-        private async void CloseCompare(int tabId)
+        private async void CloseDiff(int tabId)
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             editorTabInfo.CompareInfo = null;
+            await editorTabInfo.YamlEditor.SetValue(editorTabInfo.Content).ConfigureAwait(false);
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
@@ -233,13 +234,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             if (!onDiffEditor)
             {
                 yaml = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
+                StartValidationSubmitCountdown(editorTabInfo, yaml);
             }
             else
             {
                 yaml = await editorTabInfo.YamlDiffEditor.GetModifiedValue().ConfigureAwait(false);
-            } 
+            }
 
-            StartValidationSubmitCountdown(editorTabInfo, yaml);
             TrackContentChanged(editorTabInfo, yaml);
         }
 
