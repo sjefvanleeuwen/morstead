@@ -224,12 +224,20 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             StateHasChanged();
         }
 
-        private async void ContentModification(int tabId)
+        private async void RegisterContentModification(int tabId, bool onDiffEditor = false)
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             editorTabInfo.IsSaved = false;
+            var yaml = string.Empty;
             //get yaml now so it doesn't have to be retrieved multiple times
-            var yaml = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
+            if (!onDiffEditor)
+            {
+                yaml = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
+            }
+            else
+            {
+                yaml = await editorTabInfo.YamlDiffEditor.GetModifiedValue().ConfigureAwait(false);
+            } 
 
             StartValidationSubmitCountdown(editorTabInfo, yaml);
             TrackContentChanged(editorTabInfo, yaml);
@@ -283,7 +291,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             };
 
             EditorTabController.AddTab(editorTabInfo);
-            
+
             if (currentTab == 0)
             {
                 SetMenu();
@@ -403,7 +411,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.Type = savedYamlInfo.Type;
             editorTabInfo.OriginalContent = await YamlStorageController.GetYamlFileContent(editorTabInfo.ContentId).ConfigureAwait(false);
             editorTabInfo.Content = editorTabInfo.OriginalContent;
-            
+
             //remove all errors if there were set
             editorTabInfo.HasErrors = false;
             if (editorTabInfo.YamlEditor != null)
@@ -411,10 +419,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 await editorTabInfo.YamlEditor.ResetDeltaDecorations().ConfigureAwait(false);
                 await editorTabInfo.YamlEditor.SetValue(editorTabInfo.Content).ConfigureAwait(false);
             }
-            
+
             //add the tab if it didnt already exist
             EditorTabController.AddTab(editorTabInfo);
-            
+
             //possibly reset the Menu
             if (currentTab == 0)
             {
@@ -439,7 +447,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
             editorTabInfo.Content = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
             editorTabInfo.CompareContent = await YamlStorageController.GetYamlFileContent(contentId).ConfigureAwait(false);
-            
+
             //set the value if it is already initiated; otherwise the content is not drawn again (no update detected in Blazor)
             if (editorTabInfo.YamlDiffEditor != null)
             {

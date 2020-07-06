@@ -42,7 +42,7 @@
                                 <div>Type: <strong>@editorTabInfo.Type</strong></div>
                             </div>
                             <div class="left-half_bottom">
-                                <YamlEditor @ref="editorTabInfo.YamlEditor" Id="@(editorTabInfo.EditorId)" Value="@editorTabInfo.Content" OnKeyUp="@(() => ContentModification(key))" CssClass="editor" />
+                                <YamlEditor @ref="editorTabInfo.YamlEditor" Id="@(editorTabInfo.EditorId)" Value="@editorTabInfo.Content" OnKeyUp="@(() => RegisterContentModification(key))" CssClass="editor" />
                             </div>
                         }
                         else
@@ -59,7 +59,7 @@
                                 <div>Type: <strong>@editorTabInfo.Type</strong></div>
                             </div>
                             <div class="left-half_bottom">
-                                <YamlDiffEditor @ref="editorTabInfo.YamlDiffEditor" Id="@($"{editorTabInfo.EditorId}_diff")" OriginalValue="@(editorTabInfo.CompareContent)" ModifiedValue="@(editorTabInfo.Content)" OnKeyUp="@(() => ContentModification(key))" CssClass="editor" />
+                                <YamlDiffEditor @ref="editorTabInfo.YamlDiffEditor" Id="@($"{editorTabInfo.EditorId}_diff")" OriginalValue="@(editorTabInfo.CompareContent)" ModifiedValue="@(editorTabInfo.Content)" OnKeyUp="@(() => RegisterContentModification(key, true))" CssClass="editor" />
                             </div>
                         }
                     </div>

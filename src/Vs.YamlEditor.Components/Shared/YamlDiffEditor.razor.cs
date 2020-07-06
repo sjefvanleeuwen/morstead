@@ -1,11 +1,8 @@
 ﻿using BlazorMonaco;
 using BlazorMonaco.Bridge;
 using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Vs.YamlEditor.Components.Controllers.ApiCalls;
-using Vs.YamlEditor.Components.Controllers.Interfaces;
 
 namespace Vs.YamlEditor.Components.Shared
 {
@@ -32,8 +29,8 @@ namespace Vs.YamlEditor.Components.Shared
         {
             if (firstRender)
             {
-                OriginalEditorId = await _monacoDiffEditor.GetModifiedEditor();
-                ModifiedEditorId = await _monacoDiffEditor.GetOriginalEditor();
+                OriginalEditorId = await _monacoDiffEditor.GetOriginalEditor();
+                ModifiedEditorId = await _monacoDiffEditor.GetModifiedEditor();
             }
             await base.OnAfterRenderAsync(firstRender);
         }
