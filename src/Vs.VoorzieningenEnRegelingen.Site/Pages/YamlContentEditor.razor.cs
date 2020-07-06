@@ -94,11 +94,16 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         #region overrides
 
+        protected override void OnInitialized()
+        {
+            ResetErrorsInOpenTabs();
+        }
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                InitEditorTabInfos();
+                InitSavedFiles();
                 await JSRuntime.InvokeAsync<object>("splitYamlContentEditor", new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
             }
         }
@@ -370,13 +375,21 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             return EditorTabController.EditorTabInfos.Where(e => e.Value.OrderNr == rightOrderNr).First().Value;
         }
 
-        private async void InitEditorTabInfos()
+        private async void InitSavedFiles()
         {
             var fileList = await YamlStorageController.GetYamlFiles().ConfigureAwait(false);
-            await AddFileListToEditorTabInfos(fileList).ConfigureAwait(false);
+            await AddFileListToSavedYamls(fileList).ConfigureAwait(false);
         }
 
-        private async Task AddFileListToEditorTabInfos(IEnumerable<FileInformation> fileList)
+        private async void ResetErrorsInOpenTabs()
+        {
+            foreach (var editorTabInfo in EditorTabController.EditorTabInfos)
+            {
+                editorTabInfo.Value.HasErrors = false;
+            }
+        }
+
+        private async Task AddFileListToSavedYamls(IEnumerable<FileInformation> fileList)
         {
             foreach (var file in fileList)
             {
