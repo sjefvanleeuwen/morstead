@@ -12,7 +12,7 @@
                     var editorTabInfo = EditorTabController.EditorTabInfos[key];
 
                     <li class="nav-item" @key="@key">
-                        <a class="nav-link@(editorTabInfo.IsActive ? " active" : string.Empty)" data-toggle="tab" href="#@editorTabInfo.TabName" @onclick="(() => SwitchToTab(key))">
+                        <a class="nav-link@(editorTabInfo.IsActive ? " active" : string.Empty)" data-toggle="tab" href="#@editorTabInfo.TabId" @onclick="(() => SwitchToTab(key))">
                             @if (key != keysVisibleTabs.First()) //do not show left if it is the first tab
                             {
                                 <i class="fa fa-chevron-left fa-small" @onclick="(() => MoveTabLeft(key))" @onclick:stopPropagation></i>
@@ -32,12 +32,12 @@
                 {
                     var editorTabInfo = EditorTabController.EditorTabInfos[key];
 
-                    <div @key="@editorTabInfo.TabName" id="@editorTabInfo.TabName" class="tab-pane @(editorTabInfo.IsActive ? " active" : string.Empty)">
+                    <div @key="@editorTabInfo.TabId" id="@editorTabInfo.TabId" class="tab-pane @(editorTabInfo.IsActive ? " active" : string.Empty)">
 
                         @if (!editorTabInfo.IsCompareMode)
                         {
                             <div class="left-half_header sm-12">
-                                <div class="editorErrorGlyphWrapper @(editorTabInfo.HasErrors ? "on" : "off")"><i class="editorErrorGlyph fa fa-exclamation-circle"></i></div>
+                                <div class="editorErrorGlyphWrapper @(editorTabInfo.HasExceptions ? "on" : "off")"><i class="editorErrorGlyph fa fa-exclamation-circle"></i></div>
                                 <div>Naam: <strong>@editorTabInfo.Name</strong></div>
                                 <div>Type: <strong>@editorTabInfo.Type</strong></div>
                             </div>

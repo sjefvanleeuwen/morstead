@@ -94,11 +94,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         #region overrides
 
-        protected override void OnInitialized()
-        {
-            ResetErrorsInOpenTabs();
-        }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -106,6 +101,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 InitSavedFiles();
                 await JSRuntime.InvokeAsync<object>("splitYamlContentEditor", new object[] { DotNetObjectReference.Create(this), "InvokeLayout" }).ConfigureAwait(false);
             }
+            await base.OnAfterRenderAsync(firstRender).ConfigureAwait(false);
         }
 
         protected override void SetMenu()
@@ -143,7 +139,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             if (ActiveTab == 0)
             {
-                return null;
+                return default;
             }
 
             return EditorTabController.GetTabByTabId(ActiveTab).YamlEditor.Layout();
@@ -153,7 +149,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         #region interactive methods
 
-        private void SwitchToTab(int tabId)
+        private async void SwitchToTab(int tabId)
         {
             EditorTabController.Activate(tabId);
             Layout();
@@ -165,14 +161,16 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.IsVisible = false;
 
             CloseDiff(tabId);
-
-            //set the next one visible
-            var newActiveTab = GetTabToRight(tabId);
-            if (newActiveTab == null)
+            if (tabId == ActiveTab)
             {
-                newActiveTab = GetTabToLeft(tabId);
+                //set the next one visible
+                var newActiveTab = GetTabToRight(tabId);
+                if (newActiveTab == null)
+                {
+                    newActiveTab = GetTabToLeft(tabId);
+                }
+                EditorTabController.Activate(newActiveTab?.TabId ?? 0);
             }
-            EditorTabController.Activate(newActiveTab?.TabId ?? 0);
 
             //possibly reset the Menu
             if (ActiveTab == 0)
@@ -234,7 +232,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             editorTabInfo.IsSaved = false;
-            var yaml = string.Empty;
+            string yaml;
             //get yaml now so it doesn't have to be retrieved multiple times
             if (!onDiffEditor)
             {
@@ -265,9 +263,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             var type = editorTabInfo.Type;
             var formattingExceptions = await ValidationController.StartSubmitCountdown(type, yaml).ConfigureAwait(false);
-            await DeltaDecorationHelper.SetDeltaDecorationsFromExceptions(editorTabInfo.YamlEditor, formattingExceptions).ConfigureAwait(false);
-            editorTabInfo.HasErrors = formattingExceptions?.Any() ?? false;
-            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+            SetErrors(ref editorTabInfo);
+            editorTabInfo.Exceptions = formattingExceptions;
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);           
         }
 
         private async void OpenNotification(string message)
@@ -337,10 +335,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
-        #endregion
-
-        #region private methods
-
         private IEditorTabInfo GetTabToLeft(int tabId)
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
@@ -381,14 +375,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await AddFileListToSavedYamls(fileList).ConfigureAwait(false);
         }
 
-        private async void ResetErrorsInOpenTabs()
-        {
-            foreach (var editorTabInfo in EditorTabController.EditorTabInfos)
-            {
-                editorTabInfo.Value.HasErrors = false;
-            }
-        }
-
         private async Task AddFileListToSavedYamls(IEnumerable<FileInformation> fileList)
         {
             foreach (var file in fileList)
@@ -427,7 +413,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.Content = editorTabInfo.OriginalContent;
 
             //remove all errors if there were set
-            editorTabInfo.HasErrors = false;
+            editorTabInfo.Exceptions = null;
+
             if (editorTabInfo.YamlEditor != null)
             {
                 await editorTabInfo.YamlEditor.ResetDeltaDecorations().ConfigureAwait(false);
@@ -456,7 +443,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
 
             var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
-            editorTabInfo.HasErrors = false; //do not remember errors
             editorTabInfo.CompareInfo = compareInfo;
 
             editorTabInfo.Content = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
@@ -469,6 +455,11 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
 
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }
+
+        private static void SetErrors(ref IEditorTabInfo editorTabInfo)
+        {
+            DeltaDecorationHelper.SetDeltaDecorationsFromExceptions(editorTabInfo.YamlEditor, editorTabInfo.Exceptions).ConfigureAwait(false);
         }
 
         private async Task Save()
@@ -522,7 +513,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await JSRuntime.InvokeAsync<object>("toggleModal", modalId).ConfigureAwait(false);
         }
 
-        //checks
         private bool NameFilledCheck(string name = null)
         {
             var nameToCheck = name ?? EditorTabController.GetTabByTabId(ActiveTab).Name;
