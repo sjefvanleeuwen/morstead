@@ -9,7 +9,7 @@ namespace Vs.YamlEditor.Components.Controllers.Interfaces
     {
         IDictionary<YamlType, bool> Types { get; }
         bool GetEnabledForType(YamlType type);
-        Task<IEnumerable<FormattingException>> StartSubmitCountdown(string type, string yaml);
+        Task<IEnumerable<FormattingException>> StartSubmitCountdown(string type, string yaml, int? overrideTimeOut = null);
         Task<IEnumerable<FormattingException>> SubmitPage(string type, string yaml);
     }
 }

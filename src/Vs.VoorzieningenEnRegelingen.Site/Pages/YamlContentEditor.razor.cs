@@ -222,13 +222,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             StateHasChanged();
         }
         
-        private async void RegisterContentModification(int tabId, bool onDiffEditor = false)
+        private async void RegisterContentModification(int tabId, bool actionIsOnDiffEditor = false)
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             editorTabInfo.IsSaved = false;
             string yaml;
             //get yaml now so it doesn't have to be retrieved multiple times
-            if (!onDiffEditor)
+            if (!actionIsOnDiffEditor)
             {
                 yaml = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
                 StartValidationSubmitCountdown(editorTabInfo, yaml);
@@ -244,6 +244,15 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         private void SwitchToTab(int tabId)
         {
             EditorTabController.Activate(tabId);
+        }
+
+        private void TabIsInitialised()
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
+            if (!editorTabInfo.IsCompareMode)
+            {
+                StartValidationSubmitCountdown(editorTabInfo, editorTabInfo.Content, 0);
+            }
         }
 
         #endregion
@@ -494,10 +503,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             DeltaDecorationHelper.SetDeltaDecorationsFromExceptions(editorTabInfo.YamlEditor, editorTabInfo.Exceptions).ConfigureAwait(false);
         }
 
-        private async void StartValidationSubmitCountdown(IEditorTabInfo editorTabInfo, string yaml)
+        private async void StartValidationSubmitCountdown(IEditorTabInfo editorTabInfo, string yaml, int? overrideTimeOut = null)
         {
             var type = editorTabInfo.Type;
-            var formattingExceptions = await ValidationController.StartSubmitCountdown(type, yaml).ConfigureAwait(false);
+            var formattingExceptions = await ValidationController.StartSubmitCountdown(type, yaml, overrideTimeOut).ConfigureAwait(false);
             editorTabInfo.Exceptions = formattingExceptions;
             SetErrors(ref editorTabInfo);
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);

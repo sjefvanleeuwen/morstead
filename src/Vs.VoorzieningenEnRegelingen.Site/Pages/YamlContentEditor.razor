@@ -48,7 +48,7 @@
                                             Value="@activeEditorTabInfo.Content" 
                                             OnKeyUp="@(() => RegisterContentModification(ActiveTab))" 
                                             OnDidPaste="@(() => RegisterContentModification(ActiveTab))" 
-                                            OnDidInit="@(() => RegisterContentModification(ActiveTab))"
+                                            OnDidInit="TabIsInitialised"
                                             CssClass="editor" />
                             </div>
                         }

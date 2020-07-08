@@ -49,8 +49,14 @@ namespace Vs.YamlEditor.Components.Controllers
         /// <param name="type"></param>
         /// <param name="yaml"></param>
         /// <returns>An (empty) list of all formatexceptions or null in case of a non-result</returns>
-        public async Task<IEnumerable<FormattingException>> StartSubmitCountdown(string type, string yaml)
+        public async Task<IEnumerable<FormattingException>> StartSubmitCountdown(string type, string yaml, int? overrideTimeOut = null)
         {
+            var timeOut = _submitWait;
+            if (overrideTimeOut != null)
+            {
+                timeOut = TimeSpan.FromMilliseconds(overrideTimeOut.Value);
+            }
+
             Task<IEnumerable<FormattingException>> result = null;
             if (TokenSource != null)
             {
@@ -62,7 +68,7 @@ namespace Vs.YamlEditor.Components.Controllers
             {
                 await Task.Run(() =>
                 {
-                    Thread.Sleep(_submitWait);
+                    Thread.Sleep(timeOut);
                     ct.ThrowIfCancellationRequested();
                     result = SubmitPage(type, yaml);
                 },
