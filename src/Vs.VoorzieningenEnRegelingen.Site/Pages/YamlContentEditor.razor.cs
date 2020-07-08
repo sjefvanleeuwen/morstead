@@ -147,12 +147,14 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         #endregion
 
-        #region interactive methods
+        #region methods called from razor
 
-        private async void SwitchToTab(int tabId)
+        private async void CloseDiff(int tabId)
         {
-            EditorTabController.Activate(tabId);
-            Layout();
+            var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
+            editorTabInfo.CompareInfo = null;
+            await editorTabInfo.YamlEditor.SetValue(editorTabInfo.Content).ConfigureAwait(false);
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         private async void CloseTab(int tabId)
@@ -179,14 +181,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
 
             //draw all tabs & menu again
-            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
-        }
-
-        private async void CloseDiff(int tabId)
-        {
-            var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
-            editorTabInfo.CompareInfo = null;
-            await editorTabInfo.YamlEditor.SetValue(editorTabInfo.Content).ConfigureAwait(false);
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
@@ -227,7 +221,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             //draw all tabs again
             StateHasChanged();
         }
-
+        
         private async void RegisterContentModification(int tabId, bool onDiffEditor = false)
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
@@ -247,30 +241,28 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             TrackContentChanged(editorTabInfo, yaml);
         }
 
-        private async void TrackContentChanged(IEditorTabInfo editorTabInfo, string yaml)
+        private void SwitchToTab(int tabId)
         {
-            var hasChangesBefore = editorTabInfo.HasChanges;
-            editorTabInfo.Content = yaml;
-            var hasChangesAfter = editorTabInfo.HasChanges;
-            if (hasChangesAfter != hasChangesBefore)
+            EditorTabController.Activate(tabId);
+            Layout();
+        }
+
+        #endregion
+
+        #region methods called from cs file
+
+        private async Task AddFileListToSavedYamls(IEnumerable<FileInformation> fileList)
+        {
+            foreach (var file in fileList)
             {
-                //update the tab name
-                await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+                SavedYamls.Add(new YamlFileInfo
+                {
+                    ContentId = file.Id,
+                    Name = file.FileName,
+                    Type = file.Directory
+                });
             }
-        }
-
-        private async void StartValidationSubmitCountdown(IEditorTabInfo editorTabInfo, string yaml)
-        {
-            var type = editorTabInfo.Type;
-            var formattingExceptions = await ValidationController.StartSubmitCountdown(type, yaml).ConfigureAwait(false);
-            SetErrors(ref editorTabInfo);
-            editorTabInfo.Exceptions = formattingExceptions;
-            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);           
-        }
-
-        private async void OpenNotification(string message)
-        {
-            await JSRuntime.InvokeAsync<object>("notify", new object[] { message }).ConfigureAwait(false);
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         private async Task AddNewTab()
@@ -306,33 +298,27 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await ToggleModal("newYamlModal").ConfigureAwait(false);
         }
 
-        private async void TrySave()
+        private async Task Compare(string contentId)
         {
-            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
-            if (string.IsNullOrWhiteSpace(editorTabInfo.Name))
-            {
-                await ToggleModal("saveAsYamlModal").ConfigureAwait(false);
-            }
-            else
-            {
-                await Save().ConfigureAwait(false);
-            }
-        }
-
-        private async Task SaveAsYaml()
-        {
-            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
-            if (!NameFilledCheck(SaveAsName))
+            var compareInfo = SavedYamls.FirstOrDefault(s => s.ContentId == contentId);
+            if (compareInfo == null)
             {
                 return;
             }
-            if (NameIsValid(SaveAsName))
+
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
+            editorTabInfo.CompareInfo = compareInfo;
+
+            editorTabInfo.Content = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
+            editorTabInfo.CompareContent = await YamlStorageController.GetYamlFileContent(contentId).ConfigureAwait(false);
+
+            //set the value if it is already initiated; otherwise the content is not drawn again (no update detected in Blazor)
+            if (editorTabInfo.YamlDiffEditor != null)
             {
-                editorTabInfo.Name = SaveAsName.Trim();
-                SaveAsName = string.Empty;
-                await Save().ConfigureAwait(false);
-                await ToggleModal("saveAsYamlModal").ConfigureAwait(false);
+                await editorTabInfo.YamlDiffEditor.SetOriginalValue(editorTabInfo.CompareContent).ConfigureAwait(false);
             }
+
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
         private IEditorTabInfo GetTabToLeft(int tabId)
@@ -375,26 +361,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await AddFileListToSavedYamls(fileList).ConfigureAwait(false);
         }
 
-        private async Task AddFileListToSavedYamls(IEnumerable<FileInformation> fileList)
-        {
-            foreach (var file in fileList)
-            {
-                SavedYamls.Add(new YamlFileInfo
-                {
-                    ContentId = file.Id,
-                    Name = file.FileName,
-                    Type = file.Directory
-                });
-            }
-            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
-        }
-
-        private async Task<string> WriteFile(IYamlFileInfo yamlFileInfo, string content)
-        {
-            var contentId = await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, content, yamlFileInfo.ContentId).ConfigureAwait(false);
-            return contentId;
-        }
-
         private async Task Load(string contentId)
         {
             var currentTab = ActiveTab;
@@ -434,32 +400,32 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
-        private async Task Compare(string contentId)
+        private bool NameFilledCheck(string name = null)
         {
-            var compareInfo = SavedYamls.FirstOrDefault(s => s.ContentId == contentId);
-            if (compareInfo == null)
+            var nameToCheck = name ?? EditorTabController.GetTabByTabId(ActiveTab).Name;
+            if (string.IsNullOrWhiteSpace(nameToCheck))
             {
-                return;
+                OpenNotification("Er is geen naam ingevuld voor de Yaml.");
+                return false;
             }
-
-            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
-            editorTabInfo.CompareInfo = compareInfo;
-
-            editorTabInfo.Content = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
-            editorTabInfo.CompareContent = await YamlStorageController.GetYamlFileContent(contentId).ConfigureAwait(false);
-
-            //set the value if it is already initiated; otherwise the content is not drawn again (no update detected in Blazor)
-            if (editorTabInfo.YamlDiffEditor != null)
-            {
-                await editorTabInfo.YamlDiffEditor.SetOriginalValue(editorTabInfo.CompareContent).ConfigureAwait(false);
-            }
-
-            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+            return true;
         }
 
-        private static void SetErrors(ref IEditorTabInfo editorTabInfo)
+        private bool NameIsValid(string name)
         {
-            DeltaDecorationHelper.SetDeltaDecorationsFromExceptions(editorTabInfo.YamlEditor, editorTabInfo.Exceptions).ConfigureAwait(false);
+            var chars = Vs.Core.Extensions.StringExtensions.GetInvalidFileNameCharacters(name);
+            if (chars.Any())
+            {
+                OpenNotification("De naam bevat illegale tekens voor bestandsnamen");
+                return false;
+            }
+
+            return true;
+        }
+
+        private async void OpenNotification(string message)
+        {
+            await JSRuntime.InvokeAsync<object>("notify", new object[] { message }).ConfigureAwait(false);
         }
 
         private async Task Save()
@@ -508,32 +474,70 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
+        private async Task SaveAsYaml()
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
+            if (!NameFilledCheck(SaveAsName))
+            {
+                return;
+            }
+            if (NameIsValid(SaveAsName))
+            {
+                editorTabInfo.Name = SaveAsName.Trim();
+                SaveAsName = string.Empty;
+                await Save().ConfigureAwait(false);
+                await ToggleModal("saveAsYamlModal").ConfigureAwait(false);
+            }
+        }
+
+        private static void SetErrors(ref IEditorTabInfo editorTabInfo)
+        {
+            DeltaDecorationHelper.SetDeltaDecorationsFromExceptions(editorTabInfo.YamlEditor, editorTabInfo.Exceptions).ConfigureAwait(false);
+        }
+
+        private async void StartValidationSubmitCountdown(IEditorTabInfo editorTabInfo, string yaml)
+        {
+            var type = editorTabInfo.Type;
+            var formattingExceptions = await ValidationController.StartSubmitCountdown(type, yaml).ConfigureAwait(false);
+            SetErrors(ref editorTabInfo);
+            editorTabInfo.Exceptions = formattingExceptions;
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }
+
         private async Task ToggleModal(string modalId)
         {
             await JSRuntime.InvokeAsync<object>("toggleModal", modalId).ConfigureAwait(false);
         }
 
-        private bool NameFilledCheck(string name = null)
+        private async void TrackContentChanged(IEditorTabInfo editorTabInfo, string yaml)
         {
-            var nameToCheck = name ?? EditorTabController.GetTabByTabId(ActiveTab).Name;
-            if (string.IsNullOrWhiteSpace(nameToCheck))
+            var hasChangesBefore = editorTabInfo.HasChanges;
+            editorTabInfo.Content = yaml;
+            var hasChangesAfter = editorTabInfo.HasChanges;
+            if (hasChangesAfter != hasChangesBefore)
             {
-                OpenNotification("Er is geen naam ingevuld voor de Yaml.");
-                return false;
+                //update the tab name
+                await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
             }
-            return true;
         }
 
-        private bool NameIsValid(string name)
+        private async void TrySave()
         {
-            var chars = Vs.Core.Extensions.StringExtensions.GetInvalidFileNameCharacters(name);
-            if (chars.Any())
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
+            if (string.IsNullOrWhiteSpace(editorTabInfo.Name))
             {
-                OpenNotification("De naam bevat illegale tekens voor bestandsnamen");
-                return false;
+                await ToggleModal("saveAsYamlModal").ConfigureAwait(false);
             }
+            else
+            {
+                await Save().ConfigureAwait(false);
+            }
+        }
 
-            return true;
+        private async Task<string> WriteFile(IYamlFileInfo yamlFileInfo, string content)
+        {
+            var contentId = await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, content, yamlFileInfo.ContentId).ConfigureAwait(false);
+            return contentId;
         }
 
         #endregion
