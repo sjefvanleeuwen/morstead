@@ -7,22 +7,22 @@
         @if (ShowTabs)
         {
             <ul class="nav nav-tabs">
-                @foreach (var keyr in keysVisibleTabs)
+                @foreach (var key in keysVisibleTabs)
                 {
-                    var eeditorTabInfo = EditorTabController.EditorTabInfos[keyr];
+                    var editorTabInfo = EditorTabController.EditorTabInfos[key];
 
-                    <li class="nav-item" @key="@keyr">
-                        <a class="nav-link@(eeditorTabInfo.IsActive ? " active" : string.Empty)" @onclick="(() => SwitchToTab(keyr))">
-                            @if (keyr != keysVisibleTabs.First()) //do not show left if it is the first tab
+                    <li class="nav-item" @key="@key">
+                        <a class="nav-link@(editorTabInfo.IsActive ? " active" : string.Empty)" @onclick="(() => SwitchToTab(key))">
+                            @if (key != keysVisibleTabs.First()) //do not show left if it is the first tab
                             {
-                                <i class="fa fa-chevron-left fa-small" @onclick="(() => MoveTabLeft(keyr))" @onclick:stopPropagation></i>
+                                <i class="fa fa-chevron-left fa-small" @onclick="(() => MoveTabLeft(key))" @onclick:stopPropagation></i>
                             }
-                            @((MarkupString)eeditorTabInfo.DisplayName)
-                            @if (keyr != keysVisibleTabs.Last()) //do not show right if it is the last tab
+                            @((MarkupString)editorTabInfo.DisplayName)
+                            @if (key != keysVisibleTabs.Last()) //do not show right if it is the last tab
                             {
-                                <i class="fa fa-chevron-right fa-small" @onclick="(() => MoveTabRight(keyr))" @onclick:stopPropagation></i>
+                                <i class="fa fa-chevron-right fa-small" @onclick="(() => MoveTabRight(key))" @onclick:stopPropagation></i>
                             }
-                            <i class="fa fa-window-close" @onclick="(() => CloseTab(keyr))" @onclick:stopPropagation></i>
+                            <i class="fa fa-window-close" @onclick="(() => CloseTab(key))" @onclick:stopPropagation></i>
                         </a>
                     </li>
                 }
@@ -32,7 +32,7 @@
 
                     var activeEditorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
 
-                    <div @key="@activeEditorTabInfo.TabId" id="@activeEditorTabInfo.TabId" class="tab-pane @(activeEditorTabInfo.IsActive ? " active" : string.Empty)">
+                    <div @key="@activeEditorTabInfo.TabId" class="tab-pane @(activeEditorTabInfo.IsActive ? " active" : string.Empty)">
 
                         @if (!activeEditorTabInfo.IsCompareMode)
                         {
