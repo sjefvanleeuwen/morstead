@@ -7,59 +7,70 @@
         @if (ShowTabs)
         {
             <ul class="nav nav-tabs">
-                @foreach (var key in keysVisibleTabs)
+                @foreach (var keyr in keysVisibleTabs)
                 {
-                    var editorTabInfo = EditorTabController.EditorTabInfos[key];
+                    var eeditorTabInfo = EditorTabController.EditorTabInfos[keyr];
 
-                    <li class="nav-item" @key="@key">
-                        <a class="nav-link@(editorTabInfo.IsActive ? " active" : string.Empty)" data-toggle="tab" href="#@editorTabInfo.TabId" @onclick="(() => SwitchToTab(key))">
-                            @if (key != keysVisibleTabs.First()) //do not show left if it is the first tab
+                    <li class="nav-item" @key="@keyr">
+                        <a class="nav-link@(eeditorTabInfo.IsActive ? " active" : string.Empty)" @onclick="(() => SwitchToTab(keyr))">
+                            @if (keyr != keysVisibleTabs.First()) //do not show left if it is the first tab
                             {
-                                <i class="fa fa-chevron-left fa-small" @onclick="(() => MoveTabLeft(key))" @onclick:stopPropagation></i>
+                                <i class="fa fa-chevron-left fa-small" @onclick="(() => MoveTabLeft(keyr))" @onclick:stopPropagation></i>
                             }
-                            @((MarkupString)editorTabInfo.DisplayName)
-                            @if (key != keysVisibleTabs.Last()) //do not show right if it is the last tab
+                            @((MarkupString)eeditorTabInfo.DisplayName)
+                            @if (keyr != keysVisibleTabs.Last()) //do not show right if it is the last tab
                             {
-                                <i class="fa fa-chevron-right fa-small" @onclick="(() => MoveTabRight(key))" @onclick:stopPropagation></i>
+                                <i class="fa fa-chevron-right fa-small" @onclick="(() => MoveTabRight(keyr))" @onclick:stopPropagation></i>
                             }
-                            <i class="fa fa-window-close" @onclick="(() => CloseTab(key))" @onclick:stopPropagation></i>
+                            <i class="fa fa-window-close" @onclick="(() => CloseTab(keyr))" @onclick:stopPropagation></i>
                         </a>
                     </li>
                 }
             </ul>
             <div class="tab-content">
-                @foreach (var key in keysAllTabs) //do this for all keys so the content is not removed/rendered again
-                {
-                    var editorTabInfo = EditorTabController.EditorTabInfos[key];
+                @{
 
-                    <div @key="@editorTabInfo.TabId" id="@editorTabInfo.TabId" class="tab-pane @(editorTabInfo.IsActive ? " active" : string.Empty)">
+                    var activeEditorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
 
-                        @if (!editorTabInfo.IsCompareMode)
+                    <div @key="@activeEditorTabInfo.TabId" id="@activeEditorTabInfo.TabId" class="tab-pane @(activeEditorTabInfo.IsActive ? " active" : string.Empty)">
+
+                        @if (!activeEditorTabInfo.IsCompareMode)
                         {
                             <div class="left-half_header sm-12">
-                                <div class="editorErrorGlyphWrapper @(editorTabInfo.HasExceptions ? "on" : "off")"><i class="editorErrorGlyph fa fa-exclamation-circle"></i></div>
-                                <div>Naam: <strong>@editorTabInfo.Name</strong></div>
-                                <div>Type: <strong>@editorTabInfo.Type</strong></div>
+                                <div class="editorErrorGlyphWrapper @(activeEditorTabInfo.HasExceptions ? "on" : "off")">
+                                    <i class="editorErrorGlyph fa fa-exclamation-circle"></i>
+                                </div>
+                                <div>Naam: <strong>@activeEditorTabInfo.Name</strong></div>
+                                <div>Type: <strong>@activeEditorTabInfo.Type</strong></div>
                             </div>
                             <div class="left-half_bottom">
-                                <YamlEditor @ref="editorTabInfo.YamlEditor" Id="@(editorTabInfo.EditorId)" Value="@editorTabInfo.Content" OnKeyUp="@(() => RegisterContentModification(key))" CssClass="editor" />
+                                <YamlEditor @ref="activeEditorTabInfo.YamlEditor" 
+                                            Id="@(activeEditorTabInfo.EditorId)" 
+                                            Value="@activeEditorTabInfo.Content" 
+                                            OnKeyUp="@(() => RegisterContentModification(ActiveTab))" 
+                                            CssClass="editor" />
                             </div>
                         }
                         else
                         {
                             <div class="left-half_header sm-12">
                                 <div class="editorErrorGlyphWrapper"></div>
-                                <div>Naam: <strong>@editorTabInfo.CompareInfo.Name</strong></div>
-                                <div>Type: <strong>@editorTabInfo.CompareInfo.Type</strong></div>
-                                <div><i class="fa fa-window-close" @onclick="(() => CloseDiff(key))"></i></div>
+                                <div>Naam: <strong>@activeEditorTabInfo.CompareInfo.Name</strong></div>
+                                <div>Type: <strong>@activeEditorTabInfo.CompareInfo.Type</strong></div>
+                                <div><i class="fa fa-window-close" @onclick="(() => CloseDiff(ActiveTab))"></i></div>
                             </div>
                             <div class="left-half_header sm-12">
                                 <div class="editorErrorGlyphWrapper"></div>
-                                <div>Naam: <strong>@editorTabInfo.Name</strong></div>
-                                <div>Type: <strong>@editorTabInfo.Type</strong></div>
+                                <div>Naam: <strong>@activeEditorTabInfo.Name</strong></div>
+                                <div>Type: <strong>@activeEditorTabInfo.Type</strong></div>
                             </div>
                             <div class="left-half_bottom">
-                                <YamlDiffEditor @ref="editorTabInfo.YamlDiffEditor" Id="@($"{editorTabInfo.EditorId}_diff")" OriginalValue="@(editorTabInfo.CompareContent)" ModifiedValue="@(editorTabInfo.Content)" OnKeyUp="@(() => RegisterContentModification(key, true))" CssClass="editor" />
+                                <YamlDiffEditor @ref="activeEditorTabInfo.YamlDiffEditor" 
+                                                Id="@($"{activeEditorTabInfo.EditorId}_diff")" 
+                                                OriginalValue="@(activeEditorTabInfo.CompareContent)" 
+                                                ModifiedValue="@(activeEditorTabInfo.Content)" 
+                                                OnKeyUp="@(() => RegisterContentModification(ActiveTab, true))" 
+                                                CssClass="editor" />
                             </div>
                         }
                     </div>
