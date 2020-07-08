@@ -22,5 +22,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces
         string CompareContent { get; set; }
         YamlEditor.Components.Shared.YamlEditor YamlEditor { get; set; }
         YamlEditor.Components.Shared.YamlDiffEditor YamlDiffEditor { get; set; }
+        
+        void RemoveExceptions();
     }
 }

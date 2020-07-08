@@ -1,2 +1,8 @@
 ﻿@page "/YamlEditor"
-<MonacoDiffEditor @ref="_monacoDiffEditor" Id="@Id" ConstructionOptions="@DiffEditorConstructionOptions" DiffEditorData="DiffEditorData" CssClass="@CssClass" OnKeyUpModified="@OnKeyUp" />
+<MonacoDiffEditor @ref="_monacoDiffEditor" 
+                  Id="@Id" 
+                  ConstructionOptions="@DiffEditorConstructionOptions" 
+                  DiffEditorData="DiffEditorData" 
+                  OnKeyUpModified="@OnKeyUp"
+                  OnDidInit="@OnDidInit"
+                  CssClass="@CssClass" />

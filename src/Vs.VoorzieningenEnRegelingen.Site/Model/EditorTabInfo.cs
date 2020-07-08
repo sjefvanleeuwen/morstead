@@ -27,5 +27,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model
         public string CompareContent { get; set; }
         public YamlEditor.Components.Shared.YamlEditor YamlEditor { get; set; }
         public YamlDiffEditor YamlDiffEditor { get; set; }
+
+        public void RemoveExceptions()
+        {
+            Exceptions = null;
+        }
     }
 }

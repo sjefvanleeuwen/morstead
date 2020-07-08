@@ -243,6 +243,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private void SwitchToTab(int tabId)
         {
+            //remove all errors
+            EditorTabController.GetTabByTabId(ActiveTab).RemoveExceptions();
             EditorTabController.Activate(tabId);
         }
 
@@ -253,6 +255,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             {
                 StartValidationSubmitCountdown(editorTabInfo, editorTabInfo.Content, 0);
             }
+            //call layout just in cases
+            Layout();
         }
 
         #endregion
@@ -387,7 +391,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.Content = editorTabInfo.OriginalContent;
 
             //remove all errors if there were set
-            editorTabInfo.Exceptions = null;
+            editorTabInfo.RemoveExceptions();
 
             if (editorTabInfo.YamlEditor != null)
             {

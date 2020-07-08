@@ -18,6 +18,8 @@ namespace Vs.YamlEditor.Components.Shared
         public string ModifiedValue { get; set; }
         [Parameter]
         public EventCallback<KeyboardEvent> OnKeyUp { get; set; }
+        [Parameter]
+        public EventCallback OnDidInit { get; set; }
 
         private MonacoDiffEditor _monacoDiffEditor { get; set; }
 
