@@ -244,7 +244,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         private void SwitchToTab(int tabId)
         {
             EditorTabController.Activate(tabId);
-            Layout();
         }
 
         #endregion
@@ -499,8 +498,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             var type = editorTabInfo.Type;
             var formattingExceptions = await ValidationController.StartSubmitCountdown(type, yaml).ConfigureAwait(false);
-            SetErrors(ref editorTabInfo);
             editorTabInfo.Exceptions = formattingExceptions;
+            SetErrors(ref editorTabInfo);
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 

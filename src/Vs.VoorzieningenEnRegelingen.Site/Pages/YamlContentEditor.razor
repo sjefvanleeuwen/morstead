@@ -29,7 +29,6 @@
             </ul>
             <div class="tab-content">
                 @{
-
                     var activeEditorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
 
                     <div @key="@activeEditorTabInfo.TabId" class="tab-pane @(activeEditorTabInfo.IsActive ? " active" : string.Empty)">
@@ -48,6 +47,8 @@
                                             Id="@(activeEditorTabInfo.EditorId)" 
                                             Value="@activeEditorTabInfo.Content" 
                                             OnKeyUp="@(() => RegisterContentModification(ActiveTab))" 
+                                            OnDidPaste="@(() => RegisterContentModification(ActiveTab))" 
+                                            OnDidInit="@(() => RegisterContentModification(ActiveTab))"
                                             CssClass="editor" />
                             </div>
                         }

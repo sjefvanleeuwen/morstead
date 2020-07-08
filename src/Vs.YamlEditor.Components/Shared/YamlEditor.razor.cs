@@ -19,6 +19,11 @@ namespace Vs.YamlEditor.Components.Shared
         public string Value { get; set; }
         [Parameter]
         public EventCallback<KeyboardEvent> OnKeyUp { get; set; }
+        [Parameter]
+        public EventCallback<PasteEvent> OnDidPaste { get; set; }
+        [Parameter]
+        public EventCallback OnDidInit { get; set; }
+
 
         [Inject]
         public IMonacoController MonacoController { get; set; }
@@ -47,6 +52,23 @@ namespace Vs.YamlEditor.Components.Shared
                 GlyphMargin = true,
                 Value = Value
             };
+        }
+
+        public async Task DoOnDidPaste(PasteEvent arg)
+        {
+            if (!OnDidPaste.HasDelegate)
+            {
+                await ResetDeltaDecorations();
+            }
+            else
+            {
+                await OnDidPaste.InvokeAsync(arg);
+            }
+        }
+
+        public async Task DoOnDidInit()
+        {
+            await OnDidInit.InvokeAsync(null);
         }
 
         public async Task SetDeltaDecoration(IEnumerable<ModelDeltaDecoration> deltaDecorations)
