@@ -159,8 +159,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grains", "grains", "{0DBA9E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Morstead.Grains.Interfaces", "morstead\src\Vs.Morstead.Grains.Interfaces\Vs.Morstead.Grains.Interfaces.csproj", "{3417EFD5-39E1-4CE9-8D44-2E5824D93C89}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorMonaco", "temp\BlazorMonaco\BlazorMonaco.csproj", "{4D49ECA0-5C89-497E-BBEB-6AD9CD1EBF6D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -339,10 +337,6 @@ Global
 		{3417EFD5-39E1-4CE9-8D44-2E5824D93C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3417EFD5-39E1-4CE9-8D44-2E5824D93C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3417EFD5-39E1-4CE9-8D44-2E5824D93C89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4D49ECA0-5C89-497E-BBEB-6AD9CD1EBF6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4D49ECA0-5C89-497E-BBEB-6AD9CD1EBF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4D49ECA0-5C89-497E-BBEB-6AD9CD1EBF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D49ECA0-5C89-497E-BBEB-6AD9CD1EBF6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -398,7 +392,6 @@ Global
 		{A29F4E84-292A-4902-8503-0F9F004A5140} = {5E74D45E-3868-41E8-9604-E57AC058F197}
 		{0DBA9E97-464A-4666-913C-3033BFAA29DC} = {FD31F7EA-0FE6-4EA5-B49B-ED199BE316F9}
 		{3417EFD5-39E1-4CE9-8D44-2E5824D93C89} = {0DBA9E97-464A-4666-913C-3033BFAA29DC}
-		{4D49ECA0-5C89-497E-BBEB-6AD9CD1EBF6D} = {9B27CEDE-1F5E-4194-912A-0518F95AC712}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}

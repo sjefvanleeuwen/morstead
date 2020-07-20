@@ -24,18 +24,6 @@ namespace Vs.YamlEditor.Components.Shared
         private MonacoDiffEditor _monacoDiffEditor { get; set; }
 
         private const string _language = "yaml";
-        private string OriginalEditorId { get; set; }
-        private string ModifiedEditorId { get; set; }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                OriginalEditorId = await _monacoDiffEditor.GetOriginalEditor();
-                ModifiedEditorId = await _monacoDiffEditor.GetModifiedEditor();
-            }
-            await base.OnAfterRenderAsync(firstRender);
-        }
 
         private DiffEditorConstructionOptions DiffEditorConstructionOptions(MonacoDiffEditor editor)
         {
@@ -46,34 +34,48 @@ namespace Vs.YamlEditor.Components.Shared
             };
         }
 
-        private DiffEditorData DiffEditorData(MonacoDiffEditor editor)
+        private async Task EditorOnDidInit()
         {
-            return new DiffEditorData
+            var originalId = $"{Id}-originalModel";
+            var modifiedId = $"{Id}-modifiedModel";
+
+            var originalModel =
+                await MonacoEditorBase.GetModel(originalId) ??
+                await MonacoEditorBase.CreateModel(OriginalValue, _language, originalId);
+
+            var modifiedModel =
+                await MonacoEditorBase.GetModel(modifiedId) ??
+                await MonacoEditorBase.CreateModel(ModifiedValue, _language, modifiedId);
+
+            //initialte the 2 yaml files
+            await _monacoDiffEditor.SetModel(new DiffEditorModel
             {
-                Language = _language,
-                OriginalValue = OriginalValue,
-                ModifiedValue = ModifiedValue
-            };
+                Original = originalModel,
+                Modified = modifiedModel
+            });
+
+            //do the parent on init callback
+            await OnDidInit.InvokeAsync(this);
         }
 
         public async Task<string> GetOriginalValue()
         {
-            return await _monacoDiffEditor.GetValue(OriginalEditorId);
+            return await _monacoDiffEditor.OriginalEditor.GetValue();
         }
 
         public async Task SetOriginalValue(string value)
         {
-            await _monacoDiffEditor.SetValue(OriginalEditorId, value);
+            await _monacoDiffEditor.OriginalEditor.SetValue(value);
         }
 
         public async Task<string> GetModifiedValue()
         {
-            return await _monacoDiffEditor.GetValue(ModifiedEditorId);
+            return await _monacoDiffEditor.ModifiedEditor.GetValue();
         }
 
         public async Task SetModifiedValue(string value)
         {
-            await _monacoDiffEditor.SetValue(ModifiedEditorId, value);
+            await _monacoDiffEditor.ModifiedEditor.SetValue(value);
         }
 
         public async Task Layout()
