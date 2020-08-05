@@ -1,8 +1,0 @@
-﻿@page "/YamlEditor"
-<MonacoEditor @ref="_monacoEditor" 
-              Id="@Id" 
-              ConstructionOptions="@EditorConstructionOptions" 
-              OnKeyUp="@OnKeyUp" 
-              OnDidPaste="((e) => DoOnDidPaste(e))" 
-              OnDidInit="DoOnDidInit"
-              CssClass="@CssClass" />
