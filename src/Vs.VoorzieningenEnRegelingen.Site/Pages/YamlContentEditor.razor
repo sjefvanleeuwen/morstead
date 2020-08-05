@@ -43,13 +43,17 @@
                                 <div>Type: <strong>@activeEditorTabInfo.Type</strong></div>
                             </div>
                             <div class="left-half_bottom">
-                                <YamlEditor @ref="activeEditorTabInfo.YamlEditor" 
-                                            Id="@(activeEditorTabInfo.EditorId)" 
-                                            Value="@activeEditorTabInfo.Content" 
-                                            OnKeyUp="@(() => RegisterContentModification(ActiveTab))" 
-                                            OnDidPaste="@(() => RegisterContentModification(ActiveTab))" 
-                                            OnDidInit="TabIsInitialised"
-                                            CssClass="editor" />
+                                <MonacoEditorYaml @ref="activeEditorTabInfo.MonacoEditorYaml"
+                                                  Id="@(activeEditorTabInfo.EditorId)"
+                                                  Value="@activeEditorTabInfo.Content"
+                                                  OnKeyUp="@(() => RegisterContentModification(ActiveTab))"
+                                                  OnDidPaste="@(() => {
+                                                                    BlazorMonacoYaml.Helpers.DeltaDecorationHelper.ResetDeltaDecorations(activeEditorTabInfo.MonacoEditorYaml.MonacoEditor);
+                                                                    RegisterContentModification(ActiveTab); 
+                                                                })"
+                                                  OnDidInit="TabIsInitialised"
+                                                  CssClass="editor" />
+                               
                             </div>
                         }
                         else
@@ -66,13 +70,13 @@
                                 <div>Type: <strong>@activeEditorTabInfo.Type</strong></div>
                             </div>
                             <div class="left-half_bottom">
-                                <YamlDiffEditor @ref="activeEditorTabInfo.YamlDiffEditor" 
-                                                Id="@($"{activeEditorTabInfo.EditorId}_diff")" 
-                                                OriginalValue="@(activeEditorTabInfo.CompareContent)" 
-                                                ModifiedValue="@(activeEditorTabInfo.Content)" 
-                                                OnKeyUp="@(() => RegisterContentModification(ActiveTab, true))" 
-                                                OnDidInit="TabIsInitialised"
-                                                CssClass="editor" />
+                                <MonacoDiffEditorYaml @ref="activeEditorTabInfo.MonacoDiffEditorYaml"
+                                                      Id="@($"{activeEditorTabInfo.EditorId}_diff")"
+                                                      OriginalValue="@(activeEditorTabInfo.CompareContent)"
+                                                      ModifiedValue="@(activeEditorTabInfo.Content)"
+                                                      OnKeyUp="@(() => RegisterContentModification(ActiveTab, true))"
+                                                      OnDidInit="TabIsInitialised"
+                                                      CssClass="editor" />
                             </div>
                         }
                     </div>

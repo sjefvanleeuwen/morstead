@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorMonaco.Bridge;
+using BlazorMonacoYaml;
+using BlazorMonacoYaml.Helpers;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -6,13 +9,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Vs.ProfessionalPortal.Morstead.Client.Controllers.Interfaces;
 using Vs.ProfessionalPortal.Morstead.Client.Models;
+using Vs.VoorzieningenEnRegelingen.Site.ApiCalls;
 using Vs.VoorzieningenEnRegelingen.Site.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Tables;
-using Vs.YamlEditor.Components.Controllers.Interfaces;
-using Vs.YamlEditor.Components.Helpers;
-using Vs.YamlEditor.Components.Shared;
+using Vs.VoorzieningenEnRegelingen.Site.Shared;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
@@ -32,7 +34,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         protected IYamlStorageController YamlStorageController { get; set; }
 
         [Inject]
-        protected IValidationController ValidationController { get; set; }
+        protected IYamlValidationController YamlValidationController { get; set; }
 
         #endregion
 
@@ -142,7 +144,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 return default;
             }
 
-            return EditorTabController.GetTabByTabId(ActiveTab).YamlEditor.Layout();
+            return EditorTabController.GetTabByTabId(ActiveTab).MonacoEditorYaml.Layout();
         }
 
         #endregion
@@ -153,7 +155,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);
             editorTabInfo.CompareInfo = null;
-            await editorTabInfo.YamlEditor.SetValue(editorTabInfo.Content).ConfigureAwait(false);
+            await editorTabInfo.MonacoEditorYaml.SetValue(editorTabInfo.Content).ConfigureAwait(false);
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
@@ -230,12 +232,20 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             //get yaml now so it doesn't have to be retrieved multiple times
             if (!actionIsOnDiffEditor)
             {
-                yaml = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
-                StartValidationSubmitCountdown(editorTabInfo, yaml);
+                yaml = await editorTabInfo.MonacoEditorYaml.GetValue().ConfigureAwait(false);
+                if (string.IsNullOrWhiteSpace(yaml))
+                {
+                    await editorTabInfo.MonacoEditorYaml.ResetDeltaDecorations().ConfigureAwait(false);
+                    YamlValidationController.CancelSubmitCountdown();
+                }
+                else
+                {
+                    StartValidationSubmitCountdown(editorTabInfo, yaml);
+                }
             }
             else
             {
-                yaml = await editorTabInfo.YamlDiffEditor.GetModifiedValue().ConfigureAwait(false);
+                yaml = await editorTabInfo.MonacoDiffEditorYaml.GetModifiedValue().ConfigureAwait(false);
             }
 
             TrackContentChanged(editorTabInfo, yaml);
@@ -251,7 +261,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         private void TabIsInitialised()
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
-            if (!editorTabInfo.IsCompareMode)
+            if (!editorTabInfo.IsCompareMode && !string.IsNullOrWhiteSpace(editorTabInfo.Content))
             {
                 StartValidationSubmitCountdown(editorTabInfo, editorTabInfo.Content, 0);
             }
@@ -295,7 +305,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 IsVisible = true,
                 Name = string.Empty,
                 Type = _yamlTypeSelector.SelectedValue,
-                YamlEditor = null
+                MonacoEditorYaml = null
             };
 
             EditorTabController.AddTab(editorTabInfo);
@@ -321,13 +331,13 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
             editorTabInfo.CompareInfo = compareInfo;
 
-            editorTabInfo.Content = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
+            editorTabInfo.Content = await editorTabInfo.MonacoEditorYaml.GetValue().ConfigureAwait(false);
             editorTabInfo.CompareContent = await YamlStorageController.GetYamlFileContent(contentId).ConfigureAwait(false);
 
             //set the value if it is already initiated; otherwise the content is not drawn again (no update detected in Blazor)
-            if (editorTabInfo.YamlDiffEditor != null)
+            if (editorTabInfo.MonacoDiffEditorYaml != null)
             {
-                await editorTabInfo.YamlDiffEditor.SetOriginalValue(editorTabInfo.CompareContent).ConfigureAwait(false);
+                await editorTabInfo.MonacoDiffEditorYaml.SetOriginalValue(editorTabInfo.CompareContent).ConfigureAwait(false);
             }
 
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -393,10 +403,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             //remove all errors if there were set
             editorTabInfo.RemoveExceptions();
 
-            if (editorTabInfo.YamlEditor != null)
+            if (editorTabInfo.MonacoEditorYaml != null)
             {
-                await editorTabInfo.YamlEditor.ResetDeltaDecorations().ConfigureAwait(false);
-                await editorTabInfo.YamlEditor.SetValue(editorTabInfo.Content).ConfigureAwait(false);
+                await editorTabInfo.MonacoEditorYaml.ResetDeltaDecorations().ConfigureAwait(false);
+                await editorTabInfo.MonacoEditorYaml.SetValue(editorTabInfo.Content).ConfigureAwait(false);
             }
 
             //add the tab if it didnt already exist
@@ -459,7 +469,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                 return;
             }
 
-            var content = await editorTabInfo.YamlEditor.GetValue().ConfigureAwait(false);
+            var content = await editorTabInfo.MonacoEditorYaml.GetValue().ConfigureAwait(false);
             if (string.IsNullOrEmpty(content))
             {
                 OpenNotification("Er is geen inhoud in het bestand");
@@ -504,13 +514,39 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private static void SetErrors(ref IEditorTabInfo editorTabInfo)
         {
-            DeltaDecorationHelper.SetDeltaDecorationsFromExceptions(editorTabInfo.YamlEditor, editorTabInfo.Exceptions).ConfigureAwait(false);
+            SetDeltaDecorationsFromExceptions(editorTabInfo.MonacoEditorYaml, editorTabInfo.Exceptions).ConfigureAwait(false);
+        }
+
+        public static async Task SetDeltaDecorationsFromExceptions(MonacoEditorYaml monacoEditorYaml, IEnumerable<FormattingException> formattingExceptions)
+        {
+            if (formattingExceptions == null)
+            {
+                return;
+            }
+            await monacoEditorYaml.ResetDeltaDecorations().ConfigureAwait(false);
+
+            var deltaDecorations = new List<ModelDeltaDecoration>();
+            foreach (var exception in formattingExceptions)
+            {
+                var message = exception.Message;
+                var range = new BlazorMonaco.Bridge.Range()
+                {
+                    StartLineNumber = exception.DebugInfo.Start.Line,
+                    StartColumn = exception.DebugInfo.Start.Col,
+                    EndLineNumber = exception.DebugInfo.End.Line,
+                    EndColumn = exception.DebugInfo.End.Col
+                };
+
+                deltaDecorations.Add(await DeltaDecorationHelper.BuildDeltaDecoration(monacoEditorYaml.MonacoEditor, range, message).ConfigureAwait(false));
+            }
+
+            await monacoEditorYaml.SetDeltaDecoration(deltaDecorations).ConfigureAwait(false);
         }
 
         private async void StartValidationSubmitCountdown(IEditorTabInfo editorTabInfo, string yaml, int? overrideTimeOut = null)
         {
             var type = editorTabInfo.Type;
-            var formattingExceptions = await ValidationController.StartSubmitCountdown(type, yaml, overrideTimeOut).ConfigureAwait(false);
+            var formattingExceptions = await YamlValidationController.StartSubmitCountdown(type, yaml, overrideTimeOut).ConfigureAwait(false);
             editorTabInfo.Exceptions = formattingExceptions;
             SetErrors(ref editorTabInfo);
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);

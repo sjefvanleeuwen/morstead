@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using BlazorMonacoYaml;
+using System.Collections.Generic;
 using System.Linq;
+using Vs.VoorzieningenEnRegelingen.Site.ApiCalls;
 using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
-using Vs.YamlEditor.Components.Controllers.ApiCalls;
-using Vs.YamlEditor.Components.Shared;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Model
 {
@@ -25,8 +25,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model
         public bool IsCompareMode => CompareInfo?.ContentId != null;
         public IYamlFileInfo CompareInfo { get; set; }
         public string CompareContent { get; set; }
-        public YamlEditor.Components.Shared.YamlEditor YamlEditor { get; set; }
-        public YamlDiffEditor YamlDiffEditor { get; set; }
+        public MonacoEditorYaml MonacoEditorYaml { get; set; }
+        public MonacoDiffEditorYaml MonacoDiffEditorYaml { get; set; }
 
         public void RemoveExceptions()
         {

@@ -42,9 +42,10 @@
     <script src="_content/MatBlazor/dist/matBlazor.js"></script>
     <link href="_content/MatBlazor/dist/matBlazor.css" rel="stylesheet" />
     <!--BlazorMonaco-->
-    <link href="_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs/editor/editor.main.css" rel="stylesheet" />
+    <link href="_content/BlazorMonacoYaml/lib/monaco-editor-yaml/min/vs/editor/editor.main.css" rel="stylesheet" />
     <!--Custom part-->
-    <link href="_content/Vs.YamlEditor.Components/css/editor.css" rel="stylesheet" />
+    <link href="~/css/MonacoEditorYaml.css" rel="stylesheet" />
+    <!--/BlazorMonaco-->
     <link href="~/fonts/lemonmilk/stysheet.css" rel="stylesheet" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed text-sm">
@@ -108,9 +109,12 @@
 
     <!--BlazorMonaco-->
     <!--BlazorMonaco Yaml-->
-    <script src="_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs/loader.js"></script>
-    <script>require.config({ paths: { 'vs': '_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs' } });</script>
-    <script src="_content/Vs.YamlEditor.Components/lib/monaco-editor-yaml/min/vs/editor/editor.main.js"></script>
+    <script src="_content/BlazorMonacoYaml/lib/monaco-editor-yaml/min/vs/loader.js"></script>
+    <script>require.config({ paths: { 'vs': '_content/BlazorMonacoYaml/lib/monaco-editor-yaml/min/vs' } });</script>
+    <script src="_content/BlazorMonacoYaml/lib/monaco-editor-yaml/min/vs/editor/editor.main.js"></script>
+    <!--/BlazorMonaco Yaml-->
     <script src="_content/BlazorMonaco/jsInterop.js"></script>
+    <!--/BlazorMonaco-->
+
 </body>
 </html>

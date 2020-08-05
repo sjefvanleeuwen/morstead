@@ -12,8 +12,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site
         {
             services.AddScoped<IMenu, Menu>();
             services.AddScoped<IEditorTabController, EditorTabController>();
-            YamlEditor.Components.Initializer.Initialize(services);
             ProfessionalPortal.Morstead.Client.Initializer.Initialize(services);
+            services.AddScoped<IYamlValidationController, YamlValidationController>();
         }
     }
 }

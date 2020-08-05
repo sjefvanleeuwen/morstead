@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BlazorMonacoYaml" Version="0.0.1-alpha1" />
     <PackageReference Include="MatBlazor" Version="2.6.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="3.1.3" />
@@ -48,7 +49,6 @@
     <ProjectReference Include="..\professional-portal\Vs.ProfessionalPortal.Morstead.Client\Vs.ProfessionalPortal.Morstead.Client.csproj" />
     <ProjectReference Include="..\rules\Vs.Rules.Core\Vs.Rules.Core.csproj" />
     <ProjectReference Include="..\Vs.VoorzieningenEnRegelingen.Core.TestData\Vs.VoorzieningenEnRegelingen.Core.TestData.csproj" />
-    <ProjectReference Include="..\Vs.YamlEditor.Components\Vs.YamlEditor.Components.csproj" />
   </ItemGroup>
 
   <ItemGroup>
