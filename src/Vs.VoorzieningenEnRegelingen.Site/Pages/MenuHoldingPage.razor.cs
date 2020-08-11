@@ -5,7 +5,7 @@ using Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 {
-    public class MenuHoldingPage : ComponentBase
+    public abstract class MenuHoldingPage : ComponentBase
     {
         [Inject]
         public IMenu Menu { get; set; }

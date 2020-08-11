@@ -14,7 +14,6 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model
         {
             MenuItems = menuItems;
             NotifyStateChanged();
-
         }
 
         private void NotifyStateChanged() => OnChange?.Invoke();

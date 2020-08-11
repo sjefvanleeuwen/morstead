@@ -1,4 +1,4 @@
-﻿namespace Vs.ProfessionalPortal.Morstead.Client.Models
+﻿namespace Vs.Definitions.Models
 {
     public class FileInformation
     {

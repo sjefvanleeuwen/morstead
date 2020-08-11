@@ -7,8 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Vs.ProfessionalPortal.Morstead.Client.Controllers.Interfaces;
-using Vs.ProfessionalPortal.Morstead.Client.Models;
+using Vs.Definitions.Models;
+using Vs.Definitions.Repositories;
 using Vs.VoorzieningenEnRegelingen.Site.ApiCalls;
 using Vs.VoorzieningenEnRegelingen.Site.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Site.Model;
@@ -31,7 +31,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         protected IEditorTabController EditorTabController { get; set; }
 
         [Inject]
-        protected IYamlStorageController YamlStorageController { get; set; }
+        protected IFileRepository FileRepository { get; set; }
 
         [Inject]
         protected IYamlValidationController YamlValidationController { get; set; }
@@ -105,6 +105,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
             await base.OnAfterRenderAsync(firstRender).ConfigureAwait(false);
         }
+
 
         protected override void SetMenu()
         {
@@ -332,7 +333,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.CompareInfo = compareInfo;
 
             editorTabInfo.Content = await editorTabInfo.MonacoEditorYaml.GetValue().ConfigureAwait(false);
-            editorTabInfo.CompareContent = await YamlStorageController.GetYamlFileContent(contentId).ConfigureAwait(false);
+            editorTabInfo.CompareContent = await FileRepository.GetFileContent(contentId).ConfigureAwait(false);
 
             //set the value if it is already initiated; otherwise the content is not drawn again (no update detected in Blazor)
             if (editorTabInfo.MonacoDiffEditorYaml != null)
@@ -379,7 +380,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private async void InitSavedFiles()
         {
-            var fileList = await YamlStorageController.GetYamlFiles().ConfigureAwait(false);
+            var fileList = await FileRepository.GetAllFiles().ConfigureAwait(false);
             await AddFileListToSavedYamls(fileList).ConfigureAwait(false);
         }
 
@@ -397,7 +398,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.ContentId = contentId;
             editorTabInfo.Name = savedYamlInfo.Name;
             editorTabInfo.Type = savedYamlInfo.Type;
-            editorTabInfo.OriginalContent = await YamlStorageController.GetYamlFileContent(editorTabInfo.ContentId).ConfigureAwait(false);
+            editorTabInfo.OriginalContent = await FileRepository.GetFileContent(editorTabInfo.ContentId).ConfigureAwait(false);
             editorTabInfo.Content = editorTabInfo.OriginalContent;
 
             //remove all errors if there were set
@@ -584,7 +585,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private async Task<string> WriteFile(IYamlFileInfo yamlFileInfo, string content)
         {
-            var contentId = await YamlStorageController.WriteYamlFile(yamlFileInfo.Type, yamlFileInfo.Name, content, yamlFileInfo.ContentId).ConfigureAwait(false);
+            var contentId = await FileRepository.WriteFile(yamlFileInfo.Type, yamlFileInfo.Name, content, yamlFileInfo.ContentId).ConfigureAwait(false);
             return contentId;
         }
 

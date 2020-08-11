@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using VirtualSociety.VirtualSocietyDid;
+using Vs.Definitions.Models;
+using Vs.Definitions.Repositories;
 using Vs.Morstead.Grains.Interfaces.Content;
 using Vs.Morstead.Grains.Interfaces.Primitives.Directory;
-using Vs.ProfessionalPortal.Morstead.Client.Controllers.Interfaces;
-using Vs.ProfessionalPortal.Morstead.Client.Models;
 
 namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
 {
-    public class YamlStorageController : IYamlStorageController
+    public class YamlStorageRepository : IFileRepository
     {
         private static string GlobalDid = "did:vsoc:mstd:dir:UtF0tMaRjUqzW4PjMjtr8g";
 
         private string Did { get; set; } = GlobalDid; // new Did("mstd:dir").ToString();
 
-        public async Task<IEnumerable<FileInformation>> GetYamlFiles()
+        public async Task<IEnumerable<FileInformation>> GetAllFiles()
         {
             return await GetFiles(new List<string> { "Rule", "Content", "Layer", "Routing" });
         }
 
-        public async Task<string> GetYamlFileContent(string contentId)
+        public async Task<string> GetFileContent(string contentId)
         {
             var contentGrain = await OrleansConnectionProvider.Client.GetGrain<IContentPersistentGrain>(contentId).Load();
             return contentGrain?.ContentAs<string>() ?? string.Empty;
@@ -54,7 +54,7 @@ namespace Vs.ProfessionalPortal.Morstead.Client.Controllers
             return result;
         }
 
-        public async Task<string> WriteYamlFile(string directoryName, string fileName, string content, string contentId = null)
+        public async Task<string> WriteFile(string directoryName, string fileName, string content, string contentId = null)
         {
             //directory
             var directoryGrain = OrleansConnectionProvider.Client.GetGrain<IDirectoryGrain>(Did);

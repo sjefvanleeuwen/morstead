@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\definitions\Vs.Definitions\Vs.Definitions.csproj" />
     <ProjectReference Include="..\..\morstead\src\Vs.Morstead.Grains.Interfaces\Vs.Morstead.Grains.Interfaces.csproj" />
   </ItemGroup>
 
