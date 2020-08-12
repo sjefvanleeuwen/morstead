@@ -27,29 +27,28 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
         [Inject]
         private NavigationManager NavigationManager { get; set; }
 
-        private Uri Uri => NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
-
-        private string RuleYaml => YamlSourceController.GetYaml(YamlType.Rules);
-        private string ContentYaml => YamlSourceController.GetYaml(YamlType.Uxcontent);
+        private bool ShowDisclaimer = true;
 
         //the formElement we are showing
         private IFormElementBase _formElement;
 
-        private IStep LastStep => SequenceController.LastExecutionResult.Step;
-        private string SemanticKey => SequenceController.HasRights ? LastStep.SemanticKey : LastStep.Break.SemanticKey;
+        private string ContentYaml => YamlSourceController.GetYaml(YamlType.Uxcontent);
         private int DisplayQuestionNumber => SequenceController.LastExecutionResult.Questions == null ? 0 : SequenceController.Sequence.Steps.Count();
-        private string PageTitle => ContentController.GetText("berekening.header", "titel");
-        private string PageSubTitle => ContentController.GetText("berekening.header", "ondertitel");
-        private string TextSummary => ContentController.GetText(SemanticKey, FormElementContentType.Question);
-        private string TextTitle => ContentController.GetText(SemanticKey, FormElementContentType.Title);
-        private string TextDescription => ContentController.GetText(SemanticKey, FormElementContentType.Description);
         private bool HasRights => SequenceController.HasRights;
+        private IStep LastStep => SequenceController.LastExecutionResult.Step;
+        private string PageSubTitle => ContentController.GetText("berekening.header", "ondertitel");
+        private string PageTitle => ContentController.GetText("berekening.header", "titel");
+        private double Progress => CalculateProgress();
         private bool QuestionAsked => SequenceController.QuestionIsAsked;
+        private string RuleYaml => YamlSourceController.GetYaml(YamlType.Rules);
+        private string SemanticKey => SequenceController.HasRights ? LastStep.SemanticKey : LastStep.Break.SemanticKey;
+        private bool ShowForm => _formElement.GetType().IsSubclassOf(typeof(FormElementBase));
         private bool ShowPreviousButton => SequenceController.CurrentStep > 1;
         private bool ShowNextButton => HasRights && QuestionAsked;
-        private double Progress => CalculateProgress();
-
-        private bool ShowForm => _formElement.GetType().IsSubclassOf(typeof(FormElementBase));
+        private string TextDescription => ContentController.GetText(SemanticKey, FormElementContentType.Description);
+        private string TextSummary => ContentController.GetText(SemanticKey, FormElementContentType.Question);
+        private string TextTitle => ContentController.GetText(SemanticKey, FormElementContentType.Title);
+        private Uri Uri => NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
 
         protected override void OnInitialized()
         {
@@ -68,8 +67,9 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
             YamlSourceHelper.SetDefaultYaml(YamlSourceController,
                 null,
                 YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml"),
-                YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml"),
-                YamlTestFileLoader.Load(@"Zorgtoeslag5Routing.yaml")
+                YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml")
+                //,
+                //YamlTestFileLoader.Load(@"Zorgtoeslag5Routing.yaml")
             );
         }
 
@@ -220,6 +220,11 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
             }
 
             return 0;
+        }
+
+        private void HideDisclaimer()
+        {
+            ShowDisclaimer = false;
         }
     }
 }

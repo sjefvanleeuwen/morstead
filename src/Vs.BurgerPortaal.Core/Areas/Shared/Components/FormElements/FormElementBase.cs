@@ -41,11 +41,9 @@ namespace Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements
                 case TypeInference.InferenceResult.TypeEnum.List:
                     return new Select();
                 case TypeInference.InferenceResult.TypeEnum.DateTime:
-                    return new Date();
-                case TypeInference.InferenceResult.TypeEnum.Period:
-                    return new DateRange();
                 case TypeInference.InferenceResult.TypeEnum.String:
-                    return new Text();
+                case TypeInference.InferenceResult.TypeEnum.Period:
+                case TypeInference.InferenceResult.TypeEnum.Step:
                 case TypeInference.InferenceResult.TypeEnum.TimeSpan:
                 case TypeInference.InferenceResult.TypeEnum.Unknown:
                 default:

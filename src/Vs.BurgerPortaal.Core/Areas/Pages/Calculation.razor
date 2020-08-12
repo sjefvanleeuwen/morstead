@@ -1,47 +1,67 @@
 ﻿@page "/"
 @page "/proefberekening/"
-@using Vs.VoorzieningenEnRegelingen.Core
 @using Vs.Rules.Core
-    <MaterialWrapper>
-        <CalculationHeader Title="@PageTitle"
-                           SubTitle="@PageSubTitle"
-                           Number=@DisplayQuestionNumber
-                           Subject="@TextSummary" />
-        <Hint Title="@TextTitle" Content="@TextDescription" />
-        @if (ShowForm)
-        {
-            <EditForm Model="_formElement.Data">
-                <DataAnnotationsValidator />
-                <CascadingValue Value="_formElement.Data">
-                    @if (HasRights && _formElement.ShowElement)
-                    {
-                        @switch (_formElement.Data.InferedType)
-                        {
-                            case TypeInference.InferenceResult.TypeEnum.Double:
-                                <Number />
-                                break;
-                            case TypeInference.InferenceResult.TypeEnum.TimeSpan:
-                                <DateRange />
-                                break;
-                            case TypeInference.InferenceResult.TypeEnum.DateTime:
-                                <Date />
-                                break;
-                            case TypeInference.InferenceResult.TypeEnum.String:
-                                <text />
-                                break;
-                            case TypeInference.InferenceResult.TypeEnum.Boolean:
-                                <Radio />
-                                break;
-                            case TypeInference.InferenceResult.TypeEnum.List:
-                                <Select />
-                                break;
-                        }
-                    }
-                </CascadingValue>
+<CalculationHeader Title="@PageTitle"
+                   SubTitle="@PageSubTitle"
+                   Number=@DisplayQuestionNumber
+                   Subject="@TextSummary" />
+<NldsHint Title="@TextTitle">@((MarkupString)TextDescription)</NldsHint>
+@if (ShowForm)
+{
+    <EditForm Model="_formElement.Data">
+        <DataAnnotationsValidator />
+        <CascadingValue Value="_formElement.Data">
+            @if (HasRights && _formElement.ShowElement)
+            {
+                @switch (_formElement.Data.InferedType)
+                {
+                    case TypeInference.InferenceResult.TypeEnum.Double:
+                        <Number />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.Boolean:
+                        <Radio />
+                        break;
+                    case TypeInference.InferenceResult.TypeEnum.List:
+                        <Select />
+                        break;
+                    default:
+                        break;
+                }
+            }
+        </CascadingValue>
+    </EditForm>
+}
 
-            </EditForm>
-        }
-        <Pagination PreviousDisabled="@(!ShowPreviousButton)" Previous="GetPreviousStep" PreviousText="Vorige"
-                    NextDisabled="@(!ShowNextButton)" Next="GetNextStep" NextText="Volgende"
-                    Progress="@Progress" />
-    </MaterialWrapper>
+@if (ShowPreviousButton && ShowNextButton)
+{
+    <NldsPagination PreviousAction="GetPreviousStep"
+                    PreviousText="Vorige"
+                    NextAction="GetNextStep"
+                    NextText="Volgende" />
+}
+else if (!ShowPreviousButton && ShowNextButton)
+{
+    <NldsPagination NextAction="GetNextStep"
+                    NextText="Volgende" />
+}
+else if (ShowPreviousButton && !ShowNextButton)
+{
+    <NldsPagination PreviousAction="GetPreviousStep"
+                    PreviousText="Vorige" />
+}
+
+@*to be used with the new version of Nlds*@
+@*<NldsPagination PreviousAction="@(ShowPreviousButton ? GetPreviousStep : default(EventCallback))"
+    PreviousText="Vorige"
+    NextAction="@(ShowPreviousButton ? GetNextStep : default(EventCallback))"
+    NextText="Volgende" />*@
+
+<NldsBottomBar ScreenReaderText="Disclaimer">
+    <NldsNotification Title="Disclaimer" CloseButtonText="Sluit">
+        <p>
+            Door deze website te bezoeken en/of de op of via deze website aangeboden informatie te gebruiken, verklaart u zich akkoord met de toepasselijkheid van deze disclaimer.<br />
+            Deze website is een innovatieve technologisch experiment. Er kunnen geen rechten aan de informatie op deze website worden ontleend.<br />
+            De informatie is niet beoordeeld op juistheid, redelijkheid, actualiteit of volledigheid.
+        </p>
+    </NldsNotification>
+</NldsBottomBar>

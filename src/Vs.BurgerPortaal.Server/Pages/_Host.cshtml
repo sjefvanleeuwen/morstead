@@ -15,12 +15,18 @@
 
     <link rel="stylesheet" href="~/css/reset.css" />
     <link rel="stylesheet" href="~/css/blazor.css" />
-    <!-- material -->
-    <link rel="stylesheet" href="_content/MatBlazor/dist/matBlazor.css" />
+
+    <!-- Blazor.NLDesignSystem -->
+    <link href="_content/Blazorized.NLDesignSystem/dist/core/uno.css" rel="stylesheet" />
+    <script src="_content/Blazorized.NLDesignSystem/interop/Promise.min.js"></script>
+    <script src="_content/Blazorized.NLDesignSystem/interop/system.js"></script>
+    <!-- Blazor.NLDesignSystem corrections-->
+    <link href="_content/Blazorized.NLDesignSystem/nl-design-system-overrides.css" rel="stylesheet" />
+    <!-- Blazor.NLDesignSystem.Site.Components -->
+    <link rel="apple-touch-icon" sizes="1024x1024" href="_content/Blazor.NLDesignSystem/nlds-1024.png" />
 
     <link rel="stylesheet" href="~/css/override.css" />
     <link rel="stylesheet" href="~/css/calculation.css" />
-    <script src="_content/BlazorInputFile/inputfile.js"></script>
     <script>
         System.config({
             packages: {
@@ -30,8 +36,6 @@
             }
         });
     </script>
-    <!-- material -->
-    <script src="_content/MatBlazor/dist/matBlazor.js"></script>
 </head>
 <body class="theme--large-padding">
     <app>
@@ -48,5 +52,7 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.server.js"></script>
+    <!-- Blazor.NLDesignSystem -->
+    <script src="_content/Blazorized.NLDesignSystem/interop/interop.js"></script>
 </body>
 </html>

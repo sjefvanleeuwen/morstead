@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blazor.NLDesignSystem.Components;
+using System;
 using System.Collections.Generic;
 using Vs.BurgerPortaal.Core.Objects.FormElements;
 using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
@@ -20,6 +21,24 @@ namespace Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements
         {
             Data = new ListFormElementData();
             Data.FillFromExecutionResult(result, contentController);
+        }
+
+        private IEnumerable<SelectItem> SelectItems => BuildSelectItemsFromOptions();
+
+        private IEnumerable<SelectItem> BuildSelectItemsFromOptions()
+        {
+            var result = new List<SelectItem>();
+            foreach (var option in _data.Options)
+            {
+                result.Add(new SelectItem()
+                {
+                    Value = option.Key,
+                    Description = option.Value,
+                    IsDisabled = _data.IsDisabled
+                });
+            }
+
+            return result;
         }
     }
 }

@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MatBlazor" Version="2.4.3" />
+    <PackageReference Include="Blazorized.NLDesignSystem" Version="0.1.1-beta1" />
   </ItemGroup>
 
   <ItemGroup>

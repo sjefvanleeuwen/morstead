@@ -1,18 +1,18 @@
 ﻿@if (ShowTitle)
 {
-    <MatH1>@((MarkupString)Title)</MatH1>
+    <h1>@((MarkupString)Title)</h1>
 }
 @if (ShowSubtitle)
 {
-    <MatH2>@((MarkupString)SubTitle)</MatH2>
+    <h2>@((MarkupString)SubTitle)</h2>
 }
 @if (ShowNumberedItem)
 {
-    <MatH3>
+    <h3>
         @if (ShowNumber)
         {
             <div class="calc_heading_number">
-                <Badge Number=@Number />
+                <NldsBadge Number="@Number.Value" />
             </div>
         }
         @if (ShowSubject)
@@ -21,5 +21,5 @@
                 @((MarkupString)Subject)
             </div>
         }
-    </MatH3>
+    </h3>
 }

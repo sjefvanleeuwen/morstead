@@ -4,5 +4,20 @@
      That is that Chrome will allow a . or a , depending on the culture of the INSTALLED VERSION of the browser.
      i.e. if you use an English browser in a Dutch culture it will not allow , but only .
      This is why it is better to implement number logic ourselves rather then use a numeric field*@
-<MatStringField Label="@HttpUtility.HtmlDecode(_data.Label)" @bind-Value="@Value" Id="@_data.Name" Disabled="@_data.IsDisabled" HelperText="@HttpUtility.HtmlDecode(_data.HintText)" />
-<Error><ValidationMessage For="@(() => _data.Value)" /></Error>
+<NldsInput Type="InputType.Text"
+           @bind-Value="@Value"
+           Identifier="@_data.Name"
+           IsDisabled="@_data.IsDisabled"
+           Size="InputSize.Medium"
+           ErrorText="@_data.ErrorText">
+    <Label>
+        <NldsFormLabel>
+            @HttpUtility.HtmlDecode(_data.Label)
+        </NldsFormLabel>
+    </Label>
+    <Hint>
+        <NldsFormHint>
+            @HttpUtility.HtmlDecode(_data.HintText)
+        </NldsFormHint>
+    </Hint>
+</NldsInput>
