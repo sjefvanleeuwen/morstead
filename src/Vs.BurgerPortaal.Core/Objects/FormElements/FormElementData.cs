@@ -4,25 +4,28 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Enums;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
+using static Vs.Rules.Core.TypeInference.InferenceResult;
 
 namespace Vs.BurgerPortaal.Core.Objects.FormElements
 {
     public class FormElementData : IFormElementData
     {
         protected string value = string.Empty;
-
-        public string Name { get; set; }
-        public string Label { get; set; }
-        public string HintText { get; set; }
+        public CultureInfo Culture { get; set; } = new CultureInfo("nl-NL");
         public string ErrorText { get => !IsValid ? GetErrorText() : string.Empty; }
+        public IList<string> ErrorTexts = new List<string>();
+        public string HintText { get; set; }
+        public TypeEnum InferedType { get; set; }
         public bool IsDisabled { get; set; } = false;
         public bool IsValid { get; set; } = true;
-        public TypeInference.InferenceResult.TypeEnum InferedType { get; set; }
-        public CultureInfo Culture { get; set; } = new CultureInfo("nl-NL");
+        public string Label { get; set; }
+        public string Name { get; set; }
+        public ElementSize Size { get; set; }
 
         public virtual string Value
         {
@@ -41,8 +44,6 @@ namespace Vs.BurgerPortaal.Core.Objects.FormElements
             }
         }
         public virtual EventCallback<string> ValueChanged { get; set; }
-
-        public IList<string> ErrorTexts = new List<string>();
 
         public virtual void CustomValidate(bool unobtrusive = false)
         {
@@ -67,7 +68,6 @@ namespace Vs.BurgerPortaal.Core.Objects.FormElements
 
             return valid;
         }
-
 
         private string GetErrorText()
         {

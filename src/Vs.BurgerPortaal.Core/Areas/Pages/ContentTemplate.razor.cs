@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Vs.BurgerPortaal.Core.Objects.FormElements;
 using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Enums;
 using Vs.Core.Formats.Yaml.Helper;
 using Vs.Rules.Core.Interfaces;
 
@@ -43,7 +44,8 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
         {
             Label = "Regels Yaml Text",
             Name = "Rule Als Text",
-            Value = "Vul hier de yaml in"
+            Value = "Vul hier de yaml in",
+            Size = ElementSize.ExtraLarge
         };
 
         private string _textDisplay = None;

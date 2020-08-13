@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazor.NLDesignSystem;
+using Microsoft.AspNetCore.Components;
 using Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements.Interfaces;
 using Vs.BurgerPortaal.Core.Objects.FormElements;
 using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Enums;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
@@ -16,9 +18,10 @@ namespace Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements
         [Parameter]
         public virtual string Value { get => Data.Value; set => Data.Value = value; }
 
-        public bool ShowElement => Data != null && !string.IsNullOrWhiteSpace(Data.Name);
+        public InputSize InputSize => ElementSizeToInputSize(Data.Size);
 
         public virtual bool HasInput => false;
+        public bool ShowElement => Data != null && !string.IsNullOrWhiteSpace(Data.Name);
 
         public virtual void FillDataFromResult(IExecutionResult result, IContentController contentController)
         {
@@ -49,6 +52,24 @@ namespace Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements
                 case TypeInference.InferenceResult.TypeEnum.Unknown:
                 default:
                     return this;
+            }
+        }
+        private InputSize ElementSizeToInputSize(ElementSize size)
+        {
+            switch (size)
+            {
+                case ElementSize.ExtraSmall:
+                    return InputSize.ExtraSmall;
+                case ElementSize.Small:
+                    return InputSize.Small;
+                case ElementSize.Large:
+                    return InputSize.Large;
+                case ElementSize.ExtraLarge:
+                    return InputSize.ExtraLarge;
+                case ElementSize.Undefined:
+                case ElementSize.Medium:
+                default:
+                    return InputSize.Medium;
             }
         }
     }

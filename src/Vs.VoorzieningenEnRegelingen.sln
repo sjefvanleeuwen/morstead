@@ -157,6 +157,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Definitions", "definitio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.NLDesignSystem", "..\..\nl-design-system-blazor\src\Blazor.NLDesignSystem\Blazor.NLDesignSystem.csproj", "{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.CitizenPortal.DataModel", "citizen-portal\Vs.CitizenPortal.DataModel\Vs.CitizenPortal.DataModel.csproj", "{2DD70918-A1D9-4FF4-9563-39D0A862B7EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -331,6 +333,10 @@ Global
 		{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DD70918-A1D9-4FF4-9563-39D0A862B7EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD70918-A1D9-4FF4-9563-39D0A862B7EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD70918-A1D9-4FF4-9563-39D0A862B7EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD70918-A1D9-4FF4-9563-39D0A862B7EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -384,6 +390,7 @@ Global
 		{3417EFD5-39E1-4CE9-8D44-2E5824D93C89} = {0DBA9E97-464A-4666-913C-3033BFAA29DC}
 		{71E5CB8F-C2C2-4F09-AC27-65D58114CD00} = {D87BC2D8-8EFD-4299-872B-4BF79B6CB96E}
 		{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41} = {6487D459-3A50-45EC-9DA7-0927BBD0BC3D}
+		{2DD70918-A1D9-4FF4-9563-39D0A862B7EC} = {6487D459-3A50-45EC-9DA7-0927BBD0BC3D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}
