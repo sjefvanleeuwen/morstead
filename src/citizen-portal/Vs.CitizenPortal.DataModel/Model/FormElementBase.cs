@@ -1,6 +1,4 @@
-﻿using Blazor.NLDesignSystem;
-using Microsoft.AspNetCore.Components;
-using Vs.CitizenPortal.DataModel.Enums;
+﻿using Microsoft.AspNetCore.Components;
 using Vs.CitizenPortal.DataModel.Model.FormElements;
 using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 using Vs.CitizenPortal.DataModel.Model.Interfaces;
@@ -18,8 +16,6 @@ namespace Vs.CitizenPortal.DataModel.Model
         [Parameter]
         public virtual string Value { get => Data.Value; set => Data.Value = value; }
 
-        public InputSize InputSize => ElementSizeToInputSize(Data.Size);
-
         public virtual bool HasInput => false;
         public bool ShowElement => Data != null && !string.IsNullOrWhiteSpace(Data.Name);
 
@@ -30,25 +26,6 @@ namespace Vs.CitizenPortal.DataModel.Model
             if (result.InferedType != TypeInference.InferenceResult.TypeEnum.Unknown)
             {
                 Data.FillFromExecutionResult(result, contentController);
-            }
-        }
-
-        private InputSize ElementSizeToInputSize(ElementSize size)
-        {
-            switch (size)
-            {
-                case ElementSize.ExtraSmall:
-                    return InputSize.ExtraSmall;
-                case ElementSize.Small:
-                    return InputSize.Small;
-                case ElementSize.Large:
-                    return InputSize.Large;
-                case ElementSize.ExtraLarge:
-                    return InputSize.ExtraLarge;
-                case ElementSize.Undefined:
-                case ElementSize.Medium:
-                default:
-                    return InputSize.Medium;
             }
         }
     }
