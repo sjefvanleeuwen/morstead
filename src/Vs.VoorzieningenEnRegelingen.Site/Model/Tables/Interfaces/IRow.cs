@@ -7,9 +7,9 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model.Tables.Interfaces
         IEnumerable<IDisplayItem> DisplayItems { get; set; }
 
         IEnumerable<string> Keys { get; }
-        
+
         IEnumerable<string> VisibleKeys { get; }
-        
+
         IEnumerable<ITableAction> TableActions { get; set; }
 
         string GetValueFor(string key);

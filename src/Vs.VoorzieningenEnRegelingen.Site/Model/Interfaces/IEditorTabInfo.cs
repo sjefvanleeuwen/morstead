@@ -23,7 +23,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model.Interfaces
         string CompareContent { get; set; }
         MonacoEditorYaml MonacoEditorYaml { get; set; }
         MonacoDiffEditorYaml MonacoDiffEditorYaml { get; set; }
-        
+
         void RemoveExceptions();
     }
 }

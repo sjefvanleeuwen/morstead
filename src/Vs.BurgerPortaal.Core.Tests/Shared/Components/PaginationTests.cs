@@ -1,7 +1,6 @@
 ﻿using AngleSharp.Dom;
 using Bunit;
 using System;
-using Vs.BurgerPortaal.Core.Areas.Shared.Components;
 using Xunit;
 
 namespace Vs.BurgerPortaal.Core.Tests.Shared.Components

@@ -16,10 +16,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Shared
         public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
-        public AuthenticationStateProvider AuthenticationStateProvider  { get; set; }
+        public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
         [Inject]
-        public IEventBus Bus  { get; set; }
+        public IEventBus Bus { get; set; }
 
         SubscriptionToken token;
 

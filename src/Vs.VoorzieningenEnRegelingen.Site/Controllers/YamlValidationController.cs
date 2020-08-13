@@ -79,7 +79,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Controllers
                 },
                 TokenSource.Token).ConfigureAwait(false);
             }
-            catch {
+            catch
+            {
                 //do nothing
             }
 

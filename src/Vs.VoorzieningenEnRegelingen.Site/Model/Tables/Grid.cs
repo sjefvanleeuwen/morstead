@@ -10,7 +10,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Model.Tables
 
         public IEnumerable<string> GetColumnNames()
         {
-            if (!Rows.Any()) {
+            if (!Rows.Any())
+            {
                 return new List<string>();
             }
             else

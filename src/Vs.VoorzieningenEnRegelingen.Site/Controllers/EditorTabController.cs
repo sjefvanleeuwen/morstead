@@ -49,7 +49,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Controllers
             {
                 throw new ArgumentNullException("Can't add no info to a tab.");
             }
-            editorTabInfo.TabId = editorTabInfo.TabId > 0 ? editorTabInfo.TabId  :
+            editorTabInfo.TabId = editorTabInfo.TabId > 0 ? editorTabInfo.TabId :
                 (EditorTabInfos.Keys.Any() ? EditorTabInfos.Keys.Max() : 0) + 1;
             EditorTabInfos[editorTabInfo.TabId] = editorTabInfo;
             Activate(editorTabInfo.TabId);

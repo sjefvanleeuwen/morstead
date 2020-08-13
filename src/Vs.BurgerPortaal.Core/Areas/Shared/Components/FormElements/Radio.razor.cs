@@ -1,6 +1,5 @@
 ﻿using Blazor.NLDesignSystem;
 using Blazor.NLDesignSystem.Components;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;

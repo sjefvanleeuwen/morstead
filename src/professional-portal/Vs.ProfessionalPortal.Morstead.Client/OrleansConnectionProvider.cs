@@ -11,7 +11,8 @@ namespace Vs.ProfessionalPortal.Morstead.Client
     {
         private static IClusterClient _client;
 
-        public static IClusterClient Client {
+        public static IClusterClient Client
+        {
             get
             {
                 if (_client == null)

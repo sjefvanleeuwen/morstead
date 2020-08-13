@@ -1,8 +1,4 @@
-﻿using Bunit;
-using Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements.ElementHelpers;
-using Xunit;
-
-namespace Vs.BurgerPortaal.Core.Tests.Shared.Components.FormElements.ElementHelpers
+﻿namespace Vs.BurgerPortaal.Core.Tests.Shared.Components.FormElements.ElementHelpers
 {
     public class ErrorTests : BlazorTestBase
     {

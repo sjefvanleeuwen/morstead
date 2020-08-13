@@ -224,7 +224,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             //draw all tabs again
             StateHasChanged();
         }
-        
+
         private async void RegisterContentModification(int tabId, bool actionIsOnDiffEditor = false)
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(tabId);

@@ -7,7 +7,6 @@ using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
 using Vs.CitizenPortal.DataModel.Enums;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
-using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
 using static Vs.Rules.Core.TypeInference.InferenceResult;
 
