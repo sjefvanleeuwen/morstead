@@ -35,11 +35,9 @@
     </EditForm>
 }
 
-<NldsPagination ShowPrevious="@ShowPreviousButton"
-                OnPrevious="GetPreviousStep"
+<NldsPagination OnPrevious="@(ShowPreviousButton ? GetPreviousStep : default(Action))"
                 PreviousText="Vorige"
-                ShowNext="@ShowNextButton"
-                OnNext="GetNextStep"
+                OnNext="@(ShowNextButton ? GetNextStep : default(Action))"
                 NextText="Volgende" />
 
 <NldsBottomBar ScreenReaderText="Disclaimer">
