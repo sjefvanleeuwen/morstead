@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Objects\FormElements\Unused.cs" />
     <Compile Remove="Areas\Shared\Components\FormElements\Checkbox.razor.cs" />
     <Compile Remove="Areas\Shared\Components\FormElements\Search.razor.cs" />
   </ItemGroup>

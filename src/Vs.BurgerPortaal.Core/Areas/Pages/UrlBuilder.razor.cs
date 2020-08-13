@@ -2,8 +2,8 @@
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 using System.Web;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Model.FormElements;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 
 namespace Vs.BurgerPortaal.Core.Areas.Pages
 {

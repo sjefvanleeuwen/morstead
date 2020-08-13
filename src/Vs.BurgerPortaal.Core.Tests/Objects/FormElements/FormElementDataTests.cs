@@ -1,5 +1,5 @@
 ﻿using System;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
+using Vs.CitizenPortal.DataModel.Model.FormElements;
 using Vs.Rules.Core;
 using Xunit;
 

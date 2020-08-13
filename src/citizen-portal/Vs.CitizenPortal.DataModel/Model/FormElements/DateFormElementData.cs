@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 
-namespace Vs.BurgerPortaal.Core.Objects.FormElements
+namespace Vs.CitizenPortal.DataModel.Model.FormElements
 {
     public class DateFormElementData : FormElementData, IDateFormElementData
     {

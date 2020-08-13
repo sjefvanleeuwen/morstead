@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
+using Vs.CitizenPortal.DataModel.Model.FormElements;
 using Xunit;
 
 namespace Vs.BurgerPortaal.Core.Tests.Objects.FormElements

@@ -1,14 +1,14 @@
 ﻿using Blazor.NLDesignSystem;
 using Microsoft.AspNetCore.Components;
-using Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements.Interfaces;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
 using Vs.CitizenPortal.DataModel.Enums;
+using Vs.CitizenPortal.DataModel.Model.FormElements;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Model.Interfaces;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
 
-namespace Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements
+namespace Vs.CitizenPortal.DataModel.Model
 {
     public class FormElementBase : ComponentBase, IFormElementBase
     {
@@ -33,27 +33,6 @@ namespace Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements
             }
         }
 
-        public IFormElementBase GetFormElement(IExecutionResult result)
-        {
-            switch (result.InferedType)
-            {
-                case TypeInference.InferenceResult.TypeEnum.Double:
-                    return new Number();
-                case TypeInference.InferenceResult.TypeEnum.Boolean:
-                    return new Radio();
-                case TypeInference.InferenceResult.TypeEnum.List:
-                    return new Select();
-                case TypeInference.InferenceResult.TypeEnum.String:
-                    return new Text();
-                case TypeInference.InferenceResult.TypeEnum.DateTime:
-                case TypeInference.InferenceResult.TypeEnum.Period:
-                case TypeInference.InferenceResult.TypeEnum.Step:
-                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
-                case TypeInference.InferenceResult.TypeEnum.Unknown:
-                default:
-                    return this;
-            }
-        }
         private InputSize ElementSizeToInputSize(ElementSize size)
         {
             switch (size)

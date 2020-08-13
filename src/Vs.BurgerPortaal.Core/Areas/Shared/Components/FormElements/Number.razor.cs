@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Model.FormElements;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Rules.Core.Interfaces;
 

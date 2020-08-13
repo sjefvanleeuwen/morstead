@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces
+namespace Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces
 {
     public interface IDateRangeFormElementData : IFormElementData
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
 using Vs.CitizenPortal.DataModel.Enums;
+using Vs.CitizenPortal.DataModel.Model.FormElements;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 using Vs.Core.Formats.Yaml.Helper;
 using Vs.Rules.Core.Interfaces;
 

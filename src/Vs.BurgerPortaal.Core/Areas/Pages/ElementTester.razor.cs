@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Model.FormElements;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 using Vs.Rules.Core;
 
 namespace Vs.BurgerPortaal.Core.Areas.Pages

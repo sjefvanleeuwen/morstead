@@ -3,14 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
 using Vs.CitizenPortal.DataModel.Enums;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
 using Vs.Rules.Core.Interfaces;
 using static Vs.Rules.Core.TypeInference.InferenceResult;
 
-namespace Vs.BurgerPortaal.Core.Objects.FormElements
+namespace Vs.CitizenPortal.DataModel.Model.FormElements
 {
     public class FormElementData : IFormElementData
     {

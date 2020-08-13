@@ -2,7 +2,7 @@
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Rules.Core.Interfaces;
 
-namespace Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces
+namespace Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces
 {
     public interface IOptionsFormElementData : IFormElementData
     {

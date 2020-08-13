@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Rules.Core.Interfaces;
 
-namespace Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements.Interfaces
+namespace Vs.CitizenPortal.DataModel.Model.Interfaces
 {
     public interface IFormElementBase
     {
@@ -14,7 +14,5 @@ namespace Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements.Interfaces
         bool HasInput { get; }
 
         void FillDataFromResult(IExecutionResult result, IContentController contentController);
-
-        IFormElementBase GetFormElement(IExecutionResult result);
     }
 }

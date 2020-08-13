@@ -1,4 +1,4 @@
-﻿namespace Vs.BurgerPortaal.Core.Objects.FormElements
+﻿namespace Vs.CitizenPortal.DataModel.Model.FormElements
 {
     public class FormElementLabel
     {

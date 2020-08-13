@@ -5,8 +5,8 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Model.FormElements;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 using Vs.BurgerPortaal.Core.Tests._Helper.Extensions;
 using Xunit;
 

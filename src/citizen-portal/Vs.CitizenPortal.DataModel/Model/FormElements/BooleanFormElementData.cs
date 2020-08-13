@@ -1,9 +1,9 @@
-﻿using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+﻿using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
 using Vs.Rules.Core.Interfaces;
 
-namespace Vs.BurgerPortaal.Core.Objects.FormElements
+namespace Vs.CitizenPortal.DataModel.Model.FormElements
 {
     public class BooleanFormElementData : OptionsFormElementData, IBooleanFormElementData
     {

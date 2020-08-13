@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements;
-using Vs.BurgerPortaal.Core.Objects.FormElements;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
 using Vs.BurgerPortaal.Core.Tests._Helper.Extensions;
+using Vs.CitizenPortal.DataModel.Model.FormElements;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 using Xunit;
 
 namespace Vs.BurgerPortaal.Core.Tests.Shared.Components.FormElements

@@ -2,15 +2,17 @@
 using System;
 using System.Linq;
 using Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements;
-using Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements.Interfaces;
 using Vs.BurgerPortaal.Core.Controllers.Interfaces;
-using Vs.BurgerPortaal.Core.Objects.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Model;
+using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
+using Vs.CitizenPortal.DataModel.Model.Interfaces;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
 using Vs.Core.Layers.Controllers.Interfaces;
 using Vs.Core.Layers.Enums;
 using Vs.Core.Layers.Helpers;
 using Vs.Rules.Core;
+using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
 
@@ -109,13 +111,35 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
             _formElement = new FormElementBase();
             if (HasRights)
             {
-                _formElement = _formElement.GetFormElement(SequenceController.LastExecutionResult);
+                _formElement = GetFormElement(SequenceController.LastExecutionResult) ?? _formElement;
                 _formElement.FillDataFromResult(SequenceController.LastExecutionResult, ContentController);
                 if (_formElement.ShowElement)
                 {
                     _formElement.Data.Value = SequenceController.GetSavedValue() ?? _formElement.Data.Value;
                     ValidateForm(true); //set the IsValid and ErrorText Property unobtrusive
                 }
+            }
+        }
+
+        private IFormElementBase GetFormElement(IExecutionResult result)
+        {
+            switch (result.InferedType)
+            {
+                case TypeInference.InferenceResult.TypeEnum.Double:
+                    return new Number();
+                case TypeInference.InferenceResult.TypeEnum.Boolean:
+                    return new Radio();
+                case TypeInference.InferenceResult.TypeEnum.List:
+                    return new Select();
+                case TypeInference.InferenceResult.TypeEnum.String:
+                    return new Text();
+                case TypeInference.InferenceResult.TypeEnum.DateTime:
+                case TypeInference.InferenceResult.TypeEnum.Period:
+                case TypeInference.InferenceResult.TypeEnum.Step:
+                case TypeInference.InferenceResult.TypeEnum.TimeSpan:
+                case TypeInference.InferenceResult.TypeEnum.Unknown:
+                default:
+                    return null;
             }
         }
 
