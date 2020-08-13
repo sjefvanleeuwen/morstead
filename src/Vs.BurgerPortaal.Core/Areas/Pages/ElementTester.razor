@@ -1,6 +1,5 @@
 ﻿@page "/ElementTester/"
-    <MaterialWrapper>
-        <EditForm Model="@FieldText">
+            <EditForm Model="@FieldText">
             <DataAnnotationsValidator />
             <CascadingValue Value="@FieldText">
                 <Text />
@@ -71,4 +70,3 @@
             value: @FieldDateRange.Value
             <MatButton TrailingIcon="chevron_right" @onclick="ValidateDateRange">Validate</MatButton>
         </EditForm>
-    </MaterialWrapper>

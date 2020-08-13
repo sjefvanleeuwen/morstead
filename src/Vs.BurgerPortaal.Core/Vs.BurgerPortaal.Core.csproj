@@ -23,10 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazorized.NLDesignSystem" Version="0.1.1-beta1" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\nl-design-system-blazor\src\Blazor.NLDesignSystem\Blazor.NLDesignSystem.csproj" />
     <ProjectReference Include="..\cms\Vs.Cms.Core\Vs.Cms.Core.csproj" />
     <ProjectReference Include="..\cms\Vs.Cms.Rules\Vs.Cms.Rules.csproj" />
     <ProjectReference Include="..\core\Vs.Core.Layers\Vs.Core.Layers.csproj" />

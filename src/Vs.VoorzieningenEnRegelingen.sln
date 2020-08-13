@@ -153,7 +153,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Morstead.Grains.Interfac
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "definitions", "definitions", "{D87BC2D8-8EFD-4299-872B-4BF79B6CB96E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.Definitions", "definitions\Vs.Definitions\Vs.Definitions.csproj", "{71E5CB8F-C2C2-4F09-AC27-65D58114CD00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.Definitions", "definitions\Vs.Definitions\Vs.Definitions.csproj", "{71E5CB8F-C2C2-4F09-AC27-65D58114CD00}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.NLDesignSystem", "..\..\nl-design-system-blazor\src\Blazor.NLDesignSystem\Blazor.NLDesignSystem.csproj", "{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -325,6 +327,10 @@ Global
 		{71E5CB8F-C2C2-4F09-AC27-65D58114CD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71E5CB8F-C2C2-4F09-AC27-65D58114CD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71E5CB8F-C2C2-4F09-AC27-65D58114CD00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -377,6 +383,7 @@ Global
 		{0DBA9E97-464A-4666-913C-3033BFAA29DC} = {FD31F7EA-0FE6-4EA5-B49B-ED199BE316F9}
 		{3417EFD5-39E1-4CE9-8D44-2E5824D93C89} = {0DBA9E97-464A-4666-913C-3033BFAA29DC}
 		{71E5CB8F-C2C2-4F09-AC27-65D58114CD00} = {D87BC2D8-8EFD-4299-872B-4BF79B6CB96E}
+		{A9BBB216-4D00-4098-91CA-9F3EAF2EEC41} = {6487D459-3A50-45EC-9DA7-0927BBD0BC3D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}

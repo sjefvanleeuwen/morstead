@@ -1,25 +1,25 @@
-﻿@*@page "/ContentTemplate/"
-<MaterialWrapper>
-    <EditForm Model="@YamlLogic">
-        <CascadingValue Value="@YamlLogic">
-            <Text />
-        </CascadingValue>
-    </EditForm>
+﻿@page "/ContentTemplate/"
+<EditForm Model="@YamlLogic">
+    <CascadingValue Value="@YamlLogic">
+        <Text />
+    </CascadingValue>
+</EditForm>
 
-    <MatButton @onclick="SubmitUrl">Verstuur</MatButton>
-    <div id="YamlLogicResult" style="display:@_urlDisplay">
-        <Hint Title="Resultaat van de Regels Yaml Url" Content="@UrlYamlContent" />
-        <MatButton @onclick="HideUrlContentResult">Verberg</MatButton>
-    </div>
-    <EditForm Model="@YamlLogic">
-        <CascadingValue Value="@YamlLogicText">
-            <TextArea />
-        </CascadingValue>
-    </EditForm>
+<NldsButton Type="ButtonType.Primary" OnClick="SubmitUrl">Verstuur</NldsButton>
+<div id="YamlLogicResult" style="display:@_urlDisplay">
+    <NldsHint Title="Resultaat van de Regels Yaml Url">@((MarkupString)UrlYamlContent)</NldsHint>
+    <NldsButton Type="ButtonType.Primary" OnClick="HideUrlContentResult">Verberg</NldsButton>
+</div>
 
-    <MatButton @onclick="SubmitText">Verstuur</MatButton>
-    <div id="YamlLogicResult" style="display:@_textDisplay">
-        <Hint Title="Resultaat van de Regels Yaml Text" Content="@UrlTextContent" />
-        <MatButton @onclick="HideTextContentResult">Verberg</MatButton>
-    </div>
-</MaterialWrapper>*@
+
+<EditForm Model="@YamlLogic">
+    <CascadingValue Value="@YamlLogicText">
+        <TextArea />
+    </CascadingValue>
+</EditForm>
+
+<NldsButton Type="ButtonType.Primary" OnClick="SubmitText">Verstuur</NldsButton>
+<div id="YamlLogicResult" style="display:@_textDisplay">
+    <NldsHint Title="Resultaat van de Regels Yaml Text">@((MarkupString)UrlTextContent)</NldsHint>
+    <NldsButton Type="ButtonType.Primary" @onclick="HideTextContentResult">Verberg</NldsButton>
+</div>

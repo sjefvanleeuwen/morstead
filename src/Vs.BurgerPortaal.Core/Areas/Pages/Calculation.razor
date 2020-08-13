@@ -24,6 +24,9 @@
                     case TypeInference.InferenceResult.TypeEnum.List:
                         <Select />
                         break;
+                    case TypeInference.InferenceResult.TypeEnum.String:
+                        <Text />
+                        break;
                     default:
                         break;
                 }
@@ -32,29 +35,12 @@
     </EditForm>
 }
 
-@if (ShowPreviousButton && ShowNextButton)
-{
-    <NldsPagination PreviousAction="GetPreviousStep"
-                    PreviousText="Vorige"
-                    NextAction="GetNextStep"
-                    NextText="Volgende" />
-}
-else if (!ShowPreviousButton && ShowNextButton)
-{
-    <NldsPagination NextAction="GetNextStep"
-                    NextText="Volgende" />
-}
-else if (ShowPreviousButton && !ShowNextButton)
-{
-    <NldsPagination PreviousAction="GetPreviousStep"
-                    PreviousText="Vorige" />
-}
-
-@*to be used with the new version of Nlds*@
-@*<NldsPagination PreviousAction="@(ShowPreviousButton ? GetPreviousStep : default(EventCallback))"
-    PreviousText="Vorige"
-    NextAction="@(ShowPreviousButton ? GetNextStep : default(EventCallback))"
-    NextText="Volgende" />*@
+<NldsPagination ShowPrevious="@ShowPreviousButton"
+                OnPrevious="GetPreviousStep"
+                PreviousText="Vorige"
+                ShowNext="@ShowNextButton"
+                OnNext="GetNextStep"
+                NextText="Volgende" />
 
 <NldsBottomBar ScreenReaderText="Disclaimer">
     <NldsNotification Title="Disclaimer" CloseButtonText="Sluit">
