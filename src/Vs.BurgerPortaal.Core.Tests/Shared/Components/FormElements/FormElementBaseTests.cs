@@ -68,17 +68,17 @@ namespace Vs.BurgerPortaal.Core.Tests.Shared.Components.FormElements
             Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
             Assert.Equal(typeof(Select), formElement.GetType());
 
-            moq.Setup(m => m.InferedType).Returns(TypeInference.InferenceResult.TypeEnum.DateTime);
-            formElement = sut.GetFormElement(moq.Object);
-            Assert.True(formElement is IFormElementBase);
-            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
-            Assert.Equal(typeof(Date), formElement.GetType());
+            //moq.Setup(m => m.InferedType).Returns(TypeInference.InferenceResult.TypeEnum.DateTime);
+            //formElement = sut.GetFormElement(moq.Object);
+            //Assert.True(formElement is IFormElementBase);
+            //Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
+            //Assert.Equal(typeof(Date), formElement.GetType());
 
-            moq.Setup(m => m.InferedType).Returns(TypeInference.InferenceResult.TypeEnum.Period);
-            formElement = sut.GetFormElement(moq.Object);
-            Assert.True(formElement is IFormElementBase);
-            Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
-            Assert.Equal(typeof(DateRange), formElement.GetType());
+            //moq.Setup(m => m.InferedType).Returns(TypeInference.InferenceResult.TypeEnum.Period);
+            //formElement = sut.GetFormElement(moq.Object);
+            //Assert.True(formElement is IFormElementBase);
+            //Assert.True(formElement.GetType().IsSubclassOf(typeof(FormElementBase)));
+            //Assert.Equal(typeof(DateRange), formElement.GetType());
 
             moq.Setup(m => m.InferedType).Returns(TypeInference.InferenceResult.TypeEnum.String);
             formElement = sut.GetFormElement(moq.Object);

@@ -14,139 +14,139 @@ namespace Vs.BurgerPortaal.Core.Tests.Shared.Components.FormElements
 {
     public class RadioTests : BlazorTestBase
     {
-        [Fact]
-        public void RadioEmpty()
-        {
-            var data = new BooleanFormElementData() as IFormElementData;
-            var cut = RenderComponent<Radio>(
-                CascadingValue(data),
-                CascadingValue(new EditContext(data)));
+        //[Fact]
+        //public void RadioEmpty()
+        //{
+        //    var data = new BooleanFormElementData() as IFormElementData;
+        //    var cut = RenderComponent<Radio>(
+        //        CascadingValue(data),
+        //        CascadingValue(new EditContext(data)));
 
-            var inputs = cut.FindAll("input");
-            var label = cut.Find("p");
-            var labels = cut.FindAll("label");
-            var hints = cut.FindAll(".mdc-text-field-helper-line");
-            var errors = cut.FindAll("div.validation-message");
-            Assert.Empty(inputs);
-            Assert.Empty(label.InnerHtml);
-            Assert.Empty(labels);
-            Assert.Empty(hints);
-            Assert.Empty(errors);
-        }
+        //    var inputs = cut.FindAll("input");
+        //    var label = cut.Find("p");
+        //    var labels = cut.FindAll("label");
+        //    var hints = cut.FindAll(".mdc-text-field-helper-line");
+        //    var errors = cut.FindAll("div.validation-message");
+        //    Assert.Empty(inputs);
+        //    Assert.Empty(label.InnerHtml);
+        //    Assert.Empty(labels);
+        //    Assert.Empty(hints);
+        //    Assert.Empty(errors);
+        //}
 
-        [Fact]
-        public void RadioOptionsClass()
-        {
-            //only 2 lower than 10
-            var data = new BooleanFormElementData
-            {
-                Options = new Dictionary<string, string> {
-                    { "A", "<than10" },
-                    { "B", "and_only_2" }
-                }
-            } as IFormElementData;
-            var cut = RenderComponent<Radio>(
-                CascadingValue(data),
-                CascadingValue(new EditContext(data)));
+        //[Fact]
+        //public void RadioOptionsClass()
+        //{
+        //    //only 2 lower than 10
+        //    var data = new BooleanFormElementData
+        //    {
+        //        Options = new Dictionary<string, string> {
+        //            { "A", "<than10" },
+        //            { "B", "and_only_2" }
+        //        }
+        //    } as IFormElementData;
+        //    var cut = RenderComponent<Radio>(
+        //        CascadingValue(data),
+        //        CascadingValue(new EditContext(data)));
 
-            Assert.Equal(2, cut.FindAll("div > div > input").Count);
-            Assert.Empty(cut.FindAll("div > div > div > input"));//0 surrounded by extra div
+        //    Assert.Equal(2, cut.FindAll("div > div > input").Count);
+        //    Assert.Empty(cut.FindAll("div > div > div > input"));//0 surrounded by extra div
 
-            //lower than 10 in length, but 3
-            data = new BooleanFormElementData
-            {
-                Options = new Dictionary<string, string> {
-                    { "A", "Thisisshor" },
-                    { "B", "terthan10c" },
-                    { "C", "haracters" }
-                }
-            } as IFormElementData;
-            cut = RenderComponent<Radio>(
-                CascadingValue(data),
-                CascadingValue(new EditContext(data)));
+        //    //lower than 10 in length, but 3
+        //    data = new BooleanFormElementData
+        //    {
+        //        Options = new Dictionary<string, string> {
+        //            { "A", "Thisisshor" },
+        //            { "B", "terthan10c" },
+        //            { "C", "haracters" }
+        //        }
+        //    } as IFormElementData;
+        //    cut = RenderComponent<Radio>(
+        //        CascadingValue(data),
+        //        CascadingValue(new EditContext(data)));
 
-            Assert.Equal(3, cut.FindAll("div > div > input").Count);
-            Assert.Equal(3, cut.FindAll("div > div > div > input").Count);//surrounded by extra div
+        //    Assert.Equal(3, cut.FindAll("div > div > input").Count);
+        //    Assert.Equal(3, cut.FindAll("div > div > div > input").Count);//surrounded by extra div
 
-            //longer than 10
-            data = new BooleanFormElementData
-            {
-                Options = new Dictionary<string, string> {
-                     { "A", ">than10" },
-                     { "B", "and_onlytwo" }
-                }
-            } as IFormElementData;
-            cut = RenderComponent<Radio>(
-                CascadingValue(data),
-                CascadingValue(new EditContext(data)));
+        //    //longer than 10
+        //    data = new BooleanFormElementData
+        //    {
+        //        Options = new Dictionary<string, string> {
+        //             { "A", ">than10" },
+        //             { "B", "and_onlytwo" }
+        //        }
+        //    } as IFormElementData;
+        //    cut = RenderComponent<Radio>(
+        //        CascadingValue(data),
+        //        CascadingValue(new EditContext(data)));
 
-            Assert.Equal(2, cut.FindAll("div > div > input").Count);
-            Assert.Equal(2, cut.FindAll("div > div > div > input").Count);//surrounded by extra div
-        }
+        //    Assert.Equal(2, cut.FindAll("div > div > input").Count);
+        //    Assert.Equal(2, cut.FindAll("div > div > div > input").Count);//surrounded by extra div
+        //}
 
-        [Fact]
-        public void RadioFilledTwoOptions()
-        {
-            var data = new BooleanFormElementData
-            {
-                IsDisabled = true,
-                Options = new Dictionary<string, string> {
-                    { "A", "ValueA" },
-                    { "B", "ValueB" }
-                },
-                Name = "TheName",
-                Label = "TheLabel"
-            } as IFormElementData;
-            var cut = RenderComponent<Radio>(
-                CascadingValue(data),
-                CascadingValue(new EditContext(data)));
+        //[Fact]
+        //public void RadioFilledTwoOptions()
+        //{
+        //    var data = new BooleanFormElementData
+        //    {
+        //        IsDisabled = true,
+        //        Options = new Dictionary<string, string> {
+        //            { "A", "ValueA" },
+        //            { "B", "ValueB" }
+        //        },
+        //        Name = "TheName",
+        //        Label = "TheLabel"
+        //    } as IFormElementData;
+        //    var cut = RenderComponent<Radio>(
+        //        CascadingValue(data),
+        //        CascadingValue(new EditContext(data)));
 
-            Assert.NotNull(cut.Find("div > div"));
-            Assert.Equal(2, cut.FindAll("div > div > input").Count);
-            var inputs = cut.FindAll("div > div > input");
-            var input1 = inputs[0];
-            Assert.Equal("TheName", input1.Attr("name"));
-            Assert.Equal("A", input1.Attr("value"));
-            Assert.Equal("label", input1.Parent.NextElement().NodeName.ToLower());
-            Assert.Equal("ValueA", input1.Parent.NextElement().InnerHtml);
-            Assert.True(input1.IsDisabled());
-            Assert.False(input1.IsChecked());
-            var input2 = inputs[1];
-            Assert.Equal("TheName", input2.Attr("name"));
-            Assert.Equal("B", input2.Attr("value"));
-            Assert.Equal("label", input2.Parent.NextElement().NodeName.ToLower());
-            Assert.Equal("ValueB", input2.Parent.NextElement().InnerHtml);
-            Assert.True(input2.IsDisabled());
-            Assert.False(input2.IsChecked());
+        //    Assert.NotNull(cut.Find("div > div"));
+        //    Assert.Equal(2, cut.FindAll("div > div > input").Count);
+        //    var inputs = cut.FindAll("div > div > input");
+        //    var input1 = inputs[0];
+        //    Assert.Equal("TheName", input1.Attr("name"));
+        //    Assert.Equal("A", input1.Attr("value"));
+        //    Assert.Equal("label", input1.Parent.NextElement().NodeName.ToLower());
+        //    Assert.Equal("ValueA", input1.Parent.NextElement().InnerHtml);
+        //    Assert.True(input1.IsDisabled());
+        //    Assert.False(input1.IsChecked());
+        //    var input2 = inputs[1];
+        //    Assert.Equal("TheName", input2.Attr("name"));
+        //    Assert.Equal("B", input2.Attr("value"));
+        //    Assert.Equal("label", input2.Parent.NextElement().NodeName.ToLower());
+        //    Assert.Equal("ValueB", input2.Parent.NextElement().InnerHtml);
+        //    Assert.True(input2.IsDisabled());
+        //    Assert.False(input2.IsChecked());
 
-            Assert.Equal("TheLabel", cut.Find("p").InnerHtml);
-        }
+        //    Assert.Equal("TheLabel", cut.Find("p").InnerHtml);
+        //}
 
-        [Fact]
-        public void RadioValueSet()
-        {
-            var data = new BooleanFormElementData
-            {
-                Options = new Dictionary<string, string> {
-                    { "A", "ValueA" },
-                    { "B", "ValueB" }
-                },
-                Value = "B"
-            } as IFormElementData;
-            var cut = RenderComponent<Radio>(
-                CascadingValue(data),
-                CascadingValue(new EditContext(data)));
+        //[Fact]
+        //public void RadioValueSet()
+        //{
+        //    var data = new BooleanFormElementData
+        //    {
+        //        Options = new Dictionary<string, string> {
+        //            { "A", "ValueA" },
+        //            { "B", "ValueB" }
+        //        },
+        //        Value = "B"
+        //    } as IFormElementData;
+        //    var cut = RenderComponent<Radio>(
+        //        CascadingValue(data),
+        //        CascadingValue(new EditContext(data)));
 
-            var inputs = cut.FindAll("div > div > input");
-            var input1 = inputs[0];
-            Assert.Equal("A", input1.Attr("value"));
-            Assert.Equal("ValueA", input1.Parent.NextElement().InnerHtml);
-            Assert.False(input1.IsChecked());
-            var input2 = inputs[1];
-            Assert.Equal("B", input2.Attr("value"));
-            Assert.Equal("ValueB", input2.Parent.NextElement().InnerHtml);
-            Assert.True(input2.IsChecked());
-        }
+        //    var inputs = cut.FindAll("div > div > input");
+        //    var input1 = inputs[0];
+        //    Assert.Equal("A", input1.Attr("value"));
+        //    Assert.Equal("ValueA", input1.Parent.NextElement().InnerHtml);
+        //    Assert.False(input1.IsChecked());
+        //    var input2 = inputs[1];
+        //    Assert.Equal("B", input2.Attr("value"));
+        //    Assert.Equal("ValueB", input2.Parent.NextElement().InnerHtml);
+        //    Assert.True(input2.IsChecked());
+        //}
 
         [Fact]
         public void RadioFilledMarkup()
@@ -220,62 +220,62 @@ namespace Vs.BurgerPortaal.Core.Tests.Shared.Components.FormElements
             Assert.Equal("A", cut.Instance.Data.Value);
         }
 
-        [Fact]
-        public void HasCorrectParts()
-        {
-            var data = new BooleanFormElementData
-            {
-                Label = "_L",
-                HintText = "_H",
-                Value = "",
-                Options = new Dictionary<string, string> {
-                    { "A", "ValueA" },
-                    { "B", "ValueB" }
-                }
-            } as IFormElementData;
-            data.CustomValidate();
-            Validator.TryValidateObject(data, new ValidationContext(data), null);
-            var cut = RenderComponent<Radio>(
-                CascadingValue(data),
-                CascadingValue(new EditContext(data)));
+        //[Fact]
+        //public void HasCorrectParts()
+        //{
+        //    var data = new BooleanFormElementData
+        //    {
+        //        Label = "_L",
+        //        HintText = "_H",
+        //        Value = "",
+        //        Options = new Dictionary<string, string> {
+        //            { "A", "ValueA" },
+        //            { "B", "ValueB" }
+        //        }
+        //    } as IFormElementData;
+        //    data.CustomValidate();
+        //    Validator.TryValidateObject(data, new ValidationContext(data), null);
+        //    var cut = RenderComponent<Radio>(
+        //        CascadingValue(data),
+        //        CascadingValue(new EditContext(data)));
 
-            Assert.NotEmpty(data.ErrorText);
-            Assert.False(data.IsValid);
+        //    Assert.NotEmpty(data.ErrorText);
+        //    Assert.False(data.IsValid);
 
-            var ps = cut.FindAll("p");
-            Assert.Equal(3, ps.Count);
-            //label
-            Assert.Equal("_L", ps[0].InnerHtml);
-            //hint
-            Assert.Equal("_H", ps[1].InnerHtml);
-            //error p
-            //var errorContent = ps[2].FirstChild();
-            //Assert.NotNull(errorContent);
-            //Assert.Equal("validation-message", hint.ClassName);
+        //    var ps = cut.FindAll("p");
+        //    Assert.Equal(3, ps.Count);
+        //    //label
+        //    Assert.Equal("_L", ps[0].InnerHtml);
+        //    //hint
+        //    Assert.Equal("_H", ps[1].InnerHtml);
+        //    //error p
+        //    //var errorContent = ps[2].FirstChild();
+        //    //Assert.NotNull(errorContent);
+        //    //Assert.Equal("validation-message", hint.ClassName);
 
-            //check order
-            var top = cut.Find("p");
-            Assert.Equal("div", top.NextElement().NodeName.ToLower());
-            Assert.Equal("div", top.NextElement().FirstChild().NodeName.ToLower());
-            Assert.Equal("input", top.NextElement().FirstChild().FirstChild().NodeName.ToLower());
-            Assert.Equal("div", top.NextElement().FirstChild().FirstChild().NextElement().NodeName.ToLower());
-            Assert.Equal("div", top.NextElement().FirstChild().FirstChild().NextElement().FirstChild().NodeName.ToLower());
-            Assert.Equal("div", top.NextElement().FirstChild().FirstChild().NextElement().FirstChild().NextElement().NodeName.ToLower());
-            Assert.Equal("label", top.NextElement().FirstChild().NextElement().NodeName.ToLower());
+        //    //check order
+        //    var top = cut.Find("p");
+        //    Assert.Equal("div", top.NextElement().NodeName.ToLower());
+        //    Assert.Equal("div", top.NextElement().FirstChild().NodeName.ToLower());
+        //    Assert.Equal("input", top.NextElement().FirstChild().FirstChild().NodeName.ToLower());
+        //    Assert.Equal("div", top.NextElement().FirstChild().FirstChild().NextElement().NodeName.ToLower());
+        //    Assert.Equal("div", top.NextElement().FirstChild().FirstChild().NextElement().FirstChild().NodeName.ToLower());
+        //    Assert.Equal("div", top.NextElement().FirstChild().FirstChild().NextElement().FirstChild().NextElement().NodeName.ToLower());
+        //    Assert.Equal("label", top.NextElement().FirstChild().NextElement().NodeName.ToLower());
 
-            Assert.Equal("div", top.NextElement().NextElement().NodeName.ToLower());
-            Assert.Equal("div", top.NextElement().NextElement().FirstChild().NodeName.ToLower());
-            Assert.Equal("input", top.NextElement().NextElement().FirstChild().FirstChild().NodeName.ToLower());
-            Assert.Equal("div", top.NextElement().NextElement().FirstChild().FirstChild().NextElement().NodeName.ToLower());
-            Assert.Equal("div", top.NextElement().NextElement().FirstChild().FirstChild().NextElement().FirstChild().NodeName.ToLower());
-            Assert.Equal("div", top.NextElement().NextElement().FirstChild().FirstChild().NextElement().FirstChild().NextElement().NodeName.ToLower());
-            Assert.Equal("label", top.NextElement().NextElement().FirstChild().NextElement().NodeName.ToLower());
+        //    Assert.Equal("div", top.NextElement().NextElement().NodeName.ToLower());
+        //    Assert.Equal("div", top.NextElement().NextElement().FirstChild().NodeName.ToLower());
+        //    Assert.Equal("input", top.NextElement().NextElement().FirstChild().FirstChild().NodeName.ToLower());
+        //    Assert.Equal("div", top.NextElement().NextElement().FirstChild().FirstChild().NextElement().NodeName.ToLower());
+        //    Assert.Equal("div", top.NextElement().NextElement().FirstChild().FirstChild().NextElement().FirstChild().NodeName.ToLower());
+        //    Assert.Equal("div", top.NextElement().NextElement().FirstChild().FirstChild().NextElement().FirstChild().NextElement().NodeName.ToLower());
+        //    Assert.Equal("label", top.NextElement().NextElement().FirstChild().NextElement().NodeName.ToLower());
 
-            Assert.Equal("p", top.NextElement().NextElement().NextElement().NodeName.ToLower());
-            Assert.Equal("p", top.NextElement().NextElement().NextElement().NextElement().NodeName.ToLower());
-            //Assert.Equal("div", top.NextElement().NextElement().NextElement().NextElement().FirstChild().NodeName);
-            //Assert.Equal("validation-message", top.NextElement().NextElement().NextElement().NextElement().ClassName);
-        }
+        //    Assert.Equal("p", top.NextElement().NextElement().NextElement().NodeName.ToLower());
+        //    Assert.Equal("p", top.NextElement().NextElement().NextElement().NextElement().NodeName.ToLower());
+        //    //Assert.Equal("div", top.NextElement().NextElement().NextElement().NextElement().FirstChild().NodeName);
+        //    //Assert.Equal("validation-message", top.NextElement().NextElement().NextElement().NextElement().ClassName);
+        //}
 
         [Fact]
         public void ShouldHaveInput()
