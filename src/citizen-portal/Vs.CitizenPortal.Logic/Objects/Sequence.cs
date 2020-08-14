@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Vs.BurgerPortaal.Core.Objects.Interfaces;
+using Vs.CitizenPortal.Logic.Objects.Interfaces;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 
-namespace Vs.BurgerPortaal.Core.Objects
+namespace Vs.CitizenPortal.Logic.Objects
 {
     public class Sequence : ISequence
     {

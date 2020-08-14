@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\citizen-portal\Vs.CitizenPortal.Logic\Vs.CitizenPortal.Logic.csproj" />
     <ProjectReference Include="..\cms\Vs.Cms.Core\Vs.Cms.Core.csproj" />
     <ProjectReference Include="..\core\Vs.Core.Web\Vs.Core.Web.csproj" />
     <ProjectReference Include="..\Vs.BurgerPortaal.Core\Vs.BurgerPortaal.Core.csproj" />

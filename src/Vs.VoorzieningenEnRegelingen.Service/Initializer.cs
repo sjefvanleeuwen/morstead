@@ -8,7 +8,8 @@ namespace Vs.VoorzieningenEnRegelingen.Service
     {
         public static void Initialize(IServiceCollection services)
         {
-            services.AddScoped<IServiceController, ServiceController>();
+            services.AddScoped<IAPIServiceController, APIServiceController>();
+            Logic.Initializer.Initialize(services);
         }
     }
 }

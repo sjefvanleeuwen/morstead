@@ -6,6 +6,7 @@ using Vs.Rules.Core.Model;
 using Vs.Rules.Routing.Controllers.Interfaces;
 using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Core.TestData;
+using Vs.VoorzieningenEnRegelingen.Logic.Controllers;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
 
@@ -16,7 +17,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         [Fact]
         public void Service_Parse_Yaml_Successfull()
         {
-            ServiceController controller = new ServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
+            APIServiceController controller = new APIServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
             var s = new ParseRequest() { Config = YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml") };
             var result = controller.Parse(s);
             Assert.False(result.IsError);
@@ -25,7 +26,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         [Fact]
         public void Service_Parse_Yaml_Unsuccessfull()
         {
-            ServiceController controller = new ServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
+            APIServiceController controller = new APIServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
             var result = controller.Parse(new ParseRequest() { Config = "--- Garbage In ---" });
             Assert.True(result.IsError);
         }
@@ -33,7 +34,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         [Fact]
         public void Service_Execute_Zorgtoeslag_From_Url()
         {
-            ServiceController controller = new ServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
+            APIServiceController controller = new APIServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
             var executeRequest = new ExecuteRequest()
             {
                 Config = YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml"),

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
@@ -10,13 +9,11 @@ using Vs.Rules.Core.Exceptions;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using Vs.Rules.Routing.Controllers.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
+using Vs.VoorzieningenEnRegelingen.Logic.Controllers.Interfaces;
 
-namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
+namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ServiceController : ControllerBase, IServiceController
+    public class ServiceController: IServiceController
     {
         private readonly ILogger<ServiceController> _logger;
         private readonly IYamlScriptController _yamlScriptController;
@@ -47,8 +44,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             return config;
         }
 
-        [HttpPost("parse")]
-        public IParseResult Parse([FromBody] IParseRequest parseRequest)
+        public IParseResult Parse(IParseRequest parseRequest)
         {
             if (parseRequest is null)
             {
@@ -58,8 +54,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             return _yamlScriptController.Parse(parseRequest.Config);
         }
 
-        [HttpPost("execute")]
-        public IExecutionResult Execute([FromBody] IExecuteRequest executeRequest)
+        public IExecutionResult Execute(IExecuteRequest executeRequest)
         {
             if (executeRequest is null)
             {
@@ -133,8 +128,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             return _routingController.RoutingConfiguration.Parameters.Any(p => p.Name == missingParameterName);
         }
 
-        [HttpPost("EvaluateFormulaWithoutQA")]
-        public void GetExtraParameters([FromBody] IEvaluateFormulaWithoutQARequest evaluateFormulaWithoutQARequest)
+        public void GetExtraParameters(IEvaluateFormulaWithoutQARequest evaluateFormulaWithoutQARequest)
         {
             if (evaluateFormulaWithoutQARequest is null)
             {

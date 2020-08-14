@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Vs.Rules.Core.Interfaces;
 
-namespace Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces
+namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers.Interfaces
 {
     public interface IEvaluateFormulaWithoutQARequest
     {

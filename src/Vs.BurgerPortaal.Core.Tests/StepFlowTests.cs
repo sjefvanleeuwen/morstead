@@ -1,12 +1,13 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using System.Linq;
-using Vs.BurgerPortaal.Core.Controllers;
-using Vs.BurgerPortaal.Core.Objects;
+using Vs.CitizenPortal.Logic.Controllers;
+using Vs.CitizenPortal.Logic.Objects;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Model;
 using Vs.Rules.Routing.Controllers.Interfaces;
 using Vs.Rules.Routing.Model.Interfaces;
+using Vs.VoorzieningenEnRegelingen.Logic.Controllers;
 using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
 

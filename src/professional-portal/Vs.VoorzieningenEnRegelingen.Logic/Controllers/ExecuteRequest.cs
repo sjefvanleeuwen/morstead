@@ -1,7 +1,7 @@
 ﻿using Vs.Rules.Core.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
+using Vs.VoorzieningenEnRegelingen.Logic.Controllers.Interfaces;
 
-namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
+namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
 {
     public class ExecuteRequest : IExecuteRequest
     {

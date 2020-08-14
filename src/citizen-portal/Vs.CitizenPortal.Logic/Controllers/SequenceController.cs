@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Vs.BurgerPortaal.Core.Controllers.Interfaces;
-using Vs.BurgerPortaal.Core.Objects.Interfaces;
+using Vs.CitizenPortal.Logic.Controllers.Interfaces;
+using Vs.CitizenPortal.Logic.Objects.Interfaces;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
-using Vs.VoorzieningenEnRegelingen.Service.Controllers;
-using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
+using Vs.VoorzieningenEnRegelingen.Logic.Controllers;
+using Vs.VoorzieningenEnRegelingen.Logic.Controllers.Interfaces;
 
-namespace Vs.BurgerPortaal.Core.Controllers
+namespace Vs.CitizenPortal.Logic.Controllers
 {
     public class SequenceController : ISequenceController
     {

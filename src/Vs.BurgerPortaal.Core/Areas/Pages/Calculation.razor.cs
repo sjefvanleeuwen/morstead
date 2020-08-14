@@ -2,10 +2,10 @@
 using System;
 using System.Linq;
 using Vs.BurgerPortaal.Core.Areas.Shared.Components.FormElements;
-using Vs.BurgerPortaal.Core.Controllers.Interfaces;
 using Vs.CitizenPortal.DataModel.Model;
 using Vs.CitizenPortal.DataModel.Model.FormElements.Interfaces;
 using Vs.CitizenPortal.DataModel.Model.Interfaces;
+using Vs.CitizenPortal.Logic.Controllers.Interfaces;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Core.Enums;
 using Vs.Core.Layers.Controllers.Interfaces;

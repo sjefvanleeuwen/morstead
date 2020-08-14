@@ -1,6 +1,6 @@
 ﻿using Moq;
 using System.Collections.Generic;
-using Vs.BurgerPortaal.Core.Objects;
+using Vs.CitizenPortal.Logic.Objects;
 using Vs.Rules.Core.Model;
 using Xunit;
 

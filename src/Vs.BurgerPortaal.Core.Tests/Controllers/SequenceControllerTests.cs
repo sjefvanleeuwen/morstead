@@ -1,12 +1,12 @@
 ﻿using Moq;
 using System.Collections.Generic;
 using System.Linq;
-using Vs.BurgerPortaal.Core.Controllers;
-using Vs.BurgerPortaal.Core.Objects.Interfaces;
+using Vs.CitizenPortal.Logic.Controllers;
+using Vs.CitizenPortal.Logic.Objects.Interfaces;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
-using Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces;
+using Vs.VoorzieningenEnRegelingen.Logic.Controllers.Interfaces;
 using Xunit;
 
 namespace Vs.BurgerPortaal.Core.Tests.Controllers

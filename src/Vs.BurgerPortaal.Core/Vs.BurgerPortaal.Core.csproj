@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\citizen-portal\Vs.CitizenPortal.DataModel\Vs.CitizenPortal.DataModel.csproj" />
+    <ProjectReference Include="..\citizen-portal\Vs.CitizenPortal.Logic\Vs.CitizenPortal.Logic.csproj" />
     <ProjectReference Include="..\cms\Vs.Cms.Core\Vs.Cms.Core.csproj" />
     <ProjectReference Include="..\cms\Vs.Cms.Rules\Vs.Cms.Rules.csproj" />
     <ProjectReference Include="..\core\Vs.Core.Layers\Vs.Core.Layers.csproj" />

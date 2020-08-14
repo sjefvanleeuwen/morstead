@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\professional-portal\Vs.VoorzieningenEnRegelingen.Logic\Vs.VoorzieningenEnRegelingen.Logic.csproj" />
+    <ProjectReference Include="..\..\rules\Vs.Rules.Core\Vs.Rules.Core.csproj" />
+  </ItemGroup>
+
+</Project>

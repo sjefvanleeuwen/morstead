@@ -1,4 +1,4 @@
-﻿namespace Vs.VoorzieningenEnRegelingen.Service.Controllers.Interfaces
+﻿namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers.Interfaces
 {
     public interface IParseRequest
     {

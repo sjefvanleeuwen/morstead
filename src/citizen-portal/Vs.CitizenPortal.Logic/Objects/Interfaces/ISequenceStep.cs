@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Vs.Rules.Core.Model;
 
-namespace Vs.BurgerPortaal.Core.Objects.Interfaces
+namespace Vs.CitizenPortal.Logic.Objects.Interfaces
 {
     public interface ISequenceStep
     {
