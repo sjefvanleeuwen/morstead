@@ -6,15 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Vs.BurgerPortaal.WASM</title>
     <base href="/" />
-    <link rel="stylesheet" href="~/css/reset.css" />
-    <link href="css/app.css" rel="stylesheet" />
-    <link href="manifest.json" rel="manifest" />
-    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
-    <!-- material -->
-    <link rel="stylesheet" href="_content/MatBlazor/dist/matBlazor.css" />
 
-    <link rel="stylesheet" href="~/css/override.css" />
-    <link rel="stylesheet" href="~/css/calculation.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/blazor.css" />
+
+    <!-- Blazor.NLDesignSystem -->
+    <link href="_content/Blazorized.NLDesignSystem/dist/core/uno.css" rel="stylesheet" />
+    <script src="_content/Blazorized.NLDesignSystem/interop/Promise.min.js"></script>
+    <script src="_content/Blazorized.NLDesignSystem/interop/system.js"></script>
+    <!-- Blazor.NLDesignSystem corrections-->
+    <link href="_content/Blazorized.NLDesignSystem/nl-design-system-overrides.css" rel="stylesheet" />
+    <!-- Blazor.NLDesignSystem.Site.Components -->
+    <link rel="apple-touch-icon" sizes="1024x1024" href="_content/Blazor.NLDesignSystem/nlds-1024.png" />
+
+    <link rel="stylesheet" href="css/override.css" />
+    <link rel="stylesheet" href="css/calculation.css" />
 </head>
 
 <body>
@@ -27,6 +33,8 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <!-- Blazor.NLDesignSystem -->
+    <script src="_content/Blazorized.NLDesignSystem/interop/interop.js"></script>
 </body>
 
 </html>
