@@ -8,7 +8,6 @@ using Vs.Rules.Core.Model;
 using Vs.Rules.Routing.Controllers.Interfaces;
 using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Logic.Controllers;
-using Vs.VoorzieningenEnRegelingen.Service.Controllers;
 using Xunit;
 
 namespace Vs.BurgerPortaal.Core.Tests
