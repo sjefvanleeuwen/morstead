@@ -1,0 +1,17 @@
+﻿@inherits NldsFormElementBase
+<NldsRadio @bind-Value="@Value"
+           Identifier="@_data.Name"
+           ErrorText="@_data.ErrorText"
+           Items="@RadioItems"
+           ItemAlignment="@ItemAlignment">
+    <Legend>
+        <NldsLegend>
+            @_data.Label
+        </NldsLegend>
+    </Legend>
+    <Hint>
+        <NldsFormHint>
+            @_data.HintText
+        </NldsFormHint>
+    </Hint>
+</NldsRadio>

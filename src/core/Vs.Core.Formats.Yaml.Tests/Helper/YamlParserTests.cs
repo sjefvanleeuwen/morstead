@@ -9,9 +9,9 @@ namespace Vs.Cms.Core.Tests.Helper
     public class YamlParserTests
     {
         [Fact]
-        public void ShouldRenderContentYamlToObject()
+        public async void ShouldRenderContentYamlToObject()
         {
-            var root = YamlParser.RenderYamlToObject(ContentYamlTest1.Body);
+            var root = await YamlParser.RenderYamlToObject(ContentYamlTest1.Body);
             Assert.Single(root);
             Assert.Equal("content", root.First().Key);
             Assert.Equal(typeof(List<object>), root.First().Value.GetType());

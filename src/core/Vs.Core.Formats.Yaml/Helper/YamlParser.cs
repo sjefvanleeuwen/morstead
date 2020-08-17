@@ -2,7 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using YamlDotNet.RepresentationModel;
 
 namespace Vs.Core.Formats.Yaml.Helper
@@ -12,14 +13,14 @@ namespace Vs.Core.Formats.Yaml.Helper
     {
         static readonly ConcurrentDictionary<string, string> UrlContentCache = new ConcurrentDictionary<string, string>();
 
-        public static IDictionary<string, object> RenderYamlToObject(string yaml)
+        public static async Task<IDictionary<string, object>> RenderYamlToObject(string yaml)
         {
-            yaml = ParseHelper(yaml);
+            yaml = await ParseHelper(yaml);
             YamlMappingNode node = Map(yaml);
             return RenderYamlMappingNodeToObject(node);
         }
 
-        public static string ParseHelper(string yaml)
+        public static async Task<string> ParseHelper(string yaml)
         {
             if (yaml.StartsWith("http"))
             {
@@ -27,10 +28,12 @@ namespace Vs.Core.Formats.Yaml.Helper
                 {
                     return UrlContentCache[yaml];
                 }
-                using (var client = new WebClient())
-                {
-                    return client.DownloadString(yaml);
-                }
+                using var client = new HttpClient();
+
+                using var response = await client.GetAsync(yaml);
+                using var streamToReadFrom = await response.Content.ReadAsStreamAsync();
+                using var streamReader = new StreamReader(streamToReadFrom);
+                return streamReader.ReadToEnd();
             }
             return yaml;
         }

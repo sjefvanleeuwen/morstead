@@ -72,13 +72,13 @@ namespace Vs.Cms.Core.Tests.Controllers
         }
 
         [Fact]
-        public void ShouldInitialize()
+        public async void ShouldInitialize()
         {
             var moqRenderStrategy = InitMoqRenderStrategy();
             var moqContentHandler = InitMoqContentHandler();
             var moqTemplateEngine = InitMoqTemplateEngine();
             var sut = new ContentController(moqRenderStrategy.Object, moqContentHandler.Object, moqTemplateEngine.Object);
-            sut.Initialize("test: test");
+            await sut.Initialize("test: test");
             moqContentHandler.Verify(x => x.SetDefaultCulture(It.IsAny<CultureInfo>()), Times.Once());
             moqContentHandler.Verify(x => x.TranslateParsedYamlToContent(It.IsAny<CultureInfo>(), It.IsAny<IDictionary<string, object>>()), Times.Once());
         }

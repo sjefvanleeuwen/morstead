@@ -1,10 +1,10 @@
 ﻿<Router AppAssembly="@typeof(Program).Assembly"
-        AdditionalAssemblies="new[] { typeof(Vs.BurgerPortaal.Core.Areas.Pages.Calculation).Assembly }">
+        AdditionalAssemblies="new[] { typeof(Vs.CitizenPortal.Site.Pages.Calculation).Assembly }">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(Vs.BurgerPortaal.Core.Areas.Shared.MainLayout)" />
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(Vs.CitizenPortal.Site.Shared.MainLayout)" />
     </Found>
     <NotFound>
-        <LayoutView Layout="@typeof(Vs.BurgerPortaal.Core.Areas.Shared.MainLayout)">
+        <LayoutView Layout="@typeof(Vs.CitizenPortal.Site.Shared.MainLayout)">
             <p>Sorry, there's nothing at this address.</p>
         </LayoutView>
     </NotFound>

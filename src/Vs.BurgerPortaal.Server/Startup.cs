@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Vs.BurgerPortaal.Core;
+using Vs.CitizenPortal.Site;
 
 namespace Vs.BurgerPortaal.Server
 {

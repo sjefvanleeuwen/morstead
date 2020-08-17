@@ -1,0 +1,54 @@
+﻿@page "/ElementTester/"
+<EditForm Model="@FieldText">
+    <DataAnnotationsValidator />
+    <CascadingValue Value="@FieldText">
+        <Text />
+    </CascadingValue>
+    value: @FieldText.Value
+    <NldsButton Type="ButtonType.Primary" @onclick="ValidateText">Validate <NldsIcon Icon="Icon.ChevronRight" /></NldsButton>
+</EditForm>
+
+<EditForm Model="@FieldTextArea">
+    <DataAnnotationsValidator />
+    <CascadingValue Value="@FieldTextArea">
+        <TextArea />
+    </CascadingValue>
+    value: @FieldTextArea.Value
+    <NldsButton Type="ButtonType.Primary" @onclick="ValidateTextArea">Validate <NldsIcon Icon="Icon.ChevronRight" /></NldsButton>
+</EditForm>
+
+<EditForm Model="@FieldNumber">
+    <DataAnnotationsValidator />
+    <CascadingValue Value="@FieldNumber">
+        <Number />
+    </CascadingValue>
+    value: @FieldNumber.Value
+    <NldsButton Type="ButtonType.Primary" @onclick="ValidateNumber">Validate <NldsIcon Icon="Icon.ChevronRight" /></NldsButton>
+</EditForm>
+
+<EditForm Model="@FieldSelect">
+    <DataAnnotationsValidator />
+    <CascadingValue Value="@FieldSelect">
+        <Select />
+    </CascadingValue>
+    value: @FieldSelect.Value
+    <NldsButton Type="ButtonType.Primary" @onclick="ValidateSelect">Validate <NldsIcon Icon="Icon.ChevronRight" /></NldsButton>
+</EditForm>
+
+<EditForm Model="@FieldRadio">
+    <DataAnnotationsValidator />
+    <CascadingValue Value="@FieldRadio">
+        <Radio />
+    </CascadingValue>
+    value: @FieldRadio.Value
+    <NldsButton Type="ButtonType.Primary" @onclick="ValidateRadio">Validate <NldsIcon Icon="Icon.ChevronRight" /></NldsButton>
+</EditForm>
+
+<EditForm Model="@FieldRadioHorizontal">
+    <DataAnnotationsValidator />
+    <CascadingValue Value="@FieldRadioHorizontal">
+        <Radio />
+    </CascadingValue>
+    value: @FieldRadioHorizontal.Value
+    <NldsButton Type="ButtonType.Primary" @onclick="ValidateRadioHorizontal">Validate <NldsIcon Icon="Icon.ChevronRight" /></NldsButton>
+</EditForm>

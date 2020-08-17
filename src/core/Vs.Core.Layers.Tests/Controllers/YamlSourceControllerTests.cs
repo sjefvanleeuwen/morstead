@@ -15,36 +15,36 @@ namespace Vs.Core.Layers.Tests.Controllers
     public class YamlSourceControllerTests
     {
         [Fact]
-        public void ShouldSetYaml()
+        public async void ShouldSetYaml()
         {
             var moqLayerController = new Mock<ILayerController>();
             var sut = new YamlSourceController(moqLayerController.Object);
-            sut.SetYaml(YamlType.Rules, "TestYamlString");
+            await sut.SetYaml(YamlType.Rules, "TestYamlString");
             Assert.Equal("TestYamlString", sut.GetYaml(YamlType.Rules));
         }
 
         [Fact]
-        public void ShouldOverwriteSetYaml()
+        public async void ShouldOverwriteSetYaml()
         {
             var moqLayerController = new Mock<ILayerController>();
             var sut = new YamlSourceController(moqLayerController.Object);
-            sut.SetYaml(YamlType.Rules, "TestYamlString");
+            await sut.SetYaml(YamlType.Rules, "TestYamlString");
             Assert.Equal("TestYamlString", sut.GetYaml(YamlType.Rules));
-            sut.SetYaml(YamlType.Rules, "TestYamlString2");
+            await sut.SetYaml(YamlType.Rules, "TestYamlString2");
             Assert.Equal("TestYamlString2", sut.GetYaml(YamlType.Rules));
         }
 
         [Fact]
-        public void ShouldSetYamlUrl()
+        public async void ShouldSetYamlUrl()
         {
             var moqLayerController = new Mock<ILayerController>();
             var sut = new YamlSourceController(moqLayerController.Object);
-            sut.SetYaml(YamlType.Rules, "http://yamlurl");
+            await sut.SetYaml(YamlType.Rules, "http://yamlurl");
             Assert.Equal("http://yamlurl/", sut.GetYaml(YamlType.Rules));
         }
 
         [Fact]
-        public void ShouldSetYamlLayerUrl()
+        public async void ShouldSetYamlLayerUrl()
         {
             var moqLayerController = new Mock<ILayerController>();
             moqLayerController.Setup(m => m.LayerConfiguration).Returns(new LayerConfiguration
@@ -65,12 +65,12 @@ namespace Vs.Core.Layers.Tests.Controllers
                 }
             });
             var sut = new YamlSourceController(moqLayerController.Object);
-            sut.SetYaml(YamlType.Layer, "dummy");
+            await sut.SetYaml(YamlType.Layer, "dummy");
             Assert.Equal("http://testurlyaml/", sut.GetYaml(YamlType.Rules));
         }
 
         [Fact]
-        public void ShouldGetYamlByPriority()
+        public async void ShouldGetYamlByPriority()
         {
             var moqLayerController = new Mock<ILayerController>();
             moqLayerController.Setup(m => m.LayerConfiguration).Returns(new LayerConfiguration
@@ -93,37 +93,37 @@ namespace Vs.Core.Layers.Tests.Controllers
 
             var sut = new YamlSourceController(moqLayerController.Object);
 
-            sut.SetYaml(YamlType.Layer, "dummy");
+            await sut.SetYaml(YamlType.Layer, "dummy");
             Assert.Equal("http://testurlyaml/", sut.GetYaml(YamlType.Rules));
 
             //set by url
-            sut.SetYaml(YamlType.Rules, "http://yamlurl");
+            await sut.SetYaml(YamlType.Rules, "http://yamlurl");
             Assert.Equal("http://yamlurl/", sut.GetYaml(YamlType.Rules));
 
             //set the layer again -> no changes because url overrules
-            sut.SetYaml(YamlType.Layer, "dummy");
+            await sut.SetYaml(YamlType.Layer, "dummy");
             Assert.Equal("http://yamlurl/", sut.GetYaml(YamlType.Rules));
 
             //override with yaml (no url)
-            sut.SetYaml(YamlType.Rules, "TestYamlString");
+            await sut.SetYaml(YamlType.Rules, "TestYamlString");
             Assert.Equal("TestYamlString", sut.GetYaml(YamlType.Rules));
         }
 
         [Fact]
-        public void ShouldSetFilterAndGetByFilterYaml()
+        public async void ShouldSetFilterAndGetByFilterYaml()
         {
             var moqLayerController = new Mock<ILayerController>();
             var sut = new YamlSourceController(moqLayerController.Object);
-            sut.SetYaml(YamlType.Uxcontent, "dummy", new Dictionary<string, object> { { "Language", LanguageCode.RU } });
-            sut.SetYaml(YamlType.Uxcontent, "dummy2", new Dictionary<string, object> { { "Language", "testString" } });
-            sut.SetYaml(YamlType.Uxcontent, "dummy3");
+            await sut.SetYaml(YamlType.Uxcontent, "dummy", new Dictionary<string, object> { { "Language", LanguageCode.RU } });
+            await sut.SetYaml(YamlType.Uxcontent, "dummy2", new Dictionary<string, object> { { "Language", "testString" } });
+            await sut.SetYaml(YamlType.Uxcontent, "dummy3");
             Assert.Equal("dummy3", sut.GetYaml(YamlType.Uxcontent));
             Assert.Equal("dummy", sut.GetYaml(YamlType.Uxcontent, new Dictionary<string, object> { { "Language", LanguageCode.RU } }));
             Assert.Equal("dummy2", sut.GetYaml(YamlType.Uxcontent, new Dictionary<string, object> { { "Language", "testString" } }));
         }
 
         [Fact]
-        public void ShouldSetFilterAndGetByFilterFromLayer()
+        public async void ShouldSetFilterAndGetByFilterFromLayer()
         {
             var moqLayerController = new Mock<ILayerController>();
             moqLayerController.Setup(m => m.LayerConfiguration).Returns(new LayerConfiguration
@@ -145,12 +145,12 @@ namespace Vs.Core.Layers.Tests.Controllers
                 }
             });
             var sut = new YamlSourceController(moqLayerController.Object);
-            sut.SetYaml(YamlType.Layer, "dummy");
+            await sut.SetYaml(YamlType.Layer, "dummy");
             Assert.Equal("http://testurlyaml/", sut.GetYaml(YamlType.Rules, new Dictionary<string, object> { { "Language", LanguageCode.RU } }));
         }
 
         [Fact]
-        public void ShouldThowExceptionWhenFilterRequestedDoesNotExist()
+        public async void ShouldThowExceptionWhenFilterRequestedDoesNotExist()
         {
             var moqLayerController = new Mock<ILayerController>();
             moqLayerController.Setup(m => m.LayerConfiguration).Returns(new LayerConfiguration
@@ -172,12 +172,12 @@ namespace Vs.Core.Layers.Tests.Controllers
                 }
             });
             var sut = new YamlSourceController(moqLayerController.Object);
-            sut.SetYaml(YamlType.Layer, "dummy");
+            await sut.SetYaml(YamlType.Layer, "dummy");
             Assert.Throws<LayersYamlException>(() => sut.GetYaml(YamlType.Rules, new Dictionary<string, object> { { "Language", LanguageCode.NL } }));
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenFilterRequestedIsOfWrongType()
+        public async void ShouldThrowExceptionWhenFilterRequestedIsOfWrongType()
         {
             var moqLayerController = new Mock<ILayerController>();
             moqLayerController.Setup(m => m.LayerConfiguration).Returns(new LayerConfiguration
@@ -199,7 +199,7 @@ namespace Vs.Core.Layers.Tests.Controllers
                 }
             });
             var sut = new YamlSourceController(moqLayerController.Object);
-            sut.SetYaml(YamlType.Layer, "dummy");
+            await sut.SetYaml(YamlType.Layer, "dummy");
             Assert.Throws<LayersYamlException>(() => sut.GetYaml(YamlType.Rules, new Dictionary<string, object> { { "Language", "RU" } }));
         }
 
@@ -212,16 +212,16 @@ namespace Vs.Core.Layers.Tests.Controllers
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenFilterDoesNotMatch()
+        public async void ShouldThrowExceptionWhenFilterDoesNotMatch()
         {
             var moqLayerController = new Mock<ILayerController>();
             var sut = new YamlSourceController(moqLayerController.Object);
-            sut.SetYaml(YamlType.Uxcontent, "dummy", new Dictionary<string, object> { { "Language", LanguageCode.RU } });
+            await sut.SetYaml(YamlType.Uxcontent, "dummy", new Dictionary<string, object> { { "Language", LanguageCode.RU } });
             Assert.Throws<LayersYamlException>(() => sut.GetYaml(YamlType.Uxcontent, new Dictionary<string, object> { { "Language", LanguageCode.EN } }));
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenUnknowYamlTypeIsProvided()
+        public async System.Threading.Tasks.Task ShouldThrowExceptionWhenUnknowYamlTypeIsProvided()
         {
             var moqLayerController = new Mock<ILayerController>();
             moqLayerController.Setup(m => m.LayerConfiguration).Returns(new LayerConfiguration
@@ -242,7 +242,7 @@ namespace Vs.Core.Layers.Tests.Controllers
                 }
             });
             var sut = new YamlSourceController(moqLayerController.Object);
-            Assert.Throws<LayersYamlException>(() => sut.SetYaml(YamlType.Layer, "dummy"));
+            await Assert.ThrowsAsync<LayersYamlException>(() => sut.SetYaml(YamlType.Layer, "dummy"));
         }
 
         [Fact]
@@ -250,7 +250,7 @@ namespace Vs.Core.Layers.Tests.Controllers
         {
             var moqLayerController = new Mock<ILayerController>();
             var sut = new YamlSourceController(moqLayerController.Object);
-            Assert.Throws<LayersYamlException>(() => sut.SetYaml(YamlType.Rules, "httpNotAUri"));
+            Assert.ThrowsAsync<LayersYamlException>(() => sut.SetYaml(YamlType.Rules, "httpNotAUri"));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Vs.Rules.Routing.Controllers
             {
                 if (!routingConfigurationSet)
                 {
-                    Initialize();
+                    Task.Run(async () => await Initialize());
                 }
                 return routingConfiguration;
             }
@@ -33,7 +33,7 @@ namespace Vs.Rules.Routing.Controllers
             _yamlSourceController = yamlSourceController;
         }
 
-        public void Initialize(string routerYaml = null)
+        public async Task Initialize(string routerYaml = null)
         {
             if (routerYaml == null)
             {
@@ -49,7 +49,7 @@ namespace Vs.Rules.Routing.Controllers
             if (routerYaml != null)
             {
                 //convert http to yaml
-                routerYaml = YamlParser.ParseHelper(routerYaml);
+                routerYaml = await YamlParser.ParseHelper(routerYaml);
 
                 var deserializer = new DeserializerBuilder().Build();
                 routingConfiguration = deserializer.Deserialize<RoutingConfiguration>(routerYaml);

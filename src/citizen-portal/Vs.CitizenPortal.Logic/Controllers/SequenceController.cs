@@ -26,7 +26,6 @@ namespace Vs.CitizenPortal.Logic.Controllers
         private IParseRequest _parseRequest;
         private IParseResult _parseResult;
 
-
         public SequenceController(IServiceController serviceController, ISequence sequence)
         {
             _serviceController = serviceController;

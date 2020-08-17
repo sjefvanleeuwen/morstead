@@ -1,0 +1,25 @@
+﻿@if (ShowTitle)
+{
+    <h1>@((MarkupString)Title)</h1>
+}
+@if (ShowSubtitle)
+{
+    <h2>@((MarkupString)SubTitle)</h2>
+}
+@if (ShowNumberedItem)
+{
+    <h3>
+        @if (ShowNumber)
+        {
+            <div class="calc_heading_number">
+                <NldsBadge Number="@Number.Value" />
+            </div>
+        }
+        @if (ShowSubject)
+        {
+            <div class="calc_heading_question">
+                @((MarkupString)Subject)
+            </div>
+        }
+    </h3>
+}

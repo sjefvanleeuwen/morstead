@@ -11,7 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vs.BurgerPortaal.Core\Vs.BurgerPortaal.Core.csproj" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\citizen-portal\Vs.CitizenPortal.Site\Vs.CitizenPortal.Site.csproj" />
   </ItemGroup>
 
 </Project>

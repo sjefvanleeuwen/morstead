@@ -1,0 +1,25 @@
+﻿@page "/ContentTemplate/"
+<EditForm Model="@YamlLogic">
+    <CascadingValue Value="@YamlLogic">
+        <Text />
+    </CascadingValue>
+</EditForm>
+
+<NldsButton Type="ButtonType.Primary" OnClick="SubmitUrl">Verstuur</NldsButton>
+<div id="YamlLogicResult" style="display:@_urlDisplay">
+    <NldsHint Title="Resultaat van de Regels Yaml Url">@((MarkupString)UrlYamlContent)</NldsHint>
+    <NldsButton Type="ButtonType.Primary" OnClick="HideUrlContentResult">Verberg</NldsButton>
+</div>
+
+
+<EditForm Model="@YamlLogic">
+    <CascadingValue Value="@YamlLogicText">
+        <TextArea />
+    </CascadingValue>
+</EditForm>
+
+<NldsButton Type="ButtonType.Primary" OnClick="SubmitText">Verstuur</NldsButton>
+<div id="YamlLogicResult" style="display:@_textDisplay">
+    <NldsHint Title="Resultaat van de Regels Yaml Text">@((MarkupString)UrlTextContent)</NldsHint>
+    <NldsButton Type="ButtonType.Primary" @onclick="HideTextContentResult">Verberg</NldsButton>
+</div>

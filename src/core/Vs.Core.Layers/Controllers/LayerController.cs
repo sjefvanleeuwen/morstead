@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Vs.Core.Formats.Yaml.Helper;
 using Vs.Core.Layers.Controllers.Interfaces;
 using Vs.Core.Layers.Model;
@@ -15,14 +16,14 @@ namespace Vs.Core.Layers.Controllers
 
         }
 
-        public void Initialize(Uri layerUri)
+        public async Task Initialize(Uri layerUri)
         {
-            Initialize(layerUri.ToString());
+            await Initialize(layerUri.ToString());
         }
 
-        public void Initialize(string layerYaml)
+        public async Task Initialize(string layerYaml)
         {
-            var yaml = YamlParser.ParseHelper(layerYaml);
+            var yaml = await YamlParser.ParseHelper(layerYaml);
 
             var deserializer = new DeserializerBuilder().Build();
             LayerConfiguration = deserializer.Deserialize<LayerConfiguration>(yaml);

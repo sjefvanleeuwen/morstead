@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Vs.CitizenPortal.Site;
 
 namespace Vs.BurgerPortaal.WASM
 {
@@ -14,7 +15,7 @@ namespace Vs.BurgerPortaal.WASM
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
+            Initializer.Initialize(builder.Services);
             await builder.Build().RunAsync();
         }
     }

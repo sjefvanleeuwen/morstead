@@ -9,11 +9,11 @@ namespace Vs.Core.Layers.Tests.Controllers
     public class LayerControllerTests
     {
         [Fact]
-        public void ShouldInitialize()
+        public async void ShouldInitialize()
         {
             var yaml = YamlTestFileLoader.Load(@"Zorgtoeslag5.layers.yaml");
             var sut = new LayerController();
-            sut.Initialize(yaml);
+            await sut.Initialize(yaml);
             Assert.Equal(sut.LayerConfiguration.Start.Line, sut.LayerConfiguration.End.Line);
             Assert.Equal(sut.LayerConfiguration.Start.Col, sut.LayerConfiguration.End.Col);
             Assert.Equal(sut.LayerConfiguration.Start.Index, sut.LayerConfiguration.End.Index);

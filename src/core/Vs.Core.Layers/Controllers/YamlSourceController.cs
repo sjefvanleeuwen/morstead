@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Vs.Core.Layers.Controllers.Interfaces;
 using Vs.Core.Layers.Enums;
 using Vs.Core.Layers.Exceptions;
@@ -18,23 +19,23 @@ namespace Vs.Core.Layers.Controllers
             _layerController = layerController;
         }
 
-        public void SetYaml(YamlType yamlType, string yaml, Dictionary<string, object> filter = null)
+        public async Task SetYaml(YamlType yamlType, string yaml, Dictionary<string, object> filter = null)
         {
             if (yaml.StartsWith("http"))
             {
-                SetUri(yamlType, yaml, filter);
+                await SetUri(yamlType, yaml, filter);
                 return;
             }
-            SetString(yamlType, yaml, filter);
+            await SetString(yamlType, yaml, filter);
         }
 
-        private void SetUri(YamlType yamlType, string yamlUri, Dictionary<string, object> filter = null, bool directlySet = true)
+        private async Task SetUri(YamlType yamlType, string yamlUri, Dictionary<string, object> filter = null, bool directlySet = true)
         {
             try
             {
                 var uri = new Uri(yamlUri);
 
-                AttachYamlInformation(new YamlInformation
+                await AttachYamlInformation(new YamlInformation
                 {
                     YamlType = yamlType,
                     YamlUri = uri,
@@ -48,9 +49,9 @@ namespace Vs.Core.Layers.Controllers
             }
         }
 
-        private void SetString(YamlType yamlType, string yaml, Dictionary<string, object> filter = null, bool directlySet = true)
+        private async Task SetString(YamlType yamlType, string yaml, Dictionary<string, object> filter = null, bool directlySet = true)
         {
-            AttachYamlInformation(new YamlInformation
+            await AttachYamlInformation(new YamlInformation
             {
                 YamlType = yamlType,
                 Yaml = yaml,
@@ -59,7 +60,7 @@ namespace Vs.Core.Layers.Controllers
             });
         }
 
-        private void AttachYamlInformation(YamlInformation yamlInformation)
+        private async Task AttachYamlInformation(YamlInformation yamlInformation)
         {
             var foundMatch = _yamlInformations.FirstOrDefault(y =>
                 y.YamlType == yamlInformation.YamlType &&
@@ -73,13 +74,13 @@ namespace Vs.Core.Layers.Controllers
 
             if (yamlInformation.YamlType == YamlType.Layer)
             {
-                ParseLayerInformation(yamlInformation.Yaml ?? yamlInformation.YamlUri.ToString());
+                await ParseLayerInformation(yamlInformation.Yaml ?? yamlInformation.YamlUri.ToString());
             }
         }
 
-        private void ParseLayerInformation(string yaml)
+        private async Task ParseLayerInformation(string yaml)
         {
-            _layerController.Initialize(yaml);
+            await _layerController.Initialize(yaml);
             var layerConfiguration = _layerController.LayerConfiguration;
             foreach (var layer in layerConfiguration.Layers)
             {
@@ -89,7 +90,7 @@ namespace Vs.Core.Layers.Controllers
                 }
                 foreach (var context in layer.Contexts)
                 {
-                    AttachYamlInformation(new YamlInformation
+                    await AttachYamlInformation(new YamlInformation
                     {
                         YamlType = yamlType,
                         YamlUri = context.Endpoint,

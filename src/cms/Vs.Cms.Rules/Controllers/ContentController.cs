@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using Vs.Cms.Core.Controllers.Interfaces;
 using Vs.Cms.Core.Interfaces;
 using Vs.Cms.Core.Objects.Interfaces;
@@ -53,12 +54,12 @@ namespace Vs.Cms.Core.Controllers
             return _renderStrategy.Render(template.ToString(), GetParametersDictionary());
         }
 
-        public void Initialize(string body)
+        public async Task Initialize(string body)
         {
             //todo MPS Rewrite to get this from the body supplied
             _cultureInfo = new CultureInfo("nl-NL");
             _contentHandler.SetDefaultCulture(_cultureInfo);
-            var parsedYaml = YamlParser.RenderYamlToObject(body);
+            var parsedYaml = await YamlParser.RenderYamlToObject(body);
             _contentHandler.TranslateParsedYamlToContent(_cultureInfo, parsedYaml);
         }
 
