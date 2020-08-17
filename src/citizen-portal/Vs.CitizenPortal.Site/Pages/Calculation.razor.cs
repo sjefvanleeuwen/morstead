@@ -53,12 +53,22 @@ namespace Vs.CitizenPortal.Site.Pages
         private string TextTitle => ContentController.GetText(SemanticKey, FormElementContentType.Title);
         private Uri Uri => NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
 
-        protected async override Task OnInitializedAsync()
+        //protected override void OnInitialized()
+        //{
+        //    InitialiseYamls();
+        //    SequenceController.Sequence.Yaml = RuleYaml;
+        //    await ContentController.Initialize(ContentYaml);
+        //    await base.OnInitializedAsync();
+        //    //get the first step
+        //    GetNextStep();
+        //}
+
+        protected override void OnInitialized()
         {
             InitialiseYamls();
             SequenceController.Sequence.Yaml = RuleYaml;
-            await ContentController.Initialize(ContentYaml);
-            await base.OnInitializedAsync();
+            Task.Run(async () => await ContentController.Initialize(ContentYaml));
+            base.OnInitialized();
             //get the first step
             GetNextStep();
         }
