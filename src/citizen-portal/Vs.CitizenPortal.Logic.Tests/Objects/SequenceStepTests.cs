@@ -4,7 +4,7 @@ using Vs.CitizenPortal.Logic.Objects;
 using Vs.Rules.Core.Model;
 using Xunit;
 
-namespace Vs.BurgerPortaal.Core.Tests.Objects
+namespace Vs.CitizenPortal.Logic.Tests.Objects
 {
     public class SequenceStepTests
     {

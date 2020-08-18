@@ -9,7 +9,7 @@ using Vs.Rules.Core.Model;
 using Vs.VoorzieningenEnRegelingen.Logic.Controllers.Interfaces;
 using Xunit;
 
-namespace Vs.BurgerPortaal.Core.Tests.Controllers
+namespace Vs.CitizenPortal.Logic.Tests.Controllers
 {
     public class SequenceControllerTests
     {
@@ -97,7 +97,7 @@ namespace Vs.BurgerPortaal.Core.Tests.Controllers
         }
 
         [Fact]
-        public void ShouldExecuteStep()
+        public async void ShouldExecuteStep()
         {
             var moqServiceController = InitMoqServiceController();
             var moqSequence = InitMoqSequence();
@@ -105,7 +105,7 @@ namespace Vs.BurgerPortaal.Core.Tests.Controllers
             var moqParametersCollection = It.IsAny<IParametersCollection>();
 
             sut.IncreaseStep();
-            sut.ExecuteStep(moqParametersCollection);
+            await sut.ExecuteStep(moqParametersCollection);
 
             moqSequence.Verify(m => m.GetParametersToSend(1), Times.Once());
             moqSequence.Verify(m => m.UpdateParametersCollection(It.IsAny<IParametersCollection>()), Times.Once());
@@ -115,7 +115,7 @@ namespace Vs.BurgerPortaal.Core.Tests.Controllers
         }
 
         [Fact]
-        private void ShouldNotGetSavedValueNoExecutionResult()
+        private async void ShouldNotGetSavedValueNoExecutionResult()
         {
             var moqServiceController = InitMoqServiceController();
             var moqSequence = InitMoqSequence();
@@ -125,40 +125,40 @@ namespace Vs.BurgerPortaal.Core.Tests.Controllers
         }
 
         [Fact]
-        private void ShouldNotGetSavedValueNoQuestion()
+        private async void ShouldNotGetSavedValueNoQuestion()
         {
             var moqServiceController = InitMoqServiceController();
             var moqSequence = InitMoqSequence();
             var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
-            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            await sut.ExecuteStep(It.IsAny<IParametersCollection>());
             var result = sut.GetSavedValue();
             Assert.Null(result);
         }
 
         [Fact]
-        private void ShouldNotGetSavedValueNoStep()
+        private async void ShouldNotGetSavedValueNoStep()
         {
             var moqServiceController = InitMoqServiceController(true);
             var moqSequence = InitMoqSequence();
             var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
-            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            await sut.ExecuteStep(It.IsAny<IParametersCollection>());
             var result = sut.GetSavedValue();
             Assert.Null(result);
         }
 
         [Fact]
-        private void ShouldNotGetSavedValueNoStepMatch()
+        private async void ShouldNotGetSavedValueNoStepMatch()
         {
             var moqServiceController = InitMoqServiceController(true);
             var moqSequence = InitMoqSequence(true);
             var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
-            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            await sut.ExecuteStep(It.IsAny<IParametersCollection>());
             var result = sut.GetSavedValue();
             Assert.Null(result);
         }
 
         [Fact]
-        private void ShouldGetSavedValueString()
+        private async void ShouldGetSavedValueString()
         {
             var moqServiceController = InitMoqServiceController(true);
             var moqSequence = InitMoqSequence(true, true,
@@ -166,14 +166,14 @@ namespace Vs.BurgerPortaal.Core.Tests.Controllers
                     new ClientParameter("Name", "TestValue", TypeInference.InferenceResult.TypeEnum.String, "Dummy")
                 });
             var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
-            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            await sut.ExecuteStep(It.IsAny<IParametersCollection>());
             var result = sut.GetSavedValue();
             Assert.NotNull(result);
             Assert.Equal("TestValue", result);
         }
 
         [Fact]
-        private void ShouldGetSavedValueBoolean()
+        private async void ShouldGetSavedValueBoolean()
         {
             var moqServiceController = InitMoqServiceController(true, TypeInference.InferenceResult.TypeEnum.Boolean);
             var moqSequence = InitMoqSequence(true, true,
@@ -182,14 +182,14 @@ namespace Vs.BurgerPortaal.Core.Tests.Controllers
                     new ClientParameter("Name2", false, TypeInference.InferenceResult.TypeEnum.Boolean, "Dummy")
                 });
             var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
-            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            await sut.ExecuteStep(It.IsAny<IParametersCollection>());
             var result = sut.GetSavedValue();
             Assert.NotNull(result);
             Assert.Equal("Name1", result);
         }
 
         [Fact]
-        private void ShouldGetSavedValueNumber()
+        private async void ShouldGetSavedValueNumber()
         {
             var moqServiceController = InitMoqServiceController(true, TypeInference.InferenceResult.TypeEnum.Double);
             var moqSequence = InitMoqSequence(true, true,
@@ -197,7 +197,7 @@ namespace Vs.BurgerPortaal.Core.Tests.Controllers
                     new ClientParameter("TheName", "1234.23", TypeInference.InferenceResult.TypeEnum.Double, "Dummy"),
                 });
             var sut = new SequenceController(moqServiceController.Object, moqSequence.Object);
-            sut.ExecuteStep(It.IsAny<IParametersCollection>());
+            await sut.ExecuteStep(It.IsAny<IParametersCollection>());
             var result = sut.GetSavedValue();
             Assert.NotNull(result);
             Assert.Equal("1234,23", result);
