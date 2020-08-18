@@ -10,16 +10,16 @@ namespace Vs.Rules.Routing.Tests.Controllers
     public class RoutingControllerTests
     {
         [Fact]
-        public void ShouldNotParseIfNothingAvailable()
+        public async void ShouldNotParseIfNothingAvailable()
         {
             var moqYamlSourceController = new Mock<IYamlSourceController>();
             moqYamlSourceController.Setup(m => m.GetYaml(YamlType.Routing, null)).Returns(null as string);
             var sut = new RoutingController(moqYamlSourceController.Object);
-            Assert.Null(sut.RoutingConfiguration);
+            Assert.Null(await sut.GetRoutingConfiguration());
         }
 
         [Fact]
-        public void ShouldParse()
+        public async void ShouldParse()
         {
             var moqYamlSourceController = new Mock<IYamlSourceController>();
             moqYamlSourceController.Setup(m => m.GetYaml(YamlType.Routing, null)).Returns(@"# Zorgtoeslag routing for burger site demo
@@ -35,9 +35,9 @@ parameters:
  - waarde: woonland
    locatie: woonlandfactorUrl");
             var sut = new RoutingController(moqYamlSourceController.Object);
-            Assert.Single(sut.RoutingConfiguration.Parameters);
-            Assert.Equal("woonland", sut.RoutingConfiguration.Parameters.ElementAt(0).Name);
-            Assert.Equal("woonlandfactorUrl", sut.RoutingConfiguration.Parameters.ElementAt(0).Location);
+            Assert.Single((await sut.GetRoutingConfiguration()).Parameters);
+            Assert.Equal("woonland", (await sut.GetRoutingConfiguration()).Parameters.ElementAt(0).Name);
+            Assert.Equal("woonlandfactorUrl", (await sut.GetRoutingConfiguration()).Parameters.ElementAt(0).Location);
         }
     }
 }

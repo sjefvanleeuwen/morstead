@@ -58,7 +58,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
         private IRoutingController InitMoqRoutingController()
         {
             var moqRoutingController = new Mock<IRoutingController>();
-            moqRoutingController.Setup(m => m.RoutingConfiguration).Returns(null as IRoutingConfiguration);
+            moqRoutingController.Setup(m => m.GetRoutingConfiguration()).ReturnsAsync(null as IRoutingConfiguration);
             return moqRoutingController.Object;
         }
     }

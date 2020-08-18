@@ -116,7 +116,7 @@ namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
                 {
                     var missingParameterName = missingParameter.Name;
                     var missingParameterType = missingParameter.Type;
-                    if (MissingParameterHasRouting(missingParameterName))
+                    if (await MissingParameterHasRouting(missingParameterName))
                     {
                         var value = Task.Run(async () => await _routingController.GetParameterValue(missingParameterName)).Result;
                         if (value == null)
@@ -138,14 +138,16 @@ namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
             }
         }
 
-        private bool MissingParameterHasRouting(string missingParameterName)
+        private async Task<bool> MissingParameterHasRouting(string missingParameterName)
         {
-            if (_routingController?.RoutingConfiguration == null)
+            var routingConfiguration = await _routingController?.GetRoutingConfiguration();
+
+            if (routingConfiguration == null)
             {
                 return false;
             }
 
-            return _routingController.RoutingConfiguration.Parameters.Any(p => p.Name == missingParameterName);
+            return routingConfiguration.Parameters.Any(p => p.Name == missingParameterName);
         }
 
         public async Task GetExtraParameters(IEvaluateFormulaWithoutQARequest evaluateFormulaWithoutQARequest)

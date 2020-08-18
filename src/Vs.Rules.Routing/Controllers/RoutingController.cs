@@ -12,21 +12,10 @@ namespace Vs.Rules.Routing.Controllers
 {
     public class RoutingController : IRoutingController
     {
-        private IRoutingConfiguration routingConfiguration;
-        private bool routingConfigurationSet;
-        public IRoutingConfiguration RoutingConfiguration
-        {
-            get
-            {
-                if (!routingConfigurationSet)
-                {
-                    Task.Run(async () => await Initialize());
-                }
-                return routingConfiguration;
-            }
-        }
-
         private readonly IYamlSourceController _yamlSourceController;
+
+        private IRoutingConfiguration RoutingConfiguration;
+        private bool IsRoutingConfigurationSet;
 
         public RoutingController(IYamlSourceController yamlSourceController)
         {
@@ -52,9 +41,9 @@ namespace Vs.Rules.Routing.Controllers
                 routerYaml = await YamlParser.ParseHelper(routerYaml);
 
                 var deserializer = new DeserializerBuilder().Build();
-                routingConfiguration = deserializer.Deserialize<RoutingConfiguration>(routerYaml);
+                RoutingConfiguration = deserializer.Deserialize<RoutingConfiguration>(routerYaml);
             }
-            routingConfigurationSet = true;
+            IsRoutingConfigurationSet = true;
         }
 
         public async Task<string> GetParameterValue(string missingParameterName)
@@ -80,6 +69,15 @@ namespace Vs.Rules.Routing.Controllers
             {
                 return null;
             }
+        }
+
+        public async Task<IRoutingConfiguration> GetRoutingConfiguration()
+        {
+            if (!IsRoutingConfigurationSet)
+            {
+                await Initialize();
+            }
+            return RoutingConfiguration;
         }
     }
 }
