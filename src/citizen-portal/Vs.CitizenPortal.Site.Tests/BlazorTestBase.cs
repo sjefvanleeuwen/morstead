@@ -1,16 +1,16 @@
 ﻿using Bunit;
-using Bunit.Mocking.JSInterop;
+using Bunit.TestDoubles.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Vs.BurgerPortaal.Core.Tests
+namespace Vs.CitizenPortal.Site.Tests
 {
     public class BlazorTestBase : ComponentTestFixture
     {
         public BlazorTestBase()
         {
-            var jsMock = Services.AddMockJsRuntime();
+            var jsMock = Services.AddMockJSRuntime();
             //solution for this error message:
             //System.InvalidOperationException : Cannot provide a value for property 'UriHelper' on type 'MatBlazor.MatIconButton'. There is no registered service of type 'Microsoft.AspNetCore.Components.NavigationManager'.
             Services.AddScoped(typeof(NavigationManager), typeof(MockNavigationManager));
@@ -38,7 +38,7 @@ namespace Vs.BurgerPortaal.Core.Tests
         protected override void NavigateToCore(string uri, bool forceLoad)
         {
             NavigateToLocation = uri;
-            Uri = $"{this.BaseUri}{uri}";
+            Uri = $"{BaseUri}{uri}";
         }
 
         protected sealed override void EnsureInitialized()

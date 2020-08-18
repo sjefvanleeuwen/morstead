@@ -167,6 +167,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vs.CitizenPortal.Logic.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.CitizenPortal.DataModel.Tests", "citizen-portal\Vs.CitizenPortal.DataModel.Tests\Vs.CitizenPortal.DataModel.Tests.csproj", "{1DF1D621-C9E4-4F67-873E-9BE2E3015E1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vs.CitizenPortal.Site.Tests", "citizen-portal\Vs.CitizenPortal.Site.Tests\Vs.CitizenPortal.Site.Tests.csproj", "{78DAD688-8CD2-410C-BB04-A34F0E29DCA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -361,6 +363,10 @@ Global
 		{1DF1D621-C9E4-4F67-873E-9BE2E3015E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DF1D621-C9E4-4F67-873E-9BE2E3015E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DF1D621-C9E4-4F67-873E-9BE2E3015E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78DAD688-8CD2-410C-BB04-A34F0E29DCA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78DAD688-8CD2-410C-BB04-A34F0E29DCA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78DAD688-8CD2-410C-BB04-A34F0E29DCA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78DAD688-8CD2-410C-BB04-A34F0E29DCA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -419,6 +425,7 @@ Global
 		{E8B2AF4B-0977-451F-968D-1D5564465838} = {6487D459-3A50-45EC-9DA7-0927BBD0BC3D}
 		{40D53226-2E74-4E4E-8DDA-DBDFD9F8C22D} = {6487D459-3A50-45EC-9DA7-0927BBD0BC3D}
 		{1DF1D621-C9E4-4F67-873E-9BE2E3015E1A} = {6487D459-3A50-45EC-9DA7-0927BBD0BC3D}
+		{78DAD688-8CD2-410C-BB04-A34F0E29DCA9} = {6487D459-3A50-45EC-9DA7-0927BBD0BC3D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E58FCF99-F1A1-4677-A764-8E0C27B8278E}

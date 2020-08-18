@@ -1,8 +1,8 @@
 ﻿using Bunit;
-using Vs.BurgerPortaal.Core.Areas.Shared.Components;
+using Vs.CitizenPortal.Site.Shared.Components;
 using Xunit;
 
-namespace Vs.BurgerPortaal.Core.Tests.Shared.Components
+namespace Vs.CitizenPortal.Site.Tests.Shared.Components
 {
     public class CalculationHeaderTests : BlazorTestBase
     {
@@ -40,19 +40,6 @@ namespace Vs.BurgerPortaal.Core.Tests.Shared.Components
             Assert.Empty(cut.FindAll("h3 > div.calc_heading_question"));
         }
 
-        //[Fact]
-        //public void CalculationHeaderFilledNumber()
-        //{
-        //    var cut = RenderComponent<CalculationHeader>(
-        //        (nameof(CalculationHeader.Number), 1));
-        //    Assert.NotEmpty(cut.Nodes);
-        //    Assert.Empty(cut.FindAll("h1"));
-        //    Assert.Empty(cut.FindAll("h2"));
-        //    Assert.Single(cut.FindAll("h3"));
-        //    Assert.Single(cut.FindAll("h3 div.mdc-chip__text"));
-        //    Assert.Empty(cut.FindAll("h3 > div.calc_heading_question"));
-        //}
-
         [Fact]
         public void CalculationHeaderNumberZero()
         {
@@ -78,25 +65,6 @@ namespace Vs.BurgerPortaal.Core.Tests.Shared.Components
             Assert.Empty(cut.FindAll("h3 div.mdc-chip__text"));
             Assert.Single(cut.FindAll("h3 > div.calc_heading_question"));
         }
-
-        //[Fact]
-        //public void CalculationHeaderFilled()
-        //{
-        //    var cut = RenderComponent<CalculationHeader>(
-        //        (nameof(CalculationHeader.Title), "Title"),
-        //        (nameof(CalculationHeader.SubTitle), "SubTitle"),
-        //        (nameof(CalculationHeader.Number), 1),
-        //        (nameof(CalculationHeader.Subject), "Subject"));
-        //    Assert.Single(cut.FindAll("h1"));
-        //    Assert.Equal("Title", cut.FindAll("h1")[0].InnerHtml.Trim());
-        //    Assert.Single(cut.FindAll("h2"));
-        //    Assert.Equal("SubTitle", cut.FindAll("h2")[0].InnerHtml.Trim());
-        //    Assert.Single(cut.FindAll("h3"));
-        //    Assert.Single(cut.FindAll("h3 div.mdc-chip__text"));
-        //    Assert.Equal("1", cut.FindAll("h3 div.mdc-chip__text")[0].InnerHtml.Trim());
-        //    Assert.Single(cut.FindAll("h3 > div.calc_heading_question"));
-        //    Assert.Equal("Subject", cut.FindAll("h3 > div.calc_heading_question")[0].InnerHtml.Trim());
-        //}
 
         [Fact]
         public void CalculationHeaderFilledWithMarkup()
