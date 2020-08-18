@@ -239,8 +239,8 @@ namespace Vs.BurgerPortaal.Core.Tests.Controllers
         {
             var moq = new Mock<IServiceController>();
             var moqExecutionResult = InitMoqExecutionResult(hasQuestion, inferedType);
-            moq.Setup(m => m.Execute(It.IsAny<IExecuteRequest>())).Returns(moqExecutionResult.Object);
-            moq.Setup(m => m.Parse(It.IsAny<IParseRequest>())).Returns(It.IsAny<IParseResult>());
+            moq.Setup(m => m.Execute(It.IsAny<IExecuteRequest>())).ReturnsAsync(moqExecutionResult.Object);
+            moq.Setup(m => m.Parse(It.IsAny<IParseRequest>())).ReturnsAsync(It.IsAny<IParseResult>());
             return moq;
         }
 

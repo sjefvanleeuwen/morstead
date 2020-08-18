@@ -31,6 +31,7 @@ namespace Vs.CitizenPortal.Site.Pages
         private NavigationManager NavigationManager { get; set; }
 
         private bool ShowDisclaimer = true;
+        private bool IsInitialized = false;
 
         //the formElement we are showing
         private IFormElementBase _formElement;
@@ -53,24 +54,15 @@ namespace Vs.CitizenPortal.Site.Pages
         private string TextTitle => ContentController.GetText(SemanticKey, FormElementContentType.Title);
         private Uri Uri => NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
 
-        //protected override void OnInitialized()
-        //{
-        //    InitialiseYamls();
-        //    SequenceController.Sequence.Yaml = RuleYaml;
-        //    await ContentController.Initialize(ContentYaml);
-        //    await base.OnInitializedAsync();
-        //    //get the first step
-        //    GetNextStep();
-        //}
-
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
             InitialiseYamls();
             SequenceController.Sequence.Yaml = RuleYaml;
-            Task.Run(async () => await ContentController.Initialize(ContentYaml));
+            await ContentController.Initialize(ContentYaml);
             base.OnInitialized();
             //get the first step
-            GetNextStep();
+            IsInitialized = true;
+            await GetNextStep();
         }
 
         private void InitialiseYamls()
@@ -101,33 +93,33 @@ namespace Vs.CitizenPortal.Site.Pages
             );
         }
 
-        private void GetNextStep()
+        private async Task GetNextStep()
         {
             if (FormIsValid())
             {
                 //increase the requ6est step
                 SequenceController.IncreaseStep();
-                ProcessStep();
+                await ProcessStep();
             }
             StateHasChanged();
         }
 
-        private void GetPreviousStep()
+        private async void GetPreviousStep()
         {
             //decrease the request step, can never be lower than 1
             SequenceController.DecreaseStep();
-            ProcessStep();
+            await ProcessStep();
             StateHasChanged();
         }
 
-        private void ProcessStep()
+        private async Task ProcessStep()
         {
-            SequenceController.ExecuteStep(GetCurrentParameters());
+            await SequenceController.ExecuteStep(GetCurrentParameters());
             var unresolvedParameters = ContentController.GetUnresolvedParameters(SemanticKey, SequenceController.LastExecutionResult.Parameters);
             var parameters = SequenceController.LastExecutionResult.Parameters;
             if (unresolvedParameters != null && unresolvedParameters.Any())
             {
-                SequenceController.FillUnresolvedParameters(ref parameters, unresolvedParameters);
+                parameters = await SequenceController.FillUnresolvedParameters(parameters, unresolvedParameters);
             }
             ContentController.Parameters = parameters;
             Display();

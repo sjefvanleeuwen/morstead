@@ -15,19 +15,19 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
     public class ServiceControllerTests
     {
         [Fact]
-        public void Service_Parse_Yaml_Successfull()
+        public async void Service_Parse_Yaml_Successfull()
         {
             APIServiceController controller = new APIServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
             var s = new ParseRequest() { Config = YamlTestFileLoader.Load(@"Rijksoverheid/Zorgtoeslag.yaml") };
-            var result = controller.Parse(s);
+            var result = await controller.Parse(s);
             Assert.False(result.IsError);
         }
 
         [Fact]
-        public void Service_Parse_Yaml_Unsuccessfull()
+        public async void Service_Parse_Yaml_Unsuccessfull()
         {
             APIServiceController controller = new APIServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
-            var result = controller.Parse(new ParseRequest() { Config = "--- Garbage In ---" });
+            var result = await controller.Parse(new ParseRequest() { Config = "--- Garbage In ---" });
             Assert.True(result.IsError);
         }
 
@@ -44,7 +44,7 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Tests
             };
 
             var payload = JsonConvert.SerializeObject(executeRequest);
-            var result = controller.Execute(executeRequest);
+            var result = controller.Execute(executeRequest).Result;
             Assert.True(result.Questions.Parameters.Count == 1);
             Assert.True(result.Questions.Parameters[0].Name == "woonland");
         }

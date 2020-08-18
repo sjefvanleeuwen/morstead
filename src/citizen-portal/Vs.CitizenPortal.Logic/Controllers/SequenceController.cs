@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Vs.CitizenPortal.Logic.Controllers.Interfaces;
 using Vs.CitizenPortal.Logic.Objects.Interfaces;
 using Vs.Rules.Core;
@@ -41,11 +42,11 @@ namespace Vs.CitizenPortal.Logic.Controllers
             };
         }
 
-        public IParseResult GetParseResult()
+        public async Task<IParseResult> GetParseResult()
         {
             if (_parseResult == null)
             {
-                _parseResult = _serviceController.Parse(GetParseRequest());
+                _parseResult = await _serviceController.Parse(GetParseRequest());
             }
 
             return _parseResult;
@@ -73,12 +74,12 @@ namespace Vs.CitizenPortal.Logic.Controllers
             RequestStep = Math.Max(1, RequestStep - 1);
         }
 
-        public void ExecuteStep(IParametersCollection currentParameters)
+        public async Task ExecuteStep(IParametersCollection currentParameters)
         {
             SaveCurrentParameters(currentParameters);
             var requestParameters = Sequence.GetParametersToSend(RequestStep);
             var request = GetExecuteRequest(requestParameters);
-            LastExecutionResult = _serviceController.Execute(request);
+            LastExecutionResult = await _serviceController.Execute(request);
             //only save non-calculated parameters
             Sequence.UpdateParametersCollection(LastExecutionResult.Parameters);
             Sequence.AddStep(RequestStep, LastExecutionResult);
@@ -93,10 +94,11 @@ namespace Vs.CitizenPortal.Logic.Controllers
             }
         }
 
-        public void FillUnresolvedParameters(ref IParametersCollection parameters, IEnumerable<string> unresolvedParameters)
+        public async Task<IParametersCollection> FillUnresolvedParameters(IParametersCollection parameters, IEnumerable<string> unresolvedParameters)
         {
             var evaluateFormulaWithoutQARequest = GetEvaluateFormulaWithoutQARequest(ref parameters, unresolvedParameters);
-            _serviceController.GetExtraParameters(evaluateFormulaWithoutQARequest);
+            await _serviceController.GetExtraParameters(evaluateFormulaWithoutQARequest);
+            return parameters;
         }
 
         public IEvaluateFormulaWithoutQARequest GetEvaluateFormulaWithoutQARequest(ref IParametersCollection parameters, IEnumerable<string> unresolvedParameters)

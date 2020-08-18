@@ -28,9 +28,9 @@ namespace Vs.BurgerPortaal.Core.Areas.Pages
 
         private string _urlYamlContentNonFormatted = string.Empty;
 
-        private void SubmitUrl()
+        private async void SubmitUrl()
         {
-            var yaml = YamlParser.ParseHelper(YamlLogic.Value);
+            var yaml = await YamlParser.ParseHelper(YamlLogic.Value);
             _urlYamlContentNonFormatted = GetYamlContentTemplate(yaml);
             _urlDisplay = Block;
         }

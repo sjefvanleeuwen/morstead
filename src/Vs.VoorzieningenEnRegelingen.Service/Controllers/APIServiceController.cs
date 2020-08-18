@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Routing.Controllers.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Logic.Controllers;
@@ -19,23 +20,22 @@ namespace Vs.VoorzieningenEnRegelingen.Service.Controllers
             _serviceController = new ServiceController(logger, yamlScriptController, routingController);
         }
 
-
         [HttpPost("parse")]
-        public IParseResult Parse([FromBody] IParseRequest parseRequest)
+        public async Task<IParseResult> Parse([FromBody] IParseRequest parseRequest)
         {
-            return _serviceController.Parse(parseRequest);
+            return await _serviceController.Parse(parseRequest);
         }
 
         [HttpPost("execute")]
-        public IExecutionResult Execute([FromBody] IExecuteRequest executeRequest)
+        public async Task<IExecutionResult> Execute([FromBody] IExecuteRequest executeRequest)
         {
-            return _serviceController.Execute(executeRequest);
+            return await _serviceController.Execute(executeRequest);
         }
 
         [HttpPost("EvaluateFormulaWithoutQA")]
-        public void GetExtraParameters([FromBody] IEvaluateFormulaWithoutQARequest evaluateFormulaWithoutQARequest)
+        public async Task GetExtraParameters([FromBody] IEvaluateFormulaWithoutQARequest evaluateFormulaWithoutQARequest)
         {
-            _serviceController.GetExtraParameters(evaluateFormulaWithoutQARequest);
-        }
+            await _serviceController.GetExtraParameters(evaluateFormulaWithoutQARequest);
+        }   
     }
 }

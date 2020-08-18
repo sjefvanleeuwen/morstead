@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
+using System.IO;
 using System.Linq;
-using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Vs.Rules.Core;
 using Vs.Rules.Core.Exceptions;
@@ -17,7 +18,7 @@ namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
     {
         private readonly ILogger<ServiceController> _logger;
         private readonly IYamlScriptController _yamlScriptController;
-        private readonly IRoutingController _routingController;
+        private readonly IRoutingController _routingController; 
 
         public ServiceController(ILogger<ServiceController> logger, IYamlScriptController yamlScriptController, IRoutingController routingController)
         {
@@ -28,7 +29,7 @@ namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
 
         static ConcurrentDictionary<string, string> UrlContentCache = new ConcurrentDictionary<string, string>();
 
-        private static string parseHelper(string config)
+        private static async Task<string> ParseHelper(string config)
         {
             if (config.StartsWith("http"))
             {
@@ -36,25 +37,35 @@ namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
                 {
                     return UrlContentCache[config];
                 }
-                using (var client = new WebClient())
-                {
-                    return client.DownloadString(config);
-                }
+
+                using var client = new HttpClient();
+
+                using var response = await client.GetAsync(config);
+                using var streamToReadFrom = await response.Content.ReadAsStreamAsync();
+                using var streamReader = new StreamReader(streamToReadFrom);
+                return streamReader.ReadToEnd();
+
             }
             return config;
         }
 
-        public IParseResult Parse(IParseRequest parseRequest)
+        public async Task<IParseResult> Parse(IParseRequest parseRequest)
         {
             if (parseRequest is null)
             {
                 throw new ArgumentNullException(nameof(parseRequest));
             }
-            parseRequest.Config = parseHelper(parseRequest.Config);
+            parseRequest.Config = await ParseHelper(parseRequest.Config);
             return _yamlScriptController.Parse(parseRequest.Config);
         }
 
-        public IExecutionResult Execute(IExecuteRequest executeRequest)
+        /// <summary>
+        /// Parameters used to parse the objects to other methods rather than using "ref"
+        /// </summary>
+        private IExecuteRequest ExecuteRequest;
+        private IExecutionResult ExecutionResult;
+
+        public async Task<IExecutionResult> Execute(IExecuteRequest executeRequest)
         {
             if (executeRequest is null)
             {
@@ -66,7 +77,7 @@ namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
             }
             var parameters = executeRequest.Parameters;
             var executionResult = new ExecutionResult(ref parameters) as IExecutionResult;
-            executeRequest.Config = parseHelper(executeRequest.Config);
+            executeRequest.Config = await ParseHelper(executeRequest.Config);
             _yamlScriptController.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
                 executionResult.Questions = args;
@@ -83,16 +94,22 @@ namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
             }
             catch (UnresolvedException)
             {
-                //a paramater is yet unresolved
-                ResolveQuestionFromRouting(ref executionResult, ref executeRequest);
+                ExecutionResult = executionResult;
+                ExecuteRequest = executeRequest;
+                //a parameter is yet unresolved
+                await ResolveQuestionFromRouting();
+                executionResult = ExecutionResult;
             }
             return executionResult;
         }
 
-        private void ResolveQuestionFromRouting(ref IExecutionResult executionResult, ref IExecuteRequest executeRequest)
+        private async Task ResolveQuestionFromRouting()
         {
             try
             {
+                var executionResult = ExecutionResult;
+                var executeRequest = ExecuteRequest;
+
                 var missingParameters = executionResult.Questions?.Parameters;
                 var type = executionResult.Questions?.Parameters.Select(p => p.Type);
                 foreach (var missingParameter in missingParameters)
@@ -108,9 +125,12 @@ namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
                         }
                         var parameter = new ClientParameter(missingParameterName, value, missingParameterType, missingParameterName);
                         executeRequest.Parameters.Add(parameter);
-                        executionResult = Execute(executeRequest);
+                        executionResult = await Execute(executeRequest);
                     }
                 }
+
+                ExecutionResult = executionResult;
+                ExecuteRequest = executeRequest;
             }
             catch
             {
@@ -128,7 +148,7 @@ namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
             return _routingController.RoutingConfiguration.Parameters.Any(p => p.Name == missingParameterName);
         }
 
-        public void GetExtraParameters(IEvaluateFormulaWithoutQARequest evaluateFormulaWithoutQARequest)
+        public async Task GetExtraParameters(IEvaluateFormulaWithoutQARequest evaluateFormulaWithoutQARequest)
         {
             if (evaluateFormulaWithoutQARequest is null)
             {
@@ -144,7 +164,7 @@ namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
             }
 
             var parameters = evaluateFormulaWithoutQARequest.Parameters;
-            evaluateFormulaWithoutQARequest.Config = parseHelper(evaluateFormulaWithoutQARequest.Config);
+            evaluateFormulaWithoutQARequest.Config = await ParseHelper(evaluateFormulaWithoutQARequest.Config);
 
             _yamlScriptController.QuestionCallback = (FormulaExpressionContext sender, QuestionArgs args) =>
             {
