@@ -8,7 +8,7 @@ using Vs.Rules.Core.Interfaces;
 using Vs.Rules.Core.Model;
 using Xunit;
 
-namespace Vs.BurgerPortaal.Core.Tests.Objects.FormElements
+namespace Vs.CitizenPortal.DataModel.Tests.Model.FormElements
 {
     public class ListFormElementDataTests
     {

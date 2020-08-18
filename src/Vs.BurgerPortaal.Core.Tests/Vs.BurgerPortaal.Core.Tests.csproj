@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Objects\FormElements\FileFormElementDataTests.cs" />
     <Compile Remove="Shared\Components\FormElements\FileTests.cs" />
   </ItemGroup>
 

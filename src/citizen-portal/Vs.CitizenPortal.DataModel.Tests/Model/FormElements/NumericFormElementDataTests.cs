@@ -1,7 +1,7 @@
 ﻿using Vs.CitizenPortal.DataModel.Model.FormElements;
 using Xunit;
 
-namespace Vs.BurgerPortaal.Core.Tests.Objects.FormElements
+namespace Vs.CitizenPortal.DataModel.Tests.Model.FormElements
 {
     public class NumericFormElementDataTests
     {

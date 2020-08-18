@@ -3,7 +3,7 @@ using Vs.CitizenPortal.DataModel.Model.FormElements;
 using Vs.Rules.Core;
 using Xunit;
 
-namespace Vs.BurgerPortaal.Core.Tests.Objects.FormElements
+namespace Vs.CitizenPortal.DataModel.Tests.Model.FormElements
 {
     public class FormElementDataTests
     {

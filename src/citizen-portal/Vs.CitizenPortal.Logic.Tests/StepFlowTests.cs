@@ -10,12 +10,12 @@ using Vs.Rules.Routing.Model.Interfaces;
 using Vs.VoorzieningenEnRegelingen.Logic.Controllers;
 using Xunit;
 
-namespace Vs.BurgerPortaal.Core.Tests
+namespace Vs.CitizenPortal.Logic.Tests
 {
     public class StepFlowTests
     {
         [Fact]
-        public void CanDoTwoStepsAndOneBack()
+        public async void CanDoTwoStepsAndOneBack()
         {
             var serviceController = new ServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
             var sequence = new Sequence()
@@ -26,7 +26,7 @@ namespace Vs.BurgerPortaal.Core.Tests
 
             //execute the first step
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(null);
+            await sequenceController.ExecuteStep(null);
 
             Assert.Equal(2, sequenceController.LastExecutionResult.Questions.Parameters.Count);
             Assert.Empty(sequenceController.LastExecutionResult.Parameters);
@@ -37,14 +37,14 @@ namespace Vs.BurgerPortaal.Core.Tests
 
             //execute the second step
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1") });
+            await sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1") });
 
             Assert.Equal(2, sequenceController.LastExecutionResult.Parameters.Count); //standaardpremie is nu ook bekend
             Assert.Equal("alleenstaande", sequenceController.LastExecutionResult.Parameters[0].Name);
             Assert.True((bool)sequenceController.LastExecutionResult.Parameters[0].Value);
 
             sequenceController.DecreaseStep();
-            sequenceController.ExecuteStep(null);
+            await sequenceController.ExecuteStep(null);
 
             Assert.Equal(2, sequenceController.LastExecutionResult.Questions.Parameters.Count);
             Assert.Empty(sequenceController.LastExecutionResult.Parameters);
@@ -54,7 +54,7 @@ namespace Vs.BurgerPortaal.Core.Tests
         }
 
         [Fact]
-        public void CanDoThreeStepsAndTwoBackAnd1forward()
+        public async void CanDoThreeStepsAndTwoBackAnd1forward()
         {
             //step sequence: 1-2-3-2-1-2
             var serviceController = new ServiceController(InitMoqLogger(), new YamlScriptController(), InitMoqRoutingController());
@@ -66,14 +66,14 @@ namespace Vs.BurgerPortaal.Core.Tests
 
             //execute the first step 0 -> 1
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(null);
+            await sequenceController.ExecuteStep(null);
 
             CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
             CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters1(sequenceController);
 
             //go back one step (it does not work that way, so it should still be the first step)
             sequenceController.DecreaseStep();
-            sequenceController.ExecuteStep(null);
+            await sequenceController.ExecuteStep(null);
 
             //should be the same as after the previous step.
             CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
@@ -81,7 +81,7 @@ namespace Vs.BurgerPortaal.Core.Tests
 
             //once again try to go back one step, but this time a value was entered
             sequenceController.DecreaseStep();
-            sequenceController.ExecuteStep(new ParametersCollection() {
+            await sequenceController.ExecuteStep(new ParametersCollection() {
                 new ClientParameter("alleenstaande", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1"),
                 new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1")
             });
@@ -92,7 +92,7 @@ namespace Vs.BurgerPortaal.Core.Tests
 
             //increase the step 1 -> 2
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ParametersCollection() {
+            await sequenceController.ExecuteStep(new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1"),
                 new ClientParameter("aanvrager_met_toeslagpartner", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1")
             });
@@ -102,14 +102,14 @@ namespace Vs.BurgerPortaal.Core.Tests
 
             //increase the step 2 ->3
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("toetsingsinkomen_aanvrager", "800", TypeInference.InferenceResult.TypeEnum.Double, "stap.2") });
+            await sequenceController.ExecuteStep(new ParametersCollection() { new ClientParameter("toetsingsinkomen_aanvrager", "800", TypeInference.InferenceResult.TypeEnum.Double, "stap.2") });
 
             CanDoThreeStepsAndTwoBackAnd1forward_CheckStep3(sequenceController);
             CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
 
             //decrease the step 3 -> 2
             sequenceController.DecreaseStep();
-            sequenceController.ExecuteStep(null);
+            await sequenceController.ExecuteStep(null);
 
             //should be the same as when step 2 was executed the first time
             CanDoThreeStepsAndTwoBackAnd1forward_CheckStep2a(sequenceController);
@@ -118,7 +118,7 @@ namespace Vs.BurgerPortaal.Core.Tests
 
             //decrease the step 2 -> 1
             sequenceController.DecreaseStep();
-            sequenceController.ExecuteStep(null);
+            await sequenceController.ExecuteStep(null);
 
             //should be the same as when step 1 was executed the first time
             CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
@@ -127,7 +127,7 @@ namespace Vs.BurgerPortaal.Core.Tests
 
             //decrease again (is not possible)
             sequenceController.DecreaseStep();
-            sequenceController.ExecuteStep(null);
+            await sequenceController.ExecuteStep(null);
 
             //should be the same as when step 1 was executed the first time
             CanDoThreeStepsAndTwoBackAnd1forward_CheckStep1(sequenceController);
@@ -135,7 +135,7 @@ namespace Vs.BurgerPortaal.Core.Tests
             CanDoThreeStepsAndTwoBackAnd1forward_CheckParameters3a(sequenceController);
 
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ParametersCollection() {
+            await sequenceController.ExecuteStep(new ParametersCollection() {
                 new ClientParameter("alleenstaande", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1"),
                 new ClientParameter("aanvrager_met_toeslagpartner", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1")
             });
@@ -147,10 +147,10 @@ namespace Vs.BurgerPortaal.Core.Tests
 
             //decrease 2 -> 1
             sequenceController.DecreaseStep();
-            sequenceController.ExecuteStep(null);
+            await sequenceController.ExecuteStep(null);
             //then increase with a different value 1 -> 2
             sequenceController.IncreaseStep();
-            sequenceController.ExecuteStep(new ParametersCollection() {
+            await sequenceController.ExecuteStep(new ParametersCollection() {
                 new ClientParameter("alleenstaande", "nee", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1"),
                 new ClientParameter("aanvrager_met_toeslagpartner", "ja", TypeInference.InferenceResult.TypeEnum.Boolean, "stap.1")
             });
