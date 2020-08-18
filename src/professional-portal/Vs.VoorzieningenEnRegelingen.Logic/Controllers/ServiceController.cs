@@ -14,11 +14,11 @@ using Vs.VoorzieningenEnRegelingen.Logic.Controllers.Interfaces;
 
 namespace Vs.VoorzieningenEnRegelingen.Logic.Controllers
 {
-    public class ServiceController: IServiceController
+    public class ServiceController : IServiceController
     {
         private readonly ILogger<ServiceController> _logger;
         private readonly IYamlScriptController _yamlScriptController;
-        private readonly IRoutingController _routingController; 
+        private readonly IRoutingController _routingController;
 
         public ServiceController(ILogger<ServiceController> logger, IYamlScriptController yamlScriptController, IRoutingController routingController)
         {

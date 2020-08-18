@@ -86,7 +86,7 @@ namespace Vs.CitizenPortal.Site.Pages
                 routing = null;
             }
             YamlSourceHelper.SetDefaultYaml(YamlSourceController,
-                layer, 
+                layer,
                 rule,
                 contentcontent,
                 routing
