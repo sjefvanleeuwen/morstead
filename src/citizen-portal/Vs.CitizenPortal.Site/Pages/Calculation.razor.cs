@@ -108,13 +108,13 @@ namespace Vs.CitizenPortal.Site.Pages
         {
             //decrease the request step, can never be lower than 1
             SequenceController.DecreaseStep();
-            await ProcessStep();
+            await ProcessStep(true);
             StateHasChanged();
         }
 
-        private async Task ProcessStep()
+        private async Task ProcessStep(bool unobtrusive = false)
         {
-            await SequenceController.ExecuteStep(GetCurrentParameters());
+            await SequenceController.ExecuteStep(GetCurrentParameters(unobtrusive));
             var unresolvedParameters = ContentController.GetUnresolvedParameters(SemanticKey, SequenceController.LastExecutionResult.Parameters);
             var parameters = SequenceController.LastExecutionResult.Parameters;
             if (unresolvedParameters != null && unresolvedParameters.Any())
@@ -189,13 +189,13 @@ namespace Vs.CitizenPortal.Site.Pages
         /// Also a name must be set (i.e. a form element should be present)
         /// </summary>
         /// <returns></returns>
-        private ParametersCollection GetCurrentParameters()
+        private ParametersCollection GetCurrentParameters(bool unobtrusive = false)
         {
             if (_formElement == null || !_formElement.HasInput)
             {
                 return null;
             }
-            ValidateForm();
+            ValidateForm(unobtrusive);
             if (_formElement.Data?.IsValid ?? false)
             {
                 if (_formElement.Data.InferedType == TypeInference.InferenceResult.TypeEnum.Boolean)

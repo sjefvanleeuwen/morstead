@@ -152,7 +152,7 @@ namespace Vs.CitizenPortal.Logic.Controllers
 
             if (parameters.First().Type == TypeInference.InferenceResult.TypeEnum.Boolean)
             {
-                return parameters.FirstOrDefault(p => (bool)p.Value).Name;
+                return parameters.FirstOrDefault(p => (bool)p.Value)?.Name ?? string.Empty;
             }
 
             return parameters.First().ValueAsString;
