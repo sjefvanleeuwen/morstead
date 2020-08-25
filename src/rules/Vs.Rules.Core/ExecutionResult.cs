@@ -9,7 +9,7 @@ namespace Vs.Rules.Core
     {
         public bool IsError { get; internal set; }
         public string Message { get; internal set; }
-        public List<FlowExecutionItem> Stacktrace { get; }
+        public List<FlowExecutionItem> Stacktrace { get; } = new List<FlowExecutionItem>();
         public IParametersCollection Parameters { get; }
         public IQuestionArgs Questions { get; set; }
 
@@ -17,10 +17,16 @@ namespace Vs.Rules.Core
 
         public IStep Step { get; set; }
 
+        /// <summary>
+        /// For inititialisation usage; instead of null values.
+        /// </summary>
+        public ExecutionResult()
+        {
+        }
+
         public ExecutionResult(ref IParametersCollection parameters)
         {
             Parameters = parameters;
-            Stacktrace = new List<FlowExecutionItem>();
         }
 
         public IEnumerable<IParameter> QuestionParameters => Questions?.Parameters?.GetAll() ?? new List<IParameter>();

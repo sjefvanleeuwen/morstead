@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,6 +30,8 @@ namespace Vs.CitizenPortal.Site.Pages
         private IYamlSourceController YamlSourceController { get; set; }
         [Inject]
         private NavigationManager NavigationManager { get; set; }
+        [Inject]
+        private IConfiguration Configuration { get; set; }
 
         private bool ShowDisclaimer = true;
         private bool IsInitialized = false;
@@ -45,8 +48,8 @@ namespace Vs.CitizenPortal.Site.Pages
         private double Progress => CalculateProgress();//currently not used; indicates the process of the steps
         private bool QuestionAsked => SequenceController.QuestionIsAsked;
         private string RuleYaml => YamlSourceController.GetYaml(YamlType.Rules);
-        private string SemanticKey => SequenceController.HasRights ? LastStep.SemanticKey : LastStep.Break.SemanticKey;
-        private bool ShowForm => _formElement.GetType().IsSubclassOf(typeof(FormElementBase));
+        private string SemanticKey => (SequenceController.HasRights ? LastStep?.SemanticKey : LastStep?.Break?.SemanticKey) ?? string.Empty;
+        private bool ShowForm => _formElement != null && _formElement.GetType().IsSubclassOf(typeof(FormElementBase));
         private bool ShowPreviousButton => SequenceController.CurrentStep > 1;
         private bool ShowNextButton => HasRights && QuestionAsked;
         private string TextDescription => ContentController.GetText(SemanticKey, FormElementContentType.Description);
@@ -71,24 +74,81 @@ namespace Vs.CitizenPortal.Site.Pages
             //this type of setting will override whatever is provided via url, so it will only set if there is nothing set yet.
 
             //set the default values if no urls are provided
-            string layer = null, rule = null, contentcontent = null, routing = null;
+            string layerFile = null, rulesFile = null, contentFile = null, routingFile = null;
+            string layer = null, rules = null, content = null, routing = null;
             try
             {
-                rule = YamlTestFileLoader.Load(@"Zorgtoeslag5.yaml");
-                contentcontent = YamlTestFileLoader.Load(@"Zorgtoeslag5Content.yaml");
-                //routing = YamlTestFileLoader.Load(@"Zorgtoeslag5Routing.yaml")
+                var DefaultYamlReferences = Configuration.GetSection("YamlDefaults").GetSection("LocalTestFiles");
+                
+                rulesFile = DefaultYamlReferences.GetValue<string>("rules") ?? null;
+                if (!string.IsNullOrWhiteSpace(rulesFile))
+                {
+                    rules = YamlTestFileLoader.Load(rulesFile);
+                }
+
+                contentFile = DefaultYamlReferences.GetValue<string>("content") ?? null;
+                if (!string.IsNullOrWhiteSpace(contentFile))
+                {
+                    content = YamlTestFileLoader.Load(contentFile);
+                }
+
+                routingFile = DefaultYamlReferences.GetValue<string>("routing") ?? null;
+                if (!string.IsNullOrWhiteSpace(routingFile))
+                {
+                    routing = YamlTestFileLoader.Load(routingFile);
+                }
             }
-            catch //loading unsuccessful (in vase of WASM for instance)
+            catch //loading unsuccessful (in case of WASM for instance)
             {
                 layer = null;
-                rule = null;
-                contentcontent = null;
+                rules = null;
+                content = null;
                 routing = null;
+            }
+            
+            //They might stuill be null (in case the local files are not accessable or not set
+            //set them again with the Urls configurtation
+
+            //if the yaml is not provided yet resort to url defaults if specified
+            try
+            {
+                var DefaultYamlReferences = Configuration.GetSection("YamlDefaults").GetSection("Urls");
+
+                if (rules == null)
+                {
+                    rulesFile = DefaultYamlReferences.GetValue<string>("rules") ?? null;
+                    if (!string.IsNullOrWhiteSpace(rulesFile))
+                    {
+                        rules = rulesFile;
+                    }
+                }
+
+                if (content == null)
+                {
+                    contentFile = DefaultYamlReferences.GetValue<string>("content") ?? null;
+                    if (!string.IsNullOrWhiteSpace(contentFile))
+                    {
+                        content = contentFile;
+                    }
+                }
+
+                if (routing == null)
+                {
+                    routingFile = DefaultYamlReferences.GetValue<string>("routing") ?? null;
+                    if (!string.IsNullOrWhiteSpace(routingFile))
+                    {
+                        routing = routingFile;
+                    }
+                }
+            }
+            catch (Exception ex) //something went wrong, it should not
+            {
+                throw new Exception("Some yaml files have not been set", ex);
             }
             YamlSourceHelper.SetDefaultYaml(YamlSourceController,
                 layer,
-                rule,
-                contentcontent,
+                rules,
+                content,
                 routing
             );
         }

@@ -63,6 +63,11 @@ namespace Vs.Cms.Core.Objects
         {
             if (!_semanticContent.ContainsKey(semanticKey))
             {
+                if (semanticKey == string.Empty)
+                {
+                    //possibly called during initialisation while waiting for content to be loaded
+                    return null;
+                }
                 throw new IndexOutOfRangeException($"There is no content defined for key '{semanticKey}'");
             }
             if (!_semanticContent[semanticKey].ContainsKey(type))

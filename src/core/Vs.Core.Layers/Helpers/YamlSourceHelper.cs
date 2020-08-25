@@ -10,10 +10,22 @@ namespace Vs.Core.Layers.Helpers
     {
         public static void SetDefaultYaml(IYamlSourceController yamlSourceController, string layerYaml = null, string ruleYaml = null, string contentYaml = null, string routingYaml = null)
         {
-            SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, ruleYaml, YamlType.Rules);
-            SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, contentYaml, YamlType.Uxcontent);
-            SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, routingYaml, YamlType.Routing);
-            SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, layerYaml, YamlType.Layer);
+            if (ruleYaml != null)
+            {
+                SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, ruleYaml, YamlType.Rules);
+            }
+            if (contentYaml != null)
+            {
+                SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, contentYaml, YamlType.Uxcontent);
+            }
+            if (routingYaml != null)
+            {
+                SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, routingYaml, YamlType.Routing);
+            }
+            if (layerYaml != null)
+            {
+                SetDefaultIfProvidedAndNothingSetYet(yamlSourceController, layerYaml, YamlType.Layer);
+            }
         }
 
         private static void SetDefaultIfProvidedAndNothingSetYet(IYamlSourceController yamlSourceController, string yaml, YamlType type)

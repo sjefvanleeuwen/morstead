@@ -16,7 +16,7 @@ namespace Vs.CitizenPortal.Logic.Controllers
         public ISequence Sequence { get; private set; }
         public int CurrentStep { get; private set; } = 0;
         public int RequestStep { get; private set; } = 0;
-        public IExecutionResult LastExecutionResult { get; private set; }
+        public IExecutionResult LastExecutionResult { get; private set; } = new ExecutionResult();
         public IParseResult ParseResult { get; private set; }
 
         public bool QuestionIsAsked => LastExecutionResult?.QuestionParameters.Any() ?? false;
