@@ -118,7 +118,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             {
                 editorMenuItems.Add(new MenuItem { IsDivider = true });
                 editorMenuItems.Add(new MenuItem { Link = "#", Name = "Opslaan", OnClick = TrySave });
-                editorMenuItems.Add(new MenuItem { Link = "#", Name = "Opslaan als...", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#saveAsYamlModal" } } });
+                editorMenuItems.Add(new MenuItem { Link = "#", Name = "Opslaan als...", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#saveAsYamlModal" } }, OnClick = FillName });
             }
 
             var menuItems = new List<IMenuItem>
@@ -575,11 +575,22 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
             if (string.IsNullOrWhiteSpace(editorTabInfo.Name))
             {
+                SaveAsName = string.Empty;
                 await ToggleModal("saveAsYamlModal").ConfigureAwait(false);
             }
             else
             {
                 await Save().ConfigureAwait(false);
+            }
+        }
+
+        private async void FillName()
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
+            SaveAsName = string.Empty;
+            if (!string.IsNullOrWhiteSpace(editorTabInfo.Name))
+            {
+                SaveAsName = editorTabInfo.Name;
             }
         }
 
