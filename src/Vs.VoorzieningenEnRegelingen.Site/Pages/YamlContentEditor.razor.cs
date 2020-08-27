@@ -121,6 +121,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             if (ActiveTab > 0)
             {
                 editorMenuItems.Add(new MenuItem { IsDivider = true });
+                if (!string.IsNullOrWhiteSpace(EditorTabController?.GetTabByTabId(ActiveTab)?.ContentId ?? null)) 
+                { 
+                    editorMenuItems.Add(new MenuItem { Link = "#", Name = "Compare to original", OnClick = async () => await CompareWithSelf().ConfigureAwait(false) });
+                }
                 editorMenuItems.Add(new MenuItem { Link = "#", Name = "Opslaan", OnClick = TrySave });
                 editorMenuItems.Add(new MenuItem { Link = "#", Name = "Opslaan als...", HtmlAttributes = new Dictionary<string, object> { { "data-toggle", "modal" }, { "data-target", "#saveAsYamlModal" } }, OnClick = FillName });
             }
@@ -179,6 +183,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                     newActiveTab = GetTabToLeft(tabId);
                 }
                 EditorTabController.Activate(newActiveTab?.TabId ?? 0);
+                SetMenu();
             }
 
             //possibly reset the Menu
@@ -261,6 +266,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             //remove all errors
             EditorTabController.GetTabByTabId(ActiveTab).RemoveExceptions();
             EditorTabController.Activate(tabId);
+            SetMenu();
         }
 
         private void TabIsInitialised()
@@ -314,11 +320,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             };
 
             EditorTabController.AddTab(editorTabInfo);
-
-            if (currentTab == 0)
-            {
-                SetMenu();
-            }
+            SetMenu();
 
             //create the YamlFileEditor in the interface
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
@@ -340,12 +342,19 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.CompareContent = await FileRepository.GetFileContent(contentId).ConfigureAwait(false);
 
             //set the value if it is already initiated; otherwise the content is not drawn again (no update detected in Blazor)
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
             if (editorTabInfo.MonacoDiffEditorYaml != null)
             {
                 await editorTabInfo.MonacoDiffEditorYaml.SetOriginalValue(editorTabInfo.CompareContent).ConfigureAwait(false);
             }
 
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }
+
+        private async Task CompareWithSelf()
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
+            await Compare(editorTabInfo.ContentId).ConfigureAwait(false);
         }
 
         private IEditorTabInfo GetTabToLeft(int tabId)
@@ -423,12 +432,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
             //add the tab if it didnt already exist
             EditorTabController.AddTab(editorTabInfo);
-
-            //possibly reset the Menu
-            if (currentTab == 0)
-            {
-                SetMenu();
-            }
+            SetMenu();
 
             //create the YamlFileEditor in the interface
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
