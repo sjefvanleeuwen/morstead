@@ -93,7 +93,7 @@
 <Modal Id="newYamlModal" Cancel="Annuleren" Ok="Ok" OnOk="AddNewTab" Title="Selecteer het type Yaml document voor het nieuwe document.">
     <YamlTypeSelector @ref="_yamlTypeSelector" Name="ValidateRuleType" />
 </Modal>
-<Modal Id="saveAsYamlModal" Cancel="Annuleren" Ok="Opslaan" OnOk="SaveAsYaml" Title="Bestand opslaan">
+<Modal Id="saveAsYamlModal" Cancel="Annuleren" Ok="Opslaan" OnOk="CheckOVerWrite" Title="Bestand opslaan">
     Vul de naam in van het document
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -102,4 +102,7 @@
         <input type="text" class="form-control" aria-label="Naam" aria-describedby="Naam" @bind="SaveAsName">
     </div>
 </Modal>
-
+<Modal Id="overWriteModal" Cancel="Annuleren" Ok="Ja" OnOk="ConfirmSaveAsYaml" Title="Bestand overschrijven">
+    Er bestaat reeds een bestand met naam '@SaveAsName' voor het type '@CurrentType'.<br />
+    Weet u zeker dat u deze wilt overschrijven?
+</Modal>

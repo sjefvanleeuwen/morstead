@@ -88,6 +88,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             }
         }
 
+        private string CurrentType => EditorTabController.GetTabByTabId(ActiveTab)?.Type?.ToString();
+
         #endregion
 
         #endregion
@@ -495,6 +497,30 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.OriginalContent = editorTabInfo.Content;
             //update the tab name
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }
+
+        private async Task CheckOVerWrite()
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
+            if (SavedYamls.Any(y => y.Name == SaveAsName && y.Type == editorTabInfo.Type))
+            {
+                await ToggleModal("overWriteModal").ConfigureAwait(false);
+            }
+            else {
+                await SaveAsYaml().ConfigureAwait(false);
+            }
+        }
+
+        private async Task ConfirmSaveAsYaml()
+        {
+            //close the tab with same the name & type that is not the current tab
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
+            var ids = SavedYamls.Where(y => y.Name == SaveAsName && y.Type == editorTabInfo.Type).Select(y => y.ContentId);
+            var openTabIds = EditorTabController.EditorTabInfos.Where(t => ids.Contains(t.Value.ContentId) && t.Value.ContentId != editorTabInfo.ContentId).Select(t => t.Value.TabId);
+            openTabIds.ToList().ForEach(id => CloseTab(id));
+
+            await SaveAsYaml().ConfigureAwait(false);
+            await ToggleModal("overWriteModal").ConfigureAwait(false);
         }
 
         private async Task SaveAsYaml()

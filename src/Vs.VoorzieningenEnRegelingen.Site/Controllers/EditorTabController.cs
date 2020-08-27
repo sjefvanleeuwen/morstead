@@ -19,7 +19,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Controllers
         {
             if (!EditorTabInfos.ContainsKey(tabId))
             {
-                throw new IndexOutOfRangeException("The id of the tab provided is unknown.");
+                return null;
             }
 
             return EditorTabInfos[tabId];
