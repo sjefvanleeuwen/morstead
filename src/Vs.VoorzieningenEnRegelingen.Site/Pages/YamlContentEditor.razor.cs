@@ -80,7 +80,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
                         },
                         TableActions = new List<TableAction> {
                             { new TableAction { Action = new Action (async () => await Load(savedYamlInfo.ContentId).ConfigureAwait(false)), IconName = "fa-edit" } },
-                            { new TableAction { Action = new Action (async () => await Compare(savedYamlInfo.ContentId).ConfigureAwait(false)), IconName = /*"fa-exchange"*/ "fa-check" } }
+                            { new TableAction { Action = new Action (async () => await Compare(savedYamlInfo.ContentId).ConfigureAwait(false)), IconName = "fa-exchange-alt" } }
                         }
                     });
                 }
