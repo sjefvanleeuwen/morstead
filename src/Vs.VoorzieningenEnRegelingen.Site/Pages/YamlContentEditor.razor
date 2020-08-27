@@ -49,11 +49,11 @@
                                                   OnKeyUp="@(() => RegisterContentModification(ActiveTab))"
                                                   OnDidPaste="@(() => {
                                                                     BlazorMonacoYaml.Helpers.DeltaDecorationHelper.ResetDeltaDecorations(activeEditorTabInfo.MonacoEditorYaml.MonacoEditor);
-                                                                    RegisterContentModification(ActiveTab); 
+                                                                    RegisterContentModification(ActiveTab);
                                                                 })"
                                                   OnDidInit="TabIsInitialised"
                                                   CssClass="editor" />
-                               
+
                             </div>
                         }
                         else
@@ -105,4 +105,8 @@
 <Modal Id="overWriteModal" Cancel="Annuleren" Ok="Ja" OnOk="ConfirmSaveAsYaml" Title="Bestand overschrijven">
     Er bestaat reeds een bestand met naam '@SaveAsName' voor het type '@CurrentType'.<br />
     Weet u zeker dat u deze wilt overschrijven?
+</Modal>
+<Modal Id="reloadModal" Cancel="Annuleren" Ok="Ja" OnOk="ConfirmReload" Title="Bestand overschrijven">
+    De file die u probeert te openen is reeds geopend.<br />
+    Weet u zeker dat u de inhoud opnieuw wilt laden?
 </Modal>

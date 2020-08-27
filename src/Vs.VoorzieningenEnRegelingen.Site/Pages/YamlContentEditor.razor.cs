@@ -90,6 +90,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
         private string CurrentType => EditorTabController.GetTabByTabId(ActiveTab)?.Type?.ToString();
 
+        private string ContentIdReloadRequest { get; set; }
+
         #endregion
 
         #endregion
@@ -386,14 +388,21 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             await AddFileListToSavedYamls(fileList).ConfigureAwait(false);
         }
 
-        private async Task Load(string contentId)
+        private async Task Load(string contentId, bool reloadPermission = false)
         {
             var currentTab = ActiveTab;
 
             //get how it is saved
             var savedYamlInfo = SavedYamls?.FirstOrDefault(y => y.ContentId == contentId);
             //get the correct EditorTabInfo if it already exists
-            var editorTabInfo = EditorTabController.GetTabByContentId(contentId) ?? new EditorTabInfo();
+            var editorTabInfo = EditorTabController.GetTabByContentId(contentId);
+            if (!reloadPermission && editorTabInfo != null && editorTabInfo.HasChanges)
+            {
+                ContentIdReloadRequest = contentId;
+                await ToggleModal("reloadModal").ConfigureAwait(false);
+                return;
+            }
+            editorTabInfo = editorTabInfo ?? new EditorTabInfo();
             //assign the correct values from the load
             editorTabInfo.OrderNr = editorTabInfo.IsVisible ? editorTabInfo.OrderNr : EditorTabController.GetNextOrderNr();
             editorTabInfo.IsVisible = true;
@@ -423,6 +432,12 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
 
             //create the YamlFileEditor in the interface
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+        }
+
+        private async Task ConfirmReload()
+        {
+            await Load(ContentIdReloadRequest, true).ConfigureAwait(false);
+            await ToggleModal("reloadModal").ConfigureAwait(false);
         }
 
         private bool NameFilledCheck(string name = null)
