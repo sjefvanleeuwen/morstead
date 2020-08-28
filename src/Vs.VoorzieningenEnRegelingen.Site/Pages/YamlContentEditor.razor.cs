@@ -91,6 +91,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
         private string CurrentType => EditorTabController.GetTabByTabId(ActiveTab)?.Type?.ToString();
 
         private string ContentIdReloadRequest { get; set; }
+        public IDictionary<string, object> ComparePreparedData { get; private set; }
 
         #endregion
 
@@ -269,6 +270,16 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             SetMenu();
         }
 
+        private async void TabCompareIsInitialised()
+        {
+            var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
+            editorTabInfo.Content = ComparePreparedData["Content"].ToString();
+            editorTabInfo.CompareContent = ComparePreparedData["CompareContent"].ToString();
+            await editorTabInfo.MonacoDiffEditorYaml.SetOriginalValue(editorTabInfo.CompareContent).ConfigureAwait(false);
+            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
+            TabIsInitialised();
+        }
+
         private void TabIsInitialised()
         {
             var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
@@ -276,7 +287,7 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             {
                 StartValidationSubmitCountdown(editorTabInfo, editorTabInfo.Content, 0);
             }
-            //call layout just in cases
+            //call layout just in case
             Layout();
         }
 
@@ -338,16 +349,10 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             var editorTabInfo = EditorTabController.GetTabByTabId(ActiveTab);
             editorTabInfo.CompareInfo = compareInfo;
 
-            editorTabInfo.Content = await editorTabInfo.MonacoEditorYaml.GetValue().ConfigureAwait(false);
-            editorTabInfo.CompareContent = await FileRepository.GetFileContent(contentId).ConfigureAwait(false);
-
-            //set the value if it is already initiated; otherwise the content is not drawn again (no update detected in Blazor)
-            await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
-            if (editorTabInfo.MonacoDiffEditorYaml != null)
-            {
-                await editorTabInfo.MonacoDiffEditorYaml.SetOriginalValue(editorTabInfo.CompareContent).ConfigureAwait(false);
-            }
-
+            //prepare the data to be set after initialisation
+            ComparePreparedData = new Dictionary<string, object>();
+            ComparePreparedData["Content"] = await editorTabInfo.MonacoEditorYaml.GetValue().ConfigureAwait(false);
+            ComparePreparedData["CompareContent"] = await FileRepository.GetFileContent(contentId).ConfigureAwait(false);
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }
 
@@ -514,6 +519,8 @@ namespace Vs.VoorzieningenEnRegelingen.Site.Pages
             editorTabInfo.ContentId = yamlFileInfo.ContentId;
             editorTabInfo.IsSaved = true;
             editorTabInfo.OriginalContent = editorTabInfo.Content;
+
+            SetMenu();
             //update the tab name
             await InvokeAsync(() => StateHasChanged()).ConfigureAwait(false);
         }

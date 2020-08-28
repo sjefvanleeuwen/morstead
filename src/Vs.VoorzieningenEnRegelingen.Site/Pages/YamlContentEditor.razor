@@ -75,7 +75,7 @@
                                                       OriginalValue="@(activeEditorTabInfo.CompareContent)"
                                                       ModifiedValue="@(activeEditorTabInfo.Content)"
                                                       OnKeyUp="@(() => RegisterContentModification(ActiveTab, true))"
-                                                      OnDidInit="TabIsInitialised"
+                                                      OnDidInit="TabCompareIsInitialised"
                                                       CssClass="editor" />
                             </div>
                         }
