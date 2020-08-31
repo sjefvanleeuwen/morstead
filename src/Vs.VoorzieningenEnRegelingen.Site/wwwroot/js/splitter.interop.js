@@ -47,6 +47,7 @@ $("body").on('event', function () {
     if (OnResizeCallBackReference && OnResizeCallBackMethodName) OnResizeCallBackReference.invokeMethodAsync(OnResizeCallBackMethodName);
 });
 
+var lastRecordedHeight = 0;
 
 function splitYamlContentEditor(dotNetReference, onResizeCallBackMethodName) {
     OnResizeCallBackMethodName = onResizeCallBackMethodName;
@@ -54,14 +55,19 @@ function splitYamlContentEditor(dotNetReference, onResizeCallBackMethodName) {
   $(window).resize(function () {
     var window_height = $(window).height(),
       header_height = $(".main-header").height();
+    lastRecordedHeight = window_height - header_height - 17;
+    console.log(lastRecordedHeight);
+    //reset to a small window
+    $("#splitcontainer").css("height", 0);
     $("#splitcontainer").css("height", window_height - header_height - 17);
-      if (dotNetReference && onResizeCallBackMethodName) OnResizeCallBackReference.invokeMethodAsync(onResizeCallBackMethodName);
+    if (dotNetReference && onResizeCallBackMethodName) {
+      OnResizeCallBackReference.invokeMethodAsync(onResizeCallBackMethodName);
+    }
   });
-  $(window).resize();
   var minSize = 310;
   var splitobj = Split(["#left-half_contenteditor", "#right-half_contenteditor"], {
     elementStyle: function (dimension, size, gutterSize, index) {
-      $(window).trigger('resize'); // Optional
+      $(window).trigger('resize');
       if (index === 0)
         return { 'flex-basis': 'calc(100% - 10px - max(calc(' + (100 - size) + '% - ' + gutterSize + 'px), ' + (minSize + gutterSize) + 'px))' }
       if (index === 1)
