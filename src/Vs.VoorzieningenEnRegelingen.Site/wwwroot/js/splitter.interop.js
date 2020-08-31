@@ -47,19 +47,18 @@ $("body").on('event', function () {
     if (OnResizeCallBackReference && OnResizeCallBackMethodName) OnResizeCallBackReference.invokeMethodAsync(OnResizeCallBackMethodName);
 });
 
-var lastRecordedHeight = 0;
-
 function splitYamlContentEditor(dotNetReference, onResizeCallBackMethodName) {
     OnResizeCallBackMethodName = onResizeCallBackMethodName;
     OnResizeCallBackReference = dotNetReference;
   $(window).resize(function () {
     var window_height = $(window).height(),
       header_height = $(".main-header").height();
-    lastRecordedHeight = window_height - header_height - 17;
-    console.log(lastRecordedHeight);
-    //reset to a small window
-    $("#splitcontainer").css("height", 0);
-    $("#splitcontainer").css("height", window_height - header_height - 17);
+    
+    var containerHeight = window_height - header_height - 17
+    $("#splitcontainer").css("height", containerHeight);
+    var tabHeight = containerHeight - 56; //minus tab selectors height
+    $("#splitcontainer .tab-content").css("height", tabHeight);
+    $("#splitcontainer .tab-content .tab-pane").css("height", tabHeight);
     if (dotNetReference && onResizeCallBackMethodName) {
       OnResizeCallBackReference.invokeMethodAsync(onResizeCallBackMethodName);
     }
