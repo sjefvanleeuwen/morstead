@@ -1,15 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <RazorLangVersion>3.0</RazorLangVersion>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazorized.NLDesignSystem" Version="0.1.1-beta3" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.7" />
+    <PackageReference Include="Blazorized.NLDesignSystem" Version="1.0.0" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
   </ItemGroup>
 
 
