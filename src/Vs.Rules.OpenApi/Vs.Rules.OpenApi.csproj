@@ -19,7 +19,7 @@
     <None Remove="v2\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Mapster" Version="5.3.0" />
+    <PackageReference Include="Mapster" Version="5.3.1" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
